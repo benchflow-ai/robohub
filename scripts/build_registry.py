@@ -117,8 +117,9 @@ def main(argv=None) -> int:
             for x in suites[s]["embodiment"].split("; "):
                 if x not in emb:
                     emb.append(x)
-            if suites[s]["simulator"] not in sims:
-                sims.append(suites[s]["simulator"])
+            for x in suites[s]["simulator"].split("; "):
+                if x not in sims:
+                    sims.append(x)
         image = ds.get("image") or (suites[used_suites[0]]["image"] if used_suites else "")
         out["datasets"].append({
             "name": e["name"], "version": e["version"], "description": e["description"], "git_tag": e["git_tag"],

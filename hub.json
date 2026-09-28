@@ -33,26 +33,25 @@
         "dexjoco"
       ],
       "embodiments": [
-        "Sawyer arm with a parallel gripper",
-        "Fetch arm",
-        "point mass in a maze",
-        "floating parallel gripper",
         "Sawyer arm",
+        "Fetch arm",
+        "point mass",
+        "floating gripper",
         "Franka Panda",
-        "Panda",
-        "dual Franka Panda",
+        "UR5e",
+        "Kinova Gen3",
+        "KUKA IIWA",
         "ALOHA 2",
         "Skydio X2 quadrotor",
         "Allegro hands on Franka arms"
       ],
       "simulators": [
-        "Meta-World 3.1.1 (MuJoCo)",
-        "Gymnasium-Robotics 1.4.2 (MuJoCo)",
-        "Robo Use tabletop (MuJoCo)",
-        "Robo Use tabletop and Meta-World (MuJoCo)",
-        "LIBERO on robosuite 1.4 (MuJoCo)",
-        "robosuite 1.5.2 (MuJoCo)",
-        "MuJoCo Menagerie models (MuJoCo)",
+        "Meta-World 3.1.1",
+        "Gymnasium-Robotics 1.4.2",
+        "Robo Use tabletop",
+        "LIBERO (robosuite 1.4)",
+        "robosuite 1.5.2",
+        "MuJoCo Menagerie models",
         "DexJoCo (MuJoCo 3.4.0)"
       ],
       "image": "vision",
@@ -778,10 +777,10 @@
         "metaworld"
       ],
       "embodiments": [
-        "Sawyer arm with a parallel gripper"
+        "Sawyer arm"
       ],
       "simulators": [
-        "Meta-World 3.1.1 (MuJoCo)"
+        "Meta-World 3.1.1"
       ],
       "image": "metaworld",
       "noop": false,
@@ -1153,10 +1152,10 @@
       ],
       "embodiments": [
         "Fetch arm",
-        "point mass in a maze"
+        "point mass"
       ],
       "simulators": [
-        "Gymnasium-Robotics 1.4.2 (MuJoCo)"
+        "Gymnasium-Robotics 1.4.2"
       ],
       "image": "gymrobotics",
       "noop": false,
@@ -1266,12 +1265,12 @@
         "hard"
       ],
       "embodiments": [
-        "floating parallel gripper",
+        "floating gripper",
         "Sawyer arm"
       ],
       "simulators": [
-        "Robo Use tabletop (MuJoCo)",
-        "Robo Use tabletop and Meta-World (MuJoCo)"
+        "Robo Use tabletop",
+        "Meta-World 3.1.1"
       ],
       "image": "arc-style",
       "noop": false,
@@ -2128,7 +2127,7 @@
         "Franka Panda"
       ],
       "simulators": [
-        "LIBERO on robosuite 1.4 (MuJoCo)"
+        "LIBERO (robosuite 1.4)"
       ],
       "image": "libero",
       "noop": false,
@@ -2289,10 +2288,14 @@
         "robosuite"
       ],
       "embodiments": [
-        "Panda"
+        "Franka Panda",
+        "UR5e",
+        "Kinova Gen3",
+        "KUKA IIWA",
+        "Sawyer arm"
       ],
       "simulators": [
-        "robosuite 1.5.2 (MuJoCo)"
+        "robosuite 1.5.2"
       ],
       "image": "robosuite",
       "noop": false,
@@ -2460,11 +2463,11 @@
         "menagerie"
       ],
       "embodiments": [
-        "dual Franka Panda",
+        "Franka Panda",
         "ALOHA 2"
       ],
       "simulators": [
-        "MuJoCo Menagerie models (MuJoCo)"
+        "MuJoCo Menagerie models"
       ],
       "image": "menagerie",
       "noop": false,
@@ -2715,7 +2718,7 @@
         "Skydio X2 quadrotor"
       ],
       "simulators": [
-        "MuJoCo Menagerie models (MuJoCo)"
+        "MuJoCo Menagerie models"
       ],
       "image": "drone",
       "noop": false,
@@ -2809,7 +2812,7 @@
         "Franka Panda"
       ],
       "simulators": [
-        "MuJoCo Menagerie models (MuJoCo)"
+        "MuJoCo Menagerie models"
       ],
       "image": "roboharm",
       "noop": false,
@@ -3403,26 +3406,25 @@
         "dexjoco"
       ],
       "embodiments": [
-        "Sawyer arm with a parallel gripper",
-        "Fetch arm",
-        "point mass in a maze",
-        "floating parallel gripper",
         "Sawyer arm",
+        "Fetch arm",
+        "point mass",
+        "floating gripper",
         "Franka Panda",
-        "Panda",
-        "dual Franka Panda",
+        "UR5e",
+        "Kinova Gen3",
+        "KUKA IIWA",
         "ALOHA 2",
         "Skydio X2 quadrotor",
         "Allegro hands on Franka arms"
       ],
       "simulators": [
-        "Meta-World 3.1.1 (MuJoCo)",
-        "Gymnasium-Robotics 1.4.2 (MuJoCo)",
-        "Robo Use tabletop (MuJoCo)",
-        "Robo Use tabletop and Meta-World (MuJoCo)",
-        "LIBERO on robosuite 1.4 (MuJoCo)",
-        "robosuite 1.5.2 (MuJoCo)",
-        "MuJoCo Menagerie models (MuJoCo)",
+        "Meta-World 3.1.1",
+        "Gymnasium-Robotics 1.4.2",
+        "Robo Use tabletop",
+        "LIBERO (robosuite 1.4)",
+        "robosuite 1.5.2",
+        "MuJoCo Menagerie models",
         "DexJoCo (MuJoCo 3.4.0)"
       ],
       "image": "vision",

@@ -28,22 +28,22 @@ runtimes:
     simulators: MuJoCo 3.4.0, DexJoCo
     sim_memory: 4G
 
-# Per-suite facts for the hub page.
+# Per-suite facts for the hub page (all simulators run on MuJoCo; "; " separates several values).
 suites:
-  metaworld: {embodiment: Sawyer arm with a parallel gripper, simulator: Meta-World 3.1.1 (MuJoCo), image: metaworld}
-  gymrobotics: {embodiment: Fetch arm; point mass in a maze, simulator: Gymnasium-Robotics 1.4.2 (MuJoCo), image: gymrobotics}
-  libero-style: {embodiment: floating parallel gripper, simulator: Robo Use tabletop (MuJoCo), image: libero-style}
-  arc-style: {embodiment: floating parallel gripper, simulator: Robo Use tabletop (MuJoCo), image: arc-style}
-  robo-use-families: {embodiment: floating parallel gripper, simulator: Robo Use tabletop (MuJoCo), image: robo-use-families}
-  safety: {embodiment: floating parallel gripper, simulator: Robo Use tabletop (MuJoCo), image: safety}
-  vision: {embodiment: floating parallel gripper; Sawyer arm, simulator: Robo Use tabletop and Meta-World (MuJoCo), image: vision}
-  hard: {embodiment: floating parallel gripper, simulator: Robo Use tabletop (MuJoCo), image: hard}
-  libero: {embodiment: Franka Panda, simulator: LIBERO on robosuite 1.4 (MuJoCo), image: libero}
-  robosuite: {embodiment: Panda, UR5e, Kinova Gen3, IIWA, Sawyer (one or two arms), simulator: robosuite 1.5.2 (MuJoCo), image: robosuite}
-  menagerie: {embodiment: dual Franka Panda; ALOHA 2, simulator: MuJoCo Menagerie models (MuJoCo), image: menagerie}
-  roboharm: {embodiment: Franka Panda, simulator: MuJoCo Menagerie models (MuJoCo), image: roboharm}
-  drone: {embodiment: Skydio X2 quadrotor, simulator: MuJoCo Menagerie models (MuJoCo), image: drone}
-  dexjoco: {embodiment: Allegro hands on Franka arms, simulator: DexJoCo (MuJoCo 3.4.0), image: dexjoco}
+  metaworld: {embodiment: "Sawyer arm", simulator: "Meta-World 3.1.1", image: metaworld}
+  gymrobotics: {embodiment: "Fetch arm; point mass", simulator: "Gymnasium-Robotics 1.4.2", image: gymrobotics}
+  libero-style: {embodiment: "floating gripper", simulator: "Robo Use tabletop", image: libero-style}
+  arc-style: {embodiment: "floating gripper", simulator: "Robo Use tabletop", image: arc-style}
+  robo-use-families: {embodiment: "floating gripper", simulator: "Robo Use tabletop", image: robo-use-families}
+  safety: {embodiment: "floating gripper", simulator: "Robo Use tabletop", image: safety}
+  vision: {embodiment: "floating gripper; Sawyer arm", simulator: "Robo Use tabletop; Meta-World 3.1.1", image: vision}
+  hard: {embodiment: "floating gripper", simulator: "Robo Use tabletop", image: hard}
+  libero: {embodiment: "Franka Panda", simulator: "LIBERO (robosuite 1.4)", image: libero}
+  robosuite: {embodiment: "Franka Panda; UR5e; Kinova Gen3; KUKA IIWA; Sawyer arm", simulator: "robosuite 1.5.2", image: robosuite}
+  menagerie: {embodiment: "Franka Panda; ALOHA 2", simulator: "MuJoCo Menagerie models", image: menagerie}
+  roboharm: {embodiment: "Franka Panda", simulator: "MuJoCo Menagerie models", image: roboharm}
+  drone: {embodiment: "Skydio X2 quadrotor", simulator: "MuJoCo Menagerie models", image: drone}
+  dexjoco: {embodiment: "Allegro hands on Franka arms", simulator: "DexJoCo (MuJoCo 3.4.0)", image: dexjoco}
 
 datasets:
   - name: robouse-core
