@@ -689,6 +689,114 @@
           "steps": 0
         }
       }
+    },
+    {
+      "label": "org-metaworld-oracle",
+      "dataset": "farama-foundation/metaworld@0.1",
+      "agent": "oracle",
+      "model": null,
+      "bench": "0.7.4",
+      "date": "2026-09-28",
+      "note": "org name, 2 tasks, registry from the robouse.ai URL",
+      "n": 2,
+      "scored": 2,
+      "passed": 2,
+      "errors": 0,
+      "tasks": {
+        "metaworld-drawer-open": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "success_reached",
+          "steps": 87
+        },
+        "metaworld-reach": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "success_reached",
+          "steps": 51
+        }
+      }
+    },
+    {
+      "label": "org-robosuite-oracle",
+      "dataset": "arise-initiative/robosuite@0.1",
+      "agent": "oracle",
+      "model": null,
+      "bench": "0.7.4",
+      "date": "2026-09-28",
+      "note": "org name, 2 tasks, registry from the robouse.ai URL",
+      "n": 2,
+      "scored": 2,
+      "passed": 2,
+      "errors": 0,
+      "tasks": {
+        "robosuite-lift-panda": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "success_reached",
+          "steps": 62
+        },
+        "robosuite-stack-panda": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 117
+        }
+      }
+    },
+    {
+      "label": "alias-metaworld-oracle",
+      "dataset": "robouse-metaworld@0.1",
+      "agent": "oracle",
+      "model": null,
+      "bench": "0.7.4",
+      "date": "2026-09-28",
+      "note": "old name (alias), 2 tasks, registry from the robouse.ai URL",
+      "n": 2,
+      "scored": 2,
+      "passed": 2,
+      "errors": 0,
+      "tasks": {
+        "metaworld-drawer-open": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "success_reached",
+          "steps": 87
+        },
+        "metaworld-reach": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "success_reached",
+          "steps": 51
+        }
+      }
+    },
+    {
+      "label": "alias-robosuite-oracle",
+      "dataset": "robouse-robosuite@0.1",
+      "agent": "oracle",
+      "model": null,
+      "bench": "0.7.4",
+      "date": "2026-09-28",
+      "note": "old name (alias), 2 tasks, registry from the robouse.ai URL",
+      "n": 2,
+      "scored": 2,
+      "passed": 2,
+      "errors": 0,
+      "tasks": {
+        "robosuite-lift-panda": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "success_reached",
+          "steps": 62
+        },
+        "robosuite-stack-panda": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 117
+        }
+      }
     }
   ]
 }
