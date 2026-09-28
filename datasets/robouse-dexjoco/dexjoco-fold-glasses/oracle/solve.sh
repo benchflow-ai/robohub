@@ -5,4 +5,7 @@
 set -euo pipefail
 export PYTHONPATH="$(cd "$(dirname "$0")" && pwd)/vendor${PYTHONPATH:+:$PYTHONPATH}"
 export ROBOUSE_ORACLE_TOKEN=32f192ccdf8d1b712f31fb223b56f4f2
+# the reference solution needs scipy==1.18.1 (the agent image has only numpy); install it outside /oracle
+python3 -m pip install --quiet --disable-pip-version-check --no-cache-dir --target /tmp/robohub-oracle-deps scipy==1.18.1
+export PYTHONPATH="$PYTHONPATH:/tmp/robohub-oracle-deps"
 python3 -m robouse.oracle --backend dexjoco --env "$(cd "$(dirname "$0")" && pwd)/demo.json"

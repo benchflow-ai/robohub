@@ -158,6 +158,8 @@ def _closure(src: Path, roots: list[str]) -> set[Path]:
     return seen
 
 
+# pip packages a backend's reference solution imports besides numpy (installed at oracle run time, never into the image)
+ORACLE_PIP = {"dexjoco": ["scipy==1.18.1"]}
 ORACLE_BACKEND_MODULE = {"robosuite": "robouse.backends.robosuite_backend", "metaworld": "robouse.backends.metaworld_backend"}
 
 
@@ -203,15 +205,19 @@ def write_oracle(task, robouse: Path, dst: Path, token: str, noop: bool) -> None
         (dst / "solve.sh").chmod(0o755)
         return
     spec = task.spec
+    source = task.oracle_script.read_text()
+    backends = {spec["backend"], *re.findall(r"--backend[ =]([a-z_]+)", source)}  # hard tasks run tabletop_hard
     vendor = dst / "vendor"
-    vendor_robouse(robouse, spec["backend"], vendor)
+    for b in sorted(backends):
+        vendor_robouse(robouse, b, vendor)
     if spec["backend"] == "metaworld":
         vendor_metaworld_policy(spec["env"], vendor)
+    pip = sorted({req for b in backends for req in ORACLE_PIP.get(b, [])})
     src_oracle = task.oracle_script.parent
     for f in sorted(src_oracle.iterdir()):  # data the reference solution reads (demo.json, demo_actions.json)
         if f.is_file() and f.name != "solve.sh" and not f.name.startswith("."):
             shutil.copy2(f, dst / f.name)
-    body = [ln for ln in task.oracle_script.read_text().splitlines()
+    body = [ln for ln in source.splitlines()
             if ln.strip() and not ln.startswith("#") and not ln.startswith("set ")]
     body = [re.sub(r"^python3? ", "python3 ", ln) for ln in body]
     (dst / "solve.sh").write_text("\n".join([
@@ -222,6 +228,9 @@ def write_oracle(task, robouse: Path, dst: Path, token: str, noop: bool) -> None
         "set -euo pipefail",
         'export PYTHONPATH="$(cd "$(dirname "$0")" && pwd)/vendor${PYTHONPATH:+:$PYTHONPATH}"',
         f"export ROBOUSE_ORACLE_TOKEN={token}",
+        *([f"# the reference solution needs {', '.join(pip)} (the agent image has only numpy); install it outside /oracle",
+           f"python3 -m pip install --quiet --disable-pip-version-check --no-cache-dir --target /tmp/robohub-oracle-deps {' '.join(pip)}",
+           'export PYTHONPATH="$PYTHONPATH:/tmp/robohub-oracle-deps"'] if pip else []),
         *body,
         "",
     ]))
