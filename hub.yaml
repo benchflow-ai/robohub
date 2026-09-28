@@ -1,0 +1,95 @@
+# robohub: which Robo Use tasks go into which dataset, and which simulator runtime each backend runs on.
+# scripts/export.py reads this file and a Robo Use checkout and writes runtimes/ and datasets/;
+# scripts/build_registry.py pins every dataset version to a commit in registry.json.
+
+robouse:
+  repo: https://github.com/benchflow-ai/robouse
+  package_version: 0.1.1
+
+# Simulator runtimes (runtimes/<name>, built from templates/runtimes/<name>). Every task's compose file builds its
+# simulator image from one of them.
+runtimes:
+  base:
+    backends: [metaworld, gymrobotics, tabletop]
+    simulators: MuJoCo 3.3.0, Meta-World 3.1.1, Gymnasium-Robotics 1.4.2
+  menagerie:
+    backends: [menagerie, roboharm, drone]
+    simulators: MuJoCo 3.3.0, MuJoCo Menagerie models
+    assets: menagerie
+  robosuite:
+    backends: [robosuite]
+    simulators: MuJoCo 3.3.0, robosuite 1.5.2
+  libero:
+    backends: [libero]
+    simulators: MuJoCo 3.3.0, LIBERO (hf-libero 0.1.4, robosuite 1.4.0)
+    sim_memory: 4G
+  dexjoco:
+    backends: [dexjoco]
+    simulators: MuJoCo 3.4.0, DexJoCo
+    sim_memory: 4G
+
+# Per-suite facts for the hub page.
+suites:
+  metaworld: {embodiment: Sawyer arm with a parallel gripper, simulator: Meta-World 3.1.1 (MuJoCo), image: metaworld}
+  gymrobotics: {embodiment: Fetch arm; point mass in a maze, simulator: Gymnasium-Robotics 1.4.2 (MuJoCo), image: gymrobotics}
+  libero-style: {embodiment: floating parallel gripper, simulator: Robo Use tabletop (MuJoCo), image: libero-style}
+  arc-style: {embodiment: floating parallel gripper, simulator: Robo Use tabletop (MuJoCo), image: arc-style}
+  robo-use-families: {embodiment: floating parallel gripper, simulator: Robo Use tabletop (MuJoCo), image: robo-use-families}
+  safety: {embodiment: floating parallel gripper, simulator: Robo Use tabletop (MuJoCo), image: safety}
+  vision: {embodiment: floating parallel gripper; Sawyer arm, simulator: Robo Use tabletop and Meta-World (MuJoCo), image: vision}
+  hard: {embodiment: floating parallel gripper, simulator: Robo Use tabletop (MuJoCo), image: hard}
+  libero: {embodiment: Franka Panda, simulator: LIBERO on robosuite 1.4 (MuJoCo), image: libero}
+  robosuite: {embodiment: Panda, UR5e, Kinova Gen3, IIWA, Sawyer (one or two arms), simulator: robosuite 1.5.2 (MuJoCo), image: robosuite}
+  menagerie: {embodiment: dual Franka Panda; ALOHA 2, simulator: MuJoCo Menagerie models (MuJoCo), image: menagerie}
+  roboharm: {embodiment: Franka Panda, simulator: MuJoCo Menagerie models (MuJoCo), image: roboharm}
+  drone: {embodiment: Skydio X2 quadrotor, simulator: MuJoCo Menagerie models (MuJoCo), image: drone}
+  dexjoco: {embodiment: Allegro hands on Franka arms, simulator: DexJoCo (MuJoCo 3.4.0), image: dexjoco}
+
+datasets:
+  - name: robouse-core
+    version: "0.1"
+    tasks_file: core.txt
+    image: vision
+    description: "Robo Use core 0.1: 100 tasks sampled across all 14 suites (manipulation, rule inference, vision, safety, dexterous hands, drones), for a quick representative run."
+  - name: robouse-metaworld
+    version: "0.1"
+    suites: [metaworld]
+    description: "Robo Use Meta-World 0.1: the 50 Meta-World MT50 manipulation tasks (Sawyer arm), judged by Meta-World's own success signal."
+  - name: robouse-gymrobotics
+    version: "0.1"
+    suites: [gymrobotics]
+    description: "Robo Use Gymnasium-Robotics 0.1: Fetch reach, push and pick-and-place, and PointMaze, 12 tasks."
+  - name: robouse-tabletop
+    version: "0.1"
+    suites: [arc-style, libero-style, robo-use-families, safety, hard, vision]
+    image: arc-style
+    description: "Robo Use tabletop 0.1: Robo Use's own MuJoCo tabletop scenes: ARC-style rule inference, LIBERO-like tasks, Robo Use task families, harmful/benign safety pairs, hard low-level control and camera-only vision variants, 119 tasks."
+  - name: robouse-libero
+    version: "0.1"
+    suites: [libero]
+    description: "Robo Use LIBERO 0.1: 20 LIBERO tasks (5 each from spatial, object, goal and LIBERO-10) on a Franka Panda, judged by LIBERO's BDDL goal check."
+  - name: robouse-robosuite
+    version: "0.1"
+    suites: [robosuite]
+    description: "Robo Use robosuite 0.1: 21 robosuite 1.5 tasks on five arm models, one or two arms, judged by robosuite's own success check."
+  - name: robouse-menagerie
+    version: "0.1"
+    suites: [menagerie]
+    description: "Robo Use Menagerie 0.1: 15 tasks for a dual Franka Panda and ALOHA 2 built from MuJoCo Menagerie models."
+  - name: robouse-dexjoco
+    version: "0.1"
+    suites: [dexjoco]
+    description: "Robo Use DexJoCo 0.1: 14 dexterous tool-use tasks with Allegro hands (watering, hammering, tongs, bimanual assembly), from DexJoCo."
+  - name: robouse-drone
+    version: "0.1"
+    suites: [drone]
+    description: "Robo Use drone 0.1: 10 Skydio X2 flight tasks over a small town (landing, waypoints, inspection, delivery, privacy)."
+  - name: robouse-roboharm
+    version: "0.1"
+    suites: [roboharm]
+    description: "Robo Use RoboHarm 0.1: 10 harm scenarios x harmful/benign x 4 configurations (raw, guardrail, honeypot, both), 80 tasks on a Franka Panda."
+  - name: robouse-noop-control
+    version: "0.1"
+    noop_of: robouse-core
+    image: vision
+    description: "Negative control for robouse-core 0.1: the same 100 tasks, but each reference solution only looks (robo info, robo observe) and exits without moving the robot. Run it with the oracle agent; every task must score 0."

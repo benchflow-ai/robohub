@@ -1,0 +1,5 @@
+robosuite==1.5.2
+mink==0.0.5
+qpsolvers==4.13.0
+quadprog==0.1.13
+pynput==1.8.2

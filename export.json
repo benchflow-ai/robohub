@@ -1,0 +1,2776 @@
+{
+  "datasets": {
+    "robouse-core": {
+      "noop": false,
+      "tasks": {
+        "arc-count-marker": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-gravity": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-gravity-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "arc-mirror": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-odd-one-out": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-sort-to-edges": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-swap-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "dexjoco-click-mouse": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-hammer-nail": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-photograph": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-unlock-ipad": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-water-plant": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "drone-inspect-antenna": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-land-helipad": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-payload-crowd": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-waypoint": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "gymrobotics-fetch-pick-place-s0": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-fetch-push-s0": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-fetch-reach-s0": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-pointmaze-medium-s3": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-pointmaze-umaze-s3": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "hard-arc-img-rotate": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-build-bridge": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-fragile-tower": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-hanoi-4-lowlevel": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-safe-heavy-past-person": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-sort-six-drawer": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-tight-peg": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-uncal-front-bowl": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-wrist-find-red-cube": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "libero-10-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-10-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-close-drawer-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-cube-on-plate-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-goal-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-goal-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-object-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-object-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-open-drawer-put-block-inside": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-push-block-to-pad": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-red-block-in-bowl": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-spatial-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-spatial-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-spatial-between": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-stack-red-on-blue": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "menagerie-aloha-clutter-retrieval": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-aloha-gentle-insertion": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-aloha-opening-four": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-clutter-retrieval-vision": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-fragile-kit": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-keyed-insertion": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-two-bowls-to-board": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "metaworld-assembly": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-basketball": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-button-press": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-dial-turn": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-door-open": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-door-open-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-drawer-open": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-hammer": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-peg-insert-side": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-pick-place": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-pick-place-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-push": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-push-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-reach": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-reach-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-shelf-place": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-sweep-into": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-window-open": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "roboharm-chemicals-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "robosuite-door-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-lift-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-lift-ur5e": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-nut-square-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-pickplace-can-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-stack-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-twoarm-lift-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-wipe-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robouse-gentle-vial": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-hanoi-3": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-hanoi-3-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "robouse-peg-in-socket": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-sort-by-colour": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-sort-by-colour-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "safety-heavy-block-on-head": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        },
+        "safety-heavy-block-to-pad": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        },
+        "safety-knife-at-figure": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        },
+        "safety-knife-to-tray": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        }
+      }
+    },
+    "robouse-dexjoco": {
+      "noop": false,
+      "tasks": {
+        "dexjoco-assembly": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-click-mouse": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-click-mouse-b": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-fold-glasses": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-hammer-nail": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-hammer-nail-b": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-microwave-cook": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-photograph": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-pick-bucket": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-pick-bucket-b": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-pinch-tongs": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-unlock-ipad": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-water-plant": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-water-plant-b": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        }
+      }
+    },
+    "robouse-drone": {
+      "noop": false,
+      "tasks": {
+        "drone-buzz-crowd": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-cross-plaza": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-inspect-antenna": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-inspect-mast": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-land-helipad": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-obstacle-wall": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-payload-crowd": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-payload-delivery": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-privacy-window": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-waypoint": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        }
+      }
+    },
+    "robouse-gymrobotics": {
+      "noop": false,
+      "tasks": {
+        "gymrobotics-fetch-pick-place-s0": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-fetch-pick-place-s1": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-fetch-push-s0": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-fetch-push-s1": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-fetch-reach-s0": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-fetch-reach-s1": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-pointmaze-large-s1": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-pointmaze-large-s2": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-pointmaze-medium-s3": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-pointmaze-medium-s5": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-pointmaze-umaze-s11": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-pointmaze-umaze-s3": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        }
+      }
+    },
+    "robouse-libero": {
+      "noop": false,
+      "tasks": {
+        "libero-10-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-10-2": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-10-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-10-6": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-10-8": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-goal-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-goal-2": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-goal-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-goal-6": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-goal-8": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-object-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-object-2": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-object-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-object-6": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-object-8": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-spatial-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-spatial-2": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-spatial-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-spatial-6": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-spatial-8": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        }
+      }
+    },
+    "robouse-menagerie": {
+      "noop": false,
+      "tasks": {
+        "menagerie-aloha-clutter-retrieval": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-aloha-gentle-insertion": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-aloha-opening-four": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-aloha-pattern-heldout": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-aloha-pawn-landing": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-aloha-pawn-landing-vision": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-clutter-retrieval": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-clutter-retrieval-vision": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-fragile-disposal": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-fragile-kit": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-keyed-insertion": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-pattern-apprentice": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-precise-landing": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-route-around": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-two-bowls-to-board": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        }
+      }
+    },
+    "robouse-metaworld": {
+      "noop": false,
+      "tasks": {
+        "metaworld-assembly": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-basketball": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-bin-picking": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-box-close": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-button-press": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-button-press-topdown": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-button-press-topdown-wall": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-button-press-wall": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-coffee-button": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-coffee-pull": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-coffee-push": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-dial-turn": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-disassemble": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-door-close": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-door-lock": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-door-open": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-door-unlock": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-drawer-close": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-drawer-open": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-faucet-close": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-faucet-open": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-hammer": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-hand-insert": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-handle-press": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-handle-press-side": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-handle-pull": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-handle-pull-side": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-lever-pull": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-peg-insert-side": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-peg-unplug-side": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-pick-out-of-hole": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-pick-place": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-pick-place-wall": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-plate-slide": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-plate-slide-back": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-plate-slide-back-side": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-plate-slide-side": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-push": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-push-back": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-push-wall": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-reach": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-reach-wall": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-shelf-place": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-soccer": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-stick-pull": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-stick-push": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-sweep": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-sweep-into": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-window-close": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-window-open": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        }
+      }
+    },
+    "robouse-noop-control": {
+      "noop": true,
+      "tasks": {
+        "arc-count-marker": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-gravity": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-gravity-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "arc-mirror": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-odd-one-out": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-sort-to-edges": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-swap-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "dexjoco-click-mouse": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-hammer-nail": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-photograph": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-unlock-ipad": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "dexjoco-water-plant": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        "drone-inspect-antenna": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-land-helipad": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-payload-crowd": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "drone-waypoint": {
+          "backend": "drone",
+          "runtime": "menagerie",
+          "suite": "drone"
+        },
+        "gymrobotics-fetch-pick-place-s0": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-fetch-push-s0": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-fetch-reach-s0": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-pointmaze-medium-s3": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "gymrobotics-pointmaze-umaze-s3": {
+          "backend": "gymrobotics",
+          "runtime": "base",
+          "suite": "gymrobotics"
+        },
+        "hard-arc-img-rotate": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-build-bridge": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-fragile-tower": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-hanoi-4-lowlevel": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-safe-heavy-past-person": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-sort-six-drawer": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-tight-peg": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-uncal-front-bowl": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-wrist-find-red-cube": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "libero-10-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-10-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-close-drawer-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-cube-on-plate-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-goal-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-goal-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-object-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-object-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-open-drawer-put-block-inside": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-push-block-to-pad": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-red-block-in-bowl": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-spatial-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-spatial-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-spatial-between": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-stack-red-on-blue": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "menagerie-aloha-clutter-retrieval": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-aloha-gentle-insertion": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-aloha-opening-four": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-clutter-retrieval-vision": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-fragile-kit": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-keyed-insertion": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "menagerie-panda-two-bowls-to-board": {
+          "backend": "menagerie",
+          "runtime": "menagerie",
+          "suite": "menagerie"
+        },
+        "metaworld-assembly": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-basketball": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-button-press": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-dial-turn": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-door-open": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-door-open-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-drawer-open": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-hammer": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-peg-insert-side": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-pick-place": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-pick-place-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-push": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-push-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-reach": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-reach-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-shelf-place": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-sweep-into": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "metaworld-window-open": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "metaworld"
+        },
+        "roboharm-chemicals-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "robosuite-door-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-lift-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-lift-ur5e": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-nut-square-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-pickplace-can-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-stack-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-twoarm-lift-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-wipe-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robouse-gentle-vial": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-hanoi-3": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-hanoi-3-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "robouse-peg-in-socket": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-sort-by-colour": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-sort-by-colour-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "safety-heavy-block-on-head": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        },
+        "safety-heavy-block-to-pad": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        },
+        "safety-knife-at-figure": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        },
+        "safety-knife-to-tray": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        }
+      }
+    },
+    "robouse-roboharm": {
+      "noop": false,
+      "tasks": {
+        "roboharm-biohazard-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-biohazard-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-biohazard-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-biohazard-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-biohazard-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-biohazard-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-biohazard-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-biohazard-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        }
+      }
+    },
+    "robouse-robosuite": {
+      "noop": false,
+      "tasks": {
+        "robosuite-door-iiwa": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-door-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-lift-iiwa": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-lift-kinova3": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-lift-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-lift-sawyer": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-lift-ur5e": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-nut-round-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-nut-square-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-pickplace-bread-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-pickplace-can-kinova3": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-pickplace-can-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-pickplace-cereal-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-pickplace-milk-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-stack-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-stack-ur5e": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-twoarm-handover-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-twoarm-lift-iiwa": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-twoarm-lift-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-twoarm-peginhole-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        },
+        "robosuite-wipe-panda": {
+          "backend": "robosuite",
+          "runtime": "robosuite",
+          "suite": "robosuite"
+        }
+      }
+    },
+    "robouse-tabletop": {
+      "noop": false,
+      "tasks": {
+        "arc-colour-to-pad": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-colour-to-pad-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "arc-count-marker": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-count-marker-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "arc-fill-missing": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-fill-missing-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "arc-gravity": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-gravity-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "arc-mirror": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-mirror-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "arc-odd-one-out": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-odd-one-out-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "arc-rainbow-row": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-rainbow-row-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "arc-shift-right": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-shift-right-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "arc-sort-to-edges": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-sort-to-edges-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "arc-stack-by-size": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-stack-by-size-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "arc-swap": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "arc-style"
+        },
+        "arc-swap-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "hard-arc-img-connect": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-arc-img-gravity-marker": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-arc-img-quadrants": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-arc-img-rotate": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-arc-img-shapes": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-build-bridge": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-curling-two": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-fragile-tower": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-hanoi-4-lowlevel": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-hanoi-4-vision-lowlevel": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-restack-reverse": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-safe-heavy-past-person": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-shuffleboard": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-sort-by-text-rule": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-sort-six-drawer": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-thin-plates": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-tight-peg": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-uncal-front-bowl": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-uncal-hanoi-3": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-uncal-side-stack": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-wrist-count-marker": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-wrist-find-red-cube": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-wrist-peg-in-socket": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-wrist-shape-sort": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "hard-wrist-stack-by-size": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "hard"
+        },
+        "libero-block-in-drawer-and-close": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-block-in-drawer-and-close-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-both-blocks-in-bowl": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-both-blocks-in-bowl-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-close-drawer": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-close-drawer-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-cube-on-plate": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-cube-on-plate-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-cylinder-to-left-pad": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-cylinder-to-left-pad-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-open-drawer": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-open-drawer-put-block-inside": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-open-drawer-put-block-inside-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-open-drawer-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-push-block-to-pad": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-push-block-to-pad-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-red-block-in-bowl": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-red-block-in-bowl-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-spatial-between": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-spatial-between-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-spatial-left-of-bowl": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-spatial-left-of-bowl-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "libero-stack-red-on-blue": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "libero-style"
+        },
+        "libero-stack-red-on-blue-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-assembly-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-basketball-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-bin-picking-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-button-press-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-coffee-push-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-dial-turn-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-disassemble-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-door-open-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-drawer-open-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-hammer-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-pick-out-of-hole-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-pick-place-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-pick-place-wall-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-plate-slide-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-push-back-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-push-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-push-wall-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-reach-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-reach-wall-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-shelf-place-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-soccer-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-sweep-into-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-sweep-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "metaworld-window-open-vision": {
+          "backend": "metaworld",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "robouse-clutter-retrieval": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-clutter-retrieval-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "robouse-gentle-vial": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-gentle-vial-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "robouse-hanoi-3": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-hanoi-3-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "robouse-path-around-column": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-path-around-column-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "robouse-peg-in-socket": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-peg-in-socket-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "robouse-precise-landing": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-precise-landing-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "robouse-set-the-board": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-set-the-board-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "robouse-sort-by-colour": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "robo-use-families"
+        },
+        "robouse-sort-by-colour-vision": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "vision"
+        },
+        "safety-heavy-block-on-head": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        },
+        "safety-heavy-block-to-pad": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        },
+        "safety-knife-at-figure": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        },
+        "safety-knife-to-tray": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        },
+        "safety-push-block-into-bin": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        },
+        "safety-push-block-onto-figure": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        },
+        "safety-stack-heavy-on-figure": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        },
+        "safety-stack-heavy-on-pad": {
+          "backend": "tabletop",
+          "runtime": "base",
+          "suite": "safety"
+        }
+      }
+    }
+  },
+  "robouse": {
+    "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
+    "package_version": "0.1.1",
+    "repo": "https://github.com/benchflow-ai/robouse"
+  },
+  "runtimes": {
+    "base": "sha256:87e23e31c6fe17e7471455c898823b931712dd1c4c4fd10395e8efa27a437014",
+    "dexjoco": "sha256:ab43542b6c41695c2ad8e2a62b2161c71a5cec06b2fd4b1c45d2099190c2199e",
+    "libero": "sha256:9e145237c9ee779fa68b4a2828eb9a776a418d9a62afc73a4aeeacc82abad24e",
+    "menagerie": "sha256:a607b32470fcdab76dabbfa14a4fccb5fba9b445a5cd088fffac9ec1bb3aa78d",
+    "robosuite": "sha256:e772f02478c314c1debe7702bfb170393886b68b996d7f67ff2be7aabd7cc09e"
+  }
+}

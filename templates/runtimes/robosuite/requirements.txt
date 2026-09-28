@@ -1,0 +1,16 @@
+# Pinned simulator dependencies of the Robo Use `robosuite` runtime (versions match the Robo Use dev venv).
+# robosuite, mink, qpsolvers, quadprog and pynput are installed with --no-deps (requirements-nodeps.txt), as in the
+# Robo Use dev venv, because their declared pins conflict with numpy 2.5.
+numpy==2.5.3
+scipy==1.18.1
+mujoco==3.3.0
+imageio==2.37.4
+imageio-ffmpeg==0.6.0
+pillow==12.3.0
+pyopengl==3.1.10
+packaging==26.3
+pyyaml==6.0.3
+numba==0.67.0
+opencv-python-headless==5.0.0.93
+termcolor==3.3.0
+typing-extensions==4.16.0

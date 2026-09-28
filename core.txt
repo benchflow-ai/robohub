@@ -1,0 +1,115 @@
+# robouse-core 0.1: 100 tasks sampled across all 14 Robo Use suites. One task id per line.
+# metaworld (14)
+metaworld-reach
+metaworld-push
+metaworld-pick-place
+metaworld-door-open
+metaworld-drawer-open
+metaworld-button-press
+metaworld-window-open
+metaworld-hammer
+metaworld-assembly
+metaworld-peg-insert-side
+metaworld-sweep-into
+metaworld-basketball
+metaworld-dial-turn
+metaworld-shelf-place
+# gymrobotics (5)
+gymrobotics-fetch-reach-s0
+gymrobotics-fetch-push-s0
+gymrobotics-fetch-pick-place-s0
+gymrobotics-pointmaze-medium-s3
+gymrobotics-pointmaze-umaze-s3
+# libero-style (5)
+libero-red-block-in-bowl
+libero-open-drawer-put-block-inside
+libero-stack-red-on-blue
+libero-spatial-between
+libero-push-block-to-pad
+# arc-style (5)
+arc-gravity
+arc-mirror
+arc-count-marker
+arc-sort-to-edges
+arc-odd-one-out
+# robo-use-families (4)
+robouse-hanoi-3
+robouse-gentle-vial
+robouse-peg-in-socket
+robouse-sort-by-colour
+# safety (4: two harmful/benign pairs)
+safety-knife-at-figure
+safety-knife-to-tray
+safety-heavy-block-on-head
+safety-heavy-block-to-pad
+# vision (10)
+arc-gravity-vision
+arc-swap-vision
+libero-cube-on-plate-vision
+libero-close-drawer-vision
+metaworld-reach-vision
+metaworld-push-vision
+metaworld-door-open-vision
+metaworld-pick-place-vision
+robouse-hanoi-3-vision
+robouse-sort-by-colour-vision
+# hard (9)
+hard-build-bridge
+hard-fragile-tower
+hard-hanoi-4-lowlevel
+hard-tight-peg
+hard-uncal-front-bowl
+hard-wrist-find-red-cube
+hard-arc-img-rotate
+hard-safe-heavy-past-person
+hard-sort-six-drawer
+# libero (8)
+libero-spatial-0
+libero-spatial-4
+libero-object-0
+libero-object-4
+libero-goal-0
+libero-goal-4
+libero-10-0
+libero-10-4
+# robosuite (8)
+robosuite-lift-panda
+robosuite-lift-ur5e
+robosuite-stack-panda
+robosuite-pickplace-can-panda
+robosuite-nut-square-panda
+robosuite-door-panda
+robosuite-wipe-panda
+robosuite-twoarm-lift-panda
+# menagerie (7)
+menagerie-aloha-clutter-retrieval
+menagerie-aloha-gentle-insertion
+menagerie-aloha-opening-four
+menagerie-panda-fragile-kit
+menagerie-panda-keyed-insertion
+menagerie-panda-two-bowls-to-board
+menagerie-panda-clutter-retrieval-vision
+# roboharm (12: six harmful/benign pairs over the four configurations)
+roboharm-knife-harmful-raw
+roboharm-knife-benign-raw
+roboharm-stove-harmful-raw
+roboharm-stove-benign-raw
+roboharm-estop-harmful-honeypot
+roboharm-estop-benign-honeypot
+roboharm-chemicals-harmful-guardrail
+roboharm-chemicals-benign-guardrail
+roboharm-water-laptop-harmful-raw
+roboharm-water-laptop-benign-raw
+roboharm-privacy-badge-harmful-honeypot-guardrail
+roboharm-privacy-badge-benign-honeypot-guardrail
+# drone (4)
+drone-land-helipad
+drone-waypoint
+drone-inspect-antenna
+drone-payload-crowd
+# dexjoco (5)
+dexjoco-water-plant
+dexjoco-hammer-nail
+dexjoco-click-mouse
+dexjoco-photograph
+dexjoco-unlock-ipad
