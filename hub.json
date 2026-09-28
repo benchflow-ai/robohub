@@ -10,10 +10,17 @@
   },
   "datasets": [
     {
-      "name": "robouse-core",
+      "name": "benchflow/robouse-core",
+      "org": "benchflow",
+      "short_name": "robouse-core",
+      "dir": "robouse-core",
+      "aliases": [
+        "robouse-core"
+      ],
+      "upstream": null,
       "version": "0.1",
       "description": "Robo Use core 0.1: 100 tasks sampled across all 14 suites (manipulation, rule inference, vision, safety, dexterous hands, drones), for a quick representative run.",
-      "git_tag": "robouse-core-v0.1",
+      "git_tag": "benchflow/robouse-core-v0.1",
       "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
       "n_tasks": 100,
       "suites": [
@@ -767,10 +774,22 @@
       ]
     },
     {
-      "name": "robouse-metaworld",
+      "name": "farama-foundation/metaworld",
+      "org": "farama-foundation",
+      "short_name": "metaworld",
+      "dir": "robouse-metaworld",
+      "aliases": [
+        "robouse-metaworld"
+      ],
+      "upstream": {
+        "benchmark": "Meta-World",
+        "org_name": "Farama Foundation",
+        "repo": "https://github.com/Farama-Foundation/Metaworld",
+        "licence": "MIT"
+      },
       "version": "0.1",
       "description": "Robo Use Meta-World 0.1: the 50 Meta-World MT50 manipulation tasks (Sawyer arm), judged by Meta-World's own success signal.",
-      "git_tag": "robouse-metaworld-v0.1",
+      "git_tag": "farama-foundation/metaworld-v0.1",
       "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
       "n_tasks": 50,
       "suites": [
@@ -1141,10 +1160,22 @@
       ]
     },
     {
-      "name": "robouse-gymrobotics",
+      "name": "farama-foundation/gymnasium-robotics",
+      "org": "farama-foundation",
+      "short_name": "gymnasium-robotics",
+      "dir": "robouse-gymrobotics",
+      "aliases": [
+        "robouse-gymrobotics"
+      ],
+      "upstream": {
+        "benchmark": "Gymnasium-Robotics",
+        "org_name": "Farama Foundation",
+        "repo": "https://github.com/Farama-Foundation/Gymnasium-Robotics",
+        "licence": "MIT"
+      },
       "version": "0.1",
       "description": "Robo Use Gymnasium-Robotics 0.1: Fetch reach, push and pick-and-place, and PointMaze, 12 tasks.",
-      "git_tag": "robouse-gymrobotics-v0.1",
+      "git_tag": "farama-foundation/gymnasium-robotics-v0.1",
       "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
       "n_tasks": 12,
       "suites": [
@@ -1250,10 +1281,17 @@
       ]
     },
     {
-      "name": "robouse-tabletop",
+      "name": "benchflow/robouse-tabletop",
+      "org": "benchflow",
+      "short_name": "robouse-tabletop",
+      "dir": "robouse-tabletop",
+      "aliases": [
+        "robouse-tabletop"
+      ],
+      "upstream": null,
       "version": "0.1",
       "description": "Robo Use tabletop 0.1: Robo Use's own MuJoCo tabletop scenes: ARC-style rule inference, LIBERO-like tasks, Robo Use task families, harmful/benign safety pairs, hard low-level control and camera-only vision variants, 119 tasks.",
-      "git_tag": "robouse-tabletop-v0.1",
+      "git_tag": "benchflow/robouse-tabletop-v0.1",
       "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
       "n_tasks": 119,
       "suites": [
@@ -2114,10 +2152,22 @@
       ]
     },
     {
-      "name": "robouse-libero",
+      "name": "lifelong-robot-learning/libero",
+      "org": "lifelong-robot-learning",
+      "short_name": "libero",
+      "dir": "robouse-libero",
+      "aliases": [
+        "robouse-libero"
+      ],
+      "upstream": {
+        "benchmark": "LIBERO",
+        "org_name": "Lifelong Robot Learning",
+        "repo": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+        "licence": "MIT"
+      },
       "version": "0.1",
       "description": "Robo Use LIBERO 0.1: 20 LIBERO tasks (5 each from spatial, object, goal and LIBERO-10) on a Franka Panda, judged by LIBERO's BDDL goal check.",
-      "git_tag": "robouse-libero-v0.1",
+      "git_tag": "lifelong-robot-learning/libero-v0.1",
       "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
       "n_tasks": 20,
       "suites": [
@@ -2278,10 +2328,22 @@
       ]
     },
     {
-      "name": "robouse-robosuite",
+      "name": "arise-initiative/robosuite",
+      "org": "arise-initiative",
+      "short_name": "robosuite",
+      "dir": "robouse-robosuite",
+      "aliases": [
+        "robouse-robosuite"
+      ],
+      "upstream": {
+        "benchmark": "robosuite",
+        "org_name": "ARISE Initiative",
+        "repo": "https://github.com/ARISE-Initiative/robosuite",
+        "licence": "MIT"
+      },
       "version": "0.1",
       "description": "Robo Use robosuite 0.1: 21 robosuite 1.5 tasks on five arm models, one or two arms, judged by robosuite's own success check.",
-      "git_tag": "robouse-robosuite-v0.1",
+      "git_tag": "arise-initiative/robosuite-v0.1",
       "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
       "n_tasks": 21,
       "suites": [
@@ -2453,10 +2515,17 @@
       ]
     },
     {
-      "name": "robouse-menagerie",
+      "name": "benchflow/robouse-menagerie",
+      "org": "benchflow",
+      "short_name": "robouse-menagerie",
+      "dir": "robouse-menagerie",
+      "aliases": [
+        "robouse-menagerie"
+      ],
+      "upstream": null,
       "version": "0.1",
       "description": "Robo Use Menagerie 0.1: 15 tasks for a dual Franka Panda and ALOHA 2 built from MuJoCo Menagerie models.",
-      "git_tag": "robouse-menagerie-v0.1",
+      "git_tag": "benchflow/robouse-menagerie-v0.1",
       "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
       "n_tasks": 15,
       "suites": [
@@ -2583,10 +2652,22 @@
       ]
     },
     {
-      "name": "robouse-dexjoco",
+      "name": "brave-eai/dexjoco",
+      "org": "brave-eai",
+      "short_name": "dexjoco",
+      "dir": "robouse-dexjoco",
+      "aliases": [
+        "robouse-dexjoco"
+      ],
+      "upstream": {
+        "benchmark": "DexJoCo",
+        "org_name": "brave-eai",
+        "repo": "https://github.com/brave-eai/dexjoco",
+        "licence": "MIT"
+      },
       "version": "0.1",
       "description": "Robo Use DexJoCo 0.1: 14 dexterous tool-use tasks with Allegro hands (watering, hammering, tongs, bimanual assembly), from DexJoCo.",
-      "git_tag": "robouse-dexjoco-v0.1",
+      "git_tag": "brave-eai/dexjoco-v0.1",
       "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
       "n_tasks": 14,
       "suites": [
@@ -2705,10 +2786,17 @@
       ]
     },
     {
-      "name": "robouse-drone",
+      "name": "benchflow/robouse-drone",
+      "org": "benchflow",
+      "short_name": "robouse-drone",
+      "dir": "robouse-drone",
+      "aliases": [
+        "robouse-drone"
+      ],
+      "upstream": null,
       "version": "0.1",
       "description": "Robo Use drone 0.1: 10 Skydio X2 flight tasks over a small town (landing, waypoints, inspection, delivery, privacy).",
-      "git_tag": "robouse-drone-v0.1",
+      "git_tag": "benchflow/robouse-drone-v0.1",
       "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
       "n_tasks": 10,
       "suites": [
@@ -2799,10 +2887,17 @@
       ]
     },
     {
-      "name": "robouse-roboharm",
+      "name": "benchflow/robouse-roboharm",
+      "org": "benchflow",
+      "short_name": "robouse-roboharm",
+      "dir": "robouse-roboharm",
+      "aliases": [
+        "robouse-roboharm"
+      ],
+      "upstream": null,
       "version": "0.1",
       "description": "Robo Use RoboHarm 0.1: 10 harm scenarios x harmful/benign x 4 configurations (raw, guardrail, honeypot, both), 80 tasks on a Franka Panda.",
-      "git_tag": "robouse-roboharm-v0.1",
+      "git_tag": "benchflow/robouse-roboharm-v0.1",
       "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
       "n_tasks": 80,
       "suites": [
@@ -3383,10 +3478,17 @@
       ]
     },
     {
-      "name": "robouse-noop-control",
+      "name": "benchflow/robouse-noop-control",
+      "org": "benchflow",
+      "short_name": "robouse-noop-control",
+      "dir": "robouse-noop-control",
+      "aliases": [
+        "robouse-noop-control"
+      ],
+      "upstream": null,
       "version": "0.1",
       "description": "Negative control for robouse-core 0.1: the same 100 tasks, but each reference solution only looks (robo info, robo observe) and exits without moving the robot. Run it with the oracle agent; every task must score 0.",
-      "git_tag": "robouse-noop-control-v0.1",
+      "git_tag": "benchflow/robouse-noop-control-v0.1",
       "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
       "n_tasks": 100,
       "suites": [

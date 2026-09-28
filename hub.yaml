@@ -45,51 +45,83 @@ suites:
   drone: {embodiment: "Skydio X2 quadrotor", simulator: "MuJoCo Menagerie models", image: drone}
   dexjoco: {embodiment: "Allegro hands on Franka arms", simulator: "DexJoCo (MuJoCo 3.4.0)", image: dexjoco}
 
+# Datasets are named <org>/<name>. The org is whoever designed the benchmark's tasks: a dataset adapted from someone
+# else's benchmark goes under that benchmark's GitHub org (lowercased) and records it under `upstream`; tasks BenchFlow
+# designed, even on someone else's simulator or robot models, go under benchflow/. `dir` is the folder under datasets/.
+# `aliases` are older names of the same version: registry.json lists each alias as its own entry with the same pinned
+# tasks, so existing `bench eval run -d OLD@VERSION` commands keep working; the hub page does not show them.
 datasets:
-  - name: robouse-core
+  - name: benchflow/robouse-core
+    dir: robouse-core
+    aliases: [robouse-core]
     version: "0.1"
     tasks_file: core.txt
     image: vision
     description: "Robo Use core 0.1: 100 tasks sampled across all 14 suites (manipulation, rule inference, vision, safety, dexterous hands, drones), for a quick representative run."
-  - name: robouse-metaworld
+  - name: farama-foundation/metaworld
+    dir: robouse-metaworld
+    aliases: [robouse-metaworld]
+    upstream: {benchmark: "Meta-World", org_name: "Farama Foundation", repo: "https://github.com/Farama-Foundation/Metaworld", licence: MIT}
     version: "0.1"
     suites: [metaworld]
     description: "Robo Use Meta-World 0.1: the 50 Meta-World MT50 manipulation tasks (Sawyer arm), judged by Meta-World's own success signal."
-  - name: robouse-gymrobotics
+  - name: farama-foundation/gymnasium-robotics
+    dir: robouse-gymrobotics
+    aliases: [robouse-gymrobotics]
+    upstream: {benchmark: "Gymnasium-Robotics", org_name: "Farama Foundation", repo: "https://github.com/Farama-Foundation/Gymnasium-Robotics", licence: MIT}
     version: "0.1"
     suites: [gymrobotics]
     description: "Robo Use Gymnasium-Robotics 0.1: Fetch reach, push and pick-and-place, and PointMaze, 12 tasks."
-  - name: robouse-tabletop
+  - name: benchflow/robouse-tabletop
+    dir: robouse-tabletop
+    aliases: [robouse-tabletop]
     version: "0.1"
     suites: [arc-style, libero-style, robo-use-families, safety, hard, vision]
     image: arc-style
     description: "Robo Use tabletop 0.1: Robo Use's own MuJoCo tabletop scenes: ARC-style rule inference, LIBERO-like tasks, Robo Use task families, harmful/benign safety pairs, hard low-level control and camera-only vision variants, 119 tasks."
-  - name: robouse-libero
+  - name: lifelong-robot-learning/libero
+    dir: robouse-libero
+    aliases: [robouse-libero]
+    upstream: {benchmark: "LIBERO", org_name: "Lifelong Robot Learning", repo: "https://github.com/Lifelong-Robot-Learning/LIBERO", licence: MIT}
     version: "0.1"
     suites: [libero]
     description: "Robo Use LIBERO 0.1: 20 LIBERO tasks (5 each from spatial, object, goal and LIBERO-10) on a Franka Panda, judged by LIBERO's BDDL goal check."
-  - name: robouse-robosuite
+  - name: arise-initiative/robosuite
+    dir: robouse-robosuite
+    aliases: [robouse-robosuite]
+    upstream: {benchmark: "robosuite", org_name: "ARISE Initiative", repo: "https://github.com/ARISE-Initiative/robosuite", licence: MIT}
     version: "0.1"
     suites: [robosuite]
     description: "Robo Use robosuite 0.1: 21 robosuite 1.5 tasks on five arm models, one or two arms, judged by robosuite's own success check."
-  - name: robouse-menagerie
+  - name: benchflow/robouse-menagerie
+    dir: robouse-menagerie
+    aliases: [robouse-menagerie]
     version: "0.1"
     suites: [menagerie]
     description: "Robo Use Menagerie 0.1: 15 tasks for a dual Franka Panda and ALOHA 2 built from MuJoCo Menagerie models."
-  - name: robouse-dexjoco
+  - name: brave-eai/dexjoco
+    dir: robouse-dexjoco
+    aliases: [robouse-dexjoco]
+    upstream: {benchmark: "DexJoCo", org_name: "brave-eai", repo: "https://github.com/brave-eai/dexjoco", licence: MIT}
     version: "0.1"
     suites: [dexjoco]
     description: "Robo Use DexJoCo 0.1: 14 dexterous tool-use tasks with Allegro hands (watering, hammering, tongs, bimanual assembly), from DexJoCo."
-  - name: robouse-drone
+  - name: benchflow/robouse-drone
+    dir: robouse-drone
+    aliases: [robouse-drone]
     version: "0.1"
     suites: [drone]
     description: "Robo Use drone 0.1: 10 Skydio X2 flight tasks over a small town (landing, waypoints, inspection, delivery, privacy)."
-  - name: robouse-roboharm
+  - name: benchflow/robouse-roboharm
+    dir: robouse-roboharm
+    aliases: [robouse-roboharm]
     version: "0.1"
     suites: [roboharm]
     description: "Robo Use RoboHarm 0.1: 10 harm scenarios x harmful/benign x 4 configurations (raw, guardrail, honeypot, both), 80 tasks on a Franka Panda."
-  - name: robouse-noop-control
+  - name: benchflow/robouse-noop-control
+    dir: robouse-noop-control
+    aliases: [robouse-noop-control]
     version: "0.1"
-    noop_of: robouse-core
+    noop_of: benchflow/robouse-core
     image: vision
     description: "Negative control for robouse-core 0.1: the same 100 tasks, but each reference solution only looks (robo info, robo observe) and exits without moving the robot. Run it with the oracle agent; every task must score 0."

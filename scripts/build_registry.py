@@ -11,8 +11,11 @@ reads, same as benchflow-ai/skillsbench's registry.json): a list of
   not over the working tree.
 - Published versions are immutable: an entry already in registry.json is kept as it is, unless it is named with
   --repin. New entries are pinned to --commit (default: HEAD, which must contain datasets/<name>/).
-- Each new entry gets the git tag <name>-v<version>; --tag creates the tags locally (push them with
-  `git push origin --tags`).
+- Names are <org>/<name> (see hub.yaml); the tasks stay in datasets/<dir>/. Each alias in hub.yaml gets its own
+  entry with the same tasks as the dataset it names, so an old `-d OLD@VERSION` keeps resolving; aliases are listed
+  after the datasets and left out of hub.json.
+- Each new entry gets the git tag <name>-v<version> (for example farama-foundation/metaworld-v0.1); --tag creates the
+  tags locally (push them with `git push origin --tags`).
 - hub.json is the machine-readable index the hub page is built from: per dataset, its tasks with suite, backend,
   runtime, embodiment and simulator (from hub.yaml and export.json), and the pinned commit.
 """
@@ -69,28 +72,40 @@ def main(argv=None) -> int:
     reg_path = HUB / "registry.json"
     old = {(e["name"], str(e["version"])): e for e in (json.loads(reg_path.read_text()) if reg_path.exists() else [])}
 
-    registry, pinned_now = [], []
+    registry, aliases, pinned_now = [], [], []
     for ds in hub["datasets"]:
         key = (ds["name"], str(ds["version"]))
         spec = f"{ds['name']}@{ds['version']}"
-        previous = old.pop(key, None)
-        if previous is not None and spec not in a.repin:
-            registry.append(previous)
-            continue
-        digests = digests_at(commit, ds["name"])
-        if not digests:
-            sys.exit(f"{spec}: datasets/{ds['name']} is empty at {commit[:12]}")
-        registry.append({
-            "name": ds["name"],
-            "version": str(ds["version"]),
-            "description": ds["description"],
-            "git_tag": f"{ds['name']}-v{ds['version']}",
-            "bench_version": BENCH_VERSION,
-            "tasks": [{"name": n, "git_url": GIT_URL, "git_commit_id": commit, "path": f"datasets/{ds['name']}/{n}",
-                       "digest": d} for n, d in digests.items()],
-        })
-        pinned_now.append(registry[-1])
-        print(f"pinned {spec}: {len(digests)} tasks at {commit[:12]}")
+        folder = ds.get("dir", ds["name"])
+        entry = old.pop(key, None)
+        if entry is None or spec in a.repin:
+            digests = digests_at(commit, folder)
+            if not digests:
+                sys.exit(f"{spec}: datasets/{folder} is empty at {commit[:12]}")
+            entry = {
+                "name": ds["name"],
+                "version": str(ds["version"]),
+                "description": ds["description"],
+                "git_tag": f"{ds['name']}-v{ds['version']}",
+                "bench_version": BENCH_VERSION,
+                "tasks": [{"name": n, "git_url": GIT_URL, "git_commit_id": commit, "path": f"datasets/{folder}/{n}",
+                           "digest": d} for n, d in digests.items()],
+            }
+            pinned_now.append(entry)
+            print(f"pinned {spec}: {len(digests)} tasks at {commit[:12]}")
+        registry.append(entry)
+        # an alias is an older name of the same version: its own registry entry, with exactly the same pinned tasks
+        for alias in ds.get("aliases", []):
+            akey = (alias, str(ds["version"]))
+            aentry = old.pop(akey, None)
+            if aentry is None:
+                aentry = {**entry, "name": alias, "git_tag": f"{alias}-v{ds['version']}"}
+                pinned_now.append(aentry)
+                print(f"alias {alias}@{ds['version']} -> {spec}")
+            if aentry["tasks"] != entry["tasks"]:
+                sys.exit(f"alias {alias}@{ds['version']} pins other tasks than {spec}; re-pin one of them")
+            aliases.append(aentry)
+    registry += aliases
     registry += list(old.values())  # versions no longer in hub.yaml stay published
     reg_path.write_text(json.dumps(registry, indent=2) + "\n")
 
@@ -103,9 +118,13 @@ def main(argv=None) -> int:
     by_name = {d["name"]: d for d in hub["datasets"]}
     out = {"registry": RAW_REGISTRY, "registry_mirror": MIRROR_REGISTRY, "git_url": GIT_URL,
            "bench_version": BENCH_VERSION, "robouse": export["robouse"], "datasets": []}
+    alias_names = {x for d in hub["datasets"] for x in d.get("aliases", [])}
     for e in registry:
+        if e["name"] in alias_names:  # aliases are not listed on the hub page
+            continue
         ds = by_name.get(e["name"], {})
-        exp = export["datasets"].get(e["name"], {"tasks": {}})
+        folder = ds.get("dir", e["name"])
+        exp = export["datasets"].get(folder, {"tasks": {}})
         tasks = []
         for t in e["tasks"]:
             info = exp["tasks"].get(t["name"], {})
@@ -121,8 +140,11 @@ def main(argv=None) -> int:
                 if x not in sims:
                     sims.append(x)
         image = ds.get("image") or (suites[used_suites[0]]["image"] if used_suites else "")
+        org, _, short = e["name"].rpartition("/")
         out["datasets"].append({
-            "name": e["name"], "version": e["version"], "description": e["description"], "git_tag": e["git_tag"],
+            "name": e["name"], "org": org, "short_name": short, "dir": folder, "aliases": ds.get("aliases", []),
+            "upstream": ds.get("upstream"),
+            "version": e["version"], "description": e["description"], "git_tag": e["git_tag"],
             "commit": e["tasks"][0]["git_commit_id"], "n_tasks": len(e["tasks"]), "suites": used_suites,
             "embodiments": emb, "simulators": sims, "image": image, "noop": bool(ds.get("noop_of")),
             "runtimes": sorted({t.get("runtime") for t in tasks if t.get("runtime")}),

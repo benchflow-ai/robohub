@@ -1,6 +1,6 @@
 """Export Robo Use tasks from a Robo Use checkout into this hub as native BenchFlow task packages.
 
-    <robouse>/.venv/bin/python scripts/export.py --robouse ~/benchflow/robouse [--datasets robouse-core,robouse-drone]
+    <robouse>/.venv/bin/python scripts/export.py --robouse ~/benchflow/robouse [--datasets benchflow/robouse-core,benchflow/robouse-drone]
 
 A dataset with `noop_of: <dataset>` in hub.yaml is a negative control: the same tasks with reference solutions
 that only look at the robot and exit, so the oracle agent must score 0 on every task.
@@ -9,7 +9,7 @@ Reads hub.yaml (datasets, runtimes) and core.txt, and writes:
 
     runtimes/<name>/                 simulator image build context shared by the tasks that use it
       Dockerfile  requirements*.txt  sim-entry.sh  check_runtime.py  robouse/src/robouse/  [fetch_assets.py assets/]
-    datasets/<dataset>/<task-id>/    one native BenchFlow package (task.md schema 1.3) per task
+    datasets/<dir>/<task-id>/        one native BenchFlow package (task.md schema 1.3) per task
       task.md
       environment/Dockerfile           agent (`main`) image: python + numpy + the `robo` client only
       environment/robo                 Robo Use's agent_cli.py (standard library only)
@@ -355,15 +355,17 @@ def main(argv=None) -> int:
     by_name = {d["name"]: d for d in hub["datasets"]}
     jobs = []
     for ds in hub["datasets"]:
-        if wanted and ds["name"] not in wanted:
+        if wanted and not wanted & {ds["name"], ds.get("dir", ds["name"])}:
             continue
         if "noop_of" in ds:  # negative control: the tasks of another dataset with no-op reference solutions
             src = by_name[ds["noop_of"]]
-            jobs.append(({**{k: v for k, v in src.items() if k in ("suites", "tasks_file")}, "name": ds["name"]}, True))
+            jobs.append(({**{k: v for k, v in src.items() if k in ("suites", "tasks_file")}, "name": ds["name"],
+                          "dir": ds.get("dir", ds["name"])}, True))
         else:
             jobs.append((ds, False))
     for ds, noop in jobs:
-        out_parent = HUB / "datasets" / ds["name"]
+        folder = ds.get("dir", ds["name"])  # names are <org>/<name>; the folder stays flat (datasets/<dir>/<task>)
+        out_parent = HUB / "datasets" / folder
         if out_parent.exists():
             shutil.rmtree(out_parent)
         out_parent.mkdir(parents=True)
@@ -374,7 +376,7 @@ def main(argv=None) -> int:
             sim_memory = hub["runtimes"][rt].get("sim_memory", "3G")
             export_task(task, robouse, out_parent, rt, runtime_digests[rt], sim_memory, PROMPT_PREFIX, noop)
             tasks[tid] = {"suite": suite_of[tid], "backend": task.spec["backend"], "runtime": rt}
-        manifest["datasets"][ds["name"]] = {"noop": noop, "tasks": tasks}
+        manifest["datasets"][folder] = {"noop": noop, "tasks": tasks}
         print(f"{ds['name']}: {len(tasks)} task(s){' (no-op oracles)' if noop else ''}")
     manifest.update({"robouse": prov, "runtimes": runtime_digests})
     manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
