@@ -73,8 +73,9 @@ def main(argv=None) -> int:
     for ds in hub["datasets"]:
         key = (ds["name"], str(ds["version"]))
         spec = f"{ds['name']}@{ds['version']}"
-        if key in old and spec not in a.repin:
-            registry.append(old.pop(key))
+        previous = old.pop(key, None)
+        if previous is not None and spec not in a.repin:
+            registry.append(previous)
             continue
         digests = digests_at(commit, ds["name"])
         if not digests:
