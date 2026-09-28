@@ -54,7 +54,7 @@ The simulator images are built from this repository, not pulled from a registry.
 | Runtime | Backends | What the build downloads | Image size |
 |---|---|---|---|
 | `base` | metaworld, gymrobotics, tabletop | pinned pip packages | 1.1 GB |
-| `menagerie` | menagerie, roboharm, drone | pinned pip packages; 87 MuJoCo Menagerie files (43 MB) from Menagerie commit `8161bba`, each checked against its SHA-256 (`runtimes/menagerie/assets/*.json`) | 1.2 GB |
+| `menagerie` | menagerie, roboharm, drone | pinned pip packages; 93 MuJoCo Menagerie files (about 43 MB) from Menagerie commit `8161bba`, each checked against its SHA-256 (`runtimes/menagerie/assets/*.json`) | 1.2 GB |
 | `robosuite` | robosuite | pinned pip packages (robosuite 1.5.2) | 2.5 GB |
 | `libero` | libero | pinned pip packages, CPU PyTorch 2.14.0, LIBERO assets (about 400 MB) from the Hugging Face dataset `lerobot/libero-assets` at revision `0b3ea86` | 4.1 GB |
 | `dexjoco` | dexjoco | pinned pip packages, a Python 3.11 environment, DexJoCo at commit `8d23b0f` (about 300 MB) | 3.1 GB |
@@ -90,7 +90,7 @@ git add -A && git commit -m "Export Robo Use <commit> as datasets <...>"
 git add registry.json hub.json && git commit -m "Registry: pin <...>" && git push origin main --tags
 ```
 
-Published versions are immutable: `build_registry.py` keeps every entry already in `registry.json` and pins only versions that are new in `hub.yaml`. To change a dataset, bump its version in `hub.yaml`, export, commit, and pin; the old version keeps pointing at its old commit. The exporter keeps each task's oracle token, so an unchanged task keeps its digest across exports.
+Published versions are immutable: `build_registry.py` keeps every entry already in `registry.json` and pins only versions that are new in `hub.yaml` (`--repin NAME@VERSION` overrides this; it was used only before the 0.1 versions were first published). To change a dataset, bump its version in `hub.yaml`, export, commit, and pin; the old version keeps pointing at its old commit. The exporter keeps each task's oracle token, so an unchanged task keeps its digest across exports.
 
 ## Dogfood
 
@@ -99,7 +99,7 @@ Run on 2026-09-28 with the released `bench` 0.7.4 (PyPI), Docker 29.5 in Colima 
 | Run | Command | Result |
 |---|---|---|
 | Oracle, all of `robouse-core` | `bench eval run -d robouse-core@0.1 --registry registry.json --agent oracle --concurrency 4` (registry fetched with `gh api`) | **100/100**, mean reward 1.00, 0 errors, 97.8 min |
-| No-op control, 10 tasks (one or two per runtime) | `bench eval run -d robouse-noop-control@0.1 --registry https://robouse.ai/hub/registry.json --agent oracle --include ...` | **0/10**, every episode closed by the verifier (`agent_exited`, 0 steps). One trial (`robosuite-lift-panda`) first failed with a Docker error (`No such container`) while another job shared the Docker VM; its rerun scored 0 |
+| No-op control, 10 tasks (one per suite family, covering all five runtimes) | `bench eval run -d robouse-noop-control@0.1 --registry https://robouse.ai/hub/registry.json --agent oracle --include ...` | **0/10**, every episode closed by the verifier (`agent_exited`, 0 steps). One trial (`robosuite-lift-panda`) first failed with a Docker error (`No such container`) while another job shared the Docker VM; its rerun scored 0 |
 | Codex + gpt-6-astra, 3 tasks | `CODEX_AUTH_JSON=... bench eval run -d robouse-core@0.1 ... --agent codex --model gpt-6-astra` | **not run**: bench 0.7.4 pins `codex-acp` 0.0.45, which rejects the model id before any request (`Unsupported format of modelId`; with `gpt-6-astra[medium]`, `Unknown model`). A BenchFlow 0.7.6 development build (`codex-acp` 1.6.0) failed the same way |
 | Claude Code + claude-sonnet-5, 1 task | `CLAUDE_CODE_OAUTH_TOKEN=... bench eval run ... --agent claude --model claude-sonnet-5` | **not run**: both maintainer OAuth tokens returned `You've hit your weekly limit` (resets Oct 2) |
 
