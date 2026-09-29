@@ -6301,6 +6301,78 @@
     ]
   },
   {
+    "name": "robodojo-benchmark/robodojo",
+    "version": "0.1",
+    "description": "Robo Use RoboDojo 0.1: 9 RoboDojo simulation tasks (7 of the 42 base tasks and 2 random-layout variants) on RoboDojo's ARX X5 bimanual platform in Isaac Sim 5.1, with RoboDojo's own layouts, step limits and success checks. Needs an NVIDIA RTX GPU for the simulator worker.",
+    "git_tag": "robodojo-benchmark/robodojo-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "robodojo-cover-blocks",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "432d0a882cb51e35c272901b25a01fbfcaefd1cd",
+        "path": "datasets/robodojo/robodojo-cover-blocks",
+        "digest": "sha256:f903bb5bcb2f8415fa5429f482da41d87d6c3679f78bf7087faa211efc5788f1"
+      },
+      {
+        "name": "robodojo-general-pickup",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "432d0a882cb51e35c272901b25a01fbfcaefd1cd",
+        "path": "datasets/robodojo/robodojo-general-pickup",
+        "digest": "sha256:22d840a7f00fb54321284970e6ac9108a2edb112016362c3eaab632135530f92"
+      },
+      {
+        "name": "robodojo-press-by-number",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "432d0a882cb51e35c272901b25a01fbfcaefd1cd",
+        "path": "datasets/robodojo/robodojo-press-by-number",
+        "digest": "sha256:b77c85f23a64741508e2b0898e6a60e4f27e1c033a5227239bce56bc9531ad94"
+      },
+      {
+        "name": "robodojo-put-bottles-into-dustbin",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "432d0a882cb51e35c272901b25a01fbfcaefd1cd",
+        "path": "datasets/robodojo/robodojo-put-bottles-into-dustbin",
+        "digest": "sha256:e8d5b6cea473b1561ea763a30a88a6924276ad968c0cc9350233ee7b7537d355"
+      },
+      {
+        "name": "robodojo-stack-blocks",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "432d0a882cb51e35c272901b25a01fbfcaefd1cd",
+        "path": "datasets/robodojo/robodojo-stack-blocks",
+        "digest": "sha256:a9c6fda18678b92ef2c7b91832e3d91e2547c51680972e9715cb3ed391881654"
+      },
+      {
+        "name": "robodojo-stack-blocks-by-language",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "432d0a882cb51e35c272901b25a01fbfcaefd1cd",
+        "path": "datasets/robodojo/robodojo-stack-blocks-by-language",
+        "digest": "sha256:c1617348215b91254024be50ea4f77e2947656d3139b0bb7b82b2cc135f4dee4"
+      },
+      {
+        "name": "robodojo-stack-blocks-random",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "432d0a882cb51e35c272901b25a01fbfcaefd1cd",
+        "path": "datasets/robodojo/robodojo-stack-blocks-random",
+        "digest": "sha256:db7f2789e5d678c065f6087d1b98816e621c885fa28445a957e61853106bb753"
+      },
+      {
+        "name": "robodojo-stack-bowls",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "432d0a882cb51e35c272901b25a01fbfcaefd1cd",
+        "path": "datasets/robodojo/robodojo-stack-bowls",
+        "digest": "sha256:6dfa8f291d22a93969480a8dd67423d65bf0d54d5e28e51ddf3ac90f269c9489"
+      },
+      {
+        "name": "robodojo-stack-bowls-random",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "432d0a882cb51e35c272901b25a01fbfcaefd1cd",
+        "path": "datasets/robodojo/robodojo-stack-bowls-random",
+        "digest": "sha256:fef5f53548ddd4ccaa14f4b24177fe56648133665727dbdb02a129cd8422a954"
+      }
+    ]
+  },
+  {
     "name": "benchflow/robouse-noop-control",
     "version": "0.1",
     "description": "Negative control for robouse-core 0.1: the same 100 tasks, but each reference solution only looks (robo info, robo observe) and exits without moving the robot. Run it with the oracle agent; every task must score 0.",

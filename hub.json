@@ -7336,6 +7336,114 @@
       ]
     },
     {
+      "name": "robodojo-benchmark/robodojo",
+      "org": "robodojo-benchmark",
+      "short_name": "robodojo",
+      "dir": "robodojo",
+      "aliases": [],
+      "upstream": {
+        "benchmark": "RoboDojo",
+        "org_name": "RoboDojo Benchmark (MMLab@HKU and partners)",
+        "repo": "https://github.com/RoboDojo-Benchmark/RoboDojo",
+        "licence": "MIT (LICENSE file); README states a non-commercial research licence"
+      },
+      "run": {
+        "label": "Robo Use checkout + GPU worker",
+        "command": "robouse run-many --tasks tasks/robodojo --harness oracle --out runs/robodojo-oracle",
+        "note": "GPU required. RoboDojo runs on NVIDIA Isaac Sim 5.1, which needs an RTX GPU with RT cores and a driver from the 580 branch (it crashed at start-up on driver 595). Start one worker per task on the GPU machine (<code>robodojo_worker.py</code> in a RoboDojo checkout with its Hugging Face assets), write their endpoints to <code>runs/_robodojo/remote.json</code> in a Robo Use checkout (branch <code>robodojo</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/robodojo/docs/suites/robodojo.md\">docs/suites/robodojo.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control.",
+        "bench_note": "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_ROBODOJO_REMOTE</code> on the host."
+      },
+      "robouse": {
+        "commit": "b573f9292803bc2707bbaca6d8f61b95615dffbd",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "version": "0.1",
+      "description": "Robo Use RoboDojo 0.1: 9 RoboDojo simulation tasks (7 of the 42 base tasks and 2 random-layout variants) on RoboDojo's ARX X5 bimanual platform in Isaac Sim 5.1, with RoboDojo's own layouts, step limits and success checks. Needs an NVIDIA RTX GPU for the simulator worker.",
+      "git_tag": "robodojo-benchmark/robodojo-v0.1",
+      "commit": "432d0a882cb51e35c272901b25a01fbfcaefd1cd",
+      "n_tasks": 9,
+      "suites": [
+        "robodojo"
+      ],
+      "embodiments": [
+        "ARX X5 bimanual"
+      ],
+      "simulators": [
+        "RoboDojo (Isaac Sim 5.1)"
+      ],
+      "image": "robodojo",
+      "noop": false,
+      "runtimes": [
+        "robodojo"
+      ],
+      "tasks": [
+        {
+          "id": "robodojo-cover-blocks",
+          "digest": "sha256:f903bb5bcb2f8415fa5429f482da41d87d6c3679f78bf7087faa211efc5788f1",
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        {
+          "id": "robodojo-general-pickup",
+          "digest": "sha256:22d840a7f00fb54321284970e6ac9108a2edb112016362c3eaab632135530f92",
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        {
+          "id": "robodojo-press-by-number",
+          "digest": "sha256:b77c85f23a64741508e2b0898e6a60e4f27e1c033a5227239bce56bc9531ad94",
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        {
+          "id": "robodojo-put-bottles-into-dustbin",
+          "digest": "sha256:e8d5b6cea473b1561ea763a30a88a6924276ad968c0cc9350233ee7b7537d355",
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        {
+          "id": "robodojo-stack-blocks",
+          "digest": "sha256:a9c6fda18678b92ef2c7b91832e3d91e2547c51680972e9715cb3ed391881654",
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        {
+          "id": "robodojo-stack-blocks-by-language",
+          "digest": "sha256:c1617348215b91254024be50ea4f77e2947656d3139b0bb7b82b2cc135f4dee4",
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        {
+          "id": "robodojo-stack-blocks-random",
+          "digest": "sha256:db7f2789e5d678c065f6087d1b98816e621c885fa28445a957e61853106bb753",
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        {
+          "id": "robodojo-stack-bowls",
+          "digest": "sha256:6dfa8f291d22a93969480a8dd67423d65bf0d54d5e28e51ddf3ac90f269c9489",
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        {
+          "id": "robodojo-stack-bowls-random",
+          "digest": "sha256:fef5f53548ddd4ccaa14f4b24177fe56648133665727dbdb02a129cd8422a954",
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        }
+      ]
+    },
+    {
       "name": "benchflow/robouse-noop-control",
       "org": "benchflow",
       "short_name": "robouse-noop-control",
@@ -8170,6 +8278,10 @@
     "gpu": {
       "simulators": "ManiSkill3 3.0.1, Genesis 1.4.2, MuJoCo Playground 0.2.0, Isaac Lab 2.3 on Isaac Sim 5.1, on a remote NVIDIA RTX GPU worker",
       "digest": "sha256:30c9df3ddb58447dbd523d84ff39e47a03e23cb4be5876d60b5e062659ad436e"
+    },
+    "robodojo": {
+      "simulators": "RoboDojo (NVIDIA Isaac Sim 5.1, Isaac Lab 2.3), on a remote NVIDIA RTX GPU worker",
+      "digest": "sha256:cbddb5b2d8b4cccf3291330183e707e02f020bff0d64793d84bb9c351ceacdfa"
     }
   }
 }
