@@ -1,9 +1,11 @@
-"""Robot model assets (MuJoCo Menagerie meshes) for the menagerie, RoboHarm and drone suites.
+"""Robot model assets (MuJoCo Menagerie meshes).
 
-A checkout of the repository has them in assets/menagerie. An installed wheel does not ship them (about 43 MB);
-`robouse fetch-assets` downloads the same files from the pinned MuJoCo Menagerie commit listed in the provenance
-manifests, checks each SHA-256, and stores them in ~/.cache/robouse/menagerie. $ROBOUSE_MENAGERIE_ASSETS overrides
-the location.
+The menagerie, RoboHarm and drone suites use the Panda, ALOHA and Skydio X2 models: a checkout of the repository has
+them in assets/menagerie; an installed wheel does not ship them (about 43 MB). The embodiment suites (quadruped,
+humanoid, mobile-manip, dexhand, crazyflie) use 14 more robots (about 350 MB, assets/menagerie/embodiments.json)
+that are never stored in git. `robouse fetch-assets` downloads the files listed in the provenance manifests from the
+pinned MuJoCo Menagerie commit, checks each SHA-256, and stores them in ~/.cache/robouse/menagerie
+(`--robot NAME` limits it to some robots). $ROBOUSE_MENAGERIE_ASSETS overrides the location.
 """
 from __future__ import annotations
 
@@ -32,12 +34,23 @@ def asset_root() -> Path:
     return CACHE
 
 
+def robot_dir(robot: str) -> Path:
+    """Folder of one Menagerie robot (e.g. `unitree_go2`): $ROBOUSE_MENAGERIE_ASSETS, the checkout, or the fetch cache."""
+    override = os.environ.get("ROBOUSE_MENAGERIE_ASSETS")
+    roots = [Path(override)] if override else [_checkout_root(), CACHE]
+    for r in roots:
+        if (r / robot).is_dir():
+            return r / robot
+    raise FileNotFoundError(f"robot model {robot!r} not found in {', '.join(map(str, roots))}; "
+                            f"run `robouse fetch-assets --robot {robot}` once")
+
+
 def manifests() -> list[Path]:
     shipped = HERE / "assets_provenance"
     if shipped.is_dir():
         return sorted(shipped.glob("*.json"))
     root = _checkout_root()
-    return [root / "provenance.json", root / "skydio_x2" / "PROVENANCE.json"]
+    return [root / "provenance.json", root / "skydio_x2" / "PROVENANCE.json", root / "embodiments.json"]
 
 
 def _sha256(p: Path) -> str:
@@ -48,11 +61,14 @@ def _sha256(p: Path) -> str:
     return h.hexdigest()
 
 
-def fetch(dest: Path | None = None, log=print) -> Path:
+def fetch(dest: Path | None = None, log=print, robots: list[str] | None = None) -> Path:
+    """Download the manifest files (all robots, or only `robots`) that are missing or differ from their pinned hash."""
     dest = Path(dest or os.environ.get("ROBOUSE_MENAGERIE_ASSETS") or CACHE)
     n_new = 0
     for m in manifests():
         for f in json.loads(m.read_text())["files"]:
+            if robots and f["path"].split("/", 1)[0] not in robots:
+                continue
             out = dest / f["path"]
             if out.exists() and _sha256(out) == f["sha256"]:
                 continue

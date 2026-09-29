@@ -1,0 +1,78 @@
+---
+schema_version: '1.3'
+task:
+  name: robouse/myosuite-finger-pose-muscles
+  description: Index finger to a fixed pose, muscles only
+metadata:
+  author_name: benchflow
+  source_benchmark: MyoSuite (MyoSuite 2.12.2, MyoHub)
+  source_task: myoFingerPoseFixed-v0
+  suite: myosuite
+  category: posture
+  difficulty: medium
+  tags:
+  - myosuite
+  - musculoskeletal
+  - muscles
+  - pose
+  simulator: MyoSuite 2.12.2 (Apache-2.0), MuJoCo 3.6.0
+  robouse:
+    id: myosuite-finger-pose-muscles
+    backend: myosuite
+    env: myosuite-finger-pose-muscles
+    seed: 0
+    max_steps: 300
+    camera: view
+    cameras:
+    - view
+    skills: false
+    success_mode: final
+agent:
+  timeout_sec: 1800
+verifier:
+  service: simulator
+  user: root
+  timeout_sec: 300
+sandbox:
+  cpus: 1
+  memory_mb: 2048
+  build_timeout_sec: 3600
+---
+
+You are controlling a simulated robot. Read the task below, then solve it by running the `robo` command in your shell (start with `robo info` and `robo observe`). Keep going until the task is done, then call `robo done` once. Do not stop to ask questions; there is no human to answer.
+
+# Index finger to a fixed pose, muscles only
+
+You control MyoFinger, MyoSuite's musculoskeletal model of a single index finger (MuJoCo physics), only through its 5 muscles: `extn` (extensor), `adabR` and `adabL` (sideways, abduction/adduction), `mflx` and `dflx` (flexors). The finger's base is fixed; it has 4 joints: `IFadb` (sideways, -0.44 to 0.44 rad), `IFmcp` (knuckle flexion, -0.44 to 1.05 rad), `IFpip` and `IFdip` (middle and end joint flexion, 0 to 1.05 rad). Angles are in radians. The finger starts straight (all joints 0), pointing along +x; flexing bends it towards -z. World frame in metres, +z up. A muscle can only pull, and the flexors cross several joints.
+
+## Task
+
+Bend the middle and end joints of the straight finger while keeping the knuckle straight. This task has no skills: you drive the five muscles directly. Bring the joints to the target angles in `target_pose_rad` (MyoSuite env `myoFingerPoseFixed-v0`). The target is `IFadb` = 0.000, `IFmcp` = 0.000, `IFpip` = 0.750, `IFdip` = 0.750 rad. At the start the pose error norm is 1.06 rad.
+
+**Success:** MyoSuite's own `solved` check for this env: the Euclidean norm of the joint-angle error over all 4 joints (target minus current, `pose_error_norm`) must be below 0.35 rad (`threshold`, the env's pose_thd), judged by the episode server from the simulated state after you call `robo done` and the 10-step settle. Simulated time advances only when you act (one step = 20 ms).
+
+**Controls.** `robo act E1 E2 ... [--repeat N]` sets the excitation (neural drive) of every muscle, a number in [0, 1], in the order `robo info` lists them (the action names), and holds it for N steps of 20 ms. A muscle's activation follows its excitation with MuJoCo's first-order activation dynamics (about 10 ms rising, 40 ms falling); its force also depends on its length and speed. The excitations stay as you last sent them until you act again, and they are also what the muscles hold during the 10-step settle after `robo done`. There are no skills in this task (`robo skill` is disabled): find excitation patterns yourself, e.g. co-contract an agonist and its antagonist to hold a joint, and watch `joint_angles_rad` and `joint_velocities_rad_s` as you adjust.
+
+**Observation.** `robo observe` reports `target_pose_rad` (the goal angles), `pose_error_norm` and `threshold`; `joint_angles_rad` and `joint_velocities_rad_s` per joint; `muscle_activations` (one per muscle, in action order); `contacts` (pairs of bones or objects touching); `time_s`; and `obs_vector`, MyoSuite's own observation vector for this env (its observation keys, in order: qpos, qvel, pose_err, act; not printed by plain `robo observe`, shown with `robo observe --json`). `robo observe --image` saves a picture from a fixed camera (muscle paths are not drawn).
+
+The step budget is 300 steps (6 s of simulated time).
+
+## How to control the robot
+
+You are the robot's policy. You act only through the `robo` command in your shell. There is no other way to move the robot, and you cannot read or change the simulator, the scoring, or other files to succeed; the episode server judges the final physical state itself.
+
+```
+robo info                          # the robot, its sensors, action groups, skills and step budget
+robo observe                       # robot and scene state as numbers
+robo observe --image [--camera C]  # also saves a camera image and prints its path (open it to look)
+robo act V1 V2 ... [--repeat N]    # one low-level action (the action groups under Controls), applied N times (N <= 50)
+robo skill NAME ARG ...            # run a skill listed by `robo info`; it runs until it finishes and reports the result
+robo done "short summary"          # end the episode and ask for scoring
+robo give-up "reason"              # end the episode without claiming success
+```
+
+- Positions are in metres in the world frame (+z up); angles are in degrees unless a field says otherwise.
+- The episode has a fixed step budget (see `robo info`); every simulated control step counts, including the steps a skill runs.
+- Skills are ordinary controllers: they can fail, stop early or be blocked by the scene. Read what they report and re-observe.
+- Success is judged about 10 steps after you call `robo done`, with the robot holding still (each action group's hold value: zero for velocity and delta commands, full brake for a car), so the goal must still be true when the robot stops.
+- Call `robo done` exactly once when finished.

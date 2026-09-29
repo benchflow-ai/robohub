@@ -198,6 +198,7 @@ class Episode:
             "steps_used": self.steps, "max_steps": self.max_steps,
             "observation_mode": self.obs_mode,
             **({"max_repeat": self.max_repeat} if "max_repeat" in self.spec else {}),
+            **(self.backend.info_extra() if callable(getattr(self.backend, "info_extra", None)) else {}),
             **({"visible_fields": self.visible_fields, "cameras": self.camera_info()} if self.obs_mode == "vision" else {}),
         }
 
@@ -227,6 +228,8 @@ class Episode:
         spec = self.backend.action_spec
         if not isinstance(action, list) or len(action) != spec.dim or not all(isinstance(x, (int, float)) for x in action):
             return {"ok": False, "error": f"action must be a list of {spec.dim} numbers {spec.names}"}
+        if not all(np.isfinite(x) for x in action):
+            return {"ok": False, "error": "action values must be finite numbers (no nan or inf)"}
         repeat = max(1, min(self.max_repeat, repeat))
         n = 0
         for _ in range(repeat):
@@ -281,6 +284,9 @@ class Episode:
         """Named high-level skill implemented by the backend (optional `run_skill(name, args)` hook, e.g. BEHAVIOR's
         symbolic primitives). One skill call counts as one step of the budget. Backends may also provide
         `pop_frames()` with the video frames rendered while the skill ran."""
+        start = getattr(self.backend, "start_skill", None)
+        if self.skills_enabled and callable(start):
+            return self._closed_loop_skill(start, name, args)
         run = getattr(self.backend, "run_skill", None)
         if not self.skills_enabled or not callable(run):
             return {"ok": False, "error": "no named skills in this task; see `robo info`"}
@@ -297,12 +303,43 @@ class Episode:
         self._record_frame(force=True)
         return {"ok": True, "result": {**out, "steps_used": self.steps, "max_steps": self.max_steps}}
 
+    def _closed_loop_skill(self, start, name, args) -> dict:
+        """Embodiment backends (backends/embodied.py): a skill is a generator that yields one action per control step;
+        each action runs as an ordinary step (budget, video frames, success checks), until the skill returns."""
+        if not isinstance(name, str) or not isinstance(args, list):
+            return {"ok": False, "error": "skill needs a name and a list of arguments"}
+        try:
+            gen = start(name, [str(a) for a in args])
+        except ValueError as e:
+            return {"ok": False, "error": str(e)}
+        n, out = 0, {}
+        while True:
+            if self.steps >= self.max_steps or self.finished:
+                gen.close()
+                out = {"stopped": "step budget exhausted" if self.steps >= self.max_steps else "episode finished"}
+                break
+            try:
+                action = next(gen)
+            except StopIteration as e:
+                out = e.value or {}
+                break
+            except Exception as e:  # a skill that fails part-way reports it; the steps it ran still count
+                gen.close()
+                out = {"error": f"{type(e).__name__}: {e}"[:300]}
+                break
+            self._env_step(action)
+            n += 1
+        return {"ok": True, "result": {"skill": name, **out, "executed_steps": n, "state": self._state(), "steps_used": self.steps,
+                                       "max_steps": self.max_steps}}
+
     def finish(self, outcome: str, text: str, settle: bool = True) -> dict:
         if self.finished:
             return {"outcome": self.outcome}
         g = float(getattr(self.backend, "_grip", 0.0))
         dim = self.backend.action_spec.dim
         hold = [0.0] * (dim - 1) + [g] if dim >= 1 else []
+        if callable(getattr(self.backend, "hold_action", None)):  # embodiment backends say what "hold still" is
+            hold = list(self.backend.hold_action())
         for _ in range(SETTLE_STEPS if settle else 0):  # settle; success must still hold afterwards
             try:
                 self.backend.step(hold)
@@ -310,18 +347,24 @@ class Episode:
                 break
             self._record_frame(force=True)
         judge = getattr(self.backend, "judge", None)  # optional: verdict that depends on how the episode ended
-        if callable(judge):  # e.g. safety tasks, where refusing (give_up) is the rewarded behaviour
-            success = bool(judge(outcome, text))
-        elif self.success_mode == "first":
-            success = bool(self.success_ever)
-        else:  # only an explicit `robo done` is judged; give-up, timeouts and budget endings score 0
-            success = outcome == "done" and bool(self.backend.success())
+        judge_error = None
+        try:
+            if callable(judge):  # e.g. safety tasks, where refusing (give_up) is the rewarded behaviour
+                success = bool(judge(outcome, text))
+            elif self.success_mode == "first":
+                success = bool(self.success_ever)
+            else:  # only an explicit `robo done` is judged; give-up, timeouts and budget endings score 0
+                success = outcome == "done" and bool(self.backend.success())
+        except Exception as e:  # a simulator that died cannot be judged: score 0 and record why
+            success, judge_error = False, f"{type(e).__name__}: {e}"[:300]
         self.finished, self.outcome, self.agent_text = True, outcome, text
         self.result = {
             "task": self.spec.get("id"), "seed": self.seed, "success": success, "success_ever": self.success_ever,
             "success_mode": self.success_mode,
             "outcome": outcome, "steps_used": self.steps, "max_steps": self.max_steps, "requests": self.requests,
             "agent_text": text, "wall_time_s": round(time.time() - self.t0, 2),
+            **({"judge_error": judge_error} if judge_error else {}),
+            **({"judge_detail": getattr(self.backend, "last_judge")} if getattr(self.backend, "last_judge", None) else {}),
         }
         (self.run_dir / "result.json").write_text(json.dumps(self.result, indent=2))
         self._write_video()

@@ -1,0 +1,14 @@
+{
+  "note": "Unitree's pretrained H1 locomotion policy (TorchScript LSTM actor) from unitree_rl_gym, used by the humanoidbench backend as the walking controller under `robo act` (read without torch by src/robouse/backends/humanoidbench_worker.py). Not stored in git: the hub runtime fetches it at image build (every file SHA-256 checked); for local runs put h1_motion.pt in ~/.cache/robouse/humanoidbench/ (docs/suites/humanoidbench.md).",
+  "repository": "https://github.com/unitreerobotics/unitree_rl_gym",
+  "commit": "276801e46c5d433564f24658bac64f254b7d2d4b",
+  "license": "BSD-3-Clause",
+  "files": [
+    {"path": "h1_motion.pt", "source": "deploy/pre_train/h1/motion.pt",
+     "url": "https://raw.githubusercontent.com/unitreerobotics/unitree_rl_gym/276801e46c5d433564f24658bac64f254b7d2d4b/deploy/pre_train/h1/motion.pt",
+     "sha256": "44a0fbceb81f3877833ae9a398d039bea1759cb0d3c8188181013885f70589eb"},
+    {"path": "unitree_rl_gym_LICENSE", "source": "LICENSE",
+     "url": "https://raw.githubusercontent.com/unitreerobotics/unitree_rl_gym/276801e46c5d433564f24658bac64f254b7d2d4b/LICENSE",
+     "sha256": "aef6394ba1597725a68308167324e675f562e6606027404deb1b9da254c2b9c1"}
+  ]
+}

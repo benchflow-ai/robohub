@@ -1,0 +1,27 @@
+# RoboCasa worker environment (Python 3.12), frozen from the Robo Use RoboCasa venv (scripts/setup_robocasa.sh) and
+# installed with --no-deps, so exactly these versions are used. RoboCasa and robosuite themselves are installed from
+# GitHub at the commits pinned in the Dockerfile, without RoboCasa's training dependencies (lerobot, torch, tianshou).
+absl-py==2.5.0
+cloudpickle==3.1.2
+etils==1.14.0
+farama-notifications==0.0.6
+fsspec==2026.9.0
+glfw==2.10.2
+gymnasium==1.3.0
+h5py==3.16.0
+imageio==2.37.4
+imageio-ffmpeg==0.6.0
+llvmlite==0.49.0
+lxml==6.1.3
+mujoco==3.3.1
+numba==0.67.0
+numpy==2.2.5
+opencv-python-headless==5.0.0.93
+pillow==12.3.0
+pyopengl==3.1.10
+pyyaml==6.0.3
+scipy==1.18.1
+termcolor==3.3.0
+tqdm==4.70.1
+typing-extensions==4.16.0
+zipp==4.1.0

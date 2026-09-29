@@ -1,0 +1,338 @@
+{
+ "layout_id": 6,
+ "style_id": 6,
+ "object_cfgs": [],
+ "fixtures": {
+  "wall_room": {
+   "cls": "Wall"
+  },
+  "wall_backing_room": {
+   "cls": "Wall"
+  },
+  "wall_left_room": {
+   "cls": "Wall"
+  },
+  "wall_left_backing_room": {
+   "cls": "Wall"
+  },
+  "wall_right_room": {
+   "cls": "Wall"
+  },
+  "wall_right_backing_room": {
+   "cls": "Wall"
+  },
+  "wall_front_room": {
+   "cls": "Wall"
+  },
+  "wall_front_backing_room": {
+   "cls": "Wall"
+  },
+  "outlet_room": {
+   "cls": "WallAccessory"
+  },
+  "outlet_2_room": {
+   "cls": "WallAccessory"
+  },
+  "outlet_3_room": {
+   "cls": "WallAccessory"
+  },
+  "light_switch_room": {
+   "cls": "WallAccessory"
+  },
+  "light_switch_2_room": {
+   "cls": "WallAccessory"
+  },
+  "utensil_rack_room": {
+   "cls": "WallAccessory"
+  },
+  "window_group_room": {
+   "cls": "Window"
+  },
+  "floor_room": {
+   "cls": "Floor"
+  },
+  "floor_backing_room": {
+   "cls": "Floor"
+  },
+  "cab_main_main_group": {
+   "cls": "HingeCabinet"
+  },
+  "cab_corner_main_group": {
+   "cls": "Box"
+  },
+  "cab_corner_2_main_group": {
+   "cls": "Box"
+  },
+  "counter_corner_left_main_group": {
+   "cls": "Counter"
+  },
+  "sink_main_group": {
+   "cls": "Sink"
+  },
+  "counter_main_main_group": {
+   "cls": "Counter"
+  },
+  "counter_corner_right_main_group": {
+   "cls": "Counter"
+  },
+  "stack_1_main_group_base": {
+   "cls": "Box"
+  },
+  "stack_1_main_group_1": {
+   "cls": "Drawer"
+  },
+  "stack_1_main_group_2": {
+   "cls": "Drawer"
+  },
+  "stack_1_main_group_3": {
+   "cls": "Drawer"
+  },
+  "stack_1_main_group_4": {
+   "cls": "Drawer"
+  },
+  "stack_2_main_group_base": {
+   "cls": "Box"
+  },
+  "stack_2_main_group_1": {
+   "cls": "HingeCabinet"
+  },
+  "stack_2_main_group_2": {
+   "cls": "PanelCabinet"
+  },
+  "dishwasher_main_group": {
+   "cls": "Dishwasher"
+  },
+  "stack_3_main_group_base": {
+   "cls": "Box"
+  },
+  "stack_3_main_group_1": {
+   "cls": "HingeCabinet"
+  },
+  "stack_3_main_group_2": {
+   "cls": "Drawer"
+  },
+  "stack_3_main_group_3": {
+   "cls": "Drawer"
+  },
+  "toaster_oven_main_group": {
+   "cls": "ToasterOven"
+  },
+  "knife_block_main_group": {
+   "cls": "Accessory"
+  },
+  "utensil_set_main_group": {
+   "cls": "Accessory"
+  },
+  "electric_kettle_main_group": {
+   "cls": "ElectricKettle"
+  },
+  "paper_towel_main_group": {
+   "cls": "Accessory"
+  },
+  "counter_1_right_group": {
+   "cls": "Counter"
+  },
+  "stove_right_group": {
+   "cls": "Stove"
+  },
+  "counter_2_right_group": {
+   "cls": "Counter"
+  },
+  "fridge_right_group": {
+   "cls": "FridgeFrenchDoor"
+  },
+  "fridge_housing_right_group": {
+   "cls": "HousingCabinet"
+  },
+  "counter_corner_right_group": {
+   "cls": "Counter"
+  },
+  "stack_1_right_group_base": {
+   "cls": "Box"
+  },
+  "stack_1_right_group_1": {
+   "cls": "SingleCabinet"
+  },
+  "stack_1_right_group_2": {
+   "cls": "Drawer"
+  },
+  "stack_2_right_group_base": {
+   "cls": "Box"
+  },
+  "stack_2_right_group_1": {
+   "cls": "SingleCabinet"
+  },
+  "stack_2_right_group_2": {
+   "cls": "Drawer"
+  },
+  "cab_1_right_group": {
+   "cls": "SingleCabinet"
+  },
+  "microwave_right_group": {
+   "cls": "Microwave"
+  },
+  "cab_micro_right_group": {
+   "cls": "HingeCabinet"
+  },
+  "cab_2_right_group": {
+   "cls": "SingleCabinet"
+  },
+  "cab_3_right_group": {
+   "cls": "HingeCabinet"
+  },
+  "toaster_right_group": {
+   "cls": "Toaster"
+  },
+  "counter_1_left_group": {
+   "cls": "Counter"
+  },
+  "counter_corner_left_group": {
+   "cls": "Counter"
+  },
+  "stack_1_left_group_base": {
+   "cls": "Box"
+  },
+  "stack_1_left_group_1": {
+   "cls": "Drawer"
+  },
+  "stack_1_left_group_2": {
+   "cls": "Drawer"
+  },
+  "stack_1_left_group_3": {
+   "cls": "Drawer"
+  },
+  "stack_1_left_group_4": {
+   "cls": "Drawer"
+  },
+  "stack_2_left_group_base": {
+   "cls": "Box"
+  },
+  "stack_2_left_group_1": {
+   "cls": "HingeCabinet"
+  },
+  "stack_2_left_group_2": {
+   "cls": "Drawer"
+  },
+  "stack_2_left_group_3": {
+   "cls": "Drawer"
+  },
+  "stack_3_left_group_base": {
+   "cls": "Box"
+  },
+  "stack_3_left_group_1": {
+   "cls": "HingeCabinet"
+  },
+  "stack_3_left_group_2": {
+   "cls": "Drawer"
+  },
+  "cab_1_left_group": {
+   "cls": "HingeCabinet"
+  },
+  "shelves_left_group": {
+   "cls": "OpenCabinet"
+  },
+  "coffee_machine_left_group": {
+   "cls": "CoffeeMachine"
+  },
+  "plant_left_group": {
+   "cls": "Accessory"
+  }
+ },
+ "gen_textures": {},
+ "lang": "Close the lid of the electric kettle.",
+ "fixture_refs": {
+  "electric_kettle": "electric_kettle_main_group"
+ },
+ "cam_configs": {
+  "robot0_agentview_center": {
+   "pos": [
+    -0.6,
+    0.0,
+    1.15
+   ],
+   "quat": [
+    0.636945903301239,
+    0.3325185477733612,
+    -0.3199238181114197,
+    -0.6175596117973328
+   ],
+   "parent_body": "mobilebase0_support"
+  },
+  "robot0_agentview_left": {
+   "pos": [
+    -0.5,
+    0.35,
+    1.05
+   ],
+   "quat": [
+    0.55623853,
+    0.29935253,
+    -0.37678665,
+    -0.6775092
+   ],
+   "camera_attribs": {
+    "fovy": "60"
+   },
+   "parent_body": "mobilebase0_support"
+  },
+  "robot0_agentview_right": {
+   "pos": [
+    -0.5,
+    -0.35,
+    1.05
+   ],
+   "quat": [
+    0.6775091886520386,
+    0.3767866790294647,
+    -0.2993525564670563,
+    -0.55623859167099
+   ],
+   "camera_attribs": {
+    "fovy": "60"
+   },
+   "parent_body": "mobilebase0_support"
+  },
+  "robot0_frontview": {
+   "pos": [
+    -0.5,
+    0,
+    0.95
+   ],
+   "quat": [
+    0.6088936924934387,
+    0.3814677894115448,
+    -0.3673907518386841,
+    -0.5905545353889465
+   ],
+   "camera_attribs": {
+    "fovy": "60"
+   },
+   "parent_body": "mobilebase0_support"
+  },
+  "robot0_eye_in_hand": {
+   "pos": [
+    0.05,
+    0,
+    0
+   ],
+   "quat": [
+    0,
+    0.707107,
+    0.707107,
+    0
+   ],
+   "parent_body": "robot0_right_hand"
+  }
+ },
+ "init_robot_base_pos": [
+  2.905818186267756,
+  -0.82301632144992,
+  0.0
+ ],
+ "init_robot_base_ori": [
+  0.0,
+  0.0,
+  1.5707963267948966
+ ],
+ "robouse_seed": 0
+}

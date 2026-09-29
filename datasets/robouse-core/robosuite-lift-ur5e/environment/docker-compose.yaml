@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/robosuite"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:e772f02478c314c1debe7702bfb170393886b68b996d7f67ff2be7aabd7cc09e"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:ae1976e503f43f82f6296e325adedcdb36932b9686a913df76d3b2ca2d138012"
     network_mode: none
     init: true
     volumes:

@@ -1,5 +1,70 @@
 {
   "datasets": {
+    "robouse-adroit": {
+      "noop": false,
+      "tasks": {
+        "adroit-door-e11": {
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        "adroit-door-e18": {
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        "adroit-door-e23": {
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        "adroit-hammer-e14": {
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        "adroit-hammer-e18": {
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        "adroit-hammer-e19": {
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        "adroit-pen-e1": {
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        "adroit-pen-e11": {
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        "adroit-pen-e7": {
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        "adroit-relocate-e0": {
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        "adroit-relocate-e17": {
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        "adroit-relocate-e5": {
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        }
+      }
+    },
     "robouse-core": {
       "noop": false,
       "tasks": {
@@ -505,6 +570,86 @@
         }
       }
     },
+    "robouse-crazyflie": {
+      "noop": false,
+      "tasks": {
+        "crazyflie-gates": {
+          "backend": "crazyflie",
+          "runtime": "embodied",
+          "suite": "crazyflie"
+        },
+        "crazyflie-shelf-landing": {
+          "backend": "crazyflie",
+          "runtime": "embodied",
+          "suite": "crazyflie"
+        },
+        "crazyflie-swarm-formation": {
+          "backend": "crazyflie",
+          "runtime": "embodied",
+          "suite": "crazyflie"
+        },
+        "crazyflie-swarm-swap": {
+          "backend": "crazyflie",
+          "runtime": "embodied",
+          "suite": "crazyflie"
+        },
+        "crazyflie-waypoints": {
+          "backend": "crazyflie",
+          "runtime": "embodied",
+          "suite": "crazyflie"
+        },
+        "crazyflie-window": {
+          "backend": "crazyflie",
+          "runtime": "embodied",
+          "suite": "crazyflie"
+        },
+        "crazyflie-window-manual": {
+          "backend": "crazyflie",
+          "runtime": "embodied",
+          "suite": "crazyflie"
+        }
+      }
+    },
+    "robouse-dexhand": {
+      "noop": false,
+      "tasks": {
+        "leap-cube-in-hand": {
+          "backend": "dexhand",
+          "runtime": "embodied",
+          "suite": "dexhand"
+        },
+        "leap-lift-ball": {
+          "backend": "dexhand",
+          "runtime": "embodied",
+          "suite": "dexhand"
+        },
+        "leap-pen-to-holder": {
+          "backend": "dexhand",
+          "runtime": "embodied",
+          "suite": "dexhand"
+        },
+        "leap-press-buttons": {
+          "backend": "dexhand",
+          "runtime": "embodied",
+          "suite": "dexhand"
+        },
+        "shadow-cube-face-up": {
+          "backend": "dexhand",
+          "runtime": "embodied",
+          "suite": "dexhand"
+        },
+        "shadow-pour-balls": {
+          "backend": "dexhand",
+          "runtime": "embodied",
+          "suite": "dexhand"
+        },
+        "shadow-turn-valve": {
+          "backend": "dexhand",
+          "runtime": "embodied",
+          "suite": "dexhand"
+        }
+      }
+    },
     "robouse-dexjoco": {
       "noop": false,
       "tasks": {
@@ -577,6 +722,136 @@
           "backend": "dexjoco",
           "runtime": "dexjoco",
           "suite": "dexjoco"
+        }
+      }
+    },
+    "robouse-dmcontrol": {
+      "noop": false,
+      "tasks": {
+        "dmcontrol-acrobot-swingup": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-ball-in-cup-catch": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-cartpole-balance": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-cartpole-swingup": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-finger-turn-easy": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-finger-turn-hard": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-jaco-lift-brick": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-jaco-place-brick": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-jaco-place-cradle": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-jaco-reach-site": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-jaco-stack-2-bricks": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-manipulator-bring-ball": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-pendulum-swingup": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-point-mass-easy": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-reacher-easy": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-reacher-hard": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        "dmcontrol-reacher-hard-b": {
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        }
+      }
+    },
+    "robouse-driving": {
+      "noop": false,
+      "tasks": {
+        "driving-broken-down-car": {
+          "backend": "driving",
+          "runtime": "driving",
+          "suite": "driving"
+        },
+        "driving-cone-zone": {
+          "backend": "driving",
+          "runtime": "driving",
+          "suite": "driving"
+        },
+        "driving-highway-overtake": {
+          "backend": "driving",
+          "runtime": "driving",
+          "suite": "driving"
+        },
+        "driving-intersection-left-turn": {
+          "backend": "driving",
+          "runtime": "driving",
+          "suite": "driving"
+        },
+        "driving-ramp-merge": {
+          "backend": "driving",
+          "runtime": "driving",
+          "suite": "driving"
+        },
+        "driving-roundabout": {
+          "backend": "driving",
+          "runtime": "driving",
+          "suite": "driving"
+        },
+        "driving-winding-road": {
+          "backend": "driving",
+          "runtime": "driving",
+          "suite": "driving"
         }
       }
     },
@@ -700,10 +975,160 @@
         }
       }
     },
+    "robouse-humanoid": {
+      "noop": false,
+      "tasks": {
+        "apollo-box-into-bin": {
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        "apollo-carry-tray": {
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        "g1-can-to-plate": {
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        "g1-drawer-stow": {
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        "g1-pass-across": {
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        "h1-box-to-shelf": {
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        "h1-panel-sequence": {
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        "t1-box-onto-step": {
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        "t1-push-cans": {
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        }
+      }
+    },
+    "robouse-humanoidbench": {
+      "noop": false,
+      "tasks": {
+        "humanoidbench-maze": {
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        },
+        "humanoidbench-pole": {
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        },
+        "humanoidbench-push": {
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        },
+        "humanoidbench-reach": {
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        },
+        "humanoidbench-sit-simple": {
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        },
+        "humanoidbench-stand": {
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        },
+        "humanoidbench-walk": {
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        }
+      }
+    },
+    "robouse-kitchen": {
+      "noop": false,
+      "tasks": {
+        "kitchen-bottom-burner": {
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        "kitchen-burners-cabinets": {
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        "kitchen-complete": {
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        "kitchen-hinge-cabinet": {
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        "kitchen-kettle": {
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        "kitchen-light-switch": {
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        "kitchen-microwave": {
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        "kitchen-mixed": {
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        "kitchen-slide-cabinet": {
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        "kitchen-top-burner": {
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        }
+      }
+    },
     "robouse-libero": {
       "noop": false,
       "tasks": {
         "libero-10-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-10-1": {
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
@@ -713,7 +1138,17 @@
           "runtime": "libero",
           "suite": "libero"
         },
+        "libero-10-3": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
         "libero-10-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-10-5": {
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
@@ -723,7 +1158,17 @@
           "runtime": "libero",
           "suite": "libero"
         },
+        "libero-10-7": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
         "libero-10-8": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-10-9": {
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
@@ -733,7 +1178,17 @@
           "runtime": "libero",
           "suite": "libero"
         },
+        "libero-goal-1": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
         "libero-goal-2": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-goal-3": {
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
@@ -743,7 +1198,17 @@
           "runtime": "libero",
           "suite": "libero"
         },
+        "libero-goal-5": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
         "libero-goal-6": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-goal-7": {
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
@@ -753,7 +1218,17 @@
           "runtime": "libero",
           "suite": "libero"
         },
+        "libero-goal-9": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
         "libero-object-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-object-1": {
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
@@ -763,7 +1238,17 @@
           "runtime": "libero",
           "suite": "libero"
         },
+        "libero-object-3": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
         "libero-object-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-object-5": {
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
@@ -773,7 +1258,17 @@
           "runtime": "libero",
           "suite": "libero"
         },
+        "libero-object-7": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
         "libero-object-8": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-object-9": {
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
@@ -783,7 +1278,17 @@
           "runtime": "libero",
           "suite": "libero"
         },
+        "libero-spatial-1": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
         "libero-spatial-2": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-spatial-3": {
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
@@ -793,7 +1298,17 @@
           "runtime": "libero",
           "suite": "libero"
         },
+        "libero-spatial-5": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
         "libero-spatial-6": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        "libero-spatial-7": {
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
@@ -802,6 +1317,531 @@
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
+        },
+        "libero-spatial-9": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        }
+      }
+    },
+    "robouse-libero-90": {
+      "noop": false,
+      "tasks": {
+        "libero-90-0": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-1": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-10": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-11": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-12": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-13": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-14": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-15": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-16": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-17": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-18": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-19": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-2": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-20": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-21": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-22": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-23": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-24": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-25": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-26": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-27": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-28": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-29": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-3": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-30": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-31": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-32": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-33": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-34": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-35": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-36": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-37": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-38": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-39": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-4": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-40": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-41": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-42": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-43": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-44": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-45": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-46": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-47": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-48": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-49": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-5": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-50": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-51": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-52": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-53": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-54": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-55": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-56": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-57": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-58": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-59": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-6": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-60": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-61": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-62": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-63": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-64": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-65": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-66": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-67": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-68": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-69": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-7": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-70": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-71": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-72": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-73": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-74": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-75": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-76": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-77": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-78": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-79": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-8": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-80": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-81": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-82": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-83": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-84": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-85": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-86": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-87": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-88": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-89": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        "libero-90-9": {
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        }
+      }
+    },
+    "robouse-maniskill": {
+      "noop": false,
+      "tasks": {
+        "maniskill-lift-peg-upright": {
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        "maniskill-peg-insertion-side": {
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        "maniskill-pick-cube": {
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        "maniskill-place-sphere": {
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        "maniskill-plug-charger": {
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        "maniskill-poke-cube": {
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        "maniskill-pull-cube": {
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        "maniskill-pull-cube-tool": {
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        "maniskill-push-cube": {
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        "maniskill-roll-ball": {
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        "maniskill-stack-cube": {
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        "maniskill-stack-pyramid": {
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
         }
       }
     },
@@ -1137,6 +2177,141 @@
           "backend": "metaworld",
           "runtime": "base",
           "suite": "metaworld"
+        }
+      }
+    },
+    "robouse-mobile-manip": {
+      "noop": false,
+      "tasks": {
+        "google-fetch-can": {
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        "google-open-drawer": {
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        "google-sort-bottle-can": {
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        "stretch-fetch-cup": {
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        "stretch-open-drawer": {
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        "stretch-shelve-two": {
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        "tiago-bin-cans": {
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        "tiago-drawer-stow": {
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        "tiago-fetch-juice": {
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        "tiago-study-to-kitchen": {
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        }
+      }
+    },
+    "robouse-myosuite": {
+      "noop": false,
+      "tasks": {
+        "myosuite-elbow-pose": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        "myosuite-elbow-pose-muscles": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        "myosuite-finger-pose-fixed": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        "myosuite-finger-pose-muscles": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        "myosuite-finger-pose-random": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        "myosuite-finger-reach-fixed": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        "myosuite-finger-reach-random": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        "myosuite-hand-key-turn": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        "myosuite-hand-pose-4": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        "myosuite-hand-pose-5": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        "myosuite-hand-pose-7": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        "myosuite-hand-pose-8": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        "myosuite-hand-pose-9": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        "myosuite-hand-reach-fixed": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        "myosuite-hand-reach-random": {
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
         }
       }
     },
@@ -1642,6 +2817,191 @@
           "backend": "tabletop",
           "runtime": "base",
           "suite": "safety"
+        }
+      }
+    },
+    "robouse-quadruped": {
+      "noop": false,
+      "tasks": {
+        "anymal-inspection-round": {
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        "anymal-mezzanine-cabinet": {
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        "go1-corridor-charger": {
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        "go1-patrol": {
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        "go2-crate-detour": {
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        "go2-crate-detour-manual": {
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        "go2-pump-inspection": {
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        "go2-push-box": {
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        "spot-arm-estop": {
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        "spot-arm-reset": {
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        "spot-gauge-reading": {
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        }
+      }
+    },
+    "robouse-robocasa": {
+      "noop": false,
+      "tasks": {
+        "robocasa-close-drawer-kitchen10": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-close-drawer-kitchen2": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-close-drawer-kitchen7": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-close-kettle-lid-kitchen1": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-close-kettle-lid-kitchen10": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-close-kettle-lid-kitchen6": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-pick-place-counter-to-cabinet-kitchen3": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-pick-place-counter-to-cabinet-kitchen8": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-pick-place-counter-to-cabinet-kitchen9": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-pick-place-counter-to-sink": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-pick-place-counter-to-sink-kitchen2": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-pick-place-counter-to-sink-kitchen2b": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-pick-place-counter-to-sink-kitchen3": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-pick-place-counter-to-sink-kitchen4": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-pick-place-counter-to-sink-kitchen5": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-pick-place-counter-to-sink-kitchen6": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-turn-off-faucet-kitchen2": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-turn-off-faucet-kitchen9": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-turn-off-stove-kitchen2": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-turn-off-stove-kitchen9": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-turn-on-stove-kitchen2": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-turn-on-stove-kitchen7": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-turn-on-toaster-kitchen7": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-turn-on-toaster-kitchen8": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
         }
       }
     },
@@ -2762,15 +4122,22 @@
     }
   },
   "robouse": {
-    "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
+    "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
     "package_version": "0.1.1",
     "repo": "https://github.com/benchflow-ai/robouse"
   },
   "runtimes": {
-    "base": "sha256:87e23e31c6fe17e7471455c898823b931712dd1c4c4fd10395e8efa27a437014",
-    "dexjoco": "sha256:ab43542b6c41695c2ad8e2a62b2161c71a5cec06b2fd4b1c45d2099190c2199e",
-    "libero": "sha256:9e145237c9ee779fa68b4a2828eb9a776a418d9a62afc73a4aeeacc82abad24e",
-    "menagerie": "sha256:a607b32470fcdab76dabbfa14a4fccb5fba9b445a5cd088fffac9ec1bb3aa78d",
-    "robosuite": "sha256:e772f02478c314c1debe7702bfb170393886b68b996d7f67ff2be7aabd7cc09e"
+    "base": "sha256:453a780cbc2972149bf99a92a41cd35666e51192e750bc2bcb1fb3deb04ca376",
+    "dexjoco": "sha256:c8a774e0cbe1feb4b08493a3ca5464e92dffe31ffec039cd37110f5490e60fd9",
+    "dmcontrol": "sha256:cda13e1219e387191d2cd39cfa37c28a4c2ac0d251833abc3c022b46d39e8876",
+    "driving": "sha256:828d135f5660360093b186c88ff6f0a828fb4fcf9a3f226103b884262c0bcb96",
+    "embodied": "sha256:2d8aef2c2e504bf4df8dbfed2a6feb48dc499c404c038b19b4e633e76fc69b6a",
+    "humanoidbench": "sha256:4e2c48833b9ca63c686671310754d2559c4d9d83ff42b3500ec218d66c6de1db",
+    "libero": "sha256:f4f64ec5810becb755db7410586836e031cb254d66baa42fbe7f6d40ec3f327e",
+    "maniskill": "sha256:50e085d16dc0c1b0f4a36236070b4290ed23ac6844ebfd1a78e54054158438e6",
+    "menagerie": "sha256:40eb64c1910118d9c821aafcef547ac49cc34534a4283d66b61b92e5f5dbf911",
+    "myosuite": "sha256:124ef7a1988b88d0918ced05416de0dc6e84b1cf490e97eac01b9d4e050323e7",
+    "robocasa": "sha256:0e7762e64c24849f320fa346ace73b18c6c7493ec14fedc79883eaa3eef49582",
+    "robosuite": "sha256:ae1976e503f43f82f6296e325adedcdb36932b9686a913df76d3b2ca2d138012"
   }
 }

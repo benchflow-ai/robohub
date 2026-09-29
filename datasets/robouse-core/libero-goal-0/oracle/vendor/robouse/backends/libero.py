@@ -14,8 +14,11 @@ pose for robosuite's OSC_POSE controller at 20 Hz. 1.0 on dx/dy/dz asks for 5 cm
 1.0 on droll/dpitch/dyaw for 0.5 rad (the arm lags behind large requests); gripper -1 opens, +1 closes.
 The move_to/grip skills send 4-D [dx, dy, dz, grip] actions, which are padded with zero rotation.
 
-Observation: end-effector position, quaternion (x, y, z, w) and axis-angle, finger joint positions, and the
-position and quaternion of each object in LIBERO's observation. Images: `agentview` (front) and
+Observation: end-effector position, quaternion (x, y, z, w) and axis-angle, finger joint positions, the
+position and quaternion of each object in LIBERO's observation, the position and quaternion of each fixture
+(cabinet, stove, microwave, rack, ...), and each articulated part (drawer, door, stove knob): its joint position,
+joint limits, LIBERO's open/close or on/off thresholds for that fixture, and the world-frame bounding box of the
+moving part. Images: `agentview` (front) and
 `robot0_eye_in_hand` (wrist) cameras at 256x256, returned upright (robosuite renders them upside down).
 
 Success is LIBERO's own `check_success()` (the task's BDDL goal predicates).
@@ -149,7 +152,44 @@ class LiberoBackend(Backend):
             # finger gap: about 0.08 fully open, about 0 closed on nothing
             "gripper_open": round(float(fingers[0] - fingers[1]), 4),
             "objects": {n: {"pos": r(o[f"{n}_pos"], 4), "quat": r(o[f"{n}_quat"], 4)} for n in self.object_names()},
+            **self._fixtures(),
         }
+
+    def _fixtures(self) -> dict:
+        """Fixtures (pose) and articulated parts (joint position, limits, LIBERO's thresholds, bounding box)."""
+        import mujoco
+
+        e = self.env.env
+        m, d = self.mj_model_data()
+        r = lambda v, n=4: [round(float(x), n) for x in np.asarray(v).ravel()]
+        fixtures, parts = {}, {}
+        for name, fx in getattr(e, "fixtures_dict", {}).items():
+            bid = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, f"{name}_main")
+            if bid < 0:
+                bid = e.obj_body_id.get(name, -1) if hasattr(e, "obj_body_id") else -1
+            if bid >= 0:
+                q = d.xquat[bid]  # MuJoCo (w, x, y, z) -> (x, y, z, w) like the objects
+                fixtures[name] = {"pos": r(d.xpos[bid]), "quat": r([q[1], q[2], q[3], q[0]])}
+            art = (getattr(fx, "object_properties", None) or {}).get("articulation", {})
+            thresholds = {k[len("default_"):]: r(v) for k, v in art.items() if v}
+            for jn in getattr(fx, "joints", None) or []:
+                j = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, jn)
+                if j < 0:
+                    continue
+                gs = np.flatnonzero(m.geom_bodyid == m.jnt_bodyid[j])
+                corners = []
+                for g in gs:
+                    c, h = m.geom_aabb[g, :3], m.geom_aabb[g, 3:]
+                    R = d.geom_xmat[g].reshape(3, 3)
+                    for sx in (-1, 1):
+                        for sy in (-1, 1):
+                            for sz in (-1, 1):
+                                corners.append(d.geom_xpos[g] + R @ (c + h * np.array([sx, sy, sz])))
+                part = {"qpos": round(float(d.qpos[m.jnt_qposadr[j]]), 4), "range": r(m.jnt_range[j]), **thresholds}
+                if corners:
+                    part["box_min"], part["box_max"] = r(np.min(corners, 0)), r(np.max(corners, 0))
+                parts[jn] = part
+        return {"fixtures": fixtures, "articulated": parts}
 
     def render(self, width: int = 320, height: int = 320) -> np.ndarray:
         key = f"{self.camera}_image"

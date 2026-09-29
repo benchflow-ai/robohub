@@ -13,7 +13,7 @@ robouse:
 # solution runs) and `oracle_modules` ({backend: module the reference solution imports}).
 runtimes:
   base:
-    backends: [metaworld, gymrobotics, tabletop]
+    backends: [metaworld, gymrobotics, tabletop, kitchen, adroit]
     simulators: MuJoCo 3.3.0, Meta-World 3.1.1, Gymnasium-Robotics 1.4.2
   menagerie:
     backends: [menagerie, roboharm, drone]
@@ -29,6 +29,38 @@ runtimes:
   dexjoco:
     backends: [dexjoco]
     simulators: MuJoCo 3.4.0, DexJoCo
+    sim_memory: 4G
+  embodied:
+    backends: [quadruped, humanoid, mobile_manip, dexhand, crazyflie]
+    simulators: MuJoCo 3.3.0, MuJoCo Menagerie models
+    assets: {embodiments.json: assets/menagerie/embodiments.json}
+    oracle_pip: {humanoid: [mujoco==3.3.0]}
+  driving:
+    backends: [driving]
+    simulators: MetaDrive 0.4.3
+  dmcontrol:
+    backends: [dmcontrol]
+    simulators: MuJoCo 3.14.0, dm_control 1.0.47
+    sim_memory: 2G
+    oracle_modules: {dmcontrol: robouse.backends.dmcontrol}
+  myosuite:
+    backends: [myosuite]
+    simulators: MuJoCo 3.6.0, MyoSuite 2.12.2
+    sim_memory: 2G
+    oracle_modules: {myosuite: robouse.backends.myosuite_backend}
+  humanoidbench:
+    backends: [humanoidbench]
+    simulators: MuJoCo 3.1.6, HumanoidBench (commit cb11890)
+    assets: {humanoidbench.json: assets/humanoidbench/provenance.json}
+    sim_memory: 2G
+  maniskill:
+    backends: [maniskill]
+    simulators: ManiSkill3 3.0.1 on SAPIEN 3.0.3 (CPU physics, lavapipe rendering)
+    sim_memory: 4G
+  robocasa:
+    backends: [robocasa]
+    simulators: MuJoCo 3.3.1, RoboCasa365 (robosuite 1.5.2)
+    assets: {robocasa.json: assets/robocasa/provenance.json}
     sim_memory: 4G
 
 # Per-suite facts for the hub page (all simulators run on MuJoCo; "; " separates several values).
@@ -47,6 +79,20 @@ suites:
   roboharm: {embodiment: "Franka Panda", simulator: "MuJoCo Menagerie models", image: roboharm}
   drone: {embodiment: "Skydio X2 quadrotor", simulator: "MuJoCo Menagerie models", image: drone}
   dexjoco: {embodiment: "Allegro hands on Franka arms", simulator: "DexJoCo (MuJoCo 3.4.0)", image: dexjoco}
+  quadruped: {embodiment: Unitree Go2; Unitree Go1; Boston Dynamics Spot; ANYbotics ANYmal C, simulator: MuJoCo Menagerie models, image: quadruped}
+  humanoid: {embodiment: Unitree G1; Unitree H1; Apptronik Apollo; Booster T1, simulator: MuJoCo Menagerie models, image: humanoid}
+  mobile-manip: {embodiment: Hello Robot Stretch 3; PAL TIAGo; Google Robot, simulator: MuJoCo Menagerie models, image: mobile-manip}
+  dexhand: {embodiment: Shadow Hand; LEAP Hand, simulator: MuJoCo Menagerie models, image: dexhand}
+  crazyflie: {embodiment: Bitcraze Crazyflie 2 quadrotor, simulator: MuJoCo Menagerie models, image: crazyflie}
+  driving: {embodiment: MetaDrive sedan, simulator: MetaDrive 0.4.3, image: driving}
+  kitchen: {embodiment: Franka Panda, simulator: Gymnasium-Robotics 1.4.2 (Franka Kitchen), image: kitchen}
+  adroit: {embodiment: ADROIT hand (24-DoF Shadow-style hand on an arm), simulator: Gymnasium-Robotics 1.4.2 (Adroit hand), image: adroit}
+  libero-90: {embodiment: Franka Panda, simulator: LIBERO (robosuite 1.4), image: libero}
+  dmcontrol: {embodiment: 'DeepMind Control Suite bodies (cart-pole, pendulum, acrobot, reacher, point mass, finger, ball in cup, planar manipulator); Kinova Jaco arm with the Jaco hand', simulator: dm_control 1.0.47 (MuJoCo 3.14.0), image: dmcontrol}
+  myosuite: {embodiment: 'MyoSuite musculoskeletal elbow, index finger and hand (muscle-driven)', simulator: MyoSuite 2.12.2 (MuJoCo 3.6.0), image: myosuite}
+  humanoidbench: {embodiment: Unitree H1 humanoid with two Shadow hands, simulator: HumanoidBench (MuJoCo 3.1.6), image: humanoidbench}
+  maniskill: {embodiment: Franka Panda, simulator: 'ManiSkill3 3.0.1 (SAPIEN 3.0.3, CPU)', image: maniskill}
+  robocasa: {embodiment: Franka Panda on a mobile base (PandaOmron), simulator: 'RoboCasa365 (robosuite 1.5.2, MuJoCo 3.3.1)', image: robocasa}
 
 # Datasets are named <org>/<name>. The org is whoever designed the benchmark's tasks: a dataset adapted from someone
 # else's benchmark goes under that benchmark's GitHub org (lowercased) and records it under `upstream`; tasks BenchFlow
@@ -86,9 +132,9 @@ datasets:
     dir: robouse-libero
     aliases: [robouse-libero]
     upstream: {benchmark: "LIBERO", org_name: "Lifelong Robot Learning", repo: "https://github.com/Lifelong-Robot-Learning/LIBERO", licence: MIT}
-    version: "0.1"
+    version: "0.2"
     suites: [libero]
-    description: "Robo Use LIBERO 0.1: 20 LIBERO tasks (5 each from spatial, object, goal and LIBERO-10) on a Franka Panda, judged by LIBERO's BDDL goal check."
+    description: "Robo Use LIBERO 0.2: all 40 tasks of LIBERO's four standard suites (LIBERO-Spatial, -Object, -Goal and -Long, 10 each) on a Franka Panda, judged by LIBERO's BDDL goal check. Reference solutions replay LIBERO's human demonstrations (Apache-2.0)."
   - name: arise-initiative/robosuite
     dir: robouse-robosuite
     aliases: [robouse-robosuite]
@@ -121,6 +167,84 @@ datasets:
     version: "0.1"
     suites: [roboharm]
     description: "Robo Use RoboHarm 0.1: 10 harm scenarios x harmful/benign x 4 configurations (raw, guardrail, honeypot, both), 80 tasks on a Franka Panda."
+  - name: benchflow/quadruped
+    dir: robouse-quadruped
+    version: "0.1"
+    suites: [quadruped]
+    description: 'Robo Use quadruped 0.1: 11 tasks for Unitree Go2 and Go1, Boston Dynamics Spot (with and without arm) and ANYbotics ANYmal C walking under a trot controller: pushing, docking, patrols, inspection, buttons. Robot models from MuJoCo Menagerie (BSD-3-Clause).'
+  - name: benchflow/humanoid
+    dir: robouse-humanoid
+    version: "0.1"
+    suites: [humanoid]
+    description: 'Robo Use humanoid 0.1: 9 tabletop tasks for Unitree G1 (Dex3 hands) and H1, Apptronik Apollo and Booster T1 on support stands with IK arm control: pick and place, a drawer, a button panel, bimanual box lifts, carrying a tray. Robot models from MuJoCo Menagerie (BSD-3-Clause, Apache-2.0).'
+  - name: benchflow/mobile-manip
+    dir: robouse-mobile-manip
+    version: "0.1"
+    suites: [mobile-manip]
+    description: 'Robo Use mobile manipulation 0.1: 10 fetch, stow and sort tasks for Hello Robot Stretch 3, PAL TIAGo and the Google Robot in a three-room apartment. Robot models from MuJoCo Menagerie (Apache-2.0).'
+  - name: benchflow/dexhand
+    dir: robouse-dexhand
+    version: "0.1"
+    suites: [dexhand]
+    description: 'Robo Use dexterous hands 0.1: 7 tasks for the Shadow Hand and LEAP Hand on 6-axis positioners: regrasp and in-hand cube flips, pouring, a valve, a pen, buttons. Robot models from MuJoCo Menagerie (Apache-2.0, MIT).'
+  - name: benchflow/crazyflie
+    dir: robouse-crazyflie
+    version: "0.1"
+    suites: [crazyflie]
+    description: 'Robo Use Crazyflie 0.1: 7 indoor flight tasks for Bitcraze Crazyflie 2 quadrotors: a window, a gate course, waypoints, a shelf landing, a formation and a swap for a swarm, and one task without skills. Robot model from MuJoCo Menagerie (MIT).'
+  - name: benchflow/driving
+    dir: robouse-driving
+    version: "0.1"
+    suites: [driving]
+    description: 'Robo Use driving 0.1: 7 traffic tasks for a sedan on MetaDrive roads (winding road, highway overtake, broken-down car, cone zone, roundabout, unprotected left turn, ramp merge), on MetaDrive 0.4.3 (Apache-2.0).'
+  - name: lifelong-robot-learning/libero-90
+    dir: robouse-libero-90
+    upstream: {benchmark: LIBERO, org_name: Lifelong Robot Learning, repo: 'https://github.com/Lifelong-Robot-Learning/LIBERO', licence: MIT}
+    version: "0.1"
+    suites: [libero-90]
+    description: 'Robo Use LIBERO-90 0.1: the 90 short-horizon LIBERO-90 tasks (20 kitchen, living-room and study scenes) on a Franka Panda, judged by LIBERO''s BDDL goal check. Reference solutions replay LIBERO''s human demonstrations (Apache-2.0).'
+  - name: farama-foundation/franka-kitchen
+    dir: robouse-kitchen
+    upstream: {benchmark: Franka Kitchen (Gymnasium-Robotics; Relay Policy Learning / D4RL kitchen), org_name: Farama Foundation, repo: 'https://github.com/Farama-Foundation/Gymnasium-Robotics', licence: MIT (code); Apache-2.0 (kitchen and Franka assets)}
+    version: "0.1"
+    suites: [kitchen]
+    description: 'Robo Use Franka Kitchen 0.1: the 7 FrankaKitchen-v1 subtasks (microwave, kettle, two burners, light switch, slide and hinge cabinets) and 3 four-subtask goal sets, 10 tasks on a Franka Panda with an end-effector interface, judged by the env''s own per-subtask completion check.'
+  - name: farama-foundation/adroit-hand
+    dir: robouse-adroit
+    upstream: {benchmark: Adroit hand (Gymnasium-Robotics; DAPG), org_name: Farama Foundation, repo: 'https://github.com/Farama-Foundation/Gymnasium-Robotics', licence: MIT (code); Apache-2.0 (ADROIT assets); CC-BY-4.0 (D4RL demonstrations)}
+    version: "0.1"
+    suites: [adroit]
+    description: 'Robo Use Adroit hand 0.1: door opening, hammering, in-hand pen rotation and ball relocation with the 24-joint ADROIT hand, 12 tasks started from D4RL human-demonstration states, judged by the env''s own success signal.'
+  - name: google-deepmind/dm-control
+    dir: robouse-dmcontrol
+    upstream: {benchmark: dm_control (DeepMind Control Suite and dm_control.manipulation), org_name: Google DeepMind, repo: 'https://github.com/google-deepmind/dm_control', licence: Apache-2.0}
+    version: "0.1"
+    suites: [dmcontrol]
+    description: 'Robo Use dm_control 0.1: 17 tasks from DeepMind''s dm_control, 12 from the Control Suite (cart-pole swing-up and balance, pendulum and acrobot swing-up, reacher, point mass, finger turning, ball in cup, planar manipulator bring-ball) acted through the domains'' own actuator commands, and 5 from dm_control.manipulation with the Kinova Jaco arm (reach, lift, place on a pedestal brick or cradle, stack two Duplo bricks) acted through an end-effector command. Success is each task''s own in-target condition (dm_control''s sparse reward) held for a number of steps, judged from the physical state.'
+  - name: myohub/myosuite
+    dir: robouse-myosuite
+    upstream: {benchmark: MyoSuite, org_name: MyoHub, repo: 'https://github.com/MyoHub/myosuite', licence: Apache-2.0}
+    version: "0.1"
+    suites: [myosuite]
+    description: 'Robo Use MyoSuite 0.1: 15 MyoSuite tasks on muscle-driven human models (elbow and finger posing, finger and five-fingertip reaching, sign-language hand shapes, key turning), acted through muscle excitations or a muscle-space joint controller and judged by MyoSuite''s own solved check.'
+  - name: carlosferrazza/humanoid-bench
+    dir: robouse-humanoidbench
+    upstream: {benchmark: HumanoidBench, org_name: 'Carmelo Sferrazza (carlosferrazza), UC Berkeley Robot Learning Lab', repo: 'https://github.com/carlosferrazza/humanoid-bench', licence: MIT}
+    version: "0.1"
+    suites: [humanoidbench]
+    description: 'Robo Use HumanoidBench 0.1: 7 whole-body tasks from HumanoidBench for a free-standing Unitree H1 with two Shadow hands (stand, walk, maze, pole forest, sit on a chair, reach a point with the left hand, push a box on a table), judged by HumanoidBench''s own reward and success rule (the task''s success bar on the episode return, or its success signal). The agent drives Unitree''s pretrained H1 walking policy through velocity commands and moves the hands through arm inverse kinematics.'
+  - name: mani-skill/maniskill
+    dir: robouse-maniskill
+    upstream: {benchmark: ManiSkill3, org_name: Hao Su Lab (UCSD) and Hillbot, repo: 'https://github.com/mani-skill/ManiSkill', licence: Apache-2.0}
+    version: "0.1"
+    suites: [maniskill]
+    description: 'Robo Use ManiSkill3 0.1: 12 ManiSkill3 tabletop tasks on a Franka Panda (pick, stack, push, pull, tool use, rolling, reorientation, peg and plug insertion), on ManiSkill''s CPU physics backend, judged by ManiSkill''s own success check.'
+  - name: robocasa/robocasa
+    dir: robouse-robocasa
+    upstream: {benchmark: RoboCasa, org_name: RoboCasa, repo: 'https://github.com/robocasa/robocasa', licence: MIT}
+    version: "0.1"
+    suites: [robocasa]
+    description: 'Robo Use RoboCasa 0.1: 24 RoboCasa365 atomic kitchen tasks in all ten kitchen layouts: close a drawer, counter to sink, counter to cabinet, turn on the toaster, close the kettle lid, turn off the faucet, and turn a stove burner on or off, with a Franka Panda on a parked mobile base. Success is RoboCasa''s own check for each task, judged from the physical state.'
   - name: benchflow/robouse-noop-control
     dir: robouse-noop-control
     aliases: [robouse-noop-control]

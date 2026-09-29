@@ -1,0 +1,10 @@
+# Pinned dependencies of the Robo Use episode server in the `dmcontrol` runtime (Python 3.12).
+numpy==2.5.3
+scipy==1.18.1
+mujoco==3.3.0
+imageio==2.37.4
+imageio-ffmpeg==0.6.0
+pillow==12.3.0
+pyopengl==3.1.10
+packaging==26.3
+pyyaml==6.0.3

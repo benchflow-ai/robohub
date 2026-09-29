@@ -43,6 +43,41 @@ def _quat_to_mat(q_xyzw):
                      [2 * (x * z - y * w), 2 * (y * z + x * w), 1 - 2 * (x * x + y * y)]])
 
 
+def _assets_root() -> str:
+    import robocasa.models
+
+    return os.path.abspath(robocasa.models.assets_root)
+
+
+def _relative_paths(ep_meta: dict) -> dict:
+    """Object model paths in an ep_meta, made relative to RoboCasa's asset root (objects/lightwheel/<cat>/<model>/model.xml),
+    so a recorded layout does not depend on where RoboCasa is installed."""
+    root = _assets_root()
+    for c in ep_meta.get("object_cfgs", []):
+        info = c.get("info") or {}
+        p = info.get("mjcf_path")
+        if isinstance(p, str):
+            p = p.replace("\\", "/")
+            if os.path.isabs(p):
+                p = os.path.relpath(p, root) if p.startswith(root + os.sep) else "objects/" + p.split("/objects/")[-1]
+            info["mjcf_path"] = p
+    return ep_meta
+
+
+def _resolve_paths(ep_meta: dict) -> dict:
+    """The inverse of _relative_paths: absolute object model paths under this machine's RoboCasa asset root."""
+    root = _assets_root()
+    for c in ep_meta.get("object_cfgs", []):
+        info = c.get("info") or {}
+        p = info.get("mjcf_path")
+        if isinstance(p, str) and not os.path.isabs(p):
+            full = os.path.join(root, p)
+            if not os.path.exists(full):
+                raise FileNotFoundError(f"RoboCasa object model {p} is not installed under {root}")
+            info["mjcf_path"] = full
+    return ep_meta
+
+
 class Worker:
     def __init__(self):
         self.env = None
@@ -86,7 +121,7 @@ class Worker:
             layout_ids=[int(layout)], style_ids=[int(style)], obj_registries=("lightwheel",), seed=int(seed),
             translucent_robot=False, **(kwargs or {}))
         if ep_meta:  # replay a recorded episode layout exactly (RoboCasa's own demo-replay mechanism)
-            self.env.set_ep_meta(ep_meta)
+            self.env.set_ep_meta(_resolve_paths(ep_meta))
         self.obs = self.env.reset()
         self.grip = -1.0
         self.adim = self.env.action_spec[0].shape[0]
@@ -104,7 +139,8 @@ class Worker:
         return {"lang": self.env.get_ep_meta().get("lang", ""), "cameras": list(self.env.sim.model.camera_names)}
 
     def ep_meta(self) -> dict:
-        return json.loads(json.dumps(self.env.get_ep_meta(), default=lambda o: o.tolist() if hasattr(o, "tolist") else str(o)))
+        meta = json.loads(json.dumps(self.env.get_ep_meta(), default=lambda o: o.tolist() if hasattr(o, "tolist") else str(o)))
+        return _relative_paths(meta)
 
     # ---- helpers -------------------------------------------------------------------------------------------------
     def _pos(self, name: str):
@@ -128,6 +164,39 @@ class Worker:
             if p is not None:
                 return p
         return None
+
+    def _joint_geoms(self, joint: str, prefer: str = "") -> list[int]:
+        """Collision geoms of the body a joint moves (and its child bodies); those whose name ends with `prefer` if any."""
+        import mujoco
+
+        m = self.env.sim.model._model
+        j = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, joint)
+        if j < 0:
+            return []
+        b = int(m.jnt_bodyid[j])
+
+        def under(k):
+            while k > 0:
+                if k == b:
+                    return True
+                k = int(m.body_parentid[k])
+            return False
+
+        gs = [g for g in range(m.ngeom) if m.geom_contype[g] and under(int(m.geom_bodyid[g]))]
+        named = [g for g in gs if prefer and (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g) or "").endswith(prefer)]
+        return named or gs
+
+    def _geoms_box(self, gs: list[int]):
+        """World axis-aligned bounding box (lo, hi) of geoms."""
+        m, d = self.env.sim.model._model, self.env.sim.data._data
+        pts = []
+        for g in gs:
+            R = d.geom_xmat[g].reshape(3, 3)
+            c = d.geom_xpos[g] + R @ m.geom_aabb[g][:3]
+            e = np.abs(R) @ m.geom_aabb[g][3:]
+            pts += [c - e, c + e]
+        pts = np.asarray(pts)
+        return pts.min(0), pts.max(0)
 
     def _eef_R(self):
         return _quat_to_mat(self.obs["robot0_eef_quat"])
@@ -189,19 +258,32 @@ class Worker:
                         cat = c.get("info", {}).get("cat", "")
                 st["object_category"] = cat
                 st["object_size"] = r(getattr(ob, "size", [0, 0, 0]))
-            elif f == "sink":
-                ints = env.sink.get_int_sites(relative=False)
+            elif f in ("sink", "cabinet"):
+                fx = env.sink if f == "sink" else env.cab
+                ints = fx.get_int_sites(relative=False)
                 p0, px, py, pz = (np.asarray(v, dtype=float) for v in list(ints.values())[0][:4])
                 centre = p0 + ((px - p0) + (py - p0) + (pz - p0)) / 2
-                st["sink_basin_center"] = r(centre)
-                st["sink_basin_half_size"] = r(np.abs(np.array([np.linalg.norm(px - p0), np.linalg.norm(py - p0), np.linalg.norm(pz - p0)])) / 2)
-                st["sink_basin_bottom_z"] = round(float(p0[2]), 4)
+                key = "sink_basin" if f == "sink" else "cabinet_interior"
+                st[f"{key}_center"] = r(centre)
+                st[f"{key}_half_size"] = r(np.abs(np.array([np.linalg.norm(px - p0), np.linalg.norm(py - p0), np.linalg.norm(pz - p0)])) / 2)
+                st[f"{key}_bottom_z"] = round(float(p0[2]), 4)
+                if f == "cabinet":
+                    st["cabinet_interior_top_z"] = round(float(pz[2]), 4)
+                    st["cabinet_front_normal"] = r(_quat_to_mat(np.r_[fx.quat[1:], fx.quat[0]])[:, 1] * -1)
             elif f == "faucet":
+                import mujoco
+
+                m, d = env.sim.model._model, env.sim.data._data
+                pre = env.sink.naming_prefix
                 hs = env.sink.get_handle_state(env=env)
-                st["faucet_handle_pos"] = r(self._pos(f"{env.sink.naming_prefix}handle_main") or
-                                            self._pos(f"{env.sink.naming_prefix}handle"))
+                j = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"{pre}handle_joint")
+                lo, hi = self._geoms_box(self._joint_geoms(f"{pre}handle_joint", "handle_main"))
+                st["faucet_handle_pos"] = r((lo + hi) / 2)
+                st["faucet_handle_size"] = r(hi - lo)
+                st["faucet_handle_hinge_pos"] = r(d.xanchor[j])
+                st["faucet_handle_hinge_axis"] = r(d.xaxis[j])
+                st["faucet_handle_angle"] = round(float(hs.get("handle_joint", 0.0)), 3)
                 st["water_on"] = bool(hs.get("water_on", False))
-                st["faucet_handle_joint"] = round(float(hs.get("handle_joint", 0.0)), 3)
             elif f == "coffee":
                 cm = env.coffee_machine
                 names = [f"{cm.naming_prefix}{n}" for n in cm._start_button_names]
@@ -214,10 +296,60 @@ class Worker:
                 st["microwave_start_button_pos"] = r(self._pos(f"{mw.name}_start_button"))
                 st["microwave_stop_button_pos"] = r(self._pos(f"{mw.name}_stop_button"))
                 st["microwave_on"] = bool(mw.get_state()["turned_on"])
+            elif f == "toaster":
+                ts = env.toaster
+                sp = 0
+                for pair in range(len(ts.get_state(env).keys())):
+                    if ts.check_slot_contact(env, "obj", pair):
+                        sp = pair
+                        break
+                lo, hi = self._geoms_box(self._joint_geoms(ts._joint_names[f"lever_{sp}"], "handle"))
+                st["toaster_lever_pos"] = r((lo + hi) / 2)
+                st["toaster_lever_size"] = r(hi - lo)
+                st["toaster_lever_pressed"] = round(float(ts.get_state(env, slot_pair=sp)["lever"]), 3)
+                st["toaster_on"] = bool(ts.get_state(env, slot_pair=sp)["turned_on"])
+            elif f == "kettle":
+                k = env.electric_kettle
+                ks = k.get_state(env)
+                for key, joint in (("switch", "switch"), ("lid", "lid")):
+                    lo, hi = self._geoms_box(self._joint_geoms(k._joint_names[joint], "_main"))
+                    st[f"kettle_{key}_pos"] = r((lo + hi) / 2)
+                    st[f"kettle_{key}_size"] = r(hi - lo)
+                import mujoco
+
+                m, d = env.sim.model._model, env.sim.data._data
+                j = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, k._joint_names["lid"])
+                st["kettle_pos"] = r(k.pos)
+                st["kettle_lid_hinge_pos"] = r(d.xanchor[j])
+                st["kettle_lid_hinge_axis"] = r(d.xaxis[j])
+                st["kettle_lid_open"] = round(float(ks.get("lid", 0.0)), 3)
+                st["kettle_on"] = bool(ks.get("turned_on", False))
+            elif f == "stove":
+                import mujoco
+
+                m, d = env.sim.model._model, env.sim.data._data
+                pre = env.stove.naming_prefix
+                j = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"{pre}knob_{env.knob}_joint")
+                ridge = self._joint_geoms(f"{pre}knob_{env.knob}_joint", "_main")
+                g = ridge[0]
+                R = d.geom_xmat[g].reshape(3, 3)
+                half = m.geom_aabb[g][3:]
+                k = int(np.argmax(half))
+                lo, hi = self._geoms_box(self._joint_geoms(f"{pre}knob_{env.knob}_joint"))
+                st["stove_knob_pos"] = r(d.xanchor[j])
+                st["stove_knob_axis"] = r(d.xaxis[j])
+                st["stove_knob_ridge_dir"] = r(R[:, k])
+                st["stove_knob_ridge_half_length"] = round(float(half[k]), 4)
+                st["stove_knob_top_z"] = round(float(hi[2]), 4)
+                st["stove_knob_angle"] = round(float(d.qpos[m.jnt_qposadr[j]]), 3)
+                st["burner_on"] = bool(env.stove.is_burner_on(env=env, burner_loc=env.knob))
             elif f in ("drawer", "door"):
                 fx = env.drawer if f == "drawer" else env.fxtr
                 st[f"{f}_handle_pos"] = r(self._handle_pos(fx))
-                ds = fx.get_joint_state(env, fx.door_joint_names)
+                if f == "drawer":  # the measure RoboCasa's drawer tasks judge (slide travel / 55 % of the drawer depth)
+                    ds = fx.get_door_state(env)
+                else:
+                    ds = fx.get_joint_state(env, fx.door_joint_names)
                 st[f"{f}_open_fraction"] = round(float(max(ds.values())), 3) if ds else None
                 st[f"{f}_front_normal"] = r(_quat_to_mat(np.r_[fx.quat[1:], fx.quat[0]])[:, 1] * -1)
         return st

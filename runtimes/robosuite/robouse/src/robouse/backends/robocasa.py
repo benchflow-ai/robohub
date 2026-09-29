@@ -30,20 +30,50 @@ WORKER = Path(__file__).with_name("robocasa_worker.py")
 EPISODES = Path(__file__).with_name("robocasa_episodes")
 DEFAULT_PY = Path.home() / ".cache" / "robouse" / "robocasa-venv" / "bin" / "python"
 
-# task id -> RoboCasa env, kitchen layout/style (test split styles 1-10 need no AI-generated textures), seed, features
+# RoboCasa env -> task-specific observation features and step budget
+KINDS: dict[str, dict] = {
+    "CloseDrawer": dict(features=["drawer"], max_steps=400),
+    "PickPlaceCounterToSink": dict(features=["object", "sink"], max_steps=800),
+    "PickPlaceCounterToCabinet": dict(features=["object", "cabinet"], max_steps=800),
+    "TurnOnToaster": dict(features=["toaster"], max_steps=300),
+    "CloseElectricKettleLid": dict(features=["kettle"], max_steps=400),
+    "TurnOffSinkFaucet": dict(features=["faucet"], max_steps=400),
+    "TurnOnStove": dict(features=["stove"], max_steps=500),
+    "TurnOffStove": dict(features=["stove"], max_steps=500),
+}
+
+
+def _t(env: str, layout: int, seed: int, style: int | None = None) -> dict:
+    return dict(env=env, layout=layout, style=layout if style is None else style, seed=seed, **KINDS[env])
+
+
+# task id -> RoboCasa env, kitchen layout/style (styles 1-10 need no AI-generated textures), seed of the recorded layout
+# (robocasa_episodes/<task id>.json is what every reset replays)
 TASKS: dict[str, dict] = {
-    "robocasa-close-drawer": dict(env="CloseDrawer", layout=1, style=1, seed=0, features=["drawer"], max_steps=400),
-    "robocasa-close-drawer-kitchen2": dict(env="CloseDrawer", layout=2, style=2, seed=0, features=["drawer"], max_steps=400),
-    "robocasa-pick-place-counter-to-sink": dict(env="PickPlaceCounterToSink", layout=1, style=1, seed=2, features=["object", "sink"],
-                                                max_steps=800),
-    "robocasa-pick-place-counter-to-sink-kitchen2": dict(env="PickPlaceCounterToSink", layout=2, style=2, seed=0,
-                                                         features=["object", "sink"], max_steps=800),
-    "robocasa-pick-place-counter-to-sink-kitchen2b": dict(env="PickPlaceCounterToSink", layout=2, style=2, seed=2,
-                                                          features=["object", "sink"], max_steps=800),
-    "robocasa-pick-place-counter-to-sink-kitchen3": dict(env="PickPlaceCounterToSink", layout=3, style=3, seed=6,
-                                                         features=["object", "sink"], max_steps=800),
-    "robocasa-pick-place-counter-to-sink-kitchen4": dict(env="PickPlaceCounterToSink", layout=4, style=4, seed=0,
-                                                         features=["object", "sink"], max_steps=800),
+    "robocasa-close-drawer-kitchen2": _t("CloseDrawer", 2, 0),
+    "robocasa-close-drawer-kitchen7": _t("CloseDrawer", 7, 1),
+    "robocasa-close-drawer-kitchen10": _t("CloseDrawer", 10, 4),
+    "robocasa-pick-place-counter-to-sink": _t("PickPlaceCounterToSink", 1, 2),
+    "robocasa-pick-place-counter-to-sink-kitchen2": _t("PickPlaceCounterToSink", 2, 0),
+    "robocasa-pick-place-counter-to-sink-kitchen2b": _t("PickPlaceCounterToSink", 2, 2),
+    "robocasa-pick-place-counter-to-sink-kitchen3": _t("PickPlaceCounterToSink", 3, 6),
+    "robocasa-pick-place-counter-to-sink-kitchen4": _t("PickPlaceCounterToSink", 4, 0),
+    "robocasa-pick-place-counter-to-sink-kitchen5": _t("PickPlaceCounterToSink", 5, 0),
+    "robocasa-pick-place-counter-to-sink-kitchen6": _t("PickPlaceCounterToSink", 6, 0),
+    "robocasa-pick-place-counter-to-cabinet-kitchen3": _t("PickPlaceCounterToCabinet", 3, 1),
+    "robocasa-pick-place-counter-to-cabinet-kitchen8": _t("PickPlaceCounterToCabinet", 8, 1),
+    "robocasa-pick-place-counter-to-cabinet-kitchen9": _t("PickPlaceCounterToCabinet", 9, 0),
+    "robocasa-turn-on-toaster-kitchen7": _t("TurnOnToaster", 7, 0),
+    "robocasa-turn-on-toaster-kitchen8": _t("TurnOnToaster", 8, 0),
+    "robocasa-close-kettle-lid-kitchen1": _t("CloseElectricKettleLid", 1, 0),
+    "robocasa-close-kettle-lid-kitchen6": _t("CloseElectricKettleLid", 6, 0),
+    "robocasa-close-kettle-lid-kitchen10": _t("CloseElectricKettleLid", 10, 0),
+    "robocasa-turn-off-faucet-kitchen2": _t("TurnOffSinkFaucet", 2, 0),
+    "robocasa-turn-off-faucet-kitchen9": _t("TurnOffSinkFaucet", 9, 0),
+    "robocasa-turn-on-stove-kitchen2": _t("TurnOnStove", 2, 1),
+    "robocasa-turn-on-stove-kitchen7": _t("TurnOnStove", 7, 1),
+    "robocasa-turn-off-stove-kitchen2": _t("TurnOffStove", 2, 0),
+    "robocasa-turn-off-stove-kitchen9": _t("TurnOffStove", 9, 0),
 }
 
 

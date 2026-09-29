@@ -14,21 +14,36 @@ Every dataset is named `<org>/<name>`. The org is whoever designed the benchmark
 
 | Dataset | Old name (alias) | Tasks | Suites | Simulator runtime | Original benchmark |
 |---|---|---|---|---|---|
-| `benchflow/robouse-core@0.1` | `robouse-core@0.1` | 100 | a sample of all 14 suites | all five | |
+| `benchflow/robouse-core@0.1` | `robouse-core@0.1` | 100 | a sample of the first 14 suites | base, menagerie, robosuite, libero, dexjoco | |
 | `farama-foundation/metaworld@0.1` | `robouse-metaworld@0.1` | 50 | metaworld | base | Meta-World (Farama Foundation, MIT) |
 | `farama-foundation/gymnasium-robotics@0.1` | `robouse-gymrobotics@0.1` | 12 | gymrobotics | base | Gymnasium-Robotics (Farama Foundation, MIT) |
 | `benchflow/robouse-tabletop@0.1` | `robouse-tabletop@0.1` | 119 | arc-style, libero-style, robo-use-families, safety, hard, vision | base | |
-| `lifelong-robot-learning/libero@0.1` | `robouse-libero@0.1` | 20 | libero | libero | LIBERO (Lifelong Robot Learning, MIT) |
+| `lifelong-robot-learning/libero@0.1` | `robouse-libero@0.1` | 20 | libero (5 tasks per suite; superseded by 0.2) | libero | LIBERO (Lifelong Robot Learning, MIT) |
 | `arise-initiative/robosuite@0.1` | `robouse-robosuite@0.1` | 21 | robosuite | robosuite | robosuite (ARISE Initiative, MIT) |
 | `benchflow/robouse-menagerie@0.1` | `robouse-menagerie@0.1` | 15 | menagerie | menagerie | |
 | `brave-eai/dexjoco@0.1` | `robouse-dexjoco@0.1` | 14 | dexjoco | dexjoco | DexJoCo (brave-eai, MIT) |
 | `benchflow/robouse-drone@0.1` | `robouse-drone@0.1` | 10 | drone | menagerie | |
 | `benchflow/robouse-roboharm@0.1` | `robouse-roboharm@0.1` | 80 | roboharm | menagerie | |
-| `benchflow/robouse-noop-control@0.1` | `robouse-noop-control@0.1` | 100 | robouse-core's tasks with no-op reference solutions (negative control) | all five | |
+| `lifelong-robot-learning/libero@0.2` | `robouse-libero@0.2` | 40 | libero | libero | LIBERO (Lifelong Robot Learning, MIT) |
+| `lifelong-robot-learning/libero-90@0.1` | | 90 | libero-90 | libero | LIBERO (Lifelong Robot Learning, MIT) |
+| `farama-foundation/franka-kitchen@0.1` | | 10 | kitchen | base | Franka Kitchen in Gymnasium-Robotics (Farama Foundation, MIT; assets Apache-2.0) |
+| `farama-foundation/adroit-hand@0.1` | | 12 | adroit | base | Adroit hand in Gymnasium-Robotics (Farama Foundation, MIT; assets Apache-2.0; D4RL demonstrations CC-BY-4.0) |
+| `google-deepmind/dm-control@0.1` | | 17 | dmcontrol | dmcontrol | dm_control (Google DeepMind, Apache-2.0; Jaco models BSD-3-Clause) |
+| `myohub/myosuite@0.1` | | 15 | myosuite | myosuite | MyoSuite (MyoHub, Apache-2.0) |
+| `carlosferrazza/humanoid-bench@0.1` | | 7 | humanoidbench | humanoidbench | HumanoidBench (carlosferrazza, MIT) |
+| `mani-skill/maniskill@0.1` | | 12 | maniskill | maniskill | ManiSkill3 (mani-skill, formerly haosulab, Apache-2.0) |
+| `robocasa/robocasa@0.1` | | 24 | robocasa | robocasa | RoboCasa (RoboCasa, MIT; assets CC-BY-4.0) |
+| `benchflow/quadruped@0.1` | | 11 | quadruped | embodied | |
+| `benchflow/humanoid@0.1` | | 9 | humanoid | embodied | |
+| `benchflow/mobile-manip@0.1` | | 10 | mobile-manip | embodied | |
+| `benchflow/dexhand@0.1` | | 7 | dexhand | embodied | |
+| `benchflow/crazyflie@0.1` | | 7 | crazyflie | embodied | |
+| `benchflow/driving@0.1` | | 7 | driving | driving | |
+| `benchflow/robouse-noop-control@0.1` | `robouse-noop-control@0.1` | 100 | robouse-core's tasks with no-op reference solutions (negative control) | base, menagerie, robosuite, libero, dexjoco | |
 
 The old plain names are aliases: each is its own entry in `registry.json` with exactly the same pinned tasks (same commit, paths and digests) as the dataset it names, so commands written with them keep working. The hub page lists only the `<org>/<name>` names, and the old `robouse.ai/hub/<name>/` pages redirect. The task folders keep their old names (`datasets/robouse-metaworld/...`); `dir` in `hub.yaml` maps a dataset to its folder.
 
-The nine suite datasets together hold all 341 tasks of the Robo Use 0.1.1 package; RoboCasa is not included (it runs only from a Robo Use checkout). `robouse-core` lists its tasks in [`core.txt`](core.txt). A task in `benchflow/robouse-core` is byte-identical to the same task in its suite dataset (same digest).
+The 0.1 datasets were exported from Robo Use 0.1.1 (commit `f1d08a0`); the datasets added on 2026-09-29 (LIBERO 0.2 and LIBERO-90, Franka Kitchen, Adroit, dm_control, MyoSuite, HumanoidBench, ManiSkill3, RoboCasa, and the six embodiment datasets) from Robo Use commit `6f8fd0b` (branch `more-suites`). Together the suite datasets hold every Robo Use task that runs on a CPU; BEHAVIOR-1K needs a GPU and is not exported here. `robouse-core` lists its tasks in [`core.txt`](core.txt). A task in `benchflow/robouse-core` is byte-identical to the same task in its suite dataset (same digest).
 
 ## Registry
 
@@ -62,6 +77,13 @@ The simulator images are built from this repository, not pulled from a registry.
 | `robosuite` | robosuite | pinned pip packages (robosuite 1.5.2) | 2.5 GB |
 | `libero` | libero | pinned pip packages, CPU PyTorch 2.14.0, LIBERO assets (about 400 MB) from the Hugging Face dataset `lerobot/libero-assets` at revision `0b3ea86` | 4.1 GB |
 | `dexjoco` | dexjoco | pinned pip packages, a Python 3.11 environment, DexJoCo at commit `8d23b0f` (about 300 MB) | 3.1 GB |
+| `embodied` | quadruped, humanoid, mobile_manip, dexhand, crazyflie | pinned pip packages; 581 MuJoCo Menagerie files from commit `8161bba`, each checked against its SHA-256 (`runtimes/embodied/assets/embodiments.json`) | 1.4 GB |
+| `driving` | driving | pinned pip packages, a Python 3.11 environment with MetaDrive 0.4.3, MetaDrive's asset pack (134 MB zip, SHA-256 pinned) | 2.9 GB |
+| `dmcontrol` | dmcontrol | pinned pip packages, a dm_control 1.0.47 environment (MuJoCo 3.14.0) | 1.7 GB |
+| `myosuite` | myosuite | pinned pip packages, a Python 3.11 environment with MyoSuite 2.12.2 (wheel SHA-256 pinned; models inside the wheel) | 1.9 GB |
+| `humanoidbench` | humanoidbench | pinned pip packages, HumanoidBench at commit `cb11890`, Unitree's H1 walking policy (SHA-256 pinned) | 2.2 GB |
+| `maniskill` | maniskill | Debian trixie (Mesa 25 lavapipe for software Vulkan), ManiSkill 3.0.1 and SAPIEN 3.0.3 (aarch64 wheel from SAPIEN's release page, SHA-256 pinned) | 3.5 GB |
+| `robocasa` | robocasa | RoboCasa at `456174f` and robosuite at `5ce6643`, 87 asset zips from two Hugging Face datasets at pinned revisions, each SHA-256 checked | 8.3 GB |
 
 Image sizes are for linux/arm64. The first run of a dataset builds each image it needs once (minutes for `base`, longer for `libero` and `dexjoco`); later trials are served from the Docker build cache. BenchFlow removes each trial's images when the trial ends, so keep the build cache. Rendering is software OpenGL (OSMesa) on the CPU, so heavy scenes are slow: a DexJoCo reference solution took up to 8 minutes for 200 steps in the dogfood below.
 

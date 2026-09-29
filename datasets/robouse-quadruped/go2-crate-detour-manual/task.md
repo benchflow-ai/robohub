@@ -1,0 +1,82 @@
+---
+schema_version: '1.3'
+task:
+  name: robouse/go2-crate-detour-manual
+  description: Crate detour (no skills)
+metadata:
+  author_name: benchflow
+  source_benchmark: robouse original (quadruped suite; Unitree Go2 from MuJoCo Menagerie)
+  source_task: go2-crate-detour-manual
+  suite: quadruped
+  category: navigation
+  difficulty: medium
+  tags:
+  - quadruped
+  - legged
+  - unitree_go2
+  - menagerie
+  - mujoco
+  robouse:
+    id: go2-crate-detour-manual
+    backend: quadruped
+    env: go2-crate-detour-manual
+    seed: 0
+    max_steps: 900
+    camera: chase
+    cameras:
+    - chase
+    - head
+    - overview
+    - west_hall
+    - east_room
+    skills: false
+    success_mode: final
+agent:
+  timeout_sec: 1800
+verifier:
+  service: simulator
+  user: root
+  timeout_sec: 300
+sandbox:
+  cpus: 1
+  memory_mb: 2048
+  build_timeout_sec: 3600
+---
+
+You are controlling a simulated robot. Read the task below, then solve it by running the `robo` command in your shell (start with `robo info` and `robo observe`). Keep going until the task is done, then call `robo done` once. Do not stop to ask questions; there is no human to answer.
+
+# Crate detour (no skills)
+
+You control a Unitree Go2 quadruped (MuJoCo Menagerie model, 15 kg, 0.7 m long, base about 0.29 m above the floor when standing) in a small indoor plant. World frame in metres: +x east, +y north, +z up, floor at z = 0; headings are in degrees, 0 = facing +x (east), 90 = facing +y (north). The plant is 12 m x 8 m (x from -6 to 6, y from -4 to 4), closed by 1 m walls. A partition wall at x = 1 separates the west hall from the east plant room; its only opening is a 1.1 m wide doorway (y from 1.5 to 2.6) at the east end of a corridor (walls at y = 1.3 and y = 2.9, from x = -2.2 to the partition; open at its west end). The west hall has the blue dock (0.9 m square at (-4.8, -2.8)), a row of crates (0.6 m cubes, 0.8 m high, at x = -3.2 from y = -3.95 to -0.95) and one more crate at (-1.9, -1.1), a green mat at (-1.2, -2.8), and a pipe with a valve and an inspection tag on the west wall. The east room has a pump (radius 0.3 m, 0.6 m high, at (4.2, -2.6)) with an asset tag, an instrument board with a pressure gauge 1.4 m up on the east wall, a yellow panel with a red emergency-stop button and a green reset button on the east wall, and a 0.2 m high mezzanine platform in the north-east corner (x 4.4-6, y 1.6-4) with a control cabinet, reached by a ramp (x 2.8-4.4, y 2.4-3.4) that rises eastwards. Every fixed position is listed under `facility` in `robo observe`. The robot stands on a free-floating base: only its feet touching the floor move it, so it can slip, trip over obstacles or fall; a fall (base tilted more than 50 degrees, or the body touching the floor, the ramp or the platform) is recorded in `safety_events` and fails the task.
+
+## Task
+
+The Go2 stands on the dock at (-4.8, -2.8), facing east. Walk to the green mat at (-1.2, -2.8) and stop on it, using only `robo act` velocity commands (skills are disabled). The row of crates stands between the dock and the mat, and one more crate stands north-west of the mat; plan a route around them.
+
+**Success:** the base centre is within 0.35 m (horizontally) of the mat centre (-1.2, -2.8), at the end the robot is standing still (not stepping, base slower than 0.1 m/s and turning slower than 11 deg/s), and it never fell. Judged by the episode server from the simulated state after you call `robo done` and the robot has held still (zero action) for 10 steps; no new inspections or checkpoints are recorded during those 10 steps.
+
+**Controls.** `robo act VX VY WZ DHEIGHT DPITCH` sets the action for the next step(s). VX and VY (m/s, up to +-0.6 and +-0.4) and WZ (deg/s, up to +-69, counter-clockwise seen from above) are the body-frame velocity command (x forward, y left) for the onboard trot controller (gait clock, foot placement from the commanded and measured velocity, leg inverse kinematics, attitude feedback and joint servos); all three zero means stop stepping and stand. DHEIGHT (m, +-0.02 per step) and DPITCH (deg, +-5 per step) change the body-height and nose-up pitch setpoints (height from -45 % to +5 % of the standing height, pitch +-20 degrees; a non-zero velocity command raises a lowered body to at least 85 % of the standing height); zero keeps them. One step is 50 ms; `--repeat N` holds an action for N steps. `robo skill` is disabled in this task.
+
+**Observation.** `robo observe` reports `robot` (`pos` of the base centre, `yaw_deg`, `roll_deg`, `pitch_up_deg`, `vel_body`, `yaw_rate_deg_s`, `gait` = standing / walking / sitting, `body_pose_setpoint`, `standing_height_m`, `feet_in_contact`, the `head_camera` position and forward direction, and `fallen`), `facility` (every fixed landmark), `objects` (this task's movable objects and floor markings, if any), `progress` (`inspected_tags`, and the task's counters) and `safety_events`. Cameras: `chase` (default; follows the robot from above and behind-left), `head` (forward-facing on the front of the base, 70 degree field of view, square image), `overview`, `west_hall` and `east_room`.
+
+The step budget is 900 steps (45 s).
+
+## How to control the robot
+
+You are the robot's policy. You act only through the `robo` command in your shell. There is no other way to move the robot, and you cannot read or change the simulator, the scoring, or other files to succeed; the episode server judges the final physical state itself.
+
+```
+robo info                          # the robot, its sensors, action groups, skills and step budget
+robo observe                       # robot and scene state as numbers
+robo observe --image [--camera C]  # also saves a camera image and prints its path (open it to look)
+robo act V1 V2 ... [--repeat N]    # one low-level action (the action groups under Controls), applied N times (N <= 50)
+robo skill NAME ARG ...            # run a skill listed by `robo info`; it runs until it finishes and reports the result
+robo done "short summary"          # end the episode and ask for scoring
+robo give-up "reason"              # end the episode without claiming success
+```
+
+- Positions are in metres in the world frame (+z up); angles are in degrees unless a field says otherwise.
+- The episode has a fixed step budget (see `robo info`); every simulated control step counts, including the steps a skill runs.
+- Skills are ordinary controllers: they can fail, stop early or be blocked by the scene. Read what they report and re-observe.
+- Success is judged about 10 steps after you call `robo done`, with the robot holding still (each action group's hold value: zero for velocity and delta commands, full brake for a car), so the goal must still be true when the robot stops.
+- Call `robo done` exactly once when finished.

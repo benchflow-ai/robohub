@@ -1,7 +1,7 @@
 {
   "robouse": {
     "repo": "https://github.com/benchflow-ai/robouse",
-    "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
+    "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
     "package_version": "0.1.1"
   },
   "runtime": "robosuite"

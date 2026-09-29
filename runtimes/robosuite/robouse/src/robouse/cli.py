@@ -4,7 +4,7 @@
   robouse run --task TASK --harness NAME [--model M] --out JOBDIR           run one trial end to end
   robouse run-many [--tasks ROOT] --harness NAME ... --out JOBDIR          run a set of trials
   robouse tasks [ROOT] [--path]                                            list tasks
-  robouse fetch-assets [--dest DIR]                                        download robot meshes (menagerie, RoboHarm, drone)
+  robouse fetch-assets [--dest DIR] [--robot NAME]                        download robot meshes (MuJoCo Menagerie)
 
 TASK is a task folder or the id of a bundled task (e.g. `arc-gravity`); ROOT defaults to the bundled tasks.
 """
@@ -65,14 +65,15 @@ def main(argv=None) -> int:
     t.add_argument("root", nargs="?", help="task root (default: the bundled tasks)")
     t.add_argument("--path", action="store_true", help="print the bundled task directory and exit")
 
-    f = sub.add_parser("fetch-assets", help="download the MuJoCo Menagerie meshes used by the menagerie, RoboHarm and drone suites")
+    f = sub.add_parser("fetch-assets", help="download the MuJoCo Menagerie robot models (menagerie, RoboHarm, drone and embodiment suites)")
     f.add_argument("--dest", help="target directory (default: ~/.cache/robouse/menagerie or $ROBOUSE_MENAGERIE_ASSETS)")
+    f.add_argument("--robot", action="append", help="only this Menagerie robot folder (repeatable), e.g. unitree_go2")
 
     a = ap.parse_args(argv)
     if a.cmd == "fetch-assets":
         from .assets import fetch
 
-        fetch(Path(a.dest) if a.dest else None)
+        fetch(Path(a.dest) if a.dest else None, robots=a.robot)
         return 0
     if a.cmd in ("serve", "run", "run-many"):
         import importlib.util

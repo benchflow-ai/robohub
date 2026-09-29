@@ -43,7 +43,7 @@ import yaml
 HUB = Path(__file__).resolve().parents[1]
 TEMPLATES = HUB / "templates"
 WALL_MARGIN_S = 900  # the episode clock starts when the simulator is up, before BenchFlow installs the harness
-PKG_IGNORE = shutil.ignore_patterns("__pycache__", "*.pyc", ".DS_Store", "bundled_tasks", "robocasa_episodes",
+PKG_IGNORE = shutil.ignore_patterns("__pycache__", "*.pyc", ".DS_Store", "bundled_tasks",
                                     "engine", "assets_provenance")
 
 
