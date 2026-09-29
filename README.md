@@ -136,4 +136,20 @@ Run on 2026-09-28 with the released `bench` 0.7.4 (PyPI), Docker 29.5 in Colima 
 
 The first two rows ran before the datasets were renamed to `<org>/<name>`; the names they used are now aliases of `benchflow/robouse-core@0.1` and `benchflow/robouse-noop-control@0.1`, with the same tasks and digests.
 
+### 2026-09-29: the datasets added from Robo Use `more-suites`
+
+Released `bench` 0.7.4 with `--agent oracle` and `-d NAME@VERSION`, digests verified at the pinned commits. Colima on the M2 Max for the first twelve; a 16-core linux/arm64 cloud VM (the same images) for the rest, reaching the pinned commits through a local mirror of this repository.
+
+| Dataset | Tasks run | Result |
+|---|---|---|
+| `farama-foundation/franka-kitchen@0.1`, `farama-foundation/adroit-hand@0.1`, `google-deepmind/dm-control@0.1`, `myohub/myosuite@0.1` | all | 10/10, 12/12, 17/17, 15/15 |
+| `benchflow/crazyflie`, `quadruped`, `humanoid`, `mobile-manip`, `dexhand`, `driving` (all `@0.1`) | all | 7/7, 11/11, 9/9, 10/10, 7/7, 7/7 |
+| `carlosferrazza/humanoid-bench@0.1`, `mani-skill/maniskill@0.1` | all | 7/7, 12/12 (two ManiSkill trials first failed to start with Docker's `No such container` and passed on rerun) |
+| `robocasa/robocasa@0.1` | all 23 | 23/23; `robocasa-close-kettle-lid-kitchen6` failed 3 times on the cloud VM (it passes on macOS and in Colima) and is left out (`exclude_tasks` in `hub.yaml`) |
+| RoboCasa no-op control (2 tasks, `--tasks-dir`, hub image) | 2 | 0/2 |
+| `lifelong-robot-learning/libero@0.2`, `lifelong-robot-learning/libero-90@0.1` | 8 (2 per suite), 10 | 8/8, 10/10 (four LIBERO-90 trials first failed to start with the same Docker error and passed on rerun) |
+| `benchflow/robouse-harm@0.1`; old names `benchflow/robouse-roboharm@0.1`, `robouse-roboharm@0.1` | 2; 1; 1 | 2/2; 1/1; 1/1 |
+
+The per-suite no-op checks (0 on every task) were run with the local Robo Use runner and in the hub images from a local export; see each suite's page in Robo Use. Reduced results: [`dogfood.json`](dogfood.json).
+
 So the datasets, the registry, digest verification, the simulator images for all five runtimes and the verifier are checked end to end on released `bench`; a model-driven run on this hub is still to do.
