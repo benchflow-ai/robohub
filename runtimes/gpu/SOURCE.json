@@ -1,0 +1,8 @@
+{
+  "robouse": {
+    "repo": "https://github.com/benchflow-ai/robouse",
+    "commit": "bd8ac560a5f4bf0256e56b6b903c27866d9a3dc0",
+    "package_version": "0.1.1"
+  },
+  "runtime": "gpu"
+}
