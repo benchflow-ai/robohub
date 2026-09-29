@@ -835,6 +835,41 @@
         }
       }
     },
+    "robouse-cubepick": {
+      "noop": false,
+      "robouse": {
+        "commit": "35e1b10065e97320504c12cfb589401409994b34",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "tasks": {
+        "cubepick-reach-layout-0": {
+          "backend": "cubepick",
+          "runtime": "light",
+          "suite": "cubepick"
+        },
+        "cubepick-reach-layout-1": {
+          "backend": "cubepick",
+          "runtime": "light",
+          "suite": "cubepick"
+        },
+        "cubepick-reach-layout-2": {
+          "backend": "cubepick",
+          "runtime": "light",
+          "suite": "cubepick"
+        },
+        "cubepick-reach-layout-3": {
+          "backend": "cubepick",
+          "runtime": "light",
+          "suite": "cubepick"
+        },
+        "cubepick-reach-layout-4": {
+          "backend": "cubepick",
+          "runtime": "light",
+          "suite": "cubepick"
+        }
+      }
+    },
     "robouse-dexhand": {
       "noop": false,
       "tasks": {
@@ -2537,6 +2572,216 @@
           "backend": "myosuite",
           "runtime": "myosuite",
           "suite": "myosuite"
+        }
+      }
+    },
+    "robouse-nav": {
+      "noop": false,
+      "robouse": {
+        "commit": "35e1b10065e97320504c12cfb589401409994b34",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "tasks": {
+        "nav-h00-armchair": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h00-fridge": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h00-wardrobe": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h00-washing-machine": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h01-fridge": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h01-kitchen-counter": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h01-oven": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h01-trash-can": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h02-bookshelf": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h02-coffee-table": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h02-dining-table": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h02-tv-stand": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h03-dining-table": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h03-filing-cabinet": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h03-fridge": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h03-nightstand": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h04-fridge": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h04-oven": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h04-sink": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h04-wardrobe": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h05-bookshelf": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h05-kitchen-counter": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h05-office-chair": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h05-wardrobe": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h06-bed": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h06-filing-cabinet": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h06-office-chair": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h06-wardrobe": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h07-armchair": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h07-bathtub": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h07-desk": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h07-plant": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h08-bathtub": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h08-bookshelf": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h08-dining-table": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h08-office-chair": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h09-bathtub": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h09-oven": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h09-sofa": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
+        },
+        "nav-h09-wardrobe": {
+          "backend": "nav",
+          "runtime": "light",
+          "suite": "nav"
         }
       }
     },
@@ -4611,6 +4856,7 @@
     "embodied": "sha256:2d8aef2c2e504bf4df8dbfed2a6feb48dc499c404c038b19b4e633e76fc69b6a",
     "humanoidbench": "sha256:4e2c48833b9ca63c686671310754d2559c4d9d83ff42b3500ec218d66c6de1db",
     "libero": "sha256:f4f64ec5810becb755db7410586836e031cb254d66baa42fbe7f6d40ec3f327e",
+    "light": "sha256:39fb599c691544e09e8b7a1af78debe4e6d878e9b696c7aff6a9ce9062ac1332",
     "maniskill": "sha256:50e085d16dc0c1b0f4a36236070b4290ed23ac6844ebfd1a78e54054158438e6",
     "menagerie": "sha256:40eb64c1910118d9c821aafcef547ac49cc34534a4283d66b61b92e5f5dbf911",
     "myosuite": "sha256:124ef7a1988b88d0918ced05416de0dc6e84b1cf490e97eac01b9d4e050323e7",

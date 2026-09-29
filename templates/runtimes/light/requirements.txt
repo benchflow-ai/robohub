@@ -1,0 +1,8 @@
+# Pinned dependencies of the Robo Use `light` runtime: numpy-only simulators (navigation, CubePick). MuJoCo is here only
+# because the episode server's start-up check imports it; nothing renders through it. Versions match the Robo Use dev venv.
+numpy==2.5.3
+mujoco==3.3.0
+imageio==2.37.4
+imageio-ffmpeg==0.6.0
+pillow==12.3.0
+pyyaml==6.0.3

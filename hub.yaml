@@ -15,6 +15,9 @@ runtimes:
   base:
     backends: [metaworld, gymrobotics, tabletop, kitchen, adroit]
     simulators: MuJoCo 3.3.0, Meta-World 3.1.1, Gymnasium-Robotics 1.4.2
+  light:
+    backends: [nav, cubepick]
+    simulators: numpy-only (Robo Use navigation homes, inspect-robots CubePick)
   menagerie:
     backends: [menagerie, roboharm, drone]
     simulators: MuJoCo 3.3.0, MuJoCo Menagerie models
@@ -88,6 +91,8 @@ suites:
   robosuite: {embodiment: "Franka Panda; UR5e; Kinova Gen3; KUKA IIWA; Sawyer arm", simulator: "robosuite 1.5.2", image: robosuite}
   menagerie: {embodiment: "Franka Panda; ALOHA 2", simulator: "MuJoCo Menagerie models", image: menagerie}
   roboharm: {embodiment: "Franka Panda", simulator: "MuJoCo Menagerie models", image: roboharm}
+  nav: {embodiment: "holonomic mobile base (0.25 m radius) in generated homes", simulator: "Robo Use nav (geometry-only, numpy)", image: light}
+  cubepick: {embodiment: "point end effector in the unit square", simulator: "inspect-robots CubePick (numpy)", image: light}
   drone: {embodiment: "Skydio X2 quadrotor", simulator: "MuJoCo Menagerie models", image: drone}
   dexjoco: {embodiment: "Allegro hands on Franka arms", simulator: "DexJoCo (MuJoCo 3.4.0)", image: dexjoco}
   quadruped: {embodiment: Unitree Go2; Unitree Go1; Boston Dynamics Spot; ANYbotics ANYmal C, simulator: MuJoCo Menagerie models, image: quadruped}
@@ -278,6 +283,17 @@ datasets:
     version: "0.1"
     suites: [remix]
     description: "Robo Use remix 0.1: 48 tasks composed from components (6 embodiments: arm, bimanual rig, two mobile manipulators, quadruped, drone; 6 scenes; 9 task templates) with modifiers (vision, noise, perturbations, safety overlays, roles). Each was accepted by robouse remix: the reference solution scores 1 and a no-op agent 0."
+  - name: benchflow/robouse-nav
+    dir: robouse-nav
+    version: "0.1"
+    suites: [nav]
+    description: "Robo Use navigation 0.1: object-goal navigation in 10 generated homes, 40 tasks: drive a mobile base to a named piece of furniture from a robot-frame WorldState in spatial language, in the protocol of Dimensional's Can Jev Nav? study; scored by arrival within 1 m with line of sight, with SPL, SoftSPL, collisions and path metrics recorded."
+  - name: robocurve/cubepick-reach
+    dir: robouse-cubepick
+    upstream: {benchmark: "inspect-robots cubepick-reach", org_name: "Robocurve", repo: "https://github.com/robocurve/inspect-robots", licence: MIT}
+    version: "0.1"
+    suites: [cubepick]
+    description: "Robo Use CubePick 0.1: inspect-robots' built-in reach-the-cube world (MIT) with its 5 seeded layouts; success the first time the effector is within 0.05 of the cube."
   - name: benchflow/robouse-noop-control
     dir: robouse-noop-control
     aliases: [robouse-noop-control]
