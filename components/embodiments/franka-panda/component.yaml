@@ -57,4 +57,5 @@ cameras:
 - robot/arm_wrist
 suites:
 - menagerie
+- remix
 - roboharm

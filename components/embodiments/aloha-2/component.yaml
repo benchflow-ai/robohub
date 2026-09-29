@@ -78,3 +78,4 @@ cameras:
 - robot/right_wrist
 suites:
 - menagerie
+- remix

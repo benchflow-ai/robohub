@@ -52,3 +52,4 @@ cameras:
 - robot/head
 suites:
 - quadruped
+- remix

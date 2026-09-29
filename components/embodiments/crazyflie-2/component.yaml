@@ -57,3 +57,4 @@ cameras:
 - robot/fpv
 suites:
 - crazyflie
+- remix

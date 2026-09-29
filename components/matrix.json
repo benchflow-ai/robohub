@@ -321,6 +321,22 @@
     "navigation"
    ]
   },
+  "remix": {
+   "embodiments": [
+    "franka-panda",
+    "aloha-2",
+    "pal-tiago",
+    "google-robot",
+    "unitree-go2",
+    "crazyflie-2"
+   ],
+   "scene": "tabletop",
+   "scenario": "tabletop",
+   "track": "arm",
+   "capabilities": [
+    "pick-and-place"
+   ]
+  },
   "gymrobotics": {
    "embodiments": [
     "fetch",
@@ -513,7 +529,7 @@
   },
   "aloha-2|lab-bench|push-to-zone": {
    "ok": false,
-   "why": "Lab bench stocks no crate; Lab bench stocks no crate (this variant pushes one)"
+   "why": "Lab bench stocks no crate\nLab bench stocks no crate (this variant pushes one)"
   },
   "aloha-2|lab-bench|put-in-container": {
    "ok": true
@@ -913,7 +929,7 @@
   },
   "franka-panda|lab-bench|push-to-zone": {
    "ok": false,
-   "why": "Lab bench stocks no crate; Lab bench stocks no crate (this variant pushes one)"
+   "why": "Lab bench stocks no crate\nLab bench stocks no crate (this variant pushes one)"
   },
   "franka-panda|lab-bench|put-in-container": {
    "ok": true
@@ -1129,7 +1145,7 @@
   },
   "google-robot|outdoor-field|fetch-and-deliver": {
    "ok": false,
-   "why": "Outdoor field stocks nothing Google Robot can pick up with its front grasp (at most 6.8 cm wide) (a level front grasp needs objects at least 7 cm tall and 4 cm wide); Google Robot reaches surfaces 0.35 to 1 m high from the floor; Outdoor field has 0 such surfaces, the task needs 2"
+   "why": "Outdoor field stocks nothing Google Robot can pick up with its front grasp (at most 6.8 cm wide) (a level front grasp needs objects at least 7 cm tall and 4 cm wide)\nGoogle Robot reaches surfaces 0.35 to 1 m high from the floor; Outdoor field has 0 such surfaces, the task needs 2"
   },
   "google-robot|outdoor-field|go-to-landmark": {
    "ok": true
@@ -1143,11 +1159,11 @@
   },
   "google-robot|outdoor-field|put-in-container": {
    "ok": false,
-   "why": "Outdoor field has no container that stands on a work surface; Outdoor field stocks nothing Google Robot can pick up with its front grasp (at most 6.8 cm wide) (a level front grasp needs objects at least 7 cm tall and 4 cm wide); Google Robot reaches surfaces 0.35 to 1 m high from the floor; Outdoor field has 0 such surfaces"
+   "why": "Outdoor field has no container that stands on a work surface\nOutdoor field stocks nothing Google Robot can pick up with its front grasp (at most 6.8 cm wide) (a level front grasp needs objects at least 7 cm tall and 4 cm wide)\nGoogle Robot reaches surfaces 0.35 to 1 m high from the floor; Outdoor field has 0 such surfaces"
   },
   "google-robot|outdoor-field|sort-by-color": {
    "ok": false,
-   "why": "Outdoor field has no container that stands on a work surface; Outdoor field stocks nothing Google Robot can pick up with its front grasp (at most 6.8 cm wide) (a level front grasp needs objects at least 7 cm tall and 4 cm wide); Google Robot reaches surfaces 0.35 to 1 m high from the floor; Outdoor field has 0 such surfaces"
+   "why": "Outdoor field has no container that stands on a work surface\nOutdoor field stocks nothing Google Robot can pick up with its front grasp (at most 6.8 cm wide) (a level front grasp needs objects at least 7 cm tall and 4 cm wide)\nGoogle Robot reaches surfaces 0.35 to 1 m high from the floor; Outdoor field has 0 such surfaces"
   },
   "google-robot|outdoor-field|stack-in-order": {
    "ok": false,
@@ -1325,7 +1341,7 @@
   },
   "pal-tiago|outdoor-field|fetch-and-deliver": {
    "ok": false,
-   "why": "Outdoor field stocks nothing PAL TIAGo can pick up with its front grasp (at most 8 cm wide) (a level front grasp needs objects at least 7 cm tall and 4 cm wide); PAL TIAGo reaches surfaces 0.5 to 0.85 m high from the floor; Outdoor field has 0 such surfaces, the task needs 2"
+   "why": "Outdoor field stocks nothing PAL TIAGo can pick up with its front grasp (at most 8 cm wide) (a level front grasp needs objects at least 7 cm tall and 4 cm wide)\nPAL TIAGo reaches surfaces 0.5 to 0.85 m high from the floor; Outdoor field has 0 such surfaces, the task needs 2"
   },
   "pal-tiago|outdoor-field|go-to-landmark": {
    "ok": true
@@ -1339,11 +1355,11 @@
   },
   "pal-tiago|outdoor-field|put-in-container": {
    "ok": false,
-   "why": "Outdoor field has no container that stands on a work surface; Outdoor field stocks nothing PAL TIAGo can pick up with its front grasp (at most 8 cm wide) (a level front grasp needs objects at least 7 cm tall and 4 cm wide); PAL TIAGo reaches surfaces 0.5 to 0.85 m high from the floor; Outdoor field has 0 such surfaces"
+   "why": "Outdoor field has no container that stands on a work surface\nOutdoor field stocks nothing PAL TIAGo can pick up with its front grasp (at most 8 cm wide) (a level front grasp needs objects at least 7 cm tall and 4 cm wide)\nPAL TIAGo reaches surfaces 0.5 to 0.85 m high from the floor; Outdoor field has 0 such surfaces"
   },
   "pal-tiago|outdoor-field|sort-by-color": {
    "ok": false,
-   "why": "Outdoor field has no container that stands on a work surface; Outdoor field stocks nothing PAL TIAGo can pick up with its front grasp (at most 8 cm wide) (a level front grasp needs objects at least 7 cm tall and 4 cm wide); PAL TIAGo reaches surfaces 0.5 to 0.85 m high from the floor; Outdoor field has 0 such surfaces"
+   "why": "Outdoor field has no container that stands on a work surface\nOutdoor field stocks nothing PAL TIAGo can pick up with its front grasp (at most 8 cm wide) (a level front grasp needs objects at least 7 cm tall and 4 cm wide)\nPAL TIAGo reaches surfaces 0.5 to 0.85 m high from the floor; Outdoor field has 0 such surfaces"
   },
   "pal-tiago|outdoor-field|stack-in-order": {
    "ok": false,
@@ -1501,7 +1517,7 @@
   },
   "unitree-go2|lab-bench|push-to-zone": {
    "ok": false,
-   "why": "Lab bench stocks no carton; Lab bench stocks no carton (this variant pushes one)"
+   "why": "Lab bench stocks no carton\nLab bench stocks no carton (this variant pushes one)"
   },
   "unitree-go2|lab-bench|put-in-container": {
    "ok": false,

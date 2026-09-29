@@ -83,6 +83,7 @@ cameras:
 - robot/head
 suites:
 - mobile-manip
+- remix
 reach:
   grasp_heights_m:
   - 0.5
