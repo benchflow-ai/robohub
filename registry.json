@@ -4934,175 +4934,168 @@
   {
     "name": "robocasa/robocasa",
     "version": "0.1",
-    "description": "Robo Use RoboCasa 0.1: 24 RoboCasa365 atomic kitchen tasks in all ten kitchen layouts: close a drawer, counter to sink, counter to cabinet, turn on the toaster, close the kettle lid, turn off the faucet, and turn a stove burner on or off, with a Franka Panda on a parked mobile base. Success is RoboCasa's own check for each task, judged from the physical state.",
+    "description": "Robo Use RoboCasa 0.1: 23 RoboCasa365 atomic kitchen tasks in all ten kitchen layouts: close a drawer, counter to sink, counter to cabinet, turn on the toaster, close the kettle lid, turn off the faucet, and turn a stove burner on or off, with a Franka Panda on a parked mobile base. Success is RoboCasa's own check for each task, judged from the physical state.",
     "git_tag": "robocasa/robocasa-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
       {
         "name": "robocasa-close-drawer-kitchen10",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-close-drawer-kitchen10",
         "digest": "sha256:891d76a8144b42804894ca3cd55a425d123109389ac757eff91b1f7a99b8b646"
       },
       {
         "name": "robocasa-close-drawer-kitchen2",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-close-drawer-kitchen2",
         "digest": "sha256:2d0a21347dfc4275a56e6b3b9801a9fd989320d1aeaeb700a4d1c91b443f280b"
       },
       {
         "name": "robocasa-close-drawer-kitchen7",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-close-drawer-kitchen7",
         "digest": "sha256:7bac94a3bd8215af1ddef1dbc36b23d4460058ab569daa0928915bd10376d399"
       },
       {
         "name": "robocasa-close-kettle-lid-kitchen1",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-close-kettle-lid-kitchen1",
         "digest": "sha256:c6ef4294169ea5228d701fde8928ff5f2f3a7501c9a189e0c9bcf7afc010b250"
       },
       {
         "name": "robocasa-close-kettle-lid-kitchen10",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-close-kettle-lid-kitchen10",
         "digest": "sha256:e8bb91355e8c9455db1971562edb31ccdfdec65dff4ac48fcd53f03a023e1b44"
       },
       {
-        "name": "robocasa-close-kettle-lid-kitchen6",
-        "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
-        "path": "datasets/robouse-robocasa/robocasa-close-kettle-lid-kitchen6",
-        "digest": "sha256:3389f0977969a2ef37db0a72c02820d46aec63ca2e94c3ffd53b7957295dbe8b"
-      },
-      {
         "name": "robocasa-pick-place-counter-to-cabinet-kitchen3",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-cabinet-kitchen3",
         "digest": "sha256:e835d7e5472f94926f1e25319954350243a47689f8b114b646b2eb27d15cdf3c"
       },
       {
         "name": "robocasa-pick-place-counter-to-cabinet-kitchen8",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-cabinet-kitchen8",
         "digest": "sha256:4573146322c8e724f5fe9e1a5cb48a3e670e8fd187332c4453e96b6d3d948a5d"
       },
       {
         "name": "robocasa-pick-place-counter-to-cabinet-kitchen9",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-cabinet-kitchen9",
         "digest": "sha256:d3b91223b426732f12d8a53b295d1df5c6cff8fce8fa3cdf6cb7c8a5aadb393b"
       },
       {
         "name": "robocasa-pick-place-counter-to-sink",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-sink",
         "digest": "sha256:c8386782eb33ed822c3b618ebf1232e2b4b8d6004f7194f77c5506bc1dc78e53"
       },
       {
         "name": "robocasa-pick-place-counter-to-sink-kitchen2",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-sink-kitchen2",
         "digest": "sha256:ddbcb3986bcd6b9ebc96e221d30536632d2ff014864edf285e90b679a750b8d2"
       },
       {
         "name": "robocasa-pick-place-counter-to-sink-kitchen2b",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-sink-kitchen2b",
         "digest": "sha256:a36dd9374875082c4a09638332fa5da10eb20f7360197f322c4619df3319ffd4"
       },
       {
         "name": "robocasa-pick-place-counter-to-sink-kitchen3",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-sink-kitchen3",
         "digest": "sha256:74eb2e679e4b36df55d0a273d83280a9c6cffd14beb351d5a33202ea9da0d297"
       },
       {
         "name": "robocasa-pick-place-counter-to-sink-kitchen4",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-sink-kitchen4",
         "digest": "sha256:421f4f5af7f3d5b6bb173b7bf131d4b145522a72e60405706ccc69db7847e6a9"
       },
       {
         "name": "robocasa-pick-place-counter-to-sink-kitchen5",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-sink-kitchen5",
         "digest": "sha256:375f6c4dbc02521ef77c62723a5a38ac8d71941b122627c807e376c4b3d47041"
       },
       {
         "name": "robocasa-pick-place-counter-to-sink-kitchen6",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-sink-kitchen6",
         "digest": "sha256:31045c64efdd7ed6e1ae31fe7e5c208b9195e15a2746f3b11cdeeaf0901c47c8"
       },
       {
         "name": "robocasa-turn-off-faucet-kitchen2",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-turn-off-faucet-kitchen2",
         "digest": "sha256:56e2a36d1638d57f8cfe851ae16f43da440b1554ede81b1e62b12ba4a9e85fce"
       },
       {
         "name": "robocasa-turn-off-faucet-kitchen9",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-turn-off-faucet-kitchen9",
         "digest": "sha256:6523b38a8cf27f5a1dabf838572947fa595b01799ccc6f0a279423370547c141"
       },
       {
         "name": "robocasa-turn-off-stove-kitchen2",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-turn-off-stove-kitchen2",
         "digest": "sha256:203f171b224ae3e352c122b0a28be233d883def0e7c37157ec3e9320da5c421a"
       },
       {
         "name": "robocasa-turn-off-stove-kitchen9",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-turn-off-stove-kitchen9",
         "digest": "sha256:f44e6700a1a548fa310bbfb44060a86aa9fed8a8e9c5b769f9a1875f65f0f418"
       },
       {
         "name": "robocasa-turn-on-stove-kitchen2",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-turn-on-stove-kitchen2",
         "digest": "sha256:43100bbc6d978c98377eb47eb57f8c5139eeb2d9dfe4da0b46f142aa187bd7f5"
       },
       {
         "name": "robocasa-turn-on-stove-kitchen7",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-turn-on-stove-kitchen7",
         "digest": "sha256:1c6805ba224567c14a5556dd91ba13d901b468fdeab9e4632702261a5dd659d4"
       },
       {
         "name": "robocasa-turn-on-toaster-kitchen7",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-turn-on-toaster-kitchen7",
         "digest": "sha256:47cc3469bb72a028ee97824d56814733a6fae652d528ccca25535555dcb2ab74"
       },
       {
         "name": "robocasa-turn-on-toaster-kitchen8",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "git_commit_id": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
         "path": "datasets/robouse-robocasa/robocasa-turn-on-toaster-kitchen8",
         "digest": "sha256:c8c0d9e47a22842bccf074822cf2f3b7422cae8276f206fadb2969343a737824"
       }

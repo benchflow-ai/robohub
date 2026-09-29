@@ -5695,10 +5695,10 @@
         "repo": "https://github.com/benchflow-ai/robouse"
       },
       "version": "0.1",
-      "description": "Robo Use RoboCasa 0.1: 24 RoboCasa365 atomic kitchen tasks in all ten kitchen layouts: close a drawer, counter to sink, counter to cabinet, turn on the toaster, close the kettle lid, turn off the faucet, and turn a stove burner on or off, with a Franka Panda on a parked mobile base. Success is RoboCasa's own check for each task, judged from the physical state.",
+      "description": "Robo Use RoboCasa 0.1: 23 RoboCasa365 atomic kitchen tasks in all ten kitchen layouts: close a drawer, counter to sink, counter to cabinet, turn on the toaster, close the kettle lid, turn off the faucet, and turn a stove burner on or off, with a Franka Panda on a parked mobile base. Success is RoboCasa's own check for each task, judged from the physical state.",
       "git_tag": "robocasa/robocasa-v0.1",
-      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
-      "n_tasks": 24,
+      "commit": "82b1dcd9ea53700b3a50ce727094bc84f75dbdd1",
+      "n_tasks": 23,
       "suites": [
         "robocasa"
       ],
@@ -5745,13 +5745,6 @@
         {
           "id": "robocasa-close-kettle-lid-kitchen10",
           "digest": "sha256:e8bb91355e8c9455db1971562edb31ccdfdec65dff4ac48fcd53f03a023e1b44",
-          "backend": "robocasa",
-          "runtime": "robocasa",
-          "suite": "robocasa"
-        },
-        {
-          "id": "robocasa-close-kettle-lid-kitchen6",
-          "digest": "sha256:3389f0977969a2ef37db0a72c02820d46aec63ca2e94c3ffd53b7957295dbe8b",
           "backend": "robocasa",
           "runtime": "robocasa",
           "suite": "robocasa"
