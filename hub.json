@@ -6991,6 +6991,351 @@
       ]
     },
     {
+      "name": "haosulab/maniskill-gpu",
+      "org": "haosulab",
+      "short_name": "maniskill-gpu",
+      "dir": "maniskill-gpu",
+      "aliases": [],
+      "upstream": {
+        "benchmark": "ManiSkill3",
+        "org_name": "Hillbot / UC San Diego (haosulab)",
+        "repo": "https://github.com/haosulab/ManiSkill",
+        "licence": "Apache-2.0"
+      },
+      "run": {
+        "label": "Robo Use checkout + GPU worker",
+        "command": "robouse run-many --tasks tasks/gpu-maniskill --harness oracle --out runs/gpu-maniskill-oracle",
+        "note": "GPU required. The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in a Robo Use checkout (branch <code>gpu-track</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/gpu-track/docs/suites/gpu-track.md\">docs/suites/gpu-track.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control.",
+        "bench_note": "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
+      },
+      "robouse": {
+        "commit": "bd8ac560a5f4bf0256e56b6b903c27866d9a3dc0",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "version": "0.1",
+      "description": "Robo Use ManiSkill3 GPU 0.1: 12 hard ManiSkill3 tasks on a Franka Panda with ray-traced cameras: side peg insertion at 3 mm and 1 mm clearance, a box that moves mid-task, charger plugging at 0.5 mm, a pyramid stack, tool use, reorientation, a cube on a moving belt, and 4 camera-only variants. GPU required.",
+      "git_tag": "haosulab/maniskill-gpu-v0.1",
+      "commit": "9ad3e1a903c626827d4e54734217f4041c82ed2c",
+      "n_tasks": 12,
+      "suites": [
+        "gpu-maniskill"
+      ],
+      "embodiments": [
+        "Franka Panda"
+      ],
+      "simulators": [
+        "ManiSkill3 3.0.1 (SAPIEN, ray-traced)"
+      ],
+      "image": "gpu-maniskill",
+      "noop": false,
+      "runtimes": [
+        "gpu"
+      ],
+      "tasks": [
+        {
+          "id": "ms-lift-peg-upright",
+          "digest": "sha256:8479914e7b31378cad14ec7d7c46561da6fe4a8c02a39d7ad3843f962faf6e5d",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        {
+          "id": "ms-peg-insertion-moving-box",
+          "digest": "sha256:c77efc9fac0ebd9ce83bfcbc5cd12381aa28ba70e32dcc3f6c87fe39e43a955f",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        {
+          "id": "ms-peg-insertion-side",
+          "digest": "sha256:78d55e780ec853003b1150e6937c0eb30e8f03d1e19bde5e7d199412d0a0735c",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        {
+          "id": "ms-peg-insertion-side-1mm",
+          "digest": "sha256:7e0e3d1b69a8584881903c58f266d8a6948799ac33bb22685357608259d458f3",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        {
+          "id": "ms-peg-insertion-side-vision",
+          "digest": "sha256:1aacd12e644e60c98ad2c4d43a93e5d466ac983fb9ad40fd35ccd1f8a3541945",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        {
+          "id": "ms-pick-moving-cube",
+          "digest": "sha256:5bf9a13af7bebe97747ea7bb8de3739acfea8186c57429f2e19f2171877001cd",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        {
+          "id": "ms-pick-moving-cube-vision",
+          "digest": "sha256:beebb4cc99a18002e0722ad717fbebb1460558725ee7c639de9e699a0ead7a66",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        {
+          "id": "ms-plug-charger",
+          "digest": "sha256:bb4a448a2c45097f2d13328c14105c8de46cd5275159c17cc9a65a06f281b65c",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        {
+          "id": "ms-plug-charger-vision",
+          "digest": "sha256:789da3bd0986e57d0a3be63ac9a09edc0cdcd64cef73b9c3d28e2962d3fca0d7",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        {
+          "id": "ms-pull-cube-tool",
+          "digest": "sha256:6feb53ecb2a76148d42a3afaf0754806902280fc742b7bd460c543119c2ff351",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        {
+          "id": "ms-stack-pyramid",
+          "digest": "sha256:17c0b9a58b768a6536aee748e0206c41cc15c93cd6c11a08b360a89d8fb3be6b",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        {
+          "id": "ms-stack-pyramid-vision",
+          "digest": "sha256:ae088ce555cdebffcdc02feab4e1bef31102c2f3a9618e0aecead129d1c6462f",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        }
+      ]
+    },
+    {
+      "name": "benchflow/robouse-genesis",
+      "org": "benchflow",
+      "short_name": "robouse-genesis",
+      "dir": "robouse-genesis",
+      "aliases": [],
+      "upstream": null,
+      "run": {
+        "label": "Robo Use checkout + GPU worker",
+        "command": "robouse run-many --tasks tasks/gpu-genesis --harness oracle --out runs/gpu-genesis-oracle",
+        "note": "GPU required. The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in a Robo Use checkout (branch <code>gpu-track</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/gpu-track/docs/suites/gpu-track.md\">docs/suites/gpu-track.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control.",
+        "bench_note": "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
+      },
+      "robouse": {
+        "commit": "bd8ac560a5f4bf0256e56b6b903c27866d9a3dc0",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "version": "0.1",
+      "description": "Robo Use Genesis 0.1: 3 liquid-pouring tasks designed for Robo Use on Genesis (SPH water, Franka Panda): pour into a bowl, into a narrow vase, and camera-only. GPU required.",
+      "git_tag": "benchflow/robouse-genesis-v0.1",
+      "commit": "9ad3e1a903c626827d4e54734217f4041c82ed2c",
+      "n_tasks": 3,
+      "suites": [
+        "gpu-genesis"
+      ],
+      "embodiments": [
+        "Franka Panda"
+      ],
+      "simulators": [
+        "Genesis 1.4.2 (SPH liquid)"
+      ],
+      "image": "gpu-genesis",
+      "noop": false,
+      "runtimes": [
+        "gpu"
+      ],
+      "tasks": [
+        {
+          "id": "gs-pour-water",
+          "digest": "sha256:4690c3cfd1952a32451456cfe1613856c84a4224dc6782720485b57f4444a244",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-genesis"
+        },
+        {
+          "id": "gs-pour-water-narrow",
+          "digest": "sha256:7cd0033a471cfcc313d5f213787258e0ac852107683daff1071efcee2f6647a7",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-genesis"
+        },
+        {
+          "id": "gs-pour-water-vision",
+          "digest": "sha256:1c6e5caa631628c2942c7cae749bc5339f2831e08c8710436d67ce900836dd6f",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-genesis"
+        }
+      ]
+    },
+    {
+      "name": "benchflow/robouse-playground",
+      "org": "benchflow",
+      "short_name": "robouse-playground",
+      "dir": "robouse-playground",
+      "aliases": [],
+      "upstream": null,
+      "run": {
+        "label": "Robo Use checkout + GPU worker",
+        "command": "robouse run-many --tasks tasks/gpu-playground --harness oracle --out runs/gpu-playground-oracle",
+        "note": "GPU required. The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in a Robo Use checkout (branch <code>gpu-track</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/gpu-track/docs/suites/gpu-track.md\">docs/suites/gpu-track.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control.",
+        "bench_note": "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
+      },
+      "robouse": {
+        "commit": "bd8ac560a5f4bf0256e56b6b903c27866d9a3dc0",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "version": "0.1",
+      "description": "Robo Use MuJoCo Playground 0.1: 5 navigation tasks for a Unitree Go1 walking with a joystick policy trained in MuJoCo Playground: obstacle field, corridor under shoves, moving barriers, a six-waypoint tour, and a camera-only search. GPU required.",
+      "git_tag": "benchflow/robouse-playground-v0.1",
+      "commit": "9ad3e1a903c626827d4e54734217f4041c82ed2c",
+      "n_tasks": 5,
+      "suites": [
+        "gpu-playground"
+      ],
+      "embodiments": [
+        "Unitree Go1 with a learned gait"
+      ],
+      "simulators": [
+        "MuJoCo Playground 0.2.0 (MuJoCo Warp)"
+      ],
+      "image": "gpu-playground",
+      "noop": false,
+      "runtimes": [
+        "gpu"
+      ],
+      "tasks": [
+        {
+          "id": "pg-go1-corridor-push",
+          "digest": "sha256:cf7cd6a0da73d02062dff8b656dacd56321b27ee4e1601c57f2bdeef019d5424",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-playground"
+        },
+        {
+          "id": "pg-go1-find-ball",
+          "digest": "sha256:45ebffcd936aeef50b4c4ed62021c1098dd491999ea95526b8fde07690b343fc",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-playground"
+        },
+        {
+          "id": "pg-go1-moving-gates",
+          "digest": "sha256:f7052160188ef90931567983e3c2ffe04b926cb646570fcadcd820c6d05c1d09",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-playground"
+        },
+        {
+          "id": "pg-go1-obstacle-field",
+          "digest": "sha256:e4e05b7eaeac347f68a6a04d1d401fb9348f1641986524aa30d8ba516cb71c0b",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-playground"
+        },
+        {
+          "id": "pg-go1-waypoint-tour",
+          "digest": "sha256:ae0d3d8ec2759154aa46e2c49208923edcd9d575beb60d6f090e29b97edfcd16",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-playground"
+        }
+      ]
+    },
+    {
+      "name": "isaac-sim/isaaclab-factory",
+      "org": "isaac-sim",
+      "short_name": "isaaclab-factory",
+      "dir": "isaaclab-factory",
+      "aliases": [],
+      "upstream": {
+        "benchmark": "Isaac Lab Factory",
+        "org_name": "NVIDIA Isaac Sim (isaac-sim)",
+        "repo": "https://github.com/isaac-sim/IsaacLab",
+        "licence": "BSD-3-Clause (Isaac Lab); Isaac Sim under the NVIDIA Isaac Sim additional software license"
+      },
+      "run": {
+        "label": "Robo Use checkout + GPU worker",
+        "command": "robouse run-many --tasks tasks/gpu-isaaclab --harness oracle --out runs/gpu-isaaclab-oracle",
+        "note": "GPU required. The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in a Robo Use checkout (branch <code>gpu-track</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/gpu-track/docs/suites/gpu-track.md\">docs/suites/gpu-track.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control.",
+        "bench_note": "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
+      },
+      "robouse": {
+        "commit": "bd8ac560a5f4bf0256e56b6b903c27866d9a3dc0",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "version": "0.1",
+      "description": "Robo Use Isaac Lab Factory 0.1: 5 contact-rich assembly tasks from Isaac Lab's Factory environments on a Franka Panda: 8 mm peg insertion, gear meshing and M16 nut threading, two with a noisy fixed-part estimate. GPU required.",
+      "git_tag": "isaac-sim/isaaclab-factory-v0.1",
+      "commit": "9ad3e1a903c626827d4e54734217f4041c82ed2c",
+      "n_tasks": 5,
+      "suites": [
+        "gpu-isaaclab"
+      ],
+      "embodiments": [
+        "Franka Panda"
+      ],
+      "simulators": [
+        "Isaac Lab 2.3 Factory (Isaac Sim 5.1)"
+      ],
+      "image": "gpu-isaaclab",
+      "noop": false,
+      "runtimes": [
+        "gpu"
+      ],
+      "tasks": [
+        {
+          "id": "il-factory-gear-mesh",
+          "digest": "sha256:30f6d905c12e1ffa39b397910fcad935f6d19d2166f9986a5a19a43e5a64becd",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-isaaclab"
+        },
+        {
+          "id": "il-factory-nut-thread",
+          "digest": "sha256:aecdd744e2dab9297865abcbc2036e2608a88ca7b4a9f8433eae10d50bdc6456",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-isaaclab"
+        },
+        {
+          "id": "il-factory-nut-thread-noisy",
+          "digest": "sha256:f5d8cebf9b6acec350ae78e998209f8b48c9d7927eb79ed5cfc3dee4bdcbff9d",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-isaaclab"
+        },
+        {
+          "id": "il-factory-peg-insert",
+          "digest": "sha256:918d0b88f6eb81fc8d27ffa202a331a206c28c86751b52a4e880aaa791f09b8f",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-isaaclab"
+        },
+        {
+          "id": "il-factory-peg-insert-noisy",
+          "digest": "sha256:d55078de0f0438ccbfbeb20eb58acdca44de71cea309c02f2d65953260358555",
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-isaaclab"
+        }
+      ]
+    },
+    {
       "name": "benchflow/robouse-noop-control",
       "org": "benchflow",
       "short_name": "robouse-noop-control",
@@ -7821,6 +8166,10 @@
     "behavior": {
       "simulators": "BEHAVIOR-1K (OmniGibson 3.9.3 on NVIDIA Isaac Sim 5.1), on a remote NVIDIA RTX GPU worker",
       "digest": "sha256:4053563589789973194b7863789677c6d1514503e1e7fd77e41b0edf1507abea"
+    },
+    "gpu": {
+      "simulators": "ManiSkill3 3.0.1, Genesis 1.4.2, MuJoCo Playground 0.2.0, Isaac Lab 2.3 on Isaac Sim 5.1, on a remote NVIDIA RTX GPU worker",
+      "digest": "sha256:30c9df3ddb58447dbd523d84ff39e47a03e23cb4be5876d60b5e062659ad436e"
     }
   }
 }

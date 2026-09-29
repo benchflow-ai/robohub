@@ -225,6 +225,111 @@
         }
       }
     },
+    "isaaclab-factory": {
+      "noop": false,
+      "robouse": {
+        "commit": "bd8ac560a5f4bf0256e56b6b903c27866d9a3dc0",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "tasks": {
+        "il-factory-gear-mesh": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-isaaclab"
+        },
+        "il-factory-nut-thread": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-isaaclab"
+        },
+        "il-factory-nut-thread-noisy": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-isaaclab"
+        },
+        "il-factory-peg-insert": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-isaaclab"
+        },
+        "il-factory-peg-insert-noisy": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-isaaclab"
+        }
+      }
+    },
+    "maniskill-gpu": {
+      "noop": false,
+      "robouse": {
+        "commit": "bd8ac560a5f4bf0256e56b6b903c27866d9a3dc0",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "tasks": {
+        "ms-lift-peg-upright": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        "ms-peg-insertion-moving-box": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        "ms-peg-insertion-side": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        "ms-peg-insertion-side-1mm": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        "ms-peg-insertion-side-vision": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        "ms-pick-moving-cube": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        "ms-pick-moving-cube-vision": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        "ms-plug-charger": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        "ms-plug-charger-vision": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        "ms-pull-cube-tool": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        "ms-stack-pyramid": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        },
+        "ms-stack-pyramid-vision": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-maniskill"
+        }
+      }
+    },
     "robouse-adroit": {
       "noop": false,
       "tasks": {
@@ -1167,6 +1272,31 @@
           "backend": "drone",
           "runtime": "menagerie",
           "suite": "drone"
+        }
+      }
+    },
+    "robouse-genesis": {
+      "noop": false,
+      "robouse": {
+        "commit": "bd8ac560a5f4bf0256e56b6b903c27866d9a3dc0",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "tasks": {
+        "gs-pour-water": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-genesis"
+        },
+        "gs-pour-water-narrow": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-genesis"
+        },
+        "gs-pour-water-vision": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-genesis"
         }
       }
     },
@@ -3290,6 +3420,41 @@
         }
       }
     },
+    "robouse-playground": {
+      "noop": false,
+      "robouse": {
+        "commit": "bd8ac560a5f4bf0256e56b6b903c27866d9a3dc0",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "tasks": {
+        "pg-go1-corridor-push": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-playground"
+        },
+        "pg-go1-find-ball": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-playground"
+        },
+        "pg-go1-moving-gates": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-playground"
+        },
+        "pg-go1-obstacle-field": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-playground"
+        },
+        "pg-go1-waypoint-tour": {
+          "backend": "gpu",
+          "runtime": "gpu",
+          "suite": "gpu-playground"
+        }
+      }
+    },
     "robouse-quadruped": {
       "noop": false,
       "tasks": {
@@ -4854,6 +5019,7 @@
     "dmcontrol": "sha256:cda13e1219e387191d2cd39cfa37c28a4c2ac0d251833abc3c022b46d39e8876",
     "driving": "sha256:828d135f5660360093b186c88ff6f0a828fb4fcf9a3f226103b884262c0bcb96",
     "embodied": "sha256:2d8aef2c2e504bf4df8dbfed2a6feb48dc499c404c038b19b4e633e76fc69b6a",
+    "gpu": "sha256:30c9df3ddb58447dbd523d84ff39e47a03e23cb4be5876d60b5e062659ad436e",
     "humanoidbench": "sha256:4e2c48833b9ca63c686671310754d2559c4d9d83ff42b3500ec218d66c6de1db",
     "libero": "sha256:f4f64ec5810becb755db7410586836e031cb254d66baa42fbe7f6d40ec3f327e",
     "light": "sha256:39fb599c691544e09e8b7a1af78debe4e6d878e9b696c7aff6a9ce9062ac1332",
