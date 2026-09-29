@@ -20,7 +20,7 @@ services:
     # cleanup (`compose down --rmi all`) never removes an image another trial is using. Repeat builds of
     # the same runtime are served from the Docker build cache.
     build:
-      context: "../../../runtime-1226e7b5b90ab436"
+      context: "../../../runtime-9b5493862f20134c"
       dockerfile: Dockerfile
     network_mode: none
     init: true
@@ -31,7 +31,7 @@ services:
       - ${HOST_ARTIFACTS_PATH}:/logs/artifacts
     environment:
       # Given only to the reference solution (oracle/solve.sh): unlocks privileged state in vision tasks.
-      ROBO_ORACLE_TOKEN: "242d776cb3ba34811aab72d152b7685d"
+      ROBO_ORACLE_TOKEN: "5b1821d462a6f44f41f927ad981cf1a9"
       ROBO_EPISODE_FACTORY: "robouse.embodied:episode_from_task"
       # The task definition (task.md frontmatter); the entry point writes it to a file for the episode server.
       ROBO_TASK_MD: |

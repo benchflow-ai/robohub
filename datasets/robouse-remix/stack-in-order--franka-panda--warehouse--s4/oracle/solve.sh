@@ -4,5 +4,5 @@
 # client (and, for Meta-World, the scripted expert policies). BenchFlow hides /oracle from agents.
 set -euo pipefail
 export PYTHONPATH="$(cd "$(dirname "$0")" && pwd)/vendor${PYTHONPATH:+:$PYTHONPATH}"
-export ROBO_ORACLE_TOKEN=ed845886c094dcf74e05ee8cf6c5ed9a
+export ROBO_ORACLE_TOKEN=ad2bcd4e30742993f6fef9a8c5941e77
 python3 -m robouse.oracle --backend remix --env stack-in-order--franka-panda--warehouse--s4
