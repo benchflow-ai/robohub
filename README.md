@@ -161,6 +161,6 @@ Released `bench` 0.7.4 with `--agent oracle` and `-d NAME@VERSION` on the 16-cor
 | `benchflow/robouse-nav@0.1` | all 40 | 40/40 |
 | `robocurve/cubepick-reach@0.1` | all 5 | 5/5 |
 
-No-op checks (0 on every task) ran with the local Robo Use runner (0/40, 0/5) and in the `light`-equivalent images from a local export (0/2 nav, 0/5 CubePick); see the suites' pages in Robo Use.
+No-op checks (0 on every task) ran with the local Robo Use runner (0/40, 0/5) and in hub images from an earlier local export of the same tasks (then on the `base` runtime: 0/2 nav, 0/5 CubePick); see the suites' pages in Robo Use.
 
 So the datasets, the registry, digest verification, the simulator images for all five runtimes and the verifier are checked end to end on released `bench`; a model-driven run on this hub is still to do.
