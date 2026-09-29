@@ -3177,6 +3177,316 @@
     ]
   },
   {
+    "name": "stanfordvl/behavior-1k",
+    "version": "0.1",
+    "description": "Robo Use BEHAVIOR-1K 0.1: 43 tasks from 30 household activities of the 2026 BEHAVIOR Challenge (5 extra instances, 8 vision-only) on a Galaxea R1Pro, driven through symbolic skills and judged by BEHAVIOR's BDDL goal check. Needs an NVIDIA RTX GPU for the simulator worker.",
+    "git_tag": "stanfordvl/behavior-1k-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "behavior-bringing-in-wood",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-bringing-in-wood",
+        "digest": "sha256:7d3d82eea2ff9187ddd28f19ec6cee8d6964cf9cbb504bbcbb92656a4c0ed474"
+      },
+      {
+        "name": "behavior-bringing-water",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-bringing-water",
+        "digest": "sha256:a0fbee3f556fdcbc60ea5bcc3869cac6c9effce41222be5baa09a605fca7832f"
+      },
+      {
+        "name": "behavior-bringing-water-instance-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-bringing-water-instance-1",
+        "digest": "sha256:dec6ffa8ee29ba53b2c27f129231c28065930226931e3f52f1b40d11c304b521"
+      },
+      {
+        "name": "behavior-bringing-water-instance-2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-bringing-water-instance-2",
+        "digest": "sha256:24cb84c7ee9c43bc20aae1ee3eddfd5c3899895f587479d79c2d7e09777a84fc"
+      },
+      {
+        "name": "behavior-bringing-water-vision",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-bringing-water-vision",
+        "digest": "sha256:d6ef89b811a1853bfb5ec0df17578aa65c91db5c00b975271ee5bfd29b4cedd3"
+      },
+      {
+        "name": "behavior-carrying-in-groceries",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-carrying-in-groceries",
+        "digest": "sha256:83433545b1caf864fa28f4815e6a9bf042b54e5c56940d9d6694d69a62292d60"
+      },
+      {
+        "name": "behavior-carrying-out-garden-furniture",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-carrying-out-garden-furniture",
+        "digest": "sha256:85a3ee4eadd151b941b87c9c50830ea7647ab6c31f58b35746d2347b0743964e"
+      },
+      {
+        "name": "behavior-clean-up-broken-glass",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-clean-up-broken-glass",
+        "digest": "sha256:1c173e4799901ff9e8a17dfcaab3f4bd44e4e0af031c7d4946bdb0c3411298cc"
+      },
+      {
+        "name": "behavior-cleaning-up-plates-and-food",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-cleaning-up-plates-and-food",
+        "digest": "sha256:13cfc7d14b0788d8298e65d0ae7c987f5de3c57ef001af117b465a495ac97261"
+      },
+      {
+        "name": "behavior-collecting-aluminum-cans",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-collecting-aluminum-cans",
+        "digest": "sha256:1662e34c4975b8cb651cf911c28d719919c7a63fecdae80ae5ba82eb3fddbb0d"
+      },
+      {
+        "name": "behavior-collecting-childrens-toys",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-collecting-childrens-toys",
+        "digest": "sha256:856f465ee6812c4183685f82e30b3cb02f4e9a783328f7ccaee591d224352ae6"
+      },
+      {
+        "name": "behavior-dispose-of-glass",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-dispose-of-glass",
+        "digest": "sha256:d7e7ae292bd61944511d5f43c57ce8e6cf6efa34602f271e1a7774ba412a04c9"
+      },
+      {
+        "name": "behavior-freeze-fruit",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-freeze-fruit",
+        "digest": "sha256:fbf03842d15278581af371dc951a5b13b0f7ba52518699aa1a0ccff4d51a8f77"
+      },
+      {
+        "name": "behavior-freeze-fruit-vision",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-freeze-fruit-vision",
+        "digest": "sha256:586cc47aee222139b6eb2c28c2930b25e77e25acee94443e2ffef677660217a5"
+      },
+      {
+        "name": "behavior-installing-a-fax-machine",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-installing-a-fax-machine",
+        "digest": "sha256:0b68693815535c3f95ce3116ad49a813acb16f6a3b55a7b6bf940294263cedd3"
+      },
+      {
+        "name": "behavior-loading-the-car",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-loading-the-car",
+        "digest": "sha256:b68566a505ae270e3374ac7c8ce1875e481a8bebf3e178b25eda489b93e87887"
+      },
+      {
+        "name": "behavior-moving-boxes-to-storage",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-moving-boxes-to-storage",
+        "digest": "sha256:6a31d802059779f240a166c10c89438ff2f7d147176c5cbcb9abd1d68913e7c1"
+      },
+      {
+        "name": "behavior-organizing-art-supplies",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-organizing-art-supplies",
+        "digest": "sha256:798366ab284b4f0cb9336735f0f4026ca1bbd0ff8b5dea1d346d91ac420fe0fd"
+      },
+      {
+        "name": "behavior-picking-up-toys",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-picking-up-toys",
+        "digest": "sha256:79731110b4c8312ece62b8d6b8b8e51f44f9c5e8697ec0bb2322ae2e16b0247c"
+      },
+      {
+        "name": "behavior-picking-up-trash",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-picking-up-trash",
+        "digest": "sha256:25055dee182fcd3b0fcc9f12194a4a0b065dcc12df3dff471949ebd39eeff877"
+      },
+      {
+        "name": "behavior-picking-up-trash-instance-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-picking-up-trash-instance-1",
+        "digest": "sha256:e024a7fd4e72228af1cf037408fc078fdf0cbb42b56836eba3e073cbf1dd8b2b"
+      },
+      {
+        "name": "behavior-picking-up-trash-vision",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-picking-up-trash-vision",
+        "digest": "sha256:d85100bceaaa13b18162885a61e9c833f50e0836701ab8116683fb42e2457707"
+      },
+      {
+        "name": "behavior-putting-away-toys",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-putting-away-toys",
+        "digest": "sha256:90dda9577da8bee31cc49079186fde8223a84c86c33de5e666fa2ca5ab76ceb3"
+      },
+      {
+        "name": "behavior-putting-dirty-dishes-in-sink",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-putting-dirty-dishes-in-sink",
+        "digest": "sha256:4e5c7aa7b150428e6726b5f2a21057ce897c337192979c7df9ac47814f883275"
+      },
+      {
+        "name": "behavior-putting-dishes-away-after-cleaning",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-putting-dishes-away-after-cleaning",
+        "digest": "sha256:f582a3a496ceeb6c8dea6afa7ae757545002c5d951893725bc956936ad2be5b5"
+      },
+      {
+        "name": "behavior-putting-dishes-away-after-cleaning-vision",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-putting-dishes-away-after-cleaning-vision",
+        "digest": "sha256:bef6b0bc9bf63f18bb83b183efdd2dcde95221b1c09505a5504dbb6056320a53"
+      },
+      {
+        "name": "behavior-re-shelving-library-books",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-re-shelving-library-books",
+        "digest": "sha256:5b58c54bf0859b2dde87cb6291e598b8f4d0e4e3c17fe2e419d8e4671098733f"
+      },
+      {
+        "name": "behavior-rearrange-your-room",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-rearrange-your-room",
+        "digest": "sha256:d924bd4e0bab93ea53a21cc221a885983d08e9d0fa5b87ebfaf850ea3c4f0482"
+      },
+      {
+        "name": "behavior-rearranging-kitchen-furniture",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-rearranging-kitchen-furniture",
+        "digest": "sha256:4047bfec8c3df7921384cfa10d2bbecbe3a1d6e07474db483ae08bb3f858df3c"
+      },
+      {
+        "name": "behavior-rearranging-kitchen-furniture-vision",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-rearranging-kitchen-furniture-vision",
+        "digest": "sha256:27aea41a5bc32d6967d3aad1e4734e1b67401b260cd6e1de25b08f353b4f0225"
+      },
+      {
+        "name": "behavior-sorting-books-on-shelf",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-sorting-books-on-shelf",
+        "digest": "sha256:2c8b3a6934bbc1a864ae6b284ccf29824735962bf7b7a296d594156c78e5c89e"
+      },
+      {
+        "name": "behavior-store-honey",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-store-honey",
+        "digest": "sha256:54b96178b1d11096bbb58012115d3c1c184bf01915d37e8f910c3f1f3891e54e"
+      },
+      {
+        "name": "behavior-store-produce",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-store-produce",
+        "digest": "sha256:1f8970ed113bd8bc477ca2ccc6baf33bd31d5d98c0c611164f764455960fe6a4"
+      },
+      {
+        "name": "behavior-store-produce-instance-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-store-produce-instance-1",
+        "digest": "sha256:96f579bacdf8952a48906eb32a8830f7197dc1c2b622c405f1cd43e47f2be77a"
+      },
+      {
+        "name": "behavior-store-produce-vision",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-store-produce-vision",
+        "digest": "sha256:5641a4a5cf8a4ceb4ed63964f6f29f82a5a27cbb98e3c69ef41bacbbaac3cb40"
+      },
+      {
+        "name": "behavior-storing-food",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-storing-food",
+        "digest": "sha256:2e8804dc01b79fdce03bc35e316df70aef6e9c4365d3de9723cc0f2ba34d2167"
+      },
+      {
+        "name": "behavior-tidying-bathroom",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-tidying-bathroom",
+        "digest": "sha256:f70c4522ed8321982f08a4d40c2a434f79d0412b2be637345b19152ef2ea8e7b"
+      },
+      {
+        "name": "behavior-tidying-bathroom-vision",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-tidying-bathroom-vision",
+        "digest": "sha256:4059adaa57f5169975c62cc39f9461828f19cdf4301865179e85e1f28be72099"
+      },
+      {
+        "name": "behavior-tidying-living-room",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-tidying-living-room",
+        "digest": "sha256:ac33994626843f178e424e395047c371620a44effd408fbb690243b4db211db9"
+      },
+      {
+        "name": "behavior-turning-on-radio",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-turning-on-radio",
+        "digest": "sha256:7a5d3f899524c2c05370fcf4dee18fa77f8ef65d5b32098b27cb1deba6cbe6cf"
+      },
+      {
+        "name": "behavior-turning-out-all-lights-before-sleep",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-turning-out-all-lights-before-sleep",
+        "digest": "sha256:cf0b78bccc6e370dcccdd44971f5aeff6aec7bcf48749a2d712b6df80f405a06"
+      },
+      {
+        "name": "behavior-turning-out-all-lights-before-sleep-instance-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-turning-out-all-lights-before-sleep-instance-1",
+        "digest": "sha256:3fd843787afc2144d6d9dcdaf02fafe38c455e178f75529807c7d2c79b39c007"
+      },
+      {
+        "name": "behavior-turning-out-all-lights-before-sleep-vision",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+        "path": "datasets/behavior-1k/behavior-turning-out-all-lights-before-sleep-vision",
+        "digest": "sha256:7a2edde5042b0f30d8b42f42974adda7e3878dbba60c0beddf9d36ee91b076ce"
+      }
+    ]
+  },
+  {
     "name": "benchflow/robouse-noop-control",
     "version": "0.1",
     "description": "Negative control for robouse-core 0.1: the same 100 tasks, but each reference solution only looks (robo info, robo observe) and exits without moving the robot. Run it with the oracle agent; every task must score 0.",
