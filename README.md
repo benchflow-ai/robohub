@@ -152,4 +152,15 @@ Released `bench` 0.7.4 with `--agent oracle` and `-d NAME@VERSION`, digests veri
 
 The per-suite no-op checks (0 on every task) were run with the local Robo Use runner and in the hub images from a local export; see each suite's page in Robo Use. Reduced results: [`dogfood.json`](dogfood.json).
 
+### 2026-09-29: navigation and CubePick (Robo Use `parity`)
+
+Released `bench` 0.7.4 with `--agent oracle` and `-d NAME@VERSION` on the 16-core linux/arm64 cloud VM, through the local mirror; digests verified at `8e77759`. Both datasets run on the new numpy-only `light` runtime, so no existing runtime or dataset changed.
+
+| Dataset | Tasks run | Result |
+|---|---|---|
+| `benchflow/robouse-nav@0.1` | all 40 | 40/40 |
+| `robocurve/cubepick-reach@0.1` | all 5 | 5/5 |
+
+No-op checks (0 on every task) ran with the local Robo Use runner (0/40, 0/5) and in the `light`-equivalent images from a local export (0/2 nav, 0/5 CubePick); see the suites' pages in Robo Use.
+
 So the datasets, the registry, digest verification, the simulator images for all five runtimes and the verifier are checked end to end on released `bench`; a model-driven run on this hub is still to do.

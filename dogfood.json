@@ -2108,6 +2108,306 @@
           "steps": 162
         }
       }
+    },
+    {
+      "label": "nav-oracle",
+      "dataset": "benchflow/robouse-nav@0.1",
+      "agent": "oracle",
+      "model": null,
+      "bench": "0.7.4",
+      "date": "2026-09-29",
+      "note": "robouse-builder (linux/arm64 cloud VM), local mirror of this repository",
+      "n": 40,
+      "scored": 40,
+      "passed": 40,
+      "errors": 0,
+      "tasks": {
+        "nav-h00-armchair": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 206
+        },
+        "nav-h00-fridge": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 80
+        },
+        "nav-h00-wardrobe": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 189
+        },
+        "nav-h00-washing-machine": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 265
+        },
+        "nav-h01-fridge": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 112
+        },
+        "nav-h01-kitchen-counter": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 160
+        },
+        "nav-h01-oven": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 80
+        },
+        "nav-h01-trash-can": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 106
+        },
+        "nav-h02-bookshelf": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 344
+        },
+        "nav-h02-coffee-table": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 154
+        },
+        "nav-h02-dining-table": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 114
+        },
+        "nav-h02-tv-stand": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 114
+        },
+        "nav-h03-dining-table": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 347
+        },
+        "nav-h03-filing-cabinet": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 296
+        },
+        "nav-h03-fridge": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 91
+        },
+        "nav-h03-nightstand": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 118
+        },
+        "nav-h04-fridge": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 189
+        },
+        "nav-h04-oven": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 166
+        },
+        "nav-h04-sink": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 150
+        },
+        "nav-h04-wardrobe": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 130
+        },
+        "nav-h05-bookshelf": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 106
+        },
+        "nav-h05-kitchen-counter": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 156
+        },
+        "nav-h05-office-chair": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 192
+        },
+        "nav-h05-wardrobe": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 108
+        },
+        "nav-h06-bed": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 119
+        },
+        "nav-h06-filing-cabinet": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 114
+        },
+        "nav-h06-office-chair": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 101
+        },
+        "nav-h06-wardrobe": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 125
+        },
+        "nav-h07-armchair": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 202
+        },
+        "nav-h07-bathtub": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 146
+        },
+        "nav-h07-desk": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 131
+        },
+        "nav-h07-plant": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 135
+        },
+        "nav-h08-bathtub": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 244
+        },
+        "nav-h08-bookshelf": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 197
+        },
+        "nav-h08-dining-table": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 81
+        },
+        "nav-h08-office-chair": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 152
+        },
+        "nav-h09-bathtub": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 276
+        },
+        "nav-h09-oven": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 167
+        },
+        "nav-h09-sofa": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 197
+        },
+        "nav-h09-wardrobe": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "done",
+          "steps": 225
+        }
+      }
+    },
+    {
+      "label": "cubepick-oracle",
+      "dataset": "robocurve/cubepick-reach@0.1",
+      "agent": "oracle",
+      "model": null,
+      "bench": "0.7.4",
+      "date": "2026-09-29",
+      "note": "robouse-builder (linux/arm64 cloud VM), local mirror of this repository",
+      "n": 5,
+      "scored": 5,
+      "passed": 5,
+      "errors": 0,
+      "tasks": {
+        "cubepick-reach-layout-0": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "success_reached",
+          "steps": 7
+        },
+        "cubepick-reach-layout-1": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "success_reached",
+          "steps": 7
+        },
+        "cubepick-reach-layout-2": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "success_reached",
+          "steps": 6
+        },
+        "cubepick-reach-layout-3": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "success_reached",
+          "steps": 7
+        },
+        "cubepick-reach-layout-4": {
+          "reward": 1.0,
+          "error": null,
+          "outcome": "success_reached",
+          "steps": 8
+        }
+      }
     }
   ]
 }
