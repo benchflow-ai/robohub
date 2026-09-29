@@ -122,6 +122,8 @@ def main(argv=None) -> int:
     for e in registry:
         if e["name"] in alias_names:  # aliases are not listed on the hub page
             continue
+        if e["name"] in by_name and str(by_name[e["name"]]["version"]) != e["version"]:
+            continue  # an older version: still in registry.json (and the page's version list), not a hub entry of its own
         ds = by_name.get(e["name"], {})
         folder = ds.get("dir", e["name"])
         exp = export["datasets"].get(folder, {"tasks": {}})
