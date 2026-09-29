@@ -1,0 +1,6 @@
+# Pinned dependencies of the Robo Use `robodojo` runtime (thin HTTP client; no simulator in the image).
+numpy==2.5.3
+imageio==2.37.4
+imageio-ffmpeg==0.6.0
+pillow==12.3.0
+pyyaml==6.0.3

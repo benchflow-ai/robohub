@@ -330,6 +330,61 @@
         }
       }
     },
+    "robodojo": {
+      "noop": false,
+      "robouse": {
+        "commit": "b573f9292803bc2707bbaca6d8f61b95615dffbd",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "tasks": {
+        "robodojo-cover-blocks": {
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        "robodojo-general-pickup": {
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        "robodojo-press-by-number": {
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        "robodojo-put-bottles-into-dustbin": {
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        "robodojo-stack-blocks": {
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        "robodojo-stack-blocks-by-language": {
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        "robodojo-stack-blocks-random": {
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        "robodojo-stack-bowls": {
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        },
+        "robodojo-stack-bowls-random": {
+          "backend": "robodojo",
+          "runtime": "robodojo",
+          "suite": "robodojo"
+        }
+      }
+    },
     "robouse-adroit": {
       "noop": false,
       "tasks": {
@@ -5028,6 +5083,7 @@
     "myosuite": "sha256:124ef7a1988b88d0918ced05416de0dc6e84b1cf490e97eac01b9d4e050323e7",
     "remix": "runtime-9b5493862f20134c",
     "robocasa": "sha256:0e7762e64c24849f320fa346ace73b18c6c7493ec14fedc79883eaa3eef49582",
+    "robodojo": "sha256:cbddb5b2d8b4cccf3291330183e707e02f020bff0d64793d84bb9c351ceacdfa",
     "robosuite": "sha256:ae1976e503f43f82f6296e325adedcdb36932b9686a913df76d3b2ca2d138012"
   }
 }

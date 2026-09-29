@@ -82,6 +82,12 @@ runtimes:
     gpu: required
     # remote GPU workers (backends/gpu_worker/server.py, one per simulator); the endpoints file is named by $ROBOUSE_GPU_REMOTE
     remote_worker: ROBOUSE_GPU_REMOTE
+  robodojo:
+    backends: [robodojo]
+    simulators: RoboDojo (NVIDIA Isaac Sim 5.1, Isaac Lab 2.3), on a remote NVIDIA RTX GPU worker
+    gpu: required
+    # remote GPU workers (robodojo_worker.py); the endpoints file is named by $ROBOUSE_ROBODOJO_REMOTE on the host
+    remote_worker: ROBOUSE_ROBODOJO_REMOTE
 
 # Per-suite facts for the hub page (all simulators run on MuJoCo; "; " separates several values).
 suites:
@@ -121,6 +127,7 @@ suites:
   gpu-genesis: {embodiment: "Franka Panda", simulator: "Genesis 1.4.2 (SPH liquid)", image: gpu-genesis}
   gpu-playground: {embodiment: "Unitree Go1 with a learned gait", simulator: "MuJoCo Playground 0.2.0 (MuJoCo Warp)", image: gpu-playground}
   gpu-isaaclab: {embodiment: "Franka Panda", simulator: "Isaac Lab 2.3 Factory (Isaac Sim 5.1)", image: gpu-isaaclab}
+  robodojo: {embodiment: "ARX X5 bimanual", simulator: "RoboDojo (Isaac Sim 5.1)", image: robodojo}
 
 # Datasets are named <org>/<name>. The org is whoever designed the benchmark's tasks: a dataset adapted from someone
 # else's benchmark goes under that benchmark's GitHub org (lowercased) and records it under `upstream`; tasks BenchFlow
@@ -346,6 +353,19 @@ datasets:
       note: "GPU required. The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in a Robo Use checkout (branch <code>gpu-track</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/gpu-track/docs/suites/gpu-track.md\">docs/suites/gpu-track.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
       bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
     description: "Robo Use Isaac Lab Factory 0.1: 5 contact-rich assembly tasks from Isaac Lab's Factory environments on a Franka Panda: 8 mm peg insertion, gear meshing and M16 nut threading, two with a noisy fixed-part estimate. GPU required."
+  - name: robodojo-benchmark/robodojo
+    dir: robodojo
+    upstream: {benchmark: "RoboDojo", org_name: "RoboDojo Benchmark (MMLab@HKU and partners)", repo: "https://github.com/RoboDojo-Benchmark/RoboDojo", licence: "MIT (LICENSE file); README states a non-commercial research licence"}
+    version: "0.1"
+    suites: [robodojo]
+    # bench cannot give a sandbox a GPU, so this dataset runs from a Robo Use checkout against RoboDojo simulator
+    # workers on an NVIDIA RTX GPU machine (driver 580)
+    run:
+      label: "Robo Use checkout + GPU worker"
+      command: "robouse run-many --tasks tasks/robodojo --harness oracle --out runs/robodojo-oracle"
+      note: "GPU required. RoboDojo runs on NVIDIA Isaac Sim 5.1, which needs an RTX GPU with RT cores and a driver from the 580 branch (it crashed at start-up on driver 595). Start one worker per task on the GPU machine (<code>robodojo_worker.py</code> in a RoboDojo checkout with its Hugging Face assets), write their endpoints to <code>runs/_robodojo/remote.json</code> in a Robo Use checkout (branch <code>robodojo</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/robodojo/docs/suites/robodojo.md\">docs/suites/robodojo.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
+      bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_ROBODOJO_REMOTE</code> on the host."
+    description: "Robo Use RoboDojo 0.1: 9 RoboDojo simulation tasks (7 of the 42 base tasks and 2 random-layout variants) on RoboDojo's ARX X5 bimanual platform in Isaac Sim 5.1, with RoboDojo's own layouts, step limits and success checks. Needs an NVIDIA RTX GPU for the simulator worker."
   - name: benchflow/robouse-noop-control
     dir: robouse-noop-control
     aliases: [robouse-noop-control]

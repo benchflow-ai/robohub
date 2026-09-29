@@ -1,0 +1,8 @@
+{
+  "robouse": {
+    "repo": "https://github.com/benchflow-ai/robouse",
+    "commit": "b573f9292803bc2707bbaca6d8f61b95615dffbd",
+    "package_version": "0.1.1"
+  },
+  "runtime": "robodojo"
+}
