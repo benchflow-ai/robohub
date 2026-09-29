@@ -1,0 +1,22 @@
+[
+ [
+  "navigate_to",
+  "facsimile.n.02_1"
+ ],
+ [
+  "grasp",
+  "facsimile.n.02_1"
+ ],
+ [
+  "navigate_to",
+  "carrel.n.02_1"
+ ],
+ [
+  "place_on_top",
+  "carrel.n.02_1"
+ ],
+ [
+  "toggle_on",
+  "facsimile.n.02_1"
+ ]
+]

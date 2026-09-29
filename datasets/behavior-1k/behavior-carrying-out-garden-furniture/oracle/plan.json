@@ -1,0 +1,34 @@
+[
+ [
+  "navigate_to",
+  "lawn_chair.n.01_1"
+ ],
+ [
+  "grasp",
+  "lawn_chair.n.01_1"
+ ],
+ [
+  "navigate_to",
+  "floor.n.01_2"
+ ],
+ [
+  "place_on_top",
+  "floor.n.01_2"
+ ],
+ [
+  "navigate_to",
+  "barrow.n.03_1"
+ ],
+ [
+  "grasp",
+  "barrow.n.03_1"
+ ],
+ [
+  "navigate_to",
+  "lawn.n.01_1"
+ ],
+ [
+  "place_on_top",
+  "lawn.n.01_1"
+ ]
+]

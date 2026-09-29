@@ -1,5 +1,230 @@
 {
   "datasets": {
+    "behavior-1k": {
+      "noop": false,
+      "robouse": {
+        "commit": "27d8ed8c2de2a3b92b19f0cd1532bfa83342f60f",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "tasks": {
+        "behavior-bringing-in-wood": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-bringing-water": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-bringing-water-instance-1": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-bringing-water-instance-2": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-bringing-water-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-carrying-in-groceries": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-carrying-out-garden-furniture": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-clean-up-broken-glass": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-cleaning-up-plates-and-food": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-collecting-aluminum-cans": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-collecting-childrens-toys": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-dispose-of-glass": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-freeze-fruit": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-freeze-fruit-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-installing-a-fax-machine": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-loading-the-car": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-moving-boxes-to-storage": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-organizing-art-supplies": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-picking-up-toys": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-picking-up-trash": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-picking-up-trash-instance-1": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-picking-up-trash-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-putting-away-toys": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-putting-dirty-dishes-in-sink": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-putting-dishes-away-after-cleaning": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-putting-dishes-away-after-cleaning-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-re-shelving-library-books": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-rearrange-your-room": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-rearranging-kitchen-furniture": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-rearranging-kitchen-furniture-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-sorting-books-on-shelf": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-store-honey": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-store-produce": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-store-produce-instance-1": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-store-produce-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-storing-food": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-tidying-bathroom": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-tidying-bathroom-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-tidying-living-room": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-turning-on-radio": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-turning-out-all-lights-before-sleep": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-turning-out-all-lights-before-sleep-instance-1": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-turning-out-all-lights-before-sleep-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        }
+      }
+    },
     "robouse-core": {
       "noop": false,
       "tasks": {
@@ -2768,6 +2993,7 @@
   },
   "runtimes": {
     "base": "sha256:87e23e31c6fe17e7471455c898823b931712dd1c4c4fd10395e8efa27a437014",
+    "behavior": "sha256:4053563589789973194b7863789677c6d1514503e1e7fd77e41b0edf1507abea",
     "dexjoco": "sha256:ab43542b6c41695c2ad8e2a62b2161c71a5cec06b2fd4b1c45d2099190c2199e",
     "libero": "sha256:9e145237c9ee779fa68b4a2828eb9a776a418d9a62afc73a4aeeacc82abad24e",
     "menagerie": "sha256:a607b32470fcdab76dabbfa14a4fccb5fba9b445a5cd088fffac9ec1bb3aa78d",

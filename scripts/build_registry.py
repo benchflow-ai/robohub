@@ -143,7 +143,7 @@ def main(argv=None) -> int:
         org, _, short = e["name"].rpartition("/")
         out["datasets"].append({
             "name": e["name"], "org": org, "short_name": short, "dir": folder, "aliases": ds.get("aliases", []),
-            "upstream": ds.get("upstream"),
+            "upstream": ds.get("upstream"), "run": ds.get("run"), "robouse": exp.get("robouse", export["robouse"]),
             "version": e["version"], "description": e["description"], "git_tag": e["git_tag"],
             "commit": e["tasks"][0]["git_commit_id"], "n_tasks": len(e["tasks"]), "suites": used_suites,
             "embodiments": emb, "simulators": sims, "image": image, "noop": bool(ds.get("noop_of")),

@@ -43,7 +43,7 @@ import yaml
 HUB = Path(__file__).resolve().parents[1]
 TEMPLATES = HUB / "templates"
 WALL_MARGIN_S = 900  # the episode clock starts when the simulator is up, before BenchFlow installs the harness
-PKG_IGNORE = shutil.ignore_patterns("__pycache__", "*.pyc", ".DS_Store", "bundled_tasks", "robocasa_episodes",
+PKG_IGNORE = shutil.ignore_patterns("__pycache__", "*.pyc", ".DS_Store", "bundled_tasks",
                                     "engine", "assets_provenance")
 
 
@@ -270,18 +270,39 @@ def native_task_md(meta: dict, instruction: str, prompt_prefix: str) -> str:
     return "---\n" + _dump(fm) + "---\n\n" + prompt_prefix + instruction.strip() + "\n"
 
 
-def compose(meta: dict, context: str, runtime_digest: str, token: str, sim_memory: str) -> str:
+REMOTE_WORKER = """\
+    # This runtime's simulator runs on a remote GPU worker (remote_worker in hub.yaml): the episode server reaches it
+    # over HTTPS, so this service keeps network access, and it reads the worker endpoints (URL, shared secret) from
+    # the host file named by $__REMOTE_ENV__, mounted read-only here only; the agent container never sees it.
+"""
+
+
+def compose(meta: dict, context: str, runtime_digest: str, token: str, sim_memory: str,
+            remote_worker: bool | str = False) -> str:
+    """`remote_worker`: False, or the name of the environment variable holding the worker endpoints file
+    (hub.yaml `remote_worker: true` means ROBOUSE_BEHAVIOR_REMOTE; a string names another one)."""
     sim_fm = {k: meta[k] for k in ("schema_version", "task", "metadata", "agent", "verifier", "robouse") if k in meta}
     sim_md = "---\n" + _dump(sim_fm) + "---\n"
     block = "\n".join("        " + ln.replace("$", "$$") for ln in sim_md.rstrip().splitlines())
     agent_timeout = float((meta.get("agent") or {}).get("timeout_sec", 900))
     text = (TEMPLATES / "docker-compose.yaml").read_text()
-    return (text.replace("__SIM_CONTEXT__", json.dumps(context))
+    text = (text.replace("__SIM_CONTEXT__", json.dumps(context))
                 .replace("__RUNTIME_DIGEST__", runtime_digest)
                 .replace("__MAX_WALL_S__", str(int(agent_timeout + WALL_MARGIN_S)))
                 .replace("__ORACLE_TOKEN__", token)
                 .replace("__SIM_MEMORY__", sim_memory)
                 .replace("__TASK_MD__", block))
+    if remote_worker:
+        var = remote_worker if isinstance(remote_worker, str) else "ROBOUSE_BEHAVIOR_REMOTE"
+        what = var.removeprefix("ROBOUSE_").removesuffix("_REMOTE")
+        text = text.replace("    network_mode: none\n", REMOTE_WORKER.replace("__REMOTE_ENV__", var))
+        text = text.replace("      - ${HOST_ARTIFACTS_PATH}:/logs/artifacts\n",
+                            "      - ${HOST_ARTIFACTS_PATH}:/logs/artifacts\n"
+                            f"      - ${{{var}:?set {var} to the {what} worker "
+                            "endpoints file}:/run/robouse/remote.json:ro\n")
+        text = text.replace("    environment:\n      # Given only", "    environment:\n"
+                            f"      {var}: /run/robouse/remote.json\n      # Given only")
+    return text
 
 
 _TOKEN_RE = re.compile(r'ROBOUSE_ORACLE_TOKEN: "([0-9a-f]{32})"')
@@ -299,7 +320,7 @@ def load_existing_tokens() -> None:
 
 
 def export_task(task, robouse: Path, out_parent: Path, runtime: str, runtime_digest: str, sim_memory: str,
-                prompt_prefix: str, noop: bool = False) -> Path:
+                prompt_prefix: str, noop: bool = False, remote_worker: bool | str = False) -> Path:
     meta = json.loads(json.dumps(task.meta))
     dst = out_parent / task.id
     token = _TOKENS.setdefault(task.id, secrets.token_hex(16))
@@ -312,7 +333,7 @@ def export_task(task, robouse: Path, out_parent: Path, runtime: str, runtime_dig
     (env / "robo").write_text("#!/usr/bin/env python3\n" + (robouse / "src" / "robouse" / "agent_cli.py").read_text())
     (env / "robo").chmod(0o755)
     context = os.path.relpath(HUB / "runtimes" / runtime, env)
-    (env / "docker-compose.yaml").write_text(compose(meta, context, runtime_digest, token, sim_memory))
+    (env / "docker-compose.yaml").write_text(compose(meta, context, runtime_digest, token, sim_memory, remote_worker))
     shutil.copytree(TEMPLATES / "verifier", dst / "verifier", ignore=shutil.ignore_patterns("__pycache__"))
     (dst / "verifier" / "test.sh").chmod(0o755)
     write_oracle(task, robouse, dst / "oracle", token, noop)
@@ -349,9 +370,26 @@ def main(argv=None) -> int:
 
     configure_oracles(hub)
     load_existing_tokens()
-    runtime_digests = {rt: write_runtime(rt, cfg, robouse, prov) for rt, cfg in hub["runtimes"].items()}
+    wanted = set(filter(None, a.datasets.split(",")))
+    manifest_path = HUB / "export.json"
+    manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {"datasets": {}}
+    # with --datasets, only the runtimes those datasets use are rewritten; the others keep their exported content
+    used = None
+    if wanted:
+        used = set()
+        for ds in hub["datasets"]:
+            if wanted & {ds["name"], ds.get("dir", ds["name"])}:
+                src = next((d for d in hub["datasets"] if d["name"] == ds.get("noop_of")), ds)
+                suites = set(src.get("suites", []))
+                used |= {backend_runtime[by_id[i].spec["backend"]] for i, s in suite_of.items() if s in suites}
+                if "tasks_file" in src:
+                    used |= {backend_runtime[by_id[ln.strip()].spec["backend"]] for ln in (HUB / src["tasks_file"]).read_text().splitlines()
+                             if ln.strip() and not ln.startswith("#") and ln.strip() in by_id}
+    runtime_digests = {rt: write_runtime(rt, cfg, robouse, prov) for rt, cfg in hub["runtimes"].items()
+                       if used is None or rt in used}
     for rt, d in runtime_digests.items():
         print(f"runtime {rt}: {d}")
+    runtime_digests = {**manifest.get("runtimes", {}), **runtime_digests}
 
     def dataset_ids(ds: dict) -> list[str]:
         if "tasks_file" in ds:
@@ -364,9 +402,6 @@ def main(argv=None) -> int:
             raise SystemExit(f"{ds['name']}: unknown task ids {missing}")
         return ids
 
-    wanted = set(filter(None, a.datasets.split(",")))
-    manifest_path = HUB / "export.json"
-    manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {"datasets": {}}
     by_name = {d["name"]: d for d in hub["datasets"]}
     jobs = []
     for ds in hub["datasets"]:
@@ -389,11 +424,14 @@ def main(argv=None) -> int:
             task = by_id[tid]
             rt = backend_runtime[task.spec["backend"]]
             sim_memory = hub["runtimes"][rt].get("sim_memory", "3G")
-            export_task(task, robouse, out_parent, rt, runtime_digests[rt], sim_memory, PROMPT_PREFIX, noop)
+            export_task(task, robouse, out_parent, rt, runtime_digests[rt], sim_memory, PROMPT_PREFIX, noop,
+                        hub["runtimes"][rt].get("remote_worker") or False)
             tasks[tid] = {"suite": suite_of[tid], "backend": task.spec["backend"], "runtime": rt}
-        manifest["datasets"][folder] = {"noop": noop, "tasks": tasks}
+        manifest["datasets"][folder] = {"noop": noop, "tasks": tasks, "robouse": prov}
         print(f"{ds['name']}: {len(tasks)} task(s){' (no-op oracles)' if noop else ''}")
-    manifest.update({"robouse": prov, "runtimes": runtime_digests})
+    manifest["runtimes"] = runtime_digests
+    if not wanted:
+        manifest["robouse"] = prov
     manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
     return 0
 
