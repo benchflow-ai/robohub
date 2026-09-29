@@ -1,0 +1,43 @@
+{
+  "repository": "https://github.com/google-deepmind/mujoco_menagerie",
+  "commit": "8161bba264d7fa7c99ca301e91e7fb44737676ad",
+  "license": "Apache-2.0 (skydio_x2/LICENSE)",
+  "files": [
+    {
+      "path": "skydio_x2/LICENSE",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/skydio_x2/LICENSE",
+      "bytes": 11355,
+      "sha256": "d42cae9a0f292b7a713597ba26e1e1e23d50df906c488f0d36fd3538af200bc1"
+    },
+    {
+      "path": "skydio_x2/README.md",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/skydio_x2/README.md",
+      "bytes": 560,
+      "sha256": "7b1b354ffdd2e9f243b211cc6ea9b5dab17614a13fc567378ded2b7676c13394"
+    },
+    {
+      "path": "skydio_x2/scene.xml",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/skydio_x2/scene.xml",
+      "bytes": 875,
+      "sha256": "fc7fb8bf774e9fed9621593f36b239ed66a06ed6e8811132c08344d95df2563e"
+    },
+    {
+      "path": "skydio_x2/x2.xml",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/skydio_x2/x2.xml",
+      "bytes": 2826,
+      "sha256": "5e8f14afe735d07e0b299444d68927058a757149761313c2f0d2f88264c2ae7b"
+    },
+    {
+      "path": "skydio_x2/assets/X2_lowpoly.obj",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/skydio_x2/assets/X2_lowpoly.obj",
+      "bytes": 540699,
+      "sha256": "4d6df3d7b26676a6ade8cbc320599961321ac3e3c52474d7c98dd7adc8152411"
+    },
+    {
+      "path": "skydio_x2/assets/X2_lowpoly_texture_SpinningProps_1024.png",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/skydio_x2/assets/X2_lowpoly_texture_SpinningProps_1024.png",
+      "bytes": 298668,
+      "sha256": "24153733dd01f9ddd37a3c79fad5e24ac876228812e3a8e95f60ccd8cedb66e1"
+    }
+  ]
+}

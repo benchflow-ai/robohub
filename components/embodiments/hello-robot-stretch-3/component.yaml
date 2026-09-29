@@ -1,0 +1,14 @@
+id: hello-robot-stretch-3
+type: embodiment
+version: 0.1.0
+title: Hello Robot Stretch 3
+summary: 'Mobile-manip suite: a lift and telescoping arm on a differential drive.'
+track: mobile-manipulation
+kind: mobile_manipulator
+capabilities:
+- locomote
+- reach
+- grasp
+remixable: false
+suites:
+- mobile-manip

@@ -1,0 +1,13 @@
+id: rethink-sawyer
+type: embodiment
+version: 0.1.0
+title: Rethink Sawyer
+summary: Meta-World's Sawyer arm.
+track: arm
+kind: arm
+capabilities:
+- reach
+- grasp
+remixable: false
+suites:
+- metaworld

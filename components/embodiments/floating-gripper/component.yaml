@@ -1,0 +1,19 @@
+id: floating-gripper
+type: embodiment
+version: 0.1.0
+title: Floating two-finger gripper
+summary: 'The tabletop suites'' gripper: a free two-finger gripper on a mocap target (no arm kinematics).'
+track: arm
+kind: arm
+capabilities:
+- reach
+- grasp
+- top-grasp
+remixable: false
+suites:
+- arc-style
+- hard
+- libero-style
+- robo-use-families
+- safety
+- vision

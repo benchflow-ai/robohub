@@ -1,0 +1,12 @@
+id: dexjoco-hand
+type: embodiment
+version: 0.1.0
+title: DexJoCo hands
+summary: DexJoCo's dexterous tool-use hands.
+track: dexterity
+kind: hand
+capabilities:
+- dexterous
+remixable: false
+suites:
+- dexjoco

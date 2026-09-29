@@ -1,0 +1,9 @@
+id: rear-edge-desk
+type: scene
+version: 0.1.0
+title: Rear-edge desk
+scenario: tabletop
+summary: The menagerie suite's desk with two arm mounts.
+remixable: false
+suites:
+- menagerie

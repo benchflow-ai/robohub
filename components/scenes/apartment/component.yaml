@@ -1,0 +1,9 @@
+id: apartment
+type: scene
+version: 0.1.0
+title: Apartment
+scenario: household
+summary: Three rooms, doorways, a kitchen drawer (mobile-manip suite).
+remixable: false
+suites:
+- mobile-manip

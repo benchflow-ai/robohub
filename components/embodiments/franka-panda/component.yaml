@@ -1,0 +1,60 @@
+id: franka-panda
+type: embodiment
+version: 0.1.0
+title: Franka Emika Panda
+summary: A 7-DoF arm with a parallel gripper, mounted on a work surface; Cartesian gripper-target control through IK, top-down grasps, a wrist camera.
+track: arm
+kind: arm
+placement: arm
+capabilities:
+- reach
+- grasp
+- top-grasp
+- precise
+- wrist-camera
+grasp: top
+max_grip_m: 0.07
+payload_kg: 3.0
+assets:
+- franka_emika_panda
+licence: Apache-2.0 (MuJoCo Menagerie)
+remixable: true
+runtime: robouse.backends.remix_sim.robots:Panda
+arms:
+- arm
+action_groups:
+- name: arm.ee_delta
+  mode: ee_delta_pos
+  components:
+  - DX
+  - DY
+  - DZ
+  units: x 2 cm per step
+  doc: moves the gripper target (world axes); IK follows it with the gripper pointing down
+- name: gripper
+  mode: gripper
+  components:
+  - G
+  units: command
+  doc: 0 keeps the fingers, > 0 closes, -f opens to fraction f (-1 fully open)
+skills:
+- name: move_to
+  signature: 'move_to X Y Z: move the grasp point (between the fingertips) to (X, Y, Z) along a straight line, gripper pointing down; reports whether it got there (it stops if blocked or out of reach) (at most 150 steps per call)'
+  args:
+  - x
+  - y
+  - z
+- name: grasp
+  signature: 'grasp: close the fingers until they stop; reports what is held (at most 30 steps per call)'
+  args: []
+- name: release
+  signature: 'release: open the fingers fully (at most 15 steps per call)'
+  args: []
+- name: home
+  signature: 'home: move the gripper back to its start point above the work area (at most 150 steps per call)'
+  args: []
+cameras:
+- robot/arm_wrist
+suites:
+- menagerie
+- roboharm

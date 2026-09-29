@@ -1,0 +1,80 @@
+id: aloha-2
+type: embodiment
+version: 0.1.0
+title: ALOHA 2
+summary: Two ViperX 300 s arms side by side on a work surface; each has its own gripper target and gripper. Together they span more than either arm reaches alone.
+track: arm
+kind: bimanual
+placement: bimanual
+capabilities:
+- reach
+- grasp
+- top-grasp
+- bimanual
+- precise
+- wrist-camera
+grasp: top
+max_grip_m: 0.05
+payload_kg: 0.75
+assets:
+- aloha
+licence: BSD-3-Clause (MuJoCo Menagerie)
+remixable: true
+runtime: robouse.backends.remix_sim.robots:Aloha
+arms:
+- left
+- right
+action_groups:
+- name: left.ee_delta
+  mode: ee_delta_pos
+  components:
+  - L_DX
+  - L_DY
+  - L_DZ
+  units: x 2 cm per step
+  doc: moves the gripper target (world axes); IK follows it with the gripper pointing down
+- name: left.gripper
+  mode: gripper
+  components:
+  - L_G
+  units: command
+  doc: 0 keeps the fingers, > 0 closes, -f opens to fraction f (-1 fully open)
+- name: right.ee_delta
+  mode: ee_delta_pos
+  components:
+  - R_DX
+  - R_DY
+  - R_DZ
+  units: x 2 cm per step
+  doc: moves the gripper target (world axes); IK follows it with the gripper pointing down
+- name: right.gripper
+  mode: gripper
+  components:
+  - R_G
+  units: command
+  doc: 0 keeps the fingers, > 0 closes, -f opens to fraction f (-1 fully open)
+skills:
+- name: move_to
+  signature: 'move_to X Y Z [ARM=auto]: move the grasp point (between the fingertips) to (X, Y, Z) along a straight line, gripper pointing down; reports whether it got there (it stops if blocked or out of reach) (at most 150 steps per call)'
+  args:
+  - x
+  - y
+  - z
+  - arm
+- name: grasp
+  signature: 'grasp [ARM=auto]: close the fingers until they stop; reports what is held (at most 30 steps per call)'
+  args:
+  - arm
+- name: release
+  signature: 'release [ARM=auto]: open the fingers fully (at most 15 steps per call)'
+  args:
+  - arm
+- name: home
+  signature: 'home [ARM=auto]: move the gripper back to its start point above the work area (at most 150 steps per call)'
+  args:
+  - arm
+cameras:
+- robot/left_wrist
+- robot/right_wrist
+suites:
+- menagerie

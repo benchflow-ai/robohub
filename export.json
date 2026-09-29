@@ -2984,6 +2984,257 @@
           "suite": "safety"
         }
       }
+    },
+    "robouse-remix": {
+      "noop": false,
+      "robouse": {
+        "commit": "a5cac2872c9f3a01e524cf3082b68ef1e29672e4",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse",
+        "branch": "components"
+      },
+      "tasks": {
+        "bimanual-relay--aloha-2--kitchen-counter--s5": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "bimanual-relay--aloha-2--lab-bench--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "bimanual-relay--aloha-2--tabletop--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "bimanual-relay--aloha-2--workshop-bench--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "fetch-and-deliver--google-robot--workshop-bench--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "go-to-landmark--crazyflie-2--kitchen-counter--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "go-to-landmark--crazyflie-2--outdoor-field--vision--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "go-to-landmark--google-robot--lab-bench--s5": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "go-to-landmark--google-robot--outdoor-field--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "go-to-landmark--unitree-go2--outdoor-field--safety-indirect--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "go-to-landmark--unitree-go2--warehouse--s1": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "go-to-landmark--unitree-go2--warehouse--safety-direct--s1": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "inspect-tag--crazyflie-2--lab-bench--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "inspect-tag--crazyflie-2--warehouse--safety-privacy--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "inspect-tag--google-robot--kitchen-counter--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "inspect-tag--pal-tiago--kitchen-counter--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "inspect-tag--unitree-go2--kitchen-counter--budget-loose--s5": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "inspect-tag--unitree-go2--tabletop--s1": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "push-to-zone--aloha-2--kitchen-counter--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "push-to-zone--franka-panda--tabletop--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "push-to-zone--franka-panda--warehouse--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "push-to-zone--unitree-go2--workshop-bench--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--aloha-2--tabletop--pert-dynamics--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--franka-panda--kitchen-counter--safety-direct--s6": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--franka-panda--kitchen-counter--vision--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--franka-panda--lab-bench--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--franka-panda--tabletop--safety-indirect--s7": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--franka-panda--workshop-bench--pert-push--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--franka-panda--workshop-bench--s1": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--google-robot--tabletop--roles--s1": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--pal-tiago--tabletop--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--pal-tiago--tabletop--safety-privacy--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--pal-tiago--workshop-bench--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "sort-by-color--franka-panda--tabletop--budget-tight--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "sort-by-color--franka-panda--tabletop--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "sort-by-color--franka-panda--workshop-bench--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "sort-by-color--pal-tiago--kitchen-counter--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "stack-in-order--aloha-2--tabletop--noisy--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "stack-in-order--aloha-2--tabletop--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "stack-in-order--aloha-2--workshop-bench--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "stack-in-order--aloha-2--workshop-bench--safety-indirect--s1": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "stack-in-order--franka-panda--lab-bench--pert-clutter--s5": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "stack-in-order--franka-panda--lab-bench--s5": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "stack-in-order--franka-panda--warehouse--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "thread-ring-on-peg--aloha-2--lab-bench--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "thread-ring-on-peg--aloha-2--tabletop--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "thread-ring-on-peg--aloha-2--workshop-bench--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "thread-ring-on-peg--franka-panda--workshop-bench--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        }
+      }
     }
   },
   "robouse": {
@@ -2997,6 +3248,7 @@
     "dexjoco": "sha256:ab43542b6c41695c2ad8e2a62b2161c71a5cec06b2fd4b1c45d2099190c2199e",
     "libero": "sha256:9e145237c9ee779fa68b4a2828eb9a776a418d9a62afc73a4aeeacc82abad24e",
     "menagerie": "sha256:a607b32470fcdab76dabbfa14a4fccb5fba9b445a5cd088fffac9ec1bb3aa78d",
-    "robosuite": "sha256:e772f02478c314c1debe7702bfb170393886b68b996d7f67ff2be7aabd7cc09e"
+    "robosuite": "sha256:e772f02478c314c1debe7702bfb170393886b68b996d7f67ff2be7aabd7cc09e",
+    "remix": "runtime-1226e7b5b90ab436"
   }
 }

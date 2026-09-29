@@ -1,0 +1,13 @@
+id: fetch
+type: embodiment
+version: 0.1.0
+title: Fetch
+summary: Gymnasium-Robotics' Fetch arm tasks.
+track: arm
+kind: arm
+capabilities:
+- reach
+- grasp
+remixable: false
+suites:
+- gymrobotics

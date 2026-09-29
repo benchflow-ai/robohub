@@ -1,0 +1,12 @@
+id: skydio-x2
+type: embodiment
+version: 0.1.0
+title: Skydio X2
+summary: Drone suite.
+track: aerial
+kind: drone
+capabilities:
+- fly
+remixable: false
+suites:
+- drone

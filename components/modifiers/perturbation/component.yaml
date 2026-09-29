@@ -1,0 +1,10 @@
+id: perturbation
+type: modifier
+version: 0.1.0
+title: Perturbation
+values:
+  none: No disturbance (default).
+  push: The task object is nudged by a disturbance force the first time a gripper comes within 16 cm of it.
+  dynamics: Task objects are 1.8 x heavier and have 0.7 x the friction.
+  clutter: Two extra distractor objects on the work surface.
+remixable: true

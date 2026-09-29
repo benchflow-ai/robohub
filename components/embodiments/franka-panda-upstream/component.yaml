@@ -1,0 +1,15 @@
+id: franka-panda-upstream
+type: embodiment
+version: 0.1.0
+title: Franka Panda (upstream benchmarks)
+summary: The Panda of robosuite, LIBERO and RoboCasa in those benchmarks' own controllers.
+track: arm
+kind: arm
+capabilities:
+- reach
+- grasp
+remixable: false
+suites:
+- libero
+- robocasa
+- robosuite

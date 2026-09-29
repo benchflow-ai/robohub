@@ -1,0 +1,10 @@
+id: flight-arena
+type: scene
+version: 0.1.0
+title: Flight arena
+scenario: flight-arena
+summary: Gates, a window and pads (crazyflie and drone suites).
+remixable: false
+suites:
+- crazyflie
+- drone

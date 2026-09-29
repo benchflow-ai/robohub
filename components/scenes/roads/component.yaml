@@ -1,0 +1,9 @@
+id: roads
+type: scene
+version: 0.1.0
+title: MetaDrive roads
+scenario: road
+summary: Highways, intersections and winding roads with traffic.
+remixable: false
+suites:
+- driving

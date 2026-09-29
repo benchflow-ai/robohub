@@ -1,0 +1,9 @@
+{
+  "source": "/Users/lixiangyi/benchflow/robouse-components/tasks/remix/put-in-container--franka-panda--kitchen-counter--safety-direct--s6",
+  "key": "9e552f82e339549d",
+  "runtime": "runtime-1226e7b5b90ab436",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "3"
+}

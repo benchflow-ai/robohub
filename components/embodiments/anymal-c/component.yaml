@@ -1,0 +1,12 @@
+id: anymal-c
+type: embodiment
+version: 0.1.0
+title: ANYbotics ANYmal C
+summary: Quadruped suite.
+track: move
+kind: quadruped
+capabilities:
+- locomote
+remixable: false
+suites:
+- quadruped

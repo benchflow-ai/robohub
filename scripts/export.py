@@ -385,8 +385,9 @@ def main(argv=None) -> int:
                 if "tasks_file" in src:
                     used |= {backend_runtime[by_id[ln.strip()].spec["backend"]] for ln in (HUB / src["tasks_file"]).read_text().splitlines()
                              if ln.strip() and not ln.startswith("#") and ln.strip() in by_id}
+    # `native: true` runtimes come from Robo Use's own native export (`robouse export`), not from this script
     runtime_digests = {rt: write_runtime(rt, cfg, robouse, prov) for rt, cfg in hub["runtimes"].items()
-                       if used is None or rt in used}
+                       if (used is None or rt in used) and not cfg.get("native")}
     for rt, d in runtime_digests.items():
         print(f"runtime {rt}: {d}")
     runtime_digests = {**manifest.get("runtimes", {}), **runtime_digests}
@@ -404,8 +405,12 @@ def main(argv=None) -> int:
 
     by_name = {d["name"]: d for d in hub["datasets"]}
     jobs = []
+    native_suites = {s for s, m in hub["suites"].items() if hub["runtimes"].get(m.get("runtime", ""), {}).get("native")}
+    native_suites |= {"remix"}  # written by `robouse export` (see hub.yaml: runtimes.remix)
     for ds in hub["datasets"]:
         if wanted and not wanted & {ds["name"], ds.get("dir", ds["name"])}:
+            continue
+        if set(ds.get("suites", [])) and set(ds["suites"]) <= native_suites:
             continue
         if "noop_of" in ds:  # negative control: the tasks of another dataset with no-op reference solutions
             src = by_name[ds["noop_of"]]

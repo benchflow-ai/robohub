@@ -1,0 +1,13 @@
+id: boston-dynamics-spot
+type: embodiment
+version: 0.1.0
+title: Boston Dynamics Spot
+summary: Quadruped suite, with and without its arm.
+track: move
+kind: quadruped
+capabilities:
+- locomote
+- reach
+remixable: false
+suites:
+- quadruped

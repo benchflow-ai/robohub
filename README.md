@@ -24,6 +24,7 @@ Every dataset is named `<org>/<name>`. The org is whoever designed the benchmark
 | `brave-eai/dexjoco@0.1` | `robouse-dexjoco@0.1` | 14 | dexjoco | dexjoco | DexJoCo (brave-eai, MIT) |
 | `benchflow/robouse-drone@0.1` | `robouse-drone@0.1` | 10 | drone | menagerie | |
 | `benchflow/robouse-roboharm@0.1` | `robouse-roboharm@0.1` | 80 | roboharm | menagerie | |
+| `benchflow/robouse-remix@0.1` | | 48 | remix (embodiment x scene x task components, validated by `robouse remix`) | remix (native export) | |
 | `benchflow/robouse-noop-control@0.1` | `robouse-noop-control@0.1` | 100 | robouse-core's tasks with no-op reference solutions (negative control) | all five | |
 
 The old plain names are aliases: each is its own entry in `registry.json` with exactly the same pinned tasks (same commit, paths and digests) as the dataset it names, so commands written with them keep working. The hub page lists only the `<org>/<name>` names, and the old `robouse.ai/hub/<name>/` pages redirect. The task folders keep their old names (`datasets/robouse-metaworld/...`); `dir` in `hub.yaml` maps a dataset to its folder.
