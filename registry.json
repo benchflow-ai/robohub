@@ -2004,150 +2004,290 @@
   },
   {
     "name": "lifelong-robot-learning/libero",
-    "version": "0.1",
-    "description": "Robo Use LIBERO 0.1: 20 LIBERO tasks (5 each from spatial, object, goal and LIBERO-10) on a Franka Panda, judged by LIBERO's BDDL goal check.",
-    "git_tag": "lifelong-robot-learning/libero-v0.1",
+    "version": "0.2",
+    "description": "Robo Use LIBERO 0.2: all 40 tasks of LIBERO's four standard suites (LIBERO-Spatial, -Object, -Goal and -Long, 10 each) on a Franka Panda, judged by LIBERO's BDDL goal check. Reference solutions replay LIBERO's human demonstrations (Apache-2.0).",
+    "git_tag": "lifelong-robot-learning/libero-v0.2",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
       {
         "name": "libero-10-0",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-10-0",
-        "digest": "sha256:6032e44f0a79da410fa45fb70e1b7ad804593e9f6f5be9a80b7a1c9d113c5523"
+        "digest": "sha256:573c7d1a05aab672b3e4ad82aaaf3361ecba1a8f3861e670c1224d60ae61e784"
+      },
+      {
+        "name": "libero-10-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-10-1",
+        "digest": "sha256:091f610ba37f915a8812df3145d8c51546caa72027989a7fd6eaa9ad7838f452"
       },
       {
         "name": "libero-10-2",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-10-2",
-        "digest": "sha256:5384b70afb7c85ec7958a376ff289474505381cdc3733e9c2082e2fd1a8ad54e"
+        "digest": "sha256:a90897783a78a3530a9ac6097c36d7b891fb352c8c6dbce104b0958aa99389dd"
+      },
+      {
+        "name": "libero-10-3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-10-3",
+        "digest": "sha256:f22a0bbb0ef68f958b53935d46cc59b0f6515dafc03243bea3a896b19d0c788c"
       },
       {
         "name": "libero-10-4",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-10-4",
-        "digest": "sha256:7e4ee6617b688c60cbc12f195a3cdd0481739a30b58ed80d08a6a6e817b383fd"
+        "digest": "sha256:d644de64cdc1ce578c93ea6a37c981515588945ec523e2664c839638aa33a8ed"
+      },
+      {
+        "name": "libero-10-5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-10-5",
+        "digest": "sha256:ec710b43b6efdf3e75a4e732531468c6533899dc18e3758d903bad478ab6fc0a"
       },
       {
         "name": "libero-10-6",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-10-6",
-        "digest": "sha256:a357cbabbbd2ffe6d95e12dc7adcd46cdda4351b52c5ed0db9b4ada15452b2ee"
+        "digest": "sha256:247d7ec515369ab930367cf9e2dc00f8edd5e24b850d459a3c0c1a0a147c4504"
+      },
+      {
+        "name": "libero-10-7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-10-7",
+        "digest": "sha256:0cb43bb6c068784be103793e748812bf4a6b01006c879c78eb2744f65609a3b3"
       },
       {
         "name": "libero-10-8",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-10-8",
-        "digest": "sha256:3da83a0d76d2a309ed1549290f1515b813d8491eacf5d1a820a2295248c44bc0"
+        "digest": "sha256:5b9ffb8b41405421cb7543c946c503709b8f58ac5d9a1dee294e252cbcf9b96e"
+      },
+      {
+        "name": "libero-10-9",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-10-9",
+        "digest": "sha256:a7af677a8f70ff9363cec0e4ee93ecc34c60b5b1146fcd1b4e9bd2a482dad0b4"
       },
       {
         "name": "libero-goal-0",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-goal-0",
-        "digest": "sha256:c1aa411f3c534f3d87b2c7c9188bdc00f587d0b84f3720a1f004ee9073eecacc"
+        "digest": "sha256:ead4fbedddb5f6310176bca80126db993ff51f8d06a28650c02a0fa79ecaa4e5"
+      },
+      {
+        "name": "libero-goal-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-goal-1",
+        "digest": "sha256:8c76228d72cc9b0deacbc04f8e912e18397d2cb7992d843de65a120f412b14e2"
       },
       {
         "name": "libero-goal-2",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-goal-2",
-        "digest": "sha256:f9b62efa73388b62e40f486d87d45306a070a985dad195c1c89bf6bf0d2f36e5"
+        "digest": "sha256:26b961beb752cd24376c07baffd8967195e84462d0062993734d9d68d95da633"
+      },
+      {
+        "name": "libero-goal-3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-goal-3",
+        "digest": "sha256:d918d1c7a637247f05e95903109a3bc771406e9bbeba81c3a9d583441f2bc1cc"
       },
       {
         "name": "libero-goal-4",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-goal-4",
-        "digest": "sha256:238f6cf959711681eac62a38e2dbc1dcc4e9b6c0a986c5e46b77473fd3684f6e"
+        "digest": "sha256:923eb958bfcaf67cf5c0ab65c4d6fa069f33c433bc6d35b3eb2349770486d688"
+      },
+      {
+        "name": "libero-goal-5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-goal-5",
+        "digest": "sha256:934e8286fc52f5f0ddf134cdf907ac6e4ccbf00f8e3f03939c35b6b58ba76f21"
       },
       {
         "name": "libero-goal-6",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-goal-6",
-        "digest": "sha256:3ed7c2292c6885f5df8f9f0d91b2dca7ecac63d3810e7c244df6cd102c7b5de8"
+        "digest": "sha256:c182a4a822d3cae9f615d43fc9ae2c47f725448039783f69fb34c6a570edea6d"
+      },
+      {
+        "name": "libero-goal-7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-goal-7",
+        "digest": "sha256:8d0dfb36e979dbffdea1a4d42f97f2f48b907b07e414747391c7a1c7ec129271"
       },
       {
         "name": "libero-goal-8",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-goal-8",
-        "digest": "sha256:90836b34963eccd4f14218edbb6ca1c46dfffe64ebd9252d861beb4735ff9996"
+        "digest": "sha256:0d1a091684badae90cfd66270e333f1b1a3bdc2f4f52886ed2fb56eb25c85c25"
+      },
+      {
+        "name": "libero-goal-9",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-goal-9",
+        "digest": "sha256:e73ef302de41af8cffbee505973d0170ba3d7f520306bdabc44614479cf7884b"
       },
       {
         "name": "libero-object-0",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-object-0",
-        "digest": "sha256:91f8571c45ee35c81d5af124972894660eed6bc9c94fab555c6826fab9c33928"
+        "digest": "sha256:b127fa8fb1841ac31bc81c30c7356b7783fe3ac912c36f2f1cee27588d41727b"
+      },
+      {
+        "name": "libero-object-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-object-1",
+        "digest": "sha256:82749aee58a56c78039f99ae19b3a479e4675ddfb0e3894da5cef1a9ba226afd"
       },
       {
         "name": "libero-object-2",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-object-2",
-        "digest": "sha256:51a89e97115d3afe9a8708a6b643e6397ebb4ab92399e6116af85fef1879e2c3"
+        "digest": "sha256:ff1d8a29d62fe5e06c725f2decbf3584e412e0d5dd05fa1fdc19d3489c9f0c89"
+      },
+      {
+        "name": "libero-object-3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-object-3",
+        "digest": "sha256:b1f6b0b15b030f979acc78a98796f8f8a582b2db1efd65dd0a1761af515cbc0e"
       },
       {
         "name": "libero-object-4",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-object-4",
-        "digest": "sha256:275d34bca1bc1bcde29f9e7ec8d7dd251449da7bf274d001e083071490a126f5"
+        "digest": "sha256:3baff15e83cd0e3fdf999203f804bdb9226c5f48ad2d68334f283997f3770018"
+      },
+      {
+        "name": "libero-object-5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-object-5",
+        "digest": "sha256:196e5c555a64526a8c49054c655652c1f5d3b87a9a833d77e993ce6b41154e3a"
       },
       {
         "name": "libero-object-6",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-object-6",
-        "digest": "sha256:311a0f048d7f91956444ede38a463efffd00c54373e4fa5e3ebf4fa2f46a0aef"
+        "digest": "sha256:4159eea867d9ca54b9c2da6c2a1c099096b8bba4fc3c49aba3adc4366df888da"
+      },
+      {
+        "name": "libero-object-7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-object-7",
+        "digest": "sha256:c73d112908347550ed19b250dcd68f9fa79ce52afb6bcc2f745521f5697f61cf"
       },
       {
         "name": "libero-object-8",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-object-8",
-        "digest": "sha256:68dd605a1d61008a9157b2362debcf104eee02d064e95ba8726542760bd84ddf"
+        "digest": "sha256:e736651db38c1562ec5c8725fb7dca17738a3fba842852083c951e0311753a8b"
+      },
+      {
+        "name": "libero-object-9",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-object-9",
+        "digest": "sha256:355b02901665546b5632057af3506c64b9fb9bf69a0a97fca545f21801d56f3a"
       },
       {
         "name": "libero-spatial-0",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-spatial-0",
-        "digest": "sha256:b20acf01c791445fec0618f9ef89382c993fe21d0a537632d891a1b52dc3427f"
+        "digest": "sha256:cf707d8ad057b7df6ebffc3a3e30cada05d43802fc0a24a51eaef6998e828ecc"
+      },
+      {
+        "name": "libero-spatial-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-spatial-1",
+        "digest": "sha256:424f3eb1828de085a5c0ad0a4e1dce9300a4a2069450bb2dff60a597f0d3c950"
       },
       {
         "name": "libero-spatial-2",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-spatial-2",
-        "digest": "sha256:346f3cd4998f450a07fc42fbd741a7b794a6c153472a4d97114e60227d9a44fc"
+        "digest": "sha256:65e135e098c57a17978e3b96913183d19c5653c7e2130b310c8b17cb221f02d3"
+      },
+      {
+        "name": "libero-spatial-3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-spatial-3",
+        "digest": "sha256:2314d1c88cd5f5d9cf3df0217a9a925edb635a738c9baff33d056f3e397149b5"
       },
       {
         "name": "libero-spatial-4",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-spatial-4",
-        "digest": "sha256:2cda170de3a76fc1a0c92223727a065f6dcadfa4eb839b75d6a51979e3ff7f42"
+        "digest": "sha256:73409c16219ea1de7fbe6d50818d6fdac9b06ba48a2ff2c04d7e5a36c31f9bec"
+      },
+      {
+        "name": "libero-spatial-5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-spatial-5",
+        "digest": "sha256:6bf47ac57de7900f5e741a7455cb3f06b1d3017305d0150857d150dddce3503c"
       },
       {
         "name": "libero-spatial-6",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-spatial-6",
-        "digest": "sha256:37d72af9284b6800c19a5ec94771856f2c5cb5a49c6c3d17849009377d753a1d"
+        "digest": "sha256:6b1236edd1ea093c43b3d661227fe5fa674b7a432d16dd60036d0f8ec7d70fc6"
+      },
+      {
+        "name": "libero-spatial-7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-spatial-7",
+        "digest": "sha256:a2e16fbc82271af7ccd56e362d585798173205cbb347bb7b8a6df573c3885154"
       },
       {
         "name": "libero-spatial-8",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-spatial-8",
-        "digest": "sha256:962ea7914a8f14ae01e5cf6cb2d2678b3b228c56c4de7cd8e7ed0cdf47332fae"
+        "digest": "sha256:c1d6186565c4ab0e0c5a81469e053c9e2d978b18f29b219cb86b1d5de14e4258"
+      },
+      {
+        "name": "libero-spatial-9",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-spatial-9",
+        "digest": "sha256:a3bd4f5b895a5a681bddb2b0bb8a05e7161cc7940aee18b77072f87c1e8028ae"
       }
     ]
   },
@@ -2608,10 +2748,10 @@
     ]
   },
   {
-    "name": "benchflow/robouse-roboharm",
+    "name": "benchflow/robouse-harm",
     "version": "0.1",
     "description": "Robo Use RoboHarm 0.1: 10 harm scenarios x harmful/benign x 4 configurations (raw, guardrail, honeypot, both), 80 tasks on a Franka Panda.",
-    "git_tag": "benchflow/robouse-roboharm-v0.1",
+    "git_tag": "benchflow/robouse-harm-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
       {
@@ -3173,6 +3313,1798 @@
         "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
         "path": "datasets/robouse-roboharm/roboharm-water-laptop-harmful-raw",
         "digest": "sha256:c75b52d3bfc59f97ab590846a3ca920da0d3420abce4c524e47fac7f55282f68"
+      }
+    ]
+  },
+  {
+    "name": "benchflow/quadruped",
+    "version": "0.1",
+    "description": "Robo Use quadruped 0.1: 11 tasks for Unitree Go2 and Go1, Boston Dynamics Spot (with and without arm) and ANYbotics ANYmal C walking under a trot controller: pushing, docking, patrols, inspection, buttons. Robot models from MuJoCo Menagerie (BSD-3-Clause).",
+    "git_tag": "benchflow/quadruped-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "anymal-inspection-round",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-quadruped/anymal-inspection-round",
+        "digest": "sha256:b6f3318f9eda5e88e633c840fd9c922dfc74477691eba97b285652cca722201a"
+      },
+      {
+        "name": "anymal-mezzanine-cabinet",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-quadruped/anymal-mezzanine-cabinet",
+        "digest": "sha256:725c58c5094958bc53f35311be5b9e7dd5f0376ec116abfa108532e6b82d1b57"
+      },
+      {
+        "name": "go1-corridor-charger",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-quadruped/go1-corridor-charger",
+        "digest": "sha256:e936a263c4b3f69349911cc87606ef51372b1cbb53d62c38c067dc9352da3784"
+      },
+      {
+        "name": "go1-patrol",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-quadruped/go1-patrol",
+        "digest": "sha256:5106d1e1261716cb939e2fbc59777c1aab761c333f4eb071b43dba9fc25595a3"
+      },
+      {
+        "name": "go2-crate-detour",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-quadruped/go2-crate-detour",
+        "digest": "sha256:bc55b09b24874ab9b10896112f5fccff10c82147e35ac2f1425109afe646d2c6"
+      },
+      {
+        "name": "go2-crate-detour-manual",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-quadruped/go2-crate-detour-manual",
+        "digest": "sha256:caf5f73303de631c54774dd5eb43eb1e97e138eeea487adc520e8ae67c809c14"
+      },
+      {
+        "name": "go2-pump-inspection",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-quadruped/go2-pump-inspection",
+        "digest": "sha256:7b7a2dbdba2403b3c6edfa0ebb6fe75433eaf86fe683d88debc4ca27c1f3e250"
+      },
+      {
+        "name": "go2-push-box",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-quadruped/go2-push-box",
+        "digest": "sha256:14c0b1ef431e7406015e8717af37c7bb157756e015c85fe8246f04f82b69d029"
+      },
+      {
+        "name": "spot-arm-estop",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-quadruped/spot-arm-estop",
+        "digest": "sha256:a410c72e73ccb21b325ae0bfbd8d8cf9debba50f0ebaa2531b766e85b1ba007b"
+      },
+      {
+        "name": "spot-arm-reset",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-quadruped/spot-arm-reset",
+        "digest": "sha256:d318f672ccc59f5fc977752589ee50555ea0de1a0b3995b473a79229e56d9012"
+      },
+      {
+        "name": "spot-gauge-reading",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-quadruped/spot-gauge-reading",
+        "digest": "sha256:c407b8a53ae87a5546730d44c1391aa75d158d37808684b57aceaf03326b54ec"
+      }
+    ]
+  },
+  {
+    "name": "benchflow/humanoid",
+    "version": "0.1",
+    "description": "Robo Use humanoid 0.1: 9 tabletop tasks for Unitree G1 (Dex3 hands) and H1, Apptronik Apollo and Booster T1 on support stands with IK arm control: pick and place, a drawer, a button panel, bimanual box lifts, carrying a tray. Robot models from MuJoCo Menagerie (BSD-3-Clause, Apache-2.0).",
+    "git_tag": "benchflow/humanoid-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "apollo-box-into-bin",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoid/apollo-box-into-bin",
+        "digest": "sha256:52402128da904d53fc3e7fcb1ea0d991ccb52c9c4367cecc3aaa42f3e9140f8d"
+      },
+      {
+        "name": "apollo-carry-tray",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoid/apollo-carry-tray",
+        "digest": "sha256:0299a0f7f6656bf2b6be189dcaa4e01633fd3aca64618922a138b961fa1e1eb7"
+      },
+      {
+        "name": "g1-can-to-plate",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoid/g1-can-to-plate",
+        "digest": "sha256:bfcfc9aff94505b5857e48c3ca3940a11c40b96c09e292023edcca3ac0620d29"
+      },
+      {
+        "name": "g1-drawer-stow",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoid/g1-drawer-stow",
+        "digest": "sha256:48fc68053d770c5034faf065825f12dc907712d6c337400b7878ac271db24145"
+      },
+      {
+        "name": "g1-pass-across",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoid/g1-pass-across",
+        "digest": "sha256:cfa3a38f3150212a44510c8302c9cf43e1c6723100f4778e05eca5de7d54c8c6"
+      },
+      {
+        "name": "h1-box-to-shelf",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoid/h1-box-to-shelf",
+        "digest": "sha256:0de56a6f03e4f019f2b794707d7e0b23b2631555cc8abf33e559669bb81d8bcd"
+      },
+      {
+        "name": "h1-panel-sequence",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoid/h1-panel-sequence",
+        "digest": "sha256:1bfbb6b134d49e7bb84c65550039955553947663a9eadb4a7d6a50b5826fb209"
+      },
+      {
+        "name": "t1-box-onto-step",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoid/t1-box-onto-step",
+        "digest": "sha256:9e280b68d5d5907c2ea51fbe9293ac84856f78ba67a3dddf24f508888a9dffbe"
+      },
+      {
+        "name": "t1-push-cans",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoid/t1-push-cans",
+        "digest": "sha256:7379ab59f6d0bd6a32f429fe6fa545f2bceb18b9e73764f08436ec42640dfa2d"
+      }
+    ]
+  },
+  {
+    "name": "benchflow/mobile-manip",
+    "version": "0.1",
+    "description": "Robo Use mobile manipulation 0.1: 10 fetch, stow and sort tasks for Hello Robot Stretch 3, PAL TIAGo and the Google Robot in a three-room apartment. Robot models from MuJoCo Menagerie (Apache-2.0).",
+    "git_tag": "benchflow/mobile-manip-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "google-fetch-can",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-mobile-manip/google-fetch-can",
+        "digest": "sha256:b337fcfa68c26b5cd6a8609f827b7f12aa613fb70cac38377a1a23fd0892df5f"
+      },
+      {
+        "name": "google-open-drawer",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-mobile-manip/google-open-drawer",
+        "digest": "sha256:dae78352c91b9c26e877560f6ac882e46a6f451770237ea57d59ea4760c0cdda"
+      },
+      {
+        "name": "google-sort-bottle-can",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-mobile-manip/google-sort-bottle-can",
+        "digest": "sha256:6ffc1eef48c54fa0699610d0a0efd36d0503549ddcdfb7340aeaaff398310862"
+      },
+      {
+        "name": "stretch-fetch-cup",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-mobile-manip/stretch-fetch-cup",
+        "digest": "sha256:7e3fc420b51fd8873706106261ba9ef978f0eae1edce4186b2828d06cb84a7cd"
+      },
+      {
+        "name": "stretch-open-drawer",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-mobile-manip/stretch-open-drawer",
+        "digest": "sha256:d50bd544f27c1b4a72c49e85bda8ffebdf74edbe358e6d7b3e1493be7df678e0"
+      },
+      {
+        "name": "stretch-shelve-two",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-mobile-manip/stretch-shelve-two",
+        "digest": "sha256:5b309cf27476a1ebe1950a7399710a8ed184abf66dec194ceaad3d1c4ce01e49"
+      },
+      {
+        "name": "tiago-bin-cans",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-mobile-manip/tiago-bin-cans",
+        "digest": "sha256:82348fac107b1ff945ebf269a1fae2690ffbf31e7969e88066d2bf344345923d"
+      },
+      {
+        "name": "tiago-drawer-stow",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-mobile-manip/tiago-drawer-stow",
+        "digest": "sha256:a1acc1465d27631aec3d2e22e28a0e8a2f1e35ead796781c45f9bf67c0b3fde2"
+      },
+      {
+        "name": "tiago-fetch-juice",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-mobile-manip/tiago-fetch-juice",
+        "digest": "sha256:4f1cc7d85cc1639c0bb8e9ab737a5a87a9d5776ceb71b761951d87fcd9c47af7"
+      },
+      {
+        "name": "tiago-study-to-kitchen",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-mobile-manip/tiago-study-to-kitchen",
+        "digest": "sha256:f57c83ec7f5d2edcd7b3129173d598ddab12487e23372fd62846bfdd0046a759"
+      }
+    ]
+  },
+  {
+    "name": "benchflow/dexhand",
+    "version": "0.1",
+    "description": "Robo Use dexterous hands 0.1: 7 tasks for the Shadow Hand and LEAP Hand on 6-axis positioners: regrasp and in-hand cube flips, pouring, a valve, a pen, buttons. Robot models from MuJoCo Menagerie (Apache-2.0, MIT).",
+    "git_tag": "benchflow/dexhand-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "leap-cube-in-hand",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dexhand/leap-cube-in-hand",
+        "digest": "sha256:682ff16391e4ec7049f08e73ca062bacbca5579344a83fe83c5e8b8b4a29c78f"
+      },
+      {
+        "name": "leap-lift-ball",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dexhand/leap-lift-ball",
+        "digest": "sha256:da491047dc25a4b2e152949565d96e5e871e03ae177299c310512e7f967ae0fb"
+      },
+      {
+        "name": "leap-pen-to-holder",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dexhand/leap-pen-to-holder",
+        "digest": "sha256:2c8fa59e8e7412707a0d55dc08a67aad5dd26f147c5d90aff1d7a22b17360a94"
+      },
+      {
+        "name": "leap-press-buttons",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dexhand/leap-press-buttons",
+        "digest": "sha256:c590877116fbfec2846d89301bbffd8b27d0bf872c34cbf377c036af1ca610f0"
+      },
+      {
+        "name": "shadow-cube-face-up",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dexhand/shadow-cube-face-up",
+        "digest": "sha256:f8461307c73d91629e2372ca09d85d0ee05da8fcfb7d875a35a8327dedf3b07c"
+      },
+      {
+        "name": "shadow-pour-balls",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dexhand/shadow-pour-balls",
+        "digest": "sha256:77b62fdb50eadc6b810d8aeddf6a728bb64f3146d28eda8e7f40f3f2b4505dd3"
+      },
+      {
+        "name": "shadow-turn-valve",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dexhand/shadow-turn-valve",
+        "digest": "sha256:00167575db127fcc6b173a3a72b4a0473e36b97dd24e23894850d87d73e12ba6"
+      }
+    ]
+  },
+  {
+    "name": "benchflow/crazyflie",
+    "version": "0.1",
+    "description": "Robo Use Crazyflie 0.1: 7 indoor flight tasks for Bitcraze Crazyflie 2 quadrotors: a window, a gate course, waypoints, a shelf landing, a formation and a swap for a swarm, and one task without skills. Robot model from MuJoCo Menagerie (MIT).",
+    "git_tag": "benchflow/crazyflie-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "crazyflie-gates",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-crazyflie/crazyflie-gates",
+        "digest": "sha256:52a8ab4ce4910a9e48cd49c229c18ac485c4228f50304f0c712818d7f330ec45"
+      },
+      {
+        "name": "crazyflie-shelf-landing",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-crazyflie/crazyflie-shelf-landing",
+        "digest": "sha256:a73d798a819b186b9bf2183a23eaf974cf32175b261308a51bf28e91b5885906"
+      },
+      {
+        "name": "crazyflie-swarm-formation",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-crazyflie/crazyflie-swarm-formation",
+        "digest": "sha256:a5ad79ac49818272ce2ae31e24a94c84a2cc148b5c69fd290c96a5c4aad27596"
+      },
+      {
+        "name": "crazyflie-swarm-swap",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-crazyflie/crazyflie-swarm-swap",
+        "digest": "sha256:1883f4e2d75bf50010b529966cc1d410edd317a7465b1031db7e1aeb41160549"
+      },
+      {
+        "name": "crazyflie-waypoints",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-crazyflie/crazyflie-waypoints",
+        "digest": "sha256:79f341535b366aa93dbde0f4d270fb531b6ad61a427d4327b4c0f75a616bc518"
+      },
+      {
+        "name": "crazyflie-window",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-crazyflie/crazyflie-window",
+        "digest": "sha256:6a317e3b528529d2ceb3b56d79a66c91e6741d9611e1e206db2836f582b598e9"
+      },
+      {
+        "name": "crazyflie-window-manual",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-crazyflie/crazyflie-window-manual",
+        "digest": "sha256:54d27c46e779811dd8d3735ce9cf6f9c142b721ccdc9d03d15694b0775beb863"
+      }
+    ]
+  },
+  {
+    "name": "benchflow/driving",
+    "version": "0.1",
+    "description": "Robo Use driving 0.1: 7 traffic tasks for a sedan on MetaDrive roads (winding road, highway overtake, broken-down car, cone zone, roundabout, unprotected left turn, ramp merge), on MetaDrive 0.4.3 (Apache-2.0).",
+    "git_tag": "benchflow/driving-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "driving-broken-down-car",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-driving/driving-broken-down-car",
+        "digest": "sha256:34fa0c04a1911524c581201fca05e46caea02bd2614d29593b00eafa89a7d669"
+      },
+      {
+        "name": "driving-cone-zone",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-driving/driving-cone-zone",
+        "digest": "sha256:bebe810d9123bd7bc90359c38d9f556603ab1e0c29bad998825ea4ed21ca8549"
+      },
+      {
+        "name": "driving-highway-overtake",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-driving/driving-highway-overtake",
+        "digest": "sha256:a65e5dd996e3d2b9e6f45b0d925901df8bb871fdc2b9d540f9545100a0078700"
+      },
+      {
+        "name": "driving-intersection-left-turn",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-driving/driving-intersection-left-turn",
+        "digest": "sha256:698a0a23e0ed3e3ef390e33e8a22144c0e4fa166f28aeb85ca80828075b8e2ad"
+      },
+      {
+        "name": "driving-ramp-merge",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-driving/driving-ramp-merge",
+        "digest": "sha256:84bd2194bf603ceddbfe9bc09a2ff535991d4782986da274f7ac86ff4805ebad"
+      },
+      {
+        "name": "driving-roundabout",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-driving/driving-roundabout",
+        "digest": "sha256:120b6ddef9b67422f2065c513bb4a84691959c0d9948904a4fdac9d86c0c4ca4"
+      },
+      {
+        "name": "driving-winding-road",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-driving/driving-winding-road",
+        "digest": "sha256:2a6f96269779c6807023603e7d05640909c0329211249054514014e28425a2cc"
+      }
+    ]
+  },
+  {
+    "name": "lifelong-robot-learning/libero-90",
+    "version": "0.1",
+    "description": "Robo Use LIBERO-90 0.1: the 90 short-horizon LIBERO-90 tasks (20 kitchen, living-room and study scenes) on a Franka Panda, judged by LIBERO's BDDL goal check. Reference solutions replay LIBERO's human demonstrations (Apache-2.0).",
+    "git_tag": "lifelong-robot-learning/libero-90-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "libero-90-0",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-0",
+        "digest": "sha256:156b726e335ab73ae8980d8df844468f7877f434c3793435504e948a0b2fba0b"
+      },
+      {
+        "name": "libero-90-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-1",
+        "digest": "sha256:4252ea351900cec4b247cedca74004160c3a7a21cd8185894000ebd78217a060"
+      },
+      {
+        "name": "libero-90-10",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-10",
+        "digest": "sha256:7a78413495e8ddac061db42ef926341d4d11db30d92b97de67223868a682b05a"
+      },
+      {
+        "name": "libero-90-11",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-11",
+        "digest": "sha256:ba7524af2dc35d798e1d862560ad97dfdd983458a76015c528aaa517a3b2e785"
+      },
+      {
+        "name": "libero-90-12",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-12",
+        "digest": "sha256:887979c35e3a7df95670a3f4e534a5ffba1610d034356776c52813befc47593a"
+      },
+      {
+        "name": "libero-90-13",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-13",
+        "digest": "sha256:bc8d04e6aad61490e7c9ab6f171b555b98e70b7476340f6ee7cd076f7b4ca837"
+      },
+      {
+        "name": "libero-90-14",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-14",
+        "digest": "sha256:7f83daf866dae68c1bce69da183aee027071e686fd6a587b89273b9415974fb7"
+      },
+      {
+        "name": "libero-90-15",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-15",
+        "digest": "sha256:d95641298bf6eba3babbd5549a94ed1a7eedb472da2aa7523b039c7d5f703dd5"
+      },
+      {
+        "name": "libero-90-16",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-16",
+        "digest": "sha256:3eda023867be142c8db97370b93419ea94d4d89bc512587e250123a0eb889b69"
+      },
+      {
+        "name": "libero-90-17",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-17",
+        "digest": "sha256:c6325e9fbeb1d7f6ee4508eafd301099e2b2877b9672b4d4a9cb46d86a0292c7"
+      },
+      {
+        "name": "libero-90-18",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-18",
+        "digest": "sha256:12c1e5bd8e848545f1f97d099ecb60ac9a717115d8549fb4d5455b8ce152ec82"
+      },
+      {
+        "name": "libero-90-19",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-19",
+        "digest": "sha256:db93e9c88fb39499beb86f0f0e0d33928377438c9384328d80fa36583afeea0b"
+      },
+      {
+        "name": "libero-90-2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-2",
+        "digest": "sha256:d3bab50592c8563b37949fae46c60ffae86b2c1e582e37b4238803ab6b867e88"
+      },
+      {
+        "name": "libero-90-20",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-20",
+        "digest": "sha256:0c9936a7644119612ee202701b99ece25f066f22e96681e92b6c05fa5f04dbf4"
+      },
+      {
+        "name": "libero-90-21",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-21",
+        "digest": "sha256:20c38eb97279f714f296a410722d6a32704f8ae2fcd03517cd6a917fb001cde2"
+      },
+      {
+        "name": "libero-90-22",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-22",
+        "digest": "sha256:9b80ead86d8e4af120ef0fd5526c223a13329ecc9aee430f72b42318033f3fed"
+      },
+      {
+        "name": "libero-90-23",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-23",
+        "digest": "sha256:212e6ac0fb8762c03d5ce64c7c6130f6d6e52cf26075bb6b46fdb65634ff924c"
+      },
+      {
+        "name": "libero-90-24",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-24",
+        "digest": "sha256:778da44050187fd0356b751d07b59d05bb5744affe339594c5e10915aa5e1352"
+      },
+      {
+        "name": "libero-90-25",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-25",
+        "digest": "sha256:e04d36bc2a57b7a261412c32be9a29fcb0228664032f774842c3c9d3bc03b525"
+      },
+      {
+        "name": "libero-90-26",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-26",
+        "digest": "sha256:6413c486607fd9f2e5df8a911bc729b2592aa304dd8965d6d92f2a432410d25d"
+      },
+      {
+        "name": "libero-90-27",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-27",
+        "digest": "sha256:23757f5252268492f202a7a9438b6744d49de86ef27693c2d87b4bcb3ed952f9"
+      },
+      {
+        "name": "libero-90-28",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-28",
+        "digest": "sha256:2ab697f28ec35069f21ef12503ec3160fdb664f6978e12eeae9fa6de5acb9ffc"
+      },
+      {
+        "name": "libero-90-29",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-29",
+        "digest": "sha256:eb7fdf836d272c804770b9af9f85ff121ac55212923dff8dad15b40e29572f84"
+      },
+      {
+        "name": "libero-90-3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-3",
+        "digest": "sha256:bbe433d011801f9e939e93381791488ffc5921de16d91ca666195e7836e722c3"
+      },
+      {
+        "name": "libero-90-30",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-30",
+        "digest": "sha256:7fd66425ebf0314c92c937e59ee6633600752993d5922b5542a53efcc0d462ac"
+      },
+      {
+        "name": "libero-90-31",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-31",
+        "digest": "sha256:b64673b25c00d50ca9d2665375c5d051ea08ee73907b1429c6c71683b260b410"
+      },
+      {
+        "name": "libero-90-32",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-32",
+        "digest": "sha256:b7a968f2684002cf91ad7c2b587444a1bc8aef97ed71860d5fb21ea90246c9dc"
+      },
+      {
+        "name": "libero-90-33",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-33",
+        "digest": "sha256:8756594bd1fdd0dec91af056c8fde2c4c520f0173d7445b9fd64384cdf329b2c"
+      },
+      {
+        "name": "libero-90-34",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-34",
+        "digest": "sha256:1778a6d1cc9ff3c46f21048a1156384e0067f350513e873e58dfbb8ec6b4dbb4"
+      },
+      {
+        "name": "libero-90-35",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-35",
+        "digest": "sha256:3befff3a3ea2cfe9c6289751c48cf3fbe0e7101bea17e9d6b1d8ed05c663dec9"
+      },
+      {
+        "name": "libero-90-36",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-36",
+        "digest": "sha256:87380f1eacd4db86d7ed627c41c5ce9acd93387d61f5a280e9e3c846c20c62a6"
+      },
+      {
+        "name": "libero-90-37",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-37",
+        "digest": "sha256:2211a52ec148cf2a05bcc18bec189d7adfa5bf274eec4c9a76908ecc5fdca866"
+      },
+      {
+        "name": "libero-90-38",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-38",
+        "digest": "sha256:2639df457284032c413ed5700963674917bc26b4988adfb4649f55c6ca059ce0"
+      },
+      {
+        "name": "libero-90-39",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-39",
+        "digest": "sha256:698d9697967b5309f16e4901b3987ba936faa90fcf354cd3bcc51965ebf08829"
+      },
+      {
+        "name": "libero-90-4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-4",
+        "digest": "sha256:db292f2a8e2958a48d2e26003b79f15df613bef735f101960c54860bfba0f649"
+      },
+      {
+        "name": "libero-90-40",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-40",
+        "digest": "sha256:13124b5ef2c70a3f3255b62b3e3e545ff0ee6fa9e15cf2674368c08d6bf90a15"
+      },
+      {
+        "name": "libero-90-41",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-41",
+        "digest": "sha256:c3597bd258d336077c402ea0dbf05622692202b76fb4b5e9814334a459d31028"
+      },
+      {
+        "name": "libero-90-42",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-42",
+        "digest": "sha256:3fe2ba967aaab46399ed2949ae93cff95638d7b826d3a55825d56c30f62e4f3d"
+      },
+      {
+        "name": "libero-90-43",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-43",
+        "digest": "sha256:715ba485d9398a8fc46867990cc973eb390ef54a0e3b310576bc8a59faf1c918"
+      },
+      {
+        "name": "libero-90-44",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-44",
+        "digest": "sha256:86d7e2e5791a91abc59c34d979a3770aa628c3037a1651c98ecd4ef6c72dee88"
+      },
+      {
+        "name": "libero-90-45",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-45",
+        "digest": "sha256:80e8db31e074255337732ea38e00b37341abb77c929e9e887fc57f2c297a41ed"
+      },
+      {
+        "name": "libero-90-46",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-46",
+        "digest": "sha256:ad7429a4185d41959cf77ce3579211afb26748ef0c4265ef37ce3dc98cbf71dd"
+      },
+      {
+        "name": "libero-90-47",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-47",
+        "digest": "sha256:14be12881fa4e5c3fa322489d29cc98a1309099aecbdc4cdf35289a01b8ddb34"
+      },
+      {
+        "name": "libero-90-48",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-48",
+        "digest": "sha256:a14d169b5f49c8285fe77ec184572ff009a879f193da6f4916df89dc5ab4a50e"
+      },
+      {
+        "name": "libero-90-49",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-49",
+        "digest": "sha256:75b2515036c9088b7faee83b46a680dde79a197afd201835e5d85110dfbc7e89"
+      },
+      {
+        "name": "libero-90-5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-5",
+        "digest": "sha256:f51c560301caf2d6e194d0011f874322b8e9de5c8f7db2ddff7421cfc06eb1c4"
+      },
+      {
+        "name": "libero-90-50",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-50",
+        "digest": "sha256:b546de41c528ec671304bd9b310aa657a8de056c2491bd48ceac9fd9e63abdc5"
+      },
+      {
+        "name": "libero-90-51",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-51",
+        "digest": "sha256:bbf56cd64ed0d55de94c13847ef036c5048d6ee696a698c64884e503efc939a2"
+      },
+      {
+        "name": "libero-90-52",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-52",
+        "digest": "sha256:6c5817af60bc14170599a42f196bfa77c2f7ff40b0e88ebd24726a46c0bd026a"
+      },
+      {
+        "name": "libero-90-53",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-53",
+        "digest": "sha256:1cdee75cfb1e5ef65c203a8662178684401a954aa9924afaf339e209817d370f"
+      },
+      {
+        "name": "libero-90-54",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-54",
+        "digest": "sha256:b6bba9094e9ae439ba0dbffc3e6c55fdf38497bd16c3227c1b43fc0c52e985b1"
+      },
+      {
+        "name": "libero-90-55",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-55",
+        "digest": "sha256:eaad46b553010f8c1e534a1b785dfd63be89c20143cf86ed1119fd9f1e4dd115"
+      },
+      {
+        "name": "libero-90-56",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-56",
+        "digest": "sha256:319982c1b1c553915a521cee3c339ada54a226de28ffe1e51496fd4d00b542e2"
+      },
+      {
+        "name": "libero-90-57",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-57",
+        "digest": "sha256:9a67cc1e19f2fdd808a5358de8669b417a4b1dbcfded80011ac66f7a57dc7339"
+      },
+      {
+        "name": "libero-90-58",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-58",
+        "digest": "sha256:ac00a74494e4695229af34894289ee4009653f5a82c4f3efeb87804b6d4cefcd"
+      },
+      {
+        "name": "libero-90-59",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-59",
+        "digest": "sha256:aac9f801ffcd42e5dfec4d7c72341b5f8ee8f040c77d296d7b0741c929f3aeaa"
+      },
+      {
+        "name": "libero-90-6",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-6",
+        "digest": "sha256:3570564b74bec06ca05e9f1c183fb426a424dab930512ad0bcc51670b8e66fd2"
+      },
+      {
+        "name": "libero-90-60",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-60",
+        "digest": "sha256:1b41ba5970faea15480d3044ec60eda3686ceab0f78d895fe83a4bea88448a43"
+      },
+      {
+        "name": "libero-90-61",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-61",
+        "digest": "sha256:a76b9332a095c5023ee92cb252a94095f2e45b37527ed879ad4a626a6692e9c0"
+      },
+      {
+        "name": "libero-90-62",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-62",
+        "digest": "sha256:1d564f7ae0f3a5ae3793b3bdfab5cc48837f8790fc331640c03d4c8df3fa9503"
+      },
+      {
+        "name": "libero-90-63",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-63",
+        "digest": "sha256:ea11fb923d150945d0a984f13038266f05924ff2fb9d2cf6441bcb435efae832"
+      },
+      {
+        "name": "libero-90-64",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-64",
+        "digest": "sha256:31089cd99e29038219534631aef5642b11e6062fca8aa58b8fa59088dd392ac8"
+      },
+      {
+        "name": "libero-90-65",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-65",
+        "digest": "sha256:c19ff82bbb01fe48fda8de8a5091f05c0f2e1ea4ca2606a64b837f82ea339def"
+      },
+      {
+        "name": "libero-90-66",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-66",
+        "digest": "sha256:67dc205f5a6e14a28d377e85e8fdd8eca28263c76ef0e4e9f6bbdda4da123ae8"
+      },
+      {
+        "name": "libero-90-67",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-67",
+        "digest": "sha256:e4b07bfa9961ba34f07bd06f1bdd2c99d451343c85ba90cbf3a11d8a66488949"
+      },
+      {
+        "name": "libero-90-68",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-68",
+        "digest": "sha256:4b57809829e469dd32e9740293e370d2c2055bf581d141aa2e342f11b9313170"
+      },
+      {
+        "name": "libero-90-69",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-69",
+        "digest": "sha256:465b6e243eaec67c409616da50ef8035af26c65a7d19e2659aa7d843f6dac476"
+      },
+      {
+        "name": "libero-90-7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-7",
+        "digest": "sha256:eda0432f41a51e58103b6c1b6c63e6bca2c3911445d80522e65cb6aebbd661f1"
+      },
+      {
+        "name": "libero-90-70",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-70",
+        "digest": "sha256:9c237d5db2c4c98c4e47e6d4b06adcd2e4e519dc64dd5fc9db3d8c864384345f"
+      },
+      {
+        "name": "libero-90-71",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-71",
+        "digest": "sha256:1d1a5182238d26685f5038bf041e0044048c003ac8c1d0872fc1f4c059af7c74"
+      },
+      {
+        "name": "libero-90-72",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-72",
+        "digest": "sha256:0e79508c98ec79071f0b865221d04ec78dbde884b22d138855af42e2e1b8e011"
+      },
+      {
+        "name": "libero-90-73",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-73",
+        "digest": "sha256:a059f08117c970e8f52047bc2205f0911c119d573af697b128921c4468a97a66"
+      },
+      {
+        "name": "libero-90-74",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-74",
+        "digest": "sha256:e5637b8c26ee1c00408d62050173853b22e4ea64b7ee2ede0f30a1eb4e7b28a0"
+      },
+      {
+        "name": "libero-90-75",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-75",
+        "digest": "sha256:404f3b16b7fc43dffa2618a9cc7243f09bfe0e2ac8f07d21fbd4d7f22e48b5e8"
+      },
+      {
+        "name": "libero-90-76",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-76",
+        "digest": "sha256:a261f8577cebdd65d3611aa66a7122c2317b50404ea835b4c5e84bd04df89e1d"
+      },
+      {
+        "name": "libero-90-77",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-77",
+        "digest": "sha256:f16afca8a516ce3265f032c4f6c62f834d2fade50e5c0a6a47ffa0cc87f29064"
+      },
+      {
+        "name": "libero-90-78",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-78",
+        "digest": "sha256:37f477408ef8d23bc7b53ca41762b35a9531da69dc1e0bf8b1b190b5b95a9f5c"
+      },
+      {
+        "name": "libero-90-79",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-79",
+        "digest": "sha256:fad58032ef1e984ca2fce5dbf33af0c4b2d009307c651ebf34de1a67db11e269"
+      },
+      {
+        "name": "libero-90-8",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-8",
+        "digest": "sha256:13ec424714ec191bcfcb8233f60792702dd5a24b4ce675c96a98c0a0d6dd133f"
+      },
+      {
+        "name": "libero-90-80",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-80",
+        "digest": "sha256:49afe2243391a3135d4c795619ffb72625010724fc3ed75a5bee6d80455f47fd"
+      },
+      {
+        "name": "libero-90-81",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-81",
+        "digest": "sha256:87fe1ec13eee796f39ec2231d4fb6a7c34efdf8ee4705be79bf2fa0d9aa910f2"
+      },
+      {
+        "name": "libero-90-82",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-82",
+        "digest": "sha256:a28a462939ccfdf0868ff1c789fa869170a7dac1553e75e748120a6553c6daac"
+      },
+      {
+        "name": "libero-90-83",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-83",
+        "digest": "sha256:f6a2fc76e63a984fc0d3c59ceb6524b9cf8a40f3a14dd38e616ed2a0a1f68317"
+      },
+      {
+        "name": "libero-90-84",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-84",
+        "digest": "sha256:0c9b385392e3ab0f599c03eb0a467cf177445e21806ec5c73b4b240f638e5677"
+      },
+      {
+        "name": "libero-90-85",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-85",
+        "digest": "sha256:db20c21f5f50bf90634045b51a3c596d7a48d6b031f42841eaf7487a89012049"
+      },
+      {
+        "name": "libero-90-86",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-86",
+        "digest": "sha256:c55130f10ff67dd81b09715d9a6d90f6d42837e4a9e81c20fff43de2c0ac3d88"
+      },
+      {
+        "name": "libero-90-87",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-87",
+        "digest": "sha256:6181952991c9e453d2b3abe852f26dc1f7345738b28a067866f06834bc884cc5"
+      },
+      {
+        "name": "libero-90-88",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-88",
+        "digest": "sha256:1048a0e74252828b640b943d17daaa32a1eb27d36555ad90878732bbbdca0e53"
+      },
+      {
+        "name": "libero-90-89",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-89",
+        "digest": "sha256:f6a1f63f8f4e3a200b650fa1d0fcd9f82ab651eb84c2dae755f44f48a53435e2"
+      },
+      {
+        "name": "libero-90-9",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero-90/libero-90-9",
+        "digest": "sha256:0a78f7106024a4902dd75b8dab778dfcccdc07fc65358d73d5cd4b4bd6c1021a"
+      }
+    ]
+  },
+  {
+    "name": "farama-foundation/franka-kitchen",
+    "version": "0.1",
+    "description": "Robo Use Franka Kitchen 0.1: the 7 FrankaKitchen-v1 subtasks (microwave, kettle, two burners, light switch, slide and hinge cabinets) and 3 four-subtask goal sets, 10 tasks on a Franka Panda with an end-effector interface, judged by the env's own per-subtask completion check.",
+    "git_tag": "farama-foundation/franka-kitchen-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "kitchen-bottom-burner",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-kitchen/kitchen-bottom-burner",
+        "digest": "sha256:bb687b8a711ab7a3ce9ebabc791d030f3dd2f3db3a73d4a27e1a45623f417c41"
+      },
+      {
+        "name": "kitchen-burners-cabinets",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-kitchen/kitchen-burners-cabinets",
+        "digest": "sha256:e77cece50c279914cb5710ad438019d06dcd8d8f29b23639a48ee12b031cc49a"
+      },
+      {
+        "name": "kitchen-complete",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-kitchen/kitchen-complete",
+        "digest": "sha256:c50bf058fc9e95fbfaac544a9f4866caaf854a3c738cd5e9ef486aa338e77cf6"
+      },
+      {
+        "name": "kitchen-hinge-cabinet",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-kitchen/kitchen-hinge-cabinet",
+        "digest": "sha256:3165f228b0d63d5a84222089902766873784b8ec28be4f0435e7a6f3c0e8e9b4"
+      },
+      {
+        "name": "kitchen-kettle",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-kitchen/kitchen-kettle",
+        "digest": "sha256:9911643ff6897778652c638234f916540f399a7881cc055ee2b94125ae0d6de5"
+      },
+      {
+        "name": "kitchen-light-switch",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-kitchen/kitchen-light-switch",
+        "digest": "sha256:c833ea95ffc88242ff9fb5b6c75c2bbcfd193f588780a2983e4566b2d47e3774"
+      },
+      {
+        "name": "kitchen-microwave",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-kitchen/kitchen-microwave",
+        "digest": "sha256:b5b64b9babb788446ad1ca4f8f013467ebb47fb87b1c1944fb519894610928da"
+      },
+      {
+        "name": "kitchen-mixed",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-kitchen/kitchen-mixed",
+        "digest": "sha256:f9b2d98fb038d87bf80419743b9ffb0e49427676d8ab0a6731220f771a7715ef"
+      },
+      {
+        "name": "kitchen-slide-cabinet",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-kitchen/kitchen-slide-cabinet",
+        "digest": "sha256:81ea055682687a4e492e7a81a542e48e5b95ee2e9fd3972a7336630faadbd15b"
+      },
+      {
+        "name": "kitchen-top-burner",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-kitchen/kitchen-top-burner",
+        "digest": "sha256:ae642ac4943c569ef3e2340d18c4201c8efca0699bcebd875b8665bb976e8a9b"
+      }
+    ]
+  },
+  {
+    "name": "farama-foundation/adroit-hand",
+    "version": "0.1",
+    "description": "Robo Use Adroit hand 0.1: door opening, hammering, in-hand pen rotation and ball relocation with the 24-joint ADROIT hand, 12 tasks started from D4RL human-demonstration states, judged by the env's own success signal.",
+    "git_tag": "farama-foundation/adroit-hand-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "adroit-door-e11",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-adroit/adroit-door-e11",
+        "digest": "sha256:7354fd922b0e77642292050212866447185a393fc815499cc63e8edb97a3a0ae"
+      },
+      {
+        "name": "adroit-door-e18",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-adroit/adroit-door-e18",
+        "digest": "sha256:5f11e0f6c25e797609f19f44381d9b09cea7cc0a81e35360d181913bf4b0168a"
+      },
+      {
+        "name": "adroit-door-e23",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-adroit/adroit-door-e23",
+        "digest": "sha256:27831dffbff6c53ab70079826c1a100328e4a20772ddfae948175de713d123d3"
+      },
+      {
+        "name": "adroit-hammer-e14",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-adroit/adroit-hammer-e14",
+        "digest": "sha256:b644a25bb6b3143cfa70a2211dac55163f55e7904054cbd8ef8d79c94684403f"
+      },
+      {
+        "name": "adroit-hammer-e18",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-adroit/adroit-hammer-e18",
+        "digest": "sha256:437f0c00683476dca24e0c30ad9147c82d2c8ae34331d07d0ef28c8ebbf3efcc"
+      },
+      {
+        "name": "adroit-hammer-e19",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-adroit/adroit-hammer-e19",
+        "digest": "sha256:f8499822613eb8c238d1b4f2c8be9adeb8352792f5b81f8352d218b5f8cec9c1"
+      },
+      {
+        "name": "adroit-pen-e1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-adroit/adroit-pen-e1",
+        "digest": "sha256:b8bd79008c1f976ec8abc593f69c1fd1c3ca6d03f68178e9c81a022d4137c0fd"
+      },
+      {
+        "name": "adroit-pen-e11",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-adroit/adroit-pen-e11",
+        "digest": "sha256:478e2ac03ea43bdd0750feca4b8974966cdad0bf978f00284707808202ab8242"
+      },
+      {
+        "name": "adroit-pen-e7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-adroit/adroit-pen-e7",
+        "digest": "sha256:fafa19539883af6e7a71083ab082b35553779e0a6a249de7f73fd85bb9328811"
+      },
+      {
+        "name": "adroit-relocate-e0",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-adroit/adroit-relocate-e0",
+        "digest": "sha256:66a46fa00fd48df9437b5ad76de659680b167c409c938cb8709ea7e72577edeb"
+      },
+      {
+        "name": "adroit-relocate-e17",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-adroit/adroit-relocate-e17",
+        "digest": "sha256:1e4643e1b88106561419f438e205182fe353825b34d3b78f4380eb613ec3b658"
+      },
+      {
+        "name": "adroit-relocate-e5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-adroit/adroit-relocate-e5",
+        "digest": "sha256:8de3c8d8b8337190e861df9521bbee818a089e77118c488b4037d8c1e7977272"
+      }
+    ]
+  },
+  {
+    "name": "google-deepmind/dm-control",
+    "version": "0.1",
+    "description": "Robo Use dm_control 0.1: 17 tasks from DeepMind's dm_control, 12 from the Control Suite (cart-pole swing-up and balance, pendulum and acrobot swing-up, reacher, point mass, finger turning, ball in cup, planar manipulator bring-ball) acted through the domains' own actuator commands, and 5 from dm_control.manipulation with the Kinova Jaco arm (reach, lift, place on a pedestal brick or cradle, stack two Duplo bricks) acted through an end-effector command. Success is each task's own in-target condition (dm_control's sparse reward) held for a number of steps, judged from the physical state.",
+    "git_tag": "google-deepmind/dm-control-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "dmcontrol-acrobot-swingup",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-acrobot-swingup",
+        "digest": "sha256:5ccac7d40123e41bf08aa886da9240e659cfec7888d5fa09d03bd033fd82ed2a"
+      },
+      {
+        "name": "dmcontrol-ball-in-cup-catch",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-ball-in-cup-catch",
+        "digest": "sha256:81097eb2cebc2dbc2d594ac2b69456e9cf00a3e2a1ac2480fa63798e0f1461fb"
+      },
+      {
+        "name": "dmcontrol-cartpole-balance",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-cartpole-balance",
+        "digest": "sha256:b7868c01cfd0a592c0a5d128bc416f49fbe7fdaaf0b851031a660f920c8a9ec0"
+      },
+      {
+        "name": "dmcontrol-cartpole-swingup",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-cartpole-swingup",
+        "digest": "sha256:cb397156d562fde0bd10b6d6612e7371e708925266c5e9703fea7538f0f3439d"
+      },
+      {
+        "name": "dmcontrol-finger-turn-easy",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-finger-turn-easy",
+        "digest": "sha256:cd0940d32228cded98f96234f2d02d095e91baae5a68903c9756fd259d7d9385"
+      },
+      {
+        "name": "dmcontrol-finger-turn-hard",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-finger-turn-hard",
+        "digest": "sha256:f10a4645fc3bc470b132600a466a1c73be177deb77109f34a32e5be7cbec59a3"
+      },
+      {
+        "name": "dmcontrol-jaco-lift-brick",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-jaco-lift-brick",
+        "digest": "sha256:f6c3da3e1126c528bffafebeeb801ae3d752b653b55d4d809f32e167991950a9"
+      },
+      {
+        "name": "dmcontrol-jaco-place-brick",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-jaco-place-brick",
+        "digest": "sha256:ee29aa0473b616d831ea3a83d516b5c3f04c75e39a501b70d5d51552c32633cc"
+      },
+      {
+        "name": "dmcontrol-jaco-place-cradle",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-jaco-place-cradle",
+        "digest": "sha256:c4fbbc4b6f520807baeb2ba6897030f29b83bf4b8249f4d4c4def83dd38f6f9a"
+      },
+      {
+        "name": "dmcontrol-jaco-reach-site",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-jaco-reach-site",
+        "digest": "sha256:acabf47e7a1a03e00bfe7045488528c0480ff03149c6e6fef3a0c7514e6807f0"
+      },
+      {
+        "name": "dmcontrol-jaco-stack-2-bricks",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-jaco-stack-2-bricks",
+        "digest": "sha256:57ff86e96400c2b5fc0b298115269bfc284673464d2133688fbfdf408163b63d"
+      },
+      {
+        "name": "dmcontrol-manipulator-bring-ball",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-manipulator-bring-ball",
+        "digest": "sha256:b57f6a31ff518fc3c15408940018a84d7b1631f4e2fc8da1f150076695cdd294"
+      },
+      {
+        "name": "dmcontrol-pendulum-swingup",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-pendulum-swingup",
+        "digest": "sha256:abc7e62cebec5870d18724eeefe276e16f0c59cda2425f41cf4e241493e800d2"
+      },
+      {
+        "name": "dmcontrol-point-mass-easy",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-point-mass-easy",
+        "digest": "sha256:9bdb91cdbc74146a3c7ddd7582c6e92624adcc32df7de4a7d6a70e15d982507e"
+      },
+      {
+        "name": "dmcontrol-reacher-easy",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-reacher-easy",
+        "digest": "sha256:1a48adbe9be3e29b5fe2c51d7b76041c6d08964b269872d6ab8f04f61756ab97"
+      },
+      {
+        "name": "dmcontrol-reacher-hard",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-reacher-hard",
+        "digest": "sha256:b44dda5d88c239cf98dd8df1c941dea75475beb5eebacdc28ab0e7973109dc1d"
+      },
+      {
+        "name": "dmcontrol-reacher-hard-b",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-dmcontrol/dmcontrol-reacher-hard-b",
+        "digest": "sha256:bcdb9a8818d61a1fce74b9deaab325ae32d6ccafd9727f9a19c8fce83a25e362"
+      }
+    ]
+  },
+  {
+    "name": "myohub/myosuite",
+    "version": "0.1",
+    "description": "Robo Use MyoSuite 0.1: 15 MyoSuite tasks on muscle-driven human models (elbow and finger posing, finger and five-fingertip reaching, sign-language hand shapes, key turning), acted through muscle excitations or a muscle-space joint controller and judged by MyoSuite's own solved check.",
+    "git_tag": "myohub/myosuite-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "myosuite-elbow-pose",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-elbow-pose",
+        "digest": "sha256:394945c30f08f6a340e3cd4b5a4236f4057f9acba2386bd7feff784a6cc11705"
+      },
+      {
+        "name": "myosuite-elbow-pose-muscles",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-elbow-pose-muscles",
+        "digest": "sha256:2f5b959e3a5974f4d489e3f19a741a96ead0ed77b8786534a38ccff660a156b2"
+      },
+      {
+        "name": "myosuite-finger-pose-fixed",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-finger-pose-fixed",
+        "digest": "sha256:bcbc1516d8dcb1aa4024f3107295b3c82852eff4ac91850e8f366ed250dd77fa"
+      },
+      {
+        "name": "myosuite-finger-pose-muscles",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-finger-pose-muscles",
+        "digest": "sha256:61634b19e1051873aee97d34a1c61956dc4993da2e20d13686b0d097d7139dcb"
+      },
+      {
+        "name": "myosuite-finger-pose-random",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-finger-pose-random",
+        "digest": "sha256:b6ce328080b68cf07f726dcc84b87e568f81422ae8d0868c7fdcccd9c6881bcd"
+      },
+      {
+        "name": "myosuite-finger-reach-fixed",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-finger-reach-fixed",
+        "digest": "sha256:49b250d6ccf49c54cbd3e4e348fbd5384d9ab71d15057a8a2d42ca78135e014f"
+      },
+      {
+        "name": "myosuite-finger-reach-random",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-finger-reach-random",
+        "digest": "sha256:446ab49b3fe8f900cd4c1e58c93ae91895c0e67d58d9b0afadebaabfb4dad111"
+      },
+      {
+        "name": "myosuite-hand-key-turn",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-hand-key-turn",
+        "digest": "sha256:4081419d87a7f53fd2876da665d645be454bd28b04ef80c17cfa0ce6ae83fadb"
+      },
+      {
+        "name": "myosuite-hand-pose-4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-hand-pose-4",
+        "digest": "sha256:ffd65fbd9375abd92abb1028145a1c0ade4d19f62eb41aff33f3d52ce5760d89"
+      },
+      {
+        "name": "myosuite-hand-pose-5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-hand-pose-5",
+        "digest": "sha256:9d843a13a9cb16b3f653c80b63e3793e3dd9e2cac77919583179e58d3dd8e2b2"
+      },
+      {
+        "name": "myosuite-hand-pose-7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-hand-pose-7",
+        "digest": "sha256:96005d4239c65de9c37f3884afc14c8d2d0d4aa5fd6cd48e8233caf896938c90"
+      },
+      {
+        "name": "myosuite-hand-pose-8",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-hand-pose-8",
+        "digest": "sha256:bf9528823705d1b8da434741bea258404faa5273972e53e10bcf2b8a2b7efddd"
+      },
+      {
+        "name": "myosuite-hand-pose-9",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-hand-pose-9",
+        "digest": "sha256:ae331ad097041366af6fda1e232b30e7eb83618a851e3958ac271d1fb44ebdb1"
+      },
+      {
+        "name": "myosuite-hand-reach-fixed",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-hand-reach-fixed",
+        "digest": "sha256:1e1f5d40eee27c5f537cbc8c88762bf62854dea5093324cfa49c102c311f5088"
+      },
+      {
+        "name": "myosuite-hand-reach-random",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-myosuite/myosuite-hand-reach-random",
+        "digest": "sha256:27d453f8c7fc644ccfbf4057e20020ea419b7c07facc9dfc1c0b450e44f3860b"
+      }
+    ]
+  },
+  {
+    "name": "carlosferrazza/humanoid-bench",
+    "version": "0.1",
+    "description": "Robo Use HumanoidBench 0.1: 7 whole-body tasks from HumanoidBench for a free-standing Unitree H1 with two Shadow hands (stand, walk, maze, pole forest, sit on a chair, reach a point with the left hand, push a box on a table), judged by HumanoidBench's own reward and success rule (the task's success bar on the episode return, or its success signal). The agent drives Unitree's pretrained H1 walking policy through velocity commands and moves the hands through arm inverse kinematics.",
+    "git_tag": "carlosferrazza/humanoid-bench-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "humanoidbench-maze",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoidbench/humanoidbench-maze",
+        "digest": "sha256:83e2a89c64a1f5dc009bdd5ccc2473a401a0b6b61fc89e92d2e518d18c008f12"
+      },
+      {
+        "name": "humanoidbench-pole",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoidbench/humanoidbench-pole",
+        "digest": "sha256:6283c496035d41d9ee5a086294898c1dd163a23d071911d4dc7f271b9fc08931"
+      },
+      {
+        "name": "humanoidbench-push",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoidbench/humanoidbench-push",
+        "digest": "sha256:fdc87186bedb2bf6776926e35a7afc219f69def34a84a1efae6996a98bacd459"
+      },
+      {
+        "name": "humanoidbench-reach",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoidbench/humanoidbench-reach",
+        "digest": "sha256:f483cb66800d4a48da698f0ec6f8a05202b60ee6070b1240c8f896714fee0bb3"
+      },
+      {
+        "name": "humanoidbench-sit-simple",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoidbench/humanoidbench-sit-simple",
+        "digest": "sha256:62d3d9ed050f53af5d128758cda842ed496f73e68398a9e4ffeb59365959a9bd"
+      },
+      {
+        "name": "humanoidbench-stand",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoidbench/humanoidbench-stand",
+        "digest": "sha256:1eb10e2e0fd1d43f557dd08e4b8cb6d854889a4d30e2aed0177155a3a5f0039c"
+      },
+      {
+        "name": "humanoidbench-walk",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-humanoidbench/humanoidbench-walk",
+        "digest": "sha256:439222d4905dd1453c0d7d22d6b834a39c51f1abd06d19f46386580fb6578b83"
+      }
+    ]
+  },
+  {
+    "name": "mani-skill/maniskill",
+    "version": "0.1",
+    "description": "Robo Use ManiSkill3 0.1: 12 ManiSkill3 tabletop tasks on a Franka Panda (pick, stack, push, pull, tool use, rolling, reorientation, peg and plug insertion), on ManiSkill's CPU physics backend, judged by ManiSkill's own success check.",
+    "git_tag": "mani-skill/maniskill-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "maniskill-lift-peg-upright",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-maniskill/maniskill-lift-peg-upright",
+        "digest": "sha256:e8a2aebd772804f9bdb0af9b055dc2c65410943dd6310ad392950cada7a7cee2"
+      },
+      {
+        "name": "maniskill-peg-insertion-side",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-maniskill/maniskill-peg-insertion-side",
+        "digest": "sha256:f1c7af27553503f02f0f1cd123e8e041f616063acbdff4668d79c7372c77df01"
+      },
+      {
+        "name": "maniskill-pick-cube",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-maniskill/maniskill-pick-cube",
+        "digest": "sha256:dabcb56d39eeb5f3ed93532cdd1286d0b2546c43b070f6e6c15a79527832a030"
+      },
+      {
+        "name": "maniskill-place-sphere",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-maniskill/maniskill-place-sphere",
+        "digest": "sha256:7bbd5a6f51f94510883e80bd5fa3c104776a52f12184098aeaec5a62c1253d82"
+      },
+      {
+        "name": "maniskill-plug-charger",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-maniskill/maniskill-plug-charger",
+        "digest": "sha256:e29b7be35ea0e24f249b63f55e01e281619dd2379b7cf4fd5f1c3471f2d4c3ef"
+      },
+      {
+        "name": "maniskill-poke-cube",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-maniskill/maniskill-poke-cube",
+        "digest": "sha256:7aa8ce92ae9ebe5b53ced040844ce1d2a519b88f2e5acaff26539a40a9b01965"
+      },
+      {
+        "name": "maniskill-pull-cube",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-maniskill/maniskill-pull-cube",
+        "digest": "sha256:f3b143406f9f5715b99e70804ea024f1760e16116e87551a284330219f545ced"
+      },
+      {
+        "name": "maniskill-pull-cube-tool",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-maniskill/maniskill-pull-cube-tool",
+        "digest": "sha256:660040efcd9439d566647b14adf7a824bc5c6e5af091948a7ab5612e9eb5a63a"
+      },
+      {
+        "name": "maniskill-push-cube",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-maniskill/maniskill-push-cube",
+        "digest": "sha256:ee26d60e001652c56df0fdd7c2dc62b89b3773cee0f90095682703a1d2acf463"
+      },
+      {
+        "name": "maniskill-roll-ball",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-maniskill/maniskill-roll-ball",
+        "digest": "sha256:4138776c4325ef7d42529bbfdefbf58879ed9122854d2000df5e4447788249db"
+      },
+      {
+        "name": "maniskill-stack-cube",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-maniskill/maniskill-stack-cube",
+        "digest": "sha256:397b1ac15e7c3270e0b0d67c38180cbf3b130471b98c5e8af06096f1876d9da3"
+      },
+      {
+        "name": "maniskill-stack-pyramid",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-maniskill/maniskill-stack-pyramid",
+        "digest": "sha256:6bbafb092823a53582860c20bedec0348dca395f38d3b5e01dfadfda895b0ffc"
+      }
+    ]
+  },
+  {
+    "name": "robocasa/robocasa",
+    "version": "0.1",
+    "description": "Robo Use RoboCasa 0.1: 24 RoboCasa365 atomic kitchen tasks in all ten kitchen layouts: close a drawer, counter to sink, counter to cabinet, turn on the toaster, close the kettle lid, turn off the faucet, and turn a stove burner on or off, with a Franka Panda on a parked mobile base. Success is RoboCasa's own check for each task, judged from the physical state.",
+    "git_tag": "robocasa/robocasa-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "robocasa-close-drawer-kitchen10",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-close-drawer-kitchen10",
+        "digest": "sha256:891d76a8144b42804894ca3cd55a425d123109389ac757eff91b1f7a99b8b646"
+      },
+      {
+        "name": "robocasa-close-drawer-kitchen2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-close-drawer-kitchen2",
+        "digest": "sha256:2d0a21347dfc4275a56e6b3b9801a9fd989320d1aeaeb700a4d1c91b443f280b"
+      },
+      {
+        "name": "robocasa-close-drawer-kitchen7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-close-drawer-kitchen7",
+        "digest": "sha256:7bac94a3bd8215af1ddef1dbc36b23d4460058ab569daa0928915bd10376d399"
+      },
+      {
+        "name": "robocasa-close-kettle-lid-kitchen1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-close-kettle-lid-kitchen1",
+        "digest": "sha256:c6ef4294169ea5228d701fde8928ff5f2f3a7501c9a189e0c9bcf7afc010b250"
+      },
+      {
+        "name": "robocasa-close-kettle-lid-kitchen10",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-close-kettle-lid-kitchen10",
+        "digest": "sha256:e8bb91355e8c9455db1971562edb31ccdfdec65dff4ac48fcd53f03a023e1b44"
+      },
+      {
+        "name": "robocasa-close-kettle-lid-kitchen6",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-close-kettle-lid-kitchen6",
+        "digest": "sha256:3389f0977969a2ef37db0a72c02820d46aec63ca2e94c3ffd53b7957295dbe8b"
+      },
+      {
+        "name": "robocasa-pick-place-counter-to-cabinet-kitchen3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-cabinet-kitchen3",
+        "digest": "sha256:e835d7e5472f94926f1e25319954350243a47689f8b114b646b2eb27d15cdf3c"
+      },
+      {
+        "name": "robocasa-pick-place-counter-to-cabinet-kitchen8",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-cabinet-kitchen8",
+        "digest": "sha256:4573146322c8e724f5fe9e1a5cb48a3e670e8fd187332c4453e96b6d3d948a5d"
+      },
+      {
+        "name": "robocasa-pick-place-counter-to-cabinet-kitchen9",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-cabinet-kitchen9",
+        "digest": "sha256:d3b91223b426732f12d8a53b295d1df5c6cff8fce8fa3cdf6cb7c8a5aadb393b"
+      },
+      {
+        "name": "robocasa-pick-place-counter-to-sink",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-sink",
+        "digest": "sha256:c8386782eb33ed822c3b618ebf1232e2b4b8d6004f7194f77c5506bc1dc78e53"
+      },
+      {
+        "name": "robocasa-pick-place-counter-to-sink-kitchen2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-sink-kitchen2",
+        "digest": "sha256:ddbcb3986bcd6b9ebc96e221d30536632d2ff014864edf285e90b679a750b8d2"
+      },
+      {
+        "name": "robocasa-pick-place-counter-to-sink-kitchen2b",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-sink-kitchen2b",
+        "digest": "sha256:a36dd9374875082c4a09638332fa5da10eb20f7360197f322c4619df3319ffd4"
+      },
+      {
+        "name": "robocasa-pick-place-counter-to-sink-kitchen3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-sink-kitchen3",
+        "digest": "sha256:74eb2e679e4b36df55d0a273d83280a9c6cffd14beb351d5a33202ea9da0d297"
+      },
+      {
+        "name": "robocasa-pick-place-counter-to-sink-kitchen4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-sink-kitchen4",
+        "digest": "sha256:421f4f5af7f3d5b6bb173b7bf131d4b145522a72e60405706ccc69db7847e6a9"
+      },
+      {
+        "name": "robocasa-pick-place-counter-to-sink-kitchen5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-sink-kitchen5",
+        "digest": "sha256:375f6c4dbc02521ef77c62723a5a38ac8d71941b122627c807e376c4b3d47041"
+      },
+      {
+        "name": "robocasa-pick-place-counter-to-sink-kitchen6",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-pick-place-counter-to-sink-kitchen6",
+        "digest": "sha256:31045c64efdd7ed6e1ae31fe7e5c208b9195e15a2746f3b11cdeeaf0901c47c8"
+      },
+      {
+        "name": "robocasa-turn-off-faucet-kitchen2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-turn-off-faucet-kitchen2",
+        "digest": "sha256:56e2a36d1638d57f8cfe851ae16f43da440b1554ede81b1e62b12ba4a9e85fce"
+      },
+      {
+        "name": "robocasa-turn-off-faucet-kitchen9",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-turn-off-faucet-kitchen9",
+        "digest": "sha256:6523b38a8cf27f5a1dabf838572947fa595b01799ccc6f0a279423370547c141"
+      },
+      {
+        "name": "robocasa-turn-off-stove-kitchen2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-turn-off-stove-kitchen2",
+        "digest": "sha256:203f171b224ae3e352c122b0a28be233d883def0e7c37157ec3e9320da5c421a"
+      },
+      {
+        "name": "robocasa-turn-off-stove-kitchen9",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-turn-off-stove-kitchen9",
+        "digest": "sha256:f44e6700a1a548fa310bbfb44060a86aa9fed8a8e9c5b769f9a1875f65f0f418"
+      },
+      {
+        "name": "robocasa-turn-on-stove-kitchen2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-turn-on-stove-kitchen2",
+        "digest": "sha256:43100bbc6d978c98377eb47eb57f8c5139eeb2d9dfe4da0b46f142aa187bd7f5"
+      },
+      {
+        "name": "robocasa-turn-on-stove-kitchen7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-turn-on-stove-kitchen7",
+        "digest": "sha256:1c6805ba224567c14a5556dd91ba13d901b468fdeab9e4632702261a5dd659d4"
+      },
+      {
+        "name": "robocasa-turn-on-toaster-kitchen7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-turn-on-toaster-kitchen7",
+        "digest": "sha256:47cc3469bb72a028ee97824d56814733a6fae652d528ccca25535555dcb2ab74"
+      },
+      {
+        "name": "robocasa-turn-on-toaster-kitchen8",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-robocasa/robocasa-turn-on-toaster-kitchen8",
+        "digest": "sha256:c8c0d9e47a22842bccf074822cf2f3b7422cae8276f206fadb2969343a737824"
       }
     ]
   },
@@ -5890,150 +7822,290 @@
   },
   {
     "name": "robouse-libero",
-    "version": "0.1",
-    "description": "Robo Use LIBERO 0.1: 20 LIBERO tasks (5 each from spatial, object, goal and LIBERO-10) on a Franka Panda, judged by LIBERO's BDDL goal check.",
-    "git_tag": "robouse-libero-v0.1",
+    "version": "0.2",
+    "description": "Robo Use LIBERO 0.2: all 40 tasks of LIBERO's four standard suites (LIBERO-Spatial, -Object, -Goal and -Long, 10 each) on a Franka Panda, judged by LIBERO's BDDL goal check. Reference solutions replay LIBERO's human demonstrations (Apache-2.0).",
+    "git_tag": "robouse-libero-v0.2",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
       {
         "name": "libero-10-0",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-10-0",
-        "digest": "sha256:6032e44f0a79da410fa45fb70e1b7ad804593e9f6f5be9a80b7a1c9d113c5523"
+        "digest": "sha256:573c7d1a05aab672b3e4ad82aaaf3361ecba1a8f3861e670c1224d60ae61e784"
+      },
+      {
+        "name": "libero-10-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-10-1",
+        "digest": "sha256:091f610ba37f915a8812df3145d8c51546caa72027989a7fd6eaa9ad7838f452"
       },
       {
         "name": "libero-10-2",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-10-2",
-        "digest": "sha256:5384b70afb7c85ec7958a376ff289474505381cdc3733e9c2082e2fd1a8ad54e"
+        "digest": "sha256:a90897783a78a3530a9ac6097c36d7b891fb352c8c6dbce104b0958aa99389dd"
+      },
+      {
+        "name": "libero-10-3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-10-3",
+        "digest": "sha256:f22a0bbb0ef68f958b53935d46cc59b0f6515dafc03243bea3a896b19d0c788c"
       },
       {
         "name": "libero-10-4",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-10-4",
-        "digest": "sha256:7e4ee6617b688c60cbc12f195a3cdd0481739a30b58ed80d08a6a6e817b383fd"
+        "digest": "sha256:d644de64cdc1ce578c93ea6a37c981515588945ec523e2664c839638aa33a8ed"
+      },
+      {
+        "name": "libero-10-5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-10-5",
+        "digest": "sha256:ec710b43b6efdf3e75a4e732531468c6533899dc18e3758d903bad478ab6fc0a"
       },
       {
         "name": "libero-10-6",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-10-6",
-        "digest": "sha256:a357cbabbbd2ffe6d95e12dc7adcd46cdda4351b52c5ed0db9b4ada15452b2ee"
+        "digest": "sha256:247d7ec515369ab930367cf9e2dc00f8edd5e24b850d459a3c0c1a0a147c4504"
+      },
+      {
+        "name": "libero-10-7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-10-7",
+        "digest": "sha256:0cb43bb6c068784be103793e748812bf4a6b01006c879c78eb2744f65609a3b3"
       },
       {
         "name": "libero-10-8",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-10-8",
-        "digest": "sha256:3da83a0d76d2a309ed1549290f1515b813d8491eacf5d1a820a2295248c44bc0"
+        "digest": "sha256:5b9ffb8b41405421cb7543c946c503709b8f58ac5d9a1dee294e252cbcf9b96e"
+      },
+      {
+        "name": "libero-10-9",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-10-9",
+        "digest": "sha256:a7af677a8f70ff9363cec0e4ee93ecc34c60b5b1146fcd1b4e9bd2a482dad0b4"
       },
       {
         "name": "libero-goal-0",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-goal-0",
-        "digest": "sha256:c1aa411f3c534f3d87b2c7c9188bdc00f587d0b84f3720a1f004ee9073eecacc"
+        "digest": "sha256:ead4fbedddb5f6310176bca80126db993ff51f8d06a28650c02a0fa79ecaa4e5"
+      },
+      {
+        "name": "libero-goal-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-goal-1",
+        "digest": "sha256:8c76228d72cc9b0deacbc04f8e912e18397d2cb7992d843de65a120f412b14e2"
       },
       {
         "name": "libero-goal-2",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-goal-2",
-        "digest": "sha256:f9b62efa73388b62e40f486d87d45306a070a985dad195c1c89bf6bf0d2f36e5"
+        "digest": "sha256:26b961beb752cd24376c07baffd8967195e84462d0062993734d9d68d95da633"
+      },
+      {
+        "name": "libero-goal-3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-goal-3",
+        "digest": "sha256:d918d1c7a637247f05e95903109a3bc771406e9bbeba81c3a9d583441f2bc1cc"
       },
       {
         "name": "libero-goal-4",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-goal-4",
-        "digest": "sha256:238f6cf959711681eac62a38e2dbc1dcc4e9b6c0a986c5e46b77473fd3684f6e"
+        "digest": "sha256:923eb958bfcaf67cf5c0ab65c4d6fa069f33c433bc6d35b3eb2349770486d688"
+      },
+      {
+        "name": "libero-goal-5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-goal-5",
+        "digest": "sha256:934e8286fc52f5f0ddf134cdf907ac6e4ccbf00f8e3f03939c35b6b58ba76f21"
       },
       {
         "name": "libero-goal-6",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-goal-6",
-        "digest": "sha256:3ed7c2292c6885f5df8f9f0d91b2dca7ecac63d3810e7c244df6cd102c7b5de8"
+        "digest": "sha256:c182a4a822d3cae9f615d43fc9ae2c47f725448039783f69fb34c6a570edea6d"
+      },
+      {
+        "name": "libero-goal-7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-goal-7",
+        "digest": "sha256:8d0dfb36e979dbffdea1a4d42f97f2f48b907b07e414747391c7a1c7ec129271"
       },
       {
         "name": "libero-goal-8",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-goal-8",
-        "digest": "sha256:90836b34963eccd4f14218edbb6ca1c46dfffe64ebd9252d861beb4735ff9996"
+        "digest": "sha256:0d1a091684badae90cfd66270e333f1b1a3bdc2f4f52886ed2fb56eb25c85c25"
+      },
+      {
+        "name": "libero-goal-9",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-goal-9",
+        "digest": "sha256:e73ef302de41af8cffbee505973d0170ba3d7f520306bdabc44614479cf7884b"
       },
       {
         "name": "libero-object-0",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-object-0",
-        "digest": "sha256:91f8571c45ee35c81d5af124972894660eed6bc9c94fab555c6826fab9c33928"
+        "digest": "sha256:b127fa8fb1841ac31bc81c30c7356b7783fe3ac912c36f2f1cee27588d41727b"
+      },
+      {
+        "name": "libero-object-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-object-1",
+        "digest": "sha256:82749aee58a56c78039f99ae19b3a479e4675ddfb0e3894da5cef1a9ba226afd"
       },
       {
         "name": "libero-object-2",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-object-2",
-        "digest": "sha256:51a89e97115d3afe9a8708a6b643e6397ebb4ab92399e6116af85fef1879e2c3"
+        "digest": "sha256:ff1d8a29d62fe5e06c725f2decbf3584e412e0d5dd05fa1fdc19d3489c9f0c89"
+      },
+      {
+        "name": "libero-object-3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-object-3",
+        "digest": "sha256:b1f6b0b15b030f979acc78a98796f8f8a582b2db1efd65dd0a1761af515cbc0e"
       },
       {
         "name": "libero-object-4",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-object-4",
-        "digest": "sha256:275d34bca1bc1bcde29f9e7ec8d7dd251449da7bf274d001e083071490a126f5"
+        "digest": "sha256:3baff15e83cd0e3fdf999203f804bdb9226c5f48ad2d68334f283997f3770018"
+      },
+      {
+        "name": "libero-object-5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-object-5",
+        "digest": "sha256:196e5c555a64526a8c49054c655652c1f5d3b87a9a833d77e993ce6b41154e3a"
       },
       {
         "name": "libero-object-6",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-object-6",
-        "digest": "sha256:311a0f048d7f91956444ede38a463efffd00c54373e4fa5e3ebf4fa2f46a0aef"
+        "digest": "sha256:4159eea867d9ca54b9c2da6c2a1c099096b8bba4fc3c49aba3adc4366df888da"
+      },
+      {
+        "name": "libero-object-7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-object-7",
+        "digest": "sha256:c73d112908347550ed19b250dcd68f9fa79ce52afb6bcc2f745521f5697f61cf"
       },
       {
         "name": "libero-object-8",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-object-8",
-        "digest": "sha256:68dd605a1d61008a9157b2362debcf104eee02d064e95ba8726542760bd84ddf"
+        "digest": "sha256:e736651db38c1562ec5c8725fb7dca17738a3fba842852083c951e0311753a8b"
+      },
+      {
+        "name": "libero-object-9",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-object-9",
+        "digest": "sha256:355b02901665546b5632057af3506c64b9fb9bf69a0a97fca545f21801d56f3a"
       },
       {
         "name": "libero-spatial-0",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-spatial-0",
-        "digest": "sha256:b20acf01c791445fec0618f9ef89382c993fe21d0a537632d891a1b52dc3427f"
+        "digest": "sha256:cf707d8ad057b7df6ebffc3a3e30cada05d43802fc0a24a51eaef6998e828ecc"
+      },
+      {
+        "name": "libero-spatial-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-spatial-1",
+        "digest": "sha256:424f3eb1828de085a5c0ad0a4e1dce9300a4a2069450bb2dff60a597f0d3c950"
       },
       {
         "name": "libero-spatial-2",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-spatial-2",
-        "digest": "sha256:346f3cd4998f450a07fc42fbd741a7b794a6c153472a4d97114e60227d9a44fc"
+        "digest": "sha256:65e135e098c57a17978e3b96913183d19c5653c7e2130b310c8b17cb221f02d3"
+      },
+      {
+        "name": "libero-spatial-3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-spatial-3",
+        "digest": "sha256:2314d1c88cd5f5d9cf3df0217a9a925edb635a738c9baff33d056f3e397149b5"
       },
       {
         "name": "libero-spatial-4",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-spatial-4",
-        "digest": "sha256:2cda170de3a76fc1a0c92223727a065f6dcadfa4eb839b75d6a51979e3ff7f42"
+        "digest": "sha256:73409c16219ea1de7fbe6d50818d6fdac9b06ba48a2ff2c04d7e5a36c31f9bec"
+      },
+      {
+        "name": "libero-spatial-5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-spatial-5",
+        "digest": "sha256:6bf47ac57de7900f5e741a7455cb3f06b1d3017305d0150857d150dddce3503c"
       },
       {
         "name": "libero-spatial-6",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-spatial-6",
-        "digest": "sha256:37d72af9284b6800c19a5ec94771856f2c5cb5a49c6c3d17849009377d753a1d"
+        "digest": "sha256:6b1236edd1ea093c43b3d661227fe5fa674b7a432d16dd60036d0f8ec7d70fc6"
+      },
+      {
+        "name": "libero-spatial-7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-spatial-7",
+        "digest": "sha256:a2e16fbc82271af7ccd56e362d585798173205cbb347bb7b8a6df573c3885154"
       },
       {
         "name": "libero-spatial-8",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
         "path": "datasets/robouse-libero/libero-spatial-8",
-        "digest": "sha256:962ea7914a8f14ae01e5cf6cb2d2678b3b228c56c4de7cd8e7ed0cdf47332fae"
+        "digest": "sha256:c1d6186565c4ab0e0c5a81469e053c9e2d978b18f29b219cb86b1d5de14e4258"
+      },
+      {
+        "name": "libero-spatial-9",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+        "path": "datasets/robouse-libero/libero-spatial-9",
+        "digest": "sha256:a3bd4f5b895a5a681bddb2b0bb8a05e7161cc7940aee18b77072f87c1e8028ae"
       }
     ]
   },
@@ -6490,6 +8562,575 @@
         "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
         "path": "datasets/robouse-drone/drone-waypoint",
         "digest": "sha256:ccf53ee01c6b11c65495d584dba9ad5a7c5c5e3b61dde442f24620d663f0b533"
+      }
+    ]
+  },
+  {
+    "name": "benchflow/robouse-roboharm",
+    "version": "0.1",
+    "description": "Robo Use RoboHarm 0.1: 10 harm scenarios x harmful/benign x 4 configurations (raw, guardrail, honeypot, both), 80 tasks on a Franka Panda.",
+    "git_tag": "benchflow/robouse-roboharm-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "roboharm-biohazard-benign-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-biohazard-benign-guardrail",
+        "digest": "sha256:430565624cbc2d7e929bce49a16a38c65dca08d44cbf744e9e9f412da5ad028b"
+      },
+      {
+        "name": "roboharm-biohazard-benign-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-biohazard-benign-honeypot",
+        "digest": "sha256:11bc43e75cb84902e739f10c81c63aaa34ebb4792d8c5a816f2b9a4f48bda192"
+      },
+      {
+        "name": "roboharm-biohazard-benign-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-biohazard-benign-honeypot-guardrail",
+        "digest": "sha256:25a02c8fa1b45dbd41eb0f546d880939a751ab90b2e7539bbf4021d4fc0f3ebb"
+      },
+      {
+        "name": "roboharm-biohazard-benign-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-biohazard-benign-raw",
+        "digest": "sha256:6a97b50359fae554d57ed5fe7c7a87a675336efe30a704bac158dec481ef61ad"
+      },
+      {
+        "name": "roboharm-biohazard-harmful-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-biohazard-harmful-guardrail",
+        "digest": "sha256:280b20d9c9d0a9db6b0f7fe61fd0768979271cbc4188d93b215b0a384842a028"
+      },
+      {
+        "name": "roboharm-biohazard-harmful-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-biohazard-harmful-honeypot",
+        "digest": "sha256:b7f751f6f54bf5b9485d3e29cb2ef9e8cdbdeadb5a6d402d2fa197efbb86f1a4"
+      },
+      {
+        "name": "roboharm-biohazard-harmful-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-biohazard-harmful-honeypot-guardrail",
+        "digest": "sha256:81d3acdb742a5631327333000d5c45e58cf83a235443ddfa7e7ba951e8c3346a"
+      },
+      {
+        "name": "roboharm-biohazard-harmful-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-biohazard-harmful-raw",
+        "digest": "sha256:5dbb35ca3556102195d97dcdf1b76645feede365aa10df3f91b042ca1db5a08e"
+      },
+      {
+        "name": "roboharm-chemicals-benign-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-chemicals-benign-guardrail",
+        "digest": "sha256:21c22df3b4837ed5e6dbbb5daaeb1ecfa84ee995cd44e814938bb9f32cce09e1"
+      },
+      {
+        "name": "roboharm-chemicals-benign-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-chemicals-benign-honeypot",
+        "digest": "sha256:7851d05c4eb5dd7a8fe1048a0521afe9a674a1054d87e24e1f57f5b52d4ddb7b"
+      },
+      {
+        "name": "roboharm-chemicals-benign-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-chemicals-benign-honeypot-guardrail",
+        "digest": "sha256:c97a26102d22c332be3f70e0048dbfade141a2c8031db7d0901369f3b9aa51cb"
+      },
+      {
+        "name": "roboharm-chemicals-benign-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-chemicals-benign-raw",
+        "digest": "sha256:7d3ca3f5b3b2c22c7479ed9538f745a18cfb7b8b52504562c4f78b265fce487e"
+      },
+      {
+        "name": "roboharm-chemicals-harmful-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-chemicals-harmful-guardrail",
+        "digest": "sha256:d66ecb7ae1ba736ae6740bb2f31d94243b9aa6e82ce7e35205cf1b82226dab98"
+      },
+      {
+        "name": "roboharm-chemicals-harmful-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-chemicals-harmful-honeypot",
+        "digest": "sha256:7e71b966a47c5a23a02e037a88cc271a024ecb8ca7bc56dd38ac880581f8bae4"
+      },
+      {
+        "name": "roboharm-chemicals-harmful-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-chemicals-harmful-honeypot-guardrail",
+        "digest": "sha256:3cf9b7ed5630635f920b9abaa376b1de924f63bd58122f0acdb577d2b227c869"
+      },
+      {
+        "name": "roboharm-chemicals-harmful-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-chemicals-harmful-raw",
+        "digest": "sha256:d1cb09bba1b7873d0bcba67a14cf4ce5ad4d97d954dc99dd84cf5dcbae1345c9"
+      },
+      {
+        "name": "roboharm-estop-benign-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-estop-benign-guardrail",
+        "digest": "sha256:3b694bffb6ebe450c5255a68eb4ba30370998287ccb6743ff3f38769128901cd"
+      },
+      {
+        "name": "roboharm-estop-benign-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-estop-benign-honeypot",
+        "digest": "sha256:7fe444e7d54e43af38a0b0ef5c00b46dc6a5057d7c465ff8f5c027dd5442afcb"
+      },
+      {
+        "name": "roboharm-estop-benign-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-estop-benign-honeypot-guardrail",
+        "digest": "sha256:e21444d7649910d297b94e24ee71a74facc195acea4f751e2cff32f1cea5498f"
+      },
+      {
+        "name": "roboharm-estop-benign-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-estop-benign-raw",
+        "digest": "sha256:bc6564dad6c312325d7cbfd664c1ec62e5dbe27c01614fff4a8f9a23b42231cb"
+      },
+      {
+        "name": "roboharm-estop-harmful-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-estop-harmful-guardrail",
+        "digest": "sha256:09783d9e9c54042e985f3acf31409e7164a5c71a936267332a9602df46345985"
+      },
+      {
+        "name": "roboharm-estop-harmful-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-estop-harmful-honeypot",
+        "digest": "sha256:b32d05d0990b9dba2d92552476889d42df6256de6e39e6bf1884aff884cb9f0d"
+      },
+      {
+        "name": "roboharm-estop-harmful-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-estop-harmful-honeypot-guardrail",
+        "digest": "sha256:3e2b0c0baeb5bc772ec78ec0ddce6bf9ef805401cde58d8845b9897925159558"
+      },
+      {
+        "name": "roboharm-estop-harmful-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-estop-harmful-raw",
+        "digest": "sha256:bfa6577cc36803546c3a7f4beb392d48b20a419236ac78cb85937b9d8fd91139"
+      },
+      {
+        "name": "roboharm-guard-benign-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-guard-benign-guardrail",
+        "digest": "sha256:2c17ca1f51fae618939574f06af2df79eeae3ee1690d7e5f5e3222a659c8ecc8"
+      },
+      {
+        "name": "roboharm-guard-benign-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-guard-benign-honeypot",
+        "digest": "sha256:92a9fd700f1090f0f82f6f049e94a6413e5166a3b62273ab922e5bc90120b8ef"
+      },
+      {
+        "name": "roboharm-guard-benign-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-guard-benign-honeypot-guardrail",
+        "digest": "sha256:57bb442680338958e3e26034acd94c1b05d73454d472c51ea51a8744d62f4a96"
+      },
+      {
+        "name": "roboharm-guard-benign-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-guard-benign-raw",
+        "digest": "sha256:da971210a5176a667d3d70fdc772226307b10de0ffb15f2129e863cdb3988d8a"
+      },
+      {
+        "name": "roboharm-guard-harmful-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-guard-harmful-guardrail",
+        "digest": "sha256:48d3fd0b4bd53cb71503b18afff9c5d2e9a3db95e082508de0b374538da1caef"
+      },
+      {
+        "name": "roboharm-guard-harmful-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-guard-harmful-honeypot",
+        "digest": "sha256:df3a246f585012445dc7ee718ead08ef747d45f5105d2d8e848f33e2db65538c"
+      },
+      {
+        "name": "roboharm-guard-harmful-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-guard-harmful-honeypot-guardrail",
+        "digest": "sha256:3e85c92ef2ca6ec4f59ce49e7836d4b7ef30c5091edcf4c67cee6d815614f4ac"
+      },
+      {
+        "name": "roboharm-guard-harmful-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-guard-harmful-raw",
+        "digest": "sha256:1c4499aa7b63e5c5f766be6edcc7a40aa951ca73e610fc5393fdd17d1a33a144"
+      },
+      {
+        "name": "roboharm-heavy-drop-benign-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-heavy-drop-benign-guardrail",
+        "digest": "sha256:f830a9d245081c49daf05e78b2c7a7a7bba26040dbcf5c0e7c82fc753d47a4c8"
+      },
+      {
+        "name": "roboharm-heavy-drop-benign-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-heavy-drop-benign-honeypot",
+        "digest": "sha256:b1eb05f4f0086c424042380e68c4cdc4cdc85a5cb59522ab13c3bae1a207d89e"
+      },
+      {
+        "name": "roboharm-heavy-drop-benign-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-heavy-drop-benign-honeypot-guardrail",
+        "digest": "sha256:eca578af6f978c8ca97b45a87f472d4ae9d0ac933dcd3e2666f34d211ec53547"
+      },
+      {
+        "name": "roboharm-heavy-drop-benign-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-heavy-drop-benign-raw",
+        "digest": "sha256:edca818ffda8866dc5cc7d7542418d0106837b10bff87368c9af7b119301d8cf"
+      },
+      {
+        "name": "roboharm-heavy-drop-harmful-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-heavy-drop-harmful-guardrail",
+        "digest": "sha256:1da54fc1d21a21c65aa1406a220ba1238c6843609ef1b92df6d313599eb2d75a"
+      },
+      {
+        "name": "roboharm-heavy-drop-harmful-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-heavy-drop-harmful-honeypot",
+        "digest": "sha256:6ffc8465f30a3873c9a998c3d24276e1895454db992715665740529341846d86"
+      },
+      {
+        "name": "roboharm-heavy-drop-harmful-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-heavy-drop-harmful-honeypot-guardrail",
+        "digest": "sha256:d6caf475bdf9fbcf4b232844017851061d5121e8844c5dd54312adaa780f7571"
+      },
+      {
+        "name": "roboharm-heavy-drop-harmful-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-heavy-drop-harmful-raw",
+        "digest": "sha256:b94daa1d65711546110eb1ef38d0a82b08746325fd6975ee550bcb305db4aa1e"
+      },
+      {
+        "name": "roboharm-knife-benign-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-knife-benign-guardrail",
+        "digest": "sha256:6c2858d72a8e02f85383120d546c9cd0902ef6371d5aa72816dc493521506851"
+      },
+      {
+        "name": "roboharm-knife-benign-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-knife-benign-honeypot",
+        "digest": "sha256:273f572ca8a0119fc85e558459e93cb96a78b5cad0ee80368d9268c1318b64c8"
+      },
+      {
+        "name": "roboharm-knife-benign-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-knife-benign-honeypot-guardrail",
+        "digest": "sha256:8011193baae94e48d6b206124754439496be0832ba3cea8d77543e2acbbfc918"
+      },
+      {
+        "name": "roboharm-knife-benign-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-knife-benign-raw",
+        "digest": "sha256:1ac5700209e076b1390181dc7574041fba353e6dfd5c65b4e5302b36cba17178"
+      },
+      {
+        "name": "roboharm-knife-harmful-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-knife-harmful-guardrail",
+        "digest": "sha256:c2dc170b58b79b93c8e582a5dac5c18d13b953cd677463df35e018e4b6c9d864"
+      },
+      {
+        "name": "roboharm-knife-harmful-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-knife-harmful-honeypot",
+        "digest": "sha256:7d7749e42d0ee56e994b3318d7ef74567e46ec2c5926d1f8d474137253d69fbf"
+      },
+      {
+        "name": "roboharm-knife-harmful-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-knife-harmful-honeypot-guardrail",
+        "digest": "sha256:219231af22c198d5e3e504c567b924dde66d4d18f539bbb3d3391dedb181862c"
+      },
+      {
+        "name": "roboharm-knife-harmful-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-knife-harmful-raw",
+        "digest": "sha256:696dd19475a6bee744088f79dc50ce9518be58ccff1162cc622c36e2a1c6fa3b"
+      },
+      {
+        "name": "roboharm-outlet-benign-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-outlet-benign-guardrail",
+        "digest": "sha256:f990248a519ef4c6b5bf92e9bdba7a0f2b87da2f57960f3abaf0d2fd3598eafc"
+      },
+      {
+        "name": "roboharm-outlet-benign-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-outlet-benign-honeypot",
+        "digest": "sha256:7a31726f85b923796c69d25238eb42b903b59a13d1da202365eb5ad9460e6b14"
+      },
+      {
+        "name": "roboharm-outlet-benign-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-outlet-benign-honeypot-guardrail",
+        "digest": "sha256:fb10aac25e0e2ec6ee86b1ed037969566991bc14338ae478e9d42fb09d1857df"
+      },
+      {
+        "name": "roboharm-outlet-benign-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-outlet-benign-raw",
+        "digest": "sha256:690405ff0035498280f3f0b6463c3f75c5db5c32813f658b5e8220152e868587"
+      },
+      {
+        "name": "roboharm-outlet-harmful-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-outlet-harmful-guardrail",
+        "digest": "sha256:32eb81cbaa98a465b666a76478b816b1ec6dc506694592b835c2fa6ffb52355d"
+      },
+      {
+        "name": "roboharm-outlet-harmful-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-outlet-harmful-honeypot",
+        "digest": "sha256:3a6777df015370a75a42f1ede6d9671148e5e63c663f21677917582d1b9912f3"
+      },
+      {
+        "name": "roboharm-outlet-harmful-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-outlet-harmful-honeypot-guardrail",
+        "digest": "sha256:7bb0fcdecebe34836a517cd6c7324f5c07e9d3657684a740e9c12cba0f18fb4e"
+      },
+      {
+        "name": "roboharm-outlet-harmful-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-outlet-harmful-raw",
+        "digest": "sha256:773c007dd4b6fd0014929600a3428bd43746a41a07eb891772f4b4c8a316aa1f"
+      },
+      {
+        "name": "roboharm-privacy-badge-benign-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-privacy-badge-benign-guardrail",
+        "digest": "sha256:f543861a58d879c838fe9db696ba49a3c014f1dcbf13cad596e449e21887d0e5"
+      },
+      {
+        "name": "roboharm-privacy-badge-benign-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-privacy-badge-benign-honeypot",
+        "digest": "sha256:61c65e0b33e4df8105f874021c582cfacc26944be45a362615397f77d788e043"
+      },
+      {
+        "name": "roboharm-privacy-badge-benign-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-privacy-badge-benign-honeypot-guardrail",
+        "digest": "sha256:4ebd477031b88ec8f3240d103eb2e203f5ced96171cd160cc8668384b33e480e"
+      },
+      {
+        "name": "roboharm-privacy-badge-benign-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-privacy-badge-benign-raw",
+        "digest": "sha256:6d76082c82ace1ee8df6f27dbe7db1df444eb1d2d7253b298926e0e94fd79fd6"
+      },
+      {
+        "name": "roboharm-privacy-badge-harmful-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-privacy-badge-harmful-guardrail",
+        "digest": "sha256:bc0581e259488d6872e44b91e47f6c08e0867939ad498fb263a82aa00bb81c1f"
+      },
+      {
+        "name": "roboharm-privacy-badge-harmful-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-privacy-badge-harmful-honeypot",
+        "digest": "sha256:d835f3561847a5817ca6e7a40d0eae2ef9b027ec671fdef60a10313f2f496aeb"
+      },
+      {
+        "name": "roboharm-privacy-badge-harmful-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-privacy-badge-harmful-honeypot-guardrail",
+        "digest": "sha256:2ab05196b891b9d6eb9e557fc1c6803c007d3bf7a7291d1c1f25a113d04a6da8"
+      },
+      {
+        "name": "roboharm-privacy-badge-harmful-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-privacy-badge-harmful-raw",
+        "digest": "sha256:bf2b4bd24693d67ef0d3c59ba971d58451910ada5808961c064566168052defd"
+      },
+      {
+        "name": "roboharm-stove-benign-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-stove-benign-guardrail",
+        "digest": "sha256:44f1d121ae3ef644f7b26a032ac4254b9054f6cd1337f84e5d502b3b60a2f6d4"
+      },
+      {
+        "name": "roboharm-stove-benign-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-stove-benign-honeypot",
+        "digest": "sha256:e86f36dc01cebd33bdd9c8eb50b7cf693d081f513c65751079728a7da7cf8b28"
+      },
+      {
+        "name": "roboharm-stove-benign-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-stove-benign-honeypot-guardrail",
+        "digest": "sha256:490377110bcfbcdfe8807df3d7cbccfc4cb4f4dffafd541e3b79c1e469789437"
+      },
+      {
+        "name": "roboharm-stove-benign-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-stove-benign-raw",
+        "digest": "sha256:40c16f4eb3061c88f08cff97cb476ce4f278c27bf017e06a54be8514fef54a67"
+      },
+      {
+        "name": "roboharm-stove-harmful-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-stove-harmful-guardrail",
+        "digest": "sha256:3fdf3206ad8ca8f0eb6be6310020e72bddcf62eb07664e6f255aee6cc581b5cc"
+      },
+      {
+        "name": "roboharm-stove-harmful-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-stove-harmful-honeypot",
+        "digest": "sha256:c6e05059f8f6656f870cd1ce903a881d08f7c1eb6080a498458361381dc2db2d"
+      },
+      {
+        "name": "roboharm-stove-harmful-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-stove-harmful-honeypot-guardrail",
+        "digest": "sha256:a3bea33fb05ac8dfbfcf6716ff8afddc5818a405c36939a43d5abc1661628b96"
+      },
+      {
+        "name": "roboharm-stove-harmful-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-stove-harmful-raw",
+        "digest": "sha256:9e7110f9792655081e6f419db00add9a9228b295f24907be665e4a83da5b9e5d"
+      },
+      {
+        "name": "roboharm-water-laptop-benign-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-water-laptop-benign-guardrail",
+        "digest": "sha256:8f23b360819d602d3398f821de4332142c45dc3ee20c1932ce9899d04a794171"
+      },
+      {
+        "name": "roboharm-water-laptop-benign-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-water-laptop-benign-honeypot",
+        "digest": "sha256:46b9e0ec3885dc50394e73ee5eb78c55065732a2cc159a4fdddd971c010c5edd"
+      },
+      {
+        "name": "roboharm-water-laptop-benign-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-water-laptop-benign-honeypot-guardrail",
+        "digest": "sha256:14578fa1d0f7048597e49f66bb3cfa538ba1cc76592fc70e5806b725de447988"
+      },
+      {
+        "name": "roboharm-water-laptop-benign-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-water-laptop-benign-raw",
+        "digest": "sha256:9b1870567f69ab488aa2bd598b598bb7888eb1c2dbcd9f3bd3b8ca4a21734585"
+      },
+      {
+        "name": "roboharm-water-laptop-harmful-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-water-laptop-harmful-guardrail",
+        "digest": "sha256:d267f70d7840c17ab7ded9bb3ee369f2502fb85af997da966061b64aca43bda2"
+      },
+      {
+        "name": "roboharm-water-laptop-harmful-honeypot",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-water-laptop-harmful-honeypot",
+        "digest": "sha256:f61a2c681a2d8d0ab74d95294e3cc37efdfd92af37f09c15b78d8d0ab410017f"
+      },
+      {
+        "name": "roboharm-water-laptop-harmful-honeypot-guardrail",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-water-laptop-harmful-honeypot-guardrail",
+        "digest": "sha256:e259778ecd3dede42172d1e26c4ec1d500cf3f263316cf8fe2faf75159d34075"
+      },
+      {
+        "name": "roboharm-water-laptop-harmful-raw",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-roboharm/roboharm-water-laptop-harmful-raw",
+        "digest": "sha256:c75b52d3bfc59f97ab590846a3ca920da0d3420abce4c524e47fac7f55282f68"
       }
     ]
   },
@@ -7768,6 +10409,304 @@
         "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
         "path": "datasets/robouse-noop-control/safety-knife-to-tray",
         "digest": "sha256:7336446d40650ecaba924b946e0409cad22778e55cac2b77b8677271ba31836b"
+      }
+    ]
+  },
+  {
+    "name": "lifelong-robot-learning/libero",
+    "version": "0.1",
+    "description": "Robo Use LIBERO 0.1: 20 LIBERO tasks (5 each from spatial, object, goal and LIBERO-10) on a Franka Panda, judged by LIBERO's BDDL goal check.",
+    "git_tag": "lifelong-robot-learning/libero-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "libero-10-0",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-10-0",
+        "digest": "sha256:6032e44f0a79da410fa45fb70e1b7ad804593e9f6f5be9a80b7a1c9d113c5523"
+      },
+      {
+        "name": "libero-10-2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-10-2",
+        "digest": "sha256:5384b70afb7c85ec7958a376ff289474505381cdc3733e9c2082e2fd1a8ad54e"
+      },
+      {
+        "name": "libero-10-4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-10-4",
+        "digest": "sha256:7e4ee6617b688c60cbc12f195a3cdd0481739a30b58ed80d08a6a6e817b383fd"
+      },
+      {
+        "name": "libero-10-6",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-10-6",
+        "digest": "sha256:a357cbabbbd2ffe6d95e12dc7adcd46cdda4351b52c5ed0db9b4ada15452b2ee"
+      },
+      {
+        "name": "libero-10-8",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-10-8",
+        "digest": "sha256:3da83a0d76d2a309ed1549290f1515b813d8491eacf5d1a820a2295248c44bc0"
+      },
+      {
+        "name": "libero-goal-0",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-goal-0",
+        "digest": "sha256:c1aa411f3c534f3d87b2c7c9188bdc00f587d0b84f3720a1f004ee9073eecacc"
+      },
+      {
+        "name": "libero-goal-2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-goal-2",
+        "digest": "sha256:f9b62efa73388b62e40f486d87d45306a070a985dad195c1c89bf6bf0d2f36e5"
+      },
+      {
+        "name": "libero-goal-4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-goal-4",
+        "digest": "sha256:238f6cf959711681eac62a38e2dbc1dcc4e9b6c0a986c5e46b77473fd3684f6e"
+      },
+      {
+        "name": "libero-goal-6",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-goal-6",
+        "digest": "sha256:3ed7c2292c6885f5df8f9f0d91b2dca7ecac63d3810e7c244df6cd102c7b5de8"
+      },
+      {
+        "name": "libero-goal-8",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-goal-8",
+        "digest": "sha256:90836b34963eccd4f14218edbb6ca1c46dfffe64ebd9252d861beb4735ff9996"
+      },
+      {
+        "name": "libero-object-0",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-object-0",
+        "digest": "sha256:91f8571c45ee35c81d5af124972894660eed6bc9c94fab555c6826fab9c33928"
+      },
+      {
+        "name": "libero-object-2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-object-2",
+        "digest": "sha256:51a89e97115d3afe9a8708a6b643e6397ebb4ab92399e6116af85fef1879e2c3"
+      },
+      {
+        "name": "libero-object-4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-object-4",
+        "digest": "sha256:275d34bca1bc1bcde29f9e7ec8d7dd251449da7bf274d001e083071490a126f5"
+      },
+      {
+        "name": "libero-object-6",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-object-6",
+        "digest": "sha256:311a0f048d7f91956444ede38a463efffd00c54373e4fa5e3ebf4fa2f46a0aef"
+      },
+      {
+        "name": "libero-object-8",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-object-8",
+        "digest": "sha256:68dd605a1d61008a9157b2362debcf104eee02d064e95ba8726542760bd84ddf"
+      },
+      {
+        "name": "libero-spatial-0",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-spatial-0",
+        "digest": "sha256:b20acf01c791445fec0618f9ef89382c993fe21d0a537632d891a1b52dc3427f"
+      },
+      {
+        "name": "libero-spatial-2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-spatial-2",
+        "digest": "sha256:346f3cd4998f450a07fc42fbd741a7b794a6c153472a4d97114e60227d9a44fc"
+      },
+      {
+        "name": "libero-spatial-4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-spatial-4",
+        "digest": "sha256:2cda170de3a76fc1a0c92223727a065f6dcadfa4eb839b75d6a51979e3ff7f42"
+      },
+      {
+        "name": "libero-spatial-6",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-spatial-6",
+        "digest": "sha256:37d72af9284b6800c19a5ec94771856f2c5cb5a49c6c3d17849009377d753a1d"
+      },
+      {
+        "name": "libero-spatial-8",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-spatial-8",
+        "digest": "sha256:962ea7914a8f14ae01e5cf6cb2d2678b3b228c56c4de7cd8e7ed0cdf47332fae"
+      }
+    ]
+  },
+  {
+    "name": "robouse-libero",
+    "version": "0.1",
+    "description": "Robo Use LIBERO 0.1: 20 LIBERO tasks (5 each from spatial, object, goal and LIBERO-10) on a Franka Panda, judged by LIBERO's BDDL goal check.",
+    "git_tag": "robouse-libero-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "libero-10-0",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-10-0",
+        "digest": "sha256:6032e44f0a79da410fa45fb70e1b7ad804593e9f6f5be9a80b7a1c9d113c5523"
+      },
+      {
+        "name": "libero-10-2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-10-2",
+        "digest": "sha256:5384b70afb7c85ec7958a376ff289474505381cdc3733e9c2082e2fd1a8ad54e"
+      },
+      {
+        "name": "libero-10-4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-10-4",
+        "digest": "sha256:7e4ee6617b688c60cbc12f195a3cdd0481739a30b58ed80d08a6a6e817b383fd"
+      },
+      {
+        "name": "libero-10-6",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-10-6",
+        "digest": "sha256:a357cbabbbd2ffe6d95e12dc7adcd46cdda4351b52c5ed0db9b4ada15452b2ee"
+      },
+      {
+        "name": "libero-10-8",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-10-8",
+        "digest": "sha256:3da83a0d76d2a309ed1549290f1515b813d8491eacf5d1a820a2295248c44bc0"
+      },
+      {
+        "name": "libero-goal-0",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-goal-0",
+        "digest": "sha256:c1aa411f3c534f3d87b2c7c9188bdc00f587d0b84f3720a1f004ee9073eecacc"
+      },
+      {
+        "name": "libero-goal-2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-goal-2",
+        "digest": "sha256:f9b62efa73388b62e40f486d87d45306a070a985dad195c1c89bf6bf0d2f36e5"
+      },
+      {
+        "name": "libero-goal-4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-goal-4",
+        "digest": "sha256:238f6cf959711681eac62a38e2dbc1dcc4e9b6c0a986c5e46b77473fd3684f6e"
+      },
+      {
+        "name": "libero-goal-6",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-goal-6",
+        "digest": "sha256:3ed7c2292c6885f5df8f9f0d91b2dca7ecac63d3810e7c244df6cd102c7b5de8"
+      },
+      {
+        "name": "libero-goal-8",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-goal-8",
+        "digest": "sha256:90836b34963eccd4f14218edbb6ca1c46dfffe64ebd9252d861beb4735ff9996"
+      },
+      {
+        "name": "libero-object-0",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-object-0",
+        "digest": "sha256:91f8571c45ee35c81d5af124972894660eed6bc9c94fab555c6826fab9c33928"
+      },
+      {
+        "name": "libero-object-2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-object-2",
+        "digest": "sha256:51a89e97115d3afe9a8708a6b643e6397ebb4ab92399e6116af85fef1879e2c3"
+      },
+      {
+        "name": "libero-object-4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-object-4",
+        "digest": "sha256:275d34bca1bc1bcde29f9e7ec8d7dd251449da7bf274d001e083071490a126f5"
+      },
+      {
+        "name": "libero-object-6",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-object-6",
+        "digest": "sha256:311a0f048d7f91956444ede38a463efffd00c54373e4fa5e3ebf4fa2f46a0aef"
+      },
+      {
+        "name": "libero-object-8",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-object-8",
+        "digest": "sha256:68dd605a1d61008a9157b2362debcf104eee02d064e95ba8726542760bd84ddf"
+      },
+      {
+        "name": "libero-spatial-0",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-spatial-0",
+        "digest": "sha256:b20acf01c791445fec0618f9ef89382c993fe21d0a537632d891a1b52dc3427f"
+      },
+      {
+        "name": "libero-spatial-2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-spatial-2",
+        "digest": "sha256:346f3cd4998f450a07fc42fbd741a7b794a6c153472a4d97114e60227d9a44fc"
+      },
+      {
+        "name": "libero-spatial-4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-spatial-4",
+        "digest": "sha256:2cda170de3a76fc1a0c92223727a065f6dcadfa4eb839b75d6a51979e3ff7f42"
+      },
+      {
+        "name": "libero-spatial-6",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-spatial-6",
+        "digest": "sha256:37d72af9284b6800c19a5ec94771856f2c5cb5a49c6c3d17849009377d753a1d"
+      },
+      {
+        "name": "libero-spatial-8",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+        "path": "datasets/robouse-libero/libero-spatial-8",
+        "digest": "sha256:962ea7914a8f14ae01e5cf6cb2d2678b3b228c56c4de7cd8e7ed0cdf47332fae"
       }
     ]
   }

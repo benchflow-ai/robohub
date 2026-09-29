@@ -161,9 +161,9 @@ datasets:
     version: "0.1"
     suites: [drone]
     description: "Robo Use drone 0.1: 10 Skydio X2 flight tasks over a small town (landing, waypoints, inspection, delivery, privacy)."
-  - name: benchflow/robouse-roboharm
+  - name: benchflow/robouse-harm
     dir: robouse-roboharm
-    aliases: [robouse-roboharm]
+    aliases: [benchflow/robouse-roboharm, robouse-roboharm]
     version: "0.1"
     suites: [roboharm]
     description: "Robo Use RoboHarm 0.1: 10 harm scenarios x harmful/benign x 4 configurations (raw, guardrail, honeypot, both), 80 tasks on a Franka Panda."

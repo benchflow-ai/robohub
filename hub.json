@@ -4,7 +4,7 @@
   "git_url": "https://github.com/benchflow-ai/robohub.git",
   "bench_version": ">=0.7.4,<0.8",
   "robouse": {
-    "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
+    "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
     "package_version": "0.1.1",
     "repo": "https://github.com/benchflow-ai/robouse"
   },
@@ -2165,11 +2165,11 @@
         "repo": "https://github.com/Lifelong-Robot-Learning/LIBERO",
         "licence": "MIT"
       },
-      "version": "0.1",
-      "description": "Robo Use LIBERO 0.1: 20 LIBERO tasks (5 each from spatial, object, goal and LIBERO-10) on a Franka Panda, judged by LIBERO's BDDL goal check.",
-      "git_tag": "lifelong-robot-learning/libero-v0.1",
-      "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
-      "n_tasks": 20,
+      "version": "0.2",
+      "description": "Robo Use LIBERO 0.2: all 40 tasks of LIBERO's four standard suites (LIBERO-Spatial, -Object, -Goal and -Long, 10 each) on a Franka Panda, judged by LIBERO's BDDL goal check. Reference solutions replay LIBERO's human demonstrations (Apache-2.0).",
+      "git_tag": "lifelong-robot-learning/libero-v0.2",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 40,
       "suites": [
         "libero"
       ],
@@ -2187,140 +2187,280 @@
       "tasks": [
         {
           "id": "libero-10-0",
-          "digest": "sha256:6032e44f0a79da410fa45fb70e1b7ad804593e9f6f5be9a80b7a1c9d113c5523",
+          "digest": "sha256:573c7d1a05aab672b3e4ad82aaaf3361ecba1a8f3861e670c1224d60ae61e784",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-10-1",
+          "digest": "sha256:091f610ba37f915a8812df3145d8c51546caa72027989a7fd6eaa9ad7838f452",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-10-2",
-          "digest": "sha256:5384b70afb7c85ec7958a376ff289474505381cdc3733e9c2082e2fd1a8ad54e",
+          "digest": "sha256:a90897783a78a3530a9ac6097c36d7b891fb352c8c6dbce104b0958aa99389dd",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-10-3",
+          "digest": "sha256:f22a0bbb0ef68f958b53935d46cc59b0f6515dafc03243bea3a896b19d0c788c",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-10-4",
-          "digest": "sha256:7e4ee6617b688c60cbc12f195a3cdd0481739a30b58ed80d08a6a6e817b383fd",
+          "digest": "sha256:d644de64cdc1ce578c93ea6a37c981515588945ec523e2664c839638aa33a8ed",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-10-5",
+          "digest": "sha256:ec710b43b6efdf3e75a4e732531468c6533899dc18e3758d903bad478ab6fc0a",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-10-6",
-          "digest": "sha256:a357cbabbbd2ffe6d95e12dc7adcd46cdda4351b52c5ed0db9b4ada15452b2ee",
+          "digest": "sha256:247d7ec515369ab930367cf9e2dc00f8edd5e24b850d459a3c0c1a0a147c4504",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-10-7",
+          "digest": "sha256:0cb43bb6c068784be103793e748812bf4a6b01006c879c78eb2744f65609a3b3",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-10-8",
-          "digest": "sha256:3da83a0d76d2a309ed1549290f1515b813d8491eacf5d1a820a2295248c44bc0",
+          "digest": "sha256:5b9ffb8b41405421cb7543c946c503709b8f58ac5d9a1dee294e252cbcf9b96e",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-10-9",
+          "digest": "sha256:a7af677a8f70ff9363cec0e4ee93ecc34c60b5b1146fcd1b4e9bd2a482dad0b4",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-goal-0",
-          "digest": "sha256:c1aa411f3c534f3d87b2c7c9188bdc00f587d0b84f3720a1f004ee9073eecacc",
+          "digest": "sha256:ead4fbedddb5f6310176bca80126db993ff51f8d06a28650c02a0fa79ecaa4e5",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-goal-1",
+          "digest": "sha256:8c76228d72cc9b0deacbc04f8e912e18397d2cb7992d843de65a120f412b14e2",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-goal-2",
-          "digest": "sha256:f9b62efa73388b62e40f486d87d45306a070a985dad195c1c89bf6bf0d2f36e5",
+          "digest": "sha256:26b961beb752cd24376c07baffd8967195e84462d0062993734d9d68d95da633",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-goal-3",
+          "digest": "sha256:d918d1c7a637247f05e95903109a3bc771406e9bbeba81c3a9d583441f2bc1cc",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-goal-4",
-          "digest": "sha256:238f6cf959711681eac62a38e2dbc1dcc4e9b6c0a986c5e46b77473fd3684f6e",
+          "digest": "sha256:923eb958bfcaf67cf5c0ab65c4d6fa069f33c433bc6d35b3eb2349770486d688",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-goal-5",
+          "digest": "sha256:934e8286fc52f5f0ddf134cdf907ac6e4ccbf00f8e3f03939c35b6b58ba76f21",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-goal-6",
-          "digest": "sha256:3ed7c2292c6885f5df8f9f0d91b2dca7ecac63d3810e7c244df6cd102c7b5de8",
+          "digest": "sha256:c182a4a822d3cae9f615d43fc9ae2c47f725448039783f69fb34c6a570edea6d",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-goal-7",
+          "digest": "sha256:8d0dfb36e979dbffdea1a4d42f97f2f48b907b07e414747391c7a1c7ec129271",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-goal-8",
-          "digest": "sha256:90836b34963eccd4f14218edbb6ca1c46dfffe64ebd9252d861beb4735ff9996",
+          "digest": "sha256:0d1a091684badae90cfd66270e333f1b1a3bdc2f4f52886ed2fb56eb25c85c25",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-goal-9",
+          "digest": "sha256:e73ef302de41af8cffbee505973d0170ba3d7f520306bdabc44614479cf7884b",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-object-0",
-          "digest": "sha256:91f8571c45ee35c81d5af124972894660eed6bc9c94fab555c6826fab9c33928",
+          "digest": "sha256:b127fa8fb1841ac31bc81c30c7356b7783fe3ac912c36f2f1cee27588d41727b",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-object-1",
+          "digest": "sha256:82749aee58a56c78039f99ae19b3a479e4675ddfb0e3894da5cef1a9ba226afd",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-object-2",
-          "digest": "sha256:51a89e97115d3afe9a8708a6b643e6397ebb4ab92399e6116af85fef1879e2c3",
+          "digest": "sha256:ff1d8a29d62fe5e06c725f2decbf3584e412e0d5dd05fa1fdc19d3489c9f0c89",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-object-3",
+          "digest": "sha256:b1f6b0b15b030f979acc78a98796f8f8a582b2db1efd65dd0a1761af515cbc0e",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-object-4",
-          "digest": "sha256:275d34bca1bc1bcde29f9e7ec8d7dd251449da7bf274d001e083071490a126f5",
+          "digest": "sha256:3baff15e83cd0e3fdf999203f804bdb9226c5f48ad2d68334f283997f3770018",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-object-5",
+          "digest": "sha256:196e5c555a64526a8c49054c655652c1f5d3b87a9a833d77e993ce6b41154e3a",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-object-6",
-          "digest": "sha256:311a0f048d7f91956444ede38a463efffd00c54373e4fa5e3ebf4fa2f46a0aef",
+          "digest": "sha256:4159eea867d9ca54b9c2da6c2a1c099096b8bba4fc3c49aba3adc4366df888da",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-object-7",
+          "digest": "sha256:c73d112908347550ed19b250dcd68f9fa79ce52afb6bcc2f745521f5697f61cf",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-object-8",
-          "digest": "sha256:68dd605a1d61008a9157b2362debcf104eee02d064e95ba8726542760bd84ddf",
+          "digest": "sha256:e736651db38c1562ec5c8725fb7dca17738a3fba842852083c951e0311753a8b",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-object-9",
+          "digest": "sha256:355b02901665546b5632057af3506c64b9fb9bf69a0a97fca545f21801d56f3a",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-spatial-0",
-          "digest": "sha256:b20acf01c791445fec0618f9ef89382c993fe21d0a537632d891a1b52dc3427f",
+          "digest": "sha256:cf707d8ad057b7df6ebffc3a3e30cada05d43802fc0a24a51eaef6998e828ecc",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-spatial-1",
+          "digest": "sha256:424f3eb1828de085a5c0ad0a4e1dce9300a4a2069450bb2dff60a597f0d3c950",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-spatial-2",
-          "digest": "sha256:346f3cd4998f450a07fc42fbd741a7b794a6c153472a4d97114e60227d9a44fc",
+          "digest": "sha256:65e135e098c57a17978e3b96913183d19c5653c7e2130b310c8b17cb221f02d3",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-spatial-3",
+          "digest": "sha256:2314d1c88cd5f5d9cf3df0217a9a925edb635a738c9baff33d056f3e397149b5",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-spatial-4",
-          "digest": "sha256:2cda170de3a76fc1a0c92223727a065f6dcadfa4eb839b75d6a51979e3ff7f42",
+          "digest": "sha256:73409c16219ea1de7fbe6d50818d6fdac9b06ba48a2ff2c04d7e5a36c31f9bec",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-spatial-5",
+          "digest": "sha256:6bf47ac57de7900f5e741a7455cb3f06b1d3017305d0150857d150dddce3503c",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-spatial-6",
-          "digest": "sha256:37d72af9284b6800c19a5ec94771856f2c5cb5a49c6c3d17849009377d753a1d",
+          "digest": "sha256:6b1236edd1ea093c43b3d661227fe5fa674b7a432d16dd60036d0f8ec7d70fc6",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-spatial-7",
+          "digest": "sha256:a2e16fbc82271af7ccd56e362d585798173205cbb347bb7b8a6df573c3885154",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
         },
         {
           "id": "libero-spatial-8",
-          "digest": "sha256:962ea7914a8f14ae01e5cf6cb2d2678b3b228c56c4de7cd8e7ed0cdf47332fae",
+          "digest": "sha256:c1d6186565c4ab0e0c5a81469e053c9e2d978b18f29b219cb86b1d5de14e4258",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-spatial-9",
+          "digest": "sha256:a3bd4f5b895a5a681bddb2b0bb8a05e7161cc7940aee18b77072f87c1e8028ae",
           "backend": "libero",
           "runtime": "libero",
           "suite": "libero"
@@ -2887,17 +3027,18 @@
       ]
     },
     {
-      "name": "benchflow/robouse-roboharm",
+      "name": "benchflow/robouse-harm",
       "org": "benchflow",
-      "short_name": "robouse-roboharm",
+      "short_name": "robouse-harm",
       "dir": "robouse-roboharm",
       "aliases": [
+        "benchflow/robouse-roboharm",
         "robouse-roboharm"
       ],
       "upstream": null,
       "version": "0.1",
       "description": "Robo Use RoboHarm 0.1: 10 harm scenarios x harmful/benign x 4 configurations (raw, guardrail, honeypot, both), 80 tasks on a Franka Panda.",
-      "git_tag": "benchflow/robouse-roboharm-v0.1",
+      "git_tag": "benchflow/robouse-harm-v0.1",
       "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
       "n_tasks": 80,
       "suites": [
@@ -3474,6 +3615,2128 @@
           "backend": "roboharm",
           "runtime": "menagerie",
           "suite": "roboharm"
+        }
+      ]
+    },
+    {
+      "name": "benchflow/quadruped",
+      "org": "benchflow",
+      "short_name": "quadruped",
+      "dir": "robouse-quadruped",
+      "aliases": [],
+      "upstream": null,
+      "version": "0.1",
+      "description": "Robo Use quadruped 0.1: 11 tasks for Unitree Go2 and Go1, Boston Dynamics Spot (with and without arm) and ANYbotics ANYmal C walking under a trot controller: pushing, docking, patrols, inspection, buttons. Robot models from MuJoCo Menagerie (BSD-3-Clause).",
+      "git_tag": "benchflow/quadruped-v0.1",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 11,
+      "suites": [
+        "quadruped"
+      ],
+      "embodiments": [
+        "Unitree Go2",
+        "Unitree Go1",
+        "Boston Dynamics Spot",
+        "ANYbotics ANYmal C"
+      ],
+      "simulators": [
+        "MuJoCo Menagerie models"
+      ],
+      "image": "quadruped",
+      "noop": false,
+      "runtimes": [
+        "embodied"
+      ],
+      "tasks": [
+        {
+          "id": "anymal-inspection-round",
+          "digest": "sha256:b6f3318f9eda5e88e633c840fd9c922dfc74477691eba97b285652cca722201a",
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        {
+          "id": "anymal-mezzanine-cabinet",
+          "digest": "sha256:725c58c5094958bc53f35311be5b9e7dd5f0376ec116abfa108532e6b82d1b57",
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        {
+          "id": "go1-corridor-charger",
+          "digest": "sha256:e936a263c4b3f69349911cc87606ef51372b1cbb53d62c38c067dc9352da3784",
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        {
+          "id": "go1-patrol",
+          "digest": "sha256:5106d1e1261716cb939e2fbc59777c1aab761c333f4eb071b43dba9fc25595a3",
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        {
+          "id": "go2-crate-detour",
+          "digest": "sha256:bc55b09b24874ab9b10896112f5fccff10c82147e35ac2f1425109afe646d2c6",
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        {
+          "id": "go2-crate-detour-manual",
+          "digest": "sha256:caf5f73303de631c54774dd5eb43eb1e97e138eeea487adc520e8ae67c809c14",
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        {
+          "id": "go2-pump-inspection",
+          "digest": "sha256:7b7a2dbdba2403b3c6edfa0ebb6fe75433eaf86fe683d88debc4ca27c1f3e250",
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        {
+          "id": "go2-push-box",
+          "digest": "sha256:14c0b1ef431e7406015e8717af37c7bb157756e015c85fe8246f04f82b69d029",
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        {
+          "id": "spot-arm-estop",
+          "digest": "sha256:a410c72e73ccb21b325ae0bfbd8d8cf9debba50f0ebaa2531b766e85b1ba007b",
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        {
+          "id": "spot-arm-reset",
+          "digest": "sha256:d318f672ccc59f5fc977752589ee50555ea0de1a0b3995b473a79229e56d9012",
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        },
+        {
+          "id": "spot-gauge-reading",
+          "digest": "sha256:c407b8a53ae87a5546730d44c1391aa75d158d37808684b57aceaf03326b54ec",
+          "backend": "quadruped",
+          "runtime": "embodied",
+          "suite": "quadruped"
+        }
+      ]
+    },
+    {
+      "name": "benchflow/humanoid",
+      "org": "benchflow",
+      "short_name": "humanoid",
+      "dir": "robouse-humanoid",
+      "aliases": [],
+      "upstream": null,
+      "version": "0.1",
+      "description": "Robo Use humanoid 0.1: 9 tabletop tasks for Unitree G1 (Dex3 hands) and H1, Apptronik Apollo and Booster T1 on support stands with IK arm control: pick and place, a drawer, a button panel, bimanual box lifts, carrying a tray. Robot models from MuJoCo Menagerie (BSD-3-Clause, Apache-2.0).",
+      "git_tag": "benchflow/humanoid-v0.1",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 9,
+      "suites": [
+        "humanoid"
+      ],
+      "embodiments": [
+        "Unitree G1",
+        "Unitree H1",
+        "Apptronik Apollo",
+        "Booster T1"
+      ],
+      "simulators": [
+        "MuJoCo Menagerie models"
+      ],
+      "image": "humanoid",
+      "noop": false,
+      "runtimes": [
+        "embodied"
+      ],
+      "tasks": [
+        {
+          "id": "apollo-box-into-bin",
+          "digest": "sha256:52402128da904d53fc3e7fcb1ea0d991ccb52c9c4367cecc3aaa42f3e9140f8d",
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        {
+          "id": "apollo-carry-tray",
+          "digest": "sha256:0299a0f7f6656bf2b6be189dcaa4e01633fd3aca64618922a138b961fa1e1eb7",
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        {
+          "id": "g1-can-to-plate",
+          "digest": "sha256:bfcfc9aff94505b5857e48c3ca3940a11c40b96c09e292023edcca3ac0620d29",
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        {
+          "id": "g1-drawer-stow",
+          "digest": "sha256:48fc68053d770c5034faf065825f12dc907712d6c337400b7878ac271db24145",
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        {
+          "id": "g1-pass-across",
+          "digest": "sha256:cfa3a38f3150212a44510c8302c9cf43e1c6723100f4778e05eca5de7d54c8c6",
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        {
+          "id": "h1-box-to-shelf",
+          "digest": "sha256:0de56a6f03e4f019f2b794707d7e0b23b2631555cc8abf33e559669bb81d8bcd",
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        {
+          "id": "h1-panel-sequence",
+          "digest": "sha256:1bfbb6b134d49e7bb84c65550039955553947663a9eadb4a7d6a50b5826fb209",
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        {
+          "id": "t1-box-onto-step",
+          "digest": "sha256:9e280b68d5d5907c2ea51fbe9293ac84856f78ba67a3dddf24f508888a9dffbe",
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        },
+        {
+          "id": "t1-push-cans",
+          "digest": "sha256:7379ab59f6d0bd6a32f429fe6fa545f2bceb18b9e73764f08436ec42640dfa2d",
+          "backend": "humanoid",
+          "runtime": "embodied",
+          "suite": "humanoid"
+        }
+      ]
+    },
+    {
+      "name": "benchflow/mobile-manip",
+      "org": "benchflow",
+      "short_name": "mobile-manip",
+      "dir": "robouse-mobile-manip",
+      "aliases": [],
+      "upstream": null,
+      "version": "0.1",
+      "description": "Robo Use mobile manipulation 0.1: 10 fetch, stow and sort tasks for Hello Robot Stretch 3, PAL TIAGo and the Google Robot in a three-room apartment. Robot models from MuJoCo Menagerie (Apache-2.0).",
+      "git_tag": "benchflow/mobile-manip-v0.1",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 10,
+      "suites": [
+        "mobile-manip"
+      ],
+      "embodiments": [
+        "Hello Robot Stretch 3",
+        "PAL TIAGo",
+        "Google Robot"
+      ],
+      "simulators": [
+        "MuJoCo Menagerie models"
+      ],
+      "image": "mobile-manip",
+      "noop": false,
+      "runtimes": [
+        "embodied"
+      ],
+      "tasks": [
+        {
+          "id": "google-fetch-can",
+          "digest": "sha256:b337fcfa68c26b5cd6a8609f827b7f12aa613fb70cac38377a1a23fd0892df5f",
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        {
+          "id": "google-open-drawer",
+          "digest": "sha256:dae78352c91b9c26e877560f6ac882e46a6f451770237ea57d59ea4760c0cdda",
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        {
+          "id": "google-sort-bottle-can",
+          "digest": "sha256:6ffc1eef48c54fa0699610d0a0efd36d0503549ddcdfb7340aeaaff398310862",
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        {
+          "id": "stretch-fetch-cup",
+          "digest": "sha256:7e3fc420b51fd8873706106261ba9ef978f0eae1edce4186b2828d06cb84a7cd",
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        {
+          "id": "stretch-open-drawer",
+          "digest": "sha256:d50bd544f27c1b4a72c49e85bda8ffebdf74edbe358e6d7b3e1493be7df678e0",
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        {
+          "id": "stretch-shelve-two",
+          "digest": "sha256:5b309cf27476a1ebe1950a7399710a8ed184abf66dec194ceaad3d1c4ce01e49",
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        {
+          "id": "tiago-bin-cans",
+          "digest": "sha256:82348fac107b1ff945ebf269a1fae2690ffbf31e7969e88066d2bf344345923d",
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        {
+          "id": "tiago-drawer-stow",
+          "digest": "sha256:a1acc1465d27631aec3d2e22e28a0e8a2f1e35ead796781c45f9bf67c0b3fde2",
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        {
+          "id": "tiago-fetch-juice",
+          "digest": "sha256:4f1cc7d85cc1639c0bb8e9ab737a5a87a9d5776ceb71b761951d87fcd9c47af7",
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        },
+        {
+          "id": "tiago-study-to-kitchen",
+          "digest": "sha256:f57c83ec7f5d2edcd7b3129173d598ddab12487e23372fd62846bfdd0046a759",
+          "backend": "mobile_manip",
+          "runtime": "embodied",
+          "suite": "mobile-manip"
+        }
+      ]
+    },
+    {
+      "name": "benchflow/dexhand",
+      "org": "benchflow",
+      "short_name": "dexhand",
+      "dir": "robouse-dexhand",
+      "aliases": [],
+      "upstream": null,
+      "version": "0.1",
+      "description": "Robo Use dexterous hands 0.1: 7 tasks for the Shadow Hand and LEAP Hand on 6-axis positioners: regrasp and in-hand cube flips, pouring, a valve, a pen, buttons. Robot models from MuJoCo Menagerie (Apache-2.0, MIT).",
+      "git_tag": "benchflow/dexhand-v0.1",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 7,
+      "suites": [
+        "dexhand"
+      ],
+      "embodiments": [
+        "Shadow Hand",
+        "LEAP Hand"
+      ],
+      "simulators": [
+        "MuJoCo Menagerie models"
+      ],
+      "image": "dexhand",
+      "noop": false,
+      "runtimes": [
+        "embodied"
+      ],
+      "tasks": [
+        {
+          "id": "leap-cube-in-hand",
+          "digest": "sha256:682ff16391e4ec7049f08e73ca062bacbca5579344a83fe83c5e8b8b4a29c78f",
+          "backend": "dexhand",
+          "runtime": "embodied",
+          "suite": "dexhand"
+        },
+        {
+          "id": "leap-lift-ball",
+          "digest": "sha256:da491047dc25a4b2e152949565d96e5e871e03ae177299c310512e7f967ae0fb",
+          "backend": "dexhand",
+          "runtime": "embodied",
+          "suite": "dexhand"
+        },
+        {
+          "id": "leap-pen-to-holder",
+          "digest": "sha256:2c8fa59e8e7412707a0d55dc08a67aad5dd26f147c5d90aff1d7a22b17360a94",
+          "backend": "dexhand",
+          "runtime": "embodied",
+          "suite": "dexhand"
+        },
+        {
+          "id": "leap-press-buttons",
+          "digest": "sha256:c590877116fbfec2846d89301bbffd8b27d0bf872c34cbf377c036af1ca610f0",
+          "backend": "dexhand",
+          "runtime": "embodied",
+          "suite": "dexhand"
+        },
+        {
+          "id": "shadow-cube-face-up",
+          "digest": "sha256:f8461307c73d91629e2372ca09d85d0ee05da8fcfb7d875a35a8327dedf3b07c",
+          "backend": "dexhand",
+          "runtime": "embodied",
+          "suite": "dexhand"
+        },
+        {
+          "id": "shadow-pour-balls",
+          "digest": "sha256:77b62fdb50eadc6b810d8aeddf6a728bb64f3146d28eda8e7f40f3f2b4505dd3",
+          "backend": "dexhand",
+          "runtime": "embodied",
+          "suite": "dexhand"
+        },
+        {
+          "id": "shadow-turn-valve",
+          "digest": "sha256:00167575db127fcc6b173a3a72b4a0473e36b97dd24e23894850d87d73e12ba6",
+          "backend": "dexhand",
+          "runtime": "embodied",
+          "suite": "dexhand"
+        }
+      ]
+    },
+    {
+      "name": "benchflow/crazyflie",
+      "org": "benchflow",
+      "short_name": "crazyflie",
+      "dir": "robouse-crazyflie",
+      "aliases": [],
+      "upstream": null,
+      "version": "0.1",
+      "description": "Robo Use Crazyflie 0.1: 7 indoor flight tasks for Bitcraze Crazyflie 2 quadrotors: a window, a gate course, waypoints, a shelf landing, a formation and a swap for a swarm, and one task without skills. Robot model from MuJoCo Menagerie (MIT).",
+      "git_tag": "benchflow/crazyflie-v0.1",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 7,
+      "suites": [
+        "crazyflie"
+      ],
+      "embodiments": [
+        "Bitcraze Crazyflie 2 quadrotor"
+      ],
+      "simulators": [
+        "MuJoCo Menagerie models"
+      ],
+      "image": "crazyflie",
+      "noop": false,
+      "runtimes": [
+        "embodied"
+      ],
+      "tasks": [
+        {
+          "id": "crazyflie-gates",
+          "digest": "sha256:52a8ab4ce4910a9e48cd49c229c18ac485c4228f50304f0c712818d7f330ec45",
+          "backend": "crazyflie",
+          "runtime": "embodied",
+          "suite": "crazyflie"
+        },
+        {
+          "id": "crazyflie-shelf-landing",
+          "digest": "sha256:a73d798a819b186b9bf2183a23eaf974cf32175b261308a51bf28e91b5885906",
+          "backend": "crazyflie",
+          "runtime": "embodied",
+          "suite": "crazyflie"
+        },
+        {
+          "id": "crazyflie-swarm-formation",
+          "digest": "sha256:a5ad79ac49818272ce2ae31e24a94c84a2cc148b5c69fd290c96a5c4aad27596",
+          "backend": "crazyflie",
+          "runtime": "embodied",
+          "suite": "crazyflie"
+        },
+        {
+          "id": "crazyflie-swarm-swap",
+          "digest": "sha256:1883f4e2d75bf50010b529966cc1d410edd317a7465b1031db7e1aeb41160549",
+          "backend": "crazyflie",
+          "runtime": "embodied",
+          "suite": "crazyflie"
+        },
+        {
+          "id": "crazyflie-waypoints",
+          "digest": "sha256:79f341535b366aa93dbde0f4d270fb531b6ad61a427d4327b4c0f75a616bc518",
+          "backend": "crazyflie",
+          "runtime": "embodied",
+          "suite": "crazyflie"
+        },
+        {
+          "id": "crazyflie-window",
+          "digest": "sha256:6a317e3b528529d2ceb3b56d79a66c91e6741d9611e1e206db2836f582b598e9",
+          "backend": "crazyflie",
+          "runtime": "embodied",
+          "suite": "crazyflie"
+        },
+        {
+          "id": "crazyflie-window-manual",
+          "digest": "sha256:54d27c46e779811dd8d3735ce9cf6f9c142b721ccdc9d03d15694b0775beb863",
+          "backend": "crazyflie",
+          "runtime": "embodied",
+          "suite": "crazyflie"
+        }
+      ]
+    },
+    {
+      "name": "benchflow/driving",
+      "org": "benchflow",
+      "short_name": "driving",
+      "dir": "robouse-driving",
+      "aliases": [],
+      "upstream": null,
+      "version": "0.1",
+      "description": "Robo Use driving 0.1: 7 traffic tasks for a sedan on MetaDrive roads (winding road, highway overtake, broken-down car, cone zone, roundabout, unprotected left turn, ramp merge), on MetaDrive 0.4.3 (Apache-2.0).",
+      "git_tag": "benchflow/driving-v0.1",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 7,
+      "suites": [
+        "driving"
+      ],
+      "embodiments": [
+        "MetaDrive sedan"
+      ],
+      "simulators": [
+        "MetaDrive 0.4.3"
+      ],
+      "image": "driving",
+      "noop": false,
+      "runtimes": [
+        "driving"
+      ],
+      "tasks": [
+        {
+          "id": "driving-broken-down-car",
+          "digest": "sha256:34fa0c04a1911524c581201fca05e46caea02bd2614d29593b00eafa89a7d669",
+          "backend": "driving",
+          "runtime": "driving",
+          "suite": "driving"
+        },
+        {
+          "id": "driving-cone-zone",
+          "digest": "sha256:bebe810d9123bd7bc90359c38d9f556603ab1e0c29bad998825ea4ed21ca8549",
+          "backend": "driving",
+          "runtime": "driving",
+          "suite": "driving"
+        },
+        {
+          "id": "driving-highway-overtake",
+          "digest": "sha256:a65e5dd996e3d2b9e6f45b0d925901df8bb871fdc2b9d540f9545100a0078700",
+          "backend": "driving",
+          "runtime": "driving",
+          "suite": "driving"
+        },
+        {
+          "id": "driving-intersection-left-turn",
+          "digest": "sha256:698a0a23e0ed3e3ef390e33e8a22144c0e4fa166f28aeb85ca80828075b8e2ad",
+          "backend": "driving",
+          "runtime": "driving",
+          "suite": "driving"
+        },
+        {
+          "id": "driving-ramp-merge",
+          "digest": "sha256:84bd2194bf603ceddbfe9bc09a2ff535991d4782986da274f7ac86ff4805ebad",
+          "backend": "driving",
+          "runtime": "driving",
+          "suite": "driving"
+        },
+        {
+          "id": "driving-roundabout",
+          "digest": "sha256:120b6ddef9b67422f2065c513bb4a84691959c0d9948904a4fdac9d86c0c4ca4",
+          "backend": "driving",
+          "runtime": "driving",
+          "suite": "driving"
+        },
+        {
+          "id": "driving-winding-road",
+          "digest": "sha256:2a6f96269779c6807023603e7d05640909c0329211249054514014e28425a2cc",
+          "backend": "driving",
+          "runtime": "driving",
+          "suite": "driving"
+        }
+      ]
+    },
+    {
+      "name": "lifelong-robot-learning/libero-90",
+      "org": "lifelong-robot-learning",
+      "short_name": "libero-90",
+      "dir": "robouse-libero-90",
+      "aliases": [],
+      "upstream": {
+        "benchmark": "LIBERO",
+        "org_name": "Lifelong Robot Learning",
+        "repo": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+        "licence": "MIT"
+      },
+      "version": "0.1",
+      "description": "Robo Use LIBERO-90 0.1: the 90 short-horizon LIBERO-90 tasks (20 kitchen, living-room and study scenes) on a Franka Panda, judged by LIBERO's BDDL goal check. Reference solutions replay LIBERO's human demonstrations (Apache-2.0).",
+      "git_tag": "lifelong-robot-learning/libero-90-v0.1",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 90,
+      "suites": [
+        "libero-90"
+      ],
+      "embodiments": [
+        "Franka Panda"
+      ],
+      "simulators": [
+        "LIBERO (robosuite 1.4)"
+      ],
+      "image": "libero",
+      "noop": false,
+      "runtimes": [
+        "libero"
+      ],
+      "tasks": [
+        {
+          "id": "libero-90-0",
+          "digest": "sha256:156b726e335ab73ae8980d8df844468f7877f434c3793435504e948a0b2fba0b",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-1",
+          "digest": "sha256:4252ea351900cec4b247cedca74004160c3a7a21cd8185894000ebd78217a060",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-10",
+          "digest": "sha256:7a78413495e8ddac061db42ef926341d4d11db30d92b97de67223868a682b05a",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-11",
+          "digest": "sha256:ba7524af2dc35d798e1d862560ad97dfdd983458a76015c528aaa517a3b2e785",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-12",
+          "digest": "sha256:887979c35e3a7df95670a3f4e534a5ffba1610d034356776c52813befc47593a",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-13",
+          "digest": "sha256:bc8d04e6aad61490e7c9ab6f171b555b98e70b7476340f6ee7cd076f7b4ca837",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-14",
+          "digest": "sha256:7f83daf866dae68c1bce69da183aee027071e686fd6a587b89273b9415974fb7",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-15",
+          "digest": "sha256:d95641298bf6eba3babbd5549a94ed1a7eedb472da2aa7523b039c7d5f703dd5",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-16",
+          "digest": "sha256:3eda023867be142c8db97370b93419ea94d4d89bc512587e250123a0eb889b69",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-17",
+          "digest": "sha256:c6325e9fbeb1d7f6ee4508eafd301099e2b2877b9672b4d4a9cb46d86a0292c7",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-18",
+          "digest": "sha256:12c1e5bd8e848545f1f97d099ecb60ac9a717115d8549fb4d5455b8ce152ec82",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-19",
+          "digest": "sha256:db93e9c88fb39499beb86f0f0e0d33928377438c9384328d80fa36583afeea0b",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-2",
+          "digest": "sha256:d3bab50592c8563b37949fae46c60ffae86b2c1e582e37b4238803ab6b867e88",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-20",
+          "digest": "sha256:0c9936a7644119612ee202701b99ece25f066f22e96681e92b6c05fa5f04dbf4",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-21",
+          "digest": "sha256:20c38eb97279f714f296a410722d6a32704f8ae2fcd03517cd6a917fb001cde2",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-22",
+          "digest": "sha256:9b80ead86d8e4af120ef0fd5526c223a13329ecc9aee430f72b42318033f3fed",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-23",
+          "digest": "sha256:212e6ac0fb8762c03d5ce64c7c6130f6d6e52cf26075bb6b46fdb65634ff924c",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-24",
+          "digest": "sha256:778da44050187fd0356b751d07b59d05bb5744affe339594c5e10915aa5e1352",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-25",
+          "digest": "sha256:e04d36bc2a57b7a261412c32be9a29fcb0228664032f774842c3c9d3bc03b525",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-26",
+          "digest": "sha256:6413c486607fd9f2e5df8a911bc729b2592aa304dd8965d6d92f2a432410d25d",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-27",
+          "digest": "sha256:23757f5252268492f202a7a9438b6744d49de86ef27693c2d87b4bcb3ed952f9",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-28",
+          "digest": "sha256:2ab697f28ec35069f21ef12503ec3160fdb664f6978e12eeae9fa6de5acb9ffc",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-29",
+          "digest": "sha256:eb7fdf836d272c804770b9af9f85ff121ac55212923dff8dad15b40e29572f84",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-3",
+          "digest": "sha256:bbe433d011801f9e939e93381791488ffc5921de16d91ca666195e7836e722c3",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-30",
+          "digest": "sha256:7fd66425ebf0314c92c937e59ee6633600752993d5922b5542a53efcc0d462ac",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-31",
+          "digest": "sha256:b64673b25c00d50ca9d2665375c5d051ea08ee73907b1429c6c71683b260b410",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-32",
+          "digest": "sha256:b7a968f2684002cf91ad7c2b587444a1bc8aef97ed71860d5fb21ea90246c9dc",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-33",
+          "digest": "sha256:8756594bd1fdd0dec91af056c8fde2c4c520f0173d7445b9fd64384cdf329b2c",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-34",
+          "digest": "sha256:1778a6d1cc9ff3c46f21048a1156384e0067f350513e873e58dfbb8ec6b4dbb4",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-35",
+          "digest": "sha256:3befff3a3ea2cfe9c6289751c48cf3fbe0e7101bea17e9d6b1d8ed05c663dec9",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-36",
+          "digest": "sha256:87380f1eacd4db86d7ed627c41c5ce9acd93387d61f5a280e9e3c846c20c62a6",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-37",
+          "digest": "sha256:2211a52ec148cf2a05bcc18bec189d7adfa5bf274eec4c9a76908ecc5fdca866",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-38",
+          "digest": "sha256:2639df457284032c413ed5700963674917bc26b4988adfb4649f55c6ca059ce0",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-39",
+          "digest": "sha256:698d9697967b5309f16e4901b3987ba936faa90fcf354cd3bcc51965ebf08829",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-4",
+          "digest": "sha256:db292f2a8e2958a48d2e26003b79f15df613bef735f101960c54860bfba0f649",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-40",
+          "digest": "sha256:13124b5ef2c70a3f3255b62b3e3e545ff0ee6fa9e15cf2674368c08d6bf90a15",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-41",
+          "digest": "sha256:c3597bd258d336077c402ea0dbf05622692202b76fb4b5e9814334a459d31028",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-42",
+          "digest": "sha256:3fe2ba967aaab46399ed2949ae93cff95638d7b826d3a55825d56c30f62e4f3d",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-43",
+          "digest": "sha256:715ba485d9398a8fc46867990cc973eb390ef54a0e3b310576bc8a59faf1c918",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-44",
+          "digest": "sha256:86d7e2e5791a91abc59c34d979a3770aa628c3037a1651c98ecd4ef6c72dee88",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-45",
+          "digest": "sha256:80e8db31e074255337732ea38e00b37341abb77c929e9e887fc57f2c297a41ed",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-46",
+          "digest": "sha256:ad7429a4185d41959cf77ce3579211afb26748ef0c4265ef37ce3dc98cbf71dd",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-47",
+          "digest": "sha256:14be12881fa4e5c3fa322489d29cc98a1309099aecbdc4cdf35289a01b8ddb34",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-48",
+          "digest": "sha256:a14d169b5f49c8285fe77ec184572ff009a879f193da6f4916df89dc5ab4a50e",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-49",
+          "digest": "sha256:75b2515036c9088b7faee83b46a680dde79a197afd201835e5d85110dfbc7e89",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-5",
+          "digest": "sha256:f51c560301caf2d6e194d0011f874322b8e9de5c8f7db2ddff7421cfc06eb1c4",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-50",
+          "digest": "sha256:b546de41c528ec671304bd9b310aa657a8de056c2491bd48ceac9fd9e63abdc5",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-51",
+          "digest": "sha256:bbf56cd64ed0d55de94c13847ef036c5048d6ee696a698c64884e503efc939a2",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-52",
+          "digest": "sha256:6c5817af60bc14170599a42f196bfa77c2f7ff40b0e88ebd24726a46c0bd026a",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-53",
+          "digest": "sha256:1cdee75cfb1e5ef65c203a8662178684401a954aa9924afaf339e209817d370f",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-54",
+          "digest": "sha256:b6bba9094e9ae439ba0dbffc3e6c55fdf38497bd16c3227c1b43fc0c52e985b1",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-55",
+          "digest": "sha256:eaad46b553010f8c1e534a1b785dfd63be89c20143cf86ed1119fd9f1e4dd115",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-56",
+          "digest": "sha256:319982c1b1c553915a521cee3c339ada54a226de28ffe1e51496fd4d00b542e2",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-57",
+          "digest": "sha256:9a67cc1e19f2fdd808a5358de8669b417a4b1dbcfded80011ac66f7a57dc7339",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-58",
+          "digest": "sha256:ac00a74494e4695229af34894289ee4009653f5a82c4f3efeb87804b6d4cefcd",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-59",
+          "digest": "sha256:aac9f801ffcd42e5dfec4d7c72341b5f8ee8f040c77d296d7b0741c929f3aeaa",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-6",
+          "digest": "sha256:3570564b74bec06ca05e9f1c183fb426a424dab930512ad0bcc51670b8e66fd2",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-60",
+          "digest": "sha256:1b41ba5970faea15480d3044ec60eda3686ceab0f78d895fe83a4bea88448a43",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-61",
+          "digest": "sha256:a76b9332a095c5023ee92cb252a94095f2e45b37527ed879ad4a626a6692e9c0",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-62",
+          "digest": "sha256:1d564f7ae0f3a5ae3793b3bdfab5cc48837f8790fc331640c03d4c8df3fa9503",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-63",
+          "digest": "sha256:ea11fb923d150945d0a984f13038266f05924ff2fb9d2cf6441bcb435efae832",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-64",
+          "digest": "sha256:31089cd99e29038219534631aef5642b11e6062fca8aa58b8fa59088dd392ac8",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-65",
+          "digest": "sha256:c19ff82bbb01fe48fda8de8a5091f05c0f2e1ea4ca2606a64b837f82ea339def",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-66",
+          "digest": "sha256:67dc205f5a6e14a28d377e85e8fdd8eca28263c76ef0e4e9f6bbdda4da123ae8",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-67",
+          "digest": "sha256:e4b07bfa9961ba34f07bd06f1bdd2c99d451343c85ba90cbf3a11d8a66488949",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-68",
+          "digest": "sha256:4b57809829e469dd32e9740293e370d2c2055bf581d141aa2e342f11b9313170",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-69",
+          "digest": "sha256:465b6e243eaec67c409616da50ef8035af26c65a7d19e2659aa7d843f6dac476",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-7",
+          "digest": "sha256:eda0432f41a51e58103b6c1b6c63e6bca2c3911445d80522e65cb6aebbd661f1",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-70",
+          "digest": "sha256:9c237d5db2c4c98c4e47e6d4b06adcd2e4e519dc64dd5fc9db3d8c864384345f",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-71",
+          "digest": "sha256:1d1a5182238d26685f5038bf041e0044048c003ac8c1d0872fc1f4c059af7c74",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-72",
+          "digest": "sha256:0e79508c98ec79071f0b865221d04ec78dbde884b22d138855af42e2e1b8e011",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-73",
+          "digest": "sha256:a059f08117c970e8f52047bc2205f0911c119d573af697b128921c4468a97a66",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-74",
+          "digest": "sha256:e5637b8c26ee1c00408d62050173853b22e4ea64b7ee2ede0f30a1eb4e7b28a0",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-75",
+          "digest": "sha256:404f3b16b7fc43dffa2618a9cc7243f09bfe0e2ac8f07d21fbd4d7f22e48b5e8",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-76",
+          "digest": "sha256:a261f8577cebdd65d3611aa66a7122c2317b50404ea835b4c5e84bd04df89e1d",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-77",
+          "digest": "sha256:f16afca8a516ce3265f032c4f6c62f834d2fade50e5c0a6a47ffa0cc87f29064",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-78",
+          "digest": "sha256:37f477408ef8d23bc7b53ca41762b35a9531da69dc1e0bf8b1b190b5b95a9f5c",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-79",
+          "digest": "sha256:fad58032ef1e984ca2fce5dbf33af0c4b2d009307c651ebf34de1a67db11e269",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-8",
+          "digest": "sha256:13ec424714ec191bcfcb8233f60792702dd5a24b4ce675c96a98c0a0d6dd133f",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-80",
+          "digest": "sha256:49afe2243391a3135d4c795619ffb72625010724fc3ed75a5bee6d80455f47fd",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-81",
+          "digest": "sha256:87fe1ec13eee796f39ec2231d4fb6a7c34efdf8ee4705be79bf2fa0d9aa910f2",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-82",
+          "digest": "sha256:a28a462939ccfdf0868ff1c789fa869170a7dac1553e75e748120a6553c6daac",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-83",
+          "digest": "sha256:f6a2fc76e63a984fc0d3c59ceb6524b9cf8a40f3a14dd38e616ed2a0a1f68317",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-84",
+          "digest": "sha256:0c9b385392e3ab0f599c03eb0a467cf177445e21806ec5c73b4b240f638e5677",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-85",
+          "digest": "sha256:db20c21f5f50bf90634045b51a3c596d7a48d6b031f42841eaf7487a89012049",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-86",
+          "digest": "sha256:c55130f10ff67dd81b09715d9a6d90f6d42837e4a9e81c20fff43de2c0ac3d88",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-87",
+          "digest": "sha256:6181952991c9e453d2b3abe852f26dc1f7345738b28a067866f06834bc884cc5",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-88",
+          "digest": "sha256:1048a0e74252828b640b943d17daaa32a1eb27d36555ad90878732bbbdca0e53",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-89",
+          "digest": "sha256:f6a1f63f8f4e3a200b650fa1d0fcd9f82ab651eb84c2dae755f44f48a53435e2",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        },
+        {
+          "id": "libero-90-9",
+          "digest": "sha256:0a78f7106024a4902dd75b8dab778dfcccdc07fc65358d73d5cd4b4bd6c1021a",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero-90"
+        }
+      ]
+    },
+    {
+      "name": "farama-foundation/franka-kitchen",
+      "org": "farama-foundation",
+      "short_name": "franka-kitchen",
+      "dir": "robouse-kitchen",
+      "aliases": [],
+      "upstream": {
+        "benchmark": "Franka Kitchen (Gymnasium-Robotics; Relay Policy Learning / D4RL kitchen)",
+        "org_name": "Farama Foundation",
+        "repo": "https://github.com/Farama-Foundation/Gymnasium-Robotics",
+        "licence": "MIT (code); Apache-2.0 (kitchen and Franka assets)"
+      },
+      "version": "0.1",
+      "description": "Robo Use Franka Kitchen 0.1: the 7 FrankaKitchen-v1 subtasks (microwave, kettle, two burners, light switch, slide and hinge cabinets) and 3 four-subtask goal sets, 10 tasks on a Franka Panda with an end-effector interface, judged by the env's own per-subtask completion check.",
+      "git_tag": "farama-foundation/franka-kitchen-v0.1",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 10,
+      "suites": [
+        "kitchen"
+      ],
+      "embodiments": [
+        "Franka Panda"
+      ],
+      "simulators": [
+        "Gymnasium-Robotics 1.4.2 (Franka Kitchen)"
+      ],
+      "image": "kitchen",
+      "noop": false,
+      "runtimes": [
+        "base"
+      ],
+      "tasks": [
+        {
+          "id": "kitchen-bottom-burner",
+          "digest": "sha256:bb687b8a711ab7a3ce9ebabc791d030f3dd2f3db3a73d4a27e1a45623f417c41",
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        {
+          "id": "kitchen-burners-cabinets",
+          "digest": "sha256:e77cece50c279914cb5710ad438019d06dcd8d8f29b23639a48ee12b031cc49a",
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        {
+          "id": "kitchen-complete",
+          "digest": "sha256:c50bf058fc9e95fbfaac544a9f4866caaf854a3c738cd5e9ef486aa338e77cf6",
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        {
+          "id": "kitchen-hinge-cabinet",
+          "digest": "sha256:3165f228b0d63d5a84222089902766873784b8ec28be4f0435e7a6f3c0e8e9b4",
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        {
+          "id": "kitchen-kettle",
+          "digest": "sha256:9911643ff6897778652c638234f916540f399a7881cc055ee2b94125ae0d6de5",
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        {
+          "id": "kitchen-light-switch",
+          "digest": "sha256:c833ea95ffc88242ff9fb5b6c75c2bbcfd193f588780a2983e4566b2d47e3774",
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        {
+          "id": "kitchen-microwave",
+          "digest": "sha256:b5b64b9babb788446ad1ca4f8f013467ebb47fb87b1c1944fb519894610928da",
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        {
+          "id": "kitchen-mixed",
+          "digest": "sha256:f9b2d98fb038d87bf80419743b9ffb0e49427676d8ab0a6731220f771a7715ef",
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        {
+          "id": "kitchen-slide-cabinet",
+          "digest": "sha256:81ea055682687a4e492e7a81a542e48e5b95ee2e9fd3972a7336630faadbd15b",
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        },
+        {
+          "id": "kitchen-top-burner",
+          "digest": "sha256:ae642ac4943c569ef3e2340d18c4201c8efca0699bcebd875b8665bb976e8a9b",
+          "backend": "kitchen",
+          "runtime": "base",
+          "suite": "kitchen"
+        }
+      ]
+    },
+    {
+      "name": "farama-foundation/adroit-hand",
+      "org": "farama-foundation",
+      "short_name": "adroit-hand",
+      "dir": "robouse-adroit",
+      "aliases": [],
+      "upstream": {
+        "benchmark": "Adroit hand (Gymnasium-Robotics; DAPG)",
+        "org_name": "Farama Foundation",
+        "repo": "https://github.com/Farama-Foundation/Gymnasium-Robotics",
+        "licence": "MIT (code); Apache-2.0 (ADROIT assets); CC-BY-4.0 (D4RL demonstrations)"
+      },
+      "version": "0.1",
+      "description": "Robo Use Adroit hand 0.1: door opening, hammering, in-hand pen rotation and ball relocation with the 24-joint ADROIT hand, 12 tasks started from D4RL human-demonstration states, judged by the env's own success signal.",
+      "git_tag": "farama-foundation/adroit-hand-v0.1",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 12,
+      "suites": [
+        "adroit"
+      ],
+      "embodiments": [
+        "ADROIT hand (24-DoF Shadow-style hand on an arm)"
+      ],
+      "simulators": [
+        "Gymnasium-Robotics 1.4.2 (Adroit hand)"
+      ],
+      "image": "adroit",
+      "noop": false,
+      "runtimes": [
+        "base"
+      ],
+      "tasks": [
+        {
+          "id": "adroit-door-e11",
+          "digest": "sha256:7354fd922b0e77642292050212866447185a393fc815499cc63e8edb97a3a0ae",
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        {
+          "id": "adroit-door-e18",
+          "digest": "sha256:5f11e0f6c25e797609f19f44381d9b09cea7cc0a81e35360d181913bf4b0168a",
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        {
+          "id": "adroit-door-e23",
+          "digest": "sha256:27831dffbff6c53ab70079826c1a100328e4a20772ddfae948175de713d123d3",
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        {
+          "id": "adroit-hammer-e14",
+          "digest": "sha256:b644a25bb6b3143cfa70a2211dac55163f55e7904054cbd8ef8d79c94684403f",
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        {
+          "id": "adroit-hammer-e18",
+          "digest": "sha256:437f0c00683476dca24e0c30ad9147c82d2c8ae34331d07d0ef28c8ebbf3efcc",
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        {
+          "id": "adroit-hammer-e19",
+          "digest": "sha256:f8499822613eb8c238d1b4f2c8be9adeb8352792f5b81f8352d218b5f8cec9c1",
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        {
+          "id": "adroit-pen-e1",
+          "digest": "sha256:b8bd79008c1f976ec8abc593f69c1fd1c3ca6d03f68178e9c81a022d4137c0fd",
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        {
+          "id": "adroit-pen-e11",
+          "digest": "sha256:478e2ac03ea43bdd0750feca4b8974966cdad0bf978f00284707808202ab8242",
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        {
+          "id": "adroit-pen-e7",
+          "digest": "sha256:fafa19539883af6e7a71083ab082b35553779e0a6a249de7f73fd85bb9328811",
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        {
+          "id": "adroit-relocate-e0",
+          "digest": "sha256:66a46fa00fd48df9437b5ad76de659680b167c409c938cb8709ea7e72577edeb",
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        {
+          "id": "adroit-relocate-e17",
+          "digest": "sha256:1e4643e1b88106561419f438e205182fe353825b34d3b78f4380eb613ec3b658",
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        },
+        {
+          "id": "adroit-relocate-e5",
+          "digest": "sha256:8de3c8d8b8337190e861df9521bbee818a089e77118c488b4037d8c1e7977272",
+          "backend": "adroit",
+          "runtime": "base",
+          "suite": "adroit"
+        }
+      ]
+    },
+    {
+      "name": "google-deepmind/dm-control",
+      "org": "google-deepmind",
+      "short_name": "dm-control",
+      "dir": "robouse-dmcontrol",
+      "aliases": [],
+      "upstream": {
+        "benchmark": "dm_control (DeepMind Control Suite and dm_control.manipulation)",
+        "org_name": "Google DeepMind",
+        "repo": "https://github.com/google-deepmind/dm_control",
+        "licence": "Apache-2.0"
+      },
+      "version": "0.1",
+      "description": "Robo Use dm_control 0.1: 17 tasks from DeepMind's dm_control, 12 from the Control Suite (cart-pole swing-up and balance, pendulum and acrobot swing-up, reacher, point mass, finger turning, ball in cup, planar manipulator bring-ball) acted through the domains' own actuator commands, and 5 from dm_control.manipulation with the Kinova Jaco arm (reach, lift, place on a pedestal brick or cradle, stack two Duplo bricks) acted through an end-effector command. Success is each task's own in-target condition (dm_control's sparse reward) held for a number of steps, judged from the physical state.",
+      "git_tag": "google-deepmind/dm-control-v0.1",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 17,
+      "suites": [
+        "dmcontrol"
+      ],
+      "embodiments": [
+        "DeepMind Control Suite bodies (cart-pole, pendulum, acrobot, reacher, point mass, finger, ball in cup, planar manipulator)",
+        "Kinova Jaco arm with the Jaco hand"
+      ],
+      "simulators": [
+        "dm_control 1.0.47 (MuJoCo 3.14.0)"
+      ],
+      "image": "dmcontrol",
+      "noop": false,
+      "runtimes": [
+        "dmcontrol"
+      ],
+      "tasks": [
+        {
+          "id": "dmcontrol-acrobot-swingup",
+          "digest": "sha256:5ccac7d40123e41bf08aa886da9240e659cfec7888d5fa09d03bd033fd82ed2a",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-ball-in-cup-catch",
+          "digest": "sha256:81097eb2cebc2dbc2d594ac2b69456e9cf00a3e2a1ac2480fa63798e0f1461fb",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-cartpole-balance",
+          "digest": "sha256:b7868c01cfd0a592c0a5d128bc416f49fbe7fdaaf0b851031a660f920c8a9ec0",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-cartpole-swingup",
+          "digest": "sha256:cb397156d562fde0bd10b6d6612e7371e708925266c5e9703fea7538f0f3439d",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-finger-turn-easy",
+          "digest": "sha256:cd0940d32228cded98f96234f2d02d095e91baae5a68903c9756fd259d7d9385",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-finger-turn-hard",
+          "digest": "sha256:f10a4645fc3bc470b132600a466a1c73be177deb77109f34a32e5be7cbec59a3",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-jaco-lift-brick",
+          "digest": "sha256:f6c3da3e1126c528bffafebeeb801ae3d752b653b55d4d809f32e167991950a9",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-jaco-place-brick",
+          "digest": "sha256:ee29aa0473b616d831ea3a83d516b5c3f04c75e39a501b70d5d51552c32633cc",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-jaco-place-cradle",
+          "digest": "sha256:c4fbbc4b6f520807baeb2ba6897030f29b83bf4b8249f4d4c4def83dd38f6f9a",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-jaco-reach-site",
+          "digest": "sha256:acabf47e7a1a03e00bfe7045488528c0480ff03149c6e6fef3a0c7514e6807f0",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-jaco-stack-2-bricks",
+          "digest": "sha256:57ff86e96400c2b5fc0b298115269bfc284673464d2133688fbfdf408163b63d",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-manipulator-bring-ball",
+          "digest": "sha256:b57f6a31ff518fc3c15408940018a84d7b1631f4e2fc8da1f150076695cdd294",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-pendulum-swingup",
+          "digest": "sha256:abc7e62cebec5870d18724eeefe276e16f0c59cda2425f41cf4e241493e800d2",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-point-mass-easy",
+          "digest": "sha256:9bdb91cdbc74146a3c7ddd7582c6e92624adcc32df7de4a7d6a70e15d982507e",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-reacher-easy",
+          "digest": "sha256:1a48adbe9be3e29b5fe2c51d7b76041c6d08964b269872d6ab8f04f61756ab97",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-reacher-hard",
+          "digest": "sha256:b44dda5d88c239cf98dd8df1c941dea75475beb5eebacdc28ab0e7973109dc1d",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        },
+        {
+          "id": "dmcontrol-reacher-hard-b",
+          "digest": "sha256:bcdb9a8818d61a1fce74b9deaab325ae32d6ccafd9727f9a19c8fce83a25e362",
+          "backend": "dmcontrol",
+          "runtime": "dmcontrol",
+          "suite": "dmcontrol"
+        }
+      ]
+    },
+    {
+      "name": "myohub/myosuite",
+      "org": "myohub",
+      "short_name": "myosuite",
+      "dir": "robouse-myosuite",
+      "aliases": [],
+      "upstream": {
+        "benchmark": "MyoSuite",
+        "org_name": "MyoHub",
+        "repo": "https://github.com/MyoHub/myosuite",
+        "licence": "Apache-2.0"
+      },
+      "version": "0.1",
+      "description": "Robo Use MyoSuite 0.1: 15 MyoSuite tasks on muscle-driven human models (elbow and finger posing, finger and five-fingertip reaching, sign-language hand shapes, key turning), acted through muscle excitations or a muscle-space joint controller and judged by MyoSuite's own solved check.",
+      "git_tag": "myohub/myosuite-v0.1",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 15,
+      "suites": [
+        "myosuite"
+      ],
+      "embodiments": [
+        "MyoSuite musculoskeletal elbow, index finger and hand (muscle-driven)"
+      ],
+      "simulators": [
+        "MyoSuite 2.12.2 (MuJoCo 3.6.0)"
+      ],
+      "image": "myosuite",
+      "noop": false,
+      "runtimes": [
+        "myosuite"
+      ],
+      "tasks": [
+        {
+          "id": "myosuite-elbow-pose",
+          "digest": "sha256:394945c30f08f6a340e3cd4b5a4236f4057f9acba2386bd7feff784a6cc11705",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        {
+          "id": "myosuite-elbow-pose-muscles",
+          "digest": "sha256:2f5b959e3a5974f4d489e3f19a741a96ead0ed77b8786534a38ccff660a156b2",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        {
+          "id": "myosuite-finger-pose-fixed",
+          "digest": "sha256:bcbc1516d8dcb1aa4024f3107295b3c82852eff4ac91850e8f366ed250dd77fa",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        {
+          "id": "myosuite-finger-pose-muscles",
+          "digest": "sha256:61634b19e1051873aee97d34a1c61956dc4993da2e20d13686b0d097d7139dcb",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        {
+          "id": "myosuite-finger-pose-random",
+          "digest": "sha256:b6ce328080b68cf07f726dcc84b87e568f81422ae8d0868c7fdcccd9c6881bcd",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        {
+          "id": "myosuite-finger-reach-fixed",
+          "digest": "sha256:49b250d6ccf49c54cbd3e4e348fbd5384d9ab71d15057a8a2d42ca78135e014f",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        {
+          "id": "myosuite-finger-reach-random",
+          "digest": "sha256:446ab49b3fe8f900cd4c1e58c93ae91895c0e67d58d9b0afadebaabfb4dad111",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        {
+          "id": "myosuite-hand-key-turn",
+          "digest": "sha256:4081419d87a7f53fd2876da665d645be454bd28b04ef80c17cfa0ce6ae83fadb",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        {
+          "id": "myosuite-hand-pose-4",
+          "digest": "sha256:ffd65fbd9375abd92abb1028145a1c0ade4d19f62eb41aff33f3d52ce5760d89",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        {
+          "id": "myosuite-hand-pose-5",
+          "digest": "sha256:9d843a13a9cb16b3f653c80b63e3793e3dd9e2cac77919583179e58d3dd8e2b2",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        {
+          "id": "myosuite-hand-pose-7",
+          "digest": "sha256:96005d4239c65de9c37f3884afc14c8d2d0d4aa5fd6cd48e8233caf896938c90",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        {
+          "id": "myosuite-hand-pose-8",
+          "digest": "sha256:bf9528823705d1b8da434741bea258404faa5273972e53e10bcf2b8a2b7efddd",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        {
+          "id": "myosuite-hand-pose-9",
+          "digest": "sha256:ae331ad097041366af6fda1e232b30e7eb83618a851e3958ac271d1fb44ebdb1",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        {
+          "id": "myosuite-hand-reach-fixed",
+          "digest": "sha256:1e1f5d40eee27c5f537cbc8c88762bf62854dea5093324cfa49c102c311f5088",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        },
+        {
+          "id": "myosuite-hand-reach-random",
+          "digest": "sha256:27d453f8c7fc644ccfbf4057e20020ea419b7c07facc9dfc1c0b450e44f3860b",
+          "backend": "myosuite",
+          "runtime": "myosuite",
+          "suite": "myosuite"
+        }
+      ]
+    },
+    {
+      "name": "carlosferrazza/humanoid-bench",
+      "org": "carlosferrazza",
+      "short_name": "humanoid-bench",
+      "dir": "robouse-humanoidbench",
+      "aliases": [],
+      "upstream": {
+        "benchmark": "HumanoidBench",
+        "org_name": "Carmelo Sferrazza (carlosferrazza), UC Berkeley Robot Learning Lab",
+        "repo": "https://github.com/carlosferrazza/humanoid-bench",
+        "licence": "MIT"
+      },
+      "version": "0.1",
+      "description": "Robo Use HumanoidBench 0.1: 7 whole-body tasks from HumanoidBench for a free-standing Unitree H1 with two Shadow hands (stand, walk, maze, pole forest, sit on a chair, reach a point with the left hand, push a box on a table), judged by HumanoidBench's own reward and success rule (the task's success bar on the episode return, or its success signal). The agent drives Unitree's pretrained H1 walking policy through velocity commands and moves the hands through arm inverse kinematics.",
+      "git_tag": "carlosferrazza/humanoid-bench-v0.1",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 7,
+      "suites": [
+        "humanoidbench"
+      ],
+      "embodiments": [
+        "Unitree H1 humanoid with two Shadow hands"
+      ],
+      "simulators": [
+        "HumanoidBench (MuJoCo 3.1.6)"
+      ],
+      "image": "humanoidbench",
+      "noop": false,
+      "runtimes": [
+        "humanoidbench"
+      ],
+      "tasks": [
+        {
+          "id": "humanoidbench-maze",
+          "digest": "sha256:83e2a89c64a1f5dc009bdd5ccc2473a401a0b6b61fc89e92d2e518d18c008f12",
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        },
+        {
+          "id": "humanoidbench-pole",
+          "digest": "sha256:6283c496035d41d9ee5a086294898c1dd163a23d071911d4dc7f271b9fc08931",
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        },
+        {
+          "id": "humanoidbench-push",
+          "digest": "sha256:fdc87186bedb2bf6776926e35a7afc219f69def34a84a1efae6996a98bacd459",
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        },
+        {
+          "id": "humanoidbench-reach",
+          "digest": "sha256:f483cb66800d4a48da698f0ec6f8a05202b60ee6070b1240c8f896714fee0bb3",
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        },
+        {
+          "id": "humanoidbench-sit-simple",
+          "digest": "sha256:62d3d9ed050f53af5d128758cda842ed496f73e68398a9e4ffeb59365959a9bd",
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        },
+        {
+          "id": "humanoidbench-stand",
+          "digest": "sha256:1eb10e2e0fd1d43f557dd08e4b8cb6d854889a4d30e2aed0177155a3a5f0039c",
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        },
+        {
+          "id": "humanoidbench-walk",
+          "digest": "sha256:439222d4905dd1453c0d7d22d6b834a39c51f1abd06d19f46386580fb6578b83",
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        }
+      ]
+    },
+    {
+      "name": "mani-skill/maniskill",
+      "org": "mani-skill",
+      "short_name": "maniskill",
+      "dir": "robouse-maniskill",
+      "aliases": [],
+      "upstream": {
+        "benchmark": "ManiSkill3",
+        "org_name": "Hao Su Lab (UCSD) and Hillbot",
+        "repo": "https://github.com/mani-skill/ManiSkill",
+        "licence": "Apache-2.0"
+      },
+      "version": "0.1",
+      "description": "Robo Use ManiSkill3 0.1: 12 ManiSkill3 tabletop tasks on a Franka Panda (pick, stack, push, pull, tool use, rolling, reorientation, peg and plug insertion), on ManiSkill's CPU physics backend, judged by ManiSkill's own success check.",
+      "git_tag": "mani-skill/maniskill-v0.1",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 12,
+      "suites": [
+        "maniskill"
+      ],
+      "embodiments": [
+        "Franka Panda"
+      ],
+      "simulators": [
+        "ManiSkill3 3.0.1 (SAPIEN 3.0.3, CPU)"
+      ],
+      "image": "maniskill",
+      "noop": false,
+      "runtimes": [
+        "maniskill"
+      ],
+      "tasks": [
+        {
+          "id": "maniskill-lift-peg-upright",
+          "digest": "sha256:e8a2aebd772804f9bdb0af9b055dc2c65410943dd6310ad392950cada7a7cee2",
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        {
+          "id": "maniskill-peg-insertion-side",
+          "digest": "sha256:f1c7af27553503f02f0f1cd123e8e041f616063acbdff4668d79c7372c77df01",
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        {
+          "id": "maniskill-pick-cube",
+          "digest": "sha256:dabcb56d39eeb5f3ed93532cdd1286d0b2546c43b070f6e6c15a79527832a030",
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        {
+          "id": "maniskill-place-sphere",
+          "digest": "sha256:7bbd5a6f51f94510883e80bd5fa3c104776a52f12184098aeaec5a62c1253d82",
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        {
+          "id": "maniskill-plug-charger",
+          "digest": "sha256:e29b7be35ea0e24f249b63f55e01e281619dd2379b7cf4fd5f1c3471f2d4c3ef",
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        {
+          "id": "maniskill-poke-cube",
+          "digest": "sha256:7aa8ce92ae9ebe5b53ced040844ce1d2a519b88f2e5acaff26539a40a9b01965",
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        {
+          "id": "maniskill-pull-cube",
+          "digest": "sha256:f3b143406f9f5715b99e70804ea024f1760e16116e87551a284330219f545ced",
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        {
+          "id": "maniskill-pull-cube-tool",
+          "digest": "sha256:660040efcd9439d566647b14adf7a824bc5c6e5af091948a7ab5612e9eb5a63a",
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        {
+          "id": "maniskill-push-cube",
+          "digest": "sha256:ee26d60e001652c56df0fdd7c2dc62b89b3773cee0f90095682703a1d2acf463",
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        {
+          "id": "maniskill-roll-ball",
+          "digest": "sha256:4138776c4325ef7d42529bbfdefbf58879ed9122854d2000df5e4447788249db",
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        {
+          "id": "maniskill-stack-cube",
+          "digest": "sha256:397b1ac15e7c3270e0b0d67c38180cbf3b130471b98c5e8af06096f1876d9da3",
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        },
+        {
+          "id": "maniskill-stack-pyramid",
+          "digest": "sha256:6bbafb092823a53582860c20bedec0348dca395f38d3b5e01dfadfda895b0ffc",
+          "backend": "maniskill",
+          "runtime": "maniskill",
+          "suite": "maniskill"
+        }
+      ]
+    },
+    {
+      "name": "robocasa/robocasa",
+      "org": "robocasa",
+      "short_name": "robocasa",
+      "dir": "robouse-robocasa",
+      "aliases": [],
+      "upstream": {
+        "benchmark": "RoboCasa",
+        "org_name": "RoboCasa",
+        "repo": "https://github.com/robocasa/robocasa",
+        "licence": "MIT"
+      },
+      "version": "0.1",
+      "description": "Robo Use RoboCasa 0.1: 24 RoboCasa365 atomic kitchen tasks in all ten kitchen layouts: close a drawer, counter to sink, counter to cabinet, turn on the toaster, close the kettle lid, turn off the faucet, and turn a stove burner on or off, with a Franka Panda on a parked mobile base. Success is RoboCasa's own check for each task, judged from the physical state.",
+      "git_tag": "robocasa/robocasa-v0.1",
+      "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
+      "n_tasks": 24,
+      "suites": [
+        "robocasa"
+      ],
+      "embodiments": [
+        "Franka Panda on a mobile base (PandaOmron)"
+      ],
+      "simulators": [
+        "RoboCasa365 (robosuite 1.5.2, MuJoCo 3.3.1)"
+      ],
+      "image": "robocasa",
+      "noop": false,
+      "runtimes": [
+        "robocasa"
+      ],
+      "tasks": [
+        {
+          "id": "robocasa-close-drawer-kitchen10",
+          "digest": "sha256:891d76a8144b42804894ca3cd55a425d123109389ac757eff91b1f7a99b8b646",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-close-drawer-kitchen2",
+          "digest": "sha256:2d0a21347dfc4275a56e6b3b9801a9fd989320d1aeaeb700a4d1c91b443f280b",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-close-drawer-kitchen7",
+          "digest": "sha256:7bac94a3bd8215af1ddef1dbc36b23d4460058ab569daa0928915bd10376d399",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-close-kettle-lid-kitchen1",
+          "digest": "sha256:c6ef4294169ea5228d701fde8928ff5f2f3a7501c9a189e0c9bcf7afc010b250",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-close-kettle-lid-kitchen10",
+          "digest": "sha256:e8bb91355e8c9455db1971562edb31ccdfdec65dff4ac48fcd53f03a023e1b44",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-close-kettle-lid-kitchen6",
+          "digest": "sha256:3389f0977969a2ef37db0a72c02820d46aec63ca2e94c3ffd53b7957295dbe8b",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-pick-place-counter-to-cabinet-kitchen3",
+          "digest": "sha256:e835d7e5472f94926f1e25319954350243a47689f8b114b646b2eb27d15cdf3c",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-pick-place-counter-to-cabinet-kitchen8",
+          "digest": "sha256:4573146322c8e724f5fe9e1a5cb48a3e670e8fd187332c4453e96b6d3d948a5d",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-pick-place-counter-to-cabinet-kitchen9",
+          "digest": "sha256:d3b91223b426732f12d8a53b295d1df5c6cff8fce8fa3cdf6cb7c8a5aadb393b",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-pick-place-counter-to-sink",
+          "digest": "sha256:c8386782eb33ed822c3b618ebf1232e2b4b8d6004f7194f77c5506bc1dc78e53",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-pick-place-counter-to-sink-kitchen2",
+          "digest": "sha256:ddbcb3986bcd6b9ebc96e221d30536632d2ff014864edf285e90b679a750b8d2",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-pick-place-counter-to-sink-kitchen2b",
+          "digest": "sha256:a36dd9374875082c4a09638332fa5da10eb20f7360197f322c4619df3319ffd4",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-pick-place-counter-to-sink-kitchen3",
+          "digest": "sha256:74eb2e679e4b36df55d0a273d83280a9c6cffd14beb351d5a33202ea9da0d297",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-pick-place-counter-to-sink-kitchen4",
+          "digest": "sha256:421f4f5af7f3d5b6bb173b7bf131d4b145522a72e60405706ccc69db7847e6a9",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-pick-place-counter-to-sink-kitchen5",
+          "digest": "sha256:375f6c4dbc02521ef77c62723a5a38ac8d71941b122627c807e376c4b3d47041",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-pick-place-counter-to-sink-kitchen6",
+          "digest": "sha256:31045c64efdd7ed6e1ae31fe7e5c208b9195e15a2746f3b11cdeeaf0901c47c8",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-turn-off-faucet-kitchen2",
+          "digest": "sha256:56e2a36d1638d57f8cfe851ae16f43da440b1554ede81b1e62b12ba4a9e85fce",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-turn-off-faucet-kitchen9",
+          "digest": "sha256:6523b38a8cf27f5a1dabf838572947fa595b01799ccc6f0a279423370547c141",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-turn-off-stove-kitchen2",
+          "digest": "sha256:203f171b224ae3e352c122b0a28be233d883def0e7c37157ec3e9320da5c421a",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-turn-off-stove-kitchen9",
+          "digest": "sha256:f44e6700a1a548fa310bbfb44060a86aa9fed8a8e9c5b769f9a1875f65f0f418",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-turn-on-stove-kitchen2",
+          "digest": "sha256:43100bbc6d978c98377eb47eb57f8c5139eeb2d9dfe4da0b46f142aa187bd7f5",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-turn-on-stove-kitchen7",
+          "digest": "sha256:1c6805ba224567c14a5556dd91ba13d901b468fdeab9e4632702261a5dd659d4",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-turn-on-toaster-kitchen7",
+          "digest": "sha256:47cc3469bb72a028ee97824d56814733a6fae652d528ccca25535555dcb2ab74",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        {
+          "id": "robocasa-turn-on-toaster-kitchen8",
+          "digest": "sha256:c8c0d9e47a22842bccf074822cf2f3b7422cae8276f206fadb2969343a737824",
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
         }
       ]
     },
@@ -4240,28 +6503,232 @@
           "suite": "safety"
         }
       ]
+    },
+    {
+      "name": "lifelong-robot-learning/libero",
+      "org": "lifelong-robot-learning",
+      "short_name": "libero",
+      "dir": "robouse-libero",
+      "aliases": [
+        "robouse-libero"
+      ],
+      "upstream": {
+        "benchmark": "LIBERO",
+        "org_name": "Lifelong Robot Learning",
+        "repo": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+        "licence": "MIT"
+      },
+      "version": "0.1",
+      "description": "Robo Use LIBERO 0.1: 20 LIBERO tasks (5 each from spatial, object, goal and LIBERO-10) on a Franka Panda, judged by LIBERO's BDDL goal check.",
+      "git_tag": "lifelong-robot-learning/libero-v0.1",
+      "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
+      "n_tasks": 20,
+      "suites": [
+        "libero"
+      ],
+      "embodiments": [
+        "Franka Panda"
+      ],
+      "simulators": [
+        "LIBERO (robosuite 1.4)"
+      ],
+      "image": "libero",
+      "noop": false,
+      "runtimes": [
+        "libero"
+      ],
+      "tasks": [
+        {
+          "id": "libero-10-0",
+          "digest": "sha256:6032e44f0a79da410fa45fb70e1b7ad804593e9f6f5be9a80b7a1c9d113c5523",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-10-2",
+          "digest": "sha256:5384b70afb7c85ec7958a376ff289474505381cdc3733e9c2082e2fd1a8ad54e",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-10-4",
+          "digest": "sha256:7e4ee6617b688c60cbc12f195a3cdd0481739a30b58ed80d08a6a6e817b383fd",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-10-6",
+          "digest": "sha256:a357cbabbbd2ffe6d95e12dc7adcd46cdda4351b52c5ed0db9b4ada15452b2ee",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-10-8",
+          "digest": "sha256:3da83a0d76d2a309ed1549290f1515b813d8491eacf5d1a820a2295248c44bc0",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-goal-0",
+          "digest": "sha256:c1aa411f3c534f3d87b2c7c9188bdc00f587d0b84f3720a1f004ee9073eecacc",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-goal-2",
+          "digest": "sha256:f9b62efa73388b62e40f486d87d45306a070a985dad195c1c89bf6bf0d2f36e5",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-goal-4",
+          "digest": "sha256:238f6cf959711681eac62a38e2dbc1dcc4e9b6c0a986c5e46b77473fd3684f6e",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-goal-6",
+          "digest": "sha256:3ed7c2292c6885f5df8f9f0d91b2dca7ecac63d3810e7c244df6cd102c7b5de8",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-goal-8",
+          "digest": "sha256:90836b34963eccd4f14218edbb6ca1c46dfffe64ebd9252d861beb4735ff9996",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-object-0",
+          "digest": "sha256:91f8571c45ee35c81d5af124972894660eed6bc9c94fab555c6826fab9c33928",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-object-2",
+          "digest": "sha256:51a89e97115d3afe9a8708a6b643e6397ebb4ab92399e6116af85fef1879e2c3",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-object-4",
+          "digest": "sha256:275d34bca1bc1bcde29f9e7ec8d7dd251449da7bf274d001e083071490a126f5",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-object-6",
+          "digest": "sha256:311a0f048d7f91956444ede38a463efffd00c54373e4fa5e3ebf4fa2f46a0aef",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-object-8",
+          "digest": "sha256:68dd605a1d61008a9157b2362debcf104eee02d064e95ba8726542760bd84ddf",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-spatial-0",
+          "digest": "sha256:b20acf01c791445fec0618f9ef89382c993fe21d0a537632d891a1b52dc3427f",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-spatial-2",
+          "digest": "sha256:346f3cd4998f450a07fc42fbd741a7b794a6c153472a4d97114e60227d9a44fc",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-spatial-4",
+          "digest": "sha256:2cda170de3a76fc1a0c92223727a065f6dcadfa4eb839b75d6a51979e3ff7f42",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-spatial-6",
+          "digest": "sha256:37d72af9284b6800c19a5ec94771856f2c5cb5a49c6c3d17849009377d753a1d",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        },
+        {
+          "id": "libero-spatial-8",
+          "digest": "sha256:962ea7914a8f14ae01e5cf6cb2d2678b3b228c56c4de7cd8e7ed0cdf47332fae",
+          "backend": "libero",
+          "runtime": "libero",
+          "suite": "libero"
+        }
+      ]
     }
   ],
   "runtimes": {
     "base": {
       "simulators": "MuJoCo 3.3.0, Meta-World 3.1.1, Gymnasium-Robotics 1.4.2",
-      "digest": "sha256:87e23e31c6fe17e7471455c898823b931712dd1c4c4fd10395e8efa27a437014"
+      "digest": "sha256:453a780cbc2972149bf99a92a41cd35666e51192e750bc2bcb1fb3deb04ca376"
     },
     "menagerie": {
       "simulators": "MuJoCo 3.3.0, MuJoCo Menagerie models",
-      "digest": "sha256:a607b32470fcdab76dabbfa14a4fccb5fba9b445a5cd088fffac9ec1bb3aa78d"
+      "digest": "sha256:40eb64c1910118d9c821aafcef547ac49cc34534a4283d66b61b92e5f5dbf911"
     },
     "robosuite": {
       "simulators": "MuJoCo 3.3.0, robosuite 1.5.2",
-      "digest": "sha256:e772f02478c314c1debe7702bfb170393886b68b996d7f67ff2be7aabd7cc09e"
+      "digest": "sha256:ae1976e503f43f82f6296e325adedcdb36932b9686a913df76d3b2ca2d138012"
     },
     "libero": {
       "simulators": "MuJoCo 3.3.0, LIBERO (hf-libero 0.1.4, robosuite 1.4.0)",
-      "digest": "sha256:9e145237c9ee779fa68b4a2828eb9a776a418d9a62afc73a4aeeacc82abad24e"
+      "digest": "sha256:f4f64ec5810becb755db7410586836e031cb254d66baa42fbe7f6d40ec3f327e"
     },
     "dexjoco": {
       "simulators": "MuJoCo 3.4.0, DexJoCo",
-      "digest": "sha256:ab43542b6c41695c2ad8e2a62b2161c71a5cec06b2fd4b1c45d2099190c2199e"
+      "digest": "sha256:c8a774e0cbe1feb4b08493a3ca5464e92dffe31ffec039cd37110f5490e60fd9"
+    },
+    "embodied": {
+      "simulators": "MuJoCo 3.3.0, MuJoCo Menagerie models",
+      "digest": "sha256:2d8aef2c2e504bf4df8dbfed2a6feb48dc499c404c038b19b4e633e76fc69b6a"
+    },
+    "driving": {
+      "simulators": "MetaDrive 0.4.3",
+      "digest": "sha256:828d135f5660360093b186c88ff6f0a828fb4fcf9a3f226103b884262c0bcb96"
+    },
+    "dmcontrol": {
+      "simulators": "MuJoCo 3.14.0, dm_control 1.0.47",
+      "digest": "sha256:cda13e1219e387191d2cd39cfa37c28a4c2ac0d251833abc3c022b46d39e8876"
+    },
+    "myosuite": {
+      "simulators": "MuJoCo 3.6.0, MyoSuite 2.12.2",
+      "digest": "sha256:124ef7a1988b88d0918ced05416de0dc6e84b1cf490e97eac01b9d4e050323e7"
+    },
+    "humanoidbench": {
+      "simulators": "MuJoCo 3.1.6, HumanoidBench (commit cb11890)",
+      "digest": "sha256:4e2c48833b9ca63c686671310754d2559c4d9d83ff42b3500ec218d66c6de1db"
+    },
+    "maniskill": {
+      "simulators": "ManiSkill3 3.0.1 on SAPIEN 3.0.3 (CPU physics, lavapipe rendering)",
+      "digest": "sha256:50e085d16dc0c1b0f4a36236070b4290ed23ac6844ebfd1a78e54054158438e6"
+    },
+    "robocasa": {
+      "simulators": "MuJoCo 3.3.1, RoboCasa365 (robosuite 1.5.2)",
+      "digest": "sha256:0e7762e64c24849f320fa346ace73b18c6c7493ec14fedc79883eaa3eef49582"
     }
   }
 }

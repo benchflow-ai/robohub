@@ -23,7 +23,7 @@ Every dataset is named `<org>/<name>`. The org is whoever designed the benchmark
 | `benchflow/robouse-menagerie@0.1` | `robouse-menagerie@0.1` | 15 | menagerie | menagerie | |
 | `brave-eai/dexjoco@0.1` | `robouse-dexjoco@0.1` | 14 | dexjoco | dexjoco | DexJoCo (brave-eai, MIT) |
 | `benchflow/robouse-drone@0.1` | `robouse-drone@0.1` | 10 | drone | menagerie | |
-| `benchflow/robouse-roboharm@0.1` | `robouse-roboharm@0.1` | 80 | roboharm | menagerie | |
+| `benchflow/robouse-harm@0.1` | `benchflow/robouse-roboharm@0.1`, `robouse-roboharm@0.1` | 80 | roboharm | menagerie | |
 | `lifelong-robot-learning/libero@0.2` | `robouse-libero@0.2` | 40 | libero | libero | LIBERO (Lifelong Robot Learning, MIT) |
 | `lifelong-robot-learning/libero-90@0.1` | | 90 | libero-90 | libero | LIBERO (Lifelong Robot Learning, MIT) |
 | `farama-foundation/franka-kitchen@0.1` | | 10 | kitchen | base | Franka Kitchen in Gymnasium-Robotics (Farama Foundation, MIT; assets Apache-2.0) |
@@ -41,7 +41,7 @@ Every dataset is named `<org>/<name>`. The org is whoever designed the benchmark
 | `benchflow/driving@0.1` | | 7 | driving | driving | |
 | `benchflow/robouse-noop-control@0.1` | `robouse-noop-control@0.1` | 100 | robouse-core's tasks with no-op reference solutions (negative control) | base, menagerie, robosuite, libero, dexjoco | |
 
-The old plain names are aliases: each is its own entry in `registry.json` with exactly the same pinned tasks (same commit, paths and digests) as the dataset it names, so commands written with them keep working. The hub page lists only the `<org>/<name>` names, and the old `robouse.ai/hub/<name>/` pages redirect. The task folders keep their old names (`datasets/robouse-metaworld/...`); `dir` in `hub.yaml` maps a dataset to its folder.
+The old plain names are aliases: each is its own entry in `registry.json` with exactly the same pinned tasks (same commit, paths and digests) as the dataset it names, so commands written with them keep working. The hub page lists only the `<org>/<name>` names, and the old `robouse.ai/hub/<name>/` pages redirect. The task folders keep their old names (`datasets/robouse-metaworld/...`); `dir` in `hub.yaml` maps a dataset to its folder. `benchflow/robouse-harm@0.1` was first published as `benchflow/robouse-roboharm@0.1`; that name is an alias too, and `robouse.ai/hub/benchflow/robouse-roboharm/` redirects.
 
 The 0.1 datasets were exported from Robo Use 0.1.1 (commit `f1d08a0`); the datasets added on 2026-09-29 (LIBERO 0.2 and LIBERO-90, Franka Kitchen, Adroit, dm_control, MyoSuite, HumanoidBench, ManiSkill3, RoboCasa, and the six embodiment datasets) from Robo Use commit `6f8fd0b` (branch `more-suites`). Together the suite datasets hold every Robo Use task that runs on a CPU; BEHAVIOR-1K needs a GPU and is not exported here. `robouse-core` lists its tasks in [`core.txt`](core.txt). A task in `benchflow/robouse-core` is byte-identical to the same task in its suite dataset (same digest).
 
