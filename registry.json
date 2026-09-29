@@ -5757,6 +5757,339 @@
     ]
   },
   {
+    "name": "benchflow/robouse-nav",
+    "version": "0.1",
+    "description": "Robo Use navigation 0.1: object-goal navigation in 10 generated homes, 40 tasks: drive a mobile base to a named piece of furniture from a robot-frame WorldState in spatial language, in the protocol of Dimensional's Can Jev Nav? study; scored by arrival within 1 m with line of sight, with SPL, SoftSPL, collisions and path metrics recorded.",
+    "git_tag": "benchflow/robouse-nav-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "nav-h00-armchair",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h00-armchair",
+        "digest": "sha256:4940284575bd5f0aa21f6d3256fdb23a9ded96db7082456138a0df24327611f5"
+      },
+      {
+        "name": "nav-h00-fridge",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h00-fridge",
+        "digest": "sha256:70810da383f62d5f5e2958fb1dda0c0b551d9f28a551e02515f466b062d32dad"
+      },
+      {
+        "name": "nav-h00-wardrobe",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h00-wardrobe",
+        "digest": "sha256:6356b51ef395c39e29cc4c359abaab5e16453e2f88a8b3914a5f3373fcdc701f"
+      },
+      {
+        "name": "nav-h00-washing-machine",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h00-washing-machine",
+        "digest": "sha256:0eb4d8845c853418f97c7cb6668758af767ba476d487b7cdf2d499bfc24f47e6"
+      },
+      {
+        "name": "nav-h01-fridge",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h01-fridge",
+        "digest": "sha256:b34465e2539a2b2b258b73ec693f038398695c8b30f7ce4cee73800e07c9fead"
+      },
+      {
+        "name": "nav-h01-kitchen-counter",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h01-kitchen-counter",
+        "digest": "sha256:3afc67343c073da170d7608ac39f5fa672d43f1bb7ad86c0e89572d2358a44a7"
+      },
+      {
+        "name": "nav-h01-oven",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h01-oven",
+        "digest": "sha256:0d017fb682c33eeab78e843676a1d5e7e7d47ebf194db065227392643702b7c7"
+      },
+      {
+        "name": "nav-h01-trash-can",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h01-trash-can",
+        "digest": "sha256:b64e7ece43231a4fdde23e37e27365d565201126743dc62b678ea522d10ef5c1"
+      },
+      {
+        "name": "nav-h02-bookshelf",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h02-bookshelf",
+        "digest": "sha256:63d9b03480a4404265ac4ef3d20b56119ca90c7b7395dccbfd686ce121c946a8"
+      },
+      {
+        "name": "nav-h02-coffee-table",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h02-coffee-table",
+        "digest": "sha256:5293629643bbf92a3e918018d238e46ab5c3f7af3c44d75e358f76104feee2d3"
+      },
+      {
+        "name": "nav-h02-dining-table",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h02-dining-table",
+        "digest": "sha256:bd04f7cfdd4fd016da42bd9934d1591d36cfe6a33e09ef86ce5e8ca0cd575946"
+      },
+      {
+        "name": "nav-h02-tv-stand",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h02-tv-stand",
+        "digest": "sha256:4488ae463305757e4ec29ec43bc5e1974eae10de7400ba6ee1f56ec77b6a6f40"
+      },
+      {
+        "name": "nav-h03-dining-table",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h03-dining-table",
+        "digest": "sha256:f075e00e73fc1074d28aec324ff3e6fc43dab28f76093ac116f2dda1bcaf6a16"
+      },
+      {
+        "name": "nav-h03-filing-cabinet",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h03-filing-cabinet",
+        "digest": "sha256:e797e8f23c29d1e8456c6fb09627c49d3ce6045d97358325cadd0e2fc935ac1e"
+      },
+      {
+        "name": "nav-h03-fridge",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h03-fridge",
+        "digest": "sha256:dae349d71c1c7d7ed36c794d4c81037455b071e6628f568963ddfc208a86956e"
+      },
+      {
+        "name": "nav-h03-nightstand",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h03-nightstand",
+        "digest": "sha256:02c017f9226b0168869b37e1cb9d4a1d5aa133c0839918dc017f224637a1081c"
+      },
+      {
+        "name": "nav-h04-fridge",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h04-fridge",
+        "digest": "sha256:a237e098120c408b10daa0a0617c324b196b8763abbd9b4b53475fd60bb03e68"
+      },
+      {
+        "name": "nav-h04-oven",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h04-oven",
+        "digest": "sha256:b1d35e06dc9951017b368cb43448b7a16611d34400e87ccddae5fdec4853137e"
+      },
+      {
+        "name": "nav-h04-sink",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h04-sink",
+        "digest": "sha256:3acd16940e1b58043e4a916b35f18f85aecc5cf0b9611022cb926f35f79f1629"
+      },
+      {
+        "name": "nav-h04-wardrobe",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h04-wardrobe",
+        "digest": "sha256:194aae9f9899d2be6a7d3e79c7152443d91138e1505f69f13e358fafc4aa376a"
+      },
+      {
+        "name": "nav-h05-bookshelf",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h05-bookshelf",
+        "digest": "sha256:22beaac177e6bbbf1bb9109e41314e4365a00c87cc4c9fd132e0a762fb01042e"
+      },
+      {
+        "name": "nav-h05-kitchen-counter",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h05-kitchen-counter",
+        "digest": "sha256:0eb563599008ea0387704ce02ed8e19241b9de3d5b224cbad28f8b071553d558"
+      },
+      {
+        "name": "nav-h05-office-chair",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h05-office-chair",
+        "digest": "sha256:e08749c94b4a39d2eb38ed380fb623149d5d041409c5d02cc5bde7de83e5dced"
+      },
+      {
+        "name": "nav-h05-wardrobe",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h05-wardrobe",
+        "digest": "sha256:ec9e0f7bc88a154d1bd3c36a58a47ab3cd3ed0a715e937f20c990e0368eb9197"
+      },
+      {
+        "name": "nav-h06-bed",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h06-bed",
+        "digest": "sha256:daf974105bb134b2aa9203efaae9e0e23ddea89ab0db1d6b37642ce476edbe3e"
+      },
+      {
+        "name": "nav-h06-filing-cabinet",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h06-filing-cabinet",
+        "digest": "sha256:93e037fe4de1a5aabee986fe2923d8879d15871737fa786302de5ec85fb47325"
+      },
+      {
+        "name": "nav-h06-office-chair",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h06-office-chair",
+        "digest": "sha256:709e03421d5da76d42af9e72ec2faa14503c4460d6bec7359fa48dc528df95f8"
+      },
+      {
+        "name": "nav-h06-wardrobe",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h06-wardrobe",
+        "digest": "sha256:3886dad71e45d97c9aea4deb8ae514910c3422eebe2476d4cb688ea60d050b09"
+      },
+      {
+        "name": "nav-h07-armchair",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h07-armchair",
+        "digest": "sha256:90fa17cfdc73c1aeca436cba0dc08fd1ed640e7726e293890da1308522c2707d"
+      },
+      {
+        "name": "nav-h07-bathtub",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h07-bathtub",
+        "digest": "sha256:7b589ee2c1fcc91cb43cb5b77fadf916a30c685c2d00cde5ebf4777f12ab59fa"
+      },
+      {
+        "name": "nav-h07-desk",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h07-desk",
+        "digest": "sha256:f7de38b9030762e1d8eba8ed91bbaf66b0b88b7142ce6cc0f73499e10c8e343f"
+      },
+      {
+        "name": "nav-h07-plant",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h07-plant",
+        "digest": "sha256:8465f1cfc6ae170a46c1391ffdfe6a02cbac796e0606acee0cc04c2f2898caae"
+      },
+      {
+        "name": "nav-h08-bathtub",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h08-bathtub",
+        "digest": "sha256:7f5fec72560e3613b991ba8e5efa3fcd5d738537375ee0e94d60d7e3c1971b6f"
+      },
+      {
+        "name": "nav-h08-bookshelf",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h08-bookshelf",
+        "digest": "sha256:d3df8dfbed663acb2200d3387d5985e685686d3172fa2e927bc33d4352482281"
+      },
+      {
+        "name": "nav-h08-dining-table",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h08-dining-table",
+        "digest": "sha256:deadf92037d1a2730bcbd7c68c587a4dc88e5e3855fc839c0a997bb6a09fb930"
+      },
+      {
+        "name": "nav-h08-office-chair",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h08-office-chair",
+        "digest": "sha256:3ab23a03cddb32de9f37e6084b580291b17ba03266adb001f365944a8891f38e"
+      },
+      {
+        "name": "nav-h09-bathtub",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h09-bathtub",
+        "digest": "sha256:60bb063fb15db6746a2c84cfbe174df6c0a9f1cbb453d8f316ff768d4b120252"
+      },
+      {
+        "name": "nav-h09-oven",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h09-oven",
+        "digest": "sha256:9813c11e311fbceb0c96f4518d2bfdc9ef62cbc216817357d01a7d6dc87cc3f7"
+      },
+      {
+        "name": "nav-h09-sofa",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h09-sofa",
+        "digest": "sha256:809f019c69c82f52ea2af870f2ccd77ace5fa41f170724cc9b1026ea50717167"
+      },
+      {
+        "name": "nav-h09-wardrobe",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-nav/nav-h09-wardrobe",
+        "digest": "sha256:0c6a16b68817bbed3e100f4fd8f756c67523c57d4a3fdd24b4581e98aa9f22f7"
+      }
+    ]
+  },
+  {
+    "name": "robocurve/cubepick-reach",
+    "version": "0.1",
+    "description": "Robo Use CubePick 0.1: inspect-robots' built-in reach-the-cube world (MIT) with its 5 seeded layouts; success the first time the effector is within 0.05 of the cube.",
+    "git_tag": "robocurve/cubepick-reach-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "cubepick-reach-layout-0",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-cubepick/cubepick-reach-layout-0",
+        "digest": "sha256:f4005cf7a71a9d4293c8d02002336eecc5a6c940c4bc3b494cee032b283a7167"
+      },
+      {
+        "name": "cubepick-reach-layout-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-cubepick/cubepick-reach-layout-1",
+        "digest": "sha256:384608e30d571b57dfd13b734e8874bed3ae73539ae25440c059fce55b3cb121"
+      },
+      {
+        "name": "cubepick-reach-layout-2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-cubepick/cubepick-reach-layout-2",
+        "digest": "sha256:67c069d7b09f56105bb57d9a25fe65049932a38190807284c410936edae60015"
+      },
+      {
+        "name": "cubepick-reach-layout-3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-cubepick/cubepick-reach-layout-3",
+        "digest": "sha256:b07abd77832ae9338137d140251fa03d998b487757f935088f11b1b22b0f1de2"
+      },
+      {
+        "name": "cubepick-reach-layout-4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "8e777592c15101ff6e66a31e5c03a7f68df27ef9",
+        "path": "datasets/robouse-cubepick/cubepick-reach-layout-4",
+        "digest": "sha256:00fa87dedfa2cde8eb436459630fc874e36b6cbfa4836eea0ef34fac44189e6f"
+      }
+    ]
+  },
+  {
     "name": "benchflow/robouse-noop-control",
     "version": "0.1",
     "description": "Negative control for robouse-core 0.1: the same 100 tasks, but each reference solution only looks (robo info, robo observe) and exits without moving the robot. Run it with the oracle agent; every task must score 0.",
