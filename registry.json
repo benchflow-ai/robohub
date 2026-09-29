@@ -3487,6 +3487,351 @@
     ]
   },
   {
+    "name": "benchflow/robouse-remix",
+    "version": "0.1",
+    "description": "Robo Use remix 0.1: 48 tasks composed from components (6 embodiments: arm, bimanual rig, two mobile manipulators, quadruped, drone; 6 scenes; 9 task templates) with modifiers (vision, noise, perturbations, safety overlays, roles). Each was accepted by robouse remix: the reference solution scores 1 and a no-op agent 0.",
+    "git_tag": "benchflow/robouse-remix-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "bimanual-relay--aloha-2--kitchen-counter--s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/bimanual-relay--aloha-2--kitchen-counter--s5",
+        "digest": "sha256:82034711b7818bc9348bc8bfb42218c4b30be53b9e45c9c41485c1e162615069"
+      },
+      {
+        "name": "bimanual-relay--aloha-2--lab-bench--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/bimanual-relay--aloha-2--lab-bench--s4",
+        "digest": "sha256:6f5f1e3c94ad2c877d415865033ae640c036a9611f7586da0d56d8f0e7ac4d9c"
+      },
+      {
+        "name": "bimanual-relay--aloha-2--tabletop--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/bimanual-relay--aloha-2--tabletop--s4",
+        "digest": "sha256:087aa4463072ef0293e45ec08813323aa464595e07c122ea2cd91c1193440768"
+      },
+      {
+        "name": "bimanual-relay--aloha-2--workshop-bench--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/bimanual-relay--aloha-2--workshop-bench--s3",
+        "digest": "sha256:417bf0a7c9d3e6435fc92270d4aca2d5b0cd864de38815e10710d887c4a6d7a9"
+      },
+      {
+        "name": "fetch-and-deliver--google-robot--workshop-bench--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/fetch-and-deliver--google-robot--workshop-bench--s3",
+        "digest": "sha256:3603a26afbebfea73a081e7ea60ef68715423727509549e99acb27df4c76d425"
+      },
+      {
+        "name": "go-to-landmark--crazyflie-2--kitchen-counter--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/go-to-landmark--crazyflie-2--kitchen-counter--s2",
+        "digest": "sha256:7442542adeb13010f27c305a8298e13379a9a16dc4338059e2c79a709bbf2150"
+      },
+      {
+        "name": "go-to-landmark--crazyflie-2--outdoor-field--vision--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/go-to-landmark--crazyflie-2--outdoor-field--vision--s2",
+        "digest": "sha256:a93bede80d92aa0d35f64154b207a5e07aff98412b0f98ffa97fa5c985f558ad"
+      },
+      {
+        "name": "go-to-landmark--google-robot--lab-bench--s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/go-to-landmark--google-robot--lab-bench--s5",
+        "digest": "sha256:ffe94675cd48cc91682188a7a2810135b6ddb0bc86a6cd94b2b45b36b45cdd71"
+      },
+      {
+        "name": "go-to-landmark--google-robot--outdoor-field--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/go-to-landmark--google-robot--outdoor-field--s3",
+        "digest": "sha256:1e7813cd8a7201c6487a337c9d25ab9e56b9f973bbe971eb9c7954b7dc62cdc8"
+      },
+      {
+        "name": "go-to-landmark--unitree-go2--outdoor-field--safety-indirect--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/go-to-landmark--unitree-go2--outdoor-field--safety-indirect--s3",
+        "digest": "sha256:4e680e45f71a88ad7679c58b4a9520dd20eb73fd12bb9913b6b31510616555fe"
+      },
+      {
+        "name": "go-to-landmark--unitree-go2--warehouse--s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/go-to-landmark--unitree-go2--warehouse--s1",
+        "digest": "sha256:e72d7ae8e721396533d40f2af390046fbdc96330a999fcfb3520126722fc2451"
+      },
+      {
+        "name": "go-to-landmark--unitree-go2--warehouse--safety-direct--s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/go-to-landmark--unitree-go2--warehouse--safety-direct--s1",
+        "digest": "sha256:8258fc154d934c84ee936448d29ec21ee4b63478c54e7aa8ee5649bbbeb88c03"
+      },
+      {
+        "name": "inspect-tag--crazyflie-2--lab-bench--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/inspect-tag--crazyflie-2--lab-bench--s3",
+        "digest": "sha256:07bc173ca2ebd01e3eee060b23cf821f52c1e827dd594e00ade682624dcee151"
+      },
+      {
+        "name": "inspect-tag--crazyflie-2--warehouse--safety-privacy--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/inspect-tag--crazyflie-2--warehouse--safety-privacy--s4",
+        "digest": "sha256:04561762404aba40af82cb8cc7df5be420e7cb23b9c74d0df660ac0f425c2292"
+      },
+      {
+        "name": "inspect-tag--google-robot--kitchen-counter--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/inspect-tag--google-robot--kitchen-counter--s4",
+        "digest": "sha256:b41a72a728fde17b5abf1db549f352e72c83f38474469fbe39391c3fb043c109"
+      },
+      {
+        "name": "inspect-tag--pal-tiago--kitchen-counter--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/inspect-tag--pal-tiago--kitchen-counter--s2",
+        "digest": "sha256:8fa83b4cbd75dd7c2d00865ce70c65461bb3a677e5447171d7e0a9be58b8d749"
+      },
+      {
+        "name": "inspect-tag--unitree-go2--kitchen-counter--budget-loose--s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/inspect-tag--unitree-go2--kitchen-counter--budget-loose--s5",
+        "digest": "sha256:d283428e6218755896aeaa8616b5d725ccfb75bafd602af11c665375229495e8"
+      },
+      {
+        "name": "inspect-tag--unitree-go2--tabletop--s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/inspect-tag--unitree-go2--tabletop--s1",
+        "digest": "sha256:e1668ebf51687cffbd5e74e9fc203a0c9f08b92625937b089a7931db2c7e5da2"
+      },
+      {
+        "name": "push-to-zone--aloha-2--kitchen-counter--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/push-to-zone--aloha-2--kitchen-counter--s2",
+        "digest": "sha256:0c159c1e2bf91eb042ec742fff91ca183c0d7aabf4d670651407ca60bffad4eb"
+      },
+      {
+        "name": "push-to-zone--franka-panda--tabletop--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/push-to-zone--franka-panda--tabletop--s2",
+        "digest": "sha256:674ddcc940aac10770cadedc020c7cf290b15b07e3b770d3e7ce81cbe241e495"
+      },
+      {
+        "name": "push-to-zone--franka-panda--warehouse--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/push-to-zone--franka-panda--warehouse--s4",
+        "digest": "sha256:228d1d5255f121ca10dc4ea836d6155c4f19dd8a0c8080f48e73f0e2c1f211e5"
+      },
+      {
+        "name": "push-to-zone--unitree-go2--workshop-bench--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/push-to-zone--unitree-go2--workshop-bench--s4",
+        "digest": "sha256:559ff956b8c8309c3239f4f5a1fc142f951cacd2e6fd9ad5371bf4007173babd"
+      },
+      {
+        "name": "put-in-container--aloha-2--tabletop--pert-dynamics--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/put-in-container--aloha-2--tabletop--pert-dynamics--s4",
+        "digest": "sha256:38eb1e5a8df9347eb3c8d8bd2913f76359a806a97ab2fec5da980c7e983a4a40"
+      },
+      {
+        "name": "put-in-container--franka-panda--kitchen-counter--safety-direct--s6",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/put-in-container--franka-panda--kitchen-counter--safety-direct--s6",
+        "digest": "sha256:045a86276bc41a5e6f9d77d13bdbfd09c8e0747f763aa470d6903da1359951a5"
+      },
+      {
+        "name": "put-in-container--franka-panda--kitchen-counter--vision--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/put-in-container--franka-panda--kitchen-counter--vision--s3",
+        "digest": "sha256:6b42e32c616a2187238ac28d175d3734166295ced1e37c5d8425d3f221ad788a"
+      },
+      {
+        "name": "put-in-container--franka-panda--lab-bench--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/put-in-container--franka-panda--lab-bench--s2",
+        "digest": "sha256:79ff31eca84120ebd55b038099d1007746a4940cce1768498b45da8aaf70e0e6"
+      },
+      {
+        "name": "put-in-container--franka-panda--tabletop--safety-indirect--s7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/put-in-container--franka-panda--tabletop--safety-indirect--s7",
+        "digest": "sha256:e6059bddf1a112412cbebd818ac886bf5b9fece277bf73731111c6c61a127e2f"
+      },
+      {
+        "name": "put-in-container--franka-panda--workshop-bench--pert-push--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/put-in-container--franka-panda--workshop-bench--pert-push--s2",
+        "digest": "sha256:93aa5127c4091704b1f6ba3a3fe215058ed3dd04e15219e56343e2f9f3150248"
+      },
+      {
+        "name": "put-in-container--franka-panda--workshop-bench--s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/put-in-container--franka-panda--workshop-bench--s1",
+        "digest": "sha256:a306bb0cd1d60f44f9862af37490de5ae7cfe3e10261408ea1739ddcf5a6430c"
+      },
+      {
+        "name": "put-in-container--google-robot--tabletop--roles--s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/put-in-container--google-robot--tabletop--roles--s1",
+        "digest": "sha256:f378ea7cb7e0fe99710ea15a50bb03745252e20ada062fef178b4cc4aa9bd26e"
+      },
+      {
+        "name": "put-in-container--pal-tiago--tabletop--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/put-in-container--pal-tiago--tabletop--s4",
+        "digest": "sha256:b5cc09579fbbcb5ed3649e075205d897a1dbf4faedc2738b54a2ea789e64ccd5"
+      },
+      {
+        "name": "put-in-container--pal-tiago--tabletop--safety-privacy--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/put-in-container--pal-tiago--tabletop--safety-privacy--s2",
+        "digest": "sha256:35ae6ae0dfe683536075a8d6c39a4e65687d5557859bd089a1459a42d4688b0f"
+      },
+      {
+        "name": "put-in-container--pal-tiago--workshop-bench--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/put-in-container--pal-tiago--workshop-bench--s4",
+        "digest": "sha256:991a6bc4147bbd2906bb61420c2a2f6c5b8dbfd9dc72dabcb8c454aaa0797e6a"
+      },
+      {
+        "name": "sort-by-color--franka-panda--tabletop--budget-tight--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/sort-by-color--franka-panda--tabletop--budget-tight--s2",
+        "digest": "sha256:69adf15f7399b9bec28e823cb44c832b642b2a7db6183d4e92226b875b316a89"
+      },
+      {
+        "name": "sort-by-color--franka-panda--tabletop--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/sort-by-color--franka-panda--tabletop--s3",
+        "digest": "sha256:0f8a6fb3bb2ba479c0afb4532222b334780ea5071d4dd325d4f5a8ad8a8ae576"
+      },
+      {
+        "name": "sort-by-color--franka-panda--workshop-bench--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/sort-by-color--franka-panda--workshop-bench--s4",
+        "digest": "sha256:065a2e1935d97f28cdb48d5d6d4b7e7ef5cb7a34ab16cae9699dde9834008b2a"
+      },
+      {
+        "name": "sort-by-color--pal-tiago--kitchen-counter--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/sort-by-color--pal-tiago--kitchen-counter--s2",
+        "digest": "sha256:bba315e757caed07b6b03c2dbe91dc4f6cdc1e3cc70b4cae11a9f94eb892a799"
+      },
+      {
+        "name": "stack-in-order--aloha-2--tabletop--noisy--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/stack-in-order--aloha-2--tabletop--noisy--s2",
+        "digest": "sha256:a7186af1339253b7305a47c8d5878ec2d3818318dc6258f89a7c1ce798f2cd10"
+      },
+      {
+        "name": "stack-in-order--aloha-2--tabletop--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/stack-in-order--aloha-2--tabletop--s4",
+        "digest": "sha256:d4ed5418fffb31079d5f633b0f3b6b927c4aee5f8281463398f1aa9edb39b5b7"
+      },
+      {
+        "name": "stack-in-order--aloha-2--workshop-bench--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/stack-in-order--aloha-2--workshop-bench--s3",
+        "digest": "sha256:04fa4f9bb2c4874d8cf3b2459b00c1a3b809a52b75a07ebaf412444535787d52"
+      },
+      {
+        "name": "stack-in-order--aloha-2--workshop-bench--safety-indirect--s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/stack-in-order--aloha-2--workshop-bench--safety-indirect--s1",
+        "digest": "sha256:dd0f3fc690f7840b26773065c92f12d43cb4367222d5f6e296d6c267749d8b35"
+      },
+      {
+        "name": "stack-in-order--franka-panda--lab-bench--pert-clutter--s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/stack-in-order--franka-panda--lab-bench--pert-clutter--s5",
+        "digest": "sha256:676e14a6297844b18a3790ace102092ad2c553511021dc764d978d53403408f0"
+      },
+      {
+        "name": "stack-in-order--franka-panda--lab-bench--s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/stack-in-order--franka-panda--lab-bench--s5",
+        "digest": "sha256:9769d1ce23272d9dc05bda78bee2da457e21d62dce08923f5cd6db561f1aa5e8"
+      },
+      {
+        "name": "stack-in-order--franka-panda--warehouse--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/stack-in-order--franka-panda--warehouse--s4",
+        "digest": "sha256:a64b296fde07842c9caf84674e0120ab050fb12bf8d36625195a68b100d3eaf5"
+      },
+      {
+        "name": "thread-ring-on-peg--aloha-2--lab-bench--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/thread-ring-on-peg--aloha-2--lab-bench--s2",
+        "digest": "sha256:1b75022147df263d473bceb860d2b9829cdd8933611d6457ca84d9cf6967d59b"
+      },
+      {
+        "name": "thread-ring-on-peg--aloha-2--tabletop--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/thread-ring-on-peg--aloha-2--tabletop--s4",
+        "digest": "sha256:69c35932668510ab0748be3a1ac964753d768e3d60ba1d315eb95d28bdf24fba"
+      },
+      {
+        "name": "thread-ring-on-peg--aloha-2--workshop-bench--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/thread-ring-on-peg--aloha-2--workshop-bench--s3",
+        "digest": "sha256:2ea01d4fbc25e0d2bad74f69f4ad04aaca0cfcefef99dca1a5d3ddf717c9b51f"
+      },
+      {
+        "name": "thread-ring-on-peg--franka-panda--workshop-bench--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "4265a0997b50b0a280a2d008e236d5d56fa96665",
+        "path": "datasets/robouse-remix/thread-ring-on-peg--franka-panda--workshop-bench--s2",
+        "digest": "sha256:7962deac0d9dcd616928f725c6c6799ffbe8ef93b1c91a9de41c749d93484120"
+      }
+    ]
+  },
+  {
     "name": "benchflow/robouse-noop-control",
     "version": "0.1",
     "description": "Negative control for robouse-core 0.1: the same 100 tasks, but each reference solution only looks (robo info, robo observe) and exits without moving the robot. Run it with the oracle agent; every task must score 0.",
