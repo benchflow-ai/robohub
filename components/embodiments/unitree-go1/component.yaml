@@ -1,0 +1,12 @@
+id: unitree-go1
+type: embodiment
+version: 0.1.0
+title: Unitree Go1
+summary: Quadruped suite.
+track: move
+kind: quadruped
+capabilities:
+- locomote
+remixable: false
+suites:
+- quadruped

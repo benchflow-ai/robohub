@@ -1,0 +1,8 @@
+id: roles
+type: modifier
+version: 0.1.0
+title: Roles
+values:
+  single: One agent (default).
+  planner-operator: 'A two-role scene: a planner that may only use `robo info` and `robo observe`, and an operator that acts; BenchFlow scenes run the two roles in turn.'
+remixable: true

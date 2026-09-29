@@ -1,0 +1,91 @@
+id: pal-tiago
+type: embodiment
+version: 0.1.0
+title: PAL TIAGo
+summary: A differential-drive mobile manipulator with a torso lift, a 7-DoF arm and a parallel gripper that grasps from the front (level); a pan-tilt head camera.
+track: mobile-manipulation
+kind: mobile_manipulator
+placement: floor
+capabilities:
+- reach
+- grasp
+- front-grasp
+- locomote
+- wheeled
+- head-camera
+grasp: front
+max_grip_m: 0.08
+payload_kg: 2.0
+assets:
+- pal_tiago
+licence: Apache-2.0 (MuJoCo Menagerie)
+remixable: true
+runtime: robouse.backends.remix_sim.robots:Tiago
+arms:
+- arm
+action_groups:
+- name: base.twist
+  mode: base_twist
+  components:
+  - V
+  - WZ
+  units: x 0.45 m/s, x 60 deg/s
+  doc: forward speed and yaw rate of the differential drive
+- name: arm.ee_delta
+  mode: ee_delta_pos
+  components:
+  - DX
+  - DY
+  - DZ
+  units: x 2 cm per step
+  doc: moves the gripper target (world axes; IK; the gripper stays level and points along the heading)
+- name: gripper
+  mode: gripper
+  components:
+  - G
+  units: rate
+  doc: '> 0 closes, < 0 opens (1 = 10 % of the stroke per step), 0 holds; closing stops squeezing at a bounded force'
+skills:
+- name: go_to
+  signature: 'go_to X Y [YAW_DEG=none] [SPEED=0.45]: drive to (X, Y) in a straight line, then turn to YAW_DEG; it does not plan around obstacles (give it waypoints) and stops if the base is blocked (at most 900 steps per call)'
+  args:
+  - x
+  - y
+  - yaw_deg
+  - speed
+- name: turn
+  signature: 'turn YAW_DEG: rotate in place to heading YAW_DEG (0 = +x, 90 = +y) (at most 200 steps per call)'
+  args:
+  - yaw_deg
+- name: look_at
+  signature: 'look_at X Y Z: point the head camera at (X, Y, Z) (pan and tilt; the base does not move) (at most 40 steps per call)'
+  args:
+  - x
+  - y
+  - z
+- name: move_to
+  signature: 'move_to X Y Z: move the grasp point (between the fingertips) to (X, Y, Z) in a straight line with the IK arm (the first call unfolds the arm); reports whether it got there (at most 400 steps per call)'
+  args:
+  - x
+  - y
+  - z
+- name: grasp
+  signature: 'grasp: close the gripper until the fingers stop; reports what is held (at most 40 steps per call)'
+  args: []
+- name: release
+  signature: 'release: open the gripper fully (at most 20 steps per call)'
+  args: []
+- name: home
+  signature: 'home: fold the arm in for driving (at most 250 steps per call)'
+  args: []
+cameras:
+- chase
+- robot/head
+suites:
+- mobile-manip
+- remix
+reach:
+  grasp_heights_m:
+  - 0.5
+  - 0.85
+  standoff_m: 0.62

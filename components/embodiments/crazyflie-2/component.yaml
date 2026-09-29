@@ -1,0 +1,60 @@
+id: crazyflie-2
+type: embodiment
+version: 0.1.0
+title: Bitcraze Crazyflie 2
+summary: A 27 g quadrotor with a cascaded velocity and attitude controller and a forward camera; it cannot carry anything.
+track: aerial
+kind: drone
+placement: airspace
+capabilities:
+- fly
+- fpv-camera
+grasp: null
+max_grip_m: 0.0
+payload_kg: 0.0
+assets:
+- bitcraze_crazyflie_2
+licence: MIT (MuJoCo Menagerie)
+remixable: true
+runtime: robouse.backends.remix_sim.robots:Crazyflie
+arms: []
+action_groups:
+- name: velocity_setpoint
+  mode: velocity_setpoint
+  components:
+  - VX
+  - VY
+  - VZ
+  - YAW_RATE
+  units: x 1 m/s, x 1 m/s, x 1 m/s, x 90 deg/s
+  doc: world-frame velocity setpoint and yaw rate; all zero = hold position (or stay landed)
+skills:
+- name: takeoff
+  signature: 'takeoff [Z=1.0]: climb straight up to height Z and hover (at most 200 steps per call)'
+  args:
+  - z
+- name: fly_to
+  signature: 'fly_to X Y Z: fly in a straight line to (X, Y, Z) and hover; not obstacle-aware (give it waypoints) (at most 600 steps per call)'
+  args:
+  - x
+  - y
+  - z
+- name: land
+  signature: 'land: descend where it is until it touches down; the motors stop on contact (at most 300 steps per call)'
+  args: []
+- name: turn
+  signature: 'turn YAW_DEG: turn in place to heading YAW_DEG (at most 200 steps per call)'
+  args:
+  - yaw_deg
+- name: look_at
+  signature: 'look_at X Y Z: turn to face (X, Y) so the forward camera looks at it, then hover for a second (at most 240 steps per call)'
+  args:
+  - x
+  - y
+  - z
+cameras:
+- chase
+- robot/fpv
+suites:
+- crazyflie
+- remix

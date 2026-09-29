@@ -1,0 +1,9 @@
+id: plant-facility
+type: scene
+version: 0.1.0
+title: Plant facility
+scenario: industrial-plant
+summary: A hall and a plant room with a pump, a gauge board and a mezzanine (quadruped suite).
+remixable: false
+suites:
+- quadruped

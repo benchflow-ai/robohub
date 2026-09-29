@@ -1,0 +1,13 @@
+id: shadow-hand
+type: embodiment
+version: 0.1.0
+title: Shadow Hand
+summary: A 24-DoF hand (dexhand suite, Gymnasium-Robotics).
+track: dexterity
+kind: hand
+capabilities:
+- dexterous
+remixable: false
+suites:
+- dexhand
+- gymrobotics

@@ -1,0 +1,12 @@
+id: leap-hand
+type: embodiment
+version: 0.1.0
+title: LEAP Hand
+summary: A 16-DoF hand on a positioner (dexhand suite).
+track: dexterity
+kind: hand
+capabilities:
+- dexterous
+remixable: false
+suites:
+- dexhand

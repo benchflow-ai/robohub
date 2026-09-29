@@ -1,0 +1,26 @@
+[
+ [
+  "navigate_to",
+  "cabinet.n.01_1"
+ ],
+ [
+  "open",
+  "cabinet.n.01_1"
+ ],
+ [
+  "navigate_to",
+  "jar__of__honey.n.01_1"
+ ],
+ [
+  "grasp",
+  "jar__of__honey.n.01_1"
+ ],
+ [
+  "navigate_to",
+  "cabinet.n.01_1"
+ ],
+ [
+  "place_inside",
+  "cabinet.n.01_1"
+ ]
+]

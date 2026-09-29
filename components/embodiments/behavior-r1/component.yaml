@@ -1,0 +1,13 @@
+id: behavior-r1
+type: embodiment
+version: 0.1.0
+title: BEHAVIOR R1
+summary: BEHAVIOR-1K's R1 robot through symbolic primitives.
+track: mobile-manipulation
+kind: skill_only
+capabilities:
+- locomote
+- grasp
+remixable: false
+suites:
+- behavior

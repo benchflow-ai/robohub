@@ -1,0 +1,55 @@
+id: unitree-go2
+type: embodiment
+version: 0.1.0
+title: Unitree Go2
+summary: A 15 kg quadruped driven by a model-based trot controller (body velocity commands); a forward head camera; it can push things with its body.
+track: move
+kind: quadruped
+placement: floor
+capabilities:
+- locomote
+- legged
+- head-camera
+- push
+grasp: null
+max_grip_m: 0.0
+payload_kg: 0.0
+assets:
+- unitree_go2
+licence: BSD-3-Clause (MuJoCo Menagerie)
+remixable: true
+runtime: robouse.backends.remix_sim.robots:Go2
+arms: []
+action_groups:
+- name: base.twist
+  mode: base_twist
+  components:
+  - VX
+  - VY
+  - WZ
+  units: m/s, m/s, deg/s
+  doc: body-frame velocity command for the trot controller (x forward, y left, WZ counter-clockwise); all zero = stop stepping and stand
+skills:
+- name: go_to
+  signature: 'go_to X Y [YAW_DEG=none] [SPEED=0.5]: walk to (X, Y): turn towards it, trot along the straight line, stop (then turn to YAW_DEG); it does not plan around obstacles (give it waypoints) and reports if blocked (at most 700 steps per call)'
+  args:
+  - x
+  - y
+  - yaw_deg
+  - speed
+- name: turn
+  signature: 'turn YAW_DEG: turn in place to heading YAW_DEG (0 = +x east, 90 = +y north) (at most 200 steps per call)'
+  args:
+  - yaw_deg
+- name: look_at
+  signature: 'look_at X Y Z: turn to face (X, Y) so the head camera looks at it, and hold still for a second (at most 240 steps per call)'
+  args:
+  - x
+  - y
+  - z
+cameras:
+- chase
+- robot/head
+suites:
+- quadruped
+- remix

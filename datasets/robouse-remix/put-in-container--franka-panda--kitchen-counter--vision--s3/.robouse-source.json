@@ -1,0 +1,9 @@
+{
+  "source": "/Users/lixiangyi/benchflow/robouse-components/tasks/remix/put-in-container--franka-panda--kitchen-counter--vision--s3",
+  "key": "520bca63528f9d52",
+  "runtime": "runtime-9b5493862f20134c",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "3"
+}

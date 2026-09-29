@@ -1,0 +1,34 @@
+[
+ [
+  "navigate_to",
+  "storage_container.n.01_1"
+ ],
+ [
+  "grasp",
+  "storage_container.n.01_1"
+ ],
+ [
+  "navigate_to",
+  "floor.n.01_2"
+ ],
+ [
+  "place_on_top",
+  "floor.n.01_2"
+ ],
+ [
+  "navigate_to",
+  "storage_container.n.01_2"
+ ],
+ [
+  "grasp",
+  "storage_container.n.01_2"
+ ],
+ [
+  "navigate_to",
+  "storage_container.n.01_1"
+ ],
+ [
+  "place_on_top",
+  "storage_container.n.01_1"
+ ]
+]

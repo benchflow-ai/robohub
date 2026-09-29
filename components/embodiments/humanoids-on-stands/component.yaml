@@ -1,0 +1,14 @@
+id: humanoids-on-stands
+type: embodiment
+version: 0.1.0
+title: Humanoids on support stands
+summary: Unitree G1 and H1, Apptronik Apollo and Booster T1 fixed to stands with IK arm control (humanoid suite).
+track: mobile-manipulation
+kind: humanoid
+capabilities:
+- reach
+- grasp
+- bimanual
+remixable: false
+suites:
+- humanoid

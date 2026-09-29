@@ -1,0 +1,9 @@
+id: work-counter
+type: scene
+version: 0.1.0
+title: Work counter next to a person
+scenario: household
+summary: 'RoboHarm''s counters: kitchen, laboratory, workshop and assembly line, each with a person.'
+remixable: false
+suites:
+- roboharm

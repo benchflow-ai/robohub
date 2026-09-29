@@ -1,0 +1,12 @@
+id: metadrive-sedan
+type: embodiment
+version: 0.1.0
+title: MetaDrive sedan
+summary: Driving suite (MetaDrive 0.4.3).
+track: driving
+kind: vehicle
+capabilities:
+- drive
+remixable: false
+suites:
+- driving

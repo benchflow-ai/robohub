@@ -62,6 +62,17 @@ runtimes:
     simulators: MuJoCo 3.3.1, RoboCasa365 (robosuite 1.5.2)
     assets: {robocasa.json: assets/robocasa/provenance.json}
     sim_memory: 4G
+  remix:
+    backends: [remix]
+    simulators: MuJoCo 3.3.0, MuJoCo Menagerie models
+    # native BenchFlow export (`robouse export`): the runtime folder is datasets/runtime-<hash>, content-addressed
+    native: true
+  behavior:
+    backends: [behavior]
+    simulators: BEHAVIOR-1K (OmniGibson 3.9.3 on NVIDIA Isaac Sim 5.1), on a remote NVIDIA RTX GPU worker
+    gpu: required
+    # the simulator runs as remote GPU workers; this runtime holds the thin client and keeps network access (export.py)
+    remote_worker: true
 
 # Per-suite facts for the hub page (all simulators run on MuJoCo; "; " separates several values).
 suites:
@@ -93,6 +104,8 @@ suites:
   humanoidbench: {embodiment: Unitree H1 humanoid with two Shadow hands, simulator: HumanoidBench (MuJoCo 3.1.6), image: humanoidbench}
   maniskill: {embodiment: Franka Panda, simulator: 'ManiSkill3 3.0.1 (SAPIEN 3.0.3, CPU)', image: maniskill}
   robocasa: {embodiment: Franka Panda on a mobile base (PandaOmron), simulator: 'RoboCasa365 (robosuite 1.5.2, MuJoCo 3.3.1)', image: robocasa}
+  remix: {embodiment: "Franka Panda; ALOHA 2; PAL TIAGo; Google Robot; Unitree Go2; Crazyflie 2", simulator: "Robo Use remix (MuJoCo Menagerie models)", image: remix}
+  behavior: {embodiment: "Galaxea R1Pro mobile manipulator", simulator: "BEHAVIOR-1K (OmniGibson on Isaac Sim 5.1)", image: behavior}
 
 # Datasets are named <org>/<name>. The org is whoever designed the benchmark's tasks: a dataset adapted from someone
 # else's benchmark goes under that benchmark's GitHub org (lowercased) and records it under `upstream`; tasks BenchFlow
@@ -245,6 +258,24 @@ datasets:
     version: "0.1"
     suites: [robocasa]
     description: 'Robo Use RoboCasa 0.1: 24 RoboCasa365 atomic kitchen tasks in all ten kitchen layouts: close a drawer, counter to sink, counter to cabinet, turn on the toaster, close the kettle lid, turn off the faucet, and turn a stove burner on or off, with a Franka Panda on a parked mobile base. Success is RoboCasa''s own check for each task, judged from the physical state.'
+  - name: stanfordvl/behavior-1k
+    dir: behavior-1k
+    upstream: {benchmark: "BEHAVIOR-1K", org_name: "Stanford Vision and Learning Lab", repo: "https://github.com/StanfordVL/BEHAVIOR-1K", licence: MIT}
+    version: "0.1"
+    suites: [behavior]
+    # bench cannot give a sandbox a GPU (its Daytona sandboxes have none), so this dataset runs from a Robo Use checkout
+    # against BEHAVIOR simulator workers on an NVIDIA RTX GPU machine
+    run:
+      label: "Robo Use checkout + GPU worker"
+      command: "robouse run-many --tasks tasks/behavior --harness oracle --out runs/behavior-oracle"
+      note: "GPU required. The BEHAVIOR simulator (OmniGibson 3.9.3 on Isaac Sim 5.1) needs an NVIDIA RTX GPU with RT cores and host driver 580 (Isaac Sim 5.1 crashed at start-up on driver 595). Start one simulator worker per activity on the GPU machine, write their endpoints to <code>runs/_behavior/remote.json</code> in a Robo Use checkout (branch <code>behavior-expand</code>), and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/behavior-expand/docs/suites/behavior.md\">docs/suites/behavior.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
+      bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_BEHAVIOR_REMOTE</code> on the host."
+    description: "Robo Use BEHAVIOR-1K 0.1: 43 tasks from 30 household activities of the 2026 BEHAVIOR Challenge (5 extra instances, 8 vision-only) on a Galaxea R1Pro, driven through symbolic skills and judged by BEHAVIOR's BDDL goal check. Needs an NVIDIA RTX GPU for the simulator worker."
+  - name: benchflow/robouse-remix
+    dir: robouse-remix
+    version: "0.1"
+    suites: [remix]
+    description: "Robo Use remix 0.1: 48 tasks composed from components (6 embodiments: arm, bimanual rig, two mobile manipulators, quadruped, drone; 6 scenes; 9 task templates) with modifiers (vision, noise, perturbations, safety overlays, roles). Each was accepted by robouse remix: the reference solution scores 1 and a no-op agent 0."
   - name: benchflow/robouse-noop-control
     dir: robouse-noop-control
     aliases: [robouse-noop-control]

@@ -1,0 +1,123 @@
+---
+schema_version: '1.3'
+task:
+  name: robouse/behavior-store-produce-vision
+  description: Take both mangoes and both pomegranates out of the wicker basket and put all four inside the same refrigerator in the kitchen.
+metadata:
+  author_name: benchflow
+  source_benchmark: BEHAVIOR-1K (Li et al. 2022/2024), 2026 BEHAVIOR Challenge task list; OmniGibson 3.9.3 on Isaac Sim 5.1
+  source_task: store_produce
+  suite: behavior
+  behavior_scene: restaurant_diner
+  behavior_instance: 0
+  behavior_challenge_task_id: 91
+  challenge_instruction: Take the mangoes and pomegranates from the basket and put them into the refrigerator.
+  category: household-long-horizon
+  difficulty: medium
+  language_instruction: Take both mangoes and both pomegranates out of the wicker basket and put all four inside the same refrigerator in the kitchen.
+  tags:
+  - behavior-1k
+  - omnigibson
+  - isaac-sim
+  - r1pro
+  - mobile-manipulation
+  - symbolic-skills
+  - remote-gpu
+  - gpu-required
+  - vision-only
+  requires_gpu: NVIDIA RTX GPU with RT cores, for the remote simulator worker
+  reference_solution: scripted skill plan, 18 skills (oracle/plan.json)
+  robouse:
+    id: behavior-store-produce-vision
+    backend: behavior
+    env: store_produce
+    scene: restaurant_diner
+    rooms:
+    - kitchen_0
+    instance: 0
+    seed: 0
+    max_steps: 55
+    camera: follow
+    cameras:
+    - follow
+    - head
+    skills: true
+    success_mode: final
+    obs_mode: vision
+    frame_every: 1
+    linger_s: 5
+    ready_timeout_s: 900
+    rpc_timeout_s: 600
+    visible_fields:
+    - robot
+    - object_names
+agent:
+  timeout_sec: 2400
+verifier:
+  service: simulator
+  user: root
+  timeout_sec: 300
+sandbox:
+  cpus: 1
+  memory_mb: 2048
+  build_timeout_sec: 3600
+---
+
+You are controlling a simulated robot. Read the task below, then solve it by running the `robo` command in your shell (start with `robo info` and `robo observe`). Keep going until the task is done, then call `robo done` once. Do not stop to ask questions; there is no human to answer.
+
+# BEHAVIOR: store produce (vision only)
+
+Take both mangoes and both pomegranates out of the wicker basket and put all four inside the same refrigerator in the kitchen.
+
+This is the BEHAVIOR-1K activity `store_produce` in the `restaurant_diner` scene (rooms loaded: kitchen_0), BEHAVIOR Challenge task instance 0. The robot starts where the challenge places it for that instance. The step budget is 55 skill calls.
+
+Vision only: `robo observe` does not report where objects are, whether they are open or switched on, or what they rest on or in. It lists the task objects' names (what skills take) and the robot's own state, and saves one picture from each camera (`follow`, behind the robot, and `head`, the robot's own view). Look at the pictures to find out the state of the scene; skill responses also say when an action fails and why.
+
+BEHAVIOR's formal goal (BDDL; `?x` are variables, `_1`, `_2` number objects of one category) is:
+
+```
+(:goal 
+        (and 
+            (exists
+                (?electric_refrigerator.n.01 - electric_refrigerator.n.01)
+                (and
+                    (forall 
+                        (?pomegranate.n.02 - pomegranate.n.02)
+                        (inside ?pomegranate.n.02 ?electric_refrigerator.n.01) 
+                    )
+                    (forall 
+                        (?mango.n.02 - mango.n.02)
+                        (inside ?mango.n.02 ?electric_refrigerator.n.01) 
+                    )
+                )
+            )
+        )
+    )
+```
+
+## How to control the robot
+
+You are the robot's high-level policy. You act only through the `robo` command in your shell; you cannot read or change the simulator, the scoring, or other files to succeed. The episode server checks BEHAVIOR's goal conditions on the final simulated state itself.
+
+```
+robo info                          # skills, step budget
+robo observe                       # the robot's own state (position, heading, room, held object), the task objects' names, and one picture per camera
+robo observe --image               # also saves a third-person camera image and prints its path (open it to look)
+robo observe --image --camera head # the robot's own head camera instead
+robo skill navigate_to OBJ         # drive next to OBJ (a held object comes along)
+robo skill grasp OBJ               # pick up OBJ (hand must be empty, OBJ within reach); things resting in or on OBJ come along
+robo skill place_on_top OBJ        # put the held object on top of OBJ
+robo skill place_inside OBJ        # put the held object inside OBJ (open OBJ first if it has a door or lid)
+robo skill open OBJ                # open OBJ (hand must be empty)
+robo skill close OBJ               # close OBJ (hand must be empty)
+robo skill toggle_on OBJ           # switch OBJ on (hand must be empty)
+robo skill toggle_off OBJ          # switch OBJ off (hand must be empty)
+robo skill release                 # drop the held object where the hand is
+robo done "short summary"          # end the episode and ask for scoring
+robo give-up "reason"              # end the episode without claiming success
+```
+
+- OBJ is an object name exactly as `robo observe` lists it (BEHAVIOR's BDDL instance names, e.g. `bottle.n.01_1`). Identical objects are numbered `_1`, `_2`, ...
+- The robot is an R1Pro wheeled mobile manipulator that carries one object at a time. Manipulation skills only work on objects within reach (about 1.25 m from the robot base); use `navigate_to` first. Objects inside a closed container must be taken out after opening it.
+- A skill can fail (the response says why, with `ok: False`); a failed skill still costs one step. Every skill call counts against the step budget (`robo info`).
+- Success is judged after you call `robo done`, with the robot holding still: every goal condition must hold at that moment. Call `robo done` exactly once when finished.

@@ -1,0 +1,7 @@
+id: seed
+type: modifier
+version: 0.1.0
+title: Seed
+values:
+  N: 'Instance seed: object choice, colours and placements (any integer).'
+remixable: true

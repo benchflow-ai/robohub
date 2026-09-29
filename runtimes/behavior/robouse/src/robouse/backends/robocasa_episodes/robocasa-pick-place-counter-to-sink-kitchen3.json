@@ -1,0 +1,445 @@
+{
+ "layout_id": 3,
+ "style_id": 3,
+ "object_cfgs": [
+  {
+   "name": "obj",
+   "obj_groups": "all",
+   "exclude_obj_groups": null,
+   "graspable": true,
+   "washable": true,
+   "placement": {
+    "fixture": "counter_main_main_group",
+    "sample_region_kwargs": {
+     "ref": "sink_main_group",
+     "loc": "left_right",
+     "min_size": [
+      0.1305485,
+      0.15809495,
+      0.09527527
+     ]
+    },
+    "size": [
+     0.3,
+     0.4
+    ],
+    "pos": [
+     "ref",
+     -1.0
+    ]
+   },
+   "type": "object",
+   "info": {
+    "groups_containing_sampled_obj": [
+     "all",
+     "reamer",
+     "tool",
+     "in_container"
+    ],
+    "groups": [
+     "all"
+    ],
+    "cat": "reamer",
+    "split": null,
+    "mjcf_path": "/Users/lixiangyi/.cache/robouse/robocasa-src/robocasa/models/assets/objects/lightwheel/reamer/Reamer007/model.xml"
+   },
+   "reset_region": {
+    "size": [
+     1.0150000000000001,
+     0.65
+    ],
+    "offset": [
+     0.9925000000000002,
+     -3.469446951953614e-17,
+     0.46
+    ],
+    "name": "geom_1"
+   }
+  },
+  {
+   "name": "distr_counter",
+   "obj_groups": "all",
+   "placement": {
+    "fixture": "counter_main_main_group",
+    "sample_region_kwargs": {
+     "ref": "sink_main_group",
+     "loc": "left_right",
+     "min_size": [
+      0.044345721,
+      0.044345721,
+      0.105796656
+     ]
+    },
+    "size": [
+     0.3,
+     0.3
+    ],
+    "pos": [
+     "ref",
+     -1.0
+    ],
+    "offset": [
+     0.0,
+     0.3
+    ]
+   },
+   "type": "object",
+   "info": {
+    "groups_containing_sampled_obj": [
+     "all",
+     "salt_and_pepper_shaker",
+     "spice"
+    ],
+    "groups": [
+     "all"
+    ],
+    "cat": "salt_and_pepper_shaker",
+    "split": null,
+    "mjcf_path": "/Users/lixiangyi/.cache/robouse/robocasa-src/robocasa/models/assets/objects/lightwheel/salt_and_pepper_shaker/PepperShaker005/model.xml"
+   },
+   "reset_region": {
+    "size": [
+     1.0150000000000001,
+     0.65
+    ],
+    "offset": [
+     0.9925000000000002,
+     -3.469446951953614e-17,
+     0.46
+    ],
+    "name": "geom_1"
+   }
+  },
+  {
+   "name": "distr_sink",
+   "obj_groups": "all",
+   "washable": true,
+   "placement": {
+    "fixture": "sink_main_group",
+    "size": [
+     0.25,
+     0.25
+    ],
+    "pos": [
+     0.0,
+     1.0
+    ]
+   },
+   "type": "object",
+   "info": {
+    "groups_containing_sampled_obj": [
+     "all",
+     "straw"
+    ],
+    "groups": [
+     "all"
+    ],
+    "cat": "straw",
+    "split": null,
+    "mjcf_path": "/Users/lixiangyi/.cache/robouse/robocasa-src/robocasa/models/assets/objects/lightwheel/straw/Straw007/model.xml"
+   },
+   "reset_region": {
+    "offset": [
+     0.23242896474130617,
+     -0.023383867315579537,
+     -0.2442081860378058
+    ],
+    "size": [
+     0.425038038708285,
+     0.36780890387215104
+    ],
+    "height": 0.19487183139511205,
+    "name": "basin_right"
+   }
+  }
+ ],
+ "fixtures": {
+  "wall_room": {
+   "cls": "Wall"
+  },
+  "wall_backing_room": {
+   "cls": "Wall"
+  },
+  "wall_right_room": {
+   "cls": "Wall"
+  },
+  "wall_right_backing_room": {
+   "cls": "Wall"
+  },
+  "wall_left_room": {
+   "cls": "Wall"
+  },
+  "wall_left_backing_room": {
+   "cls": "Wall"
+  },
+  "wall_front_room": {
+   "cls": "Wall"
+  },
+  "wall_front_backing_room": {
+   "cls": "Wall"
+  },
+  "floor_room": {
+   "cls": "Floor"
+  },
+  "floor_backing_room": {
+   "cls": "Floor"
+  },
+  "outlet_room": {
+   "cls": "WallAccessory"
+  },
+  "light_switch_room": {
+   "cls": "WallAccessory"
+  },
+  "light_switch_2_room": {
+   "cls": "WallAccessory"
+  },
+  "utensil_rack_room": {
+   "cls": "WallAccessory"
+  },
+  "outlet_2_room": {
+   "cls": "WallAccessory"
+  },
+  "cab_1_main_group": {
+   "cls": "HingeCabinet"
+  },
+  "cab_2_main_group": {
+   "cls": "HingeCabinet"
+  },
+  "cab_main_main_group": {
+   "cls": "HingeCabinet"
+  },
+  "cab_corner_main_group": {
+   "cls": "Box"
+  },
+  "cab_corner_2_main_group": {
+   "cls": "Box"
+  },
+  "sink_main_group": {
+   "cls": "Sink"
+  },
+  "counter_main_main_group": {
+   "cls": "Counter"
+  },
+  "counter_corner_main_main_group": {
+   "cls": "Counter"
+  },
+  "stack_1_main_group_base": {
+   "cls": "Box"
+  },
+  "stack_1_main_group_1": {
+   "cls": "Drawer"
+  },
+  "stack_1_main_group_2": {
+   "cls": "Drawer"
+  },
+  "stack_1_main_group_3": {
+   "cls": "Drawer"
+  },
+  "stack_1_main_group_4": {
+   "cls": "Drawer"
+  },
+  "stack_2_main_group_base": {
+   "cls": "Box"
+  },
+  "stack_2_main_group_1": {
+   "cls": "HingeCabinet"
+  },
+  "dishwasher_main_group": {
+   "cls": "Dishwasher"
+  },
+  "stack_3_main_group_base": {
+   "cls": "Box"
+  },
+  "stack_3_main_group_1": {
+   "cls": "SingleCabinet"
+  },
+  "toaster_oven_main_group": {
+   "cls": "ToasterOven"
+  },
+  "plant_main_group": {
+   "cls": "Accessory"
+  },
+  "knife_block_main_group": {
+   "cls": "Accessory"
+  },
+  "paper_towel_main_group": {
+   "cls": "Accessory"
+  },
+  "counter_1_right_group": {
+   "cls": "Counter"
+  },
+  "counter_corner_left_right_group": {
+   "cls": "Counter"
+  },
+  "stove_right_group": {
+   "cls": "Stove"
+  },
+  "counter_2_right_group": {
+   "cls": "Counter"
+  },
+  "fridge_right_group": {
+   "cls": "FridgeBottomFreezer"
+  },
+  "fridge_housing_right_group": {
+   "cls": "HousingCabinet"
+  },
+  "stack_1_right_group_base": {
+   "cls": "Box"
+  },
+  "stack_1_right_group_1": {
+   "cls": "SingleCabinet"
+  },
+  "stack_1_right_group_2": {
+   "cls": "Drawer"
+  },
+  "stack_2_right_group_base": {
+   "cls": "Box"
+  },
+  "stack_2_right_group_1": {
+   "cls": "HingeCabinet"
+  },
+  "stack_2_right_group_2": {
+   "cls": "Drawer"
+  },
+  "stack_2_right_group_3": {
+   "cls": "Drawer"
+  },
+  "stack_3_right_group_base": {
+   "cls": "Box"
+  },
+  "stack_3_right_group_1": {
+   "cls": "Drawer"
+  },
+  "stack_3_right_group_2": {
+   "cls": "Drawer"
+  },
+  "stack_3_right_group_3": {
+   "cls": "Drawer"
+  },
+  "stack_3_right_group_4": {
+   "cls": "Drawer"
+  },
+  "cab_1_right_group": {
+   "cls": "SingleCabinet"
+  },
+  "microwave_right_group": {
+   "cls": "Microwave"
+  },
+  "cab_micro_right_group": {
+   "cls": "HingeCabinet"
+  },
+  "cab_2_right_group": {
+   "cls": "SingleCabinet"
+  },
+  "shelves_right_group": {
+   "cls": "OpenCabinet"
+  },
+  "cab_3_right_group": {
+   "cls": "HingeCabinet"
+  },
+  "toaster_right_group": {
+   "cls": "Toaster"
+  },
+  "coffee_machine_right_group": {
+   "cls": "CoffeeMachine"
+  }
+ },
+ "gen_textures": {},
+ "lang": "Pick the reamer from the counter and place it in the sink.",
+ "fixture_refs": {
+  "sink": "sink_main_group",
+  "counter": "counter_main_main_group"
+ },
+ "cam_configs": {
+  "robot0_agentview_center": {
+   "pos": [
+    -0.6,
+    0.0,
+    1.15
+   ],
+   "quat": [
+    0.636945903301239,
+    0.3325185477733612,
+    -0.3199238181114197,
+    -0.6175596117973328
+   ],
+   "parent_body": "mobilebase0_support"
+  },
+  "robot0_agentview_left": {
+   "pos": [
+    -0.5,
+    0.35,
+    1.05
+   ],
+   "quat": [
+    0.55623853,
+    0.29935253,
+    -0.37678665,
+    -0.6775092
+   ],
+   "camera_attribs": {
+    "fovy": "60"
+   },
+   "parent_body": "mobilebase0_support"
+  },
+  "robot0_agentview_right": {
+   "pos": [
+    -0.5,
+    -0.35,
+    1.05
+   ],
+   "quat": [
+    0.6775091886520386,
+    0.3767866790294647,
+    -0.2993525564670563,
+    -0.55623859167099
+   ],
+   "camera_attribs": {
+    "fovy": "60"
+   },
+   "parent_body": "mobilebase0_support"
+  },
+  "robot0_frontview": {
+   "pos": [
+    -0.5,
+    0,
+    0.95
+   ],
+   "quat": [
+    0.6088936924934387,
+    0.3814677894115448,
+    -0.3673907518386841,
+    -0.5905545353889465
+   ],
+   "camera_attribs": {
+    "fovy": "60"
+   },
+   "parent_body": "mobilebase0_support"
+  },
+  "robot0_eye_in_hand": {
+   "pos": [
+    0.05,
+    0,
+    0
+   ],
+   "quat": [
+    0,
+    0.707107,
+    0.707107,
+    0
+   ],
+   "parent_body": "robot0_right_hand"
+  }
+ },
+ "init_robot_base_pos": [
+  3.0970508979372005,
+  -0.7977611596738634,
+  0.0
+ ],
+ "init_robot_base_ori": [
+  0.0,
+  0.0,
+  1.5707963267948966
+ ],
+ "robouse_seed": 6
+}

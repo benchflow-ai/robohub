@@ -1,5 +1,230 @@
 {
   "datasets": {
+    "behavior-1k": {
+      "noop": false,
+      "robouse": {
+        "commit": "27d8ed8c2de2a3b92b19f0cd1532bfa83342f60f",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "tasks": {
+        "behavior-bringing-in-wood": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-bringing-water": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-bringing-water-instance-1": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-bringing-water-instance-2": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-bringing-water-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-carrying-in-groceries": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-carrying-out-garden-furniture": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-clean-up-broken-glass": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-cleaning-up-plates-and-food": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-collecting-aluminum-cans": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-collecting-childrens-toys": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-dispose-of-glass": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-freeze-fruit": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-freeze-fruit-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-installing-a-fax-machine": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-loading-the-car": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-moving-boxes-to-storage": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-organizing-art-supplies": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-picking-up-toys": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-picking-up-trash": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-picking-up-trash-instance-1": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-picking-up-trash-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-putting-away-toys": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-putting-dirty-dishes-in-sink": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-putting-dishes-away-after-cleaning": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-putting-dishes-away-after-cleaning-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-re-shelving-library-books": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-rearrange-your-room": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-rearranging-kitchen-furniture": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-rearranging-kitchen-furniture-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-sorting-books-on-shelf": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-store-honey": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-store-produce": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-store-produce-instance-1": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-store-produce-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-storing-food": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-tidying-bathroom": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-tidying-bathroom-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-tidying-living-room": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-turning-on-radio": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-turning-out-all-lights-before-sleep": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-turning-out-all-lights-before-sleep-instance-1": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        "behavior-turning-out-all-lights-before-sleep-vision": {
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        }
+      }
+    },
     "robouse-adroit": {
       "noop": false,
       "tasks": {
@@ -2880,6 +3105,257 @@
         }
       }
     },
+    "robouse-remix": {
+      "noop": false,
+      "robouse": {
+        "branch": "components",
+        "commit": "87b60f347b627fb0d742d77d272f7e71ce10e76a",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "tasks": {
+        "bimanual-relay--aloha-2--kitchen-counter--s5": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "bimanual-relay--aloha-2--lab-bench--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "bimanual-relay--aloha-2--tabletop--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "bimanual-relay--aloha-2--workshop-bench--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "fetch-and-deliver--google-robot--workshop-bench--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "go-to-landmark--crazyflie-2--kitchen-counter--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "go-to-landmark--crazyflie-2--outdoor-field--vision--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "go-to-landmark--google-robot--lab-bench--s5": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "go-to-landmark--google-robot--outdoor-field--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "go-to-landmark--unitree-go2--outdoor-field--safety-indirect--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "go-to-landmark--unitree-go2--warehouse--s1": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "go-to-landmark--unitree-go2--warehouse--safety-direct--s1": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "inspect-tag--crazyflie-2--lab-bench--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "inspect-tag--crazyflie-2--warehouse--safety-privacy--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "inspect-tag--google-robot--kitchen-counter--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "inspect-tag--pal-tiago--kitchen-counter--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "inspect-tag--unitree-go2--kitchen-counter--budget-loose--s5": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "inspect-tag--unitree-go2--tabletop--s1": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "push-to-zone--aloha-2--kitchen-counter--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "push-to-zone--franka-panda--tabletop--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "push-to-zone--franka-panda--warehouse--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "push-to-zone--unitree-go2--workshop-bench--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--aloha-2--tabletop--pert-dynamics--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--franka-panda--kitchen-counter--safety-direct--s6": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--franka-panda--kitchen-counter--vision--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--franka-panda--lab-bench--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--franka-panda--tabletop--safety-indirect--s7": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--franka-panda--workshop-bench--pert-push--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--franka-panda--workshop-bench--s1": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--google-robot--tabletop--roles--s1": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--pal-tiago--tabletop--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--pal-tiago--tabletop--safety-privacy--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "put-in-container--pal-tiago--workshop-bench--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "sort-by-color--franka-panda--tabletop--budget-tight--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "sort-by-color--franka-panda--tabletop--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "sort-by-color--franka-panda--workshop-bench--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "sort-by-color--pal-tiago--kitchen-counter--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "stack-in-order--aloha-2--tabletop--noisy--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "stack-in-order--aloha-2--tabletop--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "stack-in-order--aloha-2--workshop-bench--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "stack-in-order--aloha-2--workshop-bench--safety-indirect--s1": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "stack-in-order--franka-panda--lab-bench--pert-clutter--s5": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "stack-in-order--franka-panda--lab-bench--s5": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "stack-in-order--franka-panda--warehouse--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "thread-ring-on-peg--aloha-2--lab-bench--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "thread-ring-on-peg--aloha-2--tabletop--s4": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "thread-ring-on-peg--aloha-2--workshop-bench--s3": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        },
+        "thread-ring-on-peg--franka-panda--workshop-bench--s2": {
+          "backend": "remix",
+          "runtime": "remix",
+          "suite": "remix"
+        }
+      }
+    },
     "robouse-robocasa": {
       "noop": false,
       "tasks": {
@@ -4128,6 +4604,7 @@
   },
   "runtimes": {
     "base": "sha256:453a780cbc2972149bf99a92a41cd35666e51192e750bc2bcb1fb3deb04ca376",
+    "behavior": "sha256:4053563589789973194b7863789677c6d1514503e1e7fd77e41b0edf1507abea",
     "dexjoco": "sha256:c8a774e0cbe1feb4b08493a3ca5464e92dffe31ffec039cd37110f5490e60fd9",
     "dmcontrol": "sha256:cda13e1219e387191d2cd39cfa37c28a4c2ac0d251833abc3c022b46d39e8876",
     "driving": "sha256:828d135f5660360093b186c88ff6f0a828fb4fcf9a3f226103b884262c0bcb96",
@@ -4137,6 +4614,7 @@
     "maniskill": "sha256:50e085d16dc0c1b0f4a36236070b4290ed23ac6844ebfd1a78e54054158438e6",
     "menagerie": "sha256:40eb64c1910118d9c821aafcef547ac49cc34534a4283d66b61b92e5f5dbf911",
     "myosuite": "sha256:124ef7a1988b88d0918ced05416de0dc6e84b1cf490e97eac01b9d4e050323e7",
+    "remix": "runtime-9b5493862f20134c",
     "robocasa": "sha256:0e7762e64c24849f320fa346ace73b18c6c7493ec14fedc79883eaa3eef49582",
     "robosuite": "sha256:ae1976e503f43f82f6296e325adedcdb36932b9686a913df76d3b2ca2d138012"
   }
