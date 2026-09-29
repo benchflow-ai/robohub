@@ -91,11 +91,15 @@ def write_runtime(name: str, cfg: dict, robouse: Path, prov: dict) -> str:
         shutil.copy2(TEMPLATES / "runtimes" / f, dst / f)
     (dst / "sim-entry.sh").chmod(0o755)
     shutil.copytree(robouse / "src" / "robouse", dst / "robouse" / "src" / "robouse", ignore=PKG_IGNORE)
-    if cfg.get("assets") == "menagerie":
+    manifests = cfg.get("assets") or {}
+    if manifests == "menagerie":  # the 0.1 runtimes
+        manifests = {"menagerie.json": "assets/menagerie/provenance.json",
+                     "skydio_x2.json": "assets/menagerie/skydio_x2/PROVENANCE.json"}
+    if manifests:  # {file name in runtimes/<name>/assets/: pinned-download manifest in the Robo Use checkout}
         shutil.copy2(TEMPLATES / "runtimes" / "fetch_assets.py", dst / "fetch_assets.py")
         (dst / "assets").mkdir()
-        shutil.copy2(robouse / "assets" / "menagerie" / "provenance.json", dst / "assets" / "menagerie.json")
-        shutil.copy2(robouse / "assets" / "menagerie" / "skydio_x2" / "PROVENANCE.json", dst / "assets" / "skydio_x2.json")
+        for out, rel in manifests.items():
+            shutil.copy2(robouse / rel, dst / "assets" / out)
     (dst / "SOURCE.json").write_text(json.dumps({"robouse": prov, "runtime": name}, indent=2) + "\n")
     return digest(dst)
 
@@ -161,6 +165,16 @@ def _closure(src: Path, roots: list[str]) -> set[Path]:
 # pip packages a backend's reference solution imports besides numpy (installed at oracle run time, never into the image)
 ORACLE_PIP = {"dexjoco": ["scipy==1.18.1"]}
 ORACLE_BACKEND_MODULE = {"robosuite": "robouse.backends.robosuite_backend", "metaworld": "robouse.backends.metaworld_backend"}
+
+
+def configure_oracles(hub: dict) -> None:
+    """Per-runtime oracle needs from hub.yaml: `oracle_pip: {backend: [req, ...]}` (installed at oracle run time)
+    and `oracle_modules: {backend: module}` (the module a backend's reference solution imports, if not
+    robouse.backends.<backend>)."""
+    for cfg in hub["runtimes"].values():
+        for b, reqs in (cfg.get("oracle_pip") or {}).items():
+            ORACLE_PIP[b] = list(reqs)
+        ORACLE_BACKEND_MODULE.update(cfg.get("oracle_modules") or {})
 
 
 def vendor_robouse(robouse: Path, backend: str, dst: Path) -> None:
@@ -333,6 +347,7 @@ def main(argv=None) -> int:
         suite_of[t.id] = t.path.parent.name
     backend_runtime = {b: rt for rt, cfg in hub["runtimes"].items() for b in cfg["backends"]}
 
+    configure_oracles(hub)
     load_existing_tokens()
     runtime_digests = {rt: write_runtime(rt, cfg, robouse, prov) for rt, cfg in hub["runtimes"].items()}
     for rt, d in runtime_digests.items():

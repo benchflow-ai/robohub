@@ -8,6 +8,9 @@ robouse:
 
 # Simulator runtimes (runtimes/<name>, built from templates/runtimes/<name>). Every task's compose file builds its
 # simulator image from one of them.
+# Optional per runtime: `assets` ("menagerie", or {file under runtimes/<name>/assets/: pinned-download manifest in the
+# Robo Use checkout}), `sim_memory`, `oracle_pip` ({backend: [pip requirement, ...]} installed when the reference
+# solution runs) and `oracle_modules` ({backend: module the reference solution imports}).
 runtimes:
   base:
     backends: [metaworld, gymrobotics, tabletop]
