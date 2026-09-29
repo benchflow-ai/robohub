@@ -20,7 +20,7 @@
       "upstream": null,
       "run": null,
       "robouse": {
-        "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
         "package_version": "0.1.1",
         "repo": "https://github.com/benchflow-ai/robouse"
       },
@@ -795,7 +795,7 @@
       },
       "run": null,
       "robouse": {
-        "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
         "package_version": "0.1.1",
         "repo": "https://github.com/benchflow-ai/robouse"
       },
@@ -1187,7 +1187,7 @@
       },
       "run": null,
       "robouse": {
-        "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
         "package_version": "0.1.1",
         "repo": "https://github.com/benchflow-ai/robouse"
       },
@@ -1309,7 +1309,7 @@
       "upstream": null,
       "run": null,
       "robouse": {
-        "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
         "package_version": "0.1.1",
         "repo": "https://github.com/benchflow-ai/robouse"
       },
@@ -2189,25 +2189,17 @@
         "repo": "https://github.com/Lifelong-Robot-Learning/LIBERO",
         "licence": "MIT"
       },
-<<<<<<< HEAD
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
       "version": "0.2",
       "description": "Robo Use LIBERO 0.2: all 40 tasks of LIBERO's four standard suites (LIBERO-Spatial, -Object, -Goal and -Long, 10 each) on a Franka Panda, judged by LIBERO's BDDL goal check. Reference solutions replay LIBERO's human demonstrations (Apache-2.0).",
       "git_tag": "lifelong-robot-learning/libero-v0.2",
       "commit": "bcd0d002b9df05972313f9ca2873b0b05c2bab30",
       "n_tasks": 40,
-=======
-      "run": null,
-      "robouse": {
-        "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
-        "package_version": "0.1.1",
-        "repo": "https://github.com/benchflow-ai/robouse"
-      },
-      "version": "0.1",
-      "description": "Robo Use LIBERO 0.1: 20 LIBERO tasks (5 each from spatial, object, goal and LIBERO-10) on a Franka Panda, judged by LIBERO's BDDL goal check.",
-      "git_tag": "lifelong-robot-learning/libero-v0.1",
-      "commit": "9e672aa1e7f0e8fb9e085a8982754fd20f1732bf",
-      "n_tasks": 20,
->>>>>>> origin/main
       "suites": [
         "libero"
       ],
@@ -2521,7 +2513,7 @@
       },
       "run": null,
       "robouse": {
-        "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
         "package_version": "0.1.1",
         "repo": "https://github.com/benchflow-ai/robouse"
       },
@@ -2709,7 +2701,7 @@
       "upstream": null,
       "run": null,
       "robouse": {
-        "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
         "package_version": "0.1.1",
         "repo": "https://github.com/benchflow-ai/robouse"
       },
@@ -2857,7 +2849,7 @@
       },
       "run": null,
       "robouse": {
-        "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
         "package_version": "0.1.1",
         "repo": "https://github.com/benchflow-ai/robouse"
       },
@@ -2992,7 +2984,7 @@
       "upstream": null,
       "run": null,
       "robouse": {
-        "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
         "package_version": "0.1.1",
         "repo": "https://github.com/benchflow-ai/robouse"
       },
@@ -3100,7 +3092,7 @@
       "upstream": null,
       "run": null,
       "robouse": {
-        "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
         "package_version": "0.1.1",
         "repo": "https://github.com/benchflow-ai/robouse"
       },
@@ -3687,13 +3679,18 @@
       ]
     },
     {
-<<<<<<< HEAD
       "name": "benchflow/quadruped",
       "org": "benchflow",
       "short_name": "quadruped",
       "dir": "robouse-quadruped",
       "aliases": [],
       "upstream": null,
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
       "version": "0.1",
       "description": "Robo Use quadruped 0.1: 11 tasks for Unitree Go2 and Go1, Boston Dynamics Spot (with and without arm) and ANYbotics ANYmal C walking under a trot controller: pushing, docking, patrols, inspection, buttons. Robot models from MuJoCo Menagerie (BSD-3-Clause).",
       "git_tag": "benchflow/quadruped-v0.1",
@@ -3793,361 +3790,22 @@
           "backend": "quadruped",
           "runtime": "embodied",
           "suite": "quadruped"
-=======
-      "name": "stanfordvl/behavior-1k",
-      "org": "stanfordvl",
-      "short_name": "behavior-1k",
-      "dir": "behavior-1k",
-      "aliases": [],
-      "upstream": {
-        "benchmark": "BEHAVIOR-1K",
-        "org_name": "Stanford Vision and Learning Lab",
-        "repo": "https://github.com/StanfordVL/BEHAVIOR-1K",
-        "licence": "MIT"
-      },
-      "run": {
-        "label": "Robo Use checkout + GPU worker",
-        "command": "robouse run-many --tasks tasks/behavior --harness oracle --out runs/behavior-oracle",
-        "note": "GPU required. The BEHAVIOR simulator (OmniGibson 3.9.3 on Isaac Sim 5.1) needs an NVIDIA RTX GPU with RT cores and host driver 580 (Isaac Sim 5.1 crashed at start-up on driver 595). Start one simulator worker per activity on the GPU machine, write their endpoints to <code>runs/_behavior/remote.json</code> in a Robo Use checkout (branch <code>behavior-expand</code>), and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/behavior-expand/docs/suites/behavior.md\">docs/suites/behavior.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control.",
-        "bench_note": "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_BEHAVIOR_REMOTE</code> on the host."
-      },
-      "robouse": {
-        "commit": "27d8ed8c2de2a3b92b19f0cd1532bfa83342f60f",
-        "package_version": "0.1.1",
-        "repo": "https://github.com/benchflow-ai/robouse"
-      },
-      "version": "0.1",
-      "description": "Robo Use BEHAVIOR-1K 0.1: 43 tasks from 30 household activities of the 2026 BEHAVIOR Challenge (5 extra instances, 8 vision-only) on a Galaxea R1Pro, driven through symbolic skills and judged by BEHAVIOR's BDDL goal check. Needs an NVIDIA RTX GPU for the simulator worker.",
-      "git_tag": "stanfordvl/behavior-1k-v0.1",
-      "commit": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
-      "n_tasks": 43,
-      "suites": [
-        "behavior"
-      ],
-      "embodiments": [
-        "Galaxea R1Pro mobile manipulator"
-      ],
-      "simulators": [
-        "BEHAVIOR-1K (OmniGibson on Isaac Sim 5.1)"
-      ],
-      "image": "behavior",
-      "noop": false,
-      "runtimes": [
-        "behavior"
-      ],
-      "tasks": [
-        {
-          "id": "behavior-bringing-in-wood",
-          "digest": "sha256:7d3d82eea2ff9187ddd28f19ec6cee8d6964cf9cbb504bbcbb92656a4c0ed474",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-bringing-water",
-          "digest": "sha256:a0fbee3f556fdcbc60ea5bcc3869cac6c9effce41222be5baa09a605fca7832f",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-bringing-water-instance-1",
-          "digest": "sha256:dec6ffa8ee29ba53b2c27f129231c28065930226931e3f52f1b40d11c304b521",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-bringing-water-instance-2",
-          "digest": "sha256:24cb84c7ee9c43bc20aae1ee3eddfd5c3899895f587479d79c2d7e09777a84fc",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-bringing-water-vision",
-          "digest": "sha256:d6ef89b811a1853bfb5ec0df17578aa65c91db5c00b975271ee5bfd29b4cedd3",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-carrying-in-groceries",
-          "digest": "sha256:83433545b1caf864fa28f4815e6a9bf042b54e5c56940d9d6694d69a62292d60",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-carrying-out-garden-furniture",
-          "digest": "sha256:85a3ee4eadd151b941b87c9c50830ea7647ab6c31f58b35746d2347b0743964e",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-clean-up-broken-glass",
-          "digest": "sha256:1c173e4799901ff9e8a17dfcaab3f4bd44e4e0af031c7d4946bdb0c3411298cc",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-cleaning-up-plates-and-food",
-          "digest": "sha256:13cfc7d14b0788d8298e65d0ae7c987f5de3c57ef001af117b465a495ac97261",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-collecting-aluminum-cans",
-          "digest": "sha256:1662e34c4975b8cb651cf911c28d719919c7a63fecdae80ae5ba82eb3fddbb0d",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-collecting-childrens-toys",
-          "digest": "sha256:856f465ee6812c4183685f82e30b3cb02f4e9a783328f7ccaee591d224352ae6",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-dispose-of-glass",
-          "digest": "sha256:d7e7ae292bd61944511d5f43c57ce8e6cf6efa34602f271e1a7774ba412a04c9",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-freeze-fruit",
-          "digest": "sha256:fbf03842d15278581af371dc951a5b13b0f7ba52518699aa1a0ccff4d51a8f77",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-freeze-fruit-vision",
-          "digest": "sha256:586cc47aee222139b6eb2c28c2930b25e77e25acee94443e2ffef677660217a5",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-installing-a-fax-machine",
-          "digest": "sha256:0b68693815535c3f95ce3116ad49a813acb16f6a3b55a7b6bf940294263cedd3",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-loading-the-car",
-          "digest": "sha256:b68566a505ae270e3374ac7c8ce1875e481a8bebf3e178b25eda489b93e87887",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-moving-boxes-to-storage",
-          "digest": "sha256:6a31d802059779f240a166c10c89438ff2f7d147176c5cbcb9abd1d68913e7c1",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-organizing-art-supplies",
-          "digest": "sha256:798366ab284b4f0cb9336735f0f4026ca1bbd0ff8b5dea1d346d91ac420fe0fd",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-picking-up-toys",
-          "digest": "sha256:79731110b4c8312ece62b8d6b8b8e51f44f9c5e8697ec0bb2322ae2e16b0247c",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-picking-up-trash",
-          "digest": "sha256:25055dee182fcd3b0fcc9f12194a4a0b065dcc12df3dff471949ebd39eeff877",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-picking-up-trash-instance-1",
-          "digest": "sha256:e024a7fd4e72228af1cf037408fc078fdf0cbb42b56836eba3e073cbf1dd8b2b",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-picking-up-trash-vision",
-          "digest": "sha256:d85100bceaaa13b18162885a61e9c833f50e0836701ab8116683fb42e2457707",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-putting-away-toys",
-          "digest": "sha256:90dda9577da8bee31cc49079186fde8223a84c86c33de5e666fa2ca5ab76ceb3",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-putting-dirty-dishes-in-sink",
-          "digest": "sha256:4e5c7aa7b150428e6726b5f2a21057ce897c337192979c7df9ac47814f883275",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-putting-dishes-away-after-cleaning",
-          "digest": "sha256:f582a3a496ceeb6c8dea6afa7ae757545002c5d951893725bc956936ad2be5b5",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-putting-dishes-away-after-cleaning-vision",
-          "digest": "sha256:bef6b0bc9bf63f18bb83b183efdd2dcde95221b1c09505a5504dbb6056320a53",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-re-shelving-library-books",
-          "digest": "sha256:5b58c54bf0859b2dde87cb6291e598b8f4d0e4e3c17fe2e419d8e4671098733f",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-rearrange-your-room",
-          "digest": "sha256:d924bd4e0bab93ea53a21cc221a885983d08e9d0fa5b87ebfaf850ea3c4f0482",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-rearranging-kitchen-furniture",
-          "digest": "sha256:4047bfec8c3df7921384cfa10d2bbecbe3a1d6e07474db483ae08bb3f858df3c",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-rearranging-kitchen-furniture-vision",
-          "digest": "sha256:27aea41a5bc32d6967d3aad1e4734e1b67401b260cd6e1de25b08f353b4f0225",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-sorting-books-on-shelf",
-          "digest": "sha256:2c8b3a6934bbc1a864ae6b284ccf29824735962bf7b7a296d594156c78e5c89e",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-store-honey",
-          "digest": "sha256:54b96178b1d11096bbb58012115d3c1c184bf01915d37e8f910c3f1f3891e54e",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-store-produce",
-          "digest": "sha256:1f8970ed113bd8bc477ca2ccc6baf33bd31d5d98c0c611164f764455960fe6a4",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-store-produce-instance-1",
-          "digest": "sha256:96f579bacdf8952a48906eb32a8830f7197dc1c2b622c405f1cd43e47f2be77a",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-store-produce-vision",
-          "digest": "sha256:5641a4a5cf8a4ceb4ed63964f6f29f82a5a27cbb98e3c69ef41bacbbaac3cb40",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-storing-food",
-          "digest": "sha256:2e8804dc01b79fdce03bc35e316df70aef6e9c4365d3de9723cc0f2ba34d2167",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-tidying-bathroom",
-          "digest": "sha256:f70c4522ed8321982f08a4d40c2a434f79d0412b2be637345b19152ef2ea8e7b",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-tidying-bathroom-vision",
-          "digest": "sha256:4059adaa57f5169975c62cc39f9461828f19cdf4301865179e85e1f28be72099",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-tidying-living-room",
-          "digest": "sha256:ac33994626843f178e424e395047c371620a44effd408fbb690243b4db211db9",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-turning-on-radio",
-          "digest": "sha256:7a5d3f899524c2c05370fcf4dee18fa77f8ef65d5b32098b27cb1deba6cbe6cf",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-turning-out-all-lights-before-sleep",
-          "digest": "sha256:cf0b78bccc6e370dcccdd44971f5aeff6aec7bcf48749a2d712b6df80f405a06",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-turning-out-all-lights-before-sleep-instance-1",
-          "digest": "sha256:3fd843787afc2144d6d9dcdaf02fafe38c455e178f75529807c7d2c79b39c007",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
-        },
-        {
-          "id": "behavior-turning-out-all-lights-before-sleep-vision",
-          "digest": "sha256:7a2edde5042b0f30d8b42f42974adda7e3878dbba60c0beddf9d36ee91b076ce",
-          "backend": "behavior",
-          "runtime": "behavior",
-          "suite": "behavior"
->>>>>>> origin/main
         }
       ]
     },
     {
-<<<<<<< HEAD
       "name": "benchflow/humanoid",
       "org": "benchflow",
       "short_name": "humanoid",
       "dir": "robouse-humanoid",
       "aliases": [],
       "upstream": null,
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
       "version": "0.1",
       "description": "Robo Use humanoid 0.1: 9 tabletop tasks for Unitree G1 (Dex3 hands) and H1, Apptronik Apollo and Booster T1 on support stands with IK arm control: pick and place, a drawer, a button panel, bimanual box lifts, carrying a tray. Robot models from MuJoCo Menagerie (BSD-3-Clause, Apache-2.0).",
       "git_tag": "benchflow/humanoid-v0.1",
@@ -4243,6 +3901,12 @@
       "dir": "robouse-mobile-manip",
       "aliases": [],
       "upstream": null,
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
       "version": "0.1",
       "description": "Robo Use mobile manipulation 0.1: 10 fetch, stow and sort tasks for Hello Robot Stretch 3, PAL TIAGo and the Google Robot in a three-room apartment. Robot models from MuJoCo Menagerie (Apache-2.0).",
       "git_tag": "benchflow/mobile-manip-v0.1",
@@ -4344,6 +4008,12 @@
       "dir": "robouse-dexhand",
       "aliases": [],
       "upstream": null,
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
       "version": "0.1",
       "description": "Robo Use dexterous hands 0.1: 7 tasks for the Shadow Hand and LEAP Hand on 6-axis positioners: regrasp and in-hand cube flips, pouring, a valve, a pen, buttons. Robot models from MuJoCo Menagerie (Apache-2.0, MIT).",
       "git_tag": "benchflow/dexhand-v0.1",
@@ -4423,6 +4093,12 @@
       "dir": "robouse-crazyflie",
       "aliases": [],
       "upstream": null,
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
       "version": "0.1",
       "description": "Robo Use Crazyflie 0.1: 7 indoor flight tasks for Bitcraze Crazyflie 2 quadrotors: a window, a gate course, waypoints, a shelf landing, a formation and a swap for a swarm, and one task without skills. Robot model from MuJoCo Menagerie (MIT).",
       "git_tag": "benchflow/crazyflie-v0.1",
@@ -4501,6 +4177,12 @@
       "dir": "robouse-driving",
       "aliases": [],
       "upstream": null,
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
       "version": "0.1",
       "description": "Robo Use driving 0.1: 7 traffic tasks for a sedan on MetaDrive roads (winding road, highway overtake, broken-down car, cone zone, roundabout, unprotected left turn, ramp merge), on MetaDrive 0.4.3 (Apache-2.0).",
       "git_tag": "benchflow/driving-v0.1",
@@ -4583,6 +4265,12 @@
         "org_name": "Lifelong Robot Learning",
         "repo": "https://github.com/Lifelong-Robot-Learning/LIBERO",
         "licence": "MIT"
+      },
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
       },
       "version": "0.1",
       "description": "Robo Use LIBERO-90 0.1: the 90 short-horizon LIBERO-90 tasks (20 kitchen, living-room and study scenes) on a Franka Panda, judged by LIBERO's BDDL goal check. Reference solutions replay LIBERO's human demonstrations (Apache-2.0).",
@@ -5248,6 +4936,12 @@
         "repo": "https://github.com/Farama-Foundation/Gymnasium-Robotics",
         "licence": "MIT (code); Apache-2.0 (kitchen and Franka assets)"
       },
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
       "version": "0.1",
       "description": "Robo Use Franka Kitchen 0.1: the 7 FrankaKitchen-v1 subtasks (microwave, kettle, two burners, light switch, slide and hinge cabinets) and 3 four-subtask goal sets, 10 tasks on a Franka Panda with an end-effector interface, judged by the env's own per-subtask completion check.",
       "git_tag": "farama-foundation/franka-kitchen-v0.1",
@@ -5351,6 +5045,12 @@
         "org_name": "Farama Foundation",
         "repo": "https://github.com/Farama-Foundation/Gymnasium-Robotics",
         "licence": "MIT (code); Apache-2.0 (ADROIT assets); CC-BY-4.0 (D4RL demonstrations)"
+      },
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
       },
       "version": "0.1",
       "description": "Robo Use Adroit hand 0.1: door opening, hammering, in-hand pen rotation and ball relocation with the 24-joint ADROIT hand, 12 tasks started from D4RL human-demonstration states, judged by the env's own success signal.",
@@ -5469,6 +5169,12 @@
         "org_name": "Google DeepMind",
         "repo": "https://github.com/google-deepmind/dm_control",
         "licence": "Apache-2.0"
+      },
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
       },
       "version": "0.1",
       "description": "Robo Use dm_control 0.1: 17 tasks from DeepMind's dm_control, 12 from the Control Suite (cart-pole swing-up and balance, pendulum and acrobot swing-up, reacher, point mass, finger turning, ball in cup, planar manipulator bring-ball) acted through the domains' own actuator commands, and 5 from dm_control.manipulation with the Kinova Jaco arm (reach, lift, place on a pedestal brick or cradle, stack two Duplo bricks) acted through an end-effector command. Success is each task's own in-target condition (dm_control's sparse reward) held for a number of steps, judged from the physical state.",
@@ -5624,6 +5330,12 @@
         "repo": "https://github.com/MyoHub/myosuite",
         "licence": "Apache-2.0"
       },
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
       "version": "0.1",
       "description": "Robo Use MyoSuite 0.1: 15 MyoSuite tasks on muscle-driven human models (elbow and finger posing, finger and five-fingertip reaching, sign-language hand shapes, key turning), acted through muscle excitations or a muscle-space joint controller and judged by MyoSuite's own solved check.",
       "git_tag": "myohub/myosuite-v0.1",
@@ -5763,6 +5475,12 @@
         "repo": "https://github.com/carlosferrazza/humanoid-bench",
         "licence": "MIT"
       },
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
       "version": "0.1",
       "description": "Robo Use HumanoidBench 0.1: 7 whole-body tasks from HumanoidBench for a free-standing Unitree H1 with two Shadow hands (stand, walk, maze, pole forest, sit on a chair, reach a point with the left hand, push a box on a table), judged by HumanoidBench's own reward and success rule (the task's success bar on the episode return, or its success signal). The agent drives Unitree's pretrained H1 walking policy through velocity commands and moves the hands through arm inverse kinematics.",
       "git_tag": "carlosferrazza/humanoid-bench-v0.1",
@@ -5845,6 +5563,12 @@
         "org_name": "Hao Su Lab (UCSD) and Hillbot",
         "repo": "https://github.com/mani-skill/ManiSkill",
         "licence": "Apache-2.0"
+      },
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
       },
       "version": "0.1",
       "description": "Robo Use ManiSkill3 0.1: 12 ManiSkill3 tabletop tasks on a Franka Panda (pick, stack, push, pull, tool use, rolling, reorientation, peg and plug insertion), on ManiSkill's CPU physics backend, judged by ManiSkill's own success check.",
@@ -5963,6 +5687,12 @@
         "org_name": "RoboCasa",
         "repo": "https://github.com/robocasa/robocasa",
         "licence": "MIT"
+      },
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
       },
       "version": "0.1",
       "description": "Robo Use RoboCasa 0.1: 24 RoboCasa365 atomic kitchen tasks in all ten kitchen layouts: close a drawer, counter to sink, counter to cabinet, turn on the toaster, close the kettle lid, turn off the faucet, and turn a stove burner on or off, with a Franka Panda on a parked mobile base. Success is RoboCasa's own check for each task, judged from the physical state.",
@@ -6151,7 +5881,356 @@
           "backend": "robocasa",
           "runtime": "robocasa",
           "suite": "robocasa"
-=======
+        }
+      ]
+    },
+    {
+      "name": "stanfordvl/behavior-1k",
+      "org": "stanfordvl",
+      "short_name": "behavior-1k",
+      "dir": "behavior-1k",
+      "aliases": [],
+      "upstream": {
+        "benchmark": "BEHAVIOR-1K",
+        "org_name": "Stanford Vision and Learning Lab",
+        "repo": "https://github.com/StanfordVL/BEHAVIOR-1K",
+        "licence": "MIT"
+      },
+      "run": {
+        "label": "Robo Use checkout + GPU worker",
+        "command": "robouse run-many --tasks tasks/behavior --harness oracle --out runs/behavior-oracle",
+        "note": "GPU required. The BEHAVIOR simulator (OmniGibson 3.9.3 on Isaac Sim 5.1) needs an NVIDIA RTX GPU with RT cores and host driver 580 (Isaac Sim 5.1 crashed at start-up on driver 595). Start one simulator worker per activity on the GPU machine, write their endpoints to <code>runs/_behavior/remote.json</code> in a Robo Use checkout (branch <code>behavior-expand</code>), and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/behavior-expand/docs/suites/behavior.md\">docs/suites/behavior.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control.",
+        "bench_note": "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_BEHAVIOR_REMOTE</code> on the host."
+      },
+      "robouse": {
+        "commit": "27d8ed8c2de2a3b92b19f0cd1532bfa83342f60f",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "version": "0.1",
+      "description": "Robo Use BEHAVIOR-1K 0.1: 43 tasks from 30 household activities of the 2026 BEHAVIOR Challenge (5 extra instances, 8 vision-only) on a Galaxea R1Pro, driven through symbolic skills and judged by BEHAVIOR's BDDL goal check. Needs an NVIDIA RTX GPU for the simulator worker.",
+      "git_tag": "stanfordvl/behavior-1k-v0.1",
+      "commit": "f4872875a63e47c87bbf63dc03f1ff49d7fd26df",
+      "n_tasks": 43,
+      "suites": [
+        "behavior"
+      ],
+      "embodiments": [
+        "Galaxea R1Pro mobile manipulator"
+      ],
+      "simulators": [
+        "BEHAVIOR-1K (OmniGibson on Isaac Sim 5.1)"
+      ],
+      "image": "behavior",
+      "noop": false,
+      "runtimes": [
+        "behavior"
+      ],
+      "tasks": [
+        {
+          "id": "behavior-bringing-in-wood",
+          "digest": "sha256:7d3d82eea2ff9187ddd28f19ec6cee8d6964cf9cbb504bbcbb92656a4c0ed474",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-bringing-water",
+          "digest": "sha256:a0fbee3f556fdcbc60ea5bcc3869cac6c9effce41222be5baa09a605fca7832f",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-bringing-water-instance-1",
+          "digest": "sha256:dec6ffa8ee29ba53b2c27f129231c28065930226931e3f52f1b40d11c304b521",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-bringing-water-instance-2",
+          "digest": "sha256:24cb84c7ee9c43bc20aae1ee3eddfd5c3899895f587479d79c2d7e09777a84fc",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-bringing-water-vision",
+          "digest": "sha256:d6ef89b811a1853bfb5ec0df17578aa65c91db5c00b975271ee5bfd29b4cedd3",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-carrying-in-groceries",
+          "digest": "sha256:83433545b1caf864fa28f4815e6a9bf042b54e5c56940d9d6694d69a62292d60",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-carrying-out-garden-furniture",
+          "digest": "sha256:85a3ee4eadd151b941b87c9c50830ea7647ab6c31f58b35746d2347b0743964e",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-clean-up-broken-glass",
+          "digest": "sha256:1c173e4799901ff9e8a17dfcaab3f4bd44e4e0af031c7d4946bdb0c3411298cc",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-cleaning-up-plates-and-food",
+          "digest": "sha256:13cfc7d14b0788d8298e65d0ae7c987f5de3c57ef001af117b465a495ac97261",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-collecting-aluminum-cans",
+          "digest": "sha256:1662e34c4975b8cb651cf911c28d719919c7a63fecdae80ae5ba82eb3fddbb0d",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-collecting-childrens-toys",
+          "digest": "sha256:856f465ee6812c4183685f82e30b3cb02f4e9a783328f7ccaee591d224352ae6",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-dispose-of-glass",
+          "digest": "sha256:d7e7ae292bd61944511d5f43c57ce8e6cf6efa34602f271e1a7774ba412a04c9",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-freeze-fruit",
+          "digest": "sha256:fbf03842d15278581af371dc951a5b13b0f7ba52518699aa1a0ccff4d51a8f77",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-freeze-fruit-vision",
+          "digest": "sha256:586cc47aee222139b6eb2c28c2930b25e77e25acee94443e2ffef677660217a5",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-installing-a-fax-machine",
+          "digest": "sha256:0b68693815535c3f95ce3116ad49a813acb16f6a3b55a7b6bf940294263cedd3",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-loading-the-car",
+          "digest": "sha256:b68566a505ae270e3374ac7c8ce1875e481a8bebf3e178b25eda489b93e87887",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-moving-boxes-to-storage",
+          "digest": "sha256:6a31d802059779f240a166c10c89438ff2f7d147176c5cbcb9abd1d68913e7c1",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-organizing-art-supplies",
+          "digest": "sha256:798366ab284b4f0cb9336735f0f4026ca1bbd0ff8b5dea1d346d91ac420fe0fd",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-picking-up-toys",
+          "digest": "sha256:79731110b4c8312ece62b8d6b8b8e51f44f9c5e8697ec0bb2322ae2e16b0247c",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-picking-up-trash",
+          "digest": "sha256:25055dee182fcd3b0fcc9f12194a4a0b065dcc12df3dff471949ebd39eeff877",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-picking-up-trash-instance-1",
+          "digest": "sha256:e024a7fd4e72228af1cf037408fc078fdf0cbb42b56836eba3e073cbf1dd8b2b",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-picking-up-trash-vision",
+          "digest": "sha256:d85100bceaaa13b18162885a61e9c833f50e0836701ab8116683fb42e2457707",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-putting-away-toys",
+          "digest": "sha256:90dda9577da8bee31cc49079186fde8223a84c86c33de5e666fa2ca5ab76ceb3",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-putting-dirty-dishes-in-sink",
+          "digest": "sha256:4e5c7aa7b150428e6726b5f2a21057ce897c337192979c7df9ac47814f883275",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-putting-dishes-away-after-cleaning",
+          "digest": "sha256:f582a3a496ceeb6c8dea6afa7ae757545002c5d951893725bc956936ad2be5b5",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-putting-dishes-away-after-cleaning-vision",
+          "digest": "sha256:bef6b0bc9bf63f18bb83b183efdd2dcde95221b1c09505a5504dbb6056320a53",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-re-shelving-library-books",
+          "digest": "sha256:5b58c54bf0859b2dde87cb6291e598b8f4d0e4e3c17fe2e419d8e4671098733f",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-rearrange-your-room",
+          "digest": "sha256:d924bd4e0bab93ea53a21cc221a885983d08e9d0fa5b87ebfaf850ea3c4f0482",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-rearranging-kitchen-furniture",
+          "digest": "sha256:4047bfec8c3df7921384cfa10d2bbecbe3a1d6e07474db483ae08bb3f858df3c",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-rearranging-kitchen-furniture-vision",
+          "digest": "sha256:27aea41a5bc32d6967d3aad1e4734e1b67401b260cd6e1de25b08f353b4f0225",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-sorting-books-on-shelf",
+          "digest": "sha256:2c8b3a6934bbc1a864ae6b284ccf29824735962bf7b7a296d594156c78e5c89e",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-store-honey",
+          "digest": "sha256:54b96178b1d11096bbb58012115d3c1c184bf01915d37e8f910c3f1f3891e54e",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-store-produce",
+          "digest": "sha256:1f8970ed113bd8bc477ca2ccc6baf33bd31d5d98c0c611164f764455960fe6a4",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-store-produce-instance-1",
+          "digest": "sha256:96f579bacdf8952a48906eb32a8830f7197dc1c2b622c405f1cd43e47f2be77a",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-store-produce-vision",
+          "digest": "sha256:5641a4a5cf8a4ceb4ed63964f6f29f82a5a27cbb98e3c69ef41bacbbaac3cb40",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-storing-food",
+          "digest": "sha256:2e8804dc01b79fdce03bc35e316df70aef6e9c4365d3de9723cc0f2ba34d2167",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-tidying-bathroom",
+          "digest": "sha256:f70c4522ed8321982f08a4d40c2a434f79d0412b2be637345b19152ef2ea8e7b",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-tidying-bathroom-vision",
+          "digest": "sha256:4059adaa57f5169975c62cc39f9461828f19cdf4301865179e85e1f28be72099",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-tidying-living-room",
+          "digest": "sha256:ac33994626843f178e424e395047c371620a44effd408fbb690243b4db211db9",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-turning-on-radio",
+          "digest": "sha256:7a5d3f899524c2c05370fcf4dee18fa77f8ef65d5b32098b27cb1deba6cbe6cf",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-turning-out-all-lights-before-sleep",
+          "digest": "sha256:cf0b78bccc6e370dcccdd44971f5aeff6aec7bcf48749a2d712b6df80f405a06",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-turning-out-all-lights-before-sleep-instance-1",
+          "digest": "sha256:3fd843787afc2144d6d9dcdaf02fafe38c455e178f75529807c7d2c79b39c007",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        },
+        {
+          "id": "behavior-turning-out-all-lights-before-sleep-vision",
+          "digest": "sha256:7a2edde5042b0f30d8b42f42974adda7e3878dbba60c0beddf9d36ee91b076ce",
+          "backend": "behavior",
+          "runtime": "behavior",
+          "suite": "behavior"
+        }
+      ]
+    },
+    {
       "name": "benchflow/robouse-remix",
       "org": "benchflow",
       "short_name": "robouse-remix",
@@ -6160,10 +6239,10 @@
       "upstream": null,
       "run": null,
       "robouse": {
+        "branch": "components",
         "commit": "87b60f347b627fb0d742d77d272f7e71ce10e76a",
         "package_version": "0.1.1",
-        "repo": "https://github.com/benchflow-ai/robouse",
-        "branch": "components"
+        "repo": "https://github.com/benchflow-ai/robouse"
       },
       "version": "0.1",
       "description": "Robo Use remix 0.1: 48 tasks composed from components (6 embodiments: arm, bimanual rig, two mobile manipulators, quadruped, drone; 6 scenes; 9 task templates) with modifiers (vision, noise, perturbations, safety overlays, roles). Each was accepted by robouse remix: the reference solution scores 1 and a no-op agent 0.",
@@ -6525,7 +6604,6 @@
           "backend": "remix",
           "runtime": "remix",
           "suite": "remix"
->>>>>>> origin/main
         }
       ]
     },
@@ -6540,7 +6618,7 @@
       "upstream": null,
       "run": null,
       "robouse": {
-        "commit": "f1d08a0f93621f21df84673b88adbfbfae2d839d",
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
         "package_version": "0.1.1",
         "repo": "https://github.com/benchflow-ai/robouse"
       },
@@ -7313,6 +7391,12 @@
         "repo": "https://github.com/Lifelong-Robot-Learning/LIBERO",
         "licence": "MIT"
       },
+      "run": null,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
       "version": "0.1",
       "description": "Robo Use LIBERO 0.1: 20 LIBERO tasks (5 each from spatial, object, goal and LIBERO-10) on a Franka Panda, judged by LIBERO's BDDL goal check.",
       "git_tag": "lifelong-robot-learning/libero-v0.1",
@@ -7495,7 +7579,6 @@
     },
     "dexjoco": {
       "simulators": "MuJoCo 3.4.0, DexJoCo",
-<<<<<<< HEAD
       "digest": "sha256:c8a774e0cbe1feb4b08493a3ca5464e92dffe31ffec039cd37110f5490e60fd9"
     },
     "embodied": {
@@ -7525,8 +7608,6 @@
     "robocasa": {
       "simulators": "MuJoCo 3.3.1, RoboCasa365 (robosuite 1.5.2)",
       "digest": "sha256:0e7762e64c24849f320fa346ace73b18c6c7493ec14fedc79883eaa3eef49582"
-=======
-      "digest": "sha256:ab43542b6c41695c2ad8e2a62b2161c71a5cec06b2fd4b1c45d2099190c2199e"
     },
     "remix": {
       "simulators": "MuJoCo 3.3.0, MuJoCo Menagerie models",
@@ -7535,7 +7616,6 @@
     "behavior": {
       "simulators": "BEHAVIOR-1K (OmniGibson 3.9.3 on NVIDIA Isaac Sim 5.1), on a remote NVIDIA RTX GPU worker",
       "digest": "sha256:4053563589789973194b7863789677c6d1514503e1e7fd77e41b0edf1507abea"
->>>>>>> origin/main
     }
   }
 }
