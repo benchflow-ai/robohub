@@ -257,7 +257,9 @@ datasets:
     upstream: {benchmark: RoboCasa, org_name: RoboCasa, repo: 'https://github.com/robocasa/robocasa', licence: MIT}
     version: "0.1"
     suites: [robocasa]
-    description: 'Robo Use RoboCasa 0.1: 24 RoboCasa365 atomic kitchen tasks in all ten kitchen layouts: close a drawer, counter to sink, counter to cabinet, turn on the toaster, close the kettle lid, turn off the faucet, and turn a stove burner on or off, with a Franka Panda on a parked mobile base. Success is RoboCasa''s own check for each task, judged from the physical state.'
+    # its reference solution passes on macOS and in Colima but not on a c4a (Neoverse V2) linux/arm64 host (the lid does not close in 400 steps, twice)
+    exclude_tasks: [robocasa-close-kettle-lid-kitchen6]
+    description: 'Robo Use RoboCasa 0.1: 23 RoboCasa365 atomic kitchen tasks in all ten kitchen layouts: close a drawer, counter to sink, counter to cabinet, turn on the toaster, close the kettle lid, turn off the faucet, and turn a stove burner on or off, with a Franka Panda on a parked mobile base. Success is RoboCasa''s own check for each task, judged from the physical state.'
   - name: stanfordvl/behavior-1k
     dir: behavior-1k
     upstream: {benchmark: "BEHAVIOR-1K", org_name: "Stanford Vision and Learning Lab", repo: "https://github.com/StanfordVL/BEHAVIOR-1K", licence: MIT}

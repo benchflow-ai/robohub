@@ -3358,6 +3358,11 @@
     },
     "robouse-robocasa": {
       "noop": false,
+      "robouse": {
+        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
+        "package_version": "0.1.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
       "tasks": {
         "robocasa-close-drawer-kitchen10": {
           "backend": "robocasa",
@@ -3380,11 +3385,6 @@
           "suite": "robocasa"
         },
         "robocasa-close-kettle-lid-kitchen10": {
-          "backend": "robocasa",
-          "runtime": "robocasa",
-          "suite": "robocasa"
-        },
-        "robocasa-close-kettle-lid-kitchen6": {
           "backend": "robocasa",
           "runtime": "robocasa",
           "suite": "robocasa"

@@ -32,7 +32,7 @@ Every dataset is named `<org>/<name>`. The org is whoever designed the benchmark
 | `myohub/myosuite@0.1` | | 15 | myosuite | myosuite | MyoSuite (MyoHub, Apache-2.0) |
 | `carlosferrazza/humanoid-bench@0.1` | | 7 | humanoidbench | humanoidbench | HumanoidBench (carlosferrazza, MIT) |
 | `mani-skill/maniskill@0.1` | | 12 | maniskill | maniskill | ManiSkill3 (mani-skill, formerly haosulab, Apache-2.0) |
-| `robocasa/robocasa@0.1` | | 24 | robocasa | robocasa | RoboCasa (RoboCasa, MIT; assets CC-BY-4.0) |
+| `robocasa/robocasa@0.1` | | 23 | robocasa | robocasa | RoboCasa (RoboCasa, MIT; assets CC-BY-4.0) |
 | `benchflow/quadruped@0.1` | | 11 | quadruped | embodied | |
 | `benchflow/humanoid@0.1` | | 9 | humanoid | embodied | |
 | `benchflow/mobile-manip@0.1` | | 10 | mobile-manip | embodied | |

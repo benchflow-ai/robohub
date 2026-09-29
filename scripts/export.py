@@ -398,6 +398,7 @@ def main(argv=None) -> int:
                    if ln.strip() and not ln.startswith("#")]
         else:
             ids = sorted(i for i, s in suite_of.items() if s in ds["suites"])
+        ids = [i for i in ids if i not in ds.get("exclude_tasks", [])]  # tasks left out of this dataset (see hub.yaml)
         missing = [i for i in ids if i not in by_id]
         if missing:
             raise SystemExit(f"{ds['name']}: unknown task ids {missing}")
