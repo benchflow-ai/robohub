@@ -1348,11 +1348,6 @@
         "repo": "https://github.com/benchflow-ai/robouse"
       },
       "tasks": {
-        "dexjoco-assembly": {
-          "backend": "dexjoco",
-          "runtime": "dexjoco",
-          "suite": "dexjoco"
-        },
         "dexjoco-click-mouse": {
           "backend": "dexjoco",
           "runtime": "dexjoco",

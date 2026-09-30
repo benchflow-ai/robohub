@@ -188,6 +188,8 @@ datasets:
     upstream: {benchmark: "DexJoCo", org_name: "brave-eai", repo: "https://github.com/brave-eai/dexjoco", licence: "MIT (code and datasets; demonstration actions redistributed here)"}
     version: "0.2"
     suites: [dexjoco]
+    # its reference solution (an open-loop replay of the recorded demonstration) passes on macOS but not in the Linux hub runtime (twice: 707 steps, no success)
+    exclude_tasks: [dexjoco-assembly]
     description: 'Robo Use DexJoCo 0.2: tool use with Allegro hands, from DexJoCo.'
   - name: benchflow/robouse-drone
     dir: robouse-drone
