@@ -4,14 +4,30 @@ version: 0.1.0
 title: Upstream benchmark scenes
 scenario: tabletop
 summary: Meta-World, robosuite, LIBERO, RoboCasa, BEHAVIOR and Gymnasium-Robotics scenes, as the benchmarks define them.
-remixable: false
+composable: false
 suites:
+- adroit
 - behavior
+- cubepick
 - dexhand
 - dexjoco
+- dmcontrol
+- gpu-genesis
+- gpu-isaaclab
+- gpu-maniskill
+- gpu-playground
 - gymrobotics
 - humanoid
+- humanoidbench
+- kitchen
 - libero
+- libero-90
+- maniskill
 - metaworld
+- myosuite
+- nav
+- real
 - robocasa
+- robodojo
 - robosuite
+- stationerybench

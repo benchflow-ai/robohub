@@ -4,8 +4,8 @@ version: 0.1.0
 title: Lab bench
 scenario: lab
 summary: 'A laboratory: a white bench, a side bench, a fume hood and a sample freezer.'
-remixable: true
-runtime: robouse.backends.remix_sim.scenes:lab
+composable: true
+runtime: robouse.backends.components_sim.scenes:lab
 placements:
 - arm
 - bimanual

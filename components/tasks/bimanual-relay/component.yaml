@@ -7,8 +7,8 @@ capabilities:
 - long-horizon
 - bimanual-coordination
 difficulty: medium
-remixable: true
-runtime: robouse.backends.remix_sim.templates:BimanualRelay
+composable: true
+runtime: robouse.backends.components_sim.templates:BimanualRelay
 requires:
 - placements:
   - bimanual

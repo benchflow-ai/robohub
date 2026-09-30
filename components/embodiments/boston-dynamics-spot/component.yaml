@@ -8,6 +8,6 @@ kind: quadruped
 capabilities:
 - locomote
 - reach
-remixable: false
+composable: false
 suites:
 - quadruped

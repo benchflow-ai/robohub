@@ -4,8 +4,8 @@ version: 0.1.0
 title: Workshop bench
 scenario: workshop-assembly
 summary: 'A workshop: a 0.9 m workbench under a pegboard, a parts cart, a tool cabinet and a drill press. Arms mount at the back of the bench.'
-remixable: true
-runtime: robouse.backends.remix_sim.scenes:workshop
+composable: true
+runtime: robouse.backends.components_sim.scenes:workshop
 placements:
 - arm
 - bimanual

@@ -7,6 +7,6 @@ track: move
 kind: quadruped
 capabilities:
 - locomote
-remixable: false
+composable: false
 suites:
 - quadruped

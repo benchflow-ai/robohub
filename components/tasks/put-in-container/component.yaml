@@ -6,8 +6,8 @@ summary: Pick one named object up and put it in a container, leaving the distrac
 capabilities:
 - pick-and-place
 difficulty: easy
-remixable: true
-runtime: robouse.backends.remix_sim.templates:PutInContainer
+composable: true
+runtime: robouse.backends.components_sim.templates:PutInContainer
 requires:
 - placements:
   - arm

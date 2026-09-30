@@ -7,8 +7,8 @@ capabilities:
 - spatial-reasoning
 - pick-and-place
 difficulty: medium
-remixable: true
-runtime: robouse.backends.remix_sim.templates:StackInOrder
+composable: true
+runtime: robouse.backends.components_sim.templates:StackInOrder
 requires:
 - placements:
   - arm

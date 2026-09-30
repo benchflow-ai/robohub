@@ -15,8 +15,8 @@ payload_kg: 0.0
 assets:
 - bitcraze_crazyflie_2
 licence: MIT (MuJoCo Menagerie)
-remixable: true
-runtime: robouse.backends.remix_sim.robots:Crazyflie
+composable: true
+runtime: robouse.backends.components_sim.robots:Crazyflie
 arms: []
 action_groups:
 - name: velocity_setpoint
@@ -56,5 +56,6 @@ cameras:
 - chase
 - robot/fpv
 suites:
+- composed
 - crazyflie
 - remix

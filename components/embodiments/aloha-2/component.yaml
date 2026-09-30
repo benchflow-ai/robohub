@@ -19,8 +19,8 @@ payload_kg: 0.75
 assets:
 - aloha
 licence: BSD-3-Clause (MuJoCo Menagerie)
-remixable: true
-runtime: robouse.backends.remix_sim.robots:Aloha
+composable: true
+runtime: robouse.backends.components_sim.robots:Aloha
 arms:
 - left
 - right
@@ -77,5 +77,6 @@ cameras:
 - robot/left_wrist
 - robot/right_wrist
 suites:
+- composed
 - menagerie
 - remix

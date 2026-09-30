@@ -4,8 +4,8 @@ version: 0.1.0
 title: Outdoor field
 scenario: outdoor-field
 summary: A 10 m x 8 m grass field with a shed, a boulder, a tree and a solar panel array; no work surfaces, so no arm mounts.
-remixable: true
-runtime: robouse.backends.remix_sim.scenes:outdoor
+composable: true
+runtime: robouse.backends.components_sim.scenes:outdoor
 placements:
 - floor
 - airspace

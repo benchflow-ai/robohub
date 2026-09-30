@@ -9,7 +9,7 @@ capabilities:
 - reach
 - grasp
 - top-grasp
-remixable: false
+composable: false
 suites:
 - arc-style
 - hard

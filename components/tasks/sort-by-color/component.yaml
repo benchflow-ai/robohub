@@ -7,8 +7,8 @@ capabilities:
 - long-horizon
 - pick-and-place
 difficulty: medium
-remixable: true
-runtime: robouse.backends.remix_sim.templates:SortByColor
+composable: true
+runtime: robouse.backends.components_sim.templates:SortByColor
 requires:
 - placements:
   - arm

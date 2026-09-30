@@ -4,7 +4,7 @@ version: 0.1.0
 title: Tabletop (primitive shapes)
 scenario: tabletop
 summary: 'The tabletop backend''s generated tables: pads, bowls, trays, a drawer, a socket.'
-remixable: false
+composable: false
 suites:
 - arc-style
 - hard

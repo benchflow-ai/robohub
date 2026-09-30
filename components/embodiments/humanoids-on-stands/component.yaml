@@ -9,6 +9,7 @@ capabilities:
 - reach
 - grasp
 - bimanual
-remixable: false
+composable: false
 suites:
 - humanoid
+- humanoidbench

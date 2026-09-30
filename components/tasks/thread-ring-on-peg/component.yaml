@@ -8,8 +8,8 @@ capabilities:
 - spatial-reasoning
 - contact-rich
 difficulty: hard
-remixable: true
-runtime: robouse.backends.remix_sim.templates:ThreadRing
+composable: true
+runtime: robouse.backends.components_sim.templates:ThreadRing
 requires:
 - placements:
   - arm

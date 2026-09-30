@@ -18,8 +18,8 @@ payload_kg: 3.0
 assets:
 - franka_emika_panda
 licence: Apache-2.0 (MuJoCo Menagerie)
-remixable: true
-runtime: robouse.backends.remix_sim.robots:Panda
+composable: true
+runtime: robouse.backends.components_sim.robots:Panda
 arms:
 - arm
 action_groups:
@@ -56,6 +56,7 @@ skills:
 cameras:
 - robot/arm_wrist
 suites:
+- composed
 - menagerie
 - remix
 - roboharm

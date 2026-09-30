@@ -7,8 +7,8 @@ capabilities:
 - spatial-reasoning
 - navigation
 difficulty: easy
-remixable: true
-runtime: robouse.backends.remix_sim.templates:GoToLandmark
+composable: true
+runtime: robouse.backends.components_sim.templates:GoToLandmark
 requires:
 - placements:
   - floor

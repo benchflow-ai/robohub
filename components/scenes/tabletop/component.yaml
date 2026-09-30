@@ -4,8 +4,8 @@ version: 0.1.0
 title: Tabletop
 scenario: tabletop
 summary: A 2 m x 0.8 m table in a plain room; arms mount at its rear edge, floor robots reach it from the south, drones take off from a pad in the corner.
-remixable: true
-runtime: robouse.backends.remix_sim.scenes:tabletop
+composable: true
+runtime: robouse.backends.components_sim.scenes:tabletop
 placements:
 - arm
 - bimanual

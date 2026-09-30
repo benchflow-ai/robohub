@@ -8,6 +8,6 @@ kind: skill_only
 capabilities:
 - locomote
 - grasp
-remixable: false
+composable: false
 suites:
 - behavior

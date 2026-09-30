@@ -1,0 +1,17 @@
+id: upstream-bodies
+type: embodiment
+version: 0.1.0
+title: Upstream benchmark bodies
+summary: The robots and bodies of benchmarks run as they ship (dm_control, MyoSuite, Genesis, Isaac Lab, MuJoCo Playground, RoboDojo, the nav suite's base).
+track: arm
+kind: other
+capabilities: []
+composable: false
+suites:
+- dmcontrol
+- gpu-genesis
+- gpu-isaaclab
+- gpu-playground
+- myosuite
+- nav
+- robodojo
