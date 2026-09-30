@@ -21,7 +21,7 @@ RUN python /opt/robohub-runtime/check_runtime.py /opt/robohub-runtime "$ROBOHUB_
  && install -m 755 /opt/robohub-runtime/sim-entry.sh /usr/local/bin/robouse-sim-entry \
  && mkdir -p /rpc /episode /task /logs/verifier
 ENV PYTHONPATH=/opt/robohub-runtime/robouse/src
-RUN python -c "from robouse.backends.robosuite_backend import _import_robosuite; _import_robosuite()"
+RUN python -c "from robouse.backends.robosuite.backend import _import_robosuite; _import_robosuite()"
 
 WORKDIR /episode
 CMD ["robouse-sim-entry"]

@@ -196,7 +196,7 @@ def _closure(src: Path, roots: list[str]) -> set[Path]:
 
 # pip packages a backend's reference solution imports besides numpy (installed at oracle run time, never into the image)
 ORACLE_PIP = {"dexjoco": ["scipy==1.18.1"]}
-ORACLE_BACKEND_MODULE = {"robosuite": "robouse.backends.robosuite_backend", "metaworld": "robouse.backends.metaworld_backend"}
+ORACLE_BACKEND_MODULE: dict[str, str] = {}  # overrides from hub.yaml; otherwise robouse.oracle.oracle_module(backend)
 
 
 def configure_oracles(hub: dict) -> None:
@@ -211,7 +211,15 @@ def configure_oracles(hub: dict) -> None:
 
 def vendor_robouse(robouse: Path, backend: str, dst: Path) -> None:
     src = robouse / "src"
-    roots = ["robouse.oracle", "robouse.agent_cli", ORACLE_BACKEND_MODULE.get(backend, f"robouse.backends.{backend}")]
+    if backend in ORACLE_BACKEND_MODULE:
+        module = ORACLE_BACKEND_MODULE[backend]
+    else:
+        from robouse.oracle import oracle_module  # the module `python -m robouse.oracle --backend <backend>` runs
+
+        module = oracle_module(backend)
+    if _module_file(src, module) is None:
+        raise SystemExit(f"backend {backend}: its reference solution module {module} is not in {src}")
+    roots = ["robouse.oracle", "robouse.agent_cli", module]
     for f in sorted(_closure(src, roots)):
         out = dst / f.relative_to(src)
         out.parent.mkdir(parents=True, exist_ok=True)

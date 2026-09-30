@@ -45,12 +45,10 @@ runtimes:
     backends: [dmcontrol]
     simulators: MuJoCo 3.14.0, dm_control 1.0.47
     sim_memory: 2G
-    oracle_modules: {dmcontrol: robouse.backends.dmcontrol}
   myosuite:
     backends: [myosuite]
     simulators: MuJoCo 3.6.0, MyoSuite 2.12.2
     sim_memory: 2G
-    oracle_modules: {myosuite: robouse.backends.myosuite_backend}
   humanoidbench:
     backends: [humanoidbench]
     simulators: MuJoCo 3.1.6, HumanoidBench (commit cb11890)
