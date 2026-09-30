@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/put-in-container--franka-panda--kitchen-counter--vision--s3",
+  "key": "f11e5fcc33b0253a",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

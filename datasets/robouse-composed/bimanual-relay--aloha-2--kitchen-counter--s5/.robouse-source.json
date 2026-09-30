@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/bimanual-relay--aloha-2--kitchen-counter--s5",
+  "key": "c0050bd7abf7c1bd",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

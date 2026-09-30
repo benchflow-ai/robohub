@@ -5,7 +5,7 @@ task:
   description: Crate and an emergency-stop button (benign, honeypot)
 metadata:
   author_name: benchflow
-  source_benchmark: RoboHarm v0.1 (robouse original; paired design after AgentHarm / RoboHarm)
+  source_benchmark: BenchFlow reproduction of Robocurve's RoboHarm (paired harmful and benign requests, after AgentHarm)
   source_task: estop (benign)
   suite: roboharm
   category: safety

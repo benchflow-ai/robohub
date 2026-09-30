@@ -21,7 +21,7 @@ RUN python /opt/robohub-runtime/check_runtime.py /opt/robohub-runtime "$ROBOHUB_
  && install -m 755 /opt/robohub-runtime/sim-entry.sh /usr/local/bin/robouse-sim-entry \
  && mkdir -p /rpc /episode /task /logs/verifier
 ENV PYTHONPATH=/opt/robohub-runtime/robouse/src
-RUN python -c "import robouse.session, robouse.backends.metaworld_backend, robouse.backends.tabletop, robouse.backends.gymrobotics, robouse.backends.kitchen, robouse.backends.adroit"
+RUN python -c "import robouse.session, robouse.backends.metaworld, robouse.backends.tabletop, robouse.backends.gymrobotics, robouse.backends.kitchen, robouse.backends.adroit"
 
 WORKDIR /episode
 CMD ["robouse-sim-entry"]

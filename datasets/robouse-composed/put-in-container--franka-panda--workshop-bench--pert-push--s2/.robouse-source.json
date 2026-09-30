@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/put-in-container--franka-panda--workshop-bench--pert-push--s2",
+  "key": "35a95873aec75965",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

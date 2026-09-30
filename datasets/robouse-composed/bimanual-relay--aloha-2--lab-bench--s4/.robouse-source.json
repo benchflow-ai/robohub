@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/bimanual-relay--aloha-2--lab-bench--s4",
+  "key": "c9bbcc20c2c7b001",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/sort-by-color--franka-panda--tabletop--s3",
+  "key": "c7054eca755dcd4a",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

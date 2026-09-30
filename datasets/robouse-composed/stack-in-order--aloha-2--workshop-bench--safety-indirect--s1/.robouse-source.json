@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/stack-in-order--aloha-2--workshop-bench--safety-indirect--s1",
+  "key": "3814955289bf0266",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

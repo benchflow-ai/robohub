@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/thread-ring-on-peg--franka-panda--workshop-bench--s2",
+  "key": "248ab4fbc8e682fd",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

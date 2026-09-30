@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/go-to-landmark--google-robot--lab-bench--s5",
+  "key": "5e343036ce883b2e",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

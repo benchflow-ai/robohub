@@ -4,5 +4,4 @@
 # the scripted expert policy). BenchFlow uploads /oracle only in oracle mode; agents never see it.
 set -euo pipefail
 export PYTHONPATH="$(cd "$(dirname "$0")" && pwd)/vendor${PYTHONPATH:+:$PYTHONPATH}"
-export ROBOUSE_ORACLE_TOKEN=da68fd5c65418fabd3e3311827a638ce
 python3 -m robouse.oracle --backend adroit --env "$(cd "$(dirname "$0")" && pwd)/demo.json"

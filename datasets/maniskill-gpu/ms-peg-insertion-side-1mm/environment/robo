@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """`robo`: the only way an agent touches the robot. Standard library only.
 
-Finds the episode socket from $ROBOUSE_SOCKET (set by the runner) and sends one JSON request.
+Finds the episode socket from $ROBOUSE_SOCKET (set by the runner; $ROBO_SOCKET on BenchFlow) and sends one JSON
+request.
 
   robo info                          action space, skills, step budget
   robo observe [--image] [--camera C] robot and object state; --image also saves a camera PNG and prints its path
@@ -13,6 +14,7 @@ Finds the episode socket from $ROBOUSE_SOCKET (set by the runner) and sends one 
   robo give-up ["message"]           end the episode without claiming success
 Add --json to any command for raw JSON output.
 """
+
 from __future__ import annotations
 
 import json
@@ -21,12 +23,13 @@ import socket
 import sys
 
 
-def _send(req: dict) -> dict:
-    path = os.environ.get("ROBOUSE_SOCKET") or _find_socket()
+def _send(req: dict, path: str | None = None) -> dict:
+    path = path or os.environ.get("ROBOUSE_SOCKET") or os.environ.get("ROBO_SOCKET") or _find_socket()
     if not path:
         return {"ok": False, "error": "no episode: ROBOUSE_SOCKET is not set"}
-    if os.environ.get("ROBOUSE_ORACLE_TOKEN"):  # set only for the reference solution
-        req = {**req, "token": os.environ["ROBOUSE_ORACLE_TOKEN"]}
+    token = os.environ.get("ROBOUSE_ORACLE_TOKEN") or os.environ.get("ROBO_ORACLE_TOKEN")  # the reference solution's
+    if token:
+        req = {**req, "token": token}
     s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     s.settimeout(120)
     try:
@@ -93,7 +96,7 @@ def main(argv: list[str] | None = None) -> int:
         if name in args:
             i = args.index(name)
             v = cast(args[i + 1])
-            del args[i:i + 2]
+            del args[i : i + 2]
             return v
         return default
 
@@ -105,7 +108,10 @@ def main(argv: list[str] | None = None) -> int:
             args = rest
             cam = opt("--camera", None, str)
             if os.environ.get("ROBOUSE_TEXT_ONLY") and ("--image" in args or cam):
-                print("note: this harness's model cannot read images, so --image and --camera are ignored", file=sys.stderr)
+                print(
+                    "note: this harness's model cannot read images, so --image and --camera are ignored",
+                    file=sys.stderr,
+                )
                 return _print(_send({"op": "observe", "image": False, "camera": None}), as_json)
             return _print(_send({"op": "observe", "image": "--image" in args, "camera": cam}), as_json)
         if cmd == "act":
@@ -117,7 +123,12 @@ def main(argv: list[str] | None = None) -> int:
             grip = opt("--grip", None, float)
             ms = opt("--max-steps", 100, int)
             tol = opt("--tol", 0.01, float)
-            return _print(_send({"op": "move_to", "pos": [float(x) for x in args[:3]], "grip": grip, "max_steps": ms, "tol": tol}), as_json)
+            return _print(
+                _send(
+                    {"op": "move_to", "pos": [float(x) for x in args[:3]], "grip": grip, "max_steps": ms, "tol": tol}
+                ),
+                as_json,
+            )
         if cmd == "grip":
             args = rest
             steps = opt("--steps", 15, int)

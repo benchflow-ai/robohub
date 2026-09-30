@@ -1,9 +1,0 @@
-{
-  "source": "/Users/lixiangyi/benchflow/robouse-components/tasks/remix/put-in-container--franka-panda--lab-bench--s2",
-  "key": "3d4b6561e84a5feb",
-  "runtime": "runtime-9b5493862f20134c",
-  "noop": false,
-  "seed": null,
-  "timeout": null,
-  "format_version": "3"
-}

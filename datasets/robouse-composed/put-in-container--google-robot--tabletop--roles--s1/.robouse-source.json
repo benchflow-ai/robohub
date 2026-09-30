@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/put-in-container--google-robot--tabletop--roles--s1",
+  "key": "a95215930d2fa828",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

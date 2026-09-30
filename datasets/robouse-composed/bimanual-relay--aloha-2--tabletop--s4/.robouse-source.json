@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/bimanual-relay--aloha-2--tabletop--s4",
+  "key": "849582a5064c58c8",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

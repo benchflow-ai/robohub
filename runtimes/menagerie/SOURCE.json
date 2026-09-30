@@ -1,8 +1,8 @@
 {
   "robouse": {
     "repo": "https://github.com/benchflow-ai/robouse",
-    "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
-    "package_version": "0.1.1"
+    "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+    "package_version": "0.2.0"
   },
   "runtime": "menagerie"
 }

@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/inspect-tag--crazyflie-2--lab-bench--s3",
+  "key": "68d8694693985147",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

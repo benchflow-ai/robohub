@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/stack-in-order--aloha-2--workshop-bench--s3",
+  "key": "d4a33eb9b1ab35e2",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

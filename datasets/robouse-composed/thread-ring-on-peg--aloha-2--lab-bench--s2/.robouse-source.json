@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/thread-ring-on-peg--aloha-2--lab-bench--s2",
+  "key": "477f5ebd34d9918f",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

@@ -8,6 +8,7 @@
 The `robouse:` block names the backend and its parameters (env, seed, budgets, scoring and observation modes,
 and for tabletop tasks the `scenario`). `write_task` writes this layout; adapters use it.
 """
+
 from __future__ import annotations
 
 import re
@@ -28,11 +29,12 @@ class Task:
 
     @property
     def id(self) -> str:
-        return self.meta.get("robouse", {}).get("id") or self.path.name
+        return self.spec["id"]
 
     @property
     def spec(self) -> dict:
-        s = dict(self.meta.get("robouse", {}))
+        # an exported BenchFlow package (`robouse export`, the hub datasets) keeps the block under metadata
+        s = dict(self.meta.get("robouse") or self.meta.get("metadata", {}).get("robouse", {}))
         s.setdefault("id", self.path.name)
         return s
 
@@ -73,8 +75,14 @@ def load_task(path: str | Path) -> Task:
         return Task(p, meta, body)
     # legacy layout (task.toml + instruction.md), read only until every folder is migrated
     t = tomllib.loads((p / "task.toml").read_text())
-    meta = {"schema_version": SCHEMA_VERSION, "task": t.get("task", {}), "metadata": t.get("metadata", {}),
-            "agent": t.get("agent", {}), "verifier": t.get("verifier", {}), "robouse": t.get("robouse", {})}
+    meta = {
+        "schema_version": SCHEMA_VERSION,
+        "task": t.get("task", {}),
+        "metadata": t.get("metadata", {}),
+        "agent": t.get("agent", {}),
+        "verifier": t.get("verifier", {}),
+        "robouse": t.get("robouse", {}),
+    }
     return Task(p, meta, (p / "instruction.md").read_text())
 
 
@@ -101,13 +109,17 @@ def resolve_task_path(arg: str | Path) -> Path:
     if len(hits) == 1:
         return hits[0]
     if len(hits) > 1:
-        raise SystemExit(f"task id {arg!r} is ambiguous in {root}: " + ", ".join(str(h.relative_to(root)) for h in hits))
-    raise SystemExit(f"no task folder {arg!r}, and no bundled task with that id (list them with `robouse tasks`)")
+        raise SystemExit(
+            f"task id {arg!r} is ambiguous in {root}: " + ", ".join(str(h.relative_to(root)) for h in hits)
+        )
+    raise SystemExit(f"no task folder {arg!r}, and no bundled task with that id (list them with `robouse tasks list`)")
 
 
 def find_tasks(root: str | Path) -> list[Task]:
     root = Path(root)
-    dirs = {p.parent for p in root.rglob("task.md")} | {p.parent for p in root.rglob("task.toml") if (p.parent / "instruction.md").exists()}
+    dirs = {p.parent for p in root.rglob("task.md")} | {
+        p.parent for p in root.rglob("task.toml") if (p.parent / "instruction.md").exists()
+    }
     return [load_task(d) for d in sorted(dirs) if "_legacy" not in d.parts]
 
 
@@ -142,8 +154,16 @@ def write_task(d: Path, meta: dict, instruction: str, oracle_sh: str, verifier_s
     d = Path(d)
     (d / "oracle").mkdir(parents=True, exist_ok=True)
     (d / "verifier").mkdir(parents=True, exist_ok=True)
-    fm = {"schema_version": SCHEMA_VERSION, **{k: meta[k] for k in ("task", "metadata", "agent", "verifier", "robouse") if k in meta}}
-    text = "---\n" + yaml.safe_dump(fm, sort_keys=False, allow_unicode=True, width=10**6) + "---\n\n" + unwrap_markdown(instruction.lstrip("\n"))
+    fm = {
+        "schema_version": SCHEMA_VERSION,
+        **{k: meta[k] for k in ("task", "metadata", "agent", "verifier", "robouse") if k in meta},
+    }
+    text = (
+        "---\n"
+        + yaml.safe_dump(fm, sort_keys=False, allow_unicode=True, width=10**6)
+        + "---\n\n"
+        + unwrap_markdown(instruction.lstrip("\n"))
+    )
     (d / "task.md").write_text(text)
     for rel, body in (("oracle/solve.sh", oracle_sh), ("verifier/test.sh", verifier_sh)):
         f = d / rel

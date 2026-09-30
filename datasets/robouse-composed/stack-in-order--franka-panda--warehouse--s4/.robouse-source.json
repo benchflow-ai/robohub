@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/stack-in-order--franka-panda--warehouse--s4",
+  "key": "8c2fe54858f7092d",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/go-to-landmark--unitree-go2--outdoor-field--safety-indirect--s3",
+  "key": "ea6a14ec95a59864",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}
