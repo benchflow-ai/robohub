@@ -2569,100 +2569,93 @@
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
       {
-        "name": "dexjoco-assembly",
-        "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
-        "path": "datasets/robouse-dexjoco/dexjoco-assembly",
-        "digest": "sha256:22c31ca6bd140702edac53cf7d8fdfbf23cd0465f926058236fbec59bef1c369"
-      },
-      {
         "name": "dexjoco-click-mouse",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
+        "git_commit_id": "bea6523e837010293a0f5a2ca4377f5a4c414fa2",
         "path": "datasets/robouse-dexjoco/dexjoco-click-mouse",
         "digest": "sha256:e3d5ab6794e025bcd13d2da34fba8e30cc0ae8f9651c491a0b581165b76fb879"
       },
       {
         "name": "dexjoco-click-mouse-b",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
+        "git_commit_id": "bea6523e837010293a0f5a2ca4377f5a4c414fa2",
         "path": "datasets/robouse-dexjoco/dexjoco-click-mouse-b",
         "digest": "sha256:f77e50873dcd8dd37e52091d362f6ae85e81d910e4c380e115938bcbf6e4f26e"
       },
       {
         "name": "dexjoco-fold-glasses",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
+        "git_commit_id": "bea6523e837010293a0f5a2ca4377f5a4c414fa2",
         "path": "datasets/robouse-dexjoco/dexjoco-fold-glasses",
         "digest": "sha256:23fe88e27d704c37a2f2655fe4c28289a8b4beaacc2eb835e3ac988f4e2c4076"
       },
       {
         "name": "dexjoco-hammer-nail",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
+        "git_commit_id": "bea6523e837010293a0f5a2ca4377f5a4c414fa2",
         "path": "datasets/robouse-dexjoco/dexjoco-hammer-nail",
         "digest": "sha256:ef7e008b6bea4f383c08a5b47b00716347db1b20ee7259f62ea395a0cde670f0"
       },
       {
         "name": "dexjoco-hammer-nail-b",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
+        "git_commit_id": "bea6523e837010293a0f5a2ca4377f5a4c414fa2",
         "path": "datasets/robouse-dexjoco/dexjoco-hammer-nail-b",
         "digest": "sha256:51b214babfd031f872b5f809b79b92e4c5232b655618701c0a091ada19bb4edb"
       },
       {
         "name": "dexjoco-microwave-cook",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
+        "git_commit_id": "bea6523e837010293a0f5a2ca4377f5a4c414fa2",
         "path": "datasets/robouse-dexjoco/dexjoco-microwave-cook",
         "digest": "sha256:f59344d29952cb3ffad395b242da8048a83a9aeb8eacc6201ce7df668e411563"
       },
       {
         "name": "dexjoco-photograph",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
+        "git_commit_id": "bea6523e837010293a0f5a2ca4377f5a4c414fa2",
         "path": "datasets/robouse-dexjoco/dexjoco-photograph",
         "digest": "sha256:0526c8cff22b7402564c5f32a94690f47a1156aff8f90845640086f0f325f06c"
       },
       {
         "name": "dexjoco-pick-bucket",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
+        "git_commit_id": "bea6523e837010293a0f5a2ca4377f5a4c414fa2",
         "path": "datasets/robouse-dexjoco/dexjoco-pick-bucket",
         "digest": "sha256:34b09a72bd14fac8ed029e159b231fe4f75d7af7e86daf56c2193e913370d960"
       },
       {
         "name": "dexjoco-pick-bucket-b",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
+        "git_commit_id": "bea6523e837010293a0f5a2ca4377f5a4c414fa2",
         "path": "datasets/robouse-dexjoco/dexjoco-pick-bucket-b",
         "digest": "sha256:5316aae821d972d8b6a4b9bf2a0ced1dabd48741f9ec8d89d313ffe3e859e601"
       },
       {
         "name": "dexjoco-pinch-tongs",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
+        "git_commit_id": "bea6523e837010293a0f5a2ca4377f5a4c414fa2",
         "path": "datasets/robouse-dexjoco/dexjoco-pinch-tongs",
         "digest": "sha256:84fa75a2d7fe5eb6a7274a2e12db7524b1aaf90c755f6e79151e119c80acf815"
       },
       {
         "name": "dexjoco-unlock-ipad",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
+        "git_commit_id": "bea6523e837010293a0f5a2ca4377f5a4c414fa2",
         "path": "datasets/robouse-dexjoco/dexjoco-unlock-ipad",
         "digest": "sha256:5cf552fae601282e23f65b8b99c8e6272550a54852a7c9b748e0b6ff40bcbf7d"
       },
       {
         "name": "dexjoco-water-plant",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
+        "git_commit_id": "bea6523e837010293a0f5a2ca4377f5a4c414fa2",
         "path": "datasets/robouse-dexjoco/dexjoco-water-plant",
         "digest": "sha256:55b02879730db6ffd04bf3ee7022972ecf39fad68ef9424a27d42d8e33136c17"
       },
       {
         "name": "dexjoco-water-plant-b",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
+        "git_commit_id": "bea6523e837010293a0f5a2ca4377f5a4c414fa2",
         "path": "datasets/robouse-dexjoco/dexjoco-water-plant-b",
         "digest": "sha256:53b241206838892d2725fb382d1b26526f47895f9008ca50e6f273a39af7d1f8"
       }

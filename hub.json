@@ -2856,8 +2856,8 @@
       "version": "0.2",
       "description": "Robo Use DexJoCo 0.2: tool use with Allegro hands, from DexJoCo.",
       "git_tag": "brave-eai/dexjoco-v0.2",
-      "commit": "4bc27c7960be8c3f79d1ed2f3a4629f4e1ad23f2",
-      "n_tasks": 14,
+      "commit": "bea6523e837010293a0f5a2ca4377f5a4c414fa2",
+      "n_tasks": 13,
       "suites": [
         "dexjoco"
       ],
@@ -2873,13 +2873,6 @@
         "dexjoco"
       ],
       "tasks": [
-        {
-          "id": "dexjoco-assembly",
-          "digest": "sha256:22c31ca6bd140702edac53cf7d8fdfbf23cd0465f926058236fbec59bef1c369",
-          "backend": "dexjoco",
-          "runtime": "dexjoco",
-          "suite": "dexjoco"
-        },
         {
           "id": "dexjoco-click-mouse",
           "digest": "sha256:e3d5ab6794e025bcd13d2da34fba8e30cc0ae8f9651c491a0b581165b76fb879",
