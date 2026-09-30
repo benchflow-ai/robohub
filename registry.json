@@ -5414,7 +5414,7 @@
   {
     "name": "benchflow/robouse-composed",
     "version": "0.1",
-    "description": "Robo Use composed 0.1: 48 tasks composed from components (6 embodiments: arm, bimanual rig, two mobile manipulators, quadruped, drone; 6 scenes; 9 task templates) with modifiers (vision, noise, perturbations, safety overlays, roles). Each was accepted by `robouse tasks init`: the reference solution scores 1 and the no-op control 0.",
+    "description": "Tasks composed from 6 embodiments, 6 scenes and 9 task templates, with modifiers for observation, noise, perturbations, safety and roles. Each was accepted by `robouse tasks init`: the reference solution scores 1 and the no-op control 0.",
     "git_tag": "benchflow/robouse-composed-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -10354,7 +10354,7 @@
   {
     "name": "benchflow/robouse-remix",
     "version": "0.1",
-    "description": "Robo Use composed 0.1: 48 tasks composed from components (6 embodiments: arm, bimanual rig, two mobile manipulators, quadruped, drone; 6 scenes; 9 task templates) with modifiers (vision, noise, perturbations, safety overlays, roles). Each was accepted by `robouse tasks init`: the reference solution scores 1 and the no-op control 0.",
+    "description": "Tasks composed from 6 embodiments, 6 scenes and 9 task templates, with modifiers for observation, noise, perturbations, safety and roles. Each was accepted by `robouse tasks init`: the reference solution scores 1 and the no-op control 0.",
     "git_tag": "benchflow/robouse-remix-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [

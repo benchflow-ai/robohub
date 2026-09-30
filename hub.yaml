@@ -104,7 +104,7 @@ suites:
   humanoidbench: {embodiment: Unitree H1 humanoid with two Shadow hands, simulator: HumanoidBench (MuJoCo 3.1.6), image: humanoidbench}
   maniskill: {embodiment: Franka Panda, simulator: 'ManiSkill3 3.0.1 (SAPIEN 3.0.3, CPU)', image: maniskill}
   robocasa: {embodiment: Franka Panda on a mobile base (PandaOmron), simulator: 'RoboCasa365 (robosuite 1.5.2, MuJoCo 3.3.1)', image: robocasa}
-  remix: {embodiment: "Franka Panda; ALOHA 2; PAL TIAGo; Google Robot; Unitree Go2; Crazyflie 2", simulator: "Robo Use composed tasks (MuJoCo Menagerie models)", image: remix}
+  remix: {embodiment: "Franka Panda; ALOHA 2; PAL TIAGo; Google Robot; Unitree Go2; Crazyflie 2", simulator: "Robo Use components (MuJoCo Menagerie models)", image: remix}
   behavior: {embodiment: "Galaxea R1Pro mobile manipulator", simulator: "BEHAVIOR-1K (OmniGibson on Isaac Sim 5.1)", image: behavior}
 
 # Datasets are named <org>/<name>. The org is whoever designed the benchmark's tasks: a dataset adapted from someone
@@ -278,7 +278,7 @@ datasets:
     aliases: [benchflow/robouse-remix]
     version: "0.1"
     suites: [remix]
-    description: "Robo Use composed 0.1: 48 tasks composed from components (6 embodiments: arm, bimanual rig, two mobile manipulators, quadruped, drone; 6 scenes; 9 task templates) with modifiers (vision, noise, perturbations, safety overlays, roles). Each was accepted by `robouse tasks init`: the reference solution scores 1 and the no-op control 0."
+    description: "Tasks composed from 6 embodiments, 6 scenes and 9 task templates, with modifiers for observation, noise, perturbations, safety and roles. Each was accepted by `robouse tasks init`: the reference solution scores 1 and the no-op control 0."
   - name: benchflow/robouse-noop-control
     dir: robouse-noop-control
     aliases: [robouse-noop-control]
