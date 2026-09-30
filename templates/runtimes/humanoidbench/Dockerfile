@@ -45,10 +45,10 @@ RUN python /opt/robohub-runtime/check_runtime.py /opt/robohub-runtime "$ROBOHUB_
 ENV PYTHONPATH=/opt/robohub-runtime/robouse/src
 # smoke test: the worker builds a HumanoidBench scene, loads the walking policy and renders a frame
 RUN python -c "import robouse.session, robouse.backends.humanoidbench" \
- && cd /opt/robohub-runtime/robouse/src/robouse/backends \
+ && cd /opt/robohub-runtime/robouse/src/robouse/backends/humanoidbench \
  && printf '%s\n' '{"cmd": "make", "task": "walk", "seed": 0, "policy": "/opt/humanoidbench-policy/h1_motion.pt"}' \
       '{"cmd": "step", "action": [1, 0, 0, 0, 0, 0, 0, 0, 0]}' '{"cmd": "close"}' \
-    | /opt/humanoidbench-venv/bin/python humanoidbench_worker.py | grep -c '"ok": true' | grep -qx 3
+    | /opt/humanoidbench-venv/bin/python worker.py | grep -c '"ok": true' | grep -qx 3
 
 WORKDIR /episode
 CMD ["robouse-sim-entry"]
