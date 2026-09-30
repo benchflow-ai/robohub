@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/robocasa"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:79ec20642c8d30c6f297c1500c5aca0377992324cb8affee54e734ae3c8ef5f2"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:53c1bd3a2b233a2bba94b9e16fd8cf48fd32d966a81212370689425813ae16b5"
     network_mode: none
     init: true
     volumes:
