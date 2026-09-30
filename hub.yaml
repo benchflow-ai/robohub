@@ -4,7 +4,7 @@
 
 robouse:
   repo: https://github.com/benchflow-ai/robouse
-  package_version: 0.1.1
+  package_version: 0.2.0
 
 # Simulator runtimes (runtimes/<name>, built from templates/runtimes/<name>). Every task's compose file builds its
 # simulator image from one of them.
@@ -65,10 +65,10 @@ runtimes:
     simulators: MuJoCo 3.3.1, RoboCasa365 (robosuite 1.5.2)
     assets: {robocasa.json: assets/robocasa/provenance.json}
     sim_memory: 4G
-  remix:
-    backends: [remix]
+  composed:
+    backends: [components]
     simulators: MuJoCo 3.3.0, MuJoCo Menagerie models
-    # native BenchFlow export (`robouse export`): the runtime folder is datasets/runtime-<hash>, content-addressed
+    # written by Robo Use's own exporter (robouse.engine.format, on BenchFlow's embodied layer); see scripts/export.py
     native: true
   behavior:
     backends: [behavior]
@@ -121,7 +121,7 @@ suites:
   humanoidbench: {embodiment: Unitree H1 humanoid with two Shadow hands, simulator: HumanoidBench (MuJoCo 3.1.6), image: humanoidbench}
   maniskill: {embodiment: Franka Panda, simulator: 'ManiSkill3 3.0.1 (SAPIEN 3.0.3, CPU)', image: maniskill}
   robocasa: {embodiment: Franka Panda on a mobile base (PandaOmron), simulator: 'RoboCasa365 (robosuite 1.5.2, MuJoCo 3.3.1)', image: robocasa}
-  remix: {embodiment: "Franka Panda; ALOHA 2; PAL TIAGo; Google Robot; Unitree Go2; Crazyflie 2", simulator: "Robo Use components (MuJoCo Menagerie models)", image: remix}
+  composed: {embodiment: "Franka Panda; ALOHA 2; PAL TIAGo; Google Robot; Unitree Go2; Crazyflie 2", simulator: "Robo Use components (MuJoCo Menagerie models)", image: composed}
   behavior: {embodiment: "Galaxea R1Pro mobile manipulator", simulator: "BEHAVIOR-1K (OmniGibson on Isaac Sim 5.1)", image: behavior}
   gpu-maniskill: {embodiment: "Franka Panda", simulator: "ManiSkill3 3.0.1 (SAPIEN, ray-traced)", image: gpu-maniskill}
   gpu-genesis: {embodiment: "Franka Panda", simulator: "Genesis 1.4.2 (SPH liquid)", image: gpu-genesis}
@@ -132,232 +132,233 @@ suites:
 # Datasets are named <org>/<name>. The org is whoever designed the benchmark's tasks: a dataset adapted from someone
 # else's benchmark goes under that benchmark's GitHub org (lowercased) and records it under `upstream`; tasks BenchFlow
 # designed, even on someone else's simulator or robot models, go under benchflow/. `dir` is the folder under datasets/.
-# `aliases` are older names of the same version: registry.json lists each alias as its own entry with the same pinned
-# tasks, so existing `bench eval run -d OLD@VERSION` commands keep working; the hub page does not show them.
+# `former_names` are older names of the dataset. Their registry.json entries (earlier versions, pinned to earlier commits)
+# stay, so existing `bench eval run -d OLD@VERSION` commands keep working; new versions are published only under `name`,
+# and the hub page does not show the old names.
 datasets:
   - name: benchflow/robouse-core
     dir: robouse-core
-    aliases: [robouse-core]
-    version: "0.1"
+    former_names: [robouse-core]
+    version: "0.2"
     tasks_file: core.txt
     image: vision
-    description: 'Robo Use core 0.1: a cross-section of every Robo Use suite.'
+    description: 'Robo Use core 0.2: a cross-section of every Robo Use suite.'
   - name: farama-foundation/metaworld
     dir: robouse-metaworld
-    aliases: [robouse-metaworld]
+    former_names: [robouse-metaworld]
     upstream: {benchmark: "Meta-World", org_name: "Farama Foundation", repo: "https://github.com/Farama-Foundation/Metaworld", licence: MIT}
-    version: "0.1"
+    version: "0.2"
     suites: [metaworld]
-    description: 'Robo Use Meta-World 0.1: Meta-World MT50 manipulation on a Sawyer arm.'
+    description: 'Robo Use Meta-World 0.2: Meta-World MT50 manipulation on a Sawyer arm.'
   - name: farama-foundation/gymnasium-robotics
     dir: robouse-gymrobotics
-    aliases: [robouse-gymrobotics]
+    former_names: [robouse-gymrobotics]
     upstream: {benchmark: "Gymnasium-Robotics", org_name: "Farama Foundation", repo: "https://github.com/Farama-Foundation/Gymnasium-Robotics", licence: MIT}
-    version: "0.1"
+    version: "0.2"
     suites: [gymrobotics]
-    description: 'Robo Use Gymnasium-Robotics 0.1: Fetch reach, push and pick-and-place, and PointMaze.'
+    description: 'Robo Use Gymnasium-Robotics 0.2: Fetch reach, push and pick-and-place, and PointMaze.'
   - name: benchflow/robouse-tabletop
     dir: robouse-tabletop
-    aliases: [robouse-tabletop]
-    version: "0.1"
+    former_names: [robouse-tabletop]
+    version: "0.2"
     suites: [arc-style, libero-style, robo-use-families, safety, hard, vision]
     image: arc-style
-    description: 'Robo Use tabletop 0.1: Robo Use''s own tabletop scenes: rule inference, safety, vision and low-level control.'
+    description: 'Robo Use tabletop 0.2: Robo Use''s own tabletop scenes: rule inference, safety, vision and low-level control.'
   - name: lifelong-robot-learning/libero
     dir: robouse-libero
-    aliases: [robouse-libero]
-    upstream: {benchmark: "LIBERO", org_name: "Lifelong Robot Learning", repo: "https://github.com/Lifelong-Robot-Learning/LIBERO", licence: MIT}
-    version: "0.2"
+    former_names: [robouse-libero]
+    upstream: {benchmark: "LIBERO", org_name: "Lifelong Robot Learning", repo: "https://github.com/Lifelong-Robot-Learning/LIBERO", licence: "MIT (code); CC BY 4.0 (datasets; demonstration actions redistributed here)"}
+    version: "0.3"
     suites: [libero]
-    description: 'Robo Use LIBERO 0.2: LIBERO''s four standard suites on a Franka Panda.'
+    description: 'Robo Use LIBERO 0.3: LIBERO''s four standard suites on a Franka Panda.'
   - name: arise-initiative/robosuite
     dir: robouse-robosuite
-    aliases: [robouse-robosuite]
+    former_names: [robouse-robosuite]
     upstream: {benchmark: "robosuite", org_name: "ARISE Initiative", repo: "https://github.com/ARISE-Initiative/robosuite", licence: MIT}
-    version: "0.1"
+    version: "0.2"
     suites: [robosuite]
-    description: 'Robo Use robosuite 0.1: tasks from robosuite 1.5 on five arm models.'
+    description: 'Robo Use robosuite 0.2: tasks from robosuite 1.5 on five arm models.'
   - name: benchflow/robouse-menagerie
     dir: robouse-menagerie
-    aliases: [robouse-menagerie]
-    version: "0.1"
+    former_names: [robouse-menagerie]
+    version: "0.2"
     suites: [menagerie]
-    description: 'Robo Use Menagerie 0.1: two-arm tasks for a dual Franka Panda and ALOHA 2.'
+    description: 'Robo Use Menagerie 0.2: two-arm tasks for a dual Franka Panda and ALOHA 2.'
   - name: brave-eai/dexjoco
     dir: robouse-dexjoco
-    aliases: [robouse-dexjoco]
-    upstream: {benchmark: "DexJoCo", org_name: "brave-eai", repo: "https://github.com/brave-eai/dexjoco", licence: MIT}
-    version: "0.1"
+    former_names: [robouse-dexjoco]
+    upstream: {benchmark: "DexJoCo", org_name: "brave-eai", repo: "https://github.com/brave-eai/dexjoco", licence: "MIT (code and datasets; demonstration actions redistributed here)"}
+    version: "0.2"
     suites: [dexjoco]
-    description: 'Robo Use DexJoCo 0.1: tool use with Allegro hands, from DexJoCo.'
+    description: 'Robo Use DexJoCo 0.2: tool use with Allegro hands, from DexJoCo.'
   - name: benchflow/robouse-drone
     dir: robouse-drone
-    aliases: [robouse-drone]
-    version: "0.1"
+    former_names: [robouse-drone]
+    version: "0.2"
     suites: [drone]
-    description: 'Robo Use drone 0.1: Skydio X2 flights over a small town.'
+    description: 'Robo Use drone 0.2: Skydio X2 flights over a small town.'
   - name: benchflow/robouse-harm
-    dir: robouse-roboharm
-    aliases: [benchflow/robouse-roboharm, robouse-roboharm]
-    version: "0.1"
+    dir: robouse-harm
+    former_names: [benchflow/robouse-roboharm, robouse-roboharm]
+    version: "0.2"
     suites: [roboharm]
-    description: 'Robo Use RoboHarm 0.1: harmful and benign requests to a Franka Panda, after Robocurve''s RoboHarm.'
+    description: 'Robo Use harm 0.2: harmful and benign requests to a Franka Panda, BenchFlow''s reproduction of Robocurve''s RoboHarm.'
   - name: benchflow/quadruped
     dir: robouse-quadruped
-    version: "0.1"
+    version: "0.2"
     suites: [quadruped]
-    description: 'Robo Use quadruped 0.1: Unitree, Boston Dynamics and ANYbotics quadrupeds walking, pushing and docking.'
+    description: 'Robo Use quadruped 0.2: Unitree, Boston Dynamics and ANYbotics quadrupeds walking, pushing and docking.'
   - name: benchflow/humanoid
     dir: robouse-humanoid
-    version: "0.1"
+    version: "0.2"
     suites: [humanoid]
-    description: 'Robo Use humanoid 0.1: humanoids on support stands doing tabletop tasks.'
+    description: 'Robo Use humanoid 0.2: humanoids on support stands doing tabletop tasks.'
   - name: benchflow/mobile-manip
     dir: robouse-mobile-manip
-    version: "0.1"
+    version: "0.2"
     suites: [mobile-manip]
-    description: 'Robo Use mobile manipulation 0.1: fetch, stow and sort in a three-room apartment.'
+    description: 'Robo Use mobile manipulation 0.2: fetch, stow and sort in a three-room apartment.'
   - name: benchflow/dexhand
     dir: robouse-dexhand
-    version: "0.1"
+    version: "0.2"
     suites: [dexhand]
-    description: 'Robo Use dexterous hands 0.1: in-hand manipulation with the Shadow Hand and LEAP Hand.'
+    description: 'Robo Use dexterous hands 0.2: in-hand manipulation with the Shadow Hand and LEAP Hand.'
   - name: benchflow/crazyflie
     dir: robouse-crazyflie
-    version: "0.1"
+    version: "0.2"
     suites: [crazyflie]
-    description: 'Robo Use Crazyflie 0.1: indoor flights for Crazyflie 2 quadrotors, alone and in a swarm.'
+    description: 'Robo Use Crazyflie 0.2: indoor flights for Crazyflie 2 quadrotors, alone and in a swarm.'
   - name: benchflow/driving
     dir: robouse-driving
-    version: "0.1"
+    version: "0.2"
     suites: [driving]
-    description: 'Robo Use driving 0.1: traffic scenarios for a sedan on MetaDrive roads.'
+    description: 'Robo Use driving 0.2: traffic scenarios for a sedan on MetaDrive roads.'
   - name: lifelong-robot-learning/libero-90
     dir: robouse-libero-90
-    upstream: {benchmark: LIBERO, org_name: Lifelong Robot Learning, repo: 'https://github.com/Lifelong-Robot-Learning/LIBERO', licence: MIT}
-    version: "0.1"
+    upstream: {benchmark: LIBERO, org_name: Lifelong Robot Learning, repo: 'https://github.com/Lifelong-Robot-Learning/LIBERO', licence: "MIT (code); CC BY 4.0 (datasets; demonstration actions redistributed here)"}
+    version: "0.2"
     suites: [libero-90]
-    description: 'Robo Use LIBERO-90 0.1: LIBERO-90''s short-horizon household tasks on a Franka Panda.'
+    description: 'Robo Use LIBERO-90 0.2: LIBERO-90''s short-horizon household tasks on a Franka Panda.'
   - name: farama-foundation/franka-kitchen
     dir: robouse-kitchen
     upstream: {benchmark: Franka Kitchen (Gymnasium-Robotics; Relay Policy Learning / D4RL kitchen), org_name: Farama Foundation, repo: 'https://github.com/Farama-Foundation/Gymnasium-Robotics', licence: MIT (code); Apache-2.0 (kitchen and Franka assets)}
-    version: "0.1"
+    version: "0.2"
     suites: [kitchen]
-    description: 'Robo Use Franka Kitchen 0.1: FrankaKitchen-v1 subtasks and goal sets on a Franka Panda.'
+    description: 'Robo Use Franka Kitchen 0.2: FrankaKitchen-v1 subtasks and goal sets on a Franka Panda.'
   - name: farama-foundation/adroit-hand
     dir: robouse-adroit
-    upstream: {benchmark: Adroit hand (Gymnasium-Robotics; DAPG), org_name: Farama Foundation, repo: 'https://github.com/Farama-Foundation/Gymnasium-Robotics', licence: MIT (code); Apache-2.0 (ADROIT assets); CC-BY-4.0 (D4RL demonstrations)}
-    version: "0.1"
+    upstream: {benchmark: Adroit hand (Gymnasium-Robotics; DAPG), org_name: Farama Foundation, repo: 'https://github.com/Farama-Foundation/Gymnasium-Robotics', licence: MIT (code); Apache-2.0 (ADROIT assets); CC BY 4.0 (D4RL demonstrations; action sequences redistributed here)}
+    version: "0.2"
     suites: [adroit]
-    description: 'Robo Use Adroit hand 0.1: door, hammer, pen and relocation tasks with the ADROIT hand.'
+    description: 'Robo Use Adroit hand 0.2: door, hammer, pen and relocation tasks with the ADROIT hand.'
   - name: google-deepmind/dm-control
     dir: robouse-dmcontrol
     upstream: {benchmark: dm_control (DeepMind Control Suite and dm_control.manipulation), org_name: Google DeepMind, repo: 'https://github.com/google-deepmind/dm_control', licence: Apache-2.0}
-    version: "0.1"
+    version: "0.2"
     suites: [dmcontrol]
-    description: 'Robo Use dm_control 0.1: Control Suite bodies and a Kinova Jaco arm from dm_control.'
+    description: 'Robo Use dm_control 0.2: Control Suite bodies and a Kinova Jaco arm from dm_control.'
   - name: myohub/myosuite
     dir: robouse-myosuite
-    upstream: {benchmark: MyoSuite, org_name: MyoHub, repo: 'https://github.com/MyoHub/myosuite', licence: Apache-2.0}
-    version: "0.1"
+    upstream: {benchmark: MyoSuite, org_name: MyoHub, repo: 'https://github.com/MyoHub/myosuite', licence: "Apache-2.0 (code, models and NPG baseline policies; three policies redistributed here, converted to JSON)"}
+    version: "0.2"
     suites: [myosuite]
-    description: 'Robo Use MyoSuite 0.1: muscle-driven human arm and hand models from MyoSuite.'
+    description: 'Robo Use MyoSuite 0.2: muscle-driven human arm and hand models from MyoSuite.'
   - name: carlosferrazza/humanoid-bench
     dir: robouse-humanoidbench
     upstream: {benchmark: HumanoidBench, org_name: 'Carmelo Sferrazza (UC Berkeley)', repo: 'https://github.com/carlosferrazza/humanoid-bench', licence: MIT}
-    version: "0.1"
+    version: "0.2"
     suites: [humanoidbench]
-    description: 'Robo Use HumanoidBench 0.1: whole-body tasks for a Unitree H1 with two Shadow hands.'
+    description: 'Robo Use HumanoidBench 0.2: whole-body tasks for a Unitree H1 with two Shadow hands.'
   - name: mani-skill/maniskill
     dir: robouse-maniskill
-    upstream: {benchmark: ManiSkill3, org_name: Hao Su Lab (UC San Diego) and Hillbot, repo: 'https://github.com/mani-skill/ManiSkill', licence: Apache-2.0}
-    version: "0.1"
+    upstream: {benchmark: ManiSkill3, org_name: Hao Su Lab (UC San Diego) and Hillbot, repo: 'https://github.com/mani-skill/ManiSkill', licence: "Apache-2.0 (code); CC BY-NC 4.0 (assets, not redistributed)"}
+    version: "0.2"
     suites: [maniskill]
-    description: 'Robo Use ManiSkill3 0.1: ManiSkill3 tabletop manipulation on a Franka Panda.'
+    description: 'Robo Use ManiSkill3 0.2: ManiSkill3 tabletop manipulation on a Franka Panda.'
   - name: robocasa/robocasa
     dir: robouse-robocasa
-    upstream: {benchmark: RoboCasa, org_name: RoboCasa, repo: 'https://github.com/robocasa/robocasa', licence: MIT}
-    version: "0.1"
+    upstream: {benchmark: RoboCasa, org_name: RoboCasa, repo: 'https://github.com/robocasa/robocasa', licence: "MIT (code); CC BY 4.0 (assets and datasets)"}
+    version: "0.2"
     suites: [robocasa]
-    # its reference solution passes on macOS and in Colima but not on a c4a (Neoverse V2) linux/arm64 host (the lid does not close in 400 steps, twice)
+    # its reference solution passes on macOS and in Colima but not on a linux/arm64 cloud VM (the lid does not close in 400 steps)
     exclude_tasks: [robocasa-close-kettle-lid-kitchen6]
-    description: 'Robo Use RoboCasa 0.1: RoboCasa kitchen tasks in ten layouts, on a Franka Panda on a mobile base.'
+    description: 'Robo Use RoboCasa 0.2: RoboCasa kitchen tasks in ten layouts, on a Franka Panda on a mobile base.'
   - name: stanfordvl/behavior-1k
     dir: behavior-1k
-    upstream: {benchmark: "BEHAVIOR-1K", org_name: "Stanford Vision and Learning Lab", repo: "https://github.com/StanfordVL/BEHAVIOR-1K", licence: MIT}
-    version: "0.1"
+    upstream: {benchmark: "BEHAVIOR-1K", org_name: "Stanford Vision and Learning Lab", repo: "https://github.com/StanfordVL/BEHAVIOR-1K", licence: "MIT (code and BDDL); BEHAVIOR Data Bundle under its own non-commercial licence (not redistributed)"}
+    version: "0.2"
     suites: [behavior]
-    # bench cannot give a sandbox a GPU (its Daytona sandboxes have none), so this dataset runs from a Robo Use checkout
+    # bench cannot give a sandbox a GPU, so this dataset runs from a Robo Use checkout
     # against BEHAVIOR simulator workers on an NVIDIA RTX GPU machine
     run:
       label: "Robo Use checkout + GPU worker"
       command: "robouse run-many --tasks tasks/behavior --harness oracle --out runs/behavior-oracle"
       note: "The BEHAVIOR simulator (OmniGibson 3.9.3 on Isaac Sim 5.1) needs an NVIDIA RTX GPU with RT cores and host driver 580 (Isaac Sim 5.1 crashed at start-up on driver 595). Start one simulator worker per activity on the GPU machine, write their endpoints to <code>runs/_behavior/remote.json</code> in a Robo Use checkout (branch <code>behavior-expand</code>), and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/behavior-expand/docs/suites/behavior.md\">docs/suites/behavior.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
       bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_BEHAVIOR_REMOTE</code> on the host."
-    description: 'Robo Use BEHAVIOR-1K 0.1: household activities from the 2026 BEHAVIOR Challenge on a Galaxea R1Pro.'
+    description: 'Robo Use BEHAVIOR-1K 0.2: household activities from the 2026 BEHAVIOR Challenge on a Galaxea R1Pro.'
   - name: benchflow/robouse-composed
-    dir: robouse-remix
-    aliases: [benchflow/robouse-remix]
-    version: "0.1"
-    suites: [remix]
-    description: 'Robo Use composed 0.1: tasks composed from embodiments, scenes, task templates and modifiers.'
+    dir: robouse-composed
+    former_names: [benchflow/robouse-remix]
+    version: "0.2"
+    suites: [composed]
+    description: 'Robo Use composed 0.2: tasks composed from embodiments, scenes, task templates and modifiers.'
   - name: benchflow/robouse-nav
     dir: robouse-nav
-    version: "0.1"
+    version: "0.2"
     suites: [nav]
-    description: 'Robo Use navigation 0.1: drive a mobile base to a named piece of furniture in generated homes.'
+    description: 'Robo Use navigation 0.2: drive a mobile base to a named piece of furniture in generated homes.'
   - name: robocurve/cubepick-reach
     dir: robouse-cubepick
     upstream: {benchmark: "inspect-robots cubepick-reach", org_name: "Robocurve", repo: "https://github.com/robocurve/inspect-robots", licence: MIT}
-    version: "0.1"
+    version: "0.2"
     suites: [cubepick]
-    description: 'Robo Use CubePick 0.1: the reach-the-cube world from inspect-robots.'
+    description: 'Robo Use CubePick 0.2: the reach-the-cube world from inspect-robots.'
   - name: haosulab/maniskill-gpu
     dir: maniskill-gpu
-    upstream: {benchmark: "ManiSkill3", org_name: "Hao Su Lab (UC San Diego) and Hillbot", repo: "https://github.com/haosulab/ManiSkill", licence: Apache-2.0}
-    version: "0.1"
+    upstream: {benchmark: "ManiSkill3", org_name: "Hao Su Lab (UC San Diego) and Hillbot", repo: "https://github.com/haosulab/ManiSkill", licence: "Apache-2.0 (code); CC BY-NC 4.0 (assets, not redistributed)"}
+    version: "0.2"
     suites: [gpu-maniskill]
     run:
       label: "Robo Use checkout + GPU worker"
       command: "robouse run-many --tasks tasks/gpu-maniskill --harness oracle --out runs/gpu-maniskill-oracle"
       note: "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in a Robo Use checkout (branch <code>gpu-track</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/gpu-track/docs/suites/gpu-track.md\">docs/suites/gpu-track.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
       bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
-    description: 'Robo Use ManiSkill3 GPU 0.1: hard ManiSkill3 tasks with ray-traced cameras, on a Franka Panda.'
+    description: 'Robo Use ManiSkill3 GPU 0.2: hard ManiSkill3 tasks with ray-traced cameras, on a Franka Panda.'
   - name: benchflow/robouse-genesis
     dir: robouse-genesis
-    version: "0.1"
+    version: "0.2"
     suites: [gpu-genesis]
     run:
       label: "Robo Use checkout + GPU worker"
       command: "robouse run-many --tasks tasks/gpu-genesis --harness oracle --out runs/gpu-genesis-oracle"
       note: "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in a Robo Use checkout (branch <code>gpu-track</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/gpu-track/docs/suites/gpu-track.md\">docs/suites/gpu-track.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
       bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
-    description: 'Robo Use Genesis 0.1: pouring liquid with a Franka Panda in Genesis.'
+    description: 'Robo Use Genesis 0.2: pouring liquid with a Franka Panda in Genesis.'
   - name: benchflow/robouse-playground
     dir: robouse-playground
-    version: "0.1"
+    version: "0.2"
     suites: [gpu-playground]
     run:
       label: "Robo Use checkout + GPU worker"
       command: "robouse run-many --tasks tasks/gpu-playground --harness oracle --out runs/gpu-playground-oracle"
       note: "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in a Robo Use checkout (branch <code>gpu-track</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/gpu-track/docs/suites/gpu-track.md\">docs/suites/gpu-track.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
       bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
-    description: 'Robo Use MuJoCo Playground 0.1: a Unitree Go1 with a learned gait navigating obstacles.'
+    description: 'Robo Use MuJoCo Playground 0.2: a Unitree Go1 with a learned gait navigating obstacles.'
   - name: isaac-sim/isaaclab-factory
     dir: isaaclab-factory
     upstream: {benchmark: "Isaac Lab Factory", org_name: "NVIDIA Isaac Sim (isaac-sim)", repo: "https://github.com/isaac-sim/IsaacLab", licence: "BSD-3-Clause (Isaac Lab); Isaac Sim under the NVIDIA Isaac Sim additional software license"}
-    version: "0.1"
+    version: "0.2"
     suites: [gpu-isaaclab]
     run:
       label: "Robo Use checkout + GPU worker"
       command: "robouse run-many --tasks tasks/gpu-isaaclab --harness oracle --out runs/gpu-isaaclab-oracle"
       note: "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in a Robo Use checkout (branch <code>gpu-track</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/gpu-track/docs/suites/gpu-track.md\">docs/suites/gpu-track.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
       bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
-    description: 'Robo Use Isaac Lab Factory 0.1: contact-rich assembly from Isaac Lab''s Factory on a Franka Panda.'
+    description: 'Robo Use Isaac Lab Factory 0.2: contact-rich assembly from Isaac Lab''s Factory on a Franka Panda.'
   - name: robodojo-benchmark/robodojo
     dir: robodojo
     upstream: {benchmark: "RoboDojo", org_name: "RoboDojo Benchmark (MMLab@HKU and partners)", repo: "https://github.com/RoboDojo-Benchmark/RoboDojo", licence: "MIT (LICENSE file); README states a non-commercial research licence"}
-    version: "0.1"
+    version: "0.2"
     suites: [robodojo]
     # bench cannot give a sandbox a GPU, so this dataset runs from a Robo Use checkout against RoboDojo simulator
     # workers on an NVIDIA RTX GPU machine (driver 580)
@@ -366,11 +367,11 @@ datasets:
       command: "robouse run-many --tasks tasks/robodojo --harness oracle --out runs/robodojo-oracle"
       note: "RoboDojo runs on NVIDIA Isaac Sim 5.1, which needs an RTX GPU with RT cores and a driver from the 580 branch (it crashed at start-up on driver 595). Start one worker per task on the GPU machine (<code>robodojo_worker.py</code> in a RoboDojo checkout with its Hugging Face assets), write their endpoints to <code>runs/_robodojo/remote.json</code> in a Robo Use checkout (branch <code>robodojo</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/robodojo/docs/suites/robodojo.md\">docs/suites/robodojo.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
       bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_ROBODOJO_REMOTE</code> on the host."
-    description: 'Robo Use RoboDojo 0.1: RoboDojo tasks on an ARX X5 bimanual platform in Isaac Sim.'
+    description: 'Robo Use RoboDojo 0.2: RoboDojo tasks on an ARX X5 bimanual platform in Isaac Sim.'
   - name: benchflow/robouse-noop-control
     dir: robouse-noop-control
-    aliases: [robouse-noop-control]
-    version: "0.1"
+    former_names: [robouse-noop-control]
+    version: "0.2"
     noop_of: benchflow/robouse-core
     image: vision
-    description: 'Robo Use no-op control 0.1: the tasks of robouse-core with a reference solution that does nothing; each must score 0.'
+    description: 'Robo Use no-op control 0.2: the tasks of robouse-core with a reference solution that does nothing; each must score 0.'

@@ -13,7 +13,8 @@ reads, same as benchflow-ai/skillsbench's registry.json): a list of
   --repin. New entries are pinned to --commit (default: HEAD, which must contain datasets/<name>/).
 - Names are <org>/<name> (see hub.yaml); the tasks stay in datasets/<dir>/. Each alias in hub.yaml gets its own
   entry with the same tasks as the dataset it names, so an old `-d OLD@VERSION` keeps resolving; aliases are listed
-  after the datasets and left out of hub.json.
+  after the datasets and left out of hub.json. `former_names` are older names whose entries (earlier versions) stay
+  in registry.json as they are; new versions get no entry under them, and hub.json leaves them out too.
 - Each new entry gets the git tag <name>-v<version> (for example farama-foundation/metaworld-v0.1); --tag creates the
   tags locally (push them with `git push origin --tags`).
 - hub.json is the machine-readable index the hub page is built from: per dataset, its tasks with suite, backend,
@@ -118,7 +119,7 @@ def main(argv=None) -> int:
     by_name = {d["name"]: d for d in hub["datasets"]}
     out = {"registry": RAW_REGISTRY, "registry_mirror": MIRROR_REGISTRY, "git_url": GIT_URL,
            "bench_version": BENCH_VERSION, "robouse": export["robouse"], "datasets": []}
-    alias_names = {x for d in hub["datasets"] for x in d.get("aliases", [])}
+    alias_names = {x for d in hub["datasets"] for x in (*d.get("aliases", []), *d.get("former_names", []))}
     for e in registry:
         if e["name"] in alias_names:  # aliases are not listed on the hub page
             continue
@@ -144,7 +145,7 @@ def main(argv=None) -> int:
         image = ds.get("image") or (suites[used_suites[0]]["image"] if used_suites else "")
         org, _, short = e["name"].rpartition("/")
         out["datasets"].append({
-            "name": e["name"], "org": org, "short_name": short, "dir": folder, "aliases": ds.get("aliases", []),
+            "name": e["name"], "org": org, "short_name": short, "dir": folder, "aliases": [*ds.get("aliases", []), *ds.get("former_names", [])],
             "upstream": ds.get("upstream"), "run": ds.get("run"), "robouse": exp.get("robouse", export["robouse"]),
             "version": e["version"], "description": e["description"], "git_tag": e["git_tag"],
             "commit": e["tasks"][0]["git_commit_id"], "n_tasks": len(e["tasks"]), "suites": used_suites,
