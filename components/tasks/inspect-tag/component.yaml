@@ -8,8 +8,8 @@ capabilities:
 - partial-observability
 - navigation
 difficulty: medium
-remixable: true
-runtime: robouse.backends.remix_sim.templates:InspectTag
+composable: true
+runtime: robouse.backends.components_sim.templates:InspectTag
 requires:
 - placements:
   - floor

@@ -17,8 +17,8 @@ payload_kg: 0.0
 assets:
 - unitree_go2
 licence: BSD-3-Clause (MuJoCo Menagerie)
-remixable: true
-runtime: robouse.backends.remix_sim.robots:Go2
+composable: true
+runtime: robouse.backends.components_sim.robots:Go2
 arms: []
 action_groups:
 - name: base.twist
@@ -51,5 +51,6 @@ cameras:
 - chase
 - robot/head
 suites:
+- composed
 - quadruped
 - remix

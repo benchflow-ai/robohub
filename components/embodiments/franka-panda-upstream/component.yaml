@@ -8,8 +8,12 @@ kind: arm
 capabilities:
 - reach
 - grasp
-remixable: false
+composable: false
 suites:
+- gpu-maniskill
+- kitchen
 - libero
+- libero-90
+- maniskill
 - robocasa
 - robosuite

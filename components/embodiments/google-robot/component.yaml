@@ -20,8 +20,8 @@ payload_kg: 1.0
 assets:
 - google_robot
 licence: Apache-2.0 (MuJoCo Menagerie)
-remixable: true
-runtime: robouse.backends.remix_sim.robots:GoogleRobot
+composable: true
+runtime: robouse.backends.components_sim.robots:GoogleRobot
 arms:
 - arm
 action_groups:
@@ -84,6 +84,7 @@ cameras:
 - chase
 - robot/head
 suites:
+- composed
 - mobile-manip
 - remix
 reach:

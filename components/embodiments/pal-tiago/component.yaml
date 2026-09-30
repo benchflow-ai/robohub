@@ -19,8 +19,8 @@ payload_kg: 2.0
 assets:
 - pal_tiago
 licence: Apache-2.0 (MuJoCo Menagerie)
-remixable: true
-runtime: robouse.backends.remix_sim.robots:Tiago
+composable: true
+runtime: robouse.backends.components_sim.robots:Tiago
 arms:
 - arm
 action_groups:
@@ -82,6 +82,7 @@ cameras:
 - chase
 - robot/head
 suites:
+- composed
 - mobile-manip
 - remix
 reach:

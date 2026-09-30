@@ -1,0 +1,15 @@
+id: real-arm
+type: embodiment
+version: 0.1.0
+title: Real arm
+summary: A physical arm behind the real suites' drivers, with a hardware-in-the-loop mock by default.
+track: arm
+kind: arm
+capabilities:
+- reach
+- grasp
+composable: false
+suites:
+- cubepick
+- real
+- stationerybench

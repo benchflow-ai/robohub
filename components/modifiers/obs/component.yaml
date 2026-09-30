@@ -6,4 +6,4 @@ values:
   state: '`robo observe` reports robot, object and fixture positions (default).'
   vision: Object and fixture positions are hidden; the agent finds them in camera images (calibrated cameras).
   noisy: Object and fixture positions carry about 1.5 cm of sensor noise.
-remixable: true
+composable: true

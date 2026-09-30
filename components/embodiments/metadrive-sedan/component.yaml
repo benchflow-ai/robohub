@@ -7,6 +7,6 @@ track: driving
 kind: vehicle
 capabilities:
 - drive
-remixable: false
+composable: false
 suites:
 - driving

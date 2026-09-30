@@ -6,8 +6,8 @@ summary: 'Push an object too wide to grasp into a marked zone: a crate on a surf
 capabilities:
 - contact-rich
 difficulty: medium
-remixable: true
-runtime: robouse.backends.remix_sim.templates:PushToZone
+composable: true
+runtime: robouse.backends.components_sim.templates:PushToZone
 requires:
 - placements:
   - arm

@@ -4,8 +4,8 @@ version: 0.1.0
 title: Kitchen counter
 scenario: household-kitchen
 summary: 'A kitchen: a 0.9 m counter with a stove along the north wall, a dining table, a fridge and a chair. Arms mount at the back of the counter.'
-remixable: true
-runtime: robouse.backends.remix_sim.scenes:kitchen
+composable: true
+runtime: robouse.backends.components_sim.scenes:kitchen
 placements:
 - arm
 - bimanual

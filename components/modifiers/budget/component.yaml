@@ -6,4 +6,4 @@ values:
   normal: The template's step budget (default).
   loose: 1.5 x the step budget.
   tight: 0.6 x the step budget.
-remixable: true
+composable: true

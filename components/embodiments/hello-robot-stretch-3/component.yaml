@@ -9,6 +9,6 @@ capabilities:
 - locomote
 - reach
 - grasp
-remixable: false
+composable: false
 suites:
 - mobile-manip

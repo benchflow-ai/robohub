@@ -2,7 +2,7 @@
   {
     "name": "benchflow/robouse-core",
     "version": "0.1",
-    "description": "Robo Use core 0.1: 100 tasks sampled across all 14 suites (manipulation, rule inference, vision, safety, dexterous hands, drones), for a quick representative run.",
+    "description": "Robo Use core 0.1: a cross-section of every Robo Use suite.",
     "git_tag": "benchflow/robouse-core-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -711,7 +711,7 @@
   {
     "name": "farama-foundation/metaworld",
     "version": "0.1",
-    "description": "Robo Use Meta-World 0.1: the 50 Meta-World MT50 manipulation tasks (Sawyer arm), judged by Meta-World's own success signal.",
+    "description": "Robo Use Meta-World 0.1: Meta-World MT50 manipulation on a Sawyer arm.",
     "git_tag": "farama-foundation/metaworld-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -1070,7 +1070,7 @@
   {
     "name": "farama-foundation/gymnasium-robotics",
     "version": "0.1",
-    "description": "Robo Use Gymnasium-Robotics 0.1: Fetch reach, push and pick-and-place, and PointMaze, 12 tasks.",
+    "description": "Robo Use Gymnasium-Robotics 0.1: Fetch reach, push and pick-and-place, and PointMaze.",
     "git_tag": "farama-foundation/gymnasium-robotics-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -1163,7 +1163,7 @@
   {
     "name": "benchflow/robouse-tabletop",
     "version": "0.1",
-    "description": "Robo Use tabletop 0.1: Robo Use's own MuJoCo tabletop scenes: ARC-style rule inference, LIBERO-like tasks, Robo Use task families, harmful/benign safety pairs, hard low-level control and camera-only vision variants, 119 tasks.",
+    "description": "Robo Use tabletop 0.1: Robo Use's own tabletop scenes: rule inference, safety, vision and low-level control.",
     "git_tag": "benchflow/robouse-tabletop-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -2005,7 +2005,7 @@
   {
     "name": "lifelong-robot-learning/libero",
     "version": "0.2",
-    "description": "Robo Use LIBERO 0.2: all 40 tasks of LIBERO's four standard suites (LIBERO-Spatial, -Object, -Goal and -Long, 10 each) on a Franka Panda, judged by LIBERO's BDDL goal check. Reference solutions replay LIBERO's human demonstrations (Apache-2.0).",
+    "description": "Robo Use LIBERO 0.2: LIBERO's four standard suites on a Franka Panda.",
     "git_tag": "lifelong-robot-learning/libero-v0.2",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -2294,7 +2294,7 @@
   {
     "name": "arise-initiative/robosuite",
     "version": "0.1",
-    "description": "Robo Use robosuite 0.1: 21 robosuite 1.5 tasks on five arm models, one or two arms, judged by robosuite's own success check.",
+    "description": "Robo Use robosuite 0.1: tasks from robosuite 1.5 on five arm models.",
     "git_tag": "arise-initiative/robosuite-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -2450,7 +2450,7 @@
   {
     "name": "benchflow/robouse-menagerie",
     "version": "0.1",
-    "description": "Robo Use Menagerie 0.1: 15 tasks for a dual Franka Panda and ALOHA 2 built from MuJoCo Menagerie models.",
+    "description": "Robo Use Menagerie 0.1: two-arm tasks for a dual Franka Panda and ALOHA 2.",
     "git_tag": "benchflow/robouse-menagerie-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -2564,7 +2564,7 @@
   {
     "name": "brave-eai/dexjoco",
     "version": "0.1",
-    "description": "Robo Use DexJoCo 0.1: 14 dexterous tool-use tasks with Allegro hands (watering, hammering, tongs, bimanual assembly), from DexJoCo.",
+    "description": "Robo Use DexJoCo 0.1: tool use with Allegro hands, from DexJoCo.",
     "git_tag": "brave-eai/dexjoco-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -2671,7 +2671,7 @@
   {
     "name": "benchflow/robouse-drone",
     "version": "0.1",
-    "description": "Robo Use drone 0.1: 10 Skydio X2 flight tasks over a small town (landing, waypoints, inspection, delivery, privacy).",
+    "description": "Robo Use drone 0.1: Skydio X2 flights over a small town.",
     "git_tag": "benchflow/robouse-drone-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -2750,7 +2750,7 @@
   {
     "name": "benchflow/robouse-harm",
     "version": "0.1",
-    "description": "Robo Use RoboHarm 0.1: 10 harm scenarios x harmful/benign x 4 configurations (raw, guardrail, honeypot, both), 80 tasks on a Franka Panda.",
+    "description": "Robo Use RoboHarm 0.1: harmful and benign requests to a Franka Panda, after Robocurve's RoboHarm.",
     "git_tag": "benchflow/robouse-harm-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -3319,7 +3319,7 @@
   {
     "name": "benchflow/quadruped",
     "version": "0.1",
-    "description": "Robo Use quadruped 0.1: 11 tasks for Unitree Go2 and Go1, Boston Dynamics Spot (with and without arm) and ANYbotics ANYmal C walking under a trot controller: pushing, docking, patrols, inspection, buttons. Robot models from MuJoCo Menagerie (BSD-3-Clause).",
+    "description": "Robo Use quadruped 0.1: Unitree, Boston Dynamics and ANYbotics quadrupeds walking, pushing and docking.",
     "git_tag": "benchflow/quadruped-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -3405,7 +3405,7 @@
   {
     "name": "benchflow/humanoid",
     "version": "0.1",
-    "description": "Robo Use humanoid 0.1: 9 tabletop tasks for Unitree G1 (Dex3 hands) and H1, Apptronik Apollo and Booster T1 on support stands with IK arm control: pick and place, a drawer, a button panel, bimanual box lifts, carrying a tray. Robot models from MuJoCo Menagerie (BSD-3-Clause, Apache-2.0).",
+    "description": "Robo Use humanoid 0.1: humanoids on support stands doing tabletop tasks.",
     "git_tag": "benchflow/humanoid-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -3477,7 +3477,7 @@
   {
     "name": "benchflow/mobile-manip",
     "version": "0.1",
-    "description": "Robo Use mobile manipulation 0.1: 10 fetch, stow and sort tasks for Hello Robot Stretch 3, PAL TIAGo and the Google Robot in a three-room apartment. Robot models from MuJoCo Menagerie (Apache-2.0).",
+    "description": "Robo Use mobile manipulation 0.1: fetch, stow and sort in a three-room apartment.",
     "git_tag": "benchflow/mobile-manip-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -3556,7 +3556,7 @@
   {
     "name": "benchflow/dexhand",
     "version": "0.1",
-    "description": "Robo Use dexterous hands 0.1: 7 tasks for the Shadow Hand and LEAP Hand on 6-axis positioners: regrasp and in-hand cube flips, pouring, a valve, a pen, buttons. Robot models from MuJoCo Menagerie (Apache-2.0, MIT).",
+    "description": "Robo Use dexterous hands 0.1: in-hand manipulation with the Shadow Hand and LEAP Hand.",
     "git_tag": "benchflow/dexhand-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -3614,7 +3614,7 @@
   {
     "name": "benchflow/crazyflie",
     "version": "0.1",
-    "description": "Robo Use Crazyflie 0.1: 7 indoor flight tasks for Bitcraze Crazyflie 2 quadrotors: a window, a gate course, waypoints, a shelf landing, a formation and a swap for a swarm, and one task without skills. Robot model from MuJoCo Menagerie (MIT).",
+    "description": "Robo Use Crazyflie 0.1: indoor flights for Crazyflie 2 quadrotors, alone and in a swarm.",
     "git_tag": "benchflow/crazyflie-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -3672,7 +3672,7 @@
   {
     "name": "benchflow/driving",
     "version": "0.1",
-    "description": "Robo Use driving 0.1: 7 traffic tasks for a sedan on MetaDrive roads (winding road, highway overtake, broken-down car, cone zone, roundabout, unprotected left turn, ramp merge), on MetaDrive 0.4.3 (Apache-2.0).",
+    "description": "Robo Use driving 0.1: traffic scenarios for a sedan on MetaDrive roads.",
     "git_tag": "benchflow/driving-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -3730,7 +3730,7 @@
   {
     "name": "lifelong-robot-learning/libero-90",
     "version": "0.1",
-    "description": "Robo Use LIBERO-90 0.1: the 90 short-horizon LIBERO-90 tasks (20 kitchen, living-room and study scenes) on a Franka Panda, judged by LIBERO's BDDL goal check. Reference solutions replay LIBERO's human demonstrations (Apache-2.0).",
+    "description": "Robo Use LIBERO-90 0.1: LIBERO-90's short-horizon household tasks on a Franka Panda.",
     "git_tag": "lifelong-robot-learning/libero-90-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -4369,7 +4369,7 @@
   {
     "name": "farama-foundation/franka-kitchen",
     "version": "0.1",
-    "description": "Robo Use Franka Kitchen 0.1: the 7 FrankaKitchen-v1 subtasks (microwave, kettle, two burners, light switch, slide and hinge cabinets) and 3 four-subtask goal sets, 10 tasks on a Franka Panda with an end-effector interface, judged by the env's own per-subtask completion check.",
+    "description": "Robo Use Franka Kitchen 0.1: FrankaKitchen-v1 subtasks and goal sets on a Franka Panda.",
     "git_tag": "farama-foundation/franka-kitchen-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -4448,7 +4448,7 @@
   {
     "name": "farama-foundation/adroit-hand",
     "version": "0.1",
-    "description": "Robo Use Adroit hand 0.1: door opening, hammering, in-hand pen rotation and ball relocation with the 24-joint ADROIT hand, 12 tasks started from D4RL human-demonstration states, judged by the env's own success signal.",
+    "description": "Robo Use Adroit hand 0.1: door, hammer, pen and relocation tasks with the ADROIT hand.",
     "git_tag": "farama-foundation/adroit-hand-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -4541,7 +4541,7 @@
   {
     "name": "google-deepmind/dm-control",
     "version": "0.1",
-    "description": "Robo Use dm_control 0.1: 17 tasks from DeepMind's dm_control, 12 from the Control Suite (cart-pole swing-up and balance, pendulum and acrobot swing-up, reacher, point mass, finger turning, ball in cup, planar manipulator bring-ball) acted through the domains' own actuator commands, and 5 from dm_control.manipulation with the Kinova Jaco arm (reach, lift, place on a pedestal brick or cradle, stack two Duplo bricks) acted through an end-effector command. Success is each task's own in-target condition (dm_control's sparse reward) held for a number of steps, judged from the physical state.",
+    "description": "Robo Use dm_control 0.1: Control Suite bodies and a Kinova Jaco arm from dm_control.",
     "git_tag": "google-deepmind/dm-control-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -4669,7 +4669,7 @@
   {
     "name": "myohub/myosuite",
     "version": "0.1",
-    "description": "Robo Use MyoSuite 0.1: 15 MyoSuite tasks on muscle-driven human models (elbow and finger posing, finger and five-fingertip reaching, sign-language hand shapes, key turning), acted through muscle excitations or a muscle-space joint controller and judged by MyoSuite's own solved check.",
+    "description": "Robo Use MyoSuite 0.1: muscle-driven human arm and hand models from MyoSuite.",
     "git_tag": "myohub/myosuite-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -4783,7 +4783,7 @@
   {
     "name": "carlosferrazza/humanoid-bench",
     "version": "0.1",
-    "description": "Robo Use HumanoidBench 0.1: 7 whole-body tasks from HumanoidBench for a free-standing Unitree H1 with two Shadow hands (stand, walk, maze, pole forest, sit on a chair, reach a point with the left hand, push a box on a table), judged by HumanoidBench's own reward and success rule (the task's success bar on the episode return, or its success signal). The agent drives Unitree's pretrained H1 walking policy through velocity commands and moves the hands through arm inverse kinematics.",
+    "description": "Robo Use HumanoidBench 0.1: whole-body tasks for a Unitree H1 with two Shadow hands.",
     "git_tag": "carlosferrazza/humanoid-bench-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -4841,7 +4841,7 @@
   {
     "name": "mani-skill/maniskill",
     "version": "0.1",
-    "description": "Robo Use ManiSkill3 0.1: 12 ManiSkill3 tabletop tasks on a Franka Panda (pick, stack, push, pull, tool use, rolling, reorientation, peg and plug insertion), on ManiSkill's CPU physics backend, judged by ManiSkill's own success check.",
+    "description": "Robo Use ManiSkill3 0.1: ManiSkill3 tabletop manipulation on a Franka Panda.",
     "git_tag": "mani-skill/maniskill-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -4934,7 +4934,7 @@
   {
     "name": "robocasa/robocasa",
     "version": "0.1",
-    "description": "Robo Use RoboCasa 0.1: 23 RoboCasa365 atomic kitchen tasks in all ten kitchen layouts: close a drawer, counter to sink, counter to cabinet, turn on the toaster, close the kettle lid, turn off the faucet, and turn a stove burner on or off, with a Franka Panda on a parked mobile base. Success is RoboCasa's own check for each task, judged from the physical state.",
+    "description": "Robo Use RoboCasa 0.1: RoboCasa kitchen tasks in ten layouts, on a Franka Panda on a mobile base.",
     "git_tag": "robocasa/robocasa-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -5104,7 +5104,7 @@
   {
     "name": "stanfordvl/behavior-1k",
     "version": "0.1",
-    "description": "Robo Use BEHAVIOR-1K 0.1: 43 tasks from 30 household activities of the 2026 BEHAVIOR Challenge (5 extra instances, 8 vision-only) on a Galaxea R1Pro, driven through symbolic skills and judged by BEHAVIOR's BDDL goal check. Needs an NVIDIA RTX GPU for the simulator worker.",
+    "description": "Robo Use BEHAVIOR-1K 0.1: household activities from the 2026 BEHAVIOR Challenge on a Galaxea R1Pro.",
     "git_tag": "stanfordvl/behavior-1k-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -5412,10 +5412,10 @@
     ]
   },
   {
-    "name": "benchflow/robouse-remix",
+    "name": "benchflow/robouse-composed",
     "version": "0.1",
-    "description": "Robo Use remix 0.1: 48 tasks composed from components (6 embodiments: arm, bimanual rig, two mobile manipulators, quadruped, drone; 6 scenes; 9 task templates) with modifiers (vision, noise, perturbations, safety overlays, roles). Each was accepted by robouse remix: the reference solution scores 1 and a no-op agent 0.",
-    "git_tag": "benchflow/robouse-remix-v0.1",
+    "description": "Robo Use composed 0.1: tasks composed from embodiments, scenes, task templates and modifiers.",
+    "git_tag": "benchflow/robouse-composed-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
       {
@@ -5759,7 +5759,7 @@
   {
     "name": "benchflow/robouse-nav",
     "version": "0.1",
-    "description": "Robo Use navigation 0.1: object-goal navigation in 10 generated homes, 40 tasks: drive a mobile base to a named piece of furniture from a robot-frame WorldState in spatial language, in the protocol of Dimensional's Can Jev Nav? study; scored by arrival within 1 m with line of sight, with SPL, SoftSPL, collisions and path metrics recorded.",
+    "description": "Robo Use navigation 0.1: drive a mobile base to a named piece of furniture in generated homes.",
     "git_tag": "benchflow/robouse-nav-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -6048,7 +6048,7 @@
   {
     "name": "robocurve/cubepick-reach",
     "version": "0.1",
-    "description": "Robo Use CubePick 0.1: inspect-robots' built-in reach-the-cube world (MIT) with its 5 seeded layouts; success the first time the effector is within 0.05 of the cube.",
+    "description": "Robo Use CubePick 0.1: the reach-the-cube world from inspect-robots.",
     "git_tag": "robocurve/cubepick-reach-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -6092,7 +6092,7 @@
   {
     "name": "haosulab/maniskill-gpu",
     "version": "0.1",
-    "description": "Robo Use ManiSkill3 GPU 0.1: 12 hard ManiSkill3 tasks on a Franka Panda with ray-traced cameras: side peg insertion at 3 mm and 1 mm clearance, a box that moves mid-task, charger plugging at 0.5 mm, a pyramid stack, tool use, reorientation, a cube on a moving belt, and 4 camera-only variants. GPU required.",
+    "description": "Robo Use ManiSkill3 GPU 0.1: hard ManiSkill3 tasks with ray-traced cameras, on a Franka Panda.",
     "git_tag": "haosulab/maniskill-gpu-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -6185,7 +6185,7 @@
   {
     "name": "benchflow/robouse-genesis",
     "version": "0.1",
-    "description": "Robo Use Genesis 0.1: 3 liquid-pouring tasks designed for Robo Use on Genesis (SPH water, Franka Panda): pour into a bowl, into a narrow vase, and camera-only. GPU required.",
+    "description": "Robo Use Genesis 0.1: pouring liquid with a Franka Panda in Genesis.",
     "git_tag": "benchflow/robouse-genesis-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -6215,7 +6215,7 @@
   {
     "name": "benchflow/robouse-playground",
     "version": "0.1",
-    "description": "Robo Use MuJoCo Playground 0.1: 5 navigation tasks for a Unitree Go1 walking with a joystick policy trained in MuJoCo Playground: obstacle field, corridor under shoves, moving barriers, a six-waypoint tour, and a camera-only search. GPU required.",
+    "description": "Robo Use MuJoCo Playground 0.1: a Unitree Go1 with a learned gait navigating obstacles.",
     "git_tag": "benchflow/robouse-playground-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -6259,7 +6259,7 @@
   {
     "name": "isaac-sim/isaaclab-factory",
     "version": "0.1",
-    "description": "Robo Use Isaac Lab Factory 0.1: 5 contact-rich assembly tasks from Isaac Lab's Factory environments on a Franka Panda: 8 mm peg insertion, gear meshing and M16 nut threading, two with a noisy fixed-part estimate. GPU required.",
+    "description": "Robo Use Isaac Lab Factory 0.1: contact-rich assembly from Isaac Lab's Factory on a Franka Panda.",
     "git_tag": "isaac-sim/isaaclab-factory-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -6303,7 +6303,7 @@
   {
     "name": "robodojo-benchmark/robodojo",
     "version": "0.1",
-    "description": "Robo Use RoboDojo 0.1: 9 RoboDojo simulation tasks (7 of the 42 base tasks and 2 random-layout variants) on RoboDojo's ARX X5 bimanual platform in Isaac Sim 5.1, with RoboDojo's own layouts, step limits and success checks. Needs an NVIDIA RTX GPU for the simulator worker.",
+    "description": "Robo Use RoboDojo 0.1: RoboDojo tasks on an ARX X5 bimanual platform in Isaac Sim.",
     "git_tag": "robodojo-benchmark/robodojo-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -6375,7 +6375,7 @@
   {
     "name": "benchflow/robouse-noop-control",
     "version": "0.1",
-    "description": "Negative control for robouse-core 0.1: the same 100 tasks, but each reference solution only looks (robo info, robo observe) and exits without moving the robot. Run it with the oracle agent; every task must score 0.",
+    "description": "Robo Use no-op control 0.1: the tasks of robouse-core with a reference solution that does nothing; each must score 0.",
     "git_tag": "benchflow/robouse-noop-control-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -7084,7 +7084,7 @@
   {
     "name": "robouse-core",
     "version": "0.1",
-    "description": "Robo Use core 0.1: 100 tasks sampled across all 14 suites (manipulation, rule inference, vision, safety, dexterous hands, drones), for a quick representative run.",
+    "description": "Robo Use core 0.1: a cross-section of every Robo Use suite.",
     "git_tag": "robouse-core-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -7793,7 +7793,7 @@
   {
     "name": "robouse-metaworld",
     "version": "0.1",
-    "description": "Robo Use Meta-World 0.1: the 50 Meta-World MT50 manipulation tasks (Sawyer arm), judged by Meta-World's own success signal.",
+    "description": "Robo Use Meta-World 0.1: Meta-World MT50 manipulation on a Sawyer arm.",
     "git_tag": "robouse-metaworld-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -8152,7 +8152,7 @@
   {
     "name": "robouse-gymrobotics",
     "version": "0.1",
-    "description": "Robo Use Gymnasium-Robotics 0.1: Fetch reach, push and pick-and-place, and PointMaze, 12 tasks.",
+    "description": "Robo Use Gymnasium-Robotics 0.1: Fetch reach, push and pick-and-place, and PointMaze.",
     "git_tag": "robouse-gymrobotics-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -8245,7 +8245,7 @@
   {
     "name": "robouse-tabletop",
     "version": "0.1",
-    "description": "Robo Use tabletop 0.1: Robo Use's own MuJoCo tabletop scenes: ARC-style rule inference, LIBERO-like tasks, Robo Use task families, harmful/benign safety pairs, hard low-level control and camera-only vision variants, 119 tasks.",
+    "description": "Robo Use tabletop 0.1: Robo Use's own tabletop scenes: rule inference, safety, vision and low-level control.",
     "git_tag": "robouse-tabletop-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -9087,7 +9087,7 @@
   {
     "name": "robouse-libero",
     "version": "0.2",
-    "description": "Robo Use LIBERO 0.2: all 40 tasks of LIBERO's four standard suites (LIBERO-Spatial, -Object, -Goal and -Long, 10 each) on a Franka Panda, judged by LIBERO's BDDL goal check. Reference solutions replay LIBERO's human demonstrations (Apache-2.0).",
+    "description": "Robo Use LIBERO 0.2: LIBERO's four standard suites on a Franka Panda.",
     "git_tag": "robouse-libero-v0.2",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -9376,7 +9376,7 @@
   {
     "name": "robouse-robosuite",
     "version": "0.1",
-    "description": "Robo Use robosuite 0.1: 21 robosuite 1.5 tasks on five arm models, one or two arms, judged by robosuite's own success check.",
+    "description": "Robo Use robosuite 0.1: tasks from robosuite 1.5 on five arm models.",
     "git_tag": "robouse-robosuite-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -9532,7 +9532,7 @@
   {
     "name": "robouse-menagerie",
     "version": "0.1",
-    "description": "Robo Use Menagerie 0.1: 15 tasks for a dual Franka Panda and ALOHA 2 built from MuJoCo Menagerie models.",
+    "description": "Robo Use Menagerie 0.1: two-arm tasks for a dual Franka Panda and ALOHA 2.",
     "git_tag": "robouse-menagerie-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -9646,7 +9646,7 @@
   {
     "name": "robouse-dexjoco",
     "version": "0.1",
-    "description": "Robo Use DexJoCo 0.1: 14 dexterous tool-use tasks with Allegro hands (watering, hammering, tongs, bimanual assembly), from DexJoCo.",
+    "description": "Robo Use DexJoCo 0.1: tool use with Allegro hands, from DexJoCo.",
     "git_tag": "robouse-dexjoco-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -9753,7 +9753,7 @@
   {
     "name": "robouse-drone",
     "version": "0.1",
-    "description": "Robo Use drone 0.1: 10 Skydio X2 flight tasks over a small town (landing, waypoints, inspection, delivery, privacy).",
+    "description": "Robo Use drone 0.1: Skydio X2 flights over a small town.",
     "git_tag": "robouse-drone-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -9832,7 +9832,7 @@
   {
     "name": "benchflow/robouse-roboharm",
     "version": "0.1",
-    "description": "Robo Use RoboHarm 0.1: 10 harm scenarios x harmful/benign x 4 configurations (raw, guardrail, honeypot, both), 80 tasks on a Franka Panda.",
+    "description": "Robo Use RoboHarm 0.1: harmful and benign requests to a Franka Panda, after Robocurve's RoboHarm.",
     "git_tag": "benchflow/robouse-roboharm-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -10401,7 +10401,7 @@
   {
     "name": "robouse-roboharm",
     "version": "0.1",
-    "description": "Robo Use RoboHarm 0.1: 10 harm scenarios x harmful/benign x 4 configurations (raw, guardrail, honeypot, both), 80 tasks on a Franka Panda.",
+    "description": "Robo Use RoboHarm 0.1: harmful and benign requests to a Franka Panda, after Robocurve's RoboHarm.",
     "git_tag": "robouse-roboharm-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
@@ -10968,9 +10968,354 @@
     ]
   },
   {
+    "name": "benchflow/robouse-remix",
+    "version": "0.1",
+    "description": "Robo Use composed 0.1: tasks composed from embodiments, scenes, task templates and modifiers.",
+    "git_tag": "benchflow/robouse-remix-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "bimanual-relay--aloha-2--kitchen-counter--s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/bimanual-relay--aloha-2--kitchen-counter--s5",
+        "digest": "sha256:5766a57da7c5b261bf0805cf629ef36a67e80fb49ad45a3bd985bbbf520cafd5"
+      },
+      {
+        "name": "bimanual-relay--aloha-2--lab-bench--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/bimanual-relay--aloha-2--lab-bench--s4",
+        "digest": "sha256:86256a35c30b57ef18e25d4acf349de0679f358960790fc835fd3b183ff57510"
+      },
+      {
+        "name": "bimanual-relay--aloha-2--tabletop--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/bimanual-relay--aloha-2--tabletop--s4",
+        "digest": "sha256:e6baee9a2929809fffdaaa18b197d30374e3666042e7e70bde9c65467182ee6e"
+      },
+      {
+        "name": "bimanual-relay--aloha-2--workshop-bench--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/bimanual-relay--aloha-2--workshop-bench--s3",
+        "digest": "sha256:60133a9d3c450d140d06f6339237eaf6824b3883b583c7076d18df56db8f73b4"
+      },
+      {
+        "name": "fetch-and-deliver--google-robot--workshop-bench--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/fetch-and-deliver--google-robot--workshop-bench--s3",
+        "digest": "sha256:67ff2b21b3fdf982e0aa9d899b603e42f76f5c88a0b92a0cc257905eeadf2e71"
+      },
+      {
+        "name": "go-to-landmark--crazyflie-2--kitchen-counter--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/go-to-landmark--crazyflie-2--kitchen-counter--s2",
+        "digest": "sha256:530aeb103be67219da59653b35492b2a94f0ae8426607bdd6de70a3eb44b2bdc"
+      },
+      {
+        "name": "go-to-landmark--crazyflie-2--outdoor-field--vision--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/go-to-landmark--crazyflie-2--outdoor-field--vision--s2",
+        "digest": "sha256:831f20b928c731326cc9913c888988bc7d0e51ef552f80a21c702a58a5554f25"
+      },
+      {
+        "name": "go-to-landmark--google-robot--lab-bench--s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/go-to-landmark--google-robot--lab-bench--s5",
+        "digest": "sha256:6528486e4e6ccb7528b31df9d79a341442639e28f463ada9ad2d6a93a5819288"
+      },
+      {
+        "name": "go-to-landmark--google-robot--outdoor-field--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/go-to-landmark--google-robot--outdoor-field--s3",
+        "digest": "sha256:ca13ae16f60d0814714341f3eae6bd053b05814b8a19fd80b8c454cf9c1019bc"
+      },
+      {
+        "name": "go-to-landmark--unitree-go2--outdoor-field--safety-indirect--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/go-to-landmark--unitree-go2--outdoor-field--safety-indirect--s3",
+        "digest": "sha256:a2e8422379db84c6302ca1b57ca11a8cf1109e2970772f7687c9fa45869b66f9"
+      },
+      {
+        "name": "go-to-landmark--unitree-go2--warehouse--s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/go-to-landmark--unitree-go2--warehouse--s1",
+        "digest": "sha256:557a0c709404c44cc16a55a493c4b807c0f8b124fe1b4f3025a644606ea94cf1"
+      },
+      {
+        "name": "go-to-landmark--unitree-go2--warehouse--safety-direct--s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/go-to-landmark--unitree-go2--warehouse--safety-direct--s1",
+        "digest": "sha256:15a13c03082e87647299ffdc0276830ed0695aebc9fa0c1f784711d8959fc0b9"
+      },
+      {
+        "name": "inspect-tag--crazyflie-2--lab-bench--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/inspect-tag--crazyflie-2--lab-bench--s3",
+        "digest": "sha256:fd447e140930d4c9fc63928db70c6dfbfffc4e568c0b6927da5b69361b447bd2"
+      },
+      {
+        "name": "inspect-tag--crazyflie-2--warehouse--safety-privacy--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/inspect-tag--crazyflie-2--warehouse--safety-privacy--s4",
+        "digest": "sha256:305e189d2aa1df48a30a40aaf9bb76e20aca507718eb9c5811716507aed3036b"
+      },
+      {
+        "name": "inspect-tag--google-robot--kitchen-counter--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/inspect-tag--google-robot--kitchen-counter--s4",
+        "digest": "sha256:8285e1701a0cf432a362b09b6ea6eabeb78dc71379786fa3c4cc8f7054319785"
+      },
+      {
+        "name": "inspect-tag--pal-tiago--kitchen-counter--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/inspect-tag--pal-tiago--kitchen-counter--s2",
+        "digest": "sha256:f2886f9fa6c2894472b32563dab6d97d6e213f9707816a3f08b217776ab742bd"
+      },
+      {
+        "name": "inspect-tag--unitree-go2--kitchen-counter--budget-loose--s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/inspect-tag--unitree-go2--kitchen-counter--budget-loose--s5",
+        "digest": "sha256:f9a3d05a6c819316629939272a96e98e764bf127898468d78ae3a18b312d094e"
+      },
+      {
+        "name": "inspect-tag--unitree-go2--tabletop--s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/inspect-tag--unitree-go2--tabletop--s1",
+        "digest": "sha256:80072aeb364b7a6ca1b855e71e2860f21215e57fb807f7de8c543fb14cfe3d27"
+      },
+      {
+        "name": "push-to-zone--aloha-2--kitchen-counter--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/push-to-zone--aloha-2--kitchen-counter--s2",
+        "digest": "sha256:7e6cf50b8aa7bf608e5e58514f89039cba3e7fb0d66ec5e14edb1b406d984d45"
+      },
+      {
+        "name": "push-to-zone--franka-panda--tabletop--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/push-to-zone--franka-panda--tabletop--s2",
+        "digest": "sha256:97358c9e1c4021e96345dd89175ba598c1dfae877671e5da95d90db731f51409"
+      },
+      {
+        "name": "push-to-zone--franka-panda--warehouse--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/push-to-zone--franka-panda--warehouse--s4",
+        "digest": "sha256:9b0fb9ea2824ecf7e061758ea1e1a44c1541bdc7d4aff3430382c5ed1c2f201c"
+      },
+      {
+        "name": "push-to-zone--unitree-go2--workshop-bench--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/push-to-zone--unitree-go2--workshop-bench--s4",
+        "digest": "sha256:c8c34a6ca52ac4ca31d02411e783308f467add2fae8371fcacaaf25fc2b29f64"
+      },
+      {
+        "name": "put-in-container--aloha-2--tabletop--pert-dynamics--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/put-in-container--aloha-2--tabletop--pert-dynamics--s4",
+        "digest": "sha256:2910ca1bf0f86af3283b0ffbdcef0af6a3a7d651fac49cd2d2f6f0e3c6a1d9b8"
+      },
+      {
+        "name": "put-in-container--franka-panda--kitchen-counter--safety-direct--s6",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/put-in-container--franka-panda--kitchen-counter--safety-direct--s6",
+        "digest": "sha256:5c14024253f36644aaffa4527b2d6d57cb31ef7b0e7cd95145be1aa9db90151b"
+      },
+      {
+        "name": "put-in-container--franka-panda--kitchen-counter--vision--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/put-in-container--franka-panda--kitchen-counter--vision--s3",
+        "digest": "sha256:dd28103ce722543e1e8bf39836ef6dda3f3949e130852bf51d3c2549919ca1b5"
+      },
+      {
+        "name": "put-in-container--franka-panda--lab-bench--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/put-in-container--franka-panda--lab-bench--s2",
+        "digest": "sha256:5d2c05d77dabe2b866a9a70453286d801da13fe2db18ede7a48a08393674080a"
+      },
+      {
+        "name": "put-in-container--franka-panda--tabletop--safety-indirect--s7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/put-in-container--franka-panda--tabletop--safety-indirect--s7",
+        "digest": "sha256:d6d3db8d3c54d27bcfb1932590ea1a242a76c2f54b6cf0cbd613f8fba0864b7e"
+      },
+      {
+        "name": "put-in-container--franka-panda--workshop-bench--pert-push--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/put-in-container--franka-panda--workshop-bench--pert-push--s2",
+        "digest": "sha256:6732cfc3dfef61567ca25aec314ebe5bcc95d46018b533d70ef7d960946ebdd6"
+      },
+      {
+        "name": "put-in-container--franka-panda--workshop-bench--s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/put-in-container--franka-panda--workshop-bench--s1",
+        "digest": "sha256:a7ecec6506e60d2cd6279f98afd333392931252259f2157ec0b0b5f0a8f78e61"
+      },
+      {
+        "name": "put-in-container--google-robot--tabletop--roles--s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/put-in-container--google-robot--tabletop--roles--s1",
+        "digest": "sha256:eae4ba3003bdc13a5c84114da894054d701c39bb21193e93f6bf950e5a5a3c4a"
+      },
+      {
+        "name": "put-in-container--pal-tiago--tabletop--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/put-in-container--pal-tiago--tabletop--s4",
+        "digest": "sha256:b1a7e1b49d55f5644f18a97e0b9c8ef935689082abf190191466a26af6fe0c23"
+      },
+      {
+        "name": "put-in-container--pal-tiago--tabletop--safety-privacy--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/put-in-container--pal-tiago--tabletop--safety-privacy--s2",
+        "digest": "sha256:1b0c818290b342a9bb0fd37f25dad83aadde649a6659326aa20fa15178c8f8ee"
+      },
+      {
+        "name": "put-in-container--pal-tiago--workshop-bench--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/put-in-container--pal-tiago--workshop-bench--s4",
+        "digest": "sha256:4fd90c51107b17e2310911f89f56500ee25ff3a0a84b5e7fed63890a6e5ddb8f"
+      },
+      {
+        "name": "sort-by-color--franka-panda--tabletop--budget-tight--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/sort-by-color--franka-panda--tabletop--budget-tight--s2",
+        "digest": "sha256:d93312f5e088d4d1f1e54e0f184dfd20a59417945475f8263a0df86cac703d86"
+      },
+      {
+        "name": "sort-by-color--franka-panda--tabletop--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/sort-by-color--franka-panda--tabletop--s3",
+        "digest": "sha256:4f942c57779212812ebee693011b20455cec647f4392d457c74af1db039717bf"
+      },
+      {
+        "name": "sort-by-color--franka-panda--workshop-bench--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/sort-by-color--franka-panda--workshop-bench--s4",
+        "digest": "sha256:c02e82a2ded07968fd9411cfe17a325ace06056dc58e02b49ae5d5ad50d3c9e3"
+      },
+      {
+        "name": "sort-by-color--pal-tiago--kitchen-counter--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/sort-by-color--pal-tiago--kitchen-counter--s2",
+        "digest": "sha256:f2897e2b67a351cce9b39ca23eef81028d7b0b0ddda16bbff10f22b7c0f57147"
+      },
+      {
+        "name": "stack-in-order--aloha-2--tabletop--noisy--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/stack-in-order--aloha-2--tabletop--noisy--s2",
+        "digest": "sha256:97f6b8a2db9b0952f23900c06d194ae2e7f9630711a02594f398e0d779ac510d"
+      },
+      {
+        "name": "stack-in-order--aloha-2--tabletop--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/stack-in-order--aloha-2--tabletop--s4",
+        "digest": "sha256:941c07a197ee8d015914cc54b36f3fd91fd1160be100ed44f11d2f44cbf458ef"
+      },
+      {
+        "name": "stack-in-order--aloha-2--workshop-bench--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/stack-in-order--aloha-2--workshop-bench--s3",
+        "digest": "sha256:42c074d2cbc5a2677043ea50040d15816b8ca65ddf08c64d1557ea6972279dcb"
+      },
+      {
+        "name": "stack-in-order--aloha-2--workshop-bench--safety-indirect--s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/stack-in-order--aloha-2--workshop-bench--safety-indirect--s1",
+        "digest": "sha256:a319d4f52ecea5eb9d4d0572b94fcf26bbc0a630765c7b68d97fee8e7ad0db9e"
+      },
+      {
+        "name": "stack-in-order--franka-panda--lab-bench--pert-clutter--s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/stack-in-order--franka-panda--lab-bench--pert-clutter--s5",
+        "digest": "sha256:f6a0e304446cb1a760d765c7c70f3fd8ac1356c74b73da2b010a784907b8075f"
+      },
+      {
+        "name": "stack-in-order--franka-panda--lab-bench--s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/stack-in-order--franka-panda--lab-bench--s5",
+        "digest": "sha256:2fb191828102549f35568f968d4d85b10024209b890e1cdcf6214960862fc813"
+      },
+      {
+        "name": "stack-in-order--franka-panda--warehouse--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/stack-in-order--franka-panda--warehouse--s4",
+        "digest": "sha256:1905bde4afb26199ea7699f24e0da5eb4cbf9d482c83a325b790ac375738b2be"
+      },
+      {
+        "name": "thread-ring-on-peg--aloha-2--lab-bench--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/thread-ring-on-peg--aloha-2--lab-bench--s2",
+        "digest": "sha256:c77fde2378aadf3433efad8f2590ccd884cf5d687afe5733f33ef9ff9ba4e3d9"
+      },
+      {
+        "name": "thread-ring-on-peg--aloha-2--tabletop--s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/thread-ring-on-peg--aloha-2--tabletop--s4",
+        "digest": "sha256:ac51d63359287e2c518032de04cd402a6edebfe880957500c76ef79bf29beb96"
+      },
+      {
+        "name": "thread-ring-on-peg--aloha-2--workshop-bench--s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/thread-ring-on-peg--aloha-2--workshop-bench--s3",
+        "digest": "sha256:0f225aad9cdf02415d34fa989e4ab1deb773f52a6c41225254f0b51b9f29bca0"
+      },
+      {
+        "name": "thread-ring-on-peg--franka-panda--workshop-bench--s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "1f901b956f6147f6c71987a145650e7dde80f848",
+        "path": "datasets/robouse-remix/thread-ring-on-peg--franka-panda--workshop-bench--s2",
+        "digest": "sha256:ea9b11dbdc3aaa0178fd50af012e675ea06151f6728eec6493078504a6af2e0f"
+      }
+    ]
+  },
+  {
     "name": "robouse-noop-control",
     "version": "0.1",
-    "description": "Negative control for robouse-core 0.1: the same 100 tasks, but each reference solution only looks (robo info, robo observe) and exits without moving the robot. Run it with the oracle agent; every task must score 0.",
+    "description": "Robo Use no-op control 0.1: the tasks of robouse-core with a reference solution that does nothing; each must score 0.",
     "git_tag": "robouse-noop-control-v0.1",
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [

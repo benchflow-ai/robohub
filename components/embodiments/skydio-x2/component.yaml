@@ -7,6 +7,6 @@ track: aerial
 kind: drone
 capabilities:
 - fly
-remixable: false
+composable: false
 suites:
 - drone

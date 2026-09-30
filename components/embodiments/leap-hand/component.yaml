@@ -7,6 +7,6 @@ track: dexterity
 kind: hand
 capabilities:
 - dexterous
-remixable: false
+composable: false
 suites:
 - dexhand

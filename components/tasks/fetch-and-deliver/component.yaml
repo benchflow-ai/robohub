@@ -8,8 +8,8 @@ capabilities:
 - navigation
 - pick-and-place
 difficulty: hard
-remixable: true
-runtime: robouse.backends.remix_sim.templates:FetchDeliver
+composable: true
+runtime: robouse.backends.components_sim.templates:FetchDeliver
 requires:
 - placements:
   - floor
