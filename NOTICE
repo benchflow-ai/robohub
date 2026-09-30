@@ -1,0 +1,149 @@
+robohub
+Copyright 2026 BenchFlow
+
+This repository is licensed under the Apache License, Version 2.0 (see LICENSE). That covers what BenchFlow wrote: the scripts, templates, component manifests, task text, verifiers, reference solutions, and the vendored copies of Robo Use and of BenchFlow's embodied layer.
+
+The third-party material listed below is redistributed here under its own licence, which it keeps. Simulators, robot models, scene assets and datasets that the simulator images download at build time, or that run on remote GPU workers, are not in this repository and are not covered by its licence; see "Third-party simulators and assets" in README.md.
+
+-------------------------------------------------------------------------------
+1. Meta-World scripted expert policies
+-------------------------------------------------------------------------------
+
+Source: https://github.com/Farama-Foundation/Metaworld (metaworld 3.1.1, metaworld/policies)
+Where: datasets/{robouse-metaworld,robouse-tabletop,robouse-core}/*/oracle/vendor/metaworld/ (each copy also carries this licence in its LICENSE file)
+Changes: only the policy modules a task's reference solution needs are copied; a short __init__.py maps the task's environment to its policy.
+Licence: MIT
+
+MIT License
+
+Copyright (c) 2019 Meta-World Team
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-------------------------------------------------------------------------------
+2. LIBERO demonstration actions
+-------------------------------------------------------------------------------
+
+Source: the LIBERO datasets (Liu, Zhu, Gao, Feng, Liu, Zhu and Stone, "LIBERO: Benchmarking Knowledge Transfer for Lifelong Robot Learning", 2023; https://github.com/Lifelong-Robot-Learning/LIBERO), as mirrored in the Hugging Face dataset yifengzhu-hf/LIBERO-datasets.
+Where: datasets/{robouse-libero,robouse-libero-90,robouse-core}/*/oracle/demo_actions.json
+Changes: the action sequence of one demonstration per task was extracted from the .hdf5 file; the file's "source" and "demo" fields name the file and demonstration.
+Licence: Creative Commons Attribution 4.0 International (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/. LIBERO's code is MIT (Copyright (c) 2023 Lifelong Robot Learning); no LIBERO code is redistributed here.
+
+-------------------------------------------------------------------------------
+3. D4RL Adroit human demonstrations
+-------------------------------------------------------------------------------
+
+Source: the D4RL datasets (Fu, Kumar, Nachum, Tucker and Levine, "D4RL: Datasets for Deep Data-Driven Reinforcement Learning", 2020), Adroit "human" demonstrations recorded for DAPG (Rajeswaran et al., 2018), as published in the Farama Minari dataset farama-minari/D4RL.
+Where: datasets/robouse-adroit/*/oracle/demo.json
+Changes: the action sequence of one episode per task was extracted; the file's "source" field names the dataset, task and episode.
+Licence: Creative Commons Attribution 4.0 International (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/
+
+-------------------------------------------------------------------------------
+4. DexJoCo raw demonstrations
+-------------------------------------------------------------------------------
+
+Source: https://github.com/brave-eai/dexjoco and the Hugging Face dataset DexJoCo/DexJoCo-Datasets-Raw
+Where: datasets/{robouse-dexjoco,robouse-core}/*/oracle/demo.json
+Changes: the action sequence of one demonstration per task was extracted; the file's "source" and "demo" fields name the demonstration.
+Licence: MIT
+
+MIT License
+
+Copyright (c) 2026 Dexjoco contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-------------------------------------------------------------------------------
+5. MyoSuite NPG baseline policies
+-------------------------------------------------------------------------------
+
+Source: https://github.com/MyoHub/myosuite, myosuite/agents/baslines_NPG (Copyright (c) MyoSuite Authors)
+Where: datasets/robouse-myosuite/*/oracle/policy.json
+Changes: three trained NPG policies were converted from pickle to JSON (network weights and normalisation constants); the file's "source" field names the original policy file.
+Licence: Apache License, Version 2.0 (the same text as LICENSE in this repository)
+
+-------------------------------------------------------------------------------
+6. inspect-robots CubePick
+-------------------------------------------------------------------------------
+
+Source: https://github.com/robocurve/inspect-robots (the cubepick-reach world)
+Where: the robouse CubePick backend, runtimes/light/robouse/src/robouse/backends/cubepick/ and its vendored copies in datasets/robouse-cubepick/*/oracle/vendor/robouse/backends/cubepick/
+Changes: the world's logic was ported to a Robo Use simulator backend.
+Licence: MIT
+
+MIT License
+
+Copyright (c) 2026 robocurve
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-------------------------------------------------------------------------------
+7. Renders of MuJoCo Menagerie robot models
+-------------------------------------------------------------------------------
+
+Source: https://github.com/google-deepmind/mujoco_menagerie at commit 8161bba
+Where: components/stills/embodiment-*.webp (and the scene and task stills, which show the same robots)
+Changes: still images rendered by BenchFlow; no model files are redistributed.
+Licences of the rendered models: ALOHA 2 (aloha), BSD-3-Clause, Copyright (c) 2023, Trossen Robotics; Franka Emika Panda (franka_emika_panda), Apache-2.0; Bitcraze Crazyflie 2 (bitcraze_crazyflie_2), MIT, Copyright (c) 2024 whoenig; Google Robot (google_robot), Apache-2.0; PAL TIAGo (pal_tiago), Apache-2.0; Unitree Go2 (unitree_go2), BSD-3-Clause, Copyright (c) 2016-2022 HangZhou YuShu TECHNOLOGY CO.,LTD. ("Unitree Robotics"). Each model's LICENSE file is in its Menagerie folder.
+
+-------------------------------------------------------------------------------
+8. RoboCasa layouts
+-------------------------------------------------------------------------------
+
+Source: https://github.com/robocasa/robocasa (Copyright (c) 2026 the RoboCasa Team; code MIT, assets and datasets CC BY 4.0)
+Where: the RoboCasa episode layouts in the vendored Robo Use package (runtimes/*/robouse/src/robouse/backends/robocasa/episodes/)
+Changes: the layouts were generated by BenchFlow; they name RoboCasa fixtures, objects and asset paths but contain no RoboCasa assets.
+
+-------------------------------------------------------------------------------
+9. Adapted benchmarks and task designs
+-------------------------------------------------------------------------------
+
+Several datasets adapt another benchmark's tasks (their task text names the original environments and describes the goals) and are listed with the original benchmark, organisation, repository and licence in hub.yaml (`upstream`). The adaptations are BenchFlow's; the original authors did not publish or review them. benchflow/robouse-harm is BenchFlow's reproduction of Robocurve's RoboHarm.
