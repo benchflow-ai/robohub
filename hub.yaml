@@ -104,7 +104,7 @@ suites:
   humanoidbench: {embodiment: Unitree H1 humanoid with two Shadow hands, simulator: HumanoidBench (MuJoCo 3.1.6), image: humanoidbench}
   maniskill: {embodiment: Franka Panda, simulator: 'ManiSkill3 3.0.1 (SAPIEN 3.0.3, CPU)', image: maniskill}
   robocasa: {embodiment: Franka Panda on a mobile base (PandaOmron), simulator: 'RoboCasa365 (robosuite 1.5.2, MuJoCo 3.3.1)', image: robocasa}
-  remix: {embodiment: "Franka Panda; ALOHA 2; PAL TIAGo; Google Robot; Unitree Go2; Crazyflie 2", simulator: "Robo Use remix (MuJoCo Menagerie models)", image: remix}
+  remix: {embodiment: "Franka Panda; ALOHA 2; PAL TIAGo; Google Robot; Unitree Go2; Crazyflie 2", simulator: "Robo Use composed tasks (MuJoCo Menagerie models)", image: remix}
   behavior: {embodiment: "Galaxea R1Pro mobile manipulator", simulator: "BEHAVIOR-1K (OmniGibson on Isaac Sim 5.1)", image: behavior}
 
 # Datasets are named <org>/<name>. The org is whoever designed the benchmark's tasks: a dataset adapted from someone
@@ -273,11 +273,12 @@ datasets:
       note: "GPU required. The BEHAVIOR simulator (OmniGibson 3.9.3 on Isaac Sim 5.1) needs an NVIDIA RTX GPU with RT cores and host driver 580 (Isaac Sim 5.1 crashed at start-up on driver 595). Start one simulator worker per activity on the GPU machine, write their endpoints to <code>runs/_behavior/remote.json</code> in a Robo Use checkout (branch <code>behavior-expand</code>), and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/behavior-expand/docs/suites/behavior.md\">docs/suites/behavior.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
       bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_BEHAVIOR_REMOTE</code> on the host."
     description: "Robo Use BEHAVIOR-1K 0.1: 43 tasks from 30 household activities of the 2026 BEHAVIOR Challenge (5 extra instances, 8 vision-only) on a Galaxea R1Pro, driven through symbolic skills and judged by BEHAVIOR's BDDL goal check. Needs an NVIDIA RTX GPU for the simulator worker."
-  - name: benchflow/robouse-remix
+  - name: benchflow/robouse-composed
     dir: robouse-remix
+    aliases: [benchflow/robouse-remix]
     version: "0.1"
     suites: [remix]
-    description: "Robo Use remix 0.1: 48 tasks composed from components (6 embodiments: arm, bimanual rig, two mobile manipulators, quadruped, drone; 6 scenes; 9 task templates) with modifiers (vision, noise, perturbations, safety overlays, roles). Each was accepted by robouse remix: the reference solution scores 1 and a no-op agent 0."
+    description: "Robo Use composed 0.1: 48 tasks composed from components (6 embodiments: arm, bimanual rig, two mobile manipulators, quadruped, drone; 6 scenes; 9 task templates) with modifiers (vision, noise, perturbations, safety overlays, roles). Each was accepted by `robouse tasks init`: the reference solution scores 1 and the no-op control 0."
   - name: benchflow/robouse-noop-control
     dir: robouse-noop-control
     aliases: [robouse-noop-control]
