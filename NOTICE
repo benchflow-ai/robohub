@@ -153,7 +153,7 @@ Several datasets adapt another benchmark's tasks (their task text names the orig
 -------------------------------------------------------------------------------
 
 Source: https://github.com/RLE-Bench/RLE-Bench at commit 34a73aa3daebd92a4adc56142b87f2bccda4780d (tasks/task03/tabletop/)
-Where: runtimes/rlebench/robouse/src/robouse/backends/rlebench/rlebench_upstream/ (with its LICENSE and VENDORED.md)
+Where: runtimes/{rlebench,capx,capx-libero}/robouse/src/robouse/backends/rlebench/rlebench_upstream/ (with its LICENSE and VENDORED.md; each runtime holds a full copy of the Robo Use package)
 Changes: none to the copied files (the task03 tabletop scenes, scoring helpers, budgets and HiddenCOM scene); Robo Use runs them in its RLE-Bench simulator worker.
 Dataset: rle-bench/rle-bench (hub.yaml). The task text quotes RLE-Bench's task goals and notes.
 Licence: MIT
@@ -185,7 +185,7 @@ SOFTWARE.
 -------------------------------------------------------------------------------
 
 Source: https://github.com/capgym/cap-x at commit 53e9966d7a8e2fa7494676772bccc35280f5c0ed
-Where: runtimes/{capx,capx-libero}/robouse/src/robouse/backends/capx/capx_upstream/ (CaP-X's RoboSuite and LIBERO low-level environments, privileged APIs, PyRoKi IK snippets and controller configs, with its LICENSE and VENDORED.md); datasets/capx/*/task.md (CaP-X's task prompts and API documentation); datasets/capx/*/oracle/oracle_code.py (CaP-X's reference code)
+Where: runtimes/{rlebench,capx,capx-libero}/robouse/src/robouse/backends/capx/capx_upstream/ (CaP-X's RoboSuite and LIBERO low-level environments, privileged APIs, PyRoKi IK snippets and controller configs, with its LICENSE and VENDORED.md); datasets/capx/*/task.md (CaP-X's task prompts and API documentation); datasets/capx/*/oracle/oracle_code.py (CaP-X's reference code)
 Changes: listed in VENDORED.md (the PyRoKi server client replaced by the same solve in-process; unused perception imports removed; open3d imported only where used). The spill-wipe reference code wipes at z = -0.10 instead of 0.0 (stated in the file).
 Dataset: capgym/cap-x (hub.yaml). The simulator images fetch at build time, and this repository does not contain: CaP-X's robosuite forks (https://github.com/uynitsuj/robosuite commit 97292732 and https://github.com/Max-Fu/robosuite commit a498b08, MIT, Copyright (c) 2022 Stanford Vision and Learning Lab and UT Robot Perception and Learning Lab), LIBERO-PRO with its scene assets (https://github.com/uynitsuj/LIBERO-PRO commit 5368540, MIT, Copyright (c) 2023 Lifelong Robot Learning) and PyRoKi (https://github.com/chungmin99/pyroki commit 95afccc, MIT).
 Licence: MIT
