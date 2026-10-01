@@ -390,15 +390,15 @@ datasets:
   - name: rle-bench/rle-bench
     dir: rle-bench
     upstream: {benchmark: "RLE-Bench", org_name: "RLE-Bench (Harvard, Georgia Tech)", repo: "https://github.com/RLE-Bench/RLE-Bench", licence: "MIT (code and tasks; scene code redistributed here)"}
-    version: "0.2"
+    version: "0.1"
     suites: [rle-bench]
-    description: 'Robo Use RLE-Bench 0.2: RLE-Bench''s tabletop reasoning tasks (tower, cantilever, balance, hidden centre of mass) for an agent in the loop.'
+    description: 'Robo Use RLE-Bench 0.1: RLE-Bench''s tabletop reasoning tasks (tower, cantilever, balance, hidden centre of mass) for an agent in the loop. Tower, cantilever and balance pass at an RLE-Bench quality of 0.5 or more, a Robo Use threshold; RLE-Bench reports the quality itself as the score.'
   - name: capgym/cap-x
     dir: capx
     upstream: {benchmark: "CaP-X (CaP-Bench)", org_name: "CaP-X (NVIDIA, UC Berkeley, Stanford, CMU)", repo: "https://github.com/capgym/cap-x", licence: "MIT (environments, APIs, prompts and reference code redistributed here)"}
-    version: "0.2"
+    version: "0.1"
     suites: [capx, capx-libero]
-    description: 'Robo Use CaP-X 0.2: CaP-Bench''s RoboSuite and LIBERO-PRO tasks as code as policy with CaP-X''s privileged API.'
+    description: 'Robo Use CaP-X 0.1: CaP-Bench''s RoboSuite and LIBERO-PRO tasks as code as policy with CaP-X''s privileged API.'
   - name: benchflow/robouse-noop-control
     dir: robouse-noop-control
     former_names: [robouse-noop-control]

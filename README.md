@@ -52,6 +52,8 @@ A dataset is named `<org>/<name>`. A dataset adapted from another benchmark sits
 | `benchflow/robouse-playground@0.2` | 5 | gpu (GPU) | |
 | `isaac-sim/isaaclab-factory@0.2` | 5 | gpu (GPU) | Isaac Lab Factory |
 | `robodojo-benchmark/robodojo@0.2` | 9 | robodojo (GPU) | RoboDojo |
+| `rle-bench/rle-bench@0.1` | 6 | rlebench | RLE-Bench, family 03 (tabletop reasoning); tower, cantilever and balance pass at RLE-Bench quality 0.5 or more, a Robo Use threshold |
+| `capgym/cap-x@0.1` | 43 | capx, capx-libero | CaP-X: RoboSuite and LIBERO-PRO tasks as code as policy with its privileged API, multi-turn (not one of CaP-Bench's tiers) |
 
 [`hub.yaml`](hub.yaml) lists each dataset's upstream repository and licence and the folder its tasks are in (`dir`). A task that appears in two datasets (for example in `robouse-core` and its suite's dataset) has byte-identical packages, so the same digest.
 
@@ -109,6 +111,9 @@ The simulator images are built from this repository, not pulled from a registry.
 | `humanoidbench` | pinned pip packages, HumanoidBench at commit `cb11890`, Unitree's H1 walking policy (SHA-256 pinned) |
 | `maniskill` | ManiSkill 3.0.1 and SAPIEN 3.0.3 (SHA-256 pinned wheel) |
 | `robocasa` | RoboCasa at `456174f`, robosuite at `5ce6643`, 87 asset archives from two Hugging Face datasets at pinned revisions, each SHA-256 checked |
+| `rlebench` | robosuite at `5ce6643` and RoboCasa at `b4684e6` (RLE-Bench's pins), pinned pip packages |
+| `capx` | CaP-X's robosuite fork at `9729273`, PyRoKi at `95afccc`, jaxls at `6fe7cf9`, top-level pip packages pinned from CaP-X's lockfile, the `panda_description` robot model |
+| `capx-libero` | LIBERO-PRO with its assets at `5368540`, CaP-X's robosuite 1.4 fork at `a498b08`, PyRoKi at `95afccc`, CPU PyTorch, top-level pip packages pinned from CaP-X's lockfile, the `panda_description` robot model |
 | `behavior`, `gpu`, `robodojo` | a thin client; the simulators run on remote GPU workers |
 
 ## Third-party simulators and assets
