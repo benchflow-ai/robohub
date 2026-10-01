@@ -88,6 +88,8 @@ runtimes:
     backends: [capx]
     simulators: CaP-X (53e9966) on its robosuite 1.5.1 fork (97292732), MuJoCo 3.5.0, PyRoKi IK on the CPU
     sim_memory: 4G
+    # CaP-X's reference code for the nut assembly and the two-arm lift imports scipy
+    oracle_pip: {capx: [scipy==1.18.1]}
   capx-libero:
     backends: [capx_libero]
     simulators: CaP-X (53e9966) on LIBERO-PRO (5368540) and its robosuite 1.4 fork (a498b08), MuJoCo 3.5.0, PyRoKi IK on the CPU
