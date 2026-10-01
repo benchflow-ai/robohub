@@ -401,7 +401,14 @@ def export_native(ids: list[str], by_id: dict, suite_of: dict, out_parent: Path,
             text = cf.read_text()
             if old not in text:
                 raise SystemExit(f"{tid}: build context {old} not found in its compose file")
-            cf.write_text(text.replace(old, json.dumps(os.path.relpath(rt_dir, dst / "environment"))))
+            text = text.replace(old, json.dumps(os.path.relpath(rt_dir, dst / "environment")))
+            # BenchFlow's `robo` client gives up on any request after ROBO_TIMEOUT_S (default 120 s), shorter than a long
+            # skill; wait as long as Robo Use's own client does for requests that step the simulator (one hour). The
+            # episode server bounds skills itself (step caps, the episode's wall-clock budget).
+            sock = "      ROBO_SOCKET: /rpc/episode.sock\n"
+            if text.count(sock) != 1:
+                raise SystemExit(f"{tid}: no single `main` ROBO_SOCKET line in its compose file")
+            cf.write_text(text.replace(sock, sock + '      ROBO_TIMEOUT_S: "3600"\n'))
             marker = dst / ".robouse-source.json"
             info = json.loads(marker.read_text())
             info["runtime"] = runtime  # runtimes/<runtime>, not the exporter's content-addressed folder name
