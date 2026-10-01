@@ -7534,7 +7534,7 @@
       "version": "0.2",
       "description": "Robo Use CaP-X 0.2: CaP-Bench's RoboSuite and LIBERO-PRO tasks as code as policy with CaP-X's privileged API.",
       "git_tag": "capgym/cap-x-v0.2",
-      "commit": "b5cfc2cfbc953bc4b1a33db5c7f5a09be8ce5a8d",
+      "commit": "371ce6050df9de8e8945fb9be69d03284a05f8d8",
       "n_tasks": 43,
       "suites": [
         "capx",
@@ -7557,105 +7557,105 @@
       "tasks": [
         {
           "id": "capx-cube-lifting-s1",
-          "digest": "sha256:d18a66584ea5735792dafd21775f283c51f23304936e05eb411687dba7ebf9fc",
+          "digest": "sha256:7ec289e30a1ff66f20ccda4c4649813a173050e3af1b6bb5ce0c3f34a89bb894",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-cube-lifting-s2",
-          "digest": "sha256:087f387ad3c845b4c994bf827a4c0d0c5dffbf151d1dd835419752495a4cdf35",
+          "digest": "sha256:4dbda72455529a3f2a6aae0783ef2adfd2d4f3e64534f990d2459f17ab56250b",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-cube-lifting-s3",
-          "digest": "sha256:b0dd3f0f1528295febc68ed7000a491c3ed752631f9a044b7dd28719343aee9a",
+          "digest": "sha256:084d49134d5b7b1b5811ffdca5d15ed216e290b71e2a015e43530567e8e3a45e",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-cube-lifting-s4",
-          "digest": "sha256:2f2aabac937637ea77a8b2b35f8ec8bdc901960af61e7848fa2d2ec02273e4c6",
+          "digest": "sha256:044bc4f8bfb943c8c1c6e7c5c955e7b29a758c0b937dd6d7637ff11ed367f630",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-cube-lifting-s5",
-          "digest": "sha256:b64a4407180a58e3d0762301f4ade49b8c12886d820dd3759602d69653f38d3e",
+          "digest": "sha256:c76b3c17baf9951762c0e0ae6785fc216976ee84eb597f776ead33091cd09be2",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-cube-restack-s1",
-          "digest": "sha256:bb3efed38aec2a4f01016ab61f3da4809aff99ea7c57b6e3b5c68d5dd1ae888f",
+          "digest": "sha256:170fcedacdc4b3d16137fdeb7e38a92800cde3ac9fcd332575251d21fef7f6e2",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-cube-restack-s2",
-          "digest": "sha256:459a1c248f795b397584a56872007d1f26393c79bb20a99e2249b9e7480593db",
+          "digest": "sha256:edf5df406409a60cb69641fcbdd6c8425abc6c46994b49592f48982c01c39896",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-cube-restack-s3",
-          "digest": "sha256:93a5ab4d9200a08fd7e2c95f7cdd4f8205513f9471ee54a70e348bca50ff4f61",
+          "digest": "sha256:fee4121f1a97399b5c3f730d8a63b406555b818d9a8a997feaca5f64cbd77db5",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-cube-restack-s4",
-          "digest": "sha256:3de8d782246b48a21f68ff378d01fc45f7d8c881e36d3ae508bfd3f8711cb9b5",
+          "digest": "sha256:5d059d84fbedf67ded22d0184a900ce747a4a33e1dd58d27cf376dfa9ce2a5da",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-cube-restack-s5",
-          "digest": "sha256:65cc52f8a8dc8fa0627be5c7706d2bd753c2615e9255e664852978e6073fff5d",
+          "digest": "sha256:a6fef5220d5715c3b93cfb61e3243acce561ca7a1d96572dae6fa4238c82b493",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-cube-stack-s1",
-          "digest": "sha256:cc0326d277e8e0e0cbab35671faba9cb7a32afc5e0e2dac101966c07130facb3",
+          "digest": "sha256:7179ea63a4dff00658d9bff983f01643f72bc98f1639a9a8989b7991b9411780",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-cube-stack-s2",
-          "digest": "sha256:490dac508583808aa93fc1b50637234f2f82d51bee29ce680602556961a415ad",
+          "digest": "sha256:0ac2b4cd8c4ce39ded1ec2b0581c8f05992dea5b4a62c1824b1dc0ea061dca2f",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-cube-stack-s3",
-          "digest": "sha256:cf38d1cde7be5f2ed3d601c7e69b952e00a3eebb2b61eef0e1f2468ecd73a55e",
+          "digest": "sha256:e286b5b326632eb90bdd693bb6e334448f9b40f5f77b8e20f82c1ce1eb3a6ae2",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-cube-stack-s4",
-          "digest": "sha256:052922692ddd269c39056bed5e67ff815dca95c4135b6da33eb97be27e24a030",
+          "digest": "sha256:854fb2f67b9c5152f16d40c65d0ae0b50e91dd3ee32bdc97cdf3aa0620cd755b",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-cube-stack-s5",
-          "digest": "sha256:faf3a3100ccef0fa8d59183c01f18e3cf2b66ceb1c93422d408f0002e52d2b79",
+          "digest": "sha256:a1c38965cfc342712da1e482be8cbc47cb07d3a6bd38074c36da45e57054c4f4",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
@@ -7718,140 +7718,140 @@
         },
         {
           "id": "capx-nut-assembly-s1",
-          "digest": "sha256:75a33f6c5b710f11917c36465289c2ba14252d93193958491af4a61a36eb755f",
+          "digest": "sha256:a418023c2487c286716b128a028797295443267266d119fd4d6866da8326637d",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-nut-assembly-s2",
-          "digest": "sha256:e4cc198592f55820c45be260e874afc193a63bd849794ac09cb871a5534da33d",
+          "digest": "sha256:2df392b64033d4bed80383c3b562c1b9dcd6835065344f6ee3f665d9e0dc9f70",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-nut-assembly-s3",
-          "digest": "sha256:1d65bd7baa95ddbfcf4e9b15ea3678c63a945b8bea820b1305267da00ffcc304",
+          "digest": "sha256:0a9f50c84c0bf06522d406dfcd457a7bdd45045228e3b010eea5aeeaf5115905",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-nut-assembly-s4",
-          "digest": "sha256:13e37e6ffe4389488e4031435af2414c0bb97f8604b2586d8510615a870fc7b3",
+          "digest": "sha256:0389c73f9e7ffb4a7396d6d3b46ce9af1f18dfd3277c4d6bea6b57b0c9efbc21",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-nut-assembly-s5",
-          "digest": "sha256:66c84635cfbeab51390f9f8468398dd41808c270c2ed773f9432a9d4a10b5c6b",
+          "digest": "sha256:677b6c64efee38018f563028ee836536363d2dd5c964da4fc9e1e196de01ce68",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-spill-wipe-s1",
-          "digest": "sha256:8665a03a26f2f4e8ee7627f5e67073a8fa95ee67fd4e89a7f0ae83ad383be83f",
+          "digest": "sha256:469e0fa5972c4416c59345c5103c08a6194d2d10620d7378c763e4e8614adfd2",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-spill-wipe-s2",
-          "digest": "sha256:f3deb3e8392ca21e77daab8e8783c2c26c3c88961d96d2c675aaa34f6c085722",
+          "digest": "sha256:90c69e3805b611588d439b7d2f3163a1dae726ff5c8ebddd6cde008bebb770bb",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-spill-wipe-s3",
-          "digest": "sha256:0645589b58edf76afce8760ce572d7850d97a3e6a036c6e88dfa85c6e04e23e8",
+          "digest": "sha256:15ba29a2c525397f576cadf3f0268ee30fb0ec6883e9a318f692bcd160b34e49",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-spill-wipe-s4",
-          "digest": "sha256:78b394733f50281b076323f2125eef1d6f65f8f04a1d146bddf04580cf9b534a",
+          "digest": "sha256:29fd377435de9befb7755517bcbde8949cf7a9b0e06b899a77dac3c9aac7e6af",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-spill-wipe-s5",
-          "digest": "sha256:e33526d46b613fefa7327bbf4abf789bcbc8d39edb242e4b87d54767f78c30eb",
+          "digest": "sha256:aa4abceb4e3a3358c27f52a6f29cabb6e7f987a00d1a1e15e8ca3ea02e3a3632",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-two-arm-handover-s1",
-          "digest": "sha256:455941ec6d538ba16a7140f3821606c575cf286735007c5256faa47aa470ecff",
+          "digest": "sha256:71c9198baac125af8f39a7cdad8ace3c24d794244ddc40add2f1b51e920cf7eb",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-two-arm-handover-s2",
-          "digest": "sha256:a39a12bc264179436cc7301c2f23282357cd09ec3646940e41f3a9d9c3fae357",
+          "digest": "sha256:b0869abf13a6eea499677ae9fe8f1289fd427e66271a1157215cd5a852de3a91",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-two-arm-handover-s3",
-          "digest": "sha256:dc4d3c12c9fd826e81a02a2b9db6938486c53ee94deddbd3644cb955eeb0cbc8",
+          "digest": "sha256:82a8b08f12cd5c88b03d82c88000d81abfed2eeeca5aa7863e2f7f3f38b0355e",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-two-arm-handover-s4",
-          "digest": "sha256:e6693d869dceed359a316070139c4ec3d0dce6e49d0499c85de165353f269d23",
+          "digest": "sha256:18613038c1e58d24df14e1e3e163cfb022064246130bf89c045630387e115c4d",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-two-arm-handover-s5",
-          "digest": "sha256:fee51ba93b88f7b274e51accf8f2793744f0bfa2b37f0143a1e64c5760360603",
+          "digest": "sha256:9209ed326916f4f72b0cc7770593877f3cc80b1de2233fbe8f390768858fe6d0",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-two-arm-lift-s1",
-          "digest": "sha256:9bd1bf06b29259a0f6ab55436247fef69c8a0f9e423894cc1218176a1a57344c",
+          "digest": "sha256:45cf935e71c03ac461894765f3377fa2a0621a47b02ce11cc9cc3473da5c0604",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-two-arm-lift-s3",
-          "digest": "sha256:1ca122aeb3a05855352ad9c5680cdf8f52cdcf93e76e1261ec57356c8386d174",
+          "digest": "sha256:ca16e5690208be8919d1a5722286194d9bd2fab934cee7d81218e8d44cf3fed8",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-two-arm-lift-s5",
-          "digest": "sha256:ee78fb549291fd6f5cb0c2d1c6251f8c823ee54ae4cf2bd22f8ce7bdf9c14ae4",
+          "digest": "sha256:419bc07422eab40c0778d76c4f7750578c49a276ff11a1f5c1989705527dd257",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-two-arm-lift-s7",
-          "digest": "sha256:5d27dbb01d6dc86e6021478c56c99f19d2173948a92cd53e5877a8a630575bd6",
+          "digest": "sha256:d41c6592ac49afa1e9d3f9c339d7386164067d3d260339b0863ab3fad785f9e6",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
         },
         {
           "id": "capx-two-arm-lift-s8",
-          "digest": "sha256:e78a39c691d53615eef79927ff637efb8f7f54eb7ba35bc6b730be827a92f63a",
+          "digest": "sha256:24842c9304a8584f3c4c985d03106bf5caed077bba83d5f4c778cdbe11af6961",
           "backend": "capx",
           "runtime": "capx",
           "suite": "capx"
