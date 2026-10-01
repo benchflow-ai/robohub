@@ -225,6 +225,231 @@
         }
       }
     },
+    "capx": {
+      "noop": false,
+      "robouse": {
+        "commit": "f2f8a4caec273b5c689e68f92f6408f753bf2e83",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
+      "tasks": {
+        "capx-cube-lifting-s1": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-cube-lifting-s2": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-cube-lifting-s3": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-cube-lifting-s4": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-cube-lifting-s5": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-cube-restack-s1": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-cube-restack-s2": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-cube-restack-s3": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-cube-restack-s4": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-cube-restack-s5": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-cube-stack-s1": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-cube-stack-s2": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-cube-stack-s3": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-cube-stack-s4": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-cube-stack-s5": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-libero-object-swap-0": {
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        "capx-libero-object-swap-1": {
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        "capx-libero-object-swap-2": {
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        "capx-libero-object-swap-3": {
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        "capx-libero-object-swap-5": {
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        "capx-libero-object-swap-6": {
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        "capx-libero-object-swap-7": {
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        "capx-libero-object-swap-9": {
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        "capx-nut-assembly-s1": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-nut-assembly-s2": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-nut-assembly-s3": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-nut-assembly-s4": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-nut-assembly-s5": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-spill-wipe-s1": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-spill-wipe-s2": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-spill-wipe-s3": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-spill-wipe-s4": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-spill-wipe-s5": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-two-arm-handover-s1": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-two-arm-handover-s2": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-two-arm-handover-s3": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-two-arm-handover-s4": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-two-arm-handover-s5": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-two-arm-lift-s1": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-two-arm-lift-s3": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-two-arm-lift-s5": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-two-arm-lift-s7": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        "capx-two-arm-lift-s8": {
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        }
+      }
+    },
     "isaaclab-factory": {
       "noop": false,
       "robouse": {
@@ -327,6 +552,46 @@
           "backend": "gpu",
           "runtime": "gpu",
           "suite": "gpu-maniskill"
+        }
+      }
+    },
+    "rle-bench": {
+      "noop": false,
+      "robouse": {
+        "commit": "f2f8a4caec273b5c689e68f92f6408f753bf2e83",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
+      "tasks": {
+        "rle-balance-coins": {
+          "backend": "rlebench",
+          "runtime": "rlebench",
+          "suite": "rle-bench"
+        },
+        "rle-cantilever-overhang": {
+          "backend": "rlebench",
+          "runtime": "rlebench",
+          "suite": "rle-bench"
+        },
+        "rle-hidden-com-box-1": {
+          "backend": "rlebench",
+          "runtime": "rlebench",
+          "suite": "rle-bench"
+        },
+        "rle-hidden-com-box-2": {
+          "backend": "rlebench",
+          "runtime": "rlebench",
+          "suite": "rle-bench"
+        },
+        "rle-hidden-com-box-3": {
+          "backend": "rlebench",
+          "runtime": "rlebench",
+          "suite": "rle-bench"
+        },
+        "rle-tower-max-height": {
+          "backend": "rlebench",
+          "runtime": "rlebench",
+          "suite": "rle-bench"
         }
       }
     },
@@ -5179,6 +5444,8 @@
   "runtimes": {
     "base": "sha256:16ae6e6a3c3b70fdf7d62473846ee401dbe85096d92b9f96b3efde95e78ebb4d",
     "behavior": "sha256:ed6260be7a33eb35e97b3b891b0d922987b7665ef3c513d6ca5cda4d0ff03389",
+    "capx": "sha256:5045ba5cce49be692b915a0933c60cbca234b2ece7a3bfbbb4cd966a6cebe46e",
+    "capx-libero": "sha256:4688fb53984c1a5375b646f713aa15d4229704a709f95e4522ccd45baa9460c1",
     "composed": "sha256:4f5aa582409bcc0f86c3214485b86d0dac79f00a26ab9727219365c5fce2f9de",
     "dexjoco": "sha256:e73eebfcf96bf7213c82e6c4da28a13c12661c31a081f9111f34ee15fb4f0fb6",
     "dmcontrol": "sha256:670434aba34601cb902c27fdaebf97598b387efdd636fcaf407468d6dd502d35",
@@ -5191,6 +5458,7 @@
     "maniskill": "sha256:696517b8ab43696fb3ac204397728bf99cc608410af186b41a0f945aa66e1ccc",
     "menagerie": "sha256:4f80f09e16b0a74ff7a59f8e4c11ce15035357e040dcd6fe1d7b6c8bb7949279",
     "myosuite": "sha256:74fa8b26b423bb31a999286252e2bba63f17e195e43529dc3e69c4698d029e84",
+    "rlebench": "sha256:5d4b537a733e264860fa1c74f9c6110847ee21c83f93632e4b0fd457275941e8",
     "robocasa": "sha256:e4164729f46ca3cbad76c770bde3884f49b63e23d67c483e01d103de01d219da",
     "robodojo": "sha256:2425e623d907fb525547dea62ec58d7be707e4b07d7acc71d44aab07a54c884e",
     "robosuite": "sha256:e65794b6cdd2900a289ed153db69da8028df999489e928aaf7dcc390463089f1"
