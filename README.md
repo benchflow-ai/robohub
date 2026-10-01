@@ -87,7 +87,19 @@ A task runs as two containers. `main` is BenchFlow's agent container with only t
 
 Oracle token. In vision tasks the agent sees camera images, not object positions; the reference solution reads the true state with a token. No package contains a token. The simulator takes it from `ROBOUSE_ORACLE_TOKEN` in the environment of the `bench` process, and the reference solution gets the same variable through `oracle.env` in `task.md`, which BenchFlow passes to the oracle only. Set a fresh random value for reference-solution runs, as above. Without it the simulator has no token, nothing is privileged, and reference solutions that need the true state score 0. Agents never receive it.
 
-GPU datasets. `bench` cannot give a sandbox a GPU, so the datasets marked GPU run with Robo Use against simulator workers on an NVIDIA RTX GPU machine; each dataset's `run` entry in `hub.yaml` has the command, and the [Robo Use docs](https://robouse.ai/docs/suites/gpu-track/) have the setup.
+The datasets marked GPU need simulator workers on a GPU machine; see [GPU datasets](#gpu-datasets).
+
+## GPU datasets
+
+Six datasets run their simulators on NVIDIA GPUs: `stanfordvl/behavior-1k`, `haosulab/maniskill-gpu`, `benchflow/robouse-genesis`, `benchflow/robouse-playground`, `isaac-sim/isaaclab-factory` and `robodojo-benchmark/robodojo`. Their task packages hold only a thin client: the `simulator` service (runtime `behavior`, `gpu` or `robodojo`) keeps network access and sends each request to simulator workers that you run on a GPU machine. The host running `bench` names a JSON file with the workers' endpoints and shared secret in an environment variable, which the service mounts read-only; the agent container never sees it.
+
+| Datasets | Simulator workers and hardware | Endpoints file |
+|---|---|---|
+| `stanfordvl/behavior-1k` | BEHAVIOR-1K (OmniGibson 3.9.3 on NVIDIA Isaac Sim 5.1) with the BEHAVIOR Data Bundle, one worker per activity; an NVIDIA RTX GPU with RT cores and a driver from the 580 branch (Isaac Sim 5.1 crashed at start-up on 595) | `ROBOUSE_BEHAVIOR_REMOTE` |
+| `haosulab/maniskill-gpu`, `benchflow/robouse-genesis`, `benchflow/robouse-playground`, `isaac-sim/isaaclab-factory` | one worker per simulator: ManiSkill3 3.0.1 (SAPIEN, ray-traced cameras), Genesis 1.4.2, MuJoCo Playground 0.2.0 (MuJoCo Warp), Isaac Lab 2.3 on Isaac Sim 5.1; an NVIDIA RTX GPU (Isaac Lab ran without its RTX renderer on driver 595) | `ROBOUSE_GPU_REMOTE` |
+| `robodojo-benchmark/robodojo` | RoboDojo (NVIDIA Isaac Sim 5.1, Isaac Lab 2.3) with its Hugging Face assets, one worker per task; an NVIDIA RTX GPU with RT cores and a driver from the 580 branch | `ROBOUSE_ROBODOJO_REMOTE` |
+
+The worker programs are in the Robo Use package (`pip install robouse==0.2.0`), and each file's docstring says how to start it: `robouse/backends/behavior/worker.py` (in the BEHAVIOR-1K conda environment), `robouse/backends/gpu/worker/server.py` (one process per simulator family) and `robouse/backends/robodojo/worker.py` (from a RoboDojo checkout at commit `726e9aa`, in RoboDojo's environment). The simulators they drive are installed separately, under their own terms (see [Third-party simulators and assets](#third-party-simulators-and-assets)); no prebuilt worker image is published. The Robo Use maintainers checked every task of these datasets with the reference solutions and a no-op control through the Robo Use runner from a source checkout; they were not run in the hub's checks, where their packages passed `bench tasks check` only.
 
 ## Simulator images
 
