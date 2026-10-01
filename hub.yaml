@@ -2,9 +2,12 @@
 # scripts/export.py reads this file and a Robo Use checkout and writes runtimes/ and datasets/;
 # scripts/build_registry.py pins every dataset version to a commit in registry.json.
 
+# The Robo Use release the next export comes from (scripts/export.py refuses a checkout of another version).
+# export.json records the release each dataset was exported from: rle-bench/rle-bench and capgym/cap-x from 0.3.0,
+# every other dataset from 0.2.0.
 robouse:
-  repo: https://pypi.org/project/robouse/0.2.0/
-  package_version: 0.2.0
+  repo: https://pypi.org/project/robouse/0.3.0/
+  package_version: 0.3.0
 
 # Simulator runtimes (runtimes/<name>, built from templates/runtimes/<name>). Every task's compose file builds its
 # simulator image from one of them.
@@ -386,13 +389,13 @@ datasets:
     upstream: {benchmark: "RLE-Bench", org_name: "RLE-Bench (Harvard, Georgia Tech)", repo: "https://github.com/RLE-Bench/RLE-Bench", licence: "MIT (code and tasks; scene code redistributed here)"}
     version: "0.1"
     suites: [rle-bench]
-    description: 'Robo Use RLE-Bench 0.1: RLE-Bench''s tabletop reasoning tasks (tower, cantilever, balance, hidden centre of mass) for an agent in the loop. Tower, cantilever and balance pass at an RLE-Bench quality of 0.5 or more, a Robo Use threshold; RLE-Bench reports the quality itself as the score.'
+    description: 'Robo Use RLE-Bench 0.1: RLE-Bench''s tabletop reasoning tasks (tower, cantilever, balance, hidden centre of mass) for an agent in the loop. Tower, cantilever and balance pass at an RLE-Bench quality of 0.5 or more; that pass mark is Robo Use''s rule, since RLE-Bench has none and reports the quality itself as the score.'
   - name: capgym/cap-x
     dir: capx
     upstream: {benchmark: "CaP-X (CaP-Bench)", org_name: "CaP-X (NVIDIA, UC Berkeley, Stanford, CMU)", repo: "https://github.com/capgym/cap-x", licence: "MIT (environments, APIs, prompts and reference code redistributed here)"}
     version: "0.1"
     suites: [capx, capx-libero]
-    description: 'Robo Use CaP-X 0.1: CaP-Bench''s RoboSuite and LIBERO-PRO tasks as code as policy with CaP-X''s privileged API.'
+    description: 'Robo Use CaP-X 0.1: CaP-Bench''s RoboSuite and LIBERO-PRO tasks as code as policy with CaP-X''s privileged API (object poses from the simulator and inverse kinematics; no perception models). The agent runs code over many turns, which is not one of CaP-Bench''s tiers.'
   - name: benchflow/robouse-noop-control
     dir: robouse-noop-control
     former_names: [robouse-noop-control]
