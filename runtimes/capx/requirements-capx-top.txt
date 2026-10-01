@@ -1,0 +1,29 @@
+# Top-level pins of the CaP-X worker environment, from CaP-X's uv.lock at 53e9966 (Python 3.12 instead of 3.10;
+# CaP-X allows >=3.10,<3.13). Resolved once and frozen into requirements-capx.txt. PyRoKi (git 95afccc) is installed
+# with --no-deps, because its unpinned jaxls requirement conflicts with CaP-X's pinned jaxls commit.
+numpy==1.26.4
+scipy==1.15.3
+mujoco==3.5.0
+numba==0.61.2
+gymnasium==1.2.3
+jax==0.4.29
+jaxlib==0.4.29
+jaxlie==1.5.0
+jax-dataclasses==1.6.3
+jaxls @ git+https://github.com/brentyi/jaxls.git@6fe7cf9d56223736b2c0272d080ec7346203c648
+jaxtyping
+loguru
+tyro
+pyliblzfse
+robot-descriptions==1.22.0
+yourdfpy==0.0.60
+trimesh==4.11.2
+viser==1.0.21
+matplotlib==3.10.7
+pillow==12.1.1
+opencv-python-headless==4.11.0.86
+termcolor==3.3.0
+h5py==3.15.1
+imageio==2.37.2
+pyyaml==6.0.3
+greenlet==3.1.1

@@ -1,0 +1,29 @@
+# RLE-Bench worker environment (Python 3.12), installed with --no-deps so exactly these versions are used. The core pins
+# (numpy, scipy, mujoco, numba, gymnasium) are RLE-Bench's own (sim/robocasa/base/Dockerfile at RLE-Bench 34a73aa); the
+# rest are the runtime dependencies RLE-Bench installs or that robosuite and MuJoCo import. robosuite and RoboCasa are
+# installed from GitHub at RLE-Bench's pinned commits (Dockerfile).
+absl-py==2.5.0
+cloudpickle==3.1.2
+etils==1.14.0
+farama-notifications==0.0.6
+fsspec==2026.9.0
+glfw==2.10.2
+gymnasium==0.29.1
+h5py==3.16.0
+imageio==2.37.4
+imageio-ffmpeg==0.6.0
+llvmlite==0.44.0
+lxml==6.1.1
+mujoco==3.3.1
+numba==0.61.2
+numpy==2.2.5
+opencv-python-headless==5.0.0.93
+pillow==12.3.0
+pyopengl==3.1.10
+pyyaml==6.0.3
+pyyaml-include==1.4.1
+scipy==1.15.3
+termcolor==3.3.0
+tqdm==4.70.0
+typing-extensions==4.16.0
+zipp==4.1.0
