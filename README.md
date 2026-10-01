@@ -112,8 +112,8 @@ The simulator images are built from this repository, not pulled from a registry.
 | `maniskill` | ManiSkill 3.0.1 and SAPIEN 3.0.3 (SHA-256 pinned wheel) |
 | `robocasa` | RoboCasa at `456174f`, robosuite at `5ce6643`, 87 asset archives from two Hugging Face datasets at pinned revisions, each SHA-256 checked |
 | `rlebench` | robosuite at `5ce6643` and RoboCasa at `b4684e6` (RLE-Bench's pins), pinned pip packages |
-| `capx` | CaP-X's robosuite fork at `9729273`, PyRoKi at `95afccc`, jaxls at `6fe7cf9`, top-level pip packages pinned from CaP-X's lockfile, the `panda_description` robot model |
-| `capx-libero` | LIBERO-PRO with its assets at `5368540`, CaP-X's robosuite 1.4 fork at `a498b08`, PyRoKi at `95afccc`, CPU PyTorch, top-level pip packages pinned from CaP-X's lockfile, the `panda_description` robot model |
+| `capx` | CaP-X's robosuite fork at `9729273`, PyRoKi at `95afccc`, jaxls at `6fe7cf9`, pinned pip packages (a complete lock), the `panda_description` robot model |
+| `capx-libero` | LIBERO-PRO with its assets at `5368540`, CaP-X's robosuite 1.4 fork at `a498b08`, PyRoKi at `95afccc`, CPU PyTorch 2.8.0, pinned pip packages (a complete lock), the `panda_description` robot model |
 | `behavior`, `gpu`, `robodojo` | a thin client; the simulators run on remote GPU workers |
 
 ## Third-party simulators and assets
