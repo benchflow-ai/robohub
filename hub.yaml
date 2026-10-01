@@ -313,7 +313,7 @@ datasets:
     description: 'Robo Use CubePick 0.2: the reach-the-cube world from inspect-robots.'
   - name: haosulab/maniskill-gpu
     dir: maniskill-gpu
-    upstream: {benchmark: "ManiSkill3", org_name: "Hao Su Lab (UC San Diego) and Hillbot", repo: "https://github.com/haosulab/ManiSkill", licence: "Apache-2.0 (code); CC BY-NC 4.0 (assets, not redistributed)"}
+    upstream: {benchmark: "ManiSkill3", org_name: "Hao Su Lab (UC San Diego) and Hillbot", repo: "https://github.com/mani-skill/ManiSkill", licence: "Apache-2.0 (code); CC BY-NC 4.0 (assets, not redistributed)"}
     version: "0.2"
     suites: [gpu-maniskill]
     run:
