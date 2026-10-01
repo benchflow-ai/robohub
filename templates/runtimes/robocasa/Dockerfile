@@ -51,7 +51,7 @@ ENV PYTHONPATH=/opt/robohub-runtime/robouse/src
 # import check, then build one kitchen once (compiles robosuite's numba kernels into their cache, checks the assets)
 RUN python -c "import robouse.session, robouse.backends.robocasa" \
  && cd /tmp && PYTHONPATH= /opt/robocasa-venv/bin/python -c "import runpy, sys; \
-W = runpy.run_path('/opt/robohub-runtime/robouse/src/robouse/backends/robocasa_worker.py'); \
+W = runpy.run_path('/opt/robohub-runtime/robouse/src/robouse/backends/robocasa/worker.py'); \
 w = W['Worker'](); print(w.make('CloseDrawer', 1, 1, 0)['lang']); w.env.close()"
 
 WORKDIR /episode

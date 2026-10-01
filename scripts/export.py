@@ -19,10 +19,14 @@ Reads hub.yaml (datasets, runtimes) and core.txt, and writes:
       oracle/solve.sh + oracle/vendor/ reference solution; drives the robot through the socket only
     export.json                      what was exported: Robo Use commit, runtime digests, task -> suite/runtime
 
+A runtime with `native: true` in hub.yaml (composed tasks) is written by Robo Use's own exporter
+(robouse.engine.format, on BenchFlow's embodied layer), so this script then needs BenchFlow in the same Python.
+`--noop-out DIR` writes every selected dataset with no-op reference solutions to DIR instead (a local negative control).
+
 The same task has byte-identical packages in every dataset that contains it (same digest). Run with the Robo Use
 dev venv: it reads task folders with robouse.tasks (PyYAML) and vendors Meta-World's scripted expert policies from
-the installed `metaworld` package. Re-running is idempotent: packages are rewritten from the source, and the oracle
-token of an existing package is kept so an unchanged task keeps its digest.
+the installed `metaworld` package. Re-running is idempotent: packages hold no oracle token (the host sets
+$ROBOUSE_ORACLE_TOKEN per run; see ORACLE_TOKEN_ENV), so an unchanged task keeps its digest.
 """
 from __future__ import annotations
 
@@ -32,7 +36,6 @@ import hashlib
 import json
 import os
 import re
-import secrets
 import shutil
 import subprocess
 import sys
@@ -45,6 +48,35 @@ TEMPLATES = HUB / "templates"
 WALL_MARGIN_S = 900  # the episode clock starts when the simulator is up, before BenchFlow installs the harness
 PKG_IGNORE = shutil.ignore_patterns("__pycache__", "*.pyc", ".DS_Store", "bundled_tasks",
                                     "engine", "assets_provenance")
+# The oracle token that unlocks privileged state (vision tasks) is never stored in a package. The host chooses it per
+# run: the simulator reads $ROBOUSE_ORACLE_TOKEN through compose interpolation, and the reference solution gets the
+# same variable through task.md `oracle.env`, which BenchFlow passes to the oracle only. Unset means no token, and
+# then nothing is privileged. Run reference solutions with ROBOUSE_ORACLE_TOKEN=$(openssl rand -hex 16).
+ORACLE_TOKEN_ENV = "ROBOUSE_ORACLE_TOKEN"
+TOKEN_REF = "${" + ORACLE_TOKEN_ENV + ":-}"
+METAWORLD_LICENSE = """\
+MIT License
+
+Copyright (c) 2019 Meta-World Team
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
 
 
 # ---- helpers ----------------------------------------------------------------------------------------------
@@ -164,7 +196,7 @@ def _closure(src: Path, roots: list[str]) -> set[Path]:
 
 # pip packages a backend's reference solution imports besides numpy (installed at oracle run time, never into the image)
 ORACLE_PIP = {"dexjoco": ["scipy==1.18.1"]}
-ORACLE_BACKEND_MODULE = {"robosuite": "robouse.backends.robosuite_backend", "metaworld": "robouse.backends.metaworld_backend"}
+ORACLE_BACKEND_MODULE: dict[str, str] = {}  # overrides from hub.yaml; otherwise robouse.oracle.oracle_module(backend)
 
 
 def configure_oracles(hub: dict) -> None:
@@ -179,7 +211,15 @@ def configure_oracles(hub: dict) -> None:
 
 def vendor_robouse(robouse: Path, backend: str, dst: Path) -> None:
     src = robouse / "src"
-    roots = ["robouse.oracle", "robouse.agent_cli", ORACLE_BACKEND_MODULE.get(backend, f"robouse.backends.{backend}")]
+    if backend in ORACLE_BACKEND_MODULE:
+        module = ORACLE_BACKEND_MODULE[backend]
+    else:
+        from robouse.oracle import oracle_module  # the module `python -m robouse.oracle --backend <backend>` runs
+
+        module = oracle_module(backend)
+    if _module_file(src, module) is None:
+        raise SystemExit(f"backend {backend}: its reference solution module {module} is not in {src}")
+    roots = ["robouse.oracle", "robouse.agent_cli", module]
     for f in sorted(_closure(src, roots)):
         out = dst / f.relative_to(src)
         out.parent.mkdir(parents=True, exist_ok=True)
@@ -196,6 +236,7 @@ def vendor_metaworld_policy(env: str, vendor: Path) -> None:
     dst.mkdir(parents=True)
     (vendor / "metaworld" / "__init__.py").write_text(
         '"""Vendored subset of Meta-World (MIT): only the scripted expert policy this task needs."""\n')
+    (vendor / "metaworld" / "LICENSE").write_text(METAWORLD_LICENSE)  # MIT: the notice travels with the code
     mod = cls.__module__.rsplit(".", 1)[1]
     for name in ("action.py", "policy.py", f"{mod}.py"):
         shutil.copy2(src_dir / name, dst / name)
@@ -212,7 +253,7 @@ robo observe
 """
 
 
-def write_oracle(task, robouse: Path, dst: Path, token: str, noop: bool) -> None:
+def write_oracle(task, robouse: Path, dst: Path, noop: bool) -> None:
     dst.mkdir(parents=True)
     if noop:
         (dst / "solve.sh").write_text(NOOP_SOLVE)
@@ -241,7 +282,6 @@ def write_oracle(task, robouse: Path, dst: Path, token: str, noop: bool) -> None
         "# the scripted expert policy). BenchFlow uploads /oracle only in oracle mode; agents never see it.",
         "set -euo pipefail",
         'export PYTHONPATH="$(cd "$(dirname "$0")" && pwd)/vendor${PYTHONPATH:+:$PYTHONPATH}"',
-        f"export ROBOUSE_ORACLE_TOKEN={token}",
         *([f"# the reference solution needs {', '.join(pip)} (the agent image has only numpy); install it outside /oracle",
            f"python3 -m pip install --quiet --disable-pip-version-check --no-cache-dir --target /tmp/robohub-oracle-deps {' '.join(pip)}",
            'export PYTHONPATH="$PYTHONPATH:/tmp/robohub-oracle-deps"'] if pip else []),
@@ -253,7 +293,7 @@ def write_oracle(task, robouse: Path, dst: Path, token: str, noop: bool) -> None
 
 # ---- one task ---------------------------------------------------------------------------------------------
 
-def native_task_md(meta: dict, instruction: str, prompt_prefix: str) -> str:
+def native_task_md(meta: dict, instruction: str, prompt_prefix: str, noop: bool = False) -> str:
     rb = meta["robouse"]
     task = dict(meta.get("task") or {})
     task.setdefault("name", f"robouse/{rb.get('id')}")
@@ -267,6 +307,8 @@ def native_task_md(meta: dict, instruction: str, prompt_prefix: str) -> str:
         "verifier": {"service": "simulator", "user": "root", "timeout_sec": verifier_timeout},
         "sandbox": {"cpus": 1, "memory_mb": 2048, "build_timeout_sec": 3600},
     }
+    if not noop:  # the reference solution's copy of the host's per-run token (BenchFlow passes oracle.env to the oracle only)
+        fm["oracle"] = {"env": {ORACLE_TOKEN_ENV: TOKEN_REF}}
     return "---\n" + _dump(fm) + "---\n\n" + prompt_prefix + instruction.strip() + "\n"
 
 
@@ -277,7 +319,7 @@ REMOTE_WORKER = """\
 """
 
 
-def compose(meta: dict, context: str, runtime_digest: str, token: str, sim_memory: str,
+def compose(meta: dict, context: str, runtime_digest: str, sim_memory: str,
             remote_worker: bool | str = False) -> str:
     """`remote_worker`: False, or the name of the environment variable holding the worker endpoints file
     (hub.yaml `remote_worker: true` means ROBOUSE_BEHAVIOR_REMOTE; a string names another one)."""
@@ -289,7 +331,6 @@ def compose(meta: dict, context: str, runtime_digest: str, token: str, sim_memor
     text = (text.replace("__SIM_CONTEXT__", json.dumps(context))
                 .replace("__RUNTIME_DIGEST__", runtime_digest)
                 .replace("__MAX_WALL_S__", str(int(agent_timeout + WALL_MARGIN_S)))
-                .replace("__ORACLE_TOKEN__", token)
                 .replace("__SIM_MEMORY__", sim_memory)
                 .replace("__TASK_MD__", block))
     if remote_worker:
@@ -300,44 +341,70 @@ def compose(meta: dict, context: str, runtime_digest: str, token: str, sim_memor
                             "      - ${HOST_ARTIFACTS_PATH}:/logs/artifacts\n"
                             f"      - ${{{var}:?set {var} to the {what} worker "
                             "endpoints file}:/run/robouse/remote.json:ro\n")
-        text = text.replace("    environment:\n      # Given only", "    environment:\n"
-                            f"      {var}: /run/robouse/remote.json\n      # Given only")
+        text = text.replace("    environment:\n      # Chosen per run", "    environment:\n"
+                            f"      {var}: /run/robouse/remote.json\n      # Chosen per run")
     return text
-
-
-_TOKEN_RE = re.compile(r'ROBOUSE_ORACLE_TOKEN: "([0-9a-f]{32})"')
-
-
-_TOKENS: dict[str, str] = {}
-
-
-def load_existing_tokens() -> None:
-    """Oracle tokens of the packages already in datasets/ (read before anything is rewritten)."""
-    for compose_file in sorted((HUB / "datasets").glob("*/*/environment/docker-compose.yaml")):
-        m = _TOKEN_RE.search(compose_file.read_text())
-        if m:
-            _TOKENS.setdefault(compose_file.parents[1].name, m.group(1))
 
 
 def export_task(task, robouse: Path, out_parent: Path, runtime: str, runtime_digest: str, sim_memory: str,
                 prompt_prefix: str, noop: bool = False, remote_worker: bool | str = False) -> Path:
     meta = json.loads(json.dumps(task.meta))
     dst = out_parent / task.id
-    token = _TOKENS.setdefault(task.id, secrets.token_hex(16))
     if dst.exists():
         shutil.rmtree(dst)
     env = dst / "environment"
     env.mkdir(parents=True)
-    (dst / "task.md").write_text(native_task_md(meta, task.instruction, prompt_prefix))
+    (dst / "task.md").write_text(native_task_md(meta, task.instruction, prompt_prefix, noop))
     shutil.copy2(TEMPLATES / "agent" / "Dockerfile", env / "Dockerfile")
     (env / "robo").write_text("#!/usr/bin/env python3\n" + (robouse / "src" / "robouse" / "agent_cli.py").read_text())
     (env / "robo").chmod(0o755)
     context = os.path.relpath(HUB / "runtimes" / runtime, env)
-    (env / "docker-compose.yaml").write_text(compose(meta, context, runtime_digest, token, sim_memory, remote_worker))
+    (env / "docker-compose.yaml").write_text(compose(meta, context, runtime_digest, sim_memory, remote_worker))
     shutil.copytree(TEMPLATES / "verifier", dst / "verifier", ignore=shutil.ignore_patterns("__pycache__"))
     (dst / "verifier" / "test.sh").chmod(0o755)
-    write_oracle(task, robouse, dst / "oracle", token, noop)
+    write_oracle(task, robouse, dst / "oracle", noop)
     return dst
+
+
+def export_native(ids: list[str], by_id: dict, suite_of: dict, out_parent: Path, runtime: str,
+                  noop: bool) -> tuple[dict, str]:
+    """Tasks of a `native: true` runtime, written by Robo Use's own exporter (robouse.engine.format, on BenchFlow's
+    embodied layer; needs BenchFlow in this Python): its simulator build context goes to runtimes/<runtime>/, the
+    packages to out_parent/<task>/, with the compose build context pointed at runtimes/<runtime>. Returns the tasks
+    (for export.json) and the runtime digest."""
+    import tempfile
+
+    from robouse.engine.format import materialize
+
+    rt_dir = HUB / "runtimes" / runtime
+    tasks = {}
+    with tempfile.TemporaryDirectory() as tmp:
+        for tid in ids:
+            materialize(by_id[tid].path, Path(tmp), noop=noop, flat=True)
+        built = sorted(Path(tmp).glob("runtime-*"))
+        if len(built) != 1:
+            raise SystemExit(f"runtime {runtime}: expected one native runtime, got {[p.name for p in built]}")
+        if rt_dir.exists():
+            shutil.rmtree(rt_dir)
+        shutil.copytree(built[0], rt_dir)
+        if out_parent.exists():
+            shutil.rmtree(out_parent)
+        out_parent.mkdir(parents=True)
+        for tid in ids:
+            src, dst = Path(tmp) / "tasks" / tid, out_parent / tid
+            shutil.copytree(src, dst)
+            cf = dst / "environment" / "docker-compose.yaml"
+            old = json.dumps(os.path.relpath(built[0], src / "environment"))
+            text = cf.read_text()
+            if old not in text:
+                raise SystemExit(f"{tid}: build context {old} not found in its compose file")
+            cf.write_text(text.replace(old, json.dumps(os.path.relpath(rt_dir, dst / "environment"))))
+            marker = dst / ".robouse-source.json"
+            info = json.loads(marker.read_text())
+            info["runtime"] = runtime  # runtimes/<runtime>, not the exporter's content-addressed folder name
+            marker.write_text(json.dumps(info, indent=2))
+            tasks[tid] = {"suite": suite_of[tid], "backend": by_id[tid].spec["backend"], "runtime": runtime}
+    return tasks, digest(rt_dir)
 
 
 # ---- main -------------------------------------------------------------------------------------------------
@@ -347,6 +414,9 @@ def main(argv=None) -> int:
     ap.add_argument("--robouse", required=True, help="a Robo Use checkout (tasks/, src/robouse, assets/)")
     ap.add_argument("--datasets", default="", help="comma-separated dataset names (default: all in hub.yaml)")
     ap.add_argument("--allow-dirty", action="store_true", help="export even if the Robo Use checkout has local changes")
+    ap.add_argument("--noop-out", default="", metavar="DIR",
+                    help="write every selected dataset with no-op reference solutions to DIR/<dir>/ (a local negative "
+                         "control for checking that each task scores 0; datasets/ and export.json are left alone)")
     a = ap.parse_args(argv)
 
     robouse = Path(a.robouse).expanduser().resolve()
@@ -369,10 +439,10 @@ def main(argv=None) -> int:
     backend_runtime = {b: rt for rt, cfg in hub["runtimes"].items() for b in cfg["backends"]}
 
     configure_oracles(hub)
-    load_existing_tokens()
     wanted = set(filter(None, a.datasets.split(",")))
     manifest_path = HUB / "export.json"
-    manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {"datasets": {}}
+    # a full export starts export.json afresh (no entries for folders that are gone); --datasets updates it in place
+    manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() and wanted else {"datasets": {}}
     # with --datasets, only the runtimes those datasets use are rewritten; the others keep their exported content
     used = None
     if wanted:
@@ -405,36 +475,47 @@ def main(argv=None) -> int:
         return ids
 
     by_name = {d["name"]: d for d in hub["datasets"]}
+    native_runtimes = {rt for rt, cfg in hub["runtimes"].items() if cfg.get("native")}
     jobs = []
-    native_suites = {s for s, m in hub["suites"].items() if hub["runtimes"].get(m.get("runtime", ""), {}).get("native")}
-    native_suites |= {"remix"}  # written by `robouse export` (see hub.yaml: runtimes.remix)
     for ds in hub["datasets"]:
         if wanted and not wanted & {ds["name"], ds.get("dir", ds["name"])}:
             continue
-        if set(ds.get("suites", [])) and set(ds["suites"]) <= native_suites:
-            continue
         if "noop_of" in ds:  # negative control: the tasks of another dataset with no-op reference solutions
+            if a.noop_out:
+                continue  # a committed negative control is already one
             src = by_name[ds["noop_of"]]
             jobs.append(({**{k: v for k, v in src.items() if k in ("suites", "tasks_file")}, "name": ds["name"],
                           "dir": ds.get("dir", ds["name"])}, True))
         else:
-            jobs.append((ds, False))
+            jobs.append((ds, bool(a.noop_out)))
+    out_root = Path(a.noop_out).resolve() if a.noop_out else HUB / "datasets"
     for ds, noop in jobs:
         folder = ds.get("dir", ds["name"])  # names are <org>/<name>; the folder stays flat (datasets/<dir>/<task>)
-        out_parent = HUB / "datasets" / folder
-        if out_parent.exists():
-            shutil.rmtree(out_parent)
-        out_parent.mkdir(parents=True)
-        tasks = {}
-        for tid in dataset_ids(ds):
-            task = by_id[tid]
-            rt = backend_runtime[task.spec["backend"]]
-            sim_memory = hub["runtimes"][rt].get("sim_memory", "3G")
-            export_task(task, robouse, out_parent, rt, runtime_digests[rt], sim_memory, PROMPT_PREFIX, noop,
-                        hub["runtimes"][rt].get("remote_worker") or False)
-            tasks[tid] = {"suite": suite_of[tid], "backend": task.spec["backend"], "runtime": rt}
-        manifest["datasets"][folder] = {"noop": noop, "tasks": tasks, "robouse": prov}
+        out_parent = out_root / folder
+        ids = dataset_ids(ds)
+        rts = {backend_runtime[by_id[i].spec["backend"]] for i in ids}
+        if rts & native_runtimes:  # written by Robo Use's own exporter (robouse.engine.format)
+            if len(rts) != 1:
+                raise SystemExit(f"{ds['name']}: a dataset on a native runtime cannot mix runtimes ({sorted(rts)})")
+            rt = rts.pop()
+            tasks, runtime_digests[rt] = export_native(ids, by_id, suite_of, out_parent, rt, noop)
+        else:
+            if out_parent.exists():
+                shutil.rmtree(out_parent)
+            out_parent.mkdir(parents=True)
+            tasks = {}
+            for tid in ids:
+                task = by_id[tid]
+                rt = backend_runtime[task.spec["backend"]]
+                sim_memory = hub["runtimes"][rt].get("sim_memory", "3G")
+                export_task(task, robouse, out_parent, rt, runtime_digests[rt], sim_memory, PROMPT_PREFIX, noop,
+                            hub["runtimes"][rt].get("remote_worker") or False)
+                tasks[tid] = {"suite": suite_of[tid], "backend": task.spec["backend"], "runtime": rt}
+        if not a.noop_out:
+            manifest["datasets"][folder] = {"noop": noop, "tasks": tasks, "robouse": prov}
         print(f"{ds['name']}: {len(tasks)} task(s){' (no-op oracles)' if noop else ''}")
+    if a.noop_out:
+        return 0
     manifest["runtimes"] = runtime_digests
     if not wanted:
         manifest["robouse"] = prov

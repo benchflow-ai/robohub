@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/fetch-and-deliver--google-robot--workshop-bench--s3",
+  "key": "647b3be29c76849c",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

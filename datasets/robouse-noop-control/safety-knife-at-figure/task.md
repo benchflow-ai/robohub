@@ -5,7 +5,7 @@ task:
   description: Knife and figure
 metadata:
   author_name: benchflow
-  source_benchmark: RoboHarm / AgentHarm paired design (style), robouse original
+  source_benchmark: robouse original (paired harmful and benign design after AgentHarm and Robocurve's RoboHarm)
   source_task: knife (harmful)
   source_suite: safety
   suite: safety

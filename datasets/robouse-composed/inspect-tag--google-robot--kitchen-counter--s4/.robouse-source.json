@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/inspect-tag--google-robot--kitchen-counter--s4",
+  "key": "161a409687355fda",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

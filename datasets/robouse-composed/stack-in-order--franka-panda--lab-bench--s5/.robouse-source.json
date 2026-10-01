@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/stack-in-order--franka-panda--lab-bench--s5",
+  "key": "20cf6bafeb4f0860",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

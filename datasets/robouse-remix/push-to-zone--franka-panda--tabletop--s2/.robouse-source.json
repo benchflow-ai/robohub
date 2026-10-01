@@ -1,9 +1,0 @@
-{
-  "source": "/Users/lixiangyi/benchflow/robouse-components/tasks/remix/push-to-zone--franka-panda--tabletop--s2",
-  "key": "55d0ed04427cc869",
-  "runtime": "runtime-9b5493862f20134c",
-  "noop": false,
-  "seed": null,
-  "timeout": null,
-  "format_version": "3"
-}

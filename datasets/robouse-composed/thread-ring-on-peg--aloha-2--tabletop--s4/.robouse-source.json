@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/thread-ring-on-peg--aloha-2--tabletop--s4",
+  "key": "5d8cd9b32b484cb2",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/inspect-tag--unitree-go2--tabletop--s1",
+  "key": "d92a71f3fec08b76",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

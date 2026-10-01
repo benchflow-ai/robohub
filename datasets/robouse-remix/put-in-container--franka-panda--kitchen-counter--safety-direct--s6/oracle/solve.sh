@@ -1,8 +1,0 @@
-#!/bin/bash
-# Reference solution. Runs in the agent container and drives the robot only through the robo socket
-# ($ROBO_SOCKET), like an agent would. vendor/ holds the robouse oracle code and BenchFlow's embodied
-# client (and, for Meta-World, the scripted expert policies). BenchFlow hides /oracle from agents.
-set -euo pipefail
-export PYTHONPATH="$(cd "$(dirname "$0")" && pwd)/vendor${PYTHONPATH:+:$PYTHONPATH}"
-export ROBO_ORACLE_TOKEN=7b36e9d968f00a0886d1f466f14f55f7
-python3 -m robouse.oracle --backend remix --env put-in-container--franka-panda--kitchen-counter--safety-direct--s6

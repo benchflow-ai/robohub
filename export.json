@@ -3,9 +3,9 @@
     "behavior-1k": {
       "noop": false,
       "robouse": {
-        "commit": "27d8ed8c2de2a3b92b19f0cd1532bfa83342f60f",
-        "package_version": "0.1.1",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "behavior-bringing-in-wood": {
@@ -228,9 +228,9 @@
     "isaaclab-factory": {
       "noop": false,
       "robouse": {
-        "commit": "bd8ac560a5f4bf0256e56b6b903c27866d9a3dc0",
-        "package_version": "0.1.1",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "il-factory-gear-mesh": {
@@ -263,9 +263,9 @@
     "maniskill-gpu": {
       "noop": false,
       "robouse": {
-        "commit": "bd8ac560a5f4bf0256e56b6b903c27866d9a3dc0",
-        "package_version": "0.1.1",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "ms-lift-peg-upright": {
@@ -333,9 +333,9 @@
     "robodojo": {
       "noop": false,
       "robouse": {
-        "commit": "b573f9292803bc2707bbaca6d8f61b95615dffbd",
-        "package_version": "0.1.1",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "robodojo-cover-blocks": {
@@ -387,6 +387,11 @@
     },
     "robouse-adroit": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "adroit-door-e11": {
           "backend": "adroit",
@@ -450,8 +455,263 @@
         }
       }
     },
+    "robouse-composed": {
+      "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
+      "tasks": {
+        "bimanual-relay--aloha-2--kitchen-counter--s5": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "bimanual-relay--aloha-2--lab-bench--s4": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "bimanual-relay--aloha-2--tabletop--s4": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "bimanual-relay--aloha-2--workshop-bench--s3": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "fetch-and-deliver--google-robot--workshop-bench--s3": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "go-to-landmark--crazyflie-2--kitchen-counter--s2": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "go-to-landmark--crazyflie-2--outdoor-field--vision--s2": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "go-to-landmark--google-robot--lab-bench--s5": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "go-to-landmark--google-robot--outdoor-field--s3": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "go-to-landmark--unitree-go2--outdoor-field--safety-indirect--s3": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "go-to-landmark--unitree-go2--warehouse--s1": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "go-to-landmark--unitree-go2--warehouse--safety-direct--s1": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "inspect-tag--crazyflie-2--lab-bench--s3": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "inspect-tag--crazyflie-2--warehouse--safety-privacy--s4": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "inspect-tag--google-robot--kitchen-counter--s4": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "inspect-tag--pal-tiago--kitchen-counter--s2": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "inspect-tag--unitree-go2--kitchen-counter--budget-loose--s5": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "inspect-tag--unitree-go2--tabletop--s1": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "push-to-zone--aloha-2--kitchen-counter--s2": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "push-to-zone--franka-panda--tabletop--s2": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "push-to-zone--franka-panda--warehouse--s4": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "push-to-zone--unitree-go2--workshop-bench--s4": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "put-in-container--aloha-2--tabletop--pert-dynamics--s4": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "put-in-container--franka-panda--kitchen-counter--safety-direct--s6": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "put-in-container--franka-panda--kitchen-counter--vision--s3": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "put-in-container--franka-panda--lab-bench--s2": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "put-in-container--franka-panda--tabletop--safety-indirect--s7": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "put-in-container--franka-panda--workshop-bench--pert-push--s2": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "put-in-container--franka-panda--workshop-bench--s1": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "put-in-container--google-robot--tabletop--roles--s1": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "put-in-container--pal-tiago--tabletop--s4": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "put-in-container--pal-tiago--tabletop--safety-privacy--s2": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "put-in-container--pal-tiago--workshop-bench--s4": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "sort-by-color--franka-panda--tabletop--budget-tight--s2": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "sort-by-color--franka-panda--tabletop--s3": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "sort-by-color--franka-panda--workshop-bench--s4": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "sort-by-color--pal-tiago--kitchen-counter--s2": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "stack-in-order--aloha-2--tabletop--noisy--s2": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "stack-in-order--aloha-2--tabletop--s4": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "stack-in-order--aloha-2--workshop-bench--s3": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "stack-in-order--aloha-2--workshop-bench--safety-indirect--s1": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "stack-in-order--franka-panda--lab-bench--pert-clutter--s5": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "stack-in-order--franka-panda--lab-bench--s5": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "stack-in-order--franka-panda--warehouse--s4": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "thread-ring-on-peg--aloha-2--lab-bench--s2": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "thread-ring-on-peg--aloha-2--tabletop--s4": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "thread-ring-on-peg--aloha-2--workshop-bench--s3": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        },
+        "thread-ring-on-peg--franka-panda--workshop-bench--s2": {
+          "backend": "components",
+          "runtime": "composed",
+          "suite": "composed"
+        }
+      }
+    },
     "robouse-core": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "arc-count-marker": {
           "backend": "tabletop",
@@ -957,6 +1217,11 @@
     },
     "robouse-crazyflie": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "crazyflie-gates": {
           "backend": "crazyflie",
@@ -998,9 +1263,9 @@
     "robouse-cubepick": {
       "noop": false,
       "robouse": {
-        "commit": "35e1b10065e97320504c12cfb589401409994b34",
-        "package_version": "0.1.1",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "cubepick-reach-layout-0": {
@@ -1032,6 +1297,11 @@
     },
     "robouse-dexhand": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "leap-cube-in-hand": {
           "backend": "dexhand",
@@ -1072,12 +1342,12 @@
     },
     "robouse-dexjoco": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
-        "dexjoco-assembly": {
-          "backend": "dexjoco",
-          "runtime": "dexjoco",
-          "suite": "dexjoco"
-        },
         "dexjoco-click-mouse": {
           "backend": "dexjoco",
           "runtime": "dexjoco",
@@ -1147,6 +1417,11 @@
     },
     "robouse-dmcontrol": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "dmcontrol-acrobot-swingup": {
           "backend": "dmcontrol",
@@ -1237,6 +1512,11 @@
     },
     "robouse-driving": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "driving-broken-down-car": {
           "backend": "driving",
@@ -1277,6 +1557,11 @@
     },
     "robouse-drone": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "drone-buzz-crowd": {
           "backend": "drone",
@@ -1333,9 +1618,9 @@
     "robouse-genesis": {
       "noop": false,
       "robouse": {
-        "commit": "bd8ac560a5f4bf0256e56b6b903c27866d9a3dc0",
-        "package_version": "0.1.1",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "gs-pour-water": {
@@ -1357,6 +1642,11 @@
     },
     "robouse-gymrobotics": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "gymrobotics-fetch-pick-place-s0": {
           "backend": "gymrobotics",
@@ -1420,8 +1710,423 @@
         }
       }
     },
+    "robouse-harm": {
+      "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
+      "tasks": {
+        "roboharm-biohazard-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-biohazard-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-biohazard-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-biohazard-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-biohazard-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-biohazard-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-biohazard-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-biohazard-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-chemicals-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-estop-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-guard-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-heavy-drop-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-knife-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-outlet-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-privacy-badge-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-stove-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-benign-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-benign-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-benign-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-benign-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-harmful-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-harmful-honeypot": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-harmful-honeypot-guardrail": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        },
+        "roboharm-water-laptop-harmful-raw": {
+          "backend": "roboharm",
+          "runtime": "menagerie",
+          "suite": "roboharm"
+        }
+      }
+    },
     "robouse-humanoid": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "apollo-box-into-bin": {
           "backend": "humanoid",
@@ -1472,12 +2177,12 @@
     },
     "robouse-humanoidbench": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
-        "humanoidbench-maze": {
-          "backend": "humanoidbench",
-          "runtime": "humanoidbench",
-          "suite": "humanoidbench"
-        },
         "humanoidbench-pole": {
           "backend": "humanoidbench",
           "runtime": "humanoidbench",
@@ -1512,6 +2217,11 @@
     },
     "robouse-kitchen": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "kitchen-bottom-burner": {
           "backend": "kitchen",
@@ -1567,6 +2277,11 @@
     },
     "robouse-libero": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "libero-10-0": {
           "backend": "libero",
@@ -1772,6 +2487,11 @@
     },
     "robouse-libero-90": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "libero-90-0": {
           "backend": "libero",
@@ -2227,6 +2947,11 @@
     },
     "robouse-maniskill": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "maniskill-lift-peg-upright": {
           "backend": "maniskill",
@@ -2292,6 +3017,11 @@
     },
     "robouse-menagerie": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "menagerie-aloha-clutter-retrieval": {
           "backend": "menagerie",
@@ -2372,6 +3102,11 @@
     },
     "robouse-metaworld": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "metaworld-assembly": {
           "backend": "metaworld",
@@ -2627,6 +3362,11 @@
     },
     "robouse-mobile-manip": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "google-fetch-can": {
           "backend": "mobile_manip",
@@ -2682,6 +3422,11 @@
     },
     "robouse-myosuite": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "myosuite-elbow-pose": {
           "backend": "myosuite",
@@ -2763,9 +3508,9 @@
     "robouse-nav": {
       "noop": false,
       "robouse": {
-        "commit": "35e1b10065e97320504c12cfb589401409994b34",
-        "package_version": "0.1.1",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "nav-h00-armchair": {
@@ -2972,6 +3717,11 @@
     },
     "robouse-noop-control": {
       "noop": true,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "arc-count-marker": {
           "backend": "tabletop",
@@ -3478,9 +4228,9 @@
     "robouse-playground": {
       "noop": false,
       "robouse": {
-        "commit": "bd8ac560a5f4bf0256e56b6b903c27866d9a3dc0",
-        "package_version": "0.1.1",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "pg-go1-corridor-push": {
@@ -3512,6 +4262,11 @@
     },
     "robouse-quadruped": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "anymal-inspection-round": {
           "backend": "quadruped",
@@ -3570,263 +4325,12 @@
         }
       }
     },
-    "robouse-remix": {
-      "noop": false,
-      "robouse": {
-        "branch": "components",
-        "commit": "87b60f347b627fb0d742d77d272f7e71ce10e76a",
-        "package_version": "0.1.1",
-        "repo": "https://github.com/benchflow-ai/robouse"
-      },
-      "tasks": {
-        "bimanual-relay--aloha-2--kitchen-counter--s5": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "bimanual-relay--aloha-2--lab-bench--s4": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "bimanual-relay--aloha-2--tabletop--s4": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "bimanual-relay--aloha-2--workshop-bench--s3": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "fetch-and-deliver--google-robot--workshop-bench--s3": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "go-to-landmark--crazyflie-2--kitchen-counter--s2": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "go-to-landmark--crazyflie-2--outdoor-field--vision--s2": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "go-to-landmark--google-robot--lab-bench--s5": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "go-to-landmark--google-robot--outdoor-field--s3": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "go-to-landmark--unitree-go2--outdoor-field--safety-indirect--s3": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "go-to-landmark--unitree-go2--warehouse--s1": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "go-to-landmark--unitree-go2--warehouse--safety-direct--s1": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "inspect-tag--crazyflie-2--lab-bench--s3": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "inspect-tag--crazyflie-2--warehouse--safety-privacy--s4": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "inspect-tag--google-robot--kitchen-counter--s4": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "inspect-tag--pal-tiago--kitchen-counter--s2": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "inspect-tag--unitree-go2--kitchen-counter--budget-loose--s5": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "inspect-tag--unitree-go2--tabletop--s1": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "push-to-zone--aloha-2--kitchen-counter--s2": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "push-to-zone--franka-panda--tabletop--s2": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "push-to-zone--franka-panda--warehouse--s4": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "push-to-zone--unitree-go2--workshop-bench--s4": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "put-in-container--aloha-2--tabletop--pert-dynamics--s4": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "put-in-container--franka-panda--kitchen-counter--safety-direct--s6": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "put-in-container--franka-panda--kitchen-counter--vision--s3": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "put-in-container--franka-panda--lab-bench--s2": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "put-in-container--franka-panda--tabletop--safety-indirect--s7": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "put-in-container--franka-panda--workshop-bench--pert-push--s2": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "put-in-container--franka-panda--workshop-bench--s1": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "put-in-container--google-robot--tabletop--roles--s1": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "put-in-container--pal-tiago--tabletop--s4": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "put-in-container--pal-tiago--tabletop--safety-privacy--s2": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "put-in-container--pal-tiago--workshop-bench--s4": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "sort-by-color--franka-panda--tabletop--budget-tight--s2": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "sort-by-color--franka-panda--tabletop--s3": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "sort-by-color--franka-panda--workshop-bench--s4": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "sort-by-color--pal-tiago--kitchen-counter--s2": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "stack-in-order--aloha-2--tabletop--noisy--s2": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "stack-in-order--aloha-2--tabletop--s4": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "stack-in-order--aloha-2--workshop-bench--s3": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "stack-in-order--aloha-2--workshop-bench--safety-indirect--s1": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "stack-in-order--franka-panda--lab-bench--pert-clutter--s5": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "stack-in-order--franka-panda--lab-bench--s5": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "stack-in-order--franka-panda--warehouse--s4": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "thread-ring-on-peg--aloha-2--lab-bench--s2": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "thread-ring-on-peg--aloha-2--tabletop--s4": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "thread-ring-on-peg--aloha-2--workshop-bench--s3": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        },
-        "thread-ring-on-peg--franka-panda--workshop-bench--s2": {
-          "backend": "remix",
-          "runtime": "remix",
-          "suite": "remix"
-        }
-      }
-    },
     "robouse-robocasa": {
       "noop": false,
       "robouse": {
-        "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
-        "package_version": "0.1.1",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "robocasa-close-drawer-kitchen10": {
@@ -3946,413 +4450,13 @@
         }
       }
     },
-    "robouse-roboharm": {
-      "noop": false,
-      "tasks": {
-        "roboharm-biohazard-benign-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-biohazard-benign-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-biohazard-benign-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-biohazard-benign-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-biohazard-harmful-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-biohazard-harmful-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-biohazard-harmful-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-biohazard-harmful-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-chemicals-benign-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-chemicals-benign-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-chemicals-benign-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-chemicals-benign-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-chemicals-harmful-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-chemicals-harmful-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-chemicals-harmful-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-chemicals-harmful-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-estop-benign-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-estop-benign-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-estop-benign-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-estop-benign-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-estop-harmful-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-estop-harmful-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-estop-harmful-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-estop-harmful-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-guard-benign-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-guard-benign-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-guard-benign-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-guard-benign-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-guard-harmful-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-guard-harmful-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-guard-harmful-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-guard-harmful-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-heavy-drop-benign-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-heavy-drop-benign-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-heavy-drop-benign-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-heavy-drop-benign-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-heavy-drop-harmful-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-heavy-drop-harmful-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-heavy-drop-harmful-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-heavy-drop-harmful-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-knife-benign-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-knife-benign-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-knife-benign-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-knife-benign-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-knife-harmful-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-knife-harmful-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-knife-harmful-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-knife-harmful-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-outlet-benign-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-outlet-benign-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-outlet-benign-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-outlet-benign-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-outlet-harmful-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-outlet-harmful-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-outlet-harmful-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-outlet-harmful-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-privacy-badge-benign-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-privacy-badge-benign-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-privacy-badge-benign-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-privacy-badge-benign-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-privacy-badge-harmful-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-privacy-badge-harmful-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-privacy-badge-harmful-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-privacy-badge-harmful-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-stove-benign-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-stove-benign-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-stove-benign-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-stove-benign-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-stove-harmful-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-stove-harmful-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-stove-harmful-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-stove-harmful-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-water-laptop-benign-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-water-laptop-benign-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-water-laptop-benign-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-water-laptop-benign-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-water-laptop-harmful-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-water-laptop-harmful-honeypot": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-water-laptop-harmful-honeypot-guardrail": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        },
-        "roboharm-water-laptop-harmful-raw": {
-          "backend": "roboharm",
-          "runtime": "menagerie",
-          "suite": "roboharm"
-        }
-      }
-    },
     "robouse-robosuite": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "robosuite-door-iiwa": {
           "backend": "robosuite",
@@ -4463,6 +4567,11 @@
     },
     "robouse-tabletop": {
       "noop": false,
+      "robouse": {
+        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "package_version": "0.2.0",
+        "repo": "https://pypi.org/project/robouse/"
+      },
       "tasks": {
         "arc-colour-to-pad": {
           "backend": "tabletop",
@@ -5063,27 +5172,27 @@
     }
   },
   "robouse": {
-    "commit": "6f8fd0be7f08b92a62b7bd0fbe4087c196d09f83",
-    "package_version": "0.1.1",
-    "repo": "https://github.com/benchflow-ai/robouse"
+    "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+    "package_version": "0.2.0",
+    "repo": "https://pypi.org/project/robouse/"
   },
   "runtimes": {
-    "base": "sha256:453a780cbc2972149bf99a92a41cd35666e51192e750bc2bcb1fb3deb04ca376",
-    "behavior": "sha256:4053563589789973194b7863789677c6d1514503e1e7fd77e41b0edf1507abea",
-    "dexjoco": "sha256:c8a774e0cbe1feb4b08493a3ca5464e92dffe31ffec039cd37110f5490e60fd9",
-    "dmcontrol": "sha256:cda13e1219e387191d2cd39cfa37c28a4c2ac0d251833abc3c022b46d39e8876",
-    "driving": "sha256:828d135f5660360093b186c88ff6f0a828fb4fcf9a3f226103b884262c0bcb96",
-    "embodied": "sha256:2d8aef2c2e504bf4df8dbfed2a6feb48dc499c404c038b19b4e633e76fc69b6a",
-    "gpu": "sha256:30c9df3ddb58447dbd523d84ff39e47a03e23cb4be5876d60b5e062659ad436e",
-    "humanoidbench": "sha256:4e2c48833b9ca63c686671310754d2559c4d9d83ff42b3500ec218d66c6de1db",
-    "libero": "sha256:f4f64ec5810becb755db7410586836e031cb254d66baa42fbe7f6d40ec3f327e",
-    "light": "sha256:39fb599c691544e09e8b7a1af78debe4e6d878e9b696c7aff6a9ce9062ac1332",
-    "maniskill": "sha256:50e085d16dc0c1b0f4a36236070b4290ed23ac6844ebfd1a78e54054158438e6",
-    "menagerie": "sha256:40eb64c1910118d9c821aafcef547ac49cc34534a4283d66b61b92e5f5dbf911",
-    "myosuite": "sha256:124ef7a1988b88d0918ced05416de0dc6e84b1cf490e97eac01b9d4e050323e7",
-    "remix": "runtime-9b5493862f20134c",
-    "robocasa": "sha256:0e7762e64c24849f320fa346ace73b18c6c7493ec14fedc79883eaa3eef49582",
-    "robodojo": "sha256:cbddb5b2d8b4cccf3291330183e707e02f020bff0d64793d84bb9c351ceacdfa",
-    "robosuite": "sha256:ae1976e503f43f82f6296e325adedcdb36932b9686a913df76d3b2ca2d138012"
+    "base": "sha256:16ae6e6a3c3b70fdf7d62473846ee401dbe85096d92b9f96b3efde95e78ebb4d",
+    "behavior": "sha256:ed6260be7a33eb35e97b3b891b0d922987b7665ef3c513d6ca5cda4d0ff03389",
+    "composed": "sha256:4f5aa582409bcc0f86c3214485b86d0dac79f00a26ab9727219365c5fce2f9de",
+    "dexjoco": "sha256:e73eebfcf96bf7213c82e6c4da28a13c12661c31a081f9111f34ee15fb4f0fb6",
+    "dmcontrol": "sha256:670434aba34601cb902c27fdaebf97598b387efdd636fcaf407468d6dd502d35",
+    "driving": "sha256:4abd093fc2f85569c1c2259182303f51354ba8d3134162a2a702db46856ccb72",
+    "embodied": "sha256:9bf4f77a6208bba931749573b167c394399f8c13bdd472355192771748cb7cc7",
+    "gpu": "sha256:b0c80bb5ccd168ae672d858f460a8e97f0c2448f2e1660c15150b62bed2fc862",
+    "humanoidbench": "sha256:56ae52ac4b339b81baa44c9a34797a738a4abdf4eb20240ac925427a8f3905fa",
+    "libero": "sha256:8965ba2d9b7336575e0cac338d12d3b386462344b1b6b3da65d1c354fea355f8",
+    "light": "sha256:c40339e7545073bd64f2accb6ac437d9a54f970d227a2b31ff07fb5b50c94326",
+    "maniskill": "sha256:696517b8ab43696fb3ac204397728bf99cc608410af186b41a0f945aa66e1ccc",
+    "menagerie": "sha256:4f80f09e16b0a74ff7a59f8e4c11ce15035357e040dcd6fe1d7b6c8bb7949279",
+    "myosuite": "sha256:74fa8b26b423bb31a999286252e2bba63f17e195e43529dc3e69c4698d029e84",
+    "robocasa": "sha256:e4164729f46ca3cbad76c770bde3884f49b63e23d67c483e01d103de01d219da",
+    "robodojo": "sha256:2425e623d907fb525547dea62ec58d7be707e4b07d7acc71d44aab07a54c884e",
+    "robosuite": "sha256:e65794b6cdd2900a289ed153db69da8028df999489e928aaf7dcc390463089f1"
   }
 }

@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/stack-in-order--aloha-2--tabletop--noisy--s2",
+  "key": "98cf9413f9b08661",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

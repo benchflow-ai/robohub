@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/inspect-tag--crazyflie-2--warehouse--safety-privacy--s4",
+  "key": "22598e50e201c158",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

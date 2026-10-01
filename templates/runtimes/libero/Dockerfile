@@ -29,7 +29,7 @@ RUN python /opt/robohub-runtime/check_runtime.py /opt/robohub-runtime "$ROBOHUB_
  && mkdir -p /rpc /episode /task /logs/verifier
 ENV PYTHONPATH=/opt/robohub-runtime/robouse/src HF_HUB_OFFLINE=1
 # writes ~/.libero/config.yaml and imports LIBERO once, so the first episode starts quickly
-RUN python -c "from robouse.backends.libero import _quiet_imports; _quiet_imports()"
+RUN python -c "from robouse.backends.libero.backend import _quiet_imports; _quiet_imports()"
 
 WORKDIR /episode
 CMD ["robouse-sim-entry"]

@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/sort-by-color--franka-panda--workshop-bench--s4",
+  "key": "cb3b0218dffd6a1d",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

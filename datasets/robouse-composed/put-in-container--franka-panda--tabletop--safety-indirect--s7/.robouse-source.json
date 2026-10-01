@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/put-in-container--franka-panda--tabletop--safety-indirect--s7",
+  "key": "28a1b4c64513182a",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

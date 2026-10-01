@@ -1,74 +1,60 @@
-"""Backend registry. The `robouse:` block of a task's task.md names a backend and its parameters."""
+"""Backend registry. The `robouse:` block of a task's task.md names a backend (`backend: KIND`) and its parameters;
+each backend is one subpackage of robouse.backends. Third-party simulators register a class taking the block under the
+`robouse.backends` entry point group."""
+
 from __future__ import annotations
+
+import importlib
 
 from .base import Backend
 
+# kind -> (subpackage, class)
+BACKENDS: dict[str, tuple[str, str]] = {
+    "adroit": ("adroit", "AdroitBackend"),  # Gymnasium-Robotics Adroit hand
+    "behavior": ("behavior", "BehaviorBackend"),  # BEHAVIOR-1K; remote GPU worker
+    "components": ("components", "ComposedBackend"),  # tasks composed from components (robouse tasks init)
+    "remix": ("components", "ComposedBackend"),  # the name composed tasks had before 0.2
+    "crazyflie": ("crazyflie", "CrazyflieBackend"),
+    "cubepick": ("cubepick", "CubePickBackend"),  # inspect-robots' CubePick mock world
+    "dexhand": ("dexhand", "DexHandBackend"),
+    "dexjoco": ("dexjoco", "DexjocoBackend"),  # simulator worker
+    "dmcontrol": ("dmcontrol", "DMControlBackend"),  # simulator worker
+    "driving": ("driving", "DrivingBackend"),  # MetaDrive; simulator worker
+    "drone": ("drone", "DroneBackend"),
+    "gpu": ("gpu", "GpuBackend"),  # ManiSkill3, Genesis, MuJoCo Playground, Isaac Lab; remote GPU workers
+    "gymrobotics": ("gymrobotics", "GymRoboticsBackend"),
+    "humanoid": ("humanoid", "HumanoidBackend"),
+    "humanoidbench": ("humanoidbench", "HumanoidBenchBackend"),  # simulator worker
+    "kitchen": ("kitchen", "KitchenBackend"),  # Gymnasium-Robotics Franka Kitchen
+    "libero": ("libero", "LiberoBackend"),
+    "maniskill": ("maniskill", "ManiSkillBackend"),  # ManiSkill3 on the CPU; simulator worker
+    "menagerie": ("menagerie", "MenagerieBackend"),
+    "metaworld": ("metaworld", "MetaWorldBackend"),
+    "mobile_manip": ("mobile_manip", "MobileManipBackend"),
+    "myosuite": ("myosuite", "MyoSuiteBackend"),  # simulator worker
+    "nav": ("nav", "NavBackend"),  # object-goal navigation in homes (geometry only)
+    "quadruped": ("quadruped", "QuadrupedBackend"),
+    "real": ("real", "RealArmBackend"),  # real arms: live hardware or the hardware-in-the-loop mock
+    "robocasa": ("robocasa", "RobocasaBackend"),  # simulator worker
+    "robodojo": ("robodojo", "RoboDojoBackend"),  # RoboDojo on Isaac Sim; remote GPU worker
+    "roboharm": ("roboharm", "RoboHarmBackend"),
+    "robosuite": ("robosuite", "RobosuiteBackend"),
+    "tabletop": ("tabletop", "TabletopBackend"),
+}
+
+
+def backend_class(kind: str) -> type[Backend]:
+    """The Backend class for a `backend:` kind (built in, or from the `robouse.backends` entry point group)."""
+    if kind in BACKENDS:
+        mod, cls = BACKENDS[kind]
+        return getattr(importlib.import_module(f"{__name__}.{mod}"), cls)
+    from importlib.metadata import entry_points
+
+    for ep in entry_points(group="robouse.backends"):
+        if ep.name == kind:
+            return ep.load()
+    raise KeyError(f"unknown backend {kind!r}; built in: {', '.join(sorted(BACKENDS))}")
+
 
 def make_backend(spec: dict) -> Backend:
-    kind = spec["backend"]
-    if kind == "metaworld":
-        from .metaworld_backend import MetaWorldBackend
-
-        return MetaWorldBackend(spec["env"], camera=spec.get("camera", "corner"), max_steps=int(spec.get("max_steps", 500)))
-    if kind == "tabletop":
-        from .tabletop import TabletopBackend
-
-        return TabletopBackend(spec)
-    if kind == "gymrobotics":
-        from .gymrobotics import GymRoboticsBackend
-
-        return GymRoboticsBackend(spec)
-    if kind == "libero":
-        from .libero import LiberoBackend
-
-        return LiberoBackend(spec)
-    if kind == "robosuite":
-        from .robosuite_backend import RobosuiteBackend
-
-        return RobosuiteBackend(spec)
-    if kind == "menagerie":
-        from .menagerie import MenagerieBackend
-
-        return MenagerieBackend(spec)
-    if kind == "robocasa":
-        from .robocasa import RobocasaBackend
-
-        return RobocasaBackend(spec)
-    if kind == "behavior":  # BEHAVIOR-1K; the simulator runs in a remote GPU worker (behavior_worker.py)
-        from .behavior import BehaviorBackend
-
-        return BehaviorBackend(spec)
-    if kind == "roboharm":
-        from .roboharm import RoboHarmBackend
-
-        return RoboHarmBackend(spec)
-    if kind == "drone":
-        from .drone import DroneBackend
-
-        return DroneBackend(spec)
-    if kind == "dexjoco":  # DexJoCo dexterous tool use; the simulator runs in its own virtualenv (dexjoco_worker.py)
-        from .dexjoco import DexjocoBackend
-
-        return DexjocoBackend(spec)
-    # embodiment suites (backends/embodied.py): quadrupeds, humanoids, mobile manipulators, dexterous hands, Crazyflie, driving
-    if kind in EMBODIED or kind in UPSTREAM:
-        import importlib
-
-        mod, cls = EMBODIED.get(kind) or UPSTREAM[kind]
-        return getattr(importlib.import_module(f".{mod}", __package__), cls)(spec)
-    raise KeyError(f"unknown backend {kind!r}")
-
-
-EMBODIED = {"quadruped": ("quadruped", "QuadrupedBackend"), "humanoid": ("humanoid", "HumanoidBackend"),
-            "mobile_manip": ("mobile_manip", "MobileManipBackend"), "dexhand": ("dexhand", "DexHandBackend"),
-            "crazyflie": ("crazyflie", "CrazyflieBackend"),
-            "driving": ("driving", "DrivingBackend")}  # MetaDrive in its own virtualenv (driving_worker.py)
-
-# more upstream benchmarks; each simulator that conflicts with the main environment runs in its own virtualenv as a worker
-UPSTREAM = {"kitchen": ("kitchen", "KitchenBackend"),  # Gymnasium-Robotics Franka Kitchen
-            "adroit": ("adroit", "AdroitBackend"),  # Gymnasium-Robotics Adroit hand
-            "dmcontrol": ("dmcontrol", "DMControlBackend"),  # DeepMind Control Suite and manipulation
-            "myosuite": ("myosuite_backend", "MyoSuiteBackend"),  # MyoSuite musculoskeletal models
-            "humanoidbench": ("humanoidbench", "HumanoidBenchBackend"),  # HumanoidBench
-            "maniskill": ("maniskill", "ManiSkillBackend"),  # ManiSkill3 (CPU backend)
-            "robodojo": ("robodojo", "RoboDojoBackend")}  # RoboDojo (Isaac Sim 5.1); remote GPU worker (robodojo_worker.py)
+    return backend_class(spec["backend"])(spec)

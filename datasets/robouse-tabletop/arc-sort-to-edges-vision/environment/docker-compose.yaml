@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/base"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:453a780cbc2972149bf99a92a41cd35666e51192e750bc2bcb1fb3deb04ca376"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:16ae6e6a3c3b70fdf7d62473846ee401dbe85096d92b9f96b3efde95e78ebb4d"
     network_mode: none
     init: true
     volumes:
@@ -33,8 +33,9 @@ services:
       # The verifier copies the episode video and camera images here after the agent has stopped.
       - ${HOST_ARTIFACTS_PATH}:/logs/artifacts
     environment:
-      # Given only to the reference solution (oracle/solve.sh): unlocks privileged state in vision tasks.
-      ROBOUSE_ORACLE_TOKEN: "0bb954d047712413c5cb5b4308a5ebe8"
+      # Chosen per run on the host ($ROBOUSE_ORACLE_TOKEN; unset means no token) and given only to the reference
+      # solution (task.md oracle.env): unlocks privileged state in vision tasks. No token is stored in this package.
+      ROBOUSE_ORACLE_TOKEN: "${ROBOUSE_ORACLE_TOKEN:-}"
       # The Robo Use task definition (task.md frontmatter); sim-entry writes it to a file for `robouse serve`.
       ROBOUSE_TASK_MD: |
         ---

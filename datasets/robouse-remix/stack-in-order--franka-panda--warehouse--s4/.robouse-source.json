@@ -1,9 +1,0 @@
-{
-  "source": "/Users/lixiangyi/benchflow/robouse-components/tasks/remix/stack-in-order--franka-panda--warehouse--s4",
-  "key": "34552149eb073c78",
-  "runtime": "runtime-9b5493862f20134c",
-  "noop": false,
-  "seed": null,
-  "timeout": null,
-  "format_version": "3"
-}

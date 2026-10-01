@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/sort-by-color--franka-panda--tabletop--budget-tight--s2",
+  "key": "af312339743f2c3a",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

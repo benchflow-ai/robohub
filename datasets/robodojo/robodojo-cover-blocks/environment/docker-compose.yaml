@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/robodojo"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:cbddb5b2d8b4cccf3291330183e707e02f020bff0d64793d84bb9c351ceacdfa"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:2425e623d907fb525547dea62ec58d7be707e4b07d7acc71d44aab07a54c884e"
     # This runtime's simulator runs on a remote GPU worker (remote_worker in hub.yaml): the episode server reaches it
     # over HTTPS, so this service keeps network access, and it reads the worker endpoints (URL, shared secret) from
     # the host file named by $ROBOUSE_ROBODOJO_REMOTE, mounted read-only here only; the agent container never sees it.
@@ -37,8 +37,9 @@ services:
       - ${ROBOUSE_ROBODOJO_REMOTE:?set ROBOUSE_ROBODOJO_REMOTE to the ROBODOJO worker endpoints file}:/run/robouse/remote.json:ro
     environment:
       ROBOUSE_ROBODOJO_REMOTE: /run/robouse/remote.json
-      # Given only to the reference solution (oracle/solve.sh): unlocks privileged state in vision tasks.
-      ROBOUSE_ORACLE_TOKEN: "c1560a33476c327a75d18e76d66a451f"
+      # Chosen per run on the host ($ROBOUSE_ORACLE_TOKEN; unset means no token) and given only to the reference
+      # solution (task.md oracle.env): unlocks privileged state in vision tasks. No token is stored in this package.
+      ROBOUSE_ORACLE_TOKEN: "${ROBOUSE_ORACLE_TOKEN:-}"
       # The Robo Use task definition (task.md frontmatter); sim-entry writes it to a file for `robouse serve`.
       ROBOUSE_TASK_MD: |
         ---

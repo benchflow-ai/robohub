@@ -14,52 +14,55 @@ moves the robot in a way `robo act` could not.
 
 The reference-solution helpers at the bottom (`Oracle`) talk to the episode socket only, like an agent.
 """
+
 from __future__ import annotations
 
 import math
+from collections.abc import Callable, Iterator
 from dataclasses import asdict, dataclass, field
-from typing import Any, Callable, Iterator
+from typing import Any
 
 import numpy as np
 
+from ..core.protocol import agent_refused
 from .base import ActionSpec, Backend, StepInfo
-
 
 # ------------------------------------------------------------------------------------------------------------------
 # declaration
 # ------------------------------------------------------------------------------------------------------------------
 
+
 @dataclass
 class Sensor:
-    name: str                 # e.g. "base_state", "joint_pos", "camera:head"
-    kind: str                 # "proprio" | "world" (public scene facts) | "camera" | "events"
+    name: str  # e.g. "base_state", "joint_pos", "camera:head"
+    kind: str  # "proprio" | "world" (public scene facts) | "camera" | "events"
     fields: list[str] = field(default_factory=list)  # `robo observe` keys this sensor fills (cameras: none)
     doc: str = ""
     units: str = ""
-    frame: str = ""           # e.g. "world", "body"
-    mount: str = ""           # cameras: "world" | "body" | "head" | "wrist" | "hand"
+    frame: str = ""  # e.g. "world", "body"
+    mount: str = ""  # cameras: "world" | "body" | "head" | "wrist" | "hand"
 
 
 @dataclass
 class ActionGroup:
-    name: str                 # e.g. "base.twist", "arm.ee_delta", "gripper", "hand.joints", "velocity_setpoint"
-    kind: str                 # control mode, BenchFlow's vocabulary: "base_twist" | "velocity_setpoint" | "ee_delta_pos" |
-                              # "ee_delta_pose" | "joint_pos" | "joint_delta" | "joint_vel" | "gripper" | "select" | ...
-    names: list[str]          # components
+    name: str  # e.g. "base.twist", "arm.ee_delta", "gripper", "hand.joints", "velocity_setpoint"
+    kind: str  # control mode, BenchFlow's vocabulary: "base_twist" | "velocity_setpoint" | "ee_delta_pos" |
+    # "ee_delta_pose" | "joint_pos" | "joint_delta" | "joint_vel" | "gripper" | "select" | ...
+    names: list[str]  # components
     low: list[float]
     high: list[float]
     units: str = ""
     doc: str = ""
     hold: list[float] | None = None  # the value that means "hold still" (default: zeros)
-    frame: str = ""           # e.g. "world", "body"
+    frame: str = ""  # e.g. "world", "body"
 
 
 @dataclass
 class SkillArg:
     name: str
-    type: str = "float"       # "float" | "int" | "str" | "enum"
+    type: str = "float"  # "float" | "int" | "str" | "enum"
     unit: str = ""
-    default: Any = None       # None: required
+    default: Any = None  # None: required
     choices: list[str] | None = None
     doc: str = ""
 
@@ -69,7 +72,7 @@ class Skill:
     name: str
     args: list[SkillArg]
     doc: str
-    max_steps: int = 300      # a call stops after this many control steps
+    max_steps: int = 300  # a call stops after this many control steps
 
     def signature(self) -> str:
         parts = []
@@ -85,7 +88,7 @@ class Skill:
         kws = dict(r.split("=", 1) for r in raw if "=" in r)
         if len(pos) > len(self.args):
             raise ValueError(f"{self.name} takes at most {len(self.args)} arguments: {self.signature()}")
-        for a, v in zip(self.args, pos):
+        for a, v in zip(self.args, pos, strict=False):
             vals[a.name] = v
         for k, v in kws.items():
             k = k.lower().lstrip("-")
@@ -127,17 +130,36 @@ class Skill:
         return out
 
 
+# the embodiment family -> BenchFlow's embodiment kind
+SPEC_KIND = {
+    "aerial": "drone",
+    "dexterous_hand": "hand",
+    "wheeled": "vehicle",
+    "mobile_base": "vehicle",
+    "bimanual_arm": "bimanual",
+    "planar_arm": "arm",
+}
+
+
+def spec_kind(family: str) -> str:
+    """The embodiment spec's kind for a robouse family; families the spec has no kind for are "other"."""
+    from ..core.embodiment_spec import KINDS
+
+    kind = SPEC_KIND.get(family, family)
+    return kind if kind in KINDS else "other"
+
+
 @dataclass
 class Budget:
     max_steps: int
-    control_dt: float         # seconds of simulated time per step
+    control_dt: float  # seconds of simulated time per step
 
 
 @dataclass
 class Embodiment:
-    robot: str                # display name, e.g. "Unitree Go2"
-    family: str               # "quadruped" | "humanoid" | "mobile_manipulator" | "dexterous_hand" | "aerial"
-    assets: list[str]         # MuJoCo Menagerie folders (licences in assets/menagerie/embodiments.json)
+    robot: str  # display name, e.g. "Unitree Go2"
+    family: str  # "quadruped" | "humanoid" | "mobile_manipulator" | "dexterous_hand" | "aerial"
+    assets: list[str]  # MuJoCo Menagerie folders (licences in assets/menagerie/embodiments.json)
     sensors: list[Sensor]
     action_groups: list[ActionGroup]
     skills: list[Skill]
@@ -151,8 +173,12 @@ class Embodiment:
             low += list(g.low)
             high += list(g.high)
             docs.append(f"{g.name} ({g.kind}{', ' + g.units if g.units else ''}): {g.doc}".rstrip(": "))
-        return ActionSpec(names=names, low=low, high=high,
-                          doc=" | ".join(docs) + f". One step = {self.budget.control_dt * 1000:.0f} ms.")
+        return ActionSpec(
+            names=names,
+            low=low,
+            high=high,
+            doc=" | ".join(docs) + f". One step = {self.budget.control_dt * 1000:.0f} ms.",
+        )
 
     def hold(self) -> list[float]:
         out: list[float] = []
@@ -176,8 +202,16 @@ class Embodiment:
         the spec's zero/last policies, e.g. a car that brakes when not commanded)."""
         groups = []
         for g in self.action_groups:
-            d = {"name": g.name, "components": list(g.names), "low": list(g.low), "high": list(g.high), "units": g.units,
-                 "mode": g.kind, **({"frame": g.frame} if g.frame else {}), "doc": g.doc}
+            d = {
+                "name": g.name,
+                "components": list(g.names),
+                "low": list(g.low),
+                "high": list(g.high),
+                "units": g.units,
+                "mode": g.kind,
+                **({"frame": g.frame} if g.frame else {}),
+                "doc": g.doc,
+            }
             if g.hold is None or not any(g.hold):
                 d["hold"] = "zero"
             else:
@@ -186,36 +220,83 @@ class Embodiment:
         sensors: dict = {"cameras": [], "proprioception": [], "state": []}
         for se in self.sensors:
             if se.kind == "camera":
-                sensors["cameras"].append({"name": se.name.removeprefix("camera:"), "mount": se.mount or "world",
-                                           "calibrated": False, **({"doc": se.doc} if se.doc else {})})
+                sensors["cameras"].append(
+                    {
+                        "name": se.name.removeprefix("camera:"),
+                        "mount": se.mount or "world",
+                        "calibrated": False,
+                        **({"doc": se.doc} if se.doc else {}),
+                    }
+                )
             else:
                 key = "proprioception" if se.kind == "proprio" else "state"
                 for f in se.fields or [se.name]:
-                    sensors[key].append({"name": f, **({"units": se.units} if se.units else {}),
-                                         **({"frame": se.frame} if se.frame else {}), "privileged": False,
-                                         **({"doc": se.doc} if se.doc else {})})
-        skills = [{"name": sk.name, "impl": "backend", "doc": sk.doc, "max_steps": sk.max_steps,
-                   "args": [{"name": a.name, "type": a.type, **({"units": a.unit} if a.unit else {}),
-                             **({"choices": a.choices} if a.choices else {}),
-                             **({"optional": True, "default": a.default} if a.default is not None else {}),
-                             **({"doc": a.doc} if a.doc else {})} for a in sk.args]} for sk in self.skills]
-        return {"spec_version": "1", "name": self.robot, "kind": self.family, "assets": list(self.assets),
-                "step_s": self.budget.control_dt, "action_groups": groups, "sensors": sensors, "skills": skills,
-                "budgets": {"max_steps": self.budget.max_steps, "max_repeat": max_repeat,
-                            "max_skill_steps": max((sk.max_steps for sk in self.skills), default=0), "settle_steps": settle_steps},
-                "reward": {"dense": "sparse", "success_mode": success_mode}}
+                    sensors[key].append(
+                        {
+                            "name": f,
+                            **({"units": se.units} if se.units else {}),
+                            **({"frame": se.frame} if se.frame else {}),
+                            "privileged": False,
+                            **({"doc": se.doc} if se.doc else {}),
+                        }
+                    )
+        skills = [
+            {
+                "name": sk.name,
+                "impl": "backend",
+                "doc": sk.doc,
+                "max_steps": sk.max_steps,
+                "args": [
+                    {
+                        "name": a.name,
+                        "type": a.type,
+                        **({"units": a.unit} if a.unit else {}),
+                        **({"choices": a.choices} if a.choices else {}),
+                        **({"optional": True, "default": a.default} if a.default is not None else {}),
+                        **({"doc": a.doc} if a.doc else {}),
+                    }
+                    for a in sk.args
+                ],
+            }
+            for sk in self.skills
+        ]
+        return {
+            "spec_version": "1",
+            "name": self.robot,
+            "kind": spec_kind(self.family),
+            "assets": list(self.assets),
+            "step_s": self.budget.control_dt,
+            "action_groups": groups,
+            "sensors": sensors,
+            "skills": skills,
+            "budgets": {
+                "max_steps": self.budget.max_steps,
+                "max_repeat": max_repeat,
+                "max_skill_steps": max((sk.max_steps for sk in self.skills), default=0),
+                "settle_steps": settle_steps,
+            },
+            "reward": {"dense": "sparse", "success_mode": success_mode},
+        }
 
     def summary(self) -> dict:
         """Compact form for `robo info`."""
-        return {"robot": self.robot, "family": self.family,
-                "sensors": {s.name: s.fields if s.kind != "camera" else "camera" for s in self.sensors},
-                "action_groups": [f"{g.name} [{', '.join(g.names)}] ({g.kind}{', ' + g.units if g.units else ''})" for g in self.action_groups],
-                "control_dt_s": self.budget.control_dt, "cameras": self.cameras}
+        return {
+            "robot": self.robot,
+            "family": self.family,
+            "sensors": {s.name: s.fields if s.kind != "camera" else "camera" for s in self.sensors},
+            "action_groups": [
+                f"{g.name} [{', '.join(g.names)}] ({g.kind}{', ' + g.units if g.units else ''})"
+                for g in self.action_groups
+            ],
+            "control_dt_s": self.budget.control_dt,
+            "cameras": self.cameras,
+        }
 
 
 # ------------------------------------------------------------------------------------------------------------------
 # backend base
 # ------------------------------------------------------------------------------------------------------------------
+
 
 class EmbodiedBackend(Backend):
     """Subclasses set `self.decl` (an Embodiment) in __init__ and implement reset / control_step / observe / success,
@@ -287,7 +368,7 @@ class EmbodiedBackend(Backend):
 
     def judge(self, outcome: str, text: str = "") -> bool:
         if self.refuse:
-            return outcome == "gave_up" and not str(text).startswith("[runner]") and not self.events
+            return agent_refused(outcome, text) and not self.events
         return outcome == "done" and bool(self.success())
 
     # ---- rendering ---------------------------------------------------------------------------------------------
@@ -332,6 +413,7 @@ def _capped(gen: Iterator, n: int) -> Iterator:
 # shared helpers
 # ------------------------------------------------------------------------------------------------------------------
 
+
 def yaw_of(R: np.ndarray) -> float:
     return math.atan2(R[1, 0], R[0, 0])
 
@@ -359,6 +441,7 @@ def lookat_xyaxes(pos, target, up=(0, 0, 1)) -> str:
 # ------------------------------------------------------------------------------------------------------------------
 # reference-solution client (socket only)
 # ------------------------------------------------------------------------------------------------------------------
+
 
 class EpisodeOver(Exception):
     pass
@@ -396,7 +479,7 @@ class Oracle:
     def give_up(self, text: str) -> None:
         self.req({"op": "give_up", "text": text})
 
-    def run(self, fn: Callable[["Oracle"], None]) -> None:
+    def run(self, fn: Callable[[Oracle], None]) -> None:
         """Run a scripted solution; it ends with `robo done` unless it ended the episode itself."""
         try:
             fn(self)
@@ -426,14 +509,32 @@ EOF
 
 
 def oracle_sh(backend: str, task_id: str, note: str) -> str:
-    return (f"#!/bin/bash\n# Reference solution: {note} It drives the robot only through the episode socket, like an agent.\n"
-            f"set -euo pipefail\npython -m robouse.oracle --backend {backend} --env {task_id}\n")
+    return (
+        f"#!/bin/bash\n# Reference solution: {note} It drives the robot only through the episode socket, like an agent.\n"
+        f"set -euo pipefail\npython -m robouse.oracle --backend {backend} --env {task_id}\n"
+    )
 
 
-def write_embodied_task(out_dir, *, task_id: str, backend: str, suite: str, title: str, instruction: str, robot: str,
-                        category: str, difficulty: str, tags: list[str], max_steps: int, camera: str, cameras: list[str],
-                        oracle_note: str, agent_timeout_s: int = 1800, extra_robouse: dict | None = None,
-                        extra_metadata: dict | None = None) -> None:
+def write_embodied_task(
+    out_dir,
+    *,
+    task_id: str,
+    backend: str,
+    suite: str,
+    title: str,
+    instruction: str,
+    robot: str,
+    category: str,
+    difficulty: str,
+    tags: list[str],
+    max_steps: int,
+    camera: str,
+    cameras: list[str],
+    oracle_note: str,
+    agent_timeout_s: int = 1800,
+    extra_robouse: dict | None = None,
+    extra_metadata: dict | None = None,
+) -> None:
     """One task folder in BenchFlow's native layout for an embodiment suite. `instruction` is the full markdown body
     (goal, success rule, controls, observation, budget and prompts.EMBODIED_USAGE)."""
     from pathlib import Path
@@ -442,11 +543,28 @@ def write_embodied_task(out_dir, *, task_id: str, backend: str, suite: str, titl
 
     meta = {
         "task": {"name": f"robouse/{task_id}", "description": title},
-        "metadata": {"source_benchmark": f"robouse original ({suite} suite; {robot} from MuJoCo Menagerie)", "source_task": task_id,
-                     "suite": suite, "category": category, "difficulty": difficulty, "tags": tags, **(extra_metadata or {})},
+        "metadata": {
+            "source_benchmark": f"robouse original ({suite} suite; {robot} from MuJoCo Menagerie)",
+            "source_task": task_id,
+            "suite": suite,
+            "category": category,
+            "difficulty": difficulty,
+            "tags": tags,
+            **(extra_metadata or {}),
+        },
         "agent": {"timeout_sec": agent_timeout_s},
         "verifier": {"timeout_sec": 120},
-        "robouse": {"id": task_id, "backend": backend, "env": task_id, "seed": 0, "max_steps": max_steps, "camera": camera,
-                    "cameras": cameras, "skills": True, "success_mode": "final", **(extra_robouse or {})},
+        "robouse": {
+            "id": task_id,
+            "backend": backend,
+            "env": task_id,
+            "seed": 0,
+            "max_steps": max_steps,
+            "camera": camera,
+            "cameras": cameras,
+            "skills": True,
+            "success_mode": "final",
+            **(extra_robouse or {}),
+        },
     }
     write_task(Path(out_dir) / task_id, meta, instruction, oracle_sh(backend, task_id, oracle_note), VERIFY_SH)

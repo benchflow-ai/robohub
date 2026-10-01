@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/libero"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:f4f64ec5810becb755db7410586836e031cb254d66baa42fbe7f6d40ec3f327e"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:8965ba2d9b7336575e0cac338d12d3b386462344b1b6b3da65d1c354fea355f8"
     network_mode: none
     init: true
     volumes:
@@ -33,8 +33,9 @@ services:
       # The verifier copies the episode video and camera images here after the agent has stopped.
       - ${HOST_ARTIFACTS_PATH}:/logs/artifacts
     environment:
-      # Given only to the reference solution (oracle/solve.sh): unlocks privileged state in vision tasks.
-      ROBOUSE_ORACLE_TOKEN: "029ab4c93e2fb90683f9ef76728d7f0f"
+      # Chosen per run on the host ($ROBOUSE_ORACLE_TOKEN; unset means no token) and given only to the reference
+      # solution (task.md oracle.env): unlocks privileged state in vision tasks. No token is stored in this package.
+      ROBOUSE_ORACLE_TOKEN: "${ROBOUSE_ORACLE_TOKEN:-}"
       # The Robo Use task definition (task.md frontmatter); sim-entry writes it to a file for `robouse serve`.
       ROBOUSE_TASK_MD: |
         ---
@@ -57,7 +58,7 @@ services:
           - robosuite
           - single-arm
           - language
-          reference_solution: LIBERO demonstration demo_0 of yifengzhu-hf/LIBERO-datasets/libero_90/STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_front_compartment_of_the_caddy_demo.hdf5 (replay reaches success at step 164)
+          reference_solution: LIBERO demonstration demo_1 of yifengzhu-hf/LIBERO-datasets/libero_90/STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_front_compartment_of_the_caddy_demo.hdf5 (replay reaches success at step 154)
         agent:
           timeout_sec: 1500
         verifier:
@@ -79,53 +80,53 @@ services:
           skills: true
           success_mode: first
           obs_mode: state
-          init_source: yifengzhu-hf/LIBERO-datasets/libero_90/STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_front_compartment_of_the_caddy_demo.hdf5 demo_0 states[0]
+          init_source: yifengzhu-hf/LIBERO-datasets/libero_90/STUDY_SCENE1_pick_up_the_book_and_place_it_in_the_front_compartment_of_the_caddy_demo.hdf5 demo_1 states[0]
           init_state:
           - 0.25000000000000017
-          - 0.014459721147003977
-          - -0.13754411793002042
-          - 0.012305255849662014
-          - -2.4511698441286693
-          - 0.0007278789279759399
-          - 2.254804035644858
-          - 0.8027987503506931
-          - 0.03408653577727327
-          - -0.034002140988817
-          - -0.21836038595793705
-          - 0.12690148936792198
+          - -0.02490808375212421
+          - -0.13375082371485267
+          - 0.03074049595810549
+          - -2.438742365833972
+          - 0.013343880954508586
+          - 2.250010509416377
+          - 0.7944282239672498
+          - 0.034101401085152805
+          - -0.0339665517667715
+          - -0.1865571153071885
+          - 0.1478165583927361
           - 0.8829597034738329
-          - -0.5518354099768644
-          - 1.869415515251554e-08
-          - -4.66383662640936e-08
-          - 0.833953044418967
-          - -0.07586733557704108
-          - 0.013927985953039653
+          - -0.5019586497956912
+          - 1.5925781575951877e-08
+          - -4.765478072402312e-08
+          - 0.8648916197393084
+          - -0.11882247672702066
+          - 0.006400365101586431
           - 0.8852269911115938
           - -0.7071067358182576
-          - -9.854906034307421e-07
-          - 5.615288457810333e-08
+          - -9.854906034314178e-07
+          - 5.615288457883657e-08
           - 0.7071068265541456
-          - 0.017868588506666585
-          - 0.10261679509059304
-          - 0.11223527305427276
-          - 0.07657999148487267
-          - 0.06802628255091354
-          - 0.09098973004654742
-          - 0.14222113415710358
-          - 0.057332022722297024
-          - -0.05767405960216388
-          - -5.85184210512964e-10
-          - 2.9578410032171686e-10
-          - 9.876915799031671e-06
-          - -2.9587630126492803e-07
-          - 1.9336918638546766e-08
-          - 2.554901633354321e-14
-          - 1.9869895000374975e-13
-          - -1.3471393246031791e-11
-          - 7.114519732129226e-07
-          - -7.5948252728675e-09
-          - 2.955405154045899e-07
-          - -3.0818312690238287e-13
+          - 0.0796919291704203
+          - 0.12234466284705044
+          - 0.11938671677312629
+          - 0.09715982552877798
+          - -0.018603938936453464
+          - 0.08552831658189121
+          - 0.10206743331548204
+          - 0.05725732036761248
+          - -0.05771589089312728
+          - -5.465096257222674e-10
+          - 3.6229273270585353e-10
+          - 9.876915799028827e-06
+          - -2.9587630126354123e-07
+          - 1.9336918629542938e-08
+          - 2.5549008994458493e-14
+          - 1.98701824050187e-13
+          - -1.3471389356571585e-11
+          - 7.114519732050023e-07
+          - -7.59482521700552e-09
+          - 2.9554051548045056e-07
+          - -3.0818256566719194e-13
         ---
     command: ["robouse-sim-entry", "--max-wall-s", "2400"]
     healthcheck:

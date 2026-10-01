@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/stack-in-order--franka-panda--lab-bench--pert-clutter--s5",
+  "key": "d9cc13db74588eef",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}

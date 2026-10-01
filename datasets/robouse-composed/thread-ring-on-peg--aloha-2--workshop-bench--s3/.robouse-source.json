@@ -1,0 +1,9 @@
+{
+  "source": "tasks/composed/thread-ring-on-peg--aloha-2--workshop-bench--s3",
+  "key": "3cfa00fa6a9b6d88",
+  "runtime": "composed",
+  "noop": false,
+  "seed": null,
+  "timeout": null,
+  "format_version": "4"
+}
