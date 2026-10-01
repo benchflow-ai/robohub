@@ -8524,7 +8524,7 @@
       "name": "benchflow/robouse-core",
       "version": "0.2",
       "superseded_by": "benchflow/robouse-core@0.4",
-      "reason": "superseded: 0.3 runs its five DexJoCo tasks on the Robo Use 0.2.0 runtime; its other 95 tasks are byte-identical"
+      "reason": "superseded: rebuilt from Robo Use 0.2.0 as published on PyPI, whose robo client waits for long skills instead of failing after 120 s"
     },
     {
       "name": "brave-eai/dexjoco",
@@ -8548,7 +8548,7 @@
       "name": "benchflow/robouse-noop-control",
       "version": "0.2",
       "superseded_by": "benchflow/robouse-noop-control@0.4",
-      "reason": "superseded with benchflow/robouse-core@0.2: 0.3 runs the same five DexJoCo tasks on the Robo Use 0.2.0 runtime; the other 95 are byte-identical"
+      "reason": "superseded: rebuilt from Robo Use 0.2.0 as published on PyPI, whose robo client waits for long skills instead of failing after 120 s"
     },
     {
       "name": "benchflow/robouse-core",
