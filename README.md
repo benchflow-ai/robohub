@@ -4,8 +4,13 @@ BenchFlow datasets of Robo Use robotics tasks. Each dataset version is a set of 
 
 ```sh
 ROBOUSE_ORACLE_TOKEN=$(openssl rand -hex 16) \
-  bench eval run -d farama-foundation/metaworld@0.2 --registry https://robouse.ai/hub/registry.json --agent oracle
+  bench eval run \
+  -d farama-foundation/metaworld@0.2 \
+  --registry https://robouse.ai/hub/registry.json \
+  --agent oracle
 ```
+
+`ROBOUSE_ORACLE_TOKEN` is needed only for reference-solution runs (`--agent oracle`), not for agent runs.
 
 ## Datasets
 
@@ -66,16 +71,23 @@ Requirements: Docker with Compose v2.24.4 or newer (the task compose files use `
 ```sh
 # reference solutions (each task must score 1)
 ROBOUSE_ORACLE_TOKEN=$(openssl rand -hex 16) \
-  bench eval run -d benchflow/robouse-core@0.2 --registry https://robouse.ai/hub/registry.json --agent oracle --concurrency 4
+  bench eval run \
+  -d benchflow/robouse-core@0.2 \
+  --registry https://robouse.ai/hub/registry.json \
+  --agent oracle \
+  --concurrency 4
 # negative control (each task must score 0)
-bench eval run -d benchflow/robouse-noop-control@0.2 --registry https://robouse.ai/hub/registry.json --agent oracle
+bench eval run \
+  -d benchflow/robouse-noop-control@0.2 \
+  --registry https://robouse.ai/hub/registry.json \
+  --agent oracle
 ```
 
 A task runs as two containers. `main` is BenchFlow's agent container with only the `robo` client. `simulator` is trusted, has no network, runs the Robo Use episode server and the verifier, and shares only a Unix socket with `main`. The reward is 1 if the episode server judged the task solved from the physical state, else 0.
 
 Oracle token. In vision tasks the agent sees camera images, not object positions; the reference solution reads the true state with a token. No package contains a token. The simulator takes it from `ROBOUSE_ORACLE_TOKEN` in the environment of the `bench` process, and the reference solution gets the same variable through `oracle.env` in `task.md`, which BenchFlow passes to the oracle only. Set a fresh random value for reference-solution runs, as above. Without it the simulator has no token, nothing is privileged, and reference solutions that need the true state score 0. Agents never receive it.
 
-GPU datasets. `bench` cannot give a sandbox a GPU, so the datasets marked GPU run from a Robo Use checkout against simulator workers on an NVIDIA RTX GPU machine; each dataset's `run` entry in `hub.yaml` has the command and setup.
+GPU datasets. `bench` cannot give a sandbox a GPU, so the datasets marked GPU run with Robo Use against simulator workers on an NVIDIA RTX GPU machine; each dataset's `run` entry in `hub.yaml` has the command, and the [Robo Use docs](https://robouse.ai/docs/suites/gpu-track/) have the setup.
 
 ## Simulator images
 
