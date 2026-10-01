@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/myosuite"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:74fa8b26b423bb31a999286252e2bba63f17e195e43529dc3e69c4698d029e84"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:d0a9c75adec6668cade6419c4ea89f174d5ca383466b8935c21bda6642bd15e7"
     network_mode: none
     init: true
     volumes:

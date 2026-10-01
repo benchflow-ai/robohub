@@ -93,7 +93,11 @@ def _summarize(a: argparse.Namespace) -> int:
 def _fetch_assets(a: argparse.Namespace) -> int:
     from ..assets import fetch
 
-    fetch(Path(a.dest) if a.dest else None, robots=a.robot, everything=a.all)
+    try:
+        fetch(Path(a.dest) if a.dest else None, robots=a.robot, everything=a.all)
+    except ValueError as e:
+        print(f"robouse: {e}", file=sys.stderr)
+        return 2
     return 0
 
 
@@ -119,6 +123,14 @@ def parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    try:
+        return _main(argv)
+    except KeyboardInterrupt:
+        print("\nrobouse: interrupted", file=sys.stderr)
+        return 130
+
+
+def _main(argv: list[str] | None = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
     if args and args[0] in ("tasks", "components", "remix"):  # these parse their own arguments (nested subcommands)
         from . import tasks

@@ -34,7 +34,8 @@ KEYS = (
 )
 
 
-def load_trials(jobs: list[Path]) -> list[dict]:
+def load_trials(jobs: list[Path], excluded: list[str] | None = None) -> list[dict]:
+    """The trials with a result; the folders of trials that failed on infrastructure go to `excluded`."""
     rows = []
     for job in jobs:
         jmeta = {}
@@ -50,6 +51,8 @@ def load_trials(jobs: list[Path]) -> list[dict]:
             except (ValueError, OSError):
                 continue
             if r.get("exception_info"):  # infrastructure failures are not results
+                if excluded is not None:
+                    excluded.append(str(rj.parent))
                 continue
             ep = r.get("episode") or {}
             md = c.get("metadata") or {}
@@ -108,8 +111,9 @@ def pass_k(rows: list[dict]) -> dict:
 
 
 def build(jobs: list[Path], by: list[str]) -> dict:
-    rows = load_trials(jobs)
-    out = {"groups": [], "by": by, "trials": len(rows)}
+    excluded: list[str] = []
+    rows = load_trials(jobs, excluded)
+    out = {"groups": [], "by": by, "trials": len(rows), "excluded_infra": excluded}
     for key, rs in group(rows, by).items():
         out["groups"].append(
             {
@@ -151,9 +155,15 @@ def markdown(rep: dict, metrics: list[str]) -> str:
         cells = [str(g["group"][k]) for k in rep["by"]] + [str(g["n"])]
         cells += [fmt(g.get(m), m in PCT) if not m.startswith("pass@") else str(g.get(m, "-")) for m in metrics]
         lines.append("| " + " | ".join(cells) + " |")
+    n_ex = len(rep.get("excluded_infra") or [])
     return (
         "\n".join(lines)
         + "\n\nProportions and progress in %; brackets are 95% intervals (Wilson for proportions, bootstrap for means).\n"
+        + (
+            f"{n_ex} trial(s) left out: they failed on infrastructure (exception_info in their result.json).\n"
+            if n_ex
+            else ""
+        )
     )
 
 

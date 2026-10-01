@@ -5,6 +5,7 @@ services:
   main:
     environment:
       ROBO_SOCKET: /rpc/episode.sock
+      ROBO_TIMEOUT_S: "3600"
       ROBOUSE_SOCKET: /rpc/episode.sock
     # !override drops BenchFlow's default host mount of /logs/verifier into the agent container, so the
     # agent cannot pre-write reward files; the verifier's output is downloaded from `simulator` instead.

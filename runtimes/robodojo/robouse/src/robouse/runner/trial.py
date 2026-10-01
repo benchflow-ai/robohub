@@ -25,6 +25,7 @@ import signal
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 import uuid
 from datetime import UTC, datetime
@@ -33,6 +34,7 @@ from typing import Any
 
 from .. import harnesses
 from ..core.protocol import RUNNER_PREFIX, verify_result
+from ..lib.text import clip
 from ..tasks import Task
 from . import sandbox
 from .cost import trial_cost
@@ -112,7 +114,7 @@ def _wait_ready(p: Path, proc: subprocess.Popen, timeout: float = 120, log: Path
                 log is not None and log.exists()
             ):  # the server's last line usually names the cause (e.g. a missing simulator)
                 lines = [l for l in log.read_text(errors="replace").splitlines() if l.strip()]
-                last = f": {lines[-1].strip()[:300]}" if lines else ""
+                last = f": {clip(lines[-1], 300)}" if lines else ""
             raise RuntimeError(f"episode server exited early ({proc.returncode}){last}")
         time.sleep(0.2)
     raise TimeoutError("episode server did not start")
@@ -148,6 +150,50 @@ def _verify(task: Task, episode: dict, tdir: Path) -> float:
         )
         return 0.0
     return reward
+
+
+# Ctrl-C: the agents of the trials running now (their process groups), so an interrupt stops them all
+_ACTIVE_AGENTS: set[int] = set()
+INTERRUPTED = threading.Event()
+INTERRUPT_TEXT = "Cancelled: the run was interrupted (Ctrl-C) before the trial finished"
+
+
+def interrupt_all() -> None:
+    """Stop every running agent; their trials are recorded as interrupted (an infrastructure failure, rerun by
+    `run-many --resume`)."""
+    INTERRUPTED.set()
+    for pid in list(_ACTIVE_AGENTS):
+        try:
+            os.killpg(pid, signal.SIGTERM)
+        except OSError:
+            pass
+
+
+def _harness_error(tdir: Path, harness: str, agent_rc: int | None, episode: dict) -> str | None:
+    """An agent that never ended the episode itself (no `robo done` or `robo give-up`) and whose harness reported an
+    error: a non-zero exit, or Claude Code's error result event (an API or credential failure). That is a failed run of
+    the harness, not a result of the model."""
+    if harness == "noop" or not (
+        episode.get("outcome") == "gave_up" and str(episode.get("agent_text", "")).startswith(RUNNER_PREFIX)
+    ):
+        return None
+    detail = ""
+    try:
+        for line in (tdir / "agent" / "stdout.jsonl").read_text(errors="replace").splitlines()[::-1]:
+            ev = json.loads(line) if line.startswith("{") else None
+            if isinstance(ev, dict) and ev.get("type") == "result":
+                if ev.get("is_error"):
+                    detail = clip(ev.get("result") or ev.get("subtype") or "error result", 300)
+                break
+    except (OSError, ValueError):
+        pass
+    if agent_rc not in (0, None):
+        return f"AgentError: the {harness} harness exited with code {agent_rc} without ending the episode" + (
+            f" ({detail})" if detail else ""
+        )
+    if detail:
+        return f"AgentError: the {harness} harness reported an error without ending the episode ({detail})"
+    return None
 
 
 def run_trial(
@@ -236,6 +282,7 @@ def run_trial(
     launch = None
     agent_rc = None
     timed_out = False
+    interrupted = False
     try:
         _wait_ready(
             ready, server, timeout=float(task.spec.get("ready_timeout_s", 300)), log=tdir / "episode" / "server.log"
@@ -275,15 +322,31 @@ def run_trial(
                 stdin=subprocess.DEVNULL,
                 start_new_session=True,
             )
+            _ACTIVE_AGENTS.add(agent.pid)
             try:
+                if INTERRUPTED.is_set():  # started just as another trial was interrupted
+                    raise KeyboardInterrupt
                 agent_rc = agent.wait(timeout=timeout)
-            except subprocess.TimeoutExpired:
-                timed_out = True
-                os.killpg(agent.pid, signal.SIGTERM)
+            except (subprocess.TimeoutExpired, KeyboardInterrupt) as e:
+                if isinstance(e, KeyboardInterrupt):
+                    interrupted = True
+                    interrupt_all()
+                else:
+                    timed_out = True
+                try:
+                    os.killpg(agent.pid, signal.SIGTERM)
+                except OSError:
+                    pass
                 try:
                     agent.wait(timeout=15)
                 except subprocess.TimeoutExpired:
                     os.killpg(agent.pid, signal.SIGKILL)
+                    agent.wait()
+            finally:
+                _ACTIVE_AGENTS.discard(agent.pid)
+    except KeyboardInterrupt:  # before the agent started (e.g. while the simulator loads)
+        interrupted = True
+        interrupt_all()
     except Exception as e:  # noqa: BLE001 - an infrastructure failure, recorded in result.json
         exc = f"{type(e).__name__}: {e}"
     finally:
@@ -291,27 +354,36 @@ def run_trial(
         from ..agent_cli import _send
 
         try:
-            st = _send({"op": "status"}, path=sock)
+            st = _send({"op": "status", "runner": True}, path=sock)
         except OSError:  # the server is still busy (e.g. a slow remote simulator step); it ends on its own clock
             st = {}
         if st.get("ok") and not st["result"]["finished"]:
-            _send(
-                {
-                    "op": "give_up",
-                    "text": f"{RUNNER_PREFIX} agent timed out"
-                    if timed_out
-                    else f"{RUNNER_PREFIX} agent exited without robo done",
-                },
-                path=sock,
-            )
+            try:
+                _send(
+                    {
+                        "op": "give_up",
+                        "text": f"{RUNNER_PREFIX} agent timed out"
+                        if timed_out
+                        else f"{RUNNER_PREFIX} agent exited without robo done",
+                    },
+                    path=sock,
+                )
+            except OSError:  # the server went away (e.g. it got the same Ctrl-C)
+                pass
         try:
-            server.wait(timeout=60)
+            server.wait(timeout=5 if interrupted or INTERRUPTED.is_set() else 60)
         except subprocess.TimeoutExpired:
             server.kill()
+            server.wait()
 
+    interrupted = interrupted or INTERRUPTED.is_set()
     episode, verified = _verdict(tdir / "episode" / "result.json", result_key)
+    if interrupted:
+        exc = INTERRUPT_TEXT
     if not verified and exc is None:
         exc = "VerdictError: the episode's result.json is missing or does not carry the server's signature"
+    if exc is None and not timed_out:
+        exc = _harness_error(tdir, harness, agent_rc, episode)
     if timed_out and episode.get("outcome") == "gave_up":
         episode["outcome"] = "agent_timeout"
     reward = _verify(task, episode, tdir) if verified else 0.0
@@ -338,13 +410,16 @@ def run_trial(
     res = {
         "task_name": task.id,
         "trial_name": trial_name,
+        # completed: the trial ran to a result (any reward); error: an infrastructure failure, not scored; cancelled: the
+        # run was interrupted. `run-many --resume` reruns error and cancelled trials
+        "status": "cancelled" if interrupted else ("error" if exc else "completed"),
         "source": task.metadata.get("source_benchmark"),
         "agent_info": {"name": harness, "model_info": {"name": (launch.notes.get("model") if launch else model)}},
         "verifier_result": {"rewards": {"reward": reward}},
         "episode": episode,
         "agent_return_code": agent_rc,
         "agent_timed_out": timed_out,
-        "exception_info": {"exception_type": exc.split(":")[0], "exception_message": exc} if exc else None,
+        "exception_info": {"exception_type": exc.split(":")[0], "exception_message": clip(exc, 4000)} if exc else None,
         "started_at": started,
         "finished_at": now(),
         "wall_time_s": round(time.time() - t0, 1),
@@ -355,6 +430,8 @@ def run_trial(
         res["proxy_stats"] = launch.helper
     (tdir / "result.json").write_text(json.dumps(res, indent=2))
     shutil.rmtree(ws, ignore_errors=True)
+    if interrupted and threading.current_thread() is threading.main_thread():
+        raise KeyboardInterrupt
     return {
         "trial": trial_name,
         "reward": reward,

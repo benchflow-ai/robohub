@@ -22,6 +22,9 @@ import os
 import socket
 import sys
 
+STEPPING_OPS = ("act", "move_to", "grip", "skill", "done", "give_up")
+STEPPING_TIMEOUT_S = 3600
+
 
 def _send(req: dict, path: str | None = None) -> dict:
     path = path or os.environ.get("ROBOUSE_SOCKET") or os.environ.get("ROBO_SOCKET") or _find_socket()
@@ -31,7 +34,10 @@ def _send(req: dict, path: str | None = None) -> dict:
     if token:
         req = {**req, "token": token}
     s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    s.settimeout(120)
+    # requests that step the simulator wait as long as the episode may run: a long skill steps hundreds of times and
+    # the server renders a video frame every other step (0.6 s each with software OpenGL on a busy CPU); the server
+    # bounds them itself (per-skill step caps and the episode's wall-clock budget)
+    s.settimeout(STEPPING_TIMEOUT_S if req.get("op") in STEPPING_OPS else 120)
     try:
         s.connect(path)
         s.sendall((json.dumps(req) + "\n").encode())
@@ -44,6 +50,8 @@ def _send(req: dict, path: str | None = None) -> dict:
         return json.loads(buf.decode() or '{"ok": false, "error": "empty response"}')
     except (FileNotFoundError, ConnectionRefusedError):
         return {"ok": False, "error": "episode server is not running (episode may have finished)"}
+    except TimeoutError:
+        return {"ok": False, "error": f"no answer from the episode server within {s.gettimeout():.0f} s"}
     finally:
         s.close()
 

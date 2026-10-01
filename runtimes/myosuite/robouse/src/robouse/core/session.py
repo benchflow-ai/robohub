@@ -32,9 +32,10 @@ import numpy as np
 from .. import config
 from ..backends import make_backend
 from ..backends.base import embodiment_dict
+from ..lib.text import clip
 from .cameras import mujoco_camera
 from .probe import PhysicsProbe
-from .protocol import FINISH_MESSAGES, MOTION_OPS, read_request, send_reply, sign_result
+from .protocol import FINISH_MESSAGES, MOTION_OPS, is_runner_request, read_request, send_reply, sign_result
 from .recording import VideoRecorder, record_size
 
 log = logging.getLogger(__name__)
@@ -202,7 +203,10 @@ class Episode:
 
     # ---- request handling --------------------------------------------------------------------------------------------
     def handle(self, req: dict) -> dict:
-        self.requests += 1
+        # `requests` in the result counts the agent's requests up to the one that ended the episode; the runner's own
+        # (its status check and its give-up after the agent exits) are not the agent's
+        if not (self.finished or is_runner_request(req)):
+            self.requests += 1
         privileged = bool(self._oracle_token) and req.get("token") == self._oracle_token
         req = {k: v for k, v in req.items() if k != "token"}  # never write the token to the trace
         op = req.get("op")
@@ -211,7 +215,7 @@ class Episode:
         try:
             resp = self._dispatch(op, req, privileged)
         except Exception as e:  # noqa: BLE001 - a bounded error goes back to the agent
-            resp = {"ok": False, "error": f"{type(e).__name__}: {e}"[:500]}
+            resp = {"ok": False, "error": clip(f"{type(e).__name__}: {e}", 500)}
         self._check_halt()
         if not self.finished and self.steps >= self.max_steps:
             self.finish("budget_exhausted", "")
@@ -251,7 +255,7 @@ class Episode:
         """Real robots: an e-stop, over-temperature or hardware fault ends the episode at once (no settle steps)."""
         halted = getattr(self.backend, "halted", None)
         if halted and not self.finished:
-            self.finish("safety_stop", str(halted)[:500], settle=False)
+            self.finish("safety_stop", clip(halted, 500), settle=False)
 
     def info(self) -> dict:
         s = self.backend.action_spec
@@ -419,7 +423,7 @@ class Episode:
                 break
             except Exception as e:  # noqa: BLE001 - a skill that fails part-way reports it; its steps still count
                 gen.close()
-                out = {"error": f"{type(e).__name__}: {e}"[:300]}
+                out = {"error": clip(f"{type(e).__name__}: {e}", 300)}
                 break
             self._env_step(action)
             n += 1
@@ -452,7 +456,7 @@ class Episode:
                 return bool(self.success_ever), None
             return outcome == "done" and bool(self.backend.success()), None
         except Exception as e:  # noqa: BLE001 - a simulator that died cannot be judged: score 0 and record why
-            return False, f"{type(e).__name__}: {e}"[:300]
+            return False, clip(f"{type(e).__name__}: {e}", 300)
 
     def finish(self, outcome: str, text: str, settle: bool = True) -> dict:
         if self.finished:
@@ -490,12 +494,13 @@ class Episode:
             **({"judge_detail": detail} if (detail := getattr(b, "last_judge", None)) else {}),
         }
         self._add_metrics()
-        if self.video.size:
+        keep_video = self.steps > 0  # no step ran: no recording (it would be a zero-length video)
+        if self.video.size and keep_video:
             self.result["video_size"] = list(self.video.size)
         if self._result_key:
             self.result["signature"] = sign_result(self.result, self._result_key)
         (self.run_dir / "result.json").write_text(json.dumps(self.result, indent=2))
-        self.video.close()
+        self.video.close(keep=keep_video)
         return {"outcome": outcome, "episode": "finished"}
 
     def _add_metrics(self) -> None:
@@ -511,7 +516,7 @@ class Episode:
             )
             self.probe.write(self.run_dir / "physics.jsonl")
         except Exception as e:  # noqa: BLE001 - metrics never change the verdict
-            self.result["metrics_error"] = f"{type(e).__name__}: {e}"[:300]
+            self.result["metrics_error"] = clip(f"{type(e).__name__}: {e}", 300)
 
     def close(self) -> None:
         if not self.finished:
@@ -576,7 +581,7 @@ def serve(
                         break
                     resp = ep.handle(req)
                 except Exception as e:  # noqa: BLE001 - a malformed request gets an error reply
-                    resp = {"ok": False, "error": f"bad request: {e}"[:300]}
+                    resp = {"ok": False, "error": clip(f"bad request: {e}", 300)}
                 send_reply(conn, resp)  # a client that went away does not end the episode
     finally:
         ep.close()

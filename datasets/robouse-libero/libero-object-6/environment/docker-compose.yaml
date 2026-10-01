@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/libero"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:8965ba2d9b7336575e0cac338d12d3b386462344b1b6b3da65d1c354fea355f8"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:93160a0b0fa71b29a6fe2db2b669bed017b243755f9d21cdec81e3550f07c749"
     network_mode: none
     init: true
     volumes:
