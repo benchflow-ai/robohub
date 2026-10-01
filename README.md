@@ -18,7 +18,7 @@ A dataset is named `<org>/<name>`. A dataset adapted from another benchmark sits
 
 | Dataset | Tasks | Simulator runtime | Original benchmark |
 |---|---|---|---|
-| `benchflow/robouse-core@0.2` | 100 | base, menagerie, robosuite, libero, dexjoco | a sample of the suites below ([`core.txt`](core.txt)) |
+| `benchflow/robouse-core@0.3` | 100 | base, menagerie, robosuite, libero, dexjoco | a sample of the suites below ([`core.txt`](core.txt)) |
 | `farama-foundation/metaworld@0.2` | 50 | base | Meta-World |
 | `farama-foundation/gymnasium-robotics@0.2` | 12 | base | Gymnasium-Robotics |
 | `farama-foundation/franka-kitchen@0.2` | 10 | base | Franka Kitchen (Gymnasium-Robotics) |
@@ -30,22 +30,22 @@ A dataset is named `<org>/<name>`. A dataset adapted from another benchmark sits
 | `benchflow/robouse-menagerie@0.2` | 15 | menagerie | |
 | `benchflow/robouse-drone@0.2` | 10 | menagerie | |
 | `benchflow/robouse-harm@0.2` | 80 | menagerie | BenchFlow's reproduction of Robocurve's RoboHarm |
-| `brave-eai/dexjoco@0.2` | 13 | dexjoco | DexJoCo |
+| `brave-eai/dexjoco@0.3` | 14 | dexjoco | DexJoCo |
 | `benchflow/quadruped@0.2` | 11 | embodied | |
 | `benchflow/humanoid@0.2` | 9 | embodied | |
 | `benchflow/mobile-manip@0.2` | 10 | embodied | |
 | `benchflow/dexhand@0.2` | 7 | embodied | |
 | `benchflow/crazyflie@0.2` | 7 | embodied | |
-| `benchflow/robouse-composed@0.2` | 48 | composed | |
+| `benchflow/robouse-composed@0.3` | 48 | composed | |
 | `benchflow/driving@0.2` | 7 | driving | |
 | `google-deepmind/dm-control@0.2` | 17 | dmcontrol | dm_control |
 | `myohub/myosuite@0.2` | 15 | myosuite | MyoSuite |
-| `carlosferrazza/humanoid-bench@0.2` | 6 | humanoidbench | HumanoidBench |
+| `carlosferrazza/humanoid-bench@0.3` | 7 | humanoidbench | HumanoidBench |
 | `mani-skill/maniskill@0.2` | 12 | maniskill | ManiSkill3 |
 | `robocasa/robocasa@0.2` | 23 | robocasa | RoboCasa |
 | `benchflow/robouse-nav@0.2` | 40 | light | |
 | `robocurve/cubepick-reach@0.2` | 5 | light | inspect-robots cubepick-reach |
-| `benchflow/robouse-noop-control@0.2` | 100 | as robouse-core | robouse-core's tasks with reference solutions that do nothing; each must score 0 |
+| `benchflow/robouse-noop-control@0.3` | 100 | as robouse-core | robouse-core's tasks with reference solutions that do nothing; each must score 0 |
 | `stanfordvl/behavior-1k@0.2` | 43 | behavior (GPU) | BEHAVIOR-1K |
 | `haosulab/maniskill-gpu@0.2` | 12 | gpu (GPU) | ManiSkill3 |
 | `benchflow/robouse-genesis@0.2` | 3 | gpu (GPU) | |
@@ -55,7 +55,7 @@ A dataset is named `<org>/<name>`. A dataset adapted from another benchmark sits
 
 [`hub.yaml`](hub.yaml) lists each dataset's upstream repository and licence and the folder its tasks are in (`dir`). A task that appears in two datasets (for example in `robouse-core` and its suite's dataset) has byte-identical packages, so the same digest.
 
-Earlier versions stay published and unchanged, as do the names they were published under: `robouse-core@0.1` and the other plain `robouse-*` names, `benchflow/robouse-roboharm@0.1` (now `benchflow/robouse-harm`) and `benchflow/robouse-remix@0.1` (now `benchflow/robouse-composed`). They still resolve in `bench`; new versions are published only under the current names.
+Earlier versions stay published and unchanged, as do the names they were published under: `robouse-core@0.1` and the other plain `robouse-*` names, `benchflow/robouse-roboharm@0.1` (now `benchflow/robouse-harm`) and `benchflow/robouse-remix@0.1` (now `benchflow/robouse-composed`). They still resolve in `bench`; new versions are published only under the current names. Do not evaluate agents on the versions listed under `deprecated` in [`hub.yaml`](hub.yaml) (also in `hub.json`), each with its reason and replacement: the earlier versions (every 0.1, and `lifelong-robot-learning/libero@0.2`) contain their tasks' oracle tokens, which this public repository exposes; `brave-eai/dexjoco@0.2` and `carlosferrazza/humanoid-bench@0.2` each left out a task, and `benchflow/robouse-composed@0.2` has an inspect-tag judge that accepts a list of every three-digit number; `benchflow/robouse-core@0.2` and `benchflow/robouse-noop-control@0.2` are superseded by 0.3, whose five DexJoCo tasks run on the newer runtime.
 
 ## Registry
 
@@ -72,13 +72,13 @@ Requirements: Docker with Compose v2.24.4 or newer (the task compose files use `
 # reference solutions (each task must score 1)
 ROBOUSE_ORACLE_TOKEN=$(openssl rand -hex 16) \
   bench eval run \
-  -d benchflow/robouse-core@0.2 \
+  -d benchflow/robouse-core@0.3 \
   --registry https://robouse.ai/hub/registry.json \
   --agent oracle \
   --concurrency 4
 # negative control (each task must score 0)
 bench eval run \
-  -d benchflow/robouse-noop-control@0.2 \
+  -d benchflow/robouse-noop-control@0.3 \
   --registry https://robouse.ai/hub/registry.json \
   --agent oracle
 ```
@@ -150,13 +150,14 @@ To change a dataset, bump its version in `hub.yaml`, export, commit and pin; `bu
 
 ## Checks
 
-Run on 2026-09-30 with the released `bench` 0.7.4 on a 16-core linux/arm64 cloud VM (Docker 29.1), through `bench eval run -d NAME@VERSION` against this repository's `registry.json`, so every run first verified all task digests at the pinned commit.
+Run with the released `bench` 0.7.4 on a 16-core linux/arm64 cloud VM (Docker 29.1), through `bench eval run -d NAME@VERSION` against this repository's `registry.json`, so every run first verified all task digests at the pinned commit: the 0.2 datasets on 2026-09-30, the 0.3 datasets on 2026-10-01.
 
 | Check | Result |
 |---|---|
-| `bench tasks check --sandbox docker`, every task package | 966/966 valid |
-| Reference solutions, all 27 CPU datasets (every task) | every task scored 1 (11 trials first failed to start with Docker's `No such container` race; each of those tasks scored 1 in another run with the same task digest) |
-| No-op reference solutions (`scripts/export.py --noop-out`), every task of every CPU dataset, and `benchflow/robouse-noop-control@0.2` | every task scored 0 (18 trials hit the same Docker race and scored 0 on rerun) |
+| `bench tasks check --sandbox docker`, every task package | 968/968 valid |
+| Reference solutions, every task of the 27 CPU datasets | every task scored 1 (trials that first failed to start with Docker's `No such container` race scored 1 in another run with the same task digest) |
+| No-op reference solutions (`scripts/export.py --noop-out`), every task of every CPU dataset, and `benchflow/robouse-noop-control@0.3` | every task scored 0 |
 | A scripted agent looking for the oracle token in a vision task and a composed task, with a token set on the host | no token in its environment, files or processes; none of about 5,400 candidate strings, including the token an earlier version committed, unlocked privileged state; a control with the reference solution's token did |
+| The composed inspect-tag judge, with the robot driven to the tag and an answer that lists every three-digit number | 1 on `benchflow/robouse-composed@0.2`, 0 on 0.3 |
 
-Left out of their datasets because their reference solutions fail in this Linux runtime: `dexjoco-assembly` (a demonstration replay that does not reach success) and `humanoidbench-maze` (a skill call that outlasts the `robo` client's 120 s timeout), as `robocasa-close-kettle-lid-kitchen6` was before. The GPU datasets cannot run in `bench`; they were checked with `bench tasks check` only.
+The 0.2 datasets ran in full before their last re-export, which changed only each runtime's provenance file and the digest each task pins, and one task per dataset after it. The 0.3 datasets come from Robo Use 0.2.0 as published on PyPI: every file their runtimes copy is identical to the 0.2.0 wheel. The GPU datasets cannot run in `bench`; they were checked with `bench tasks check` only.

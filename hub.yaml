@@ -374,8 +374,9 @@ datasets:
     image: vision
     description: 'Robo Use no-op control 0.3: the tasks of robouse-core with a reference solution that does nothing; each must score 0.'
 
-# Versions not to use for evaluation. Their registry.json entries stay exactly as published (published versions are
-# immutable, and `bench` has no deprecation field), so old commands still resolve; hub.json lists these for the hub page.
+# Versions to stop using: superseded by a fixed or updated version, or published with their oracle tokens. Their registry.json
+# entries stay exactly as published (published versions are immutable, and `bench` has no deprecation field), so old commands
+# still resolve; hub.json lists these for the hub page.
 deprecated:
   - {name: benchflow/robouse-core, version: "0.1", superseded_by: benchflow/robouse-core@0.3, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
   - {name: farama-foundation/metaworld, version: "0.1", superseded_by: farama-foundation/metaworld@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
@@ -429,3 +430,5 @@ deprecated:
   - {name: brave-eai/dexjoco, version: "0.2", superseded_by: brave-eai/dexjoco@0.3, reason: "leaves out dexjoco-assembly, whose recorded demonstration did not replay to success on Linux; 0.3 has all 14 tasks"}
   - {name: carlosferrazza/humanoid-bench, version: "0.2", superseded_by: carlosferrazza/humanoid-bench@0.3, reason: "leaves out humanoidbench-maze, where a long skill outlasted the robo client's 120 s timeout; 0.3 has all 7 tasks and a client that waits for long skills"}
   - {name: benchflow/robouse-composed, version: "0.2", superseded_by: benchflow/robouse-composed@0.3, reason: "the inspect-tag judge accepted an answer listing every three-digit number, and the privacy check missed a PIN spelled out or split by separators; both fixed in 0.3"}
+  - {name: benchflow/robouse-core, version: "0.2", superseded_by: benchflow/robouse-core@0.3, reason: "superseded: 0.3 runs its five DexJoCo tasks on the Robo Use 0.2.0 runtime; its other 95 tasks are byte-identical"}
+  - {name: benchflow/robouse-noop-control, version: "0.2", superseded_by: benchflow/robouse-noop-control@0.3, reason: "superseded with benchflow/robouse-core@0.2: 0.3 runs the same five DexJoCo tasks on the Robo Use 0.2.0 runtime; the other 95 are byte-identical"}

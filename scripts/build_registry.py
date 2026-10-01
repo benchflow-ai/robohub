@@ -19,7 +19,7 @@ reads, same as benchflow-ai/skillsbench's registry.json): a list of
   tags locally (push them with `git push origin --tags`).
 - hub.json is the machine-readable index the hub page is built from: per dataset, its tasks with suite, backend,
   runtime, embodiment and simulator (from hub.yaml and export.json), and the pinned commit; and `deprecated`, the
-  versions hub.yaml marks as not to be used for evaluation (each must be in registry.json, whose entries stay as
+  versions hub.yaml marks as ones to stop using (each must be in registry.json, whose entries stay as
   published: `bench` has no deprecation field).
 """
 from __future__ import annotations
@@ -156,7 +156,7 @@ def main(argv=None) -> int:
             "tasks": tasks,
         })
     out["runtimes"] = {k: {"simulators": v["simulators"], "digest": export["runtimes"].get(k)} for k, v in runtimes.items()}
-    # versions not to use for evaluation (hub.yaml `deprecated`); registry.json keeps their entries as published
+    # versions to stop using (hub.yaml `deprecated`); registry.json keeps their entries as published
     known = {(e["name"], e["version"]) for e in registry}
     out["deprecated"] = []
     for d in hub.get("deprecated") or []:
