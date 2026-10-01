@@ -75,7 +75,7 @@ Use the robot to find the heavy cube with the balance and deliver it to the answ
 
 A PandaOmron robot (a Franka Panda arm with a two-finger gripper on a mobile base with a torso lift) stands at a 0.7 x 1.6 m table whose top is at z = 0.9 m, spanning x in [-0.35, 0.35] and y in [-0.8, 0.8] around the world origin. Control runs at 20 Hz.
 
-**Scoring.** RLE-Bench's score is 0 unless exactly the heavy cube rests on the answer mat; then it is 1 with at most two weighings (the fewest that always suffice for nine cubes) and 2 / w with w weighings. A weighing is a comparison with the same non-zero number of cubes on both pans, held for 0.5 s. This task passes when the score is at least 0.5: the heavy cube alone on the mat, found with at most four weighings. The scene is submitted however the episode ends: `robo done`, running out of steps or time, or stopping without `robo done`; `robo give-up` scores 0.
+**Scoring.** RLE-Bench's score is 0 unless exactly the heavy cube rests on the answer mat; then it is 1 with at most two weighings (the fewest that always suffice for nine cubes) and 2 / w with w weighings. A weighing is a comparison with the same non-zero number of cubes on both pans, held for 0.5 s. This task passes when the score is at least 0.5: the heavy cube alone on the mat, found with at most four weighings. RLE-Bench itself has no pass mark: it reports this number as the score. The 0.5 pass mark is Robo Use's, because a Robo Use task scores 1 or 0. The scene is submitted however the episode ends: `robo done`, running out of steps or time, or stopping without `robo done`; `robo give-up` scores 0.
 
 You have **50,000 control steps** in one attempt. Observe and experiment until satisfied, then call `robo done`.
 

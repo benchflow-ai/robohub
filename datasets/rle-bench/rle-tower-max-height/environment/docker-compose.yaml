@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/rlebench"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:5d4b537a733e264860fa1c74f9c6110847ee21c83f93632e4b0fd457275941e8"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:f31e715b3ca1ca7e98330100098ef8b6a391a8048703a3387f7f7953834bfd22"
     network_mode: none
     init: true
     volumes:

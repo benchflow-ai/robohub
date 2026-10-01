@@ -72,7 +72,7 @@ Use the robot to stack mixed pieces into the tallest stable tower. Some pieces c
 
 A PandaOmron robot (a Franka Panda arm with a two-finger gripper on a mobile base with a torso lift) stands at a 0.7 x 1.6 m table whose top is at z = 0.9 m, spanning x in [-0.35, 0.35] and y in [-0.8, 0.8] around the world origin. Control runs at 20 Hz.
 
-**Scoring.** RLE-Bench scores the settled height of the tower (pieces resting on the table or on other pieces, none touching the robot, after the scene settles for 5 s) relative to the tallest tower the pieces allow. This task passes when that fraction is at least 0.5. The scene is submitted however the episode ends: `robo done`, running out of steps or time, or stopping without `robo done`; `robo give-up` scores 0.
+**Scoring.** RLE-Bench scores the settled height of the tower (pieces resting on the table or on other pieces, none touching the robot, after the scene settles for 5 s) relative to the tallest tower the pieces allow. This task passes when that fraction is at least 0.5. RLE-Bench itself has no pass mark: it reports this number as the score. The 0.5 pass mark is Robo Use's, because a Robo Use task scores 1 or 0. The scene is submitted however the episode ends: `robo done`, running out of steps or time, or stopping without `robo done`; `robo give-up` scores 0.
 
 You have **50,000 control steps** in one attempt. Observe and experiment until satisfied, then call `robo done`.
 

@@ -13,13 +13,13 @@ simulator worker (worker.py) inside RLE-Bench's pinned simulator stack (robosuit
   fraction correct; here each box is a task, so the mean over the three tasks is RLE-Bench's score). A fixed Panda,
   7-number actions, cameras workspace/closeup/top, and the skill `submit A|B|C|D` (final, no feedback).
 
-Scoring. RLE-Bench scores family 03 as a quality in [0, 1] computed from the final scene. Robo Use rewards 1 or 0, so a
-tabletop trial passes when RLE-Bench's quality is at least 0.5 (tower: half the analytic optimum height; cantilever:
-half the harmonic-stack overhang, more than one block alone can reach; balance: exactly the heavy cube on the mat with
-at most four weighings). A HiddenCOM box passes when the submitted quadrant is the ballast's. The quality, the rule and
-(for the balance) the weighing count are recorded in result.json (`judge_detail`). As in RLE-Bench, a tabletop scene is
-scored however the episode ends (`robo done`, the step budget, the time limit, or the agent stopping), except that
-`robo give-up` scores 0.
+Scoring. RLE-Bench scores family 03 as a quality in [0, 1] computed from the final scene and has no pass mark. Robo Use
+rewards 1 or 0, so a tabletop trial passes when RLE-Bench's quality is at least 0.5, a threshold of Robo Use's choosing
+(tower: half the analytic optimum height; cantilever: half the harmonic-stack overhang, more than one block alone can
+reach; balance: exactly the heavy cube on the mat with at most four weighings). A HiddenCOM box passes when the submitted
+quadrant is the ballast's. The quality, the rule and (for the balance) the weighing count are recorded in result.json
+(`judge_detail`). As in RLE-Bench, a tabletop scene is scored however the episode ends (`robo done`, the step budget,
+the time limit, or the agent stopping), except that `robo give-up` scores 0.
 
 Hidden physical conditions (the heavy cube, the ballast quadrant and masses, piece masses) never leave the worker: the
 agent sees only RLE-Bench's public fields and camera images, and `robo info` gives each camera's intrinsics only, as
@@ -297,7 +297,7 @@ class RLEBenchBackend(Backend):
         self.last_judge = {
             **detail,
             "pass_quality": PASS_QUALITY,
-            "rule": f"RLE-Bench {self.kind} quality >= {PASS_QUALITY}",
+            "rule": f"RLE-Bench {self.kind} quality >= {PASS_QUALITY} (a Robo Use pass mark; RLE-Bench reports the quality)",
         }
         return ok
 
