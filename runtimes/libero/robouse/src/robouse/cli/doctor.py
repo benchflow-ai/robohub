@@ -40,8 +40,13 @@ def run() -> int:
     print("Simulator backends")
     from ..backends import BACKENDS
 
+    # every in-process backend needs the simulator extra (`pip install 'robouse[sim]'`)
+    no_sim = [m for m in ("mujoco", "imageio", "PIL") if importlib.util.find_spec(m) is None]
     for b, (mod, _cls) in BACKENDS.items():
         if b in WORKER_VENVS or b in REMOTE or b == "remix":
+            continue
+        if no_sim:
+            print(f"  -- {b} (missing package {', '.join(no_sim)}: pip install 'robouse[sim]')")
             continue
         try:
             importlib.import_module(f"robouse.backends.{mod}")

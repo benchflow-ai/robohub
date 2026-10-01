@@ -64,6 +64,11 @@ def manifests() -> list[Path]:
     return [root / "provenance.json", root / "skydio_x2" / "PROVENANCE.json", root / EMBODIMENTS_MANIFEST]
 
 
+def robot_names() -> list[str]:
+    """The robot folders `fetch --robot` accepts."""
+    return sorted({f["path"].split("/", 1)[0] for m in manifests() for f in json.loads(m.read_text())["files"]})
+
+
 def fetch(
     dest: Path | None = None,
     log: Callable[[str], object] = print,
@@ -73,6 +78,10 @@ def fetch(
     """Download the manifest files that are missing or differ from their pinned hash: the base robots (Panda, ALOHA,
     Skydio X2), every robot with `everything`, or only `robots`."""
     dest = Path(dest or config.env("ROBOUSE_MENAGERIE_ASSETS") or cache())
+    if robots:
+        unknown = sorted(set(robots) - set(robot_names()))
+        if unknown:
+            raise ValueError(f"no robot {', '.join(unknown)} in the manifests; robots: {', '.join(robot_names())}")
     n_new = 0
     for m in manifests():
         if not (robots or everything) and m.name == EMBODIMENTS_MANIFEST:

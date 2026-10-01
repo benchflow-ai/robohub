@@ -5,6 +5,7 @@ services:
   main:
     environment:
       ROBO_SOCKET: /rpc/episode.sock
+      ROBO_TIMEOUT_S: "3600"
       ROBOUSE_SOCKET: /rpc/episode.sock
     # !override drops BenchFlow's default host mount of /logs/verifier into the agent container, so the
     # agent cannot pre-write reward files; the verifier's output is downloaded from `simulator` instead.
@@ -124,7 +125,7 @@ services:
                 tag: tag
                 reading: 560
               task: A yellow inspection tag hangs on the east wall; a three-digit number is printed on it. Go and look at it with your camera, read the number, and report it in the `robo done` message (for example `robo done "the tag reads 123"`).
-              success: the tag was seen by the robot's own camera (its centre in the middle 70 % of the image, facing the camera, at most 2.5 m away, not blocked) for at least one second, and the `robo done` message contains the number
+              success: the tag was seen by the robot's own camera (its centre in the middle 70 % of the image, facing the camera, at most 2.5 m away, not blocked) for at least one second, and the `robo done` message contains the number and no other three-digit number
               steps: 1400
         ---
     command: ["embodied-sim-entry", "--max-wall-s", "3000"]

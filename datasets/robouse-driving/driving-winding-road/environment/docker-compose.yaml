@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/driving"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:4abd093fc2f85569c1c2259182303f51354ba8d3134162a2a702db46856ccb72"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:c17dbccef41bc3f9c6c75ec76a7dfd063b2b6b905f3ee2eb38e7de475b0ad2f2"
     network_mode: none
     init: true
     volumes:

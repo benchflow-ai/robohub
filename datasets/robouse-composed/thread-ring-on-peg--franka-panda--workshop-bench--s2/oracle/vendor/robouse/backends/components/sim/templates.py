@@ -13,6 +13,7 @@ statically, so a combination that cannot be generated is rejected with the reaso
 from __future__ import annotations
 
 import math
+import re
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -706,14 +707,16 @@ class InspectTag(Template):
                 "task": (f"A yellow inspection tag hangs {where}; a three-digit number is printed on it. Go and look at it with your "
                          "camera, read the number, and report it in the `robo done` message (for example `robo done \"the tag reads 123\"`)."),
                 "success": ("the tag was seen by the robot's own camera (its centre in the middle 70 % of the image, facing the camera, "
-                            "at most 2.5 m away, not blocked) for at least one second, and the `robo done` message contains the number"),
+                            "at most 2.5 m away, not blocked) for at least one second, and the `robo done` message contains the number and "
+                            "no other three-digit number"),
                 "steps": 1400}
 
     def check(self, b) -> tuple[bool, dict]:
         return b.tag_seen("tag"), {"seen": b.tag_seen("tag")}
 
     def judge_text(self, b, text: str) -> bool:
-        return str(b.inst["goal"]["reading"]) in text
+        """The message names the tag's number and no other three-digit number (listing candidates is not reading)."""
+        return set(re.findall(r"(?<!\d)\d{3}(?!\d)", text)) == {str(b.inst["goal"]["reading"])}
 
     def solve(self, r, inst: dict) -> None:
         r.inspect("tag")

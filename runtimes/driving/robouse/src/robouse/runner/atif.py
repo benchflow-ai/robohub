@@ -38,7 +38,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from ..core.protocol import RUNNER_PREFIX
+from ..core.protocol import is_runner_request
 
 FPS = 30
 OBS_LIMIT = 4000  # characters kept of one tool result (head and tail)
@@ -59,7 +59,7 @@ ROBO_RE = re.compile(r"(?:^|[^\w.-])robo\s+(" + "|".join(re.escape(s) for s in R
 SCRIPT_RE = re.compile(r"(?:^|[\s;&|(])(?:python\d?(?:\.\d+)?|bash|sh|zsh|node|\./)", re.M)
 LOOP_RE = re.compile(r"(?:^|[\s;&|(])(?:for|while|until)\s|\bxargs\b|\bseq\b", re.M)
 RESULT_MARK_RE = re.compile(r'^(?:steps_used: |outcome: |error: |\{"ok": )', re.M)
-HAND_RE = re.compile(r'"?hand_pos"?:\s*(\[[^\]]*\])')
+HAND_RE = re.compile(r'(?<![\w"])"?hand_pos"?:\s*(\[[^\]]*\])')  # not left_hand_pos / right_hand_pos (two-arm robots)
 STEPS_RE = re.compile(r'"?steps_used"?:\s*(\d+)')
 
 
@@ -600,11 +600,11 @@ def _steps_from_trace(entries: list[int], trace: list[dict], harness: str) -> li
 # aligning tool calls with trace entries
 
 
-def _is_runner_entry(e: dict) -> bool:
+def _is_runner_entry(e: dict, legacy: bool = False) -> bool:
+    """The runner's request, not the agent's. Traces written before the runner marked its status check (`legacy`) take
+    every status request as the runner's."""
     req = e.get("req") or {}
-    return req.get("op") == "status" or (
-        req.get("op") == "give_up" and str(req.get("text", "")).startswith(RUNNER_PREFIX)
-    )
+    return is_runner_request(req) or (legacy and req.get("op") == "status")
 
 
 def _entry_sig(e: dict) -> tuple | None:
@@ -859,8 +859,9 @@ def build(trial: Path, harness: str | None = None) -> tuple[dict, dict]:
     )
     notes: list[str] = []
 
-    runner_entries = [j for j, e in enumerate(trace) if _is_runner_entry(e)]
-    agent_entries = [j for j, e in enumerate(trace) if not _is_runner_entry(e)]
+    legacy = not any((e.get("req") or {}).get("runner") for e in trace)
+    runner_entries = [j for j, e in enumerate(trace) if _is_runner_entry(e, legacy)]
+    agent_entries = [j for j, e in enumerate(trace) if not _is_runner_entry(e, legacy)]
 
     meta: dict[str, Any] = {}
     fm: dict | None = None
@@ -1013,7 +1014,9 @@ def build(trial: Path, harness: str | None = None) -> tuple[dict, dict]:
                 "harness": harness,
                 "episode_outcome": episode.get("outcome"),
                 "episode_success": episode.get("success"),
-                "robo_requests": len(agent_entries),
+                "robo_requests": episode.get("requests")
+                if isinstance(episode.get("requests"), int)
+                else len(agent_entries),
                 "runner_requests": len(runner_entries),
                 "recording_index": "artifacts/recording_index.json",
             }
@@ -1022,8 +1025,15 @@ def build(trial: Path, harness: str | None = None) -> tuple[dict, dict]:
     fm = dict(fm or {})
     fm["total_steps"] = len(atif_steps)
     if harness.startswith("mini-swe-agent"):
+        # mini reports no totals: sum its per-step usage, so runner/cost.py can price the trial. Its own
+        # instance_cost is 0.0 for models litellm has no price for (the Baseten ones), so a zero is not kept.
+        for key in ("prompt_tokens", "completion_tokens", "cached_tokens"):
+            vals = [(st.get("metrics") or {}).get(key) for st in atif_steps]
+            vals = [v for v in vals if isinstance(v, (int, float))]
+            if vals and fm.get(f"total_{key}") is None:
+                fm[f"total_{key}"] = int(sum(vals))
         ms = (meta.get("info") or {}).get("model_stats") or {}
-        if ms.get("instance_cost") is not None:
+        if ms.get("instance_cost"):
             fm["total_cost_usd"] = ms["instance_cost"]
     traj["final_metrics"] = {k: v for k, v in fm.items() if v is not None}
     if meta.get("result", {}).get("result") and not any(
