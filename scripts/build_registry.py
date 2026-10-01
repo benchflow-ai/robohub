@@ -18,7 +18,9 @@ reads, same as benchflow-ai/skillsbench's registry.json): a list of
 - Each new entry gets the git tag <name>-v<version> (for example farama-foundation/metaworld-v0.1); --tag creates the
   tags locally (push them with `git push origin --tags`).
 - hub.json is the machine-readable index the hub page is built from: per dataset, its tasks with suite, backend,
-  runtime, embodiment and simulator (from hub.yaml and export.json), and the pinned commit.
+  runtime, embodiment and simulator (from hub.yaml and export.json), and the pinned commit; and `deprecated`, the
+  versions hub.yaml marks as ones to stop using (each must be in registry.json, whose entries stay as
+  published: `bench` has no deprecation field).
 """
 from __future__ import annotations
 
@@ -154,6 +156,14 @@ def main(argv=None) -> int:
             "tasks": tasks,
         })
     out["runtimes"] = {k: {"simulators": v["simulators"], "digest": export["runtimes"].get(k)} for k, v in runtimes.items()}
+    # versions to stop using (hub.yaml `deprecated`); registry.json keeps their entries as published
+    known = {(e["name"], e["version"]) for e in registry}
+    out["deprecated"] = []
+    for d in hub.get("deprecated") or []:
+        if (d["name"], str(d["version"])) not in known:
+            sys.exit(f"deprecated {d['name']}@{d['version']} is not in registry.json")
+        out["deprecated"].append({"name": d["name"], "version": str(d["version"]),
+                                  "superseded_by": d.get("superseded_by"), "reason": d["reason"]})
     (HUB / "hub.json").write_text(json.dumps(out, indent=2) + "\n")
     print(f"wrote {reg_path.name} ({len(registry)} dataset versions) and hub.json")
     return 0

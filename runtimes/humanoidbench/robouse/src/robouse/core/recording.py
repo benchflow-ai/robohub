@@ -60,10 +60,15 @@ class VideoRecorder:
         self._writer.append_data(img)
         self.frames.append({"i": len(self.frames), "t": round(time.time() - self.t0, 3), "step": step})
 
-    def close(self) -> None:
-        with open(self.run_dir / "frames.jsonl", "w") as f:
-            for m in self.frames:
-                f.write(json.dumps(m) + "\n")
+    def close(self, keep: bool = True) -> None:
+        """Finish the video; `keep=False` (an episode in which no simulator step ran) removes it, since a still frame
+        is not a recording of anything."""
         if self._writer is not None:
             self._writer.close()
             self._writer = None
+        if not keep:
+            (self.run_dir / "recording.mp4").unlink(missing_ok=True)
+            self.frames, self.size = [], None
+        with open(self.run_dir / "frames.jsonl", "w") as f:
+            for m in self.frames:
+                f.write(json.dumps(m) + "\n")

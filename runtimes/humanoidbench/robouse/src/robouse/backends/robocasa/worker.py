@@ -120,9 +120,23 @@ class Worker:
                 c.get("placement", {}).pop("try_to_place_in", None)
             return cfgs
 
+        def _load_model(env_self, attempt_num=1):
+            # RoboCasa samples where counter appliances (a kettle, a toaster) go, and the draw is not reproducible across
+            # processes even with the seed and PYTHONHASHSEED fixed; an episode can record the placements to restore
+            base._load_model(env_self, attempt_num)
+            fixed = (getattr(env_self, "_ep_meta", None) or {}).get("robouse_fixture_placements") or {}
+            if fixed:
+                import robosuite.utils.transform_utils as T
+
+                for name, (pos, quat) in fixed.items():
+                    obj = env_self.fixtures[name]
+                    obj.set_pos(pos)
+                    obj.set_euler(T.mat2euler(T.quat2mat(T.convert_quat(np.asarray(quat), "xyzw"))))
+                    env_self.fxtr_placements[name] = (pos, quat, obj)
+
         patched = f"RobouseLW{env_name}"
         if patched not in REGISTERED_ENVS:
-            type(patched, (base,), {"_get_obj_cfgs": _get_obj_cfgs})
+            type(patched, (base,), {"_get_obj_cfgs": _get_obj_cfgs, "_load_model": _load_model})
         self.env = robosuite.make(
             patched,
             robots="PandaOmron",

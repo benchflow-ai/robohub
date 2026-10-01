@@ -24,10 +24,10 @@
         "package_version": "0.2.0",
         "repo": "https://pypi.org/project/robouse/"
       },
-      "version": "0.2",
-      "description": "Robo Use core 0.2: a cross-section of every Robo Use suite.",
-      "git_tag": "benchflow/robouse-core-v0.2",
-      "commit": "e472b1a1e041b85ecf08b86040ba0acf8c224bac",
+      "version": "0.3",
+      "description": "Robo Use core 0.3: a cross-section of every Robo Use suite.",
+      "git_tag": "benchflow/robouse-core-v0.3",
+      "commit": "954472c78299d116a50ed62b8df6b99b9fb6d81d",
       "n_tasks": 100,
       "suites": [
         "metaworld",
@@ -128,36 +128,66 @@
         },
         {
           "id": "dexjoco-click-mouse",
-          "digest": "sha256:5e1dd34b9157d60126cfdbbca1f4962807f3b9c4e7405a652c7914a0ad855cb9",
+          "digest": "sha256:02f3c28dce1f299abf0ae97ba3c76b74eb20d5bb7a2690e04a53add20c1702d4",
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-hammer-nail",
-          "digest": "sha256:18921a2d2e11ec0b9ece0090e418d0c61a389cbb42cf0c4810521be8545ef1f2",
+          "digest": "sha256:c78b6f433b4973eb72f91dae742149b5b234fa27e9a9a2095dab7b8eddb4dae5",
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-photograph",
-          "digest": "sha256:bf7fb91f7da89e5ddb999def40d84359dada51f3d79de505283826774551af4b",
+          "digest": "sha256:dec3c2835625f86f86ff7fe6313c301f16dc4c7721fc2968ac23366e1572b064",
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-unlock-ipad",
-          "digest": "sha256:1f6a3d549ec5438f29f9ddf3b6f16e0e2ec797e254348f11cc4d08fc8cb550d8",
+          "digest": "sha256:2464f7664039f0d6b1f70419834baf2ad91632d4e4b69c6d4f5b69b0966ffbf6",
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-water-plant",
-          "digest": "sha256:70d8016d9beee6c57022f9641dfe3f149e9e677077e116a3f9a6e2a89dd7c73a",
+          "digest": "sha256:1170a6da81fc4f47d2d984fa323f7ec9a47f66c41c27c013aa70f7e8e52374eb",
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
@@ -2849,15 +2879,16 @@
       },
       "run": null,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
-      "version": "0.2",
-      "description": "Robo Use DexJoCo 0.2: tool use with Allegro hands, from DexJoCo.",
-      "git_tag": "brave-eai/dexjoco-v0.2",
-      "commit": "e472b1a1e041b85ecf08b86040ba0acf8c224bac",
-      "n_tasks": 13,
+      "version": "0.3",
+      "description": "Robo Use DexJoCo 0.3: tool use with Allegro hands, from DexJoCo.",
+      "git_tag": "brave-eai/dexjoco-v0.3",
+      "commit": "954472c78299d116a50ed62b8df6b99b9fb6d81d",
+      "n_tasks": 14,
       "suites": [
         "dexjoco"
       ],
@@ -2874,92 +2905,99 @@
       ],
       "tasks": [
         {
+          "id": "dexjoco-assembly",
+          "digest": "sha256:d915497cb6ff8ed84a227eacf611fadc12f3ff39811f50b375c63c0e49b2eebb",
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
+        {
           "id": "dexjoco-click-mouse",
-          "digest": "sha256:5e1dd34b9157d60126cfdbbca1f4962807f3b9c4e7405a652c7914a0ad855cb9",
+          "digest": "sha256:02f3c28dce1f299abf0ae97ba3c76b74eb20d5bb7a2690e04a53add20c1702d4",
           "backend": "dexjoco",
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-click-mouse-b",
-          "digest": "sha256:e8431666979220358ac6ca8823806965688e2227cc5807089337344cb254ff8d",
+          "digest": "sha256:38f7d785a328bf7f911227f9ffd163376794d9b5221591a034cafcfd81de6d2f",
           "backend": "dexjoco",
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-fold-glasses",
-          "digest": "sha256:4bb6d8dc7d55ea940a8dc21af38d53484ea0f573d75c4b8ddbd85a0c74e1b8df",
+          "digest": "sha256:d1254ef23153265f25103d1a45b70a8fef5cd16675bd25f6d1802e08fb64d593",
           "backend": "dexjoco",
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-hammer-nail",
-          "digest": "sha256:18921a2d2e11ec0b9ece0090e418d0c61a389cbb42cf0c4810521be8545ef1f2",
+          "digest": "sha256:c78b6f433b4973eb72f91dae742149b5b234fa27e9a9a2095dab7b8eddb4dae5",
           "backend": "dexjoco",
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-hammer-nail-b",
-          "digest": "sha256:4b00ceab75938027afa4cad5d8022f4cc071da891602c9f27dbd0798130fde63",
+          "digest": "sha256:539eeb4cf49d70440d16dedc179601ef9c89cc7e43795ad536346e57f0867c76",
           "backend": "dexjoco",
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-microwave-cook",
-          "digest": "sha256:9e226b838c02f6b4d2b0d02bb76eb94ba20b8e47becf1f2ca6ed7fb3d637d95c",
+          "digest": "sha256:e068cad46b33b694ecc5d92884f74d84ed875538aef36fa92119f7f815dc1077",
           "backend": "dexjoco",
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-photograph",
-          "digest": "sha256:bf7fb91f7da89e5ddb999def40d84359dada51f3d79de505283826774551af4b",
+          "digest": "sha256:dec3c2835625f86f86ff7fe6313c301f16dc4c7721fc2968ac23366e1572b064",
           "backend": "dexjoco",
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-pick-bucket",
-          "digest": "sha256:d0a16486ae665447482865c3e3a27fa0083e83af0b9197dec73ed28a1b86407e",
+          "digest": "sha256:30002d2937feadfeee4c4f042cd2a555b39b6e8c2dd80c2654294a368cc5ce94",
           "backend": "dexjoco",
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-pick-bucket-b",
-          "digest": "sha256:c6759be5f1128cef7f52a7d78d065ec49729ab963e145db60500496141d930ce",
+          "digest": "sha256:34ac447d8530b664e4879b4b08b7e9f0b6156da17f75ffdcd7c7cddd45b60218",
           "backend": "dexjoco",
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-pinch-tongs",
-          "digest": "sha256:65636c19826643020e9e236c0def519592a63607d10729e317dcf18dd4e0b7ce",
+          "digest": "sha256:57afdb12561d93af760392005dba7afaaf63b0c61220b8e5d4621a459a422dfd",
           "backend": "dexjoco",
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-unlock-ipad",
-          "digest": "sha256:1f6a3d549ec5438f29f9ddf3b6f16e0e2ec797e254348f11cc4d08fc8cb550d8",
+          "digest": "sha256:2464f7664039f0d6b1f70419834baf2ad91632d4e4b69c6d4f5b69b0966ffbf6",
           "backend": "dexjoco",
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-water-plant",
-          "digest": "sha256:70d8016d9beee6c57022f9641dfe3f149e9e677077e116a3f9a6e2a89dd7c73a",
+          "digest": "sha256:1170a6da81fc4f47d2d984fa323f7ec9a47f66c41c27c013aa70f7e8e52374eb",
           "backend": "dexjoco",
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-water-plant-b",
-          "digest": "sha256:77f34002294836bb3ebb108fa33c024f2b8e59d27ca05c667eccc621149c48f7",
+          "digest": "sha256:0746dfc56a320f6b3c79789e3e38144397fa18759d423dc48860ba1eb192874e",
           "backend": "dexjoco",
           "runtime": "dexjoco",
           "suite": "dexjoco"
@@ -5470,15 +5508,16 @@
       },
       "run": null,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
-      "version": "0.2",
-      "description": "Robo Use HumanoidBench 0.2: whole-body tasks for a Unitree H1 with two Shadow hands.",
-      "git_tag": "carlosferrazza/humanoid-bench-v0.2",
-      "commit": "e472b1a1e041b85ecf08b86040ba0acf8c224bac",
-      "n_tasks": 6,
+      "version": "0.3",
+      "description": "Robo Use HumanoidBench 0.3: whole-body tasks for a Unitree H1 with two Shadow hands.",
+      "git_tag": "carlosferrazza/humanoid-bench-v0.3",
+      "commit": "954472c78299d116a50ed62b8df6b99b9fb6d81d",
+      "n_tasks": 7,
       "suites": [
         "humanoidbench"
       ],
@@ -5495,43 +5534,50 @@
       ],
       "tasks": [
         {
+          "id": "humanoidbench-maze",
+          "digest": "sha256:01c731a27424a3ad08f7b0bbefdd6401adad520fffdd9d149741c62cc39ef974",
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        },
+        {
           "id": "humanoidbench-pole",
-          "digest": "sha256:280159d2f1e4cc5384a7da686ce936cfb76dba3aa81df6703e2ec766145e55c6",
+          "digest": "sha256:f26ef03353f6b2de67cc7a0918d56df55e4207f643da0cb653bd848465982281",
           "backend": "humanoidbench",
           "runtime": "humanoidbench",
           "suite": "humanoidbench"
         },
         {
           "id": "humanoidbench-push",
-          "digest": "sha256:6dbf417bf42dfbdf20c7f5ad4de0f94290bedbb4547715db63d30cbac30e7bd3",
+          "digest": "sha256:4b0abe4238517d0e18476354b416a8c1c8890de3b10a86239d0e671006e481e1",
           "backend": "humanoidbench",
           "runtime": "humanoidbench",
           "suite": "humanoidbench"
         },
         {
           "id": "humanoidbench-reach",
-          "digest": "sha256:f65df38d4bc597bbb622c63059c8c516847ee3578e4777f64c03058100f14914",
+          "digest": "sha256:cb0721d7c2051dc6c1b3279dd33c47180cf2bd75419e7e0af99ac177315c7a99",
           "backend": "humanoidbench",
           "runtime": "humanoidbench",
           "suite": "humanoidbench"
         },
         {
           "id": "humanoidbench-sit-simple",
-          "digest": "sha256:02e3cccad2e84cf1ab6bd9399d34fc3081e39c962df892b5a92bedcefed699cd",
+          "digest": "sha256:e6d63edb8cb07852f46bfc70f97d6e66747811435e76a84632dbda59c8591da8",
           "backend": "humanoidbench",
           "runtime": "humanoidbench",
           "suite": "humanoidbench"
         },
         {
           "id": "humanoidbench-stand",
-          "digest": "sha256:af4f775bb877d803178c1fc6cea064579044bec3022cef6b7f3ced505e8e955b",
+          "digest": "sha256:e46a321920d0c8f36795fb22e342af04558a60100d39e36c4b1dead6256f8e3f",
           "backend": "humanoidbench",
           "runtime": "humanoidbench",
           "suite": "humanoidbench"
         },
         {
           "id": "humanoidbench-walk",
-          "digest": "sha256:957c905797ba337a715e417e3491efae5e652098eec95abda4001097be802165",
+          "digest": "sha256:e13dd2947ffd17082b0a765052351348f861b52ecb417d45d1bcb5d0ff73fe16",
           "backend": "humanoidbench",
           "runtime": "humanoidbench",
           "suite": "humanoidbench"
@@ -5878,8 +5924,8 @@
       "run": {
         "label": "Robo Use + GPU worker",
         "command": "robouse run-many --tasks tasks/behavior --harness oracle --out runs/behavior-oracle",
-        "note": "The BEHAVIOR simulator (OmniGibson 3.9.3 on Isaac Sim 5.1) needs an NVIDIA RTX GPU with RT cores and host driver 580 (Isaac Sim 5.1 crashed at start-up on driver 595). Start one simulator worker per activity on the GPU machine, write their endpoints to <code>runs/_behavior/remote.json</code> in the folder you run Robo Use from, and run from there; the setup is in <a href=\"https://robouse.ai/docs/suites/behavior/\">the behavior docs</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control.",
-        "bench_note": "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_BEHAVIOR_REMOTE</code> on the host."
+        "note": "Needs BEHAVIOR-1K simulator workers (OmniGibson 3.9.3 on NVIDIA Isaac Sim 5.1, with the BEHAVIOR Data Bundle), one per activity, on an NVIDIA RTX GPU with RT cores and a driver from the 580 branch (Isaac Sim 5.1 crashed at start-up on 595). The command above is the Robo Use run that checked every task with the reference solutions and a no-op control; it uses the task folders of a Robo Use source checkout. Requirements: <a href=\"https://github.com/benchflow-ai/robohub#gpu-datasets\">GPU datasets in the robohub README</a>.",
+        "bench_note": "Not run in the hub's checks (its packages passed bench tasks check only). With bench, the host names the worker endpoints file in <code>$ROBOUSE_BEHAVIOR_REMOTE</code>."
       },
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
@@ -6220,14 +6266,15 @@
       "upstream": null,
       "run": null,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
-      "version": "0.2",
-      "description": "Robo Use composed 0.2: tasks composed from embodiments, scenes, task templates and modifiers.",
-      "git_tag": "benchflow/robouse-composed-v0.2",
-      "commit": "e472b1a1e041b85ecf08b86040ba0acf8c224bac",
+      "version": "0.3",
+      "description": "Robo Use composed 0.3: tasks composed from embodiments, scenes, task templates and modifiers.",
+      "git_tag": "benchflow/robouse-composed-v0.3",
+      "commit": "954472c78299d116a50ed62b8df6b99b9fb6d81d",
       "n_tasks": 48,
       "suites": [
         "composed"
@@ -6251,336 +6298,336 @@
       "tasks": [
         {
           "id": "bimanual-relay--aloha-2--kitchen-counter--s5",
-          "digest": "sha256:d4c1ed1ede4e6fa8d0af03ac3313b783f6fc3f752d24f1b416b0423ba6338aff",
+          "digest": "sha256:8af11b5c949abf15cc26380707690e4a7ebe4817dae7d48f3746d50adad97d93",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "bimanual-relay--aloha-2--lab-bench--s4",
-          "digest": "sha256:3410b6c86e62be0e42ccc9351f85628c190098c9f654c372a3d46ee30cef3db5",
+          "digest": "sha256:c87dcf5d8ac2ca7380b4d52539525e4c4f14865bb608abbd964cab42e9d595da",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "bimanual-relay--aloha-2--tabletop--s4",
-          "digest": "sha256:ab1b4fe78ea5b34781f988952740982fe94d6d78960f43a34df3bc1a3056ae59",
+          "digest": "sha256:06507c281b6d0d3531654b1ade7f0c954f4653aadf31eb1a0e3c823b72fc12c0",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "bimanual-relay--aloha-2--workshop-bench--s3",
-          "digest": "sha256:8e70b470e6137570804e661859e045025f5d7bbfa0812010b7461226be6601d1",
+          "digest": "sha256:c2129ee5e2a9bb2930999b28c7dd6ef4b0d93e37c7777600e310f9c112eb441a",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "fetch-and-deliver--google-robot--workshop-bench--s3",
-          "digest": "sha256:b13cfa2753c05ef6f7f79509bfacf95e27df6fdd793a3a282ec26bbe95d29369",
+          "digest": "sha256:501b8d4633de4d04c33868cb409969d209dbfe3acabdb7d56ed5b792eaed5177",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "go-to-landmark--crazyflie-2--kitchen-counter--s2",
-          "digest": "sha256:638fef4f1ccbcf5c275ee4e65267d07608152d8690d84aed6a272fda57283900",
+          "digest": "sha256:20edd6e9dd33aed0b79ee4268d724cd1aa094921788e09ca1f6de6fe36e23205",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "go-to-landmark--crazyflie-2--outdoor-field--vision--s2",
-          "digest": "sha256:c71e0f3a1ddfd3c4e2403ed6df0f96311732e76d39a37cd1c1464ad7975611ed",
+          "digest": "sha256:7ff950cf3a08cb56450f1a78a2e1d55da6853d56d4445dd217866e3aed68c335",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "go-to-landmark--google-robot--lab-bench--s5",
-          "digest": "sha256:c43f111d06ec6fe5b69f0f22208e952b5bc6c22e8015bd57955c8d16297360eb",
+          "digest": "sha256:114ecaa4ee8a1c01d9650f270b8b40465d11f90df0dc397c43c765d3bf93eaae",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "go-to-landmark--google-robot--outdoor-field--s3",
-          "digest": "sha256:e353c614e07a1ef306c975d241a04ae8ddfb106276f97c0cb51da912a167e7a5",
+          "digest": "sha256:2ddc6669bb411fb3a95e0cf488e326571c4b77dfcf85ac1cd82b9755fcbd40fc",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "go-to-landmark--unitree-go2--outdoor-field--safety-indirect--s3",
-          "digest": "sha256:a120c14dbc6e7ec40346baa9c1fea73974d3937fdf31a84b7c661e5f0e8fb0ba",
+          "digest": "sha256:88939d85bc7ff5f6c82752dd920f6a302146932ebbb32b2c0e257f7a954fb9c2",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "go-to-landmark--unitree-go2--warehouse--s1",
-          "digest": "sha256:4f4ca6077b7eec92fbb9185756a782d5989ecaa09aa3a311557b5896106ae78d",
+          "digest": "sha256:f26608e3cdb02b92b6ceede471c99505c4c722ab956ce6bf046d6f0ce313aa66",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "go-to-landmark--unitree-go2--warehouse--safety-direct--s1",
-          "digest": "sha256:8c6bea0a269d2b555010a8c3e5290bafec94038943165616a0373633102ef88e",
+          "digest": "sha256:0d6493b1d7413da8884a543446b93b90b9c91fad86186f027d9ea0032a0d2293",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "inspect-tag--crazyflie-2--lab-bench--s3",
-          "digest": "sha256:08dc2da9e0e76d093ceca28af84785f59bd2cff1f2a551175f2df15a232f648c",
+          "digest": "sha256:d599f2837f2068285d7fc3a789472cdc9759ce35c1f8d7d6e48eaae480c65b40",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "inspect-tag--crazyflie-2--warehouse--safety-privacy--s4",
-          "digest": "sha256:8835de24cd630a78d9deb43c9b0b59d7a0a96da3b5ef6071a443396726e99025",
+          "digest": "sha256:884365ba92419f84a25c933ca1bb9c165145a0f3224603aa46d774850808fd40",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "inspect-tag--google-robot--kitchen-counter--s4",
-          "digest": "sha256:72d8b723ebd7e1f0d5f03ca0191056ed6a01b63896da55463b52c355b6f9e8a4",
+          "digest": "sha256:bc15e6b6651eb00910c3f13d477309ef5571cbd18fc38d3e34f13fa92bd87bd9",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "inspect-tag--pal-tiago--kitchen-counter--s2",
-          "digest": "sha256:d90930fd7134e08c78da48ff6de81c2ce9a1c347cf761a0b9f96659e4e2aab20",
+          "digest": "sha256:a212205d2c84ae56538c6827b7d26379be7008d6ef9348c02840a12c4b16e966",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "inspect-tag--unitree-go2--kitchen-counter--budget-loose--s5",
-          "digest": "sha256:de3566443b74e3fcf7482f3349aaf458083094b5c0faedc46981db35cc6afc3c",
+          "digest": "sha256:428a3391e9a45d99995c160cc55bd1194e2b52e3bfbd40ddf4fede863d71bfae",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "inspect-tag--unitree-go2--tabletop--s1",
-          "digest": "sha256:51c3861a00b861099eaec30cd78fef7e7eb96a7b3906566f7c2538105295e390",
+          "digest": "sha256:16066a849d6a950f020355905e3a65434758377529dad25c0afb23f890ba3041",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "push-to-zone--aloha-2--kitchen-counter--s2",
-          "digest": "sha256:899846b789a17f51c899c7011e88ad0a24dc36fe2a67ab945e7e11c06f947656",
+          "digest": "sha256:e29321a9b53f2e1115790e69dd02a1f922b09d1adbde248635b0df193185adc0",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "push-to-zone--franka-panda--tabletop--s2",
-          "digest": "sha256:9ae61df998133a06593f1a38244d4c46af0f263913d1ca083731f367360afcfe",
+          "digest": "sha256:15a61b85b7fc1d05c66eb76431482986ffce9ba9420f87019561ff2ef4f4decc",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "push-to-zone--franka-panda--warehouse--s4",
-          "digest": "sha256:f340f8c390a07ea9cbff6fec5cb6a8bfb4a92666f7403483fb4b0deb1f43f7f1",
+          "digest": "sha256:e4a9a4769fffada8da819b6b46e851604e6b4f06222a641b2affe708e39b7d06",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "push-to-zone--unitree-go2--workshop-bench--s4",
-          "digest": "sha256:7a50af83e4d18d4ba4121e1f292af395df540f0430108851700268190bcd21e3",
+          "digest": "sha256:6b05621a9ad9c024559e5e1a4fc47630f96b9b6a8c1081a1cdd144abf148f4b0",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "put-in-container--aloha-2--tabletop--pert-dynamics--s4",
-          "digest": "sha256:cfaba415ae4393dc218106a292590b297bc2027a56cdc2a422a5d7919e0eec88",
+          "digest": "sha256:47a1258362fe33005c9302ccfd657df9620cde0f2ec4b108eb8c7910712d9029",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "put-in-container--franka-panda--kitchen-counter--safety-direct--s6",
-          "digest": "sha256:33c7e05ceccefdc5a094515e045af8fa30523b2fb80d8619a921c326e21fccb4",
+          "digest": "sha256:8da46f2ee2120c85c644d2bf9c139cd151d4e45f76dace77ffd554bad42319f2",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "put-in-container--franka-panda--kitchen-counter--vision--s3",
-          "digest": "sha256:e86a7e0b4b5db34a7c62fbe3a0922a27b1a7f471181ca66718b7a45e6eddc0f6",
+          "digest": "sha256:fed58312938f794629b1c26d09692c94c426cce9e63cdbfa4e0b8c850f52c33d",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "put-in-container--franka-panda--lab-bench--s2",
-          "digest": "sha256:b4ac27c008fb7d906008c997e53f409195282e45156123af8002a9d6603df58e",
+          "digest": "sha256:56859c233ec9d5c28265ce6e375d4177bcebf824f7a678732207eed2eae60eab",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "put-in-container--franka-panda--tabletop--safety-indirect--s7",
-          "digest": "sha256:f3adea3c18fea933dc6ad23185e927b3d79a2cad1b4ba8ca5c06237bed6b1b91",
+          "digest": "sha256:eeaec3f66405199d4da6172ad09d3c49a789dc87805b6ab5819ffad085bba002",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "put-in-container--franka-panda--workshop-bench--pert-push--s2",
-          "digest": "sha256:acf3167c594eeb748abec241154a496fd7bf87229225c0d0fdb28c66e91e955f",
+          "digest": "sha256:f7d573e453a2ee0492c8d04878a0326b50039b7121c883de3152d2f5466a59fe",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "put-in-container--franka-panda--workshop-bench--s1",
-          "digest": "sha256:e3bd23d0255dee66b08fc80dd4fce12efe4af4e9144c2c2e9e9facc3c9dfac60",
+          "digest": "sha256:fae869117e4f7fece3a43becf0e94f1885b4a0dd8acd6d9525b3569d24b7bbd9",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "put-in-container--google-robot--tabletop--roles--s1",
-          "digest": "sha256:8ccb66fade76463f1e91061aea334f5d06e88145d37690d7ddd062e0811bdf04",
+          "digest": "sha256:e25d95d377c14c23958e2bdea7849926a39c8c35734a14e0e23e0702610df8ea",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "put-in-container--pal-tiago--tabletop--s4",
-          "digest": "sha256:d489a87dfd9bc902829e7faf921db029628f89daf424bdbe5c90006f9f3718ee",
+          "digest": "sha256:31c5090e10d1952a1b3720293e387007e83f236500b31f910395331478ca604a",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "put-in-container--pal-tiago--tabletop--safety-privacy--s2",
-          "digest": "sha256:c9090b73ae70dcc0a0b0032dbac1364f873bc99de77c358e4905d30b10f8eb6d",
+          "digest": "sha256:023aedeb8ce48c412d76691272b05aa9828d58c1fe366ce4386df3b1dad7dc63",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "put-in-container--pal-tiago--workshop-bench--s4",
-          "digest": "sha256:6f17c69931d71b25c6338106c91615ea6bda94af748ae90e9b12425d61a85a06",
+          "digest": "sha256:d4e4e59e589fb9f6c4fc951d7862893a932ac4a1800c30dbf44ea40add5aa34e",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "sort-by-color--franka-panda--tabletop--budget-tight--s2",
-          "digest": "sha256:2a3c5ff920889cdd062b4745045624d3cc749465301bde290fd18558cae90ad3",
+          "digest": "sha256:d830bd793cea8ee447a8e4e1986e19a2fad723bb27d5671260c55ce92f4b90d9",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "sort-by-color--franka-panda--tabletop--s3",
-          "digest": "sha256:f832658497f546d6738ac48cde8c6645e270ab6c8fb371d4e930daf180e4ad6b",
+          "digest": "sha256:6b0e0104e5e686fb7e1337a1284cadf63bb83daee898fcfc82fedc861cc47bfd",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "sort-by-color--franka-panda--workshop-bench--s4",
-          "digest": "sha256:5637183f5fa9eb598f0a0752e132d0dfe9574e67cd8e4d4140570b32ece07825",
+          "digest": "sha256:e99304c07625b26494bec43391d3d4fdef85887aa9bf52d4477ca86f113f8abf",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "sort-by-color--pal-tiago--kitchen-counter--s2",
-          "digest": "sha256:816f5813c1ef665149c258e4a00337d238acebfe3fba362a0756f5aa4901ae0e",
+          "digest": "sha256:4f07bbb62626e5e1982ec82cc745ba843c5872c829e07516b4985192c92fe01e",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "stack-in-order--aloha-2--tabletop--noisy--s2",
-          "digest": "sha256:5ca787f8658f91dbd24bfc4c9239aa9c8bc6a10d4fc694f2ba5b8599c6f5cbc3",
+          "digest": "sha256:94a7fdc3db59ee90ae3d73323f3240a5db36c3320a8e79d6a5fa304d194ad711",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "stack-in-order--aloha-2--tabletop--s4",
-          "digest": "sha256:1890d8ca1fbf951ef1e3fed8e08ba81d9d8e9ba77e570cad22b5e5c96bea697d",
+          "digest": "sha256:2d4f93ef6d48aec5e94915b104f2e409a53d596778d3265fed8c2233034882d7",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "stack-in-order--aloha-2--workshop-bench--s3",
-          "digest": "sha256:c2cc3389e6d74edc3a0da71c1a2f2eb1fe270f59dd1d911cdef80e425bf228c7",
+          "digest": "sha256:c66fb42035710376c42002d6d1a7d6b301f690a5897f03e81e0c8aeda89ac08a",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "stack-in-order--aloha-2--workshop-bench--safety-indirect--s1",
-          "digest": "sha256:73d0be3ef3e6ffd75874b31fd0812c3972780e4ea61166a1564b7bb959f696d2",
+          "digest": "sha256:50fa157779875dd8fe8c34a523060d73ad58c1db08ca9ea41fd3cee1c39c1588",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "stack-in-order--franka-panda--lab-bench--pert-clutter--s5",
-          "digest": "sha256:a510cc442c4d944055f73080650a8ebdbf75159f68e240ba49fe95a1fc348db8",
+          "digest": "sha256:3894fbe42cfc17b44ed0867519845a8d6cf97d34e55b286381bafbdfb9c47b08",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "stack-in-order--franka-panda--lab-bench--s5",
-          "digest": "sha256:497bb4bed00324a54ed52c7eb0ec1ac4a705eb4e9aea4208dffeede5c12625d3",
+          "digest": "sha256:7ae42cf9463d1d0ca235be162568e2ebefd2c3b6f4555d87371e07c9aa627e76",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "stack-in-order--franka-panda--warehouse--s4",
-          "digest": "sha256:5625d6d44a87be6acf34f6dc7d0914ab74b925521effb02bab536c27cccb2e01",
+          "digest": "sha256:9659359fcc583f89bc9a8533726f9fde7b863397221f12e5bc594504a5758668",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "thread-ring-on-peg--aloha-2--lab-bench--s2",
-          "digest": "sha256:5c6da8371c4c65f9c967581b74f83e7aff0dd3e293790990b921bb94187e83da",
+          "digest": "sha256:91e969bad922548f01e3d5e58a42548942b9c6232651172b4a2c5c422bba16b6",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "thread-ring-on-peg--aloha-2--tabletop--s4",
-          "digest": "sha256:936d4d96ed333d6ad1c6cc67fa201afc6ace776f29891d922d3c10906ecb3201",
+          "digest": "sha256:7b51c98ac029a2e84c1970cc636b4b435b66d50d6dd5f592419a102d28fe78f5",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "thread-ring-on-peg--aloha-2--workshop-bench--s3",
-          "digest": "sha256:67b18fb122c2f581da1176e670c89f27325d82006005f74ecfbdcb5d9ddd219a",
+          "digest": "sha256:a9199e7338c32034f04690e5e8fa9a444e722d1069d5a4dfb2876013224598d3",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
         },
         {
           "id": "thread-ring-on-peg--franka-panda--workshop-bench--s2",
-          "digest": "sha256:2c097ac82765cd0fa8474a4119e1f7423f0299bab3117560c9828ba54309059e",
+          "digest": "sha256:6b4a337e17fed0534ec68a9e02e1aecf390871a80f057aa54992dddf5f541af6",
           "backend": "components",
           "runtime": "composed",
           "suite": "composed"
@@ -6986,14 +7033,14 @@
       "upstream": {
         "benchmark": "ManiSkill3",
         "org_name": "Hao Su Lab (UC San Diego) and Hillbot",
-        "repo": "https://github.com/haosulab/ManiSkill",
+        "repo": "https://github.com/mani-skill/ManiSkill",
         "licence": "Apache-2.0 (code); CC BY-NC 4.0 (assets, not redistributed)"
       },
       "run": {
         "label": "Robo Use + GPU worker",
         "command": "robouse run-many --tasks tasks/gpu-maniskill --harness oracle --out runs/gpu-maniskill-oracle",
-        "note": "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in the folder you run Robo Use from, and run from there; the setup is in <a href=\"https://robouse.ai/docs/suites/gpu-track/\">the gpu-track docs</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control.",
-        "bench_note": "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
+        "note": "Needs GPU simulator workers (<code>robouse/backends/gpu/worker/server.py</code> in the Robo Use package, one per simulator: ManiSkill3 3.0.1, Genesis 1.4.2, MuJoCo Playground 0.2.0, Isaac Lab 2.3 on Isaac Sim 5.1) on an NVIDIA RTX GPU machine; Isaac Lab ran without its RTX renderer on driver 595. The command above is the Robo Use run that checked every task with the reference solutions and a no-op control; it uses the task folders of a Robo Use source checkout. Requirements: <a href=\"https://github.com/benchflow-ai/robohub#gpu-datasets\">GPU datasets in the robohub README</a>.",
+        "bench_note": "Not run in the hub's checks (its packages passed bench tasks check only). With bench, the host names the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code>."
       },
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
@@ -7116,8 +7163,8 @@
       "run": {
         "label": "Robo Use + GPU worker",
         "command": "robouse run-many --tasks tasks/gpu-genesis --harness oracle --out runs/gpu-genesis-oracle",
-        "note": "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in the folder you run Robo Use from, and run from there; the setup is in <a href=\"https://robouse.ai/docs/suites/gpu-track/\">the gpu-track docs</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control.",
-        "bench_note": "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
+        "note": "Needs GPU simulator workers (<code>robouse/backends/gpu/worker/server.py</code> in the Robo Use package, one per simulator: ManiSkill3 3.0.1, Genesis 1.4.2, MuJoCo Playground 0.2.0, Isaac Lab 2.3 on Isaac Sim 5.1) on an NVIDIA RTX GPU machine; Isaac Lab ran without its RTX renderer on driver 595. The command above is the Robo Use run that checked every task with the reference solutions and a no-op control; it uses the task folders of a Robo Use source checkout. Requirements: <a href=\"https://github.com/benchflow-ai/robohub#gpu-datasets\">GPU datasets in the robohub README</a>.",
+        "bench_note": "Not run in the hub's checks (its packages passed bench tasks check only). With bench, the host names the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code>."
       },
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
@@ -7177,8 +7224,8 @@
       "run": {
         "label": "Robo Use + GPU worker",
         "command": "robouse run-many --tasks tasks/gpu-playground --harness oracle --out runs/gpu-playground-oracle",
-        "note": "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in the folder you run Robo Use from, and run from there; the setup is in <a href=\"https://robouse.ai/docs/suites/gpu-track/\">the gpu-track docs</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control.",
-        "bench_note": "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
+        "note": "Needs GPU simulator workers (<code>robouse/backends/gpu/worker/server.py</code> in the Robo Use package, one per simulator: ManiSkill3 3.0.1, Genesis 1.4.2, MuJoCo Playground 0.2.0, Isaac Lab 2.3 on Isaac Sim 5.1) on an NVIDIA RTX GPU machine; Isaac Lab ran without its RTX renderer on driver 595. The command above is the Robo Use run that checked every task with the reference solutions and a no-op control; it uses the task folders of a Robo Use source checkout. Requirements: <a href=\"https://github.com/benchflow-ai/robohub#gpu-datasets\">GPU datasets in the robohub README</a>.",
+        "bench_note": "Not run in the hub's checks (its packages passed bench tasks check only). With bench, the host names the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code>."
       },
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
@@ -7257,8 +7304,8 @@
       "run": {
         "label": "Robo Use + GPU worker",
         "command": "robouse run-many --tasks tasks/gpu-isaaclab --harness oracle --out runs/gpu-isaaclab-oracle",
-        "note": "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in the folder you run Robo Use from, and run from there; the setup is in <a href=\"https://robouse.ai/docs/suites/gpu-track/\">the gpu-track docs</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control.",
-        "bench_note": "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
+        "note": "Needs GPU simulator workers (<code>robouse/backends/gpu/worker/server.py</code> in the Robo Use package, one per simulator: ManiSkill3 3.0.1, Genesis 1.4.2, MuJoCo Playground 0.2.0, Isaac Lab 2.3 on Isaac Sim 5.1) on an NVIDIA RTX GPU machine; Isaac Lab ran without its RTX renderer on driver 595. The command above is the Robo Use run that checked every task with the reference solutions and a no-op control; it uses the task folders of a Robo Use source checkout. Requirements: <a href=\"https://github.com/benchflow-ai/robohub#gpu-datasets\">GPU datasets in the robohub README</a>.",
+        "bench_note": "Not run in the hub's checks (its packages passed bench tasks check only). With bench, the host names the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code>."
       },
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
@@ -7337,8 +7384,8 @@
       "run": {
         "label": "Robo Use + GPU worker",
         "command": "robouse run-many --tasks tasks/robodojo --harness oracle --out runs/robodojo-oracle",
-        "note": "RoboDojo runs on NVIDIA Isaac Sim 5.1, which needs an RTX GPU with RT cores and a driver from the 580 branch (it crashed at start-up on driver 595). Start one worker per task on the GPU machine (<code>robodojo_worker.py</code> in a RoboDojo checkout with its Hugging Face assets), write their endpoints to <code>runs/_robodojo/remote.json</code> in the folder you run Robo Use from, and run from there; the setup is in <a href=\"https://robouse.ai/docs/suites/robodojo/\">the robodojo docs</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control.",
-        "bench_note": "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_ROBODOJO_REMOTE</code> on the host."
+        "note": "Needs RoboDojo simulator workers (<code>robouse/backends/robodojo/worker.py</code> in the Robo Use package, run from a RoboDojo checkout with its Hugging Face assets, under RoboDojo's own terms), one per task, on NVIDIA Isaac Sim 5.1 with an RTX GPU with RT cores and a driver from the 580 branch (it crashed at start-up on 595). The command above is the Robo Use run that checked every task with the reference solutions and a no-op control; it uses the task folders of a Robo Use source checkout. Requirements: <a href=\"https://github.com/benchflow-ai/robohub#gpu-datasets\">GPU datasets in the robohub README</a>.",
+        "bench_note": "Not run in the hub's checks (its packages passed bench tasks check only). With bench, the host names the worker endpoints file in <code>$ROBOUSE_ROBODOJO_REMOTE</code>."
       },
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
@@ -7445,10 +7492,10 @@
         "package_version": "0.2.0",
         "repo": "https://pypi.org/project/robouse/"
       },
-      "version": "0.2",
-      "description": "Robo Use no-op control 0.2: the tasks of robouse-core with a reference solution that does nothing; each must score 0.",
-      "git_tag": "benchflow/robouse-noop-control-v0.2",
-      "commit": "e472b1a1e041b85ecf08b86040ba0acf8c224bac",
+      "version": "0.3",
+      "description": "Robo Use no-op control 0.3: the tasks of robouse-core with a reference solution that does nothing; each must score 0.",
+      "git_tag": "benchflow/robouse-noop-control-v0.3",
+      "commit": "954472c78299d116a50ed62b8df6b99b9fb6d81d",
       "n_tasks": 100,
       "suites": [
         "metaworld",
@@ -7549,36 +7596,66 @@
         },
         {
           "id": "dexjoco-click-mouse",
-          "digest": "sha256:2d0175489ab10d9d3a24bbd08be109cda362da9e4c9035a68aef424dfeaf0e5f",
+          "digest": "sha256:b7e6e95ab8e08d40cbb37c9866ce4bc8291f9f33d8a18f95a9e97901ae63a5b2",
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-hammer-nail",
-          "digest": "sha256:217bd9ec2a7cf7555ae9eee6fc57010d786547d6ab818140d542c51f93475f1d",
+          "digest": "sha256:723fea6f3b13cac80d4d8f7dfad0675d2422e28804b1370ae32ddc69b354d05a",
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-photograph",
-          "digest": "sha256:76305084ea75962d20307aff4d2f245767c8cfee5a6dc7debf5ecfe1bbf97912",
+          "digest": "sha256:0dbba55f3a162a8575ad64a06a792883b7e7ee39e1089a2ad00eac580dddd9e9",
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-unlock-ipad",
-          "digest": "sha256:d5dabcb2e0cf78b604fcffd962d2b903cf5a6ecc7f69e4abc4fa71509d0fe49b",
+          "digest": "sha256:b8592085ad1cc0af99db532e99f56e4d76ab440cfe8d7e5c2c00820e648d62f3",
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         {
           "id": "dexjoco-water-plant",
-          "digest": "sha256:68c70baeea8b1282c8c75dd8dd277b7150359e18b2839ddc181b1a0e39627019",
+          "digest": "sha256:16e931e14c92ccc99b4baec6560bcd5f1378afc259cfd95617024cefe4a9b913",
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
@@ -8224,7 +8301,7 @@
     },
     "dexjoco": {
       "simulators": "MuJoCo 3.4.0, DexJoCo",
-      "digest": "sha256:e73eebfcf96bf7213c82e6c4da28a13c12661c31a081f9111f34ee15fb4f0fb6"
+      "digest": "sha256:21ac50856e673f412bf2031b25d0be334f18f01c3e7d75f77a5bd88ddd9b98d1"
     },
     "embodied": {
       "simulators": "MuJoCo 3.3.0, MuJoCo Menagerie models",
@@ -8244,7 +8321,7 @@
     },
     "humanoidbench": {
       "simulators": "MuJoCo 3.1.6, HumanoidBench (commit cb11890)",
-      "digest": "sha256:56ae52ac4b339b81baa44c9a34797a738a4abdf4eb20240ac925427a8f3905fa"
+      "digest": "sha256:6f64a0b969422b413d228a966920917f69e78f8b047b230ed1567330886fd41c"
     },
     "maniskill": {
       "simulators": "ManiSkill3 3.0.1 on SAPIEN 3.0.3 (CPU physics, lavapipe rendering)",
@@ -8256,7 +8333,7 @@
     },
     "composed": {
       "simulators": "MuJoCo 3.3.0, MuJoCo Menagerie models",
-      "digest": "sha256:4f5aa582409bcc0f86c3214485b86d0dac79f00a26ab9727219365c5fce2f9de"
+      "digest": "sha256:bf35428b062766f1759671abe0b534cf25a18a81b92181b7c69b7a5698e607c4"
     },
     "behavior": {
       "simulators": "BEHAVIOR-1K (OmniGibson 3.9.3 on NVIDIA Isaac Sim 5.1), on a remote NVIDIA RTX GPU worker",
@@ -8270,5 +8347,331 @@
       "simulators": "RoboDojo (NVIDIA Isaac Sim 5.1, Isaac Lab 2.3), on a remote NVIDIA RTX GPU worker",
       "digest": "sha256:2425e623d907fb525547dea62ec58d7be707e4b07d7acc71d44aab07a54c884e"
     }
-  }
+  },
+  "deprecated": [
+    {
+      "name": "benchflow/robouse-core",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-core@0.3",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "farama-foundation/metaworld",
+      "version": "0.1",
+      "superseded_by": "farama-foundation/metaworld@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "farama-foundation/gymnasium-robotics",
+      "version": "0.1",
+      "superseded_by": "farama-foundation/gymnasium-robotics@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/robouse-tabletop",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-tabletop@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "lifelong-robot-learning/libero",
+      "version": "0.2",
+      "superseded_by": "lifelong-robot-learning/libero@0.3",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "arise-initiative/robosuite",
+      "version": "0.1",
+      "superseded_by": "arise-initiative/robosuite@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/robouse-menagerie",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-menagerie@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "brave-eai/dexjoco",
+      "version": "0.1",
+      "superseded_by": "brave-eai/dexjoco@0.3",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/robouse-drone",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-drone@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/robouse-harm",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-harm@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/quadruped",
+      "version": "0.1",
+      "superseded_by": "benchflow/quadruped@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/humanoid",
+      "version": "0.1",
+      "superseded_by": "benchflow/humanoid@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/mobile-manip",
+      "version": "0.1",
+      "superseded_by": "benchflow/mobile-manip@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/dexhand",
+      "version": "0.1",
+      "superseded_by": "benchflow/dexhand@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/crazyflie",
+      "version": "0.1",
+      "superseded_by": "benchflow/crazyflie@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/driving",
+      "version": "0.1",
+      "superseded_by": "benchflow/driving@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "lifelong-robot-learning/libero-90",
+      "version": "0.1",
+      "superseded_by": "lifelong-robot-learning/libero-90@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "farama-foundation/franka-kitchen",
+      "version": "0.1",
+      "superseded_by": "farama-foundation/franka-kitchen@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "farama-foundation/adroit-hand",
+      "version": "0.1",
+      "superseded_by": "farama-foundation/adroit-hand@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "google-deepmind/dm-control",
+      "version": "0.1",
+      "superseded_by": "google-deepmind/dm-control@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "myohub/myosuite",
+      "version": "0.1",
+      "superseded_by": "myohub/myosuite@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "carlosferrazza/humanoid-bench",
+      "version": "0.1",
+      "superseded_by": "carlosferrazza/humanoid-bench@0.3",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "mani-skill/maniskill",
+      "version": "0.1",
+      "superseded_by": "mani-skill/maniskill@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robocasa/robocasa",
+      "version": "0.1",
+      "superseded_by": "robocasa/robocasa@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "stanfordvl/behavior-1k",
+      "version": "0.1",
+      "superseded_by": "stanfordvl/behavior-1k@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/robouse-composed",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-composed@0.3",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/robouse-nav",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-nav@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robocurve/cubepick-reach",
+      "version": "0.1",
+      "superseded_by": "robocurve/cubepick-reach@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "haosulab/maniskill-gpu",
+      "version": "0.1",
+      "superseded_by": "haosulab/maniskill-gpu@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/robouse-genesis",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-genesis@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/robouse-playground",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-playground@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "isaac-sim/isaaclab-factory",
+      "version": "0.1",
+      "superseded_by": "isaac-sim/isaaclab-factory@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robodojo-benchmark/robodojo",
+      "version": "0.1",
+      "superseded_by": "robodojo-benchmark/robodojo@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/robouse-noop-control",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-noop-control@0.3",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robouse-core",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-core@0.3",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robouse-metaworld",
+      "version": "0.1",
+      "superseded_by": "farama-foundation/metaworld@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robouse-gymrobotics",
+      "version": "0.1",
+      "superseded_by": "farama-foundation/gymnasium-robotics@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robouse-tabletop",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-tabletop@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robouse-libero",
+      "version": "0.2",
+      "superseded_by": "lifelong-robot-learning/libero@0.3",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robouse-robosuite",
+      "version": "0.1",
+      "superseded_by": "arise-initiative/robosuite@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robouse-menagerie",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-menagerie@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robouse-dexjoco",
+      "version": "0.1",
+      "superseded_by": "brave-eai/dexjoco@0.3",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robouse-drone",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-drone@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/robouse-roboharm",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-harm@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robouse-roboharm",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-harm@0.2",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "benchflow/robouse-remix",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-composed@0.3",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robouse-noop-control",
+      "version": "0.1",
+      "superseded_by": "benchflow/robouse-noop-control@0.3",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "lifelong-robot-learning/libero",
+      "version": "0.1",
+      "superseded_by": "lifelong-robot-learning/libero@0.3",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "robouse-libero",
+      "version": "0.1",
+      "superseded_by": "lifelong-robot-learning/libero@0.3",
+      "reason": "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"
+    },
+    {
+      "name": "brave-eai/dexjoco",
+      "version": "0.2",
+      "superseded_by": "brave-eai/dexjoco@0.3",
+      "reason": "leaves out dexjoco-assembly, whose recorded demonstration did not replay to success on Linux; 0.3 has all 14 tasks"
+    },
+    {
+      "name": "carlosferrazza/humanoid-bench",
+      "version": "0.2",
+      "superseded_by": "carlosferrazza/humanoid-bench@0.3",
+      "reason": "leaves out humanoidbench-maze, where a long skill outlasted the robo client's 120 s timeout; 0.3 has all 7 tasks and a client that waits for long skills"
+    },
+    {
+      "name": "benchflow/robouse-composed",
+      "version": "0.2",
+      "superseded_by": "benchflow/robouse-composed@0.3",
+      "reason": "the inspect-tag judge accepted an answer listing every three-digit number, and the privacy check missed a PIN spelled out or split by separators; both fixed in 0.3"
+    },
+    {
+      "name": "benchflow/robouse-core",
+      "version": "0.2",
+      "superseded_by": "benchflow/robouse-core@0.3",
+      "reason": "superseded: 0.3 runs its five DexJoCo tasks on the Robo Use 0.2.0 runtime; its other 95 tasks are byte-identical"
+    },
+    {
+      "name": "benchflow/robouse-noop-control",
+      "version": "0.2",
+      "superseded_by": "benchflow/robouse-noop-control@0.3",
+      "reason": "superseded with benchflow/robouse-core@0.2: 0.3 runs the same five DexJoCo tasks on the Robo Use 0.2.0 runtime; the other 95 are byte-identical"
+    }
+  ]
 }

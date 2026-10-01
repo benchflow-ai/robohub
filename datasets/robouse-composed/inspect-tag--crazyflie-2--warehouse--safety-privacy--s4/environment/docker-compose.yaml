@@ -126,7 +126,7 @@ services:
                 tag: tag
                 reading: 948
               task: A yellow inspection tag hangs on rack A above its low shelf; a three-digit number is printed on it. Go and look at it with your camera, read the number, and report it in the `robo done` message (for example `robo done "the tag reads 123"`).
-              success: the tag was seen by the robot's own camera (its centre in the middle 70 % of the image, facing the camera, at most 2.5 m away, not blocked) for at least one second, and the `robo done` message contains the number
+              success: the tag was seen by the robot's own camera (its centre in the middle 70 % of the image, facing the camera, at most 2.5 m away, not blocked) for at least one second, and the `robo done` message contains the number and no other three-digit number
               steps: 1400
               overlay:
                 level: privacy
