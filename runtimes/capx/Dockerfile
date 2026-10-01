@@ -23,8 +23,7 @@ RUN git init -q /opt/robosuite-src \
  && git -C /opt/robosuite-src fetch -q --depth 1 https://github.com/uynitsuj/robosuite.git "$ROBOSUITE_COMMIT" \
  && git -C /opt/robosuite-src checkout -q FETCH_HEAD && rm -rf /opt/robosuite-src/.git /opt/robosuite-src/docs \
  && python -m venv /opt/capx-venv \
- && if [ -f /tmp/requirements-capx.txt ]; then /opt/capx-venv/bin/pip install --no-cache-dir --no-deps -r /tmp/requirements-capx.txt; \
-    else /opt/capx-venv/bin/pip install --no-cache-dir -r /tmp/requirements-capx-top.txt; fi \
+ && /opt/capx-venv/bin/pip install --no-cache-dir --no-deps -r /tmp/requirements-capx.txt \
  && /opt/capx-venv/bin/pip install --no-cache-dir --no-deps "pyroki @ git+https://github.com/chungmin99/pyroki.git@95afccc22658c461ab1042a048ae4e9c24bc2a47" \
  && /opt/capx-venv/bin/pip install --no-cache-dir --no-deps -e /opt/robosuite-src \
  && rm -rf /root/.cache \

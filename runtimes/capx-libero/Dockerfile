@@ -27,9 +27,8 @@ RUN git init -q /opt/robosuite-src \
  && git -C /opt/LIBERO-PRO fetch -q --depth 1 https://github.com/uynitsuj/LIBERO-PRO.git "$LIBERO_PRO_COMMIT" \
  && git -C /opt/LIBERO-PRO checkout -q FETCH_HEAD && rm -rf /opt/LIBERO-PRO/.git \
  && python -m venv /opt/capx-venv \
- && if [ -f /tmp/requirements-capx-libero.txt ]; then /opt/capx-venv/bin/pip install --no-cache-dir --no-deps -r /tmp/requirements-capx-libero.txt; \
-    else /opt/capx-venv/bin/pip install --no-cache-dir -r /tmp/requirements-capx-libero-top.txt; fi \
- && /opt/capx-venv/bin/pip install --no-cache-dir torch==2.8.0 --index-url https://download.pytorch.org/whl/cpu \
+ && /opt/capx-venv/bin/pip install --no-cache-dir --no-deps -r /tmp/requirements-capx-libero.txt \
+ && /opt/capx-venv/bin/pip install --no-cache-dir --no-deps torch==2.8.0+cpu --index-url https://download.pytorch.org/whl/cpu \
  && /opt/capx-venv/bin/pip install --no-cache-dir --no-deps "pyroki @ git+https://github.com/chungmin99/pyroki.git@95afccc22658c461ab1042a048ae4e9c24bc2a47" \
  && /opt/capx-venv/bin/pip install --no-cache-dir --no-deps -e /opt/robosuite-src -e /opt/LIBERO-PRO \
  && rm -rf /root/.cache \

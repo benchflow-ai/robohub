@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/capx-libero"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:33e8f7e66658d14455eb396152a9150de4061505d1e813ff8fd7bafc1b93c3f2"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:a484b303fc5470c50e90c5f74e9487e590ea965e72c3b4544452c1ce9d50bc27"
     network_mode: none
     init: true
     volumes:
