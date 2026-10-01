@@ -20,13 +20,14 @@ import logging
 
 import numpy as np
 
+from ... import config
 from ...workers.client import WorkerError, decode_png_b64, load_endpoints, remote_worker
 from ..base import ActionSpec, Backend, StepInfo
 
 log = logging.getLogger(__name__)
 
 RETRY_METHODS = frozenset({"info", "observe", "render", "success", "camera_info", "goal_status"})
-SETUP = "docs/suites/gpu-track.md"
+SETUP = config.SUITES_DOCS
 
 
 class GpuBackend(Backend):

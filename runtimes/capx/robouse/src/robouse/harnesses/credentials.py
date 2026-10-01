@@ -45,7 +45,7 @@ def clean_codex_home(extra_config: str = "", api_key: str = "") -> str:
             shutil.copyfile(acct, d / "auth.json")
             (d / "auth.json").chmod(0o600)
         return str(d)
-    d = config.cache_dir() / ("codex-home-glm" if extra_config else "codex-home")
+    d = config.cache_dir() / ("codex-home-gateway" if extra_config else "codex-home")
     d.mkdir(parents=True, exist_ok=True)
     auth, dst = Path.home() / ".codex" / "auth.json", d / "auth.json"
     if dst.is_symlink() or dst.exists():

@@ -316,6 +316,9 @@ def validate(d: Path, keep_runs: Path | None = None) -> dict:
     from ..runner import run_trial
     from ..tasks import load_task
 
+    from ..core import gl
+
+    gl.auto_select()  # once for both trials (MUJOCO_GL unset on Linux without a display)
     task = load_task(d)
     runs = Path(keep_runs) if keep_runs else Path(tempfile.mkdtemp(prefix="compose-validate-"))
     out = {}

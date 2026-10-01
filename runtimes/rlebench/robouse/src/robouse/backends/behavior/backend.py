@@ -33,7 +33,7 @@ from ... import config
 from ...workers.client import decode_png_b64, load_endpoints, remote_worker
 from ..base import ActionSpec, Backend, StepInfo
 
-SETUP = "docs/suites/behavior.md"
+SETUP = config.SUITES_DOCS
 
 
 SKILLS = [  # (name, takes an object, doc, preconditions)

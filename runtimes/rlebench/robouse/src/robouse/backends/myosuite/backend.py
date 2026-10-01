@@ -138,7 +138,7 @@ class MyoSuiteBackend(EmbodiedBackend):
         self.task_id, self.task = env, TASKS[env]
         self.render_size = tuple(spec.get("render_size", (480, 480)))
         self.worker = StdioWorker(
-            "myosuite", config.sim_python("myosuite", "myosuite"), WORKER, setup="docs/suites/myosuite.md"
+            "myosuite", config.sim_python("myosuite", "myosuite"), WORKER, setup=config.SUITES_DOCS
         )
         self._state = None
         self.last_judge: dict = {}

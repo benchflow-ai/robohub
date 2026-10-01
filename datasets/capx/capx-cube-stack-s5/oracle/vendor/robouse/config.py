@@ -10,6 +10,10 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
+# The published documentation. Messages point here, not at files under docs/ in the repository, which are not published.
+DOCS_URL = "https://robouse.ai/docs/"
+SUITES_DOCS = DOCS_URL + "suites/"  # the suites page, with the setup of the simulators that need their own virtualenv
+
 ENV: dict[str, str] = {
     # locations
     "ROBOUSE_CACHE_DIR": "cache for simulator virtualenvs, downloaded assets and harness homes (default ~/.cache/robouse)",
@@ -26,8 +30,25 @@ ENV: dict[str, str] = {
     "ROBOUSE_RECORD_SIZE": "episode video size WIDTHxHEIGHT (default: the backend's native size)",
     "ROBOUSE_EPISODE_DIR": "episode folder a task verifier reads (set by the runner)",
     "ROBOUSE_VERIFIER_DIR": "folder a task verifier writes reward.txt to (set by the runner)",
-    "ROBOUSE_TEXT_ONLY": "1: `robo observe --image` prints the path without attaching the image (set for harnesses "
-    "whose API rejects images)",
+    "ROBOUSE_AGENT_IMAGES": "0: the model gets no image input in this run, whatever it takes (its gateway replaces every "
+    "image part; recorded as image_input: false). Default: from the model registry",
+    "ROBOUSE_SPEND_CAP_USD": "the model spend at which the model gateway stops a trial, in USD (default 5; 0: no cap; "
+    "recorded as a budget stop)",
+    "ROBOUSE_GATEWAY_KEY": "the per-trial key a harness uses for its model gateway (set by the runner, never a provider "
+    "key)",
+    "ROBOUSE_GATEWAY_URL": "the trial's model gateway, http://127.0.0.1:<port> (set by the runner)",
+    "ROBOUSE_GATEWAY_MAX_IMAGES": "gateway process only: images per request (0 none, -1 no limit), from the registry",
+    "ROBOUSE_GATEWAY_LOG": "gateway process only: the request log (image counts, no content)",
+    "ROBOUSE_GATEWAY_BEARER_ENV": "gateway process only: the provider key variable sent as a Bearer token",
+    "ROBOUSE_GATEWAY_SPEND_CAP": "gateway process only: the trial's spend cap in USD (0: none)",
+    "ROBOUSE_GATEWAY_PRICE": "gateway process only: the model's price, USD per 1M tokens (JSON, from pricing.json)",
+    "ROBOUSE_GATEWAY_STOP_FILE": "gateway process only: the file it writes when the spend cap is reached",
+    "ROBOUSE_GATEWAY_DUMP": "debugging only: a folder where the gateway writes every request body it receives and "
+    "sends (trial content; never for published runs)",
+    "ROBOUSE_INTERFACE": "the trial's robot interface: cli, mcp or both (set by the runner; see harnesses/interface.py)",
+    "ROBOUSE_SEND_VIA": "mcp: `robo` and reference solutions send every request through a `robo mcp` server (set by "
+    "the runner for oracle and noop with --interface mcp)",
+    "ROBOUSE_MCP_URL": "the `robo` MCP endpoint of a harness that speaks MCP over HTTP (set by the runner)",
     # local runner sandbox
     "ROBOUSE_SANDBOX": "0 disables the macOS Seatbelt sandbox around agent processes (default 1)",
     "ROBOUSE_SANDBOX_DENY": "extra colon-separated paths agents may neither read nor write",
@@ -44,7 +65,18 @@ ENV: dict[str, str] = {
     "ROBOUSE_CAPX_LIBERO_PYTHON": "Python of the CaP-X LIBERO virtualenv (default <cache>/capx-libero-venv/bin/python)",
     **{
         f"ROBOUSE_{b}_QUIET": f"0 shows the {b.lower()} worker's stderr (default 1)"
-        for b in ("DEXJOCO", "DMCONTROL", "HUMANOIDBENCH", "MANISKILL", "METADRIVE", "MYOSUITE", "ROBOCASA", "RLEBENCH", "CAPX", "CAPX_LIBERO")
+        for b in (
+            "DEXJOCO",
+            "DMCONTROL",
+            "HUMANOIDBENCH",
+            "MANISKILL",
+            "METADRIVE",
+            "MYOSUITE",
+            "ROBOCASA",
+            "RLEBENCH",
+            "CAPX",
+            "CAPX_LIBERO",
+        )
     },
     "ROBOUSE_MANISKILL_DEBUG": "1: the ManiSkill worker logs each request",
     "ROBOUSE_HUMANOIDBENCH_POLICY": "HumanoidBench low-level walking policy (default <cache>/humanoidbench/h1_motion.pt)",
@@ -79,6 +111,8 @@ ENV: dict[str, str] = {
     "ROBOUSE_VLA_CONFIG": "resolved `vla` preset, passed to the client (set by the runner)",
     "ROBOUSE_MOLMOACT2_URL": "MolmoAct2 policy server for the `molmoact2` harness",
     "ROBOUSE_MOLMOACT2_TOKEN": "bearer token for the MolmoAct2 server",
+    "ROBOUSE_DIMCODE": "the dimcode executable for the `dimcode` harness (default: `dimcode` on PATH)",
+    "ROBOUSE_DIMCODE_NODE": "Node 24 or 26 that runs dimcode (default: `node` on PATH)",
     "ROBOUSE_TASK_LANGUAGE": "the language instruction a VLA client sends (set by the runner)",
     "ROBOUSE_GRADER_URL": "OpenAI-compatible endpoint for `robouse grade` (default: Baseten)",
     "ROBOUSE_GRADER_API_KEY": "API key for `robouse grade` (default: BASETEN_API_KEY)",
@@ -103,6 +137,8 @@ PUBLIC = frozenset(
         "ROBOUSE_RECORD_SIZE",
         "ROBOUSE_SANDBOX",
         "ROBOUSE_SANDBOX_DENY",
+        "ROBOUSE_SPEND_CAP_USD",
+        "ROBOUSE_AGENT_IMAGES",
         "ROBOUSE_DEXJOCO_PYTHON",
         "ROBOUSE_DMCONTROL_PYTHON",
         "ROBOUSE_HUMANOIDBENCH_PYTHON",
@@ -118,6 +154,8 @@ PUBLIC = frozenset(
         "ROBOUSE_VLA_POLICY_CONFIG",
         "ROBOUSE_MOLMOACT2_URL",
         "ROBOUSE_MOLMOACT2_TOKEN",
+        "ROBOUSE_DIMCODE",
+        "ROBOUSE_DIMCODE_NODE",
     }
 )
 

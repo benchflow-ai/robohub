@@ -37,7 +37,7 @@ def asset_root() -> Path:
         return _checkout_root()
     if not cache().is_dir():
         raise FileNotFoundError(
-            f"robot model assets not found in {cache()}; run `robouse fetch-assets` once (about 43 MB)"
+            f"robot model assets not found in {cache()}; run `robouse fetch-assets` once ({about_mb(download_bytes())})"
         )
     return cache()
 
@@ -64,6 +64,31 @@ def manifests() -> list[Path]:
     return [root / "provenance.json", root / "skydio_x2" / "PROVENANCE.json", root / EMBODIMENTS_MANIFEST]
 
 
+def robot_names() -> list[str]:
+    """The robot folders `fetch --robot` accepts."""
+    return sorted({f["path"].split("/", 1)[0] for m in manifests() for f in json.loads(m.read_text())["files"]})
+
+
+def download_bytes(everything: bool = False) -> int:
+    """Bytes `fetch` downloads into an empty folder: the base robots, or with `everything` every robot (from the
+    manifests' byte counts)."""
+    total = 0
+    for m in manifests():
+        if not everything and m.name == EMBODIMENTS_MANIFEST:
+            continue
+        try:
+            total += sum(int(f.get("bytes", 0)) for f in json.loads(m.read_text())["files"])
+        except (OSError, ValueError, KeyError):
+            continue
+    return total
+
+
+def about_mb(n: int) -> str:
+    """ "about 43 MB", "about 390 MB" (decimal megabytes)."""
+    mb = n / 1e6
+    return f"about {mb:.0f} MB" if mb < 100 else f"about {round(mb, -1):.0f} MB"
+
+
 def fetch(
     dest: Path | None = None,
     log: Callable[[str], object] = print,
@@ -73,6 +98,10 @@ def fetch(
     """Download the manifest files that are missing or differ from their pinned hash: the base robots (Panda, ALOHA,
     Skydio X2), every robot with `everything`, or only `robots`."""
     dest = Path(dest or config.env("ROBOUSE_MENAGERIE_ASSETS") or cache())
+    if robots:
+        unknown = sorted(set(robots) - set(robot_names()))
+        if unknown:
+            raise ValueError(f"no robot {', '.join(unknown)} in the manifests; robots: {', '.join(robot_names())}")
     n_new = 0
     for m in manifests():
         if not (robots or everything) and m.name == EMBODIMENTS_MANIFEST:

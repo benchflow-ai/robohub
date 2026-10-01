@@ -1,18 +1,21 @@
 """Task folders in BenchFlow's native task format.
 
   <task>/task.md            YAML frontmatter (schema_version, task, metadata, agent, verifier, robouse) + the
-                            instruction the agent reads as the markdown body
+                            instruction as the markdown body, which is the agent's prompt
   <task>/oracle/solve.sh    reference solution; must score 1.0
   <task>/verifier/test.sh   turns the episode server's verdict into reward.txt
 
 The `robouse:` block names the backend and its parameters (env, seed, budgets, scoring and observation modes,
 and for tabletop tasks the `scenario`). `write_task` writes this layout; adapters use it.
+
+The older layout (task.toml + instruction.md, solution/, tests/) is not read; BenchFlow converts such a folder:
+`bench tasks migrate DIR --remove-legacy`.
 """
 
 from __future__ import annotations
 
 import re
-import tomllib
+import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -52,13 +55,28 @@ class Task:
 
     @property
     def oracle_script(self) -> Path:
-        p = self.path / "oracle" / "solve.sh"
-        return p if p.exists() else self.path / "solution" / "solve.sh"
+        return self.path / "oracle" / "solve.sh"
 
     @property
     def verifier_script(self) -> Path:
-        p = self.path / "verifier" / "test.sh"
-        return p if p.exists() else self.path / "tests" / "test.sh"
+        return self.path / "verifier" / "test.sh"
+
+
+class TaskFormatError(ValueError):
+    """A folder that is not a task.md task folder, such as one in the older task.toml + instruction.md layout."""
+
+
+def older_layout(d: Path) -> bool:
+    """The folder holds the older task.toml + instruction.md layout and no task.md."""
+    d = Path(d)
+    return not (d / "task.md").exists() and ((d / "task.toml").exists() or (d / "instruction.md").exists())
+
+
+def older_layout_message(d: Path) -> str:
+    return (
+        f"{d} is not a task.md folder: it has task.toml and instruction.md, the older layout, which robouse no longer "
+        f"reads. Convert it with BenchFlow: bench tasks migrate {d} --remove-legacy"
+    )
 
 
 def _split_frontmatter(text: str) -> tuple[dict, str]:
@@ -73,17 +91,9 @@ def load_task(path: str | Path) -> Task:
     if (p / "task.md").exists():
         meta, body = _split_frontmatter((p / "task.md").read_text())
         return Task(p, meta, body)
-    # legacy layout (task.toml + instruction.md), read only until every folder is migrated
-    t = tomllib.loads((p / "task.toml").read_text())
-    meta = {
-        "schema_version": SCHEMA_VERSION,
-        "task": t.get("task", {}),
-        "metadata": t.get("metadata", {}),
-        "agent": t.get("agent", {}),
-        "verifier": t.get("verifier", {}),
-        "robouse": t.get("robouse", {}),
-    }
-    return Task(p, meta, (p / "instruction.md").read_text())
+    if older_layout(p):
+        raise TaskFormatError(older_layout_message(p))
+    raise FileNotFoundError(f"no task.md in {p}")
 
 
 def bundled_tasks_root() -> Path:
@@ -117,9 +127,15 @@ def resolve_task_path(arg: str | Path) -> Path:
 
 def find_tasks(root: str | Path) -> list[Task]:
     root = Path(root)
-    dirs = {p.parent for p in root.rglob("task.md")} | {
-        p.parent for p in root.rglob("task.toml") if (p.parent / "instruction.md").exists()
-    }
+    dirs = {p.parent for p in root.rglob("task.md")}
+    # the older task.toml + instruction.md layout is not read: skip those folders, and say so
+    older = sorted(d for d in {p.parent for p in root.rglob("task.toml")} - dirs if "_legacy" not in d.parts)
+    if older:
+        print(
+            f"robouse: skipped {len(older)} folder(s) under {root} in the older task.toml + instruction.md layout "
+            f"(e.g. {older[0]}); convert them with BenchFlow: bench tasks migrate DIR --remove-legacy",
+            file=sys.stderr,
+        )
     return [load_task(d) for d in sorted(dirs) if "_legacy" not in d.parts]
 
 
@@ -169,22 +185,3 @@ def write_task(d: Path, meta: dict, instruction: str, oracle_sh: str, verifier_s
         f = d / rel
         f.write_text(body)
         f.chmod(0o755)
-
-
-def to_native(d: Path, keep_legacy: bool = False) -> None:
-    """Rewrite a task folder written in the older layout (task.toml, instruction.md, solution/, tests/) as task.md +
-    oracle/ + verifier/. The older files are removed unless keep_legacy is set."""
-    import shutil
-
-    d = Path(d)
-    if not (d / "task.toml").exists():
-        return
-    t = load_task(d)
-    old_oracle = (d / "solution" / "solve.sh").read_text()
-    old_verifier = (d / "tests" / "test.sh").read_text()
-    write_task(d, t.meta, t.body, old_oracle, old_verifier)
-    if not keep_legacy:
-        for name in ("task.toml", "instruction.md"):
-            (d / name).unlink(missing_ok=True)
-        for name in ("solution", "tests"):
-            shutil.rmtree(d / name, ignore_errors=True)

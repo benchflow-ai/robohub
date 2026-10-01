@@ -13,8 +13,8 @@ z up. The table top is at z = 0 and spans x in [-0.35, 0.35], y in [-0.30, 0.30]
 A task is a *scenario* (a plain dict, see SCENARIOS at the bottom): objects, fixtures (pads, bowls, trays,
 a drawer cabinet, a socket, a figure), goal predicates, safety constraints monitored at every step, public
 extra observation fields (e.g. ARC-style examples) and the reference plan used by `oracle_main`.
-The generator (adapters/tabletop/generate.py) writes each scenario into its task.toml as
-[robouse.scenario]; the backend reads it from there (falling back to SCENARIOS by task id).
+The generator (adapters/tabletop/generate.py) writes each scenario into its task.md as robouse.scenario;
+the backend reads it from there (falling back to SCENARIOS by task id).
 """
 
 from __future__ import annotations

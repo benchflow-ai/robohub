@@ -229,9 +229,10 @@
     "capx": {
       "noop": false,
       "robouse": {
-        "commit": "35004d97fbdd505de3724472c634f614b19778c0",
-        "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "commit": "8e01ea25d747d84e4f6504c2ab1533b46139888c",
+        "package_version": "0.3.0",
+        "repo": "https://pypi.org/project/robouse/0.3.0/",
+        "tag": "v0.3.0"
       },
       "tasks": {
         "capx-cube-lifting-s1": {
@@ -561,9 +562,10 @@
     "rle-bench": {
       "noop": false,
       "robouse": {
-        "commit": "35004d97fbdd505de3724472c634f614b19778c0",
-        "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "commit": "8e01ea25d747d84e4f6504c2ab1533b46139888c",
+        "package_version": "0.3.0",
+        "repo": "https://pypi.org/project/robouse/0.3.0/",
+        "tag": "v0.3.0"
       },
       "tasks": {
         "rle-balance-coins": {
@@ -5494,8 +5496,8 @@
   "runtimes": {
     "base": "sha256:76ca877fb0b1008d896761538a5e7e5c3e8610b33004ac99b9c5f0e7a91127bc",
     "behavior": "sha256:11f5eef83311f0ff86993fda9031fdb3b295fc646935c888c4f57535b302b234",
-    "capx": "sha256:f0e379a11ed4bfde69e3c51234eec7e3e404c1f20401b67dc6e11d50345fbdce",
-    "capx-libero": "sha256:a484b303fc5470c50e90c5f74e9487e590ea965e72c3b4544452c1ce9d50bc27",
+    "capx": "sha256:c485668f75eeb5b28dfefd50b5e9d98539b0f6aaf04bf1563195949a0af5c8ab",
+    "capx-libero": "sha256:15fad7671d649330899dfe99de2b157a5741bf6195fd5d4c379681476b7d8e11",
     "composed": "sha256:bf35428b062766f1759671abe0b534cf25a18a81b92181b7c69b7a5698e607c4",
     "dexjoco": "sha256:21ac50856e673f412bf2031b25d0be334f18f01c3e7d75f77a5bd88ddd9b98d1",
     "dmcontrol": "sha256:549bc1819e2cbc972a3e45bc9d81c6eee41356765740e0551e8972c8bae5d19c",
@@ -5508,7 +5510,7 @@
     "maniskill": "sha256:7aa54af2c8fda2df7b64de1c8ab6c1aa24cbe7056b1b2907cdb379dd9dadd907",
     "menagerie": "sha256:ae71dbdd3a1c1a8114bc44c51411039e11c32fef199042a9858eb11bec1b1f36",
     "myosuite": "sha256:d0a9c75adec6668cade6419c4ea89f174d5ca383466b8935c21bda6642bd15e7",
-    "rlebench": "sha256:f31e715b3ca1ca7e98330100098ef8b6a391a8048703a3387f7f7953834bfd22",
+    "rlebench": "sha256:7fe78bb4ff576e3b6545f927bd90dff9810ef684effbe2c39daf9f5d9c273ae4",
     "robocasa": "sha256:7d487d7ecae857f0c84c915c1ea4e28f859954450833a30519fd06ae42effab6",
     "robodojo": "sha256:05cf41ab0ac67408847feda2672513577d04f7d127c733b3d9f7327b8b2c09bb",
     "robosuite": "sha256:2ec475a68ded7bbf7906a0b2ea986470598305201c15971fdc458edb9a5a09f5"

@@ -93,7 +93,11 @@ def _summarize(a: argparse.Namespace) -> int:
 def _fetch_assets(a: argparse.Namespace) -> int:
     from ..assets import fetch
 
-    fetch(Path(a.dest) if a.dest else None, robots=a.robot, everything=a.all)
+    try:
+        fetch(Path(a.dest) if a.dest else None, robots=a.robot, everything=a.all)
+    except ValueError as e:
+        print(f"robouse: {e}", file=sys.stderr)
+        return 2
     return 0
 
 
@@ -111,7 +115,13 @@ def parser() -> argparse.ArgumentParser:
     )
     f.add_argument("--dest", help="target folder (default: <cache>/menagerie, or $ROBOUSE_MENAGERIE_ASSETS)")
     f.add_argument("--robot", action="append", help="only this Menagerie robot folder (repeatable), e.g. unitree_go2")
-    f.add_argument("--all", action="store_true", help="every robot the bundled suites use (about 2 GB)")
+    from ..assets import about_mb, download_bytes
+
+    f.add_argument(
+        "--all",
+        action="store_true",
+        help=f"every robot the bundled suites use ({about_mb(download_bytes(everything=True))})",
+    )
     f.set_defaults(func=_fetch_assets)
     _analysis(sub)
     real.register(sub)
@@ -119,6 +129,19 @@ def parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    from ..tasks import TaskFormatError
+
+    try:
+        return _main(argv)
+    except KeyboardInterrupt:
+        print("\nrobouse: interrupted", file=sys.stderr)
+        return 130
+    except TaskFormatError as e:  # e.g. a folder in the older task.toml + instruction.md layout
+        print(f"robouse: {e}", file=sys.stderr)
+        return 2
+
+
+def _main(argv: list[str] | None = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
     if args and args[0] in ("tasks", "components", "remix"):  # these parse their own arguments (nested subcommands)
         from . import tasks

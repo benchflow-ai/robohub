@@ -132,7 +132,7 @@ class RLEBenchBackend(Backend):
             "rlebench",
             config.sim_python("rlebench", "rlebench"),
             WORKER,
-            setup="docs/suites/rle-bench.md",
+            setup=config.SUITES_DOCS,
             env={"PYTHONHASHSEED": "0"},
         )
         self._state: dict | None = None

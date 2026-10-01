@@ -243,7 +243,7 @@ class DrivingBackend(EmbodiedBackend):
             "metadrive",
             config.sim_python("metadrive", "metadrive"),
             WORKER,
-            setup="docs/suites/driving.md",
+            setup=config.SUITES_DOCS,
             env={
                 "PYGAME_HIDE_SUPPORT_PROMPT": "1",
                 "SDL_VIDEODRIVER": "dummy",

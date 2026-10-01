@@ -20,6 +20,7 @@ import json
 import math
 import shutil
 import sys
+import tempfile
 from pathlib import Path
 
 MODS = [
@@ -37,6 +38,12 @@ def _mod_args(p: argparse.ArgumentParser) -> None:
         p.add_argument(flag, dest=key, metavar=metavar, default=DEFAULTS[key], help=help_)
         if key == "perturbation":  # the pre-rename spelling
             p.add_argument("--perturbation", dest=key, help=argparse.SUPPRESS)
+
+
+def _seed(x: str) -> int:
+    if not x.isdigit():
+        raise argparse.ArgumentTypeError(f"must be a non-negative integer, not {x!r}")
+    return int(x)
 
 
 def _err(msg: str, code: int = 1) -> int:
@@ -130,6 +137,8 @@ def _list(a) -> int:
     if a.path:
         print(bundled_tasks_root())
         return 0
+    if a.root and not Path(a.root).is_dir():
+        return _err(f"no such task folder: {a.root} (robouse tasks [list] [ROOT]; subcommands: list, init, check)", 2)
     try:
         for task in find_tasks(a.root or bundled_tasks_root()):
             print(task.id, task.spec.get("backend"), task.spec.get("env", ""))
@@ -227,25 +236,42 @@ def compose_one(
         return False, e.args[0], None
     if not rep.ok:
         return False, "incompatible: " + "; ".join(rep.reasons), None
+    out = Path(out)
+    stage = None
     try:
-        d = write(emb, scene, task, mods, seed, out, reg)
+        out.mkdir(parents=True, exist_ok=True)
+        if validate_it:  # validate in a staging folder, so a rejected task never touches an existing folder
+            stage = Path(tempfile.mkdtemp(prefix=".robouse-compose-", dir=out))
+        d = write(emb, scene, task, mods, seed, stage or out, reg)
     except ComposeError as e:
+        _rm(stage)
         return False, f"incompatible: {e}", None
-    if not quiet:
-        print(f"wrote {d}")
+    except OSError as e:
+        _rm(stage)
+        return False, f"cannot write to {out}: {e.strerror or e}", None
+    target = out / d.name
     if not validate_it:
+        if not quiet:
+            print(f"wrote {d}")
         return True, "written (not validated)", d
-    v = validate(d, Path(keep_runs) / d.name if keep_runs else None)
-    msg = _validation_message(v)
-    if not v["accepted"]:
+    try:
+        v = validate(d, Path(keep_runs) / d.name if keep_runs else None)
+        msg = _validation_message(v)
+        if not v["accepted"]:
+            kept = f"; {target} was left as it was" if target.exists() else ""
+            return False, msg + "; rejected (the reference solution must score 1 and the no-op control 0)" + kept, None
+        record_validation(d, v)
+        shutil.copytree(d, target, dirs_exist_ok=True)
+    finally:
+        _rm(stage)
+    if not quiet:
+        print(f"wrote {target}")
+    return True, msg, target
+
+
+def _rm(d: Path | None) -> None:
+    if d is not None:
         shutil.rmtree(d, ignore_errors=True)
-        return (
-            False,
-            msg + "; rejected (the reference solution must score 1 and the no-op control 0); the folder was removed",
-            None,
-        )
-    record_validation(d, v)
-    return True, msg, d
 
 
 def _validation_message(v: dict) -> str:
@@ -277,10 +303,11 @@ def _compose(a) -> int:
         multi = [k for k, v in vals.items() if len(v) > 1]
         if multi:
             return _err(f"several values for {', '.join(multi)}: add --grid to compose every combination", 2)
-        try:
-            seed = int(vals["seed"][0])
-        except ValueError:
-            return _err("--seed must be an integer", 2)
+    bad = [x for x in vals["seed"] if not x.isdigit()]
+    if bad or not vals["seed"]:
+        return _err(f"--seed must be a non-negative integer (got {', '.join(bad) or 'nothing'})", 2)
+    if not a.grid:
+        seed = int(vals["seed"][0])
         mods = modifiers({k: vals[k][0] for k, *_ in MODS})
         ok, msg, d = compose_one(
             vals["embodiment"][0],
@@ -402,11 +429,21 @@ def _from(a) -> int:
 
 
 def check_task(d: Path, level: str = "structural", run: bool = True, keep_runs: str | None = None) -> int:
-    from ..tasks import load_task
+    from ..tasks import SCHEMA_VERSION, load_task, older_layout, older_layout_message
 
+    if not d.is_dir():
+        return _err(f"no such task folder: {d}")
+    if older_layout(d):
+        return _err(older_layout_message(d))
     problems = []
+    if (d / "task.md").is_file() and not (d / "environment" / "Dockerfile").is_file():
+        problems += [f"{rel} is missing" for rel in ("oracle/solve.sh", "verifier/test.sh") if not (d / rel).is_file()]
     try:
         t = load_task(d)
+        if t.meta.get("schema_version") != SCHEMA_VERSION:
+            problems.append(
+                f"task.md: schema_version {t.meta.get('schema_version')!r}; this robouse reads {SCHEMA_VERSION!r}"
+            )
         for key in ("id", "backend"):
             if not t.spec.get(key):
                 problems.append(f"task.md: robouse.{key} is missing")
@@ -489,7 +526,7 @@ def components_main(argv: list[str]) -> int:
     cc.add_argument("scene", metavar="SCENE", help="scene component id")
     cc.add_argument("task", metavar="TASK", help="task component id")
     _mod_args(cc)
-    cc.add_argument("--seed", type=int, default=0, metavar="N", help="instance seed to lay out (default 0)")
+    cc.add_argument("--seed", type=_seed, default=0, metavar="N", help="instance seed to lay out (default 0)")
     cc.add_argument("--json", action="store_true", help="print the report as JSON")
     ce = sub.add_parser("export")  # maintainers (unlisted): rewrite components/ from the runtime
     ce.add_argument("--root")

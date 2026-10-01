@@ -82,7 +82,7 @@ class CapxBackend(Backend):
             self.venv.replace("-", "_"),
             config.sim_python(self.venv.replace("-", "_"), self.venv),
             WORKER,
-            setup="docs/suites/capx.md",
+            setup=config.SUITES_DOCS,
             timeout=900,
         )
         self.functions: list[str] = []

@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/capx"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:f0e379a11ed4bfde69e3c51234eec7e3e404c1f20401b67dc6e11d50345fbdce"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:c485668f75eeb5b28dfefd50b5e9d98539b0f6aaf04bf1563195949a0af5c8ab"
     network_mode: none
     init: true
     volumes:

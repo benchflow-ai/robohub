@@ -1,16 +1,20 @@
 """Harness launchers: the command, environment and helper process for one trial's agent.
 
-The agent process gets: cwd = an isolated workspace (instruction.md, observations/), PATH with a standard-library
-`robo` shim first, and ROBOUSE_SOCKET. Credentials come from the environment (`credentials.py`).
+The agent process gets: its prompt (PROMPT_PREFIX + the task.md body), cwd = an isolated workspace (observations/),
+PATH with a standard-library `robo` shim first, and ROBOUSE_SOCKET. Credentials come from the environment
+(`credentials.py`).
 
 Harnesses
   oracle                 the task's reference solution (oracle/solve.sh)
   noop                   calls `robo done` immediately (negative control)
-  claude-code            Claude Code CLI; model e.g. claude-sonnet-5
-  codex                  Codex CLI; model e.g. gpt-6-astra
-  claude-code-glm        Claude Code CLI against a Baseten model (default GLM-5.3) through a local image-capping proxy
-  codex-glm              Codex CLI with a custom OpenAI-compatible provider (Baseten)
-  mini-swe-agent-glm     mini-swe-agent (litellm) with a Baseten model
+  claude-code            Claude Code CLI; model: a bare Claude id (Anthropic, own credentials) or any provider-prefixed
+                         id, e.g. baseten/zai-org/GLM-5.3, reached through the trial's model gateway (gateway.py)
+  codex                  Codex CLI; model: a bare OpenAI id (own credentials or the account pool) or a provider-prefixed
+                         id through the gateway
+  mini-swe-agent         mini-swe-agent; model: a provider-prefixed id, always through the gateway
+  (claude-code-glm, codex-glm and mini-swe-agent-glm: hidden aliases for the three above with a baseten/ model)
+  dimcode                Dimensional's dimcode (built on Pi); model: a provider-prefixed id, always through the
+                         gateway (default baseten/zai-org/GLM-5.3); see dimcode.py
   molmoact2              MolmoAct2 VLA policy: molmoact2/client.py drives `robo` with action chunks from a policy
                          server at $ROBOUSE_MOLMOACT2_URL; model e.g. allenai/MolmoAct2-LIBERO-LeRobot
   vla                    any served VLA (vla/client.py): --model is a preset from vla/presets.json; server at
@@ -30,8 +34,6 @@ from typing import Any
 from .. import config
 from . import credentials
 
-GLM_MODEL = "zai-org/GLM-5.3"
-BASETEN_OPENAI = "https://inference.baseten.co/v1"
 DISALLOWED_CLAUDE_TOOLS = "WebFetch,WebSearch,Task"
 
 PROMPT_PREFIX = (
@@ -46,6 +48,8 @@ class Launch:
     cmd: list[str]
     env: dict[str, str]
     helper: object | None = None  # e.g. a proxy's statistics, recorded in result.json
+    stop: Callable[[], None] | None = None  # stops a helper process (the model gateway) after the agent exits
+    stop_file: Path | None = None  # written by the model gateway when the trial's spend cap is reached
     notes: dict[str, Any] = field(default_factory=dict)
 
 
@@ -94,40 +98,88 @@ def _noop(model, prompt, workspace, task, env) -> Launch:
     return Launch(["robo", "done", "noop control"], env, notes={"model": "none"})
 
 
+PRIVATE_ENV = ("_ROBOUSE_TRIAL_DIR", "_ROBOUSE_IMAGE_INPUT", "_ROBOUSE_SPEND_CAP_USD")  # runner to builder only
+
+
+def _gateway(ref, env: dict, protocol: str):
+    """Start this trial's model gateway (harnesses/gateway.py). The runner passes the trial folder, the image-input
+    decision and the spend cap in private variables, removed here so the agent never sees them."""
+    from . import gateway
+
+    run_dir = Path(env.pop("_ROBOUSE_TRIAL_DIR"))
+    images = env.pop("_ROBOUSE_IMAGE_INPUT", "1") == "1"
+    cap = float(env.pop("_ROBOUSE_SPEND_CAP_USD", "0") or 0)
+    return gateway.start(ref, run_dir, images=images, protocol=protocol, spend_cap_usd=cap)
+
+
+def _gateway_launch(gw, ref, cmd: list[str], env: dict) -> Launch:
+    return Launch(
+        cmd,
+        env,
+        helper=gw.stats,
+        stop=gw.stop,
+        stop_file=gw.stop_file,
+        notes={"model": ref.bare, "model_id": ref.id, "provider": ref.provider},
+    )
+
+
+def _via_gateway(harness: str, model: str) -> object | None:
+    """The resolved model when `harness` should reach it through the gateway, else None (the harness's own vendor)."""
+    from . import models
+
+    ref = models.resolve(harness, model)
+    return None if models.NATIVE_VENDORS.get(harness) == ref.provider else ref
+
+
 def _claude_code(model, prompt, workspace, task, env) -> Launch:
-    m = model or "claude-sonnet-5"
+    if model and (ref := _via_gateway("claude-code", model)) is not None:
+        home = credentials.clean_claude_home()
+        gw = _gateway(ref, env, "anthropic-messages")
+        env.update(
+            {
+                "ANTHROPIC_BASE_URL": gw.url,
+                "ANTHROPIC_AUTH_TOKEN": gw.key,
+                "ANTHROPIC_MODEL": gw.model,
+                "ANTHROPIC_DEFAULT_OPUS_MODEL": gw.model,
+                "ANTHROPIC_DEFAULT_SONNET_MODEL": gw.model,
+                "ANTHROPIC_DEFAULT_HAIKU_MODEL": gw.model,
+                "ANTHROPIC_SMALL_FAST_MODEL": gw.model,
+                "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+                "CLAUDE_CONFIG_DIR": home,
+            }
+        )
+        return _gateway_launch(gw, ref, _claude_cmd(prompt, gw.model), env)
+    m = (model or "claude-sonnet-5").removeprefix("anthropic/")
     env.update(credentials.claude_auth())
     env["CLAUDE_CONFIG_DIR"] = credentials.clean_claude_home()
     return Launch(_claude_cmd(prompt, m), env, notes={"model": m})
 
 
-def _claude_code_glm(model, prompt, workspace, task, env) -> Launch:
-    from .providers import baseten_proxy
-
-    bm = model or GLM_MODEL
-    port, stats = baseten_proxy.start(credentials.baseten_key())
-    env.update(
-        {
-            "ANTHROPIC_BASE_URL": f"http://127.0.0.1:{port}",
-            "ANTHROPIC_AUTH_TOKEN": "proxy-held",
-            "ANTHROPIC_API_KEY": "",
-            "ANTHROPIC_MODEL": bm,
-            "ANTHROPIC_DEFAULT_OPUS_MODEL": bm,
-            "ANTHROPIC_DEFAULT_SONNET_MODEL": bm,
-            "ANTHROPIC_DEFAULT_HAIKU_MODEL": bm,
-            "ANTHROPIC_SMALL_FAST_MODEL": bm,
-            "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
-        }
-    )
-    env.pop("CLAUDE_CODE_OAUTH_TOKEN", None)
-    env["CLAUDE_CONFIG_DIR"] = credentials.clean_claude_home()
-    return Launch(_claude_cmd(prompt, bm), env, helper=stats, notes={"model": bm, "provider": "baseten"})
-
-
 def _codex(model, prompt, workspace, task, env) -> Launch:
     import os
 
-    m = model or "gpt-6-astra"
+    if model and (ref := _via_gateway("codex", model)) is not None:
+        home = credentials.clean_codex_home("# model provider: the trial's gateway, set on the command line\n")
+        gw = _gateway(ref, env, "openai-responses")
+        env["ROBOUSE_GATEWAY_KEY"] = gw.key
+        env["ROBOUSE_GATEWAY_URL"] = gw.url  # also lets the macOS sandbox allow this local port
+        env["CODEX_HOME"] = home
+        cfg = [
+            "-c",
+            'model_providers.robouse.name="Robo Use gateway"',
+            "-c",
+            f'model_providers.robouse.base_url="{gw.url}/v1"',
+            "-c",
+            'model_providers.robouse.env_key="ROBOUSE_GATEWAY_KEY"',
+            "-c",
+            'model_providers.robouse.wire_api="responses"',
+            "-c",
+            'model_provider="robouse"',
+        ]
+        # the provider's own Responses endpoint, the request passed through unchanged (reasoning effort and earlier
+        # reasoning kept); the gateway moves any image out of a tool result into the next user message
+        return _gateway_launch(gw, ref, _codex_cmd(prompt, gw.model, workspace, cfg), env)
+    m = (model or "gpt-6-astra").removeprefix("openai/")
     key = os.environ.get("OPENAI_API_KEY", "")
     env["CODEX_HOME"] = credentials.clean_codex_home(api_key=key)
     if key:
@@ -135,59 +187,34 @@ def _codex(model, prompt, workspace, task, env) -> Launch:
     return Launch(_codex_cmd(prompt, m, workspace), env, notes={"model": m})
 
 
-def _codex_glm(model, prompt, workspace, task, env) -> Launch:
-    bm = model or GLM_MODEL
-    env["BASETEN_API_KEY"] = credentials.baseten_key()
-    env["ROBOUSE_TEXT_ONLY"] = "1"  # Baseten's Responses API rejects images; Codex attaches PNGs it sees in output
-    env["CODEX_HOME"] = credentials.clean_codex_home(
-        "# Baseten provider, set on the command line\n"
-        "# Baseten's Responses API rejects image input\n"
-        "[tools]\nview_image = false\n"
-    )
-    cfg = [
-        "-c",
-        'model_providers.baseten.name="Baseten"',
-        "-c",
-        f'model_providers.baseten.base_url="{BASETEN_OPENAI}"',
-        "-c",
-        'model_providers.baseten.env_key="BASETEN_API_KEY"',
-        "-c",
-        'model_providers.baseten.wire_api="responses"',
-        "-c",
-        'model_provider="baseten"',
-    ]
-    return Launch(_codex_cmd(prompt, bm, workspace, cfg), env, notes={"model": bm, "provider": "baseten"})
+def _mini_swe_agent(model, prompt, workspace, task, env) -> Launch:
+    from . import models
 
-
-def _mini_swe_agent_glm(model, prompt, workspace, task, env) -> Launch:
-    bm = model or GLM_MODEL
+    ref = models.resolve("mini-swe-agent", model or models.DEFAULT_MODELS["mini-swe-agent"])
+    exe = shutil.which("mini") or str(Path.home() / ".local" / "bin" / "mini")
+    gw = _gateway(ref, env, "openai-completions")
     env.update(
         {
-            "OPENAI_API_KEY": credentials.baseten_key(),
-            "OPENAI_API_BASE": BASETEN_OPENAI,
+            "OPENAI_API_KEY": gw.key,
+            "OPENAI_API_BASE": f"{gw.url}/v1",
             "MSWEA_CONFIGURED": "true",
             "MSWEA_COST_TRACKING": "ignore_errors",
         }
     )
-    exe = shutil.which("mini") or str(Path.home() / ".local" / "bin" / "mini")
-    (workspace / ".robouse" / "task.txt").write_text(PROMPT_PREFIX + prompt)
-    return Launch(
-        [
-            exe,
-            "-y",
-            "--exit-immediately",
-            "-l",
-            "0",
-            "-m",
-            f"openai/{bm}",
-            "-t",
-            PROMPT_PREFIX + prompt,
-            "-o",
-            str(workspace / ".robouse" / "mini_traj.json"),
-        ],
-        env,
-        notes={"model": bm, "provider": "baseten"},
-    )
+    cmd = [
+        exe,
+        "-y",
+        "--exit-immediately",
+        "-l",
+        "0",
+        "-m",
+        f"openai/{gw.model}",
+        "-t",
+        PROMPT_PREFIX + prompt,
+        "-o",
+        str(workspace / ".robouse" / "mini_traj.json"),
+    ]
+    return _gateway_launch(gw, ref, cmd, env)
 
 
 def _task_language(task) -> str:
@@ -233,28 +260,41 @@ def _vla(model, prompt, workspace, task, env) -> Launch:
     )
 
 
+def _dimcode(model, prompt, workspace, task, env) -> Launch:
+    from . import dimcode
+
+    return dimcode.build(model, prompt, workspace, task, env)
+
+
 HARNESSES: dict[str, Builder] = {
     "oracle": _oracle,
     "noop": _noop,
     "claude-code": _claude_code,
-    "claude-code-glm": _claude_code_glm,
     "codex": _codex,
-    "codex-glm": _codex_glm,
-    "mini-swe-agent-glm": _mini_swe_agent_glm,
+    "mini-swe-agent": _mini_swe_agent,
     "molmoact2": _molmoact2,
     "vla": _vla,
+    "dimcode": _dimcode,
 }
 
 
 def build(harness: str, model: str, prompt: str, workspace: Path, task, base_env: dict) -> Launch:
     """The launch for one trial. Raises KeyError for an unknown harness and RuntimeError for missing credentials."""
-    env = dict(base_env)
-    fn = HARNESSES.get(harness)
-    if fn is not None:
-        return fn(model, prompt, workspace, task, env)
-    from importlib.metadata import entry_points
+    from . import models
 
-    for ep in entry_points(group="robouse.harnesses"):
-        if ep.name == harness:
-            return ep.load()(harness, model, prompt, workspace, task, env)
-    raise KeyError(f"unknown harness {harness!r}; harnesses: {', '.join(HARNESSES)}")
+    env = dict(base_env)
+    harness, model = models.legacy(harness, model)  # claude-code-glm etc.: hidden aliases
+    fn = HARNESSES.get(harness)
+    if fn is None:
+        from importlib.metadata import entry_points
+
+        fn = next((ep.load() for ep in entry_points(group="robouse.harnesses") if ep.name == harness), None)
+        if fn is None:
+            raise KeyError(f"unknown harness {harness!r}; harnesses: {', '.join(HARNESSES)}")
+        for k in PRIVATE_ENV:
+            env.pop(k, None)
+        return fn(harness, model, prompt, workspace, task, env)
+    launch = fn(model, prompt, workspace, task, env)
+    for k in PRIVATE_ENV:  # never in the agent's environment
+        launch.env.pop(k, None)
+    return launch

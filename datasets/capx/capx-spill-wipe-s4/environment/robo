@@ -12,6 +12,7 @@ request.
   robo skill NAME [ARG ...]          run a named high-level skill listed by `robo info` (only some tasks have them)
   robo done ["message"]              end the episode and ask for scoring
   robo give-up ["message"]           end the episode without claiming success
+  robo mcp [--http [HOST:]PORT]      serve these operations as MCP tools (stdio; --http: streamable HTTP)
 Add --json to any command for raw JSON output.
 """
 
@@ -22,8 +23,13 @@ import os
 import socket
 import sys
 
+STEPPING_OPS = ("act", "move_to", "grip", "skill", "done", "give_up")
+STEPPING_TIMEOUT_S = 3600
+
 
 def _send(req: dict, path: str | None = None) -> dict:
+    if path is None and os.environ.get("ROBOUSE_SEND_VIA") == "mcp":  # reference solutions run through MCP
+        return _mcp().send(req)
     path = path or os.environ.get("ROBOUSE_SOCKET") or os.environ.get("ROBO_SOCKET") or _find_socket()
     if not path:
         return {"ok": False, "error": "no episode: ROBOUSE_SOCKET is not set"}
@@ -31,7 +37,10 @@ def _send(req: dict, path: str | None = None) -> dict:
     if token:
         req = {**req, "token": token}
     s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    s.settimeout(120)
+    # requests that step the simulator wait as long as the episode may run: a long skill steps hundreds of times and
+    # the server renders a video frame every other step (0.6 s each with software OpenGL on a busy CPU); the server
+    # bounds them itself (per-skill step caps and the episode's wall-clock budget)
+    s.settimeout(STEPPING_TIMEOUT_S if req.get("op") in STEPPING_OPS else 120)
     try:
         s.connect(path)
         s.sendall((json.dumps(req) + "\n").encode())
@@ -44,8 +53,23 @@ def _send(req: dict, path: str | None = None) -> dict:
         return json.loads(buf.decode() or '{"ok": false, "error": "empty response"}')
     except (FileNotFoundError, ConnectionRefusedError):
         return {"ok": False, "error": "episode server is not running (episode may have finished)"}
+    except TimeoutError:
+        return {"ok": False, "error": f"no answer from the episode server within {s.gettimeout():.0f} s"}
     finally:
         s.close()
+
+
+def _mcp():
+    """The MCP module: robo_mcp.py next to this script (the workspace shim), else the installed package's."""
+    here = os.path.dirname(os.path.abspath(__file__))
+    if os.path.isfile(os.path.join(here, "robo_mcp.py")):
+        sys.path.insert(0, here)
+        import robo_mcp  # type: ignore[import-not-found]
+
+        return robo_mcp
+    from robouse import mcp_server
+
+    return mcp_server
 
 
 def _find_socket() -> str | None:
@@ -60,37 +84,39 @@ def _fmt_state(st: dict) -> str:
     return "\n".join(f"  {k}: {st[k]}" for k in keys)
 
 
+def format_reply(resp: dict) -> tuple[str, int]:
+    """What `robo` prints for a reply, and its exit code."""
+    if not resp.get("ok"):
+        return f"error: {resp.get('error')}", 1
+    r = resp.get("result", {})
+    if not isinstance(r, dict):
+        return str(r), 0
+    lines = []
+    for k, v in r.items():
+        if k == "state" and isinstance(v, dict):
+            lines += ["state:", _fmt_state(v)]
+        elif k == "action" and isinstance(v, dict):
+            lines.append(f"action: {v['names']} low={v['low']} high={v['high']}")
+            if v.get("doc"):
+                lines.append(f"  {v['doc']}")
+        else:
+            lines.append(f"{k}: {v}")
+    return "\n".join(lines), 0
+
+
 def _print(resp: dict, as_json: bool) -> int:
     if as_json:
         print(json.dumps(resp))
         return 0 if resp.get("ok") else 1
-    if not resp.get("ok"):
-        print(f"error: {resp.get('error')}")
-        return 1
-    r = resp.get("result", {})
-    if not isinstance(r, dict):
-        print(r)
-        return 0
-    for k, v in r.items():
-        if k == "state" and isinstance(v, dict):
-            print("state:")
-            print(_fmt_state(v))
-        elif k == "action" and isinstance(v, dict):
-            print(f"action: {v['names']} low={v['low']} high={v['high']}")
-            if v.get("doc"):
-                print(f"  {v['doc']}")
-        else:
-            print(f"{k}: {v}")
-    return 0
+    text, rc = format_reply(resp)
+    print(text)
+    return rc
 
 
-def main(argv: list[str] | None = None) -> int:
-    args = list(sys.argv[1:] if argv is None else argv)
-    as_json = "--json" in args
-    args = [a for a in args if a != "--json"]
-    if not args or args[0] in ("-h", "--help", "help"):
-        print(__doc__)
-        return 0
+def build_request(cmd: str, rest: list[str]) -> dict:
+    """The episode request for `robo CMD REST...`. Raises ValueError or IndexError for bad arguments and KeyError for an
+    unknown command. The MCP tools build their requests through this too, so both interfaces send the same thing."""
+    args = list(rest)
 
     def opt(name: str, default=None, cast=float):
         if name in args:
@@ -100,52 +126,52 @@ def main(argv: list[str] | None = None) -> int:
             return v
         return default
 
+    if cmd == "info":
+        return {"op": "info"}
+    if cmd == "observe":
+        cam = opt("--camera", None, str)
+        return {"op": "observe", "image": "--image" in args, "camera": cam}
+    if cmd == "act":
+        rep = opt("--repeat", 1, int)
+        return {"op": "act", "action": [float(x) for x in args], "repeat": rep}
+    if cmd in ("move-to", "move_to"):
+        grip = opt("--grip", None, float)
+        ms = opt("--max-steps", 100, int)
+        tol = opt("--tol", 0.01, float)
+        return {"op": "move_to", "pos": [float(x) for x in args[:3]], "grip": grip, "max_steps": ms, "tol": tol}
+    if cmd == "grip":
+        steps = opt("--steps", 15, int)
+        return {"op": "grip", "value": float(args[0]), "steps": steps}
+    if cmd == "skill":
+        if not args:
+            raise IndexError("skill needs a name")
+        return {"op": "skill", "name": args[0], "args": args[1:]}
+    if cmd == "done":
+        return {"op": "done", "text": " ".join(args)}
+    if cmd in ("give-up", "give_up"):
+        return {"op": "give_up", "text": " ".join(args)}
+    raise KeyError(cmd)
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = list(sys.argv[1:] if argv is None else argv)
+    if args[:1] == ["mcp"]:
+        return _mcp().main(args[1:])
+    as_json = "--json" in args
+    args = [a for a in args if a != "--json"]
+    if not args or args[0] in ("-h", "--help", "help"):
+        print(__doc__)
+        return 0
     cmd, rest = args[0], args[1:]
     try:
-        if cmd == "info":
-            return _print(_send({"op": "info"}), as_json)
-        if cmd == "observe":
-            args = rest
-            cam = opt("--camera", None, str)
-            if os.environ.get("ROBOUSE_TEXT_ONLY") and ("--image" in args or cam):
-                print(
-                    "note: this harness's model cannot read images, so --image and --camera are ignored",
-                    file=sys.stderr,
-                )
-                return _print(_send({"op": "observe", "image": False, "camera": None}), as_json)
-            return _print(_send({"op": "observe", "image": "--image" in args, "camera": cam}), as_json)
-        if cmd == "act":
-            args = rest
-            rep = opt("--repeat", 1, int)
-            return _print(_send({"op": "act", "action": [float(x) for x in args], "repeat": rep}), as_json)
-        if cmd in ("move-to", "move_to"):
-            args = rest
-            grip = opt("--grip", None, float)
-            ms = opt("--max-steps", 100, int)
-            tol = opt("--tol", 0.01, float)
-            return _print(
-                _send(
-                    {"op": "move_to", "pos": [float(x) for x in args[:3]], "grip": grip, "max_steps": ms, "tol": tol}
-                ),
-                as_json,
-            )
-        if cmd == "grip":
-            args = rest
-            steps = opt("--steps", 15, int)
-            return _print(_send({"op": "grip", "value": float(args[0]), "steps": steps}), as_json)
-        if cmd == "skill":
-            if not rest:
-                raise IndexError("skill needs a name")
-            return _print(_send({"op": "skill", "name": rest[0], "args": rest[1:]}), as_json)
-        if cmd == "done":
-            return _print(_send({"op": "done", "text": " ".join(rest)}), as_json)
-        if cmd in ("give-up", "give_up"):
-            return _print(_send({"op": "give_up", "text": " ".join(rest)}), as_json)
+        req = build_request(cmd, rest)
     except (ValueError, IndexError) as e:
         print(f"error: bad arguments ({e}); run `robo help`")
         return 2
-    print(f"error: unknown command {cmd!r}; run `robo help`")
-    return 2
+    except KeyError:
+        print(f"error: unknown command {cmd!r}; run `robo help`")
+        return 2
+    return _print(_send(req), as_json)
 
 
 if __name__ == "__main__":

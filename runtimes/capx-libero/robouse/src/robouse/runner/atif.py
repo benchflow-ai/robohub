@@ -3,7 +3,8 @@
 
 Inputs (all optional; missing or malformed files degrade to fewer steps, never to an exception):
   agent/stdout.jsonl       Claude Code stream-json, `codex exec --json` events, or plain text
-  agent/mini_traj.json     mini-swe-agent trajectory (mini-swe-agent-glm)
+  agent/mini_traj.json     mini-swe-agent trajectory
+  agent/pi_session.jsonl   Pi session file (dimcode)
   episode/trace.jsonl      every robo request the episode server handled: {t, steps, req, resp}
   episode/frames.jsonl     one line per video frame: {i, t, step}; the video plays them at FPS
   episode/result.json      outcome, agent_text, wall_time_s
@@ -22,7 +23,9 @@ are matched to trace entries by order: each shell command consumes as many trace
 requests. That count is the larger of the `robo <subcommand>` invocations written in the command and the
 result blocks in its output (loops print one block per call); then the state printed last in the output
 (hand_pos and steps_used) is looked up in the trace to correct the end point. Requests the runner made
-itself (status, the closing give_up) are not the agent's and become a final system step.
+itself (status, the closing give_up) are not the agent's and become a final system step. A call of a `robo` MCP
+tool (Claude Code `mcp__robo__act`, Codex `robo.act`, dimcode `dimos_robo_act_<hash>`) is treated as the equivalent
+`robo` command: it made exactly one request, and its text result is what that command prints.
 
   python -m robouse.runner.atif TRIAL_DIR [TRIAL_DIR ...]     (re)build both files for existing trials
 """
@@ -38,7 +41,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from ..core.protocol import RUNNER_PREFIX
+from ..core.protocol import is_runner_request
 
 FPS = 30
 OBS_LIMIT = 4000  # characters kept of one tool result (head and tail)
@@ -51,15 +54,17 @@ DEFAULT_MODELS = {
     "claude-code-glm": "zai-org/GLM-5.3",
     "codex-glm": "zai-org/GLM-5.3",
     "mini-swe-agent-glm": "zai-org/GLM-5.3",
+    "mini-swe-agent": "baseten/zai-org/GLM-5.3",
+    "dimcode": "baseten/zai-org/GLM-5.3",
     "oracle": "scripted",
     "noop": "none",
 }
-ROBO_SUBCOMMANDS = ("info", "observe", "act", "move-to", "move_to", "grip", "done", "give-up", "give_up")
+ROBO_SUBCOMMANDS = ("info", "observe", "act", "move-to", "move_to", "grip", "skill", "done", "give-up", "give_up")
 ROBO_RE = re.compile(r"(?:^|[^\w.-])robo\s+(" + "|".join(re.escape(s) for s in ROBO_SUBCOMMANDS) + r")(?![\w-])", re.M)
 SCRIPT_RE = re.compile(r"(?:^|[\s;&|(])(?:python\d?(?:\.\d+)?|bash|sh|zsh|node|\./)", re.M)
 LOOP_RE = re.compile(r"(?:^|[\s;&|(])(?:for|while|until)\s|\bxargs\b|\bseq\b", re.M)
 RESULT_MARK_RE = re.compile(r'^(?:steps_used: |outcome: |error: |\{"ok": )', re.M)
-HAND_RE = re.compile(r'"?hand_pos"?:\s*(\[[^\]]*\])')
+HAND_RE = re.compile(r'(?<![\w"])"?hand_pos"?:\s*(\[[^\]]*\])')  # not left_hand_pos / right_hand_pos (two-arm robots)
 STEPS_RE = re.compile(r'"?steps_used"?:\s*(\d+)')
 
 
@@ -500,6 +505,148 @@ def _parse_mini(data: dict) -> tuple[list[dict], dict]:
 
 
 # ---------------------------------------------------------------------------------------------
+# Pi session file (dimcode): {"type": "session"} header, then {"type": "message", "message": AgentMessage} entries
+
+
+def _parse_pi(entries: list[dict], trial: Path) -> tuple[list[dict], dict]:
+    steps: list[dict] = []
+    by_call: dict[str, dict] = {}
+    meta: dict[str, Any] = {"events": len(entries), "usage": []}
+    for ev in entries:
+        et = ev.get("type")
+        if et == "session":
+            meta.update({"session_id": ev.get("id"), "cwd": ev.get("cwd")})
+            continue
+        if et == "compaction":
+            steps.append(_step("system", _clip(f"[compaction] {ev.get('summary', '')}")))
+            continue
+        if et == "model_change":
+            if steps:  # the first one is the session's initial model, not a change
+                steps.append(_step("system", f"[model change] {ev.get('provider')}/{ev.get('modelId')}"))
+            else:
+                meta["model"] = f"{ev.get('provider')}/{ev.get('modelId')}"
+            continue
+        if et not in ("message", "custom_message"):
+            continue
+        m = ev.get("message") if et == "message" else {"role": "custom", "content": ev.get("content")}
+        if not isinstance(m, dict):
+            continue
+        role = m.get("role")
+        ts = m.get("timestamp")
+        epoch = ts / 1000 if isinstance(ts, (int, float)) else _parse_iso(ev.get("timestamp"))
+        if role == "user":
+            steps.append(_step("user", _clip(_text_of(m.get("content")), MSG_LIMIT), epoch=epoch))
+        elif role == "assistant":
+            st = _step("agent", model=m.get("model"), epoch=epoch)
+            texts, thinks = [], []
+            for b in m.get("content") or []:
+                if not isinstance(b, dict):
+                    continue
+                if b.get("type") == "text":
+                    texts.append(str(b.get("text", "")))
+                elif b.get("type") == "thinking" and b.get("thinking"):
+                    thinks.append(str(b["thinking"]))
+                elif b.get("type") == "toolCall":
+                    args = b.get("arguments") if isinstance(b.get("arguments"), dict) else {"input": b.get("arguments")}
+                    name = str(b.get("name") or "tool")
+                    cmd = args.get("command") if name == "bash" and isinstance(args.get("command"), str) else None
+                    c = _call(str(b.get("id") or f"call-{len(by_call)}"), name, args, cmd)
+                    st["calls"].append(c)
+                    by_call[c["id"]] = c
+            st["message"] = _clip("\n\n".join(texts), MSG_LIMIT)
+            st["reasoning"] = "\n\n".join(thinks) or None
+            u = m.get("usage") or {}
+            if u:
+                meta["usage"].append(u)
+                cached = int(u.get("cacheRead") or 0)
+                st["metrics"] = {
+                    "prompt_tokens": int(u.get("input") or 0) + cached + int(u.get("cacheWrite") or 0),
+                    "completion_tokens": int(u.get("output") or 0),
+                    "cached_tokens": cached,
+                }
+            if m.get("errorMessage"):
+                st["extra"]["error"] = m["errorMessage"]
+            if m.get("stopReason"):
+                st["extra"]["stop_reason"] = m["stopReason"]
+            steps.append(st)
+        elif role == "toolResult":
+            c = by_call.get(str(m.get("toolCallId")))
+            text = _text_of(m.get("content"))
+            if c is None:
+                steps.append(_step("system", _clip(f"[tool result without a matching call] {text}"), epoch=epoch))
+                continue
+            c["output"] = text
+            c["is_error"] = bool(m.get("isError"))
+            c["epoch_end"] = epoch
+            imgs = [x for x in m.get("content") or [] if isinstance(x, dict) and x.get("type") == "image"]
+            name = os.path.basename(str(c["args"].get("path") or ""))
+            if imgs and name and (trial / "artifacts" / "observations" / name).is_file():
+                c["image_paths"] = [f"../artifacts/observations/{name}"]
+        elif role in ("custom", "bashExecution", "branchSummary", "compactionSummary"):
+            txt = m.get("command") or m.get("summary") or _text_of(m.get("content"))
+            steps.append(_step("system", _clip(f"[{role}] {txt}"), epoch=epoch))
+    return steps, meta
+
+
+def _pi_final(meta: dict) -> dict | None:
+    us = meta.get("usage") or []
+    if not us:
+        return None
+    tot = lambda k: sum(int(u.get(k) or 0) for u in us)
+    return {
+        "total_prompt_tokens": tot("input") + tot("cacheRead") + tot("cacheWrite"),
+        "total_completion_tokens": tot("output"),
+        "total_cached_tokens": tot("cacheRead"),
+        "extra": {"turns": len(us)},
+    }
+
+
+# ---------------------------------------------------------------------------------------------
+# robo MCP tool calls, as the equivalent `robo` command
+
+MCP_TOOL_RES = (
+    re.compile(r"^mcp__robo__(\w+)$"),  # Claude Code
+    re.compile(r"^robo\.(\w+)$"),  # Codex (server.tool)
+    re.compile(r"^dimos_robo_(\w+?)_[0-9a-f]{10}$"),  # dimcode
+)
+
+
+def _mcp_tool(name: str) -> str | None:
+    for rx in MCP_TOOL_RES:
+        m = rx.match(name)
+        if m:
+            return m.group(1)
+    return None
+
+
+def _mcp_commands(steps: list[dict], trial: Path | None = None) -> None:
+    """Give each robo MCP tool call the command line the CLI would have run, so it aligns like one, and point the
+    images it returned at the trial's saved copies."""
+    import shlex
+
+    from ..mcp_server import ArgError, tool_argv
+
+    for st in steps:
+        for c in st["calls"]:
+            tool = _mcp_tool(str(c.get("name") or ""))
+            if tool is None or c.get("command"):
+                continue
+            c["mcp"] = True
+            if str(c.get("output") or "").startswith("error: bad arguments"):
+                continue  # rejected before any request was sent
+            try:
+                cmd, rest = tool_argv(tool, c.get("args") or {})
+                c["command"] = "robo " + " ".join(shlex.quote(x) for x in [cmd, *rest])
+            except (ArgError, KeyError, TypeError, ValueError):
+                c["command"] = f"robo {tool.replace('_', '-')}"
+            if trial is not None and not c.get("image_paths"):
+                names = [os.path.basename(x) for x in re.findall(r"[\w./-]+\.png", str(c.get("output") or ""))]
+                saved = [n for n in dict.fromkeys(names) if (trial / "artifacts" / "observations" / n).is_file()]
+                if saved:
+                    c["image_paths"] = [f"../artifacts/observations/{n}" for n in saved]
+
+
+# ---------------------------------------------------------------------------------------------
 # no-LLM harnesses: steps straight from the trace
 
 
@@ -600,11 +747,11 @@ def _steps_from_trace(entries: list[int], trace: list[dict], harness: str) -> li
 # aligning tool calls with trace entries
 
 
-def _is_runner_entry(e: dict) -> bool:
+def _is_runner_entry(e: dict, legacy: bool = False) -> bool:
+    """The runner's request, not the agent's. Traces written before the runner marked its status check (`legacy`) take
+    every status request as the runner's."""
     req = e.get("req") or {}
-    return req.get("op") == "status" or (
-        req.get("op") == "give_up" and str(req.get("text", "")).startswith(RUNNER_PREFIX)
-    )
+    return is_runner_request(req) or (legacy and req.get("op") == "status")
 
 
 def _entry_sig(e: dict) -> tuple | None:
@@ -786,9 +933,13 @@ def _prompt(trial: Path, cfg: dict, harness: str) -> str:
             instr = ""
     if harness in TRACE_HARNESSES:
         return instr or f"task {cfg.get('task')}"
-    from ..harnesses import PROMPT_PREFIX
+    from ..harnesses.interface import prompt_prefix
 
-    return PROMPT_PREFIX + instr if instr else f"(prompt not recorded) task {cfg.get('task')}"
+    return (
+        prompt_prefix(cfg.get("interface") or "cli") + instr
+        if instr
+        else f"(prompt not recorded) task {cfg.get('task')}"
+    )
 
 
 def _to_atif_step(sid: int, st: dict, default_model: str | None) -> dict:
@@ -859,8 +1010,9 @@ def build(trial: Path, harness: str | None = None) -> tuple[dict, dict]:
     )
     notes: list[str] = []
 
-    runner_entries = [j for j, e in enumerate(trace) if _is_runner_entry(e)]
-    agent_entries = [j for j, e in enumerate(trace) if not _is_runner_entry(e)]
+    legacy = not any((e.get("req") or {}).get("runner") for e in trace)
+    runner_entries = [j for j, e in enumerate(trace) if _is_runner_entry(e, legacy)]
+    agent_entries = [j for j, e in enumerate(trace) if not _is_runner_entry(e, legacy)]
 
     meta: dict[str, Any] = {}
     fm: dict | None = None
@@ -873,7 +1025,10 @@ def build(trial: Path, harness: str | None = None) -> tuple[dict, dict]:
             f"(up to {ORACLE_ACTS_PER_STEP} motion requests per step)."
         )
     else:
-        if harness.startswith("mini-swe-agent") and (trial / "agent" / "mini_traj.json").is_file():
+        if harness == "dimcode" and (trial / "agent" / "pi_session.jsonl").is_file():
+            steps, meta = _parse_pi(_read_jsonl(trial / "agent" / "pi_session.jsonl"), trial)
+            fm = _pi_final(meta)
+        elif harness.startswith("mini-swe-agent") and (trial / "agent" / "mini_traj.json").is_file():
             data = _read_json(trial / "agent" / "mini_traj.json")
             steps, meta = _parse_mini(data if isinstance(data, dict) else {})
             if not isinstance(data, dict):
@@ -908,6 +1063,7 @@ def build(trial: Path, harness: str | None = None) -> tuple[dict, dict]:
                 pass
             if n_bad > 0:
                 notes.append(f"{n_bad} malformed JSON line(s) in agent/stdout.jsonl skipped")
+        _mcp_commands(steps, trial)
         leftover = _align(steps, agent_entries, trace)
         if leftover:
             notes.append(
@@ -1013,7 +1169,9 @@ def build(trial: Path, harness: str | None = None) -> tuple[dict, dict]:
                 "harness": harness,
                 "episode_outcome": episode.get("outcome"),
                 "episode_success": episode.get("success"),
-                "robo_requests": len(agent_entries),
+                "robo_requests": episode.get("requests")
+                if isinstance(episode.get("requests"), int)
+                else len(agent_entries),
                 "runner_requests": len(runner_entries),
                 "recording_index": "artifacts/recording_index.json",
             }
@@ -1022,8 +1180,15 @@ def build(trial: Path, harness: str | None = None) -> tuple[dict, dict]:
     fm = dict(fm or {})
     fm["total_steps"] = len(atif_steps)
     if harness.startswith("mini-swe-agent"):
+        # mini reports no totals: sum its per-step usage, so runner/cost.py can price the trial. Its own
+        # instance_cost is 0.0 for models litellm has no price for (the Baseten ones), so a zero is not kept.
+        for key in ("prompt_tokens", "completion_tokens", "cached_tokens"):
+            vals = [(st.get("metrics") or {}).get(key) for st in atif_steps]
+            vals = [v for v in vals if isinstance(v, (int, float))]
+            if vals and fm.get(f"total_{key}") is None:
+                fm[f"total_{key}"] = int(sum(vals))
         ms = (meta.get("info") or {}).get("model_stats") or {}
-        if ms.get("instance_cost") is not None:
+        if ms.get("instance_cost"):
             fm["total_cost_usd"] = ms["instance_cost"]
     traj["final_metrics"] = {k: v for k, v in fm.items() if v is not None}
     if meta.get("result", {}).get("result") and not any(
@@ -1113,6 +1278,8 @@ def _source_name(trial: Path, harness: str) -> str:
         return "episode/trace.jsonl"
     if harness.startswith("mini-swe-agent") and (trial / "agent" / "mini_traj.json").is_file():
         return "agent/mini_traj.json"
+    if harness == "dimcode" and (trial / "agent" / "pi_session.jsonl").is_file():
+        return "agent/pi_session.jsonl (Pi session)"
     return (
         "agent/stdout.jsonl ("
         + (

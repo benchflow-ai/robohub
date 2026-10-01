@@ -196,7 +196,7 @@ class DMControlBackend(EmbodiedBackend):
         self.render_size = tuple(spec.get("render_size", (480, 480)))
         self.decl = self._declare()
         self.worker = StdioWorker(
-            "dmcontrol", config.sim_python("dmcontrol", "dmcontrol"), WORKER, setup="docs/suites/dmcontrol.md"
+            "dmcontrol", config.sim_python("dmcontrol", "dmcontrol"), WORKER, setup=config.SUITES_DOCS
         )
         self._state = None
         self._success = False

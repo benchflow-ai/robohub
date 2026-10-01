@@ -1,11 +1,13 @@
 """`robouse doctor`: what this machine can run. Checks each simulator backend's imports (or its worker virtualenv), the
-harness command-line tools and credentials, the VLA client, the real-robot drivers' SDKs, and registered plugins.
-Read-only: nothing is installed or started."""
+harness command-line tools and credentials, the VLA client, the real-robot drivers' SDKs, registered plugins, and whether
+MuJoCo can render offscreen. Read-only: nothing is installed; the rendering check runs MuJoCo once in a short-lived
+process."""
 
 from __future__ import annotations
 
 import importlib
 import importlib.util
+import os
 import shutil
 
 from .. import config
@@ -36,12 +38,52 @@ def _ok(flag: bool) -> str:
     return "ok " if flag else "-- "
 
 
+def gateway_key_var(provider: str) -> str:
+    """The variable the model gateway reads a provider's key from: its `auth_env` in the provider registry
+    (harnesses/gateway.py checks exactly that, in the environment)."""
+    from ..harnesses import models
+
+    try:
+        return str(models.provider_registry()[provider].auth_env)
+    except (RuntimeError, KeyError, AttributeError):  # BenchFlow (the llm extra) not installed: the pending entry
+        return str(models.PENDING_PROVIDERS[provider]["auth_env"])
+
+
+def _rendering() -> None:
+    """Every simulator records its episode video with MuJoCo's renderer, which needs an OpenGL platform."""
+    import os
+
+    from ..core import gl
+
+    print("Offscreen rendering")
+    if importlib.util.find_spec("mujoco") is None:
+        print("  -- MuJoCo is not installed (pip install 'robouse[sim]')")
+        return
+    picked = gl.auto_select()  # what `robouse run` does when MUJOCO_GL is unset on Linux without a display
+    why = gl.probe()
+    setting = os.environ.get("MUJOCO_GL") or "unset, so GLFW, which needs a display"
+    if why is None:
+        print(
+            f"  ok MuJoCo renders offscreen (MUJOCO_GL={setting}"
+            + (", chosen because it was unset" if picked else "")
+            + ")"
+        )
+    else:
+        print(f"  -- MuJoCo cannot render offscreen (MUJOCO_GL={setting}): {why}. {gl.HINT}")
+
+
 def run() -> int:
+    _rendering()
     print("Simulator backends")
     from ..backends import BACKENDS
 
+    # every in-process backend needs the simulator extra (`pip install 'robouse[sim]'`)
+    no_sim = [m for m in ("mujoco", "imageio", "PIL") if importlib.util.find_spec(m) is None]
     for b, (mod, _cls) in BACKENDS.items():
         if b in WORKER_VENVS or b in REMOTE or b == "remix":
+            continue
+        if no_sim:
+            print(f"  -- {b} (missing package {', '.join(no_sim)}: pip install 'robouse[sim]')")
             continue
         try:
             importlib.import_module(f"robouse.backends.{mod}")
@@ -55,18 +97,25 @@ def run() -> int:
         print(f"  {_ok(py.exists())}{b} (worker virtualenv {py})")
     print("Harnesses")
     for h, exe in (
-        ("claude-code, claude-code-glm", "claude"),
-        ("codex, codex-glm", "codex"),
-        ("mini-swe-agent-glm", "mini"),
+        ("claude-code", "claude"),
+        ("codex", "codex"),
+        ("mini-swe-agent", "mini"),
+        ("model gateway (provider-prefixed models)", "litellm"),
     ):
         print(f"  {_ok(shutil.which(exe) is not None)}{h} (`{exe}` on PATH)")
+    dim = config.env("ROBOUSE_DIMCODE") or shutil.which("dimcode")
+    print(f"  {_ok(bool(dim))}dimcode (" + (dim if dim else "`dimcode` on PATH, or ROBOUSE_DIMCODE") + ")")
     creds = {
         "ANTHROPIC_API_KEY or CLAUDE_CODE_OAUTH_TOKEN": credentials.have_claude(),
         "OPENAI_API_KEY or ~/.codex/auth.json": credentials.have_codex(),
-        "BASETEN_API_KEY": credentials.have_baseten(),
     }
     for k, v in creds.items():
         print(f"  {_ok(v)}{k}")
+    var = gateway_key_var("baseten")
+    print(
+        f"  {_ok(bool(os.environ.get(var)))}{var} in the environment "
+        "(what the model gateway reads for baseten/ models; no key file is read)"
+    )
     print(
         f"  {_ok(bool(config.env('ROBOUSE_VLA_URL')))}vla (ROBOUSE_VLA_URL {config.env('ROBOUSE_VLA_URL', 'not set')})"
     )

@@ -91,9 +91,7 @@ class DexjocoBackend(Backend):
         )
         lim = ([POS_LIM] * 3 + [ROT_LIM] * 3 + [HAND_LIM] * 16) * len(arms)
         self.action_spec = ActionSpec(names=names, low=[-x for x in lim], high=lim, doc=doc)
-        self.worker = StdioWorker(
-            "dexjoco", config.sim_python("dexjoco", "dexjoco"), WORKER, setup="docs/suites/dexjoco.md"
-        )
+        self.worker = StdioWorker("dexjoco", config.sim_python("dexjoco", "dexjoco"), WORKER, setup=config.SUITES_DOCS)
         self._state = None
         self._success = False
         self._grip = 0.0  # skills and the settle hold send 0 = keep the hand as commanded

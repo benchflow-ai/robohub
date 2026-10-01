@@ -31,7 +31,7 @@ from ..base import StepInfo
 from ..embodied import ActionGroup, Budget, EmbodiedBackend, Embodiment, Oracle, Sensor, Skill, SkillArg
 
 RETRY_METHODS = frozenset({"info", "observe", "render", "success", "status"})
-SETUP = "docs/suites/robodojo.md"
+SETUP = config.SUITES_DOCS
 ARMS = ("left", "right")
 STEP_S = 0.04  # one RoboDojo action: 10 physics steps of 4 ms
 # A skill call returns after at most this much wall time (the robo client waits 120 s for a reply); the result then
