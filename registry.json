@@ -6373,6 +6373,367 @@
     ]
   },
   {
+    "name": "rle-bench/rle-bench",
+    "version": "0.2",
+    "description": "Robo Use RLE-Bench 0.2: RLE-Bench's tabletop reasoning tasks (tower, cantilever, balance, hidden centre of mass) for an agent in the loop.",
+    "git_tag": "rle-bench/rle-bench-v0.2",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "rle-balance-coins",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/rle-bench/rle-balance-coins",
+        "digest": "sha256:8ed057906c7a03119437d93cf41345b373d17b9a6f3dd5afeab6e87d37a4ce04"
+      },
+      {
+        "name": "rle-cantilever-overhang",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/rle-bench/rle-cantilever-overhang",
+        "digest": "sha256:c2a55f8001cea23a90ac5383dcf8acf50b96c3619849e99b64671f3d53809d56"
+      },
+      {
+        "name": "rle-hidden-com-box-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/rle-bench/rle-hidden-com-box-1",
+        "digest": "sha256:b4d6273c202c330ab50b7b163f2faafb9f4cfdbd8920e8604c1bf3c4e85ee1b7"
+      },
+      {
+        "name": "rle-hidden-com-box-2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/rle-bench/rle-hidden-com-box-2",
+        "digest": "sha256:cc66ed90b464f0815ffc95726b57b384ebfe78174f21c981c032d2714550f5e2"
+      },
+      {
+        "name": "rle-hidden-com-box-3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/rle-bench/rle-hidden-com-box-3",
+        "digest": "sha256:64ef278fc639a74d240c8be50882c7d781b20606b463f1b000e84531f8ebd296"
+      },
+      {
+        "name": "rle-tower-max-height",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/rle-bench/rle-tower-max-height",
+        "digest": "sha256:0ac56e12ecf10a5e0d5929e899fc217227adecd8697fbb65b82229d0cbcf22cb"
+      }
+    ]
+  },
+  {
+    "name": "capgym/cap-x",
+    "version": "0.2",
+    "description": "Robo Use CaP-X 0.2: CaP-Bench's RoboSuite and LIBERO-PRO tasks as code as policy with CaP-X's privileged API.",
+    "git_tag": "capgym/cap-x-v0.2",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "capx-cube-lifting-s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-lifting-s1",
+        "digest": "sha256:782dcd17acde34847a3272206bb51f4f2ea0028d8d7015432dfc01bfa54a9d51"
+      },
+      {
+        "name": "capx-cube-lifting-s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-lifting-s2",
+        "digest": "sha256:f435da27e883ffefef1aeb6ddc569bbca822f1f5cf8d119623dc684e7fba54c4"
+      },
+      {
+        "name": "capx-cube-lifting-s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-lifting-s3",
+        "digest": "sha256:32d9b33c457af9428865e6b9cf80f96205ddbc55f3b0e2ad99a9566c54bdb077"
+      },
+      {
+        "name": "capx-cube-lifting-s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-lifting-s4",
+        "digest": "sha256:079178afce95aab352854c925e95dcdfd3ad6e96eae341d08d18bc2814649ce7"
+      },
+      {
+        "name": "capx-cube-lifting-s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-lifting-s5",
+        "digest": "sha256:b76d3bd7e835bb824c734dc141d7e6166113ba745e5e1a5d04867e7b0eb02210"
+      },
+      {
+        "name": "capx-cube-restack-s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-restack-s1",
+        "digest": "sha256:0fcaa8e19758550df7c69d59edd58653e3e7d9f26043f9617b4d481178e7dc47"
+      },
+      {
+        "name": "capx-cube-restack-s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-restack-s2",
+        "digest": "sha256:ee856c2b7612539c91148e46f6136f5c84e380e050791c40047ab12256b52217"
+      },
+      {
+        "name": "capx-cube-restack-s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-restack-s3",
+        "digest": "sha256:4ad0c23a119235d12264ebbff02a959484311dcb608cc499c39e8621c1f210f6"
+      },
+      {
+        "name": "capx-cube-restack-s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-restack-s4",
+        "digest": "sha256:be923b719abaa48a972ee4f76098cc7f2ce13a78b077c104a18a227693b23125"
+      },
+      {
+        "name": "capx-cube-restack-s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-restack-s5",
+        "digest": "sha256:2bf6d5e6ffa86d5e709ff0a617030b6fc510e9ad669494de5a3855eb9fbd754d"
+      },
+      {
+        "name": "capx-cube-stack-s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-stack-s1",
+        "digest": "sha256:aff484bb8f1ac0b069308b2451621de8feb010ba25cc2f8821597efaf9ec4184"
+      },
+      {
+        "name": "capx-cube-stack-s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-stack-s2",
+        "digest": "sha256:ec7469b561f34a048a8e3c03d5cb3e43b4211c70276e3fbe5d7d0389a897d560"
+      },
+      {
+        "name": "capx-cube-stack-s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-stack-s3",
+        "digest": "sha256:9f5b920933a3b0ec3d0b3f719a8ec435a38bf345c2400d8249d3c648755ac111"
+      },
+      {
+        "name": "capx-cube-stack-s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-stack-s4",
+        "digest": "sha256:8ca0aeb4ecfbd533627bd3deb53442d3dd7d3344475017974167485fa786f919"
+      },
+      {
+        "name": "capx-cube-stack-s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-cube-stack-s5",
+        "digest": "sha256:9dccb4924d501e55c518ce55c324c8fa7697351625219df0af79948d621e7ca8"
+      },
+      {
+        "name": "capx-libero-object-swap-0",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-libero-object-swap-0",
+        "digest": "sha256:3689f6e1c5f7b021c48970310092b8da6b24d2d27e3fe48b4cc3979179e52326"
+      },
+      {
+        "name": "capx-libero-object-swap-1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-libero-object-swap-1",
+        "digest": "sha256:59816ce54e564b3ae46756476db6e217fe4ec8287c79f095debcba7f14488b9b"
+      },
+      {
+        "name": "capx-libero-object-swap-2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-libero-object-swap-2",
+        "digest": "sha256:1e838b1c3e0c5c247c3592963a97f383286de771269b2728331f705977be9aa6"
+      },
+      {
+        "name": "capx-libero-object-swap-3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-libero-object-swap-3",
+        "digest": "sha256:805d9aa171e13b4f57be58afbf91d7930986f108ff8772cbbc56a05e1bc90ed2"
+      },
+      {
+        "name": "capx-libero-object-swap-5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-libero-object-swap-5",
+        "digest": "sha256:f2261aa404d375c7663a38676c6cb585722732bd50115391a7d05bc9ad1186c2"
+      },
+      {
+        "name": "capx-libero-object-swap-6",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-libero-object-swap-6",
+        "digest": "sha256:a27fc9cab0e7ee67b26f415fae473e888c6cc9566d145120ec7120752ec87607"
+      },
+      {
+        "name": "capx-libero-object-swap-7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-libero-object-swap-7",
+        "digest": "sha256:9437e7f55603082b8fc6609cdc2c8163f30480e3132410ddca3db8f1fe2981d4"
+      },
+      {
+        "name": "capx-libero-object-swap-9",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-libero-object-swap-9",
+        "digest": "sha256:80dc10a63e069555ce69582992f07252c3c202518b64373664ba31bc0bf640c5"
+      },
+      {
+        "name": "capx-nut-assembly-s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-nut-assembly-s1",
+        "digest": "sha256:bd094d0e14d16faedd29e3faa24811588ee046c7f3ebbeaded0876b7a02985d7"
+      },
+      {
+        "name": "capx-nut-assembly-s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-nut-assembly-s2",
+        "digest": "sha256:5c54a2d02efd7cf8079e87f6a9137bd801a006fef323c769557d8202e5c609a3"
+      },
+      {
+        "name": "capx-nut-assembly-s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-nut-assembly-s3",
+        "digest": "sha256:eee826f8eba520e1387f5a558a50e9162f20540dcbfa82472cbf7e6dd74ea3ce"
+      },
+      {
+        "name": "capx-nut-assembly-s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-nut-assembly-s4",
+        "digest": "sha256:fa7acf43668841985c208703fc34ef3052bf02151d801860d221d9e437f0ef4b"
+      },
+      {
+        "name": "capx-nut-assembly-s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-nut-assembly-s5",
+        "digest": "sha256:210eaf2c232acaf56a4f8530286bf51885374c75d6280b760b74d15e863b8424"
+      },
+      {
+        "name": "capx-spill-wipe-s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-spill-wipe-s1",
+        "digest": "sha256:333732407f1b849859a9015c1aec6e9ecc14000f04b3b38edaf7c116cb97d668"
+      },
+      {
+        "name": "capx-spill-wipe-s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-spill-wipe-s2",
+        "digest": "sha256:2227bafdf7ffde3ab3c850af5ca8a5e4146af8279253263c78aaaf23ead1add3"
+      },
+      {
+        "name": "capx-spill-wipe-s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-spill-wipe-s3",
+        "digest": "sha256:8b21c5497e813f11f2f13f5e12b44a7c3a0855f09c4723258e51bcd2aa54df0c"
+      },
+      {
+        "name": "capx-spill-wipe-s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-spill-wipe-s4",
+        "digest": "sha256:f171905321fa0a598842620803879537f31f4a5d8c7a871d2759a300a0acb105"
+      },
+      {
+        "name": "capx-spill-wipe-s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-spill-wipe-s5",
+        "digest": "sha256:78f21520f8708da22cbc37befda7504482179a7161f4527fbeeb7cbe692c1dc4"
+      },
+      {
+        "name": "capx-two-arm-handover-s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-two-arm-handover-s1",
+        "digest": "sha256:3be60686d74afe2d452db533a5fcbd6e5fba3c282b4e86678674cce9173df2d6"
+      },
+      {
+        "name": "capx-two-arm-handover-s2",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-two-arm-handover-s2",
+        "digest": "sha256:c64b7f827e5b371b92d05c1a7a33e86114b2e106ebf66c6ddf43d8addb9da341"
+      },
+      {
+        "name": "capx-two-arm-handover-s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-two-arm-handover-s3",
+        "digest": "sha256:c27955cbc54145bfe719337d99590c0cd332ca48be5aa675a478f863d771a6a8"
+      },
+      {
+        "name": "capx-two-arm-handover-s4",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-two-arm-handover-s4",
+        "digest": "sha256:b349b5b43412a53226073648e1713931787a2cacc3f37c18a001eb94c70b3fe3"
+      },
+      {
+        "name": "capx-two-arm-handover-s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-two-arm-handover-s5",
+        "digest": "sha256:b771fd841d4ea67ec8d563148c40bc0518e26a9aa5b7e5be2888adf08e6bb38a"
+      },
+      {
+        "name": "capx-two-arm-lift-s1",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-two-arm-lift-s1",
+        "digest": "sha256:05a598b2bc74683c0a1f68d870c2650fb70b591b4697c61ca2b24f0dc07eb565"
+      },
+      {
+        "name": "capx-two-arm-lift-s3",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-two-arm-lift-s3",
+        "digest": "sha256:5e031213e5ce985ad1ba1c8a5d1b82b8de6931e82fe37363df5d125d423591dd"
+      },
+      {
+        "name": "capx-two-arm-lift-s5",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-two-arm-lift-s5",
+        "digest": "sha256:00334b29a6df4a002b977c5fc5bc21bd48392f93b49c8002b98e1a7c9c6fe05b"
+      },
+      {
+        "name": "capx-two-arm-lift-s7",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-two-arm-lift-s7",
+        "digest": "sha256:e865b3f60595f1c7ad92efab3d102068ec9cd8bbed69fcf570f6dd19110022c6"
+      },
+      {
+        "name": "capx-two-arm-lift-s8",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "537999bd1079943d6cf6a441c35bfef245df70aa",
+        "path": "datasets/capx/capx-two-arm-lift-s8",
+        "digest": "sha256:ee34343ccb1bcc2fefdc33f0441ae4cd0bcc585937bd39c6ca23b01ff7ce1807"
+      }
+    ]
+  },
+  {
     "name": "benchflow/robouse-noop-control",
     "version": "0.2",
     "description": "Robo Use no-op control 0.2: the tasks of robouse-core with a reference solution that does nothing; each must score 0.",
