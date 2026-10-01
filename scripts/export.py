@@ -22,6 +22,9 @@ Reads hub.yaml (datasets, runtimes) and core.txt, and writes:
 A runtime with `native: true` in hub.yaml (composed tasks) is written by Robo Use's own exporter
 (robouse.engine.format, on BenchFlow's embodied layer), so this script then needs BenchFlow in the same Python.
 `--noop-out DIR` writes every selected dataset with no-op reference solutions to DIR instead (a local negative control).
+`--runtimes RT,...` (with --datasets) rewrites only those runtimes and, in the selected datasets, only the tasks that run on
+them: a fix release from a newer Robo Use leaves every other package byte-identical. export.json then records the newer
+Robo Use commit on each rewritten task. The checkout's version must equal hub.yaml robouse.package_version.
 
 The same task has byte-identical packages in every dataset that contains it (same digest). Run with the Robo Use
 dev venv: it reads task folders with robouse.tasks (PyYAML) and vendors Meta-World's scripted expert policies from
@@ -417,7 +420,14 @@ def main(argv=None) -> int:
     ap.add_argument("--noop-out", default="", metavar="DIR",
                     help="write every selected dataset with no-op reference solutions to DIR/<dir>/ (a local negative "
                          "control for checking that each task scores 0; datasets/ and export.json are left alone)")
+    ap.add_argument("--runtimes", default="", metavar="RT[,RT...]",
+                    help="with --datasets: rewrite only these runtimes and, in the selected datasets, only the tasks "
+                         "that run on them; every other task and runtime stays exactly as exported before (its "
+                         "export.json entry included). For a fix release that must not change other packages.")
     a = ap.parse_args(argv)
+    only = set(filter(None, a.runtimes.split(",")))
+    if only and not a.datasets:
+        ap.error("--runtimes needs --datasets")
 
     robouse = Path(a.robouse).expanduser().resolve()
     sys.path.insert(0, str(robouse / "src"))
@@ -431,6 +441,14 @@ def main(argv=None) -> int:
         return 1
     hub = yaml.safe_load((HUB / "hub.yaml").read_text())
     prov = {"repo": hub["robouse"]["repo"], "commit": sha, "package_version": hub["robouse"]["package_version"]}
+    m = re.search(r'^__version__ = "([^"]+)"', (robouse / "src" / "robouse" / "__init__.py").read_text(), re.M)
+    if not m or m.group(1) != prov["package_version"]:
+        raise SystemExit(f"{robouse} is Robo Use {m.group(1) if m else '?'}, but hub.yaml robouse.package_version is "
+                         f"{prov['package_version']}")
+    tag = subprocess.run(["git", "-C", str(robouse), "describe", "--tags", "--exact-match", "HEAD"],
+                         capture_output=True, text=True).stdout.strip()
+    if tag:  # a release: the commit the package on PyPI was built from
+        prov["tag"] = tag
 
     by_id, suite_of = {}, {}
     for t in find_tasks(robouse / "tasks"):
@@ -455,6 +473,11 @@ def main(argv=None) -> int:
                 if "tasks_file" in src:
                     used |= {backend_runtime[by_id[ln.strip()].spec["backend"]] for ln in (HUB / src["tasks_file"]).read_text().splitlines()
                              if ln.strip() and not ln.startswith("#") and ln.strip() in by_id}
+        if only:
+            unknown = only - set(hub["runtimes"])
+            if unknown:
+                raise SystemExit(f"--runtimes: unknown runtimes {sorted(unknown)}")
+            used &= only
     # `native: true` runtimes come from Robo Use's own native export (`robouse export`), not from this script
     runtime_digests = {rt: write_runtime(rt, cfg, robouse, prov) for rt, cfg in hub["runtimes"].items()
                        if (used is None or rt in used) and not cfg.get("native")}
@@ -494,6 +517,26 @@ def main(argv=None) -> int:
         out_parent = out_root / folder
         ids = dataset_ids(ds)
         rts = {backend_runtime[by_id[i].spec["backend"]] for i in ids}
+        partial = bool(only) and not rts <= only
+        if partial:  # --runtimes: only this dataset's tasks on those runtimes are rewritten, the others stay as they are
+            ids = [i for i in ids if backend_runtime[by_id[i].spec["backend"]] in only]
+            if not ids:
+                print(f"{ds['name']}: no task on {sorted(only)}, left as it is")
+                continue
+            out_parent.mkdir(parents=True, exist_ok=True)
+            tasks = {}
+            for tid in ids:
+                task = by_id[tid]
+                rt = backend_runtime[task.spec["backend"]]
+                export_task(task, robouse, out_parent, rt, runtime_digests[rt], hub["runtimes"][rt].get("sim_memory", "3G"),
+                            PROMPT_PREFIX, noop, hub["runtimes"][rt].get("remote_worker") or False)
+                # these tasks come from another Robo Use commit than the rest of the dataset
+                tasks[tid] = {"suite": suite_of[tid], "backend": task.spec["backend"], "runtime": rt, "robouse": prov}
+            if not a.noop_out:
+                manifest["datasets"][folder]["tasks"].update(tasks)
+            print(f"{ds['name']}: {len(tasks)} task(s) on {sorted(only)} rewritten{' (no-op oracles)' if noop else ''}; "
+                  "the others left as they are")
+            continue
         if rts & native_runtimes:  # written by Robo Use's own exporter (robouse.engine.format)
             if len(rts) != 1:
                 raise SystemExit(f"{ds['name']}: a dataset on a native runtime cannot mix runtimes ({sorted(rts)})")
