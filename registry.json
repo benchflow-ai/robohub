@@ -4781,51 +4781,44 @@
     "bench_version": ">=0.7.4,<0.8",
     "tasks": [
       {
-        "name": "humanoidbench-maze",
-        "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bd58700ba6866db5d20babcfc9a642ebe5c5ca35",
-        "path": "datasets/robouse-humanoidbench/humanoidbench-maze",
-        "digest": "sha256:b6f6b8fd7171099e36af7fc02e3af2b6ea4b6de842f0df2485d5016ec048826e"
-      },
-      {
         "name": "humanoidbench-pole",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bd58700ba6866db5d20babcfc9a642ebe5c5ca35",
+        "git_commit_id": "5d1b4a88d993277f9b66ad401e60f010c387a0ed",
         "path": "datasets/robouse-humanoidbench/humanoidbench-pole",
         "digest": "sha256:6acf3d49fd66b23f487249750d875bf271479bc82da02a4810dac48494562d8b"
       },
       {
         "name": "humanoidbench-push",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bd58700ba6866db5d20babcfc9a642ebe5c5ca35",
+        "git_commit_id": "5d1b4a88d993277f9b66ad401e60f010c387a0ed",
         "path": "datasets/robouse-humanoidbench/humanoidbench-push",
         "digest": "sha256:6c6ba599c50a6e162586783bf5fd11ff020b9b74014c49e322b5adcb0fb3f76e"
       },
       {
         "name": "humanoidbench-reach",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bd58700ba6866db5d20babcfc9a642ebe5c5ca35",
+        "git_commit_id": "5d1b4a88d993277f9b66ad401e60f010c387a0ed",
         "path": "datasets/robouse-humanoidbench/humanoidbench-reach",
         "digest": "sha256:316897b56edb974a5b74894d67cd0b7b0bcee79cd87221864d0dda372be24aad"
       },
       {
         "name": "humanoidbench-sit-simple",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bd58700ba6866db5d20babcfc9a642ebe5c5ca35",
+        "git_commit_id": "5d1b4a88d993277f9b66ad401e60f010c387a0ed",
         "path": "datasets/robouse-humanoidbench/humanoidbench-sit-simple",
         "digest": "sha256:ea5e8cd1635496d8961dc8084fa1526b6ff1e9c3797c873aeed5bbe99f4228a1"
       },
       {
         "name": "humanoidbench-stand",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bd58700ba6866db5d20babcfc9a642ebe5c5ca35",
+        "git_commit_id": "5d1b4a88d993277f9b66ad401e60f010c387a0ed",
         "path": "datasets/robouse-humanoidbench/humanoidbench-stand",
         "digest": "sha256:4b9934f89e5dd3409eb6a73e99568672cee5d33838ba5130511c895e23675288"
       },
       {
         "name": "humanoidbench-walk",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "bd58700ba6866db5d20babcfc9a642ebe5c5ca35",
+        "git_commit_id": "5d1b4a88d993277f9b66ad401e60f010c387a0ed",
         "path": "datasets/robouse-humanoidbench/humanoidbench-walk",
         "digest": "sha256:5946e122b73cd8770befd9cb96310045dad36e6eb79eecebc36ab2b093493393"
       }

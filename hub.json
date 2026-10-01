@@ -5477,8 +5477,8 @@
       "version": "0.2",
       "description": "Robo Use HumanoidBench 0.2: whole-body tasks for a Unitree H1 with two Shadow hands.",
       "git_tag": "carlosferrazza/humanoid-bench-v0.2",
-      "commit": "bd58700ba6866db5d20babcfc9a642ebe5c5ca35",
-      "n_tasks": 7,
+      "commit": "5d1b4a88d993277f9b66ad401e60f010c387a0ed",
+      "n_tasks": 6,
       "suites": [
         "humanoidbench"
       ],
@@ -5494,13 +5494,6 @@
         "humanoidbench"
       ],
       "tasks": [
-        {
-          "id": "humanoidbench-maze",
-          "digest": "sha256:b6f6b8fd7171099e36af7fc02e3af2b6ea4b6de842f0df2485d5016ec048826e",
-          "backend": "humanoidbench",
-          "runtime": "humanoidbench",
-          "suite": "humanoidbench"
-        },
         {
           "id": "humanoidbench-pole",
           "digest": "sha256:6acf3d49fd66b23f487249750d875bf271479bc82da02a4810dac48494562d8b",
