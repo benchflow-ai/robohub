@@ -52,6 +52,8 @@ A dataset is named `<org>/<name>`. A dataset adapted from another benchmark sits
 | `benchflow/robouse-playground@0.3` | 5 | gpu (GPU) | |
 | `isaac-sim/isaaclab-factory@0.3` | 5 | gpu (GPU) | Isaac Lab Factory |
 | `robodojo-benchmark/robodojo@0.3` | 9 | robodojo (GPU) | RoboDojo |
+| `rle-bench/rle-bench@0.1` | 6 | rlebench | RLE-Bench, family 03 (tabletop reasoning); tower, cantilever and balance pass at RLE-Bench quality 0.5 or more, which is Robo Use's rule (RLE-Bench has no pass mark and reports the quality as the score) |
+| `capgym/cap-x@0.1` | 43 | capx, capx-libero | CaP-X: RoboSuite and LIBERO-PRO tasks as code as policy with CaP-X's privileged API (object poses from the simulator, inverse kinematics; no perception models), over many turns (not one of CaP-Bench's tiers) |
 
 [`hub.yaml`](hub.yaml) lists each dataset's upstream repository and licence and the folder its tasks are in (`dir`). A task that appears in two datasets (for example in `robouse-core` and its suite's dataset) has byte-identical packages, so the same digest.
 
@@ -121,6 +123,9 @@ The simulator images are built from this repository, not pulled from a registry.
 | `humanoidbench` | pinned pip packages, HumanoidBench at commit `cb11890`, Unitree's H1 walking policy (SHA-256 pinned) |
 | `maniskill` | ManiSkill 3.0.1 and SAPIEN 3.0.3 (SHA-256 pinned wheel) |
 | `robocasa` | RoboCasa at `456174f`, robosuite at `5ce6643`, 87 asset archives from two Hugging Face datasets at pinned revisions, each SHA-256 checked |
+| `rlebench` | robosuite at `5ce6643` and RoboCasa at `b4684e6` (RLE-Bench's pins), pinned pip packages |
+| `capx` | CaP-X's robosuite fork at `9729273`, PyRoKi at `95afccc`, jaxls at `6fe7cf9`, pinned pip packages (a complete lock), the `panda_description` robot model |
+| `capx-libero` | LIBERO-PRO with its assets at `5368540`, CaP-X's robosuite 1.4 fork at `a498b08`, PyRoKi at `95afccc`, CPU PyTorch 2.8.0, pinned pip packages (a complete lock), the `panda_description` robot model |
 | `behavior`, `gpu`, `robodojo` | a thin client; the simulators run on remote GPU workers |
 
 ## Third-party simulators and assets
@@ -169,7 +174,8 @@ Run on 2026-10-01 with the released `bench` 0.7.4 on a 16-core linux/arm64 cloud
 | `bench tasks check --sandbox docker`, every task package | 969/969 valid |
 | Reference solutions, every task of the 27 CPU datasets | every task scored 1 |
 | No-op reference solutions (`scripts/export.py --noop-out`), every task of every CPU dataset, and `benchflow/robouse-noop-control@0.4` | every task scored 0 |
+| `rle-bench/rle-bench@0.1` and `capgym/cap-x@0.1`, exported from Robo Use 0.3.0 (run 2026-10-01, same VM and `bench`): `bench tasks check`, reference solutions, no-op reference solutions | 49/49 valid; every task scored 1 (6/6, 43/43); every task scored 0 (0/6, 0/43) |
 | A scripted agent looking for the oracle token in a vision task and a composed task, with a token set on the host (0.2 packages; the token handling has not changed since) | no token in its environment, files or processes; none of about 5,400 candidate strings, including the token an earlier version committed, unlocked privileged state; a control with the reference solution's token did |
 | The composed inspect-tag judge, with the robot driven to the tag and an answer that lists every three-digit number | 1 on `benchflow/robouse-composed@0.2`, 0 on 0.3 |
 
-Every dataset comes from Robo Use 0.2.0 as published on PyPI: every file the runtimes copy is identical to the 0.2.0 wheel. `brave-eai/dexjoco@0.3` and `carlosferrazza/humanoid-bench@0.3` were run in full when they were published; this export left their packages unchanged. The GPU datasets were not run in the hub's checks; their packages passed `bench tasks check` only.
+Every dataset comes from a Robo Use release as published on PyPI, and every file the runtimes copy is identical to that release's wheel: `rle-bench/rle-bench@0.1` and `capgym/cap-x@0.1` come from 0.3.0, every other dataset from 0.2.0. `brave-eai/dexjoco@0.3` and `carlosferrazza/humanoid-bench@0.3` were run in full when they were published; the 0.2.0 export left their packages unchanged. The GPU datasets were not run in the hub's checks; their packages passed `bench tasks check` only.

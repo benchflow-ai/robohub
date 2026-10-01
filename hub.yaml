@@ -2,9 +2,12 @@
 # scripts/export.py reads this file and a Robo Use checkout and writes runtimes/ and datasets/;
 # scripts/build_registry.py pins every dataset version to a commit in registry.json.
 
+# The Robo Use release the next export comes from (scripts/export.py refuses a checkout of another version).
+# export.json records the release each dataset was exported from: rle-bench/rle-bench and capgym/cap-x from 0.3.0,
+# every other dataset from 0.2.0.
 robouse:
-  repo: https://pypi.org/project/robouse/0.2.0/
-  package_version: 0.2.0
+  repo: https://pypi.org/project/robouse/0.3.0/
+  package_version: 0.3.0
 
 # Simulator runtimes (runtimes/<name>, built from templates/runtimes/<name>). Every task's compose file builds its
 # simulator image from one of them.
@@ -80,6 +83,20 @@ runtimes:
     gpu: required
     # remote GPU workers (robouse/backends/gpu/worker/server.py, one per simulator); the endpoints file is named by $ROBOUSE_GPU_REMOTE
     remote_worker: ROBOUSE_GPU_REMOTE
+  rlebench:
+    backends: [rlebench]
+    simulators: RLE-Bench scenes (34a73aa) on robosuite 5ce6643 and RoboCasa v1.0.1, MuJoCo 3.3.1
+    sim_memory: 4G
+  capx:
+    backends: [capx]
+    simulators: CaP-X (53e9966) on its robosuite 1.5.1 fork (97292732), MuJoCo 3.5.0, PyRoKi IK on the CPU
+    sim_memory: 4G
+    # CaP-X's reference code for the nut assembly and the two-arm lift imports scipy
+    oracle_pip: {capx: [scipy==1.18.1]}
+  capx-libero:
+    backends: [capx_libero]
+    simulators: CaP-X (53e9966) on LIBERO-PRO (5368540) and its robosuite 1.4 fork (a498b08), MuJoCo 3.5.0, PyRoKi IK on the CPU
+    sim_memory: 4G
   robodojo:
     backends: [robodojo]
     simulators: RoboDojo (NVIDIA Isaac Sim 5.1, Isaac Lab 2.3), on a remote NVIDIA RTX GPU worker
@@ -126,6 +143,9 @@ suites:
   gpu-playground: {embodiment: "Unitree Go1 with a learned gait", simulator: "MuJoCo Playground 0.2.0 (MuJoCo Warp)", image: gpu-playground}
   gpu-isaaclab: {embodiment: "Franka Panda", simulator: "Isaac Lab 2.3 Factory (Isaac Sim 5.1)", image: gpu-isaaclab}
   robodojo: {embodiment: "ARX X5 bimanual", simulator: "RoboDojo (Isaac Sim 5.1)", image: robodojo}
+  rle-bench: {embodiment: "Franka Panda on a mobile base (PandaOmron); Franka Panda", simulator: "RLE-Bench scenes (robosuite, MuJoCo 3.3.1)", image: rle-bench}
+  capx: {embodiment: "Franka Panda; two Franka Pandas", simulator: "CaP-X robosuite 1.5.1 fork (MuJoCo 3.5.0)", image: capx}
+  capx-libero: {embodiment: "Franka Panda", simulator: "LIBERO-PRO (robosuite 1.4 fork, MuJoCo 3.5.0)", image: capx-libero}
 
 # Datasets are named <org>/<name>. The org is whoever designed the benchmark's tasks: a dataset adapted from someone
 # else's benchmark goes under that benchmark's GitHub org (lowercased) and records it under `upstream`; tasks BenchFlow
@@ -364,6 +384,18 @@ datasets:
       note: "Needs RoboDojo simulator workers (<code>robouse/backends/robodojo/worker.py</code> in the Robo Use package, run from a RoboDojo checkout with its Hugging Face assets, under RoboDojo's own terms), one per task, on NVIDIA Isaac Sim 5.1 with an RTX GPU with RT cores and a driver from the 580 branch (it crashed at start-up on 595). The command above is the Robo Use run that checked every task with the reference solutions and a no-op control; it uses the task folders of a Robo Use source checkout. Requirements: <a href=\"https://github.com/benchflow-ai/robohub#gpu-datasets\">GPU datasets in the robohub README</a>."
       bench_note: "Not run in the hub's checks (its packages passed bench tasks check only). With bench, the host names the worker endpoints file in <code>$ROBOUSE_ROBODOJO_REMOTE</code>."
     description: 'Robo Use RoboDojo 0.3: RoboDojo tasks on an ARX X5 bimanual platform in Isaac Sim.'
+  - name: rle-bench/rle-bench
+    dir: rle-bench
+    upstream: {benchmark: "RLE-Bench", org_name: "RLE-Bench (Harvard, Georgia Tech)", repo: "https://github.com/RLE-Bench/RLE-Bench", licence: "MIT (code and tasks; scene code redistributed here)"}
+    version: "0.1"
+    suites: [rle-bench]
+    description: 'Robo Use RLE-Bench 0.1: RLE-Bench''s tabletop reasoning tasks (tower, cantilever, balance, hidden centre of mass) for an agent in the loop. Tower, cantilever and balance pass at an RLE-Bench quality of 0.5 or more; that pass mark is Robo Use''s rule, since RLE-Bench has none and reports the quality itself as the score.'
+  - name: capgym/cap-x
+    dir: capx
+    upstream: {benchmark: "CaP-X (CaP-Bench)", org_name: "CaP-X (NVIDIA, UC Berkeley, Stanford, CMU)", repo: "https://github.com/capgym/cap-x", licence: "MIT (environments, APIs, prompts and reference code redistributed here)"}
+    version: "0.1"
+    suites: [capx, capx-libero]
+    description: 'Robo Use CaP-X 0.1: CaP-Bench''s RoboSuite and LIBERO-PRO tasks as code as policy with CaP-X''s privileged API (object poses from the simulator and inverse kinematics; no perception models). The agent runs code over many turns, which is not one of CaP-Bench''s tiers.'
   - name: benchflow/robouse-noop-control
     dir: robouse-noop-control
     former_names: [robouse-noop-control]

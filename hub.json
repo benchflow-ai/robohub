@@ -7486,6 +7486,436 @@
       ]
     },
     {
+      "name": "rle-bench/rle-bench",
+      "org": "rle-bench",
+      "short_name": "rle-bench",
+      "dir": "rle-bench",
+      "aliases": [],
+      "upstream": {
+        "benchmark": "RLE-Bench",
+        "org_name": "RLE-Bench (Harvard, Georgia Tech)",
+        "repo": "https://github.com/RLE-Bench/RLE-Bench",
+        "licence": "MIT (code and tasks; scene code redistributed here)"
+      },
+      "run": null,
+      "robouse": {
+        "commit": "8e01ea25d747d84e4f6504c2ab1533b46139888c",
+        "package_version": "0.3.0",
+        "repo": "https://pypi.org/project/robouse/0.3.0/",
+        "tag": "v0.3.0"
+      },
+      "version": "0.1",
+      "description": "Robo Use RLE-Bench 0.1: RLE-Bench's tabletop reasoning tasks (tower, cantilever, balance, hidden centre of mass) for an agent in the loop. Tower, cantilever and balance pass at an RLE-Bench quality of 0.5 or more; that pass mark is Robo Use's rule, since RLE-Bench has none and reports the quality itself as the score.",
+      "git_tag": "rle-bench/rle-bench-v0.1",
+      "commit": "a35423f7930c2ccaee29c8300963af1ebebb9455",
+      "n_tasks": 6,
+      "suites": [
+        "rle-bench"
+      ],
+      "embodiments": [
+        "Franka Panda on a mobile base (PandaOmron)",
+        "Franka Panda"
+      ],
+      "simulators": [
+        "RLE-Bench scenes (robosuite, MuJoCo 3.3.1)"
+      ],
+      "image": "rle-bench",
+      "noop": false,
+      "runtimes": [
+        "rlebench"
+      ],
+      "tasks": [
+        {
+          "id": "rle-balance-coins",
+          "digest": "sha256:cfa8ec1d7426d4da049717935f4c0019618079e1614a6f07d205c4ea7de2a9c1",
+          "backend": "rlebench",
+          "runtime": "rlebench",
+          "suite": "rle-bench"
+        },
+        {
+          "id": "rle-cantilever-overhang",
+          "digest": "sha256:42d694d69f2a185bf0830755f2bfc53b6375dd86a6fc048becf2c1ff0ae22c61",
+          "backend": "rlebench",
+          "runtime": "rlebench",
+          "suite": "rle-bench"
+        },
+        {
+          "id": "rle-hidden-com-box-1",
+          "digest": "sha256:e02c94644a5880df5d98fe201b5110fb0cfe5202d43727a1dfd524523cbf3c7f",
+          "backend": "rlebench",
+          "runtime": "rlebench",
+          "suite": "rle-bench"
+        },
+        {
+          "id": "rle-hidden-com-box-2",
+          "digest": "sha256:026558048121d1ecb5ab5ef8017e5ea3ebc7197166601c1923e2fe7e99dfa2d2",
+          "backend": "rlebench",
+          "runtime": "rlebench",
+          "suite": "rle-bench"
+        },
+        {
+          "id": "rle-hidden-com-box-3",
+          "digest": "sha256:72467cd599ec3ac34ea6519338aef3e2ba411c59184fa70ca87873a3324a1545",
+          "backend": "rlebench",
+          "runtime": "rlebench",
+          "suite": "rle-bench"
+        },
+        {
+          "id": "rle-tower-max-height",
+          "digest": "sha256:361e5157c7964c16b2d6de32d9919174df550cde0499f9b789076c03918d5ca2",
+          "backend": "rlebench",
+          "runtime": "rlebench",
+          "suite": "rle-bench"
+        }
+      ]
+    },
+    {
+      "name": "capgym/cap-x",
+      "org": "capgym",
+      "short_name": "cap-x",
+      "dir": "capx",
+      "aliases": [],
+      "upstream": {
+        "benchmark": "CaP-X (CaP-Bench)",
+        "org_name": "CaP-X (NVIDIA, UC Berkeley, Stanford, CMU)",
+        "repo": "https://github.com/capgym/cap-x",
+        "licence": "MIT (environments, APIs, prompts and reference code redistributed here)"
+      },
+      "run": null,
+      "robouse": {
+        "commit": "8e01ea25d747d84e4f6504c2ab1533b46139888c",
+        "package_version": "0.3.0",
+        "repo": "https://pypi.org/project/robouse/0.3.0/",
+        "tag": "v0.3.0"
+      },
+      "version": "0.1",
+      "description": "Robo Use CaP-X 0.1: CaP-Bench's RoboSuite and LIBERO-PRO tasks as code as policy with CaP-X's privileged API (object poses from the simulator and inverse kinematics; no perception models). The agent runs code over many turns, which is not one of CaP-Bench's tiers.",
+      "git_tag": "capgym/cap-x-v0.1",
+      "commit": "a35423f7930c2ccaee29c8300963af1ebebb9455",
+      "n_tasks": 43,
+      "suites": [
+        "capx",
+        "capx-libero"
+      ],
+      "embodiments": [
+        "Franka Panda",
+        "two Franka Pandas"
+      ],
+      "simulators": [
+        "CaP-X robosuite 1.5.1 fork (MuJoCo 3.5.0)",
+        "LIBERO-PRO (robosuite 1.4 fork, MuJoCo 3.5.0)"
+      ],
+      "image": "capx",
+      "noop": false,
+      "runtimes": [
+        "capx",
+        "capx-libero"
+      ],
+      "tasks": [
+        {
+          "id": "capx-cube-lifting-s1",
+          "digest": "sha256:d55844ec833c0bc0c10c895db12fc91c565ff8fbec3e9e257c7891369b856c28",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-cube-lifting-s2",
+          "digest": "sha256:7e9d5140e15c37f4c385aa2d92231b4ce7b808aadc613839ee34ccd09e654062",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-cube-lifting-s3",
+          "digest": "sha256:a00b0376504f27e807aec42e91170df0bf1b99f207b1daa6ad4305e6308650fe",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-cube-lifting-s4",
+          "digest": "sha256:2646891990a4a75ccc7f124d74fa771c772d283afd17e172fe60ba70122a5e9e",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-cube-lifting-s5",
+          "digest": "sha256:5b5caec03b0776e228873528306da8f250f567c39d15f778e81a888c6ea376cc",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-cube-restack-s1",
+          "digest": "sha256:3c683dae4eb7a3d25efab27115e7597378be4a288db849c67d07fe8fdcac088f",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-cube-restack-s2",
+          "digest": "sha256:e0a1878797c5fadf204113a810a8dc5f46f5bd0bce9a3510885a31af7ddfdf6c",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-cube-restack-s3",
+          "digest": "sha256:79d0089ba133e1aa7258452b880b7a1d7e7936399a11ea8633abbbf991cc06c2",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-cube-restack-s4",
+          "digest": "sha256:4fbd1378e443fe50514e657699bc4d867d17cd53e335b76b4cf6c9258f6bdd73",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-cube-restack-s5",
+          "digest": "sha256:43f88d87a4db5003832821c774f0ba71b85183a97629bfff31d2b0783c52d7a5",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-cube-stack-s1",
+          "digest": "sha256:5b38cdad7430c5f40ee5855d3974b6777916f5c622c3815adf69fbfe31b512a3",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-cube-stack-s2",
+          "digest": "sha256:f235c3d3b0facb12c972f85a9e480565734553e6848caee2bce2ef2af72b5256",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-cube-stack-s3",
+          "digest": "sha256:019cb4e261a12292d81447091629ed761ae1c931cc4ad6b560dc1219cb6599be",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-cube-stack-s4",
+          "digest": "sha256:5abc5a2aff5d4b3fb49896d4d9b3a08c0202bb220cf26545b1428b9c0cbd8efa",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-cube-stack-s5",
+          "digest": "sha256:7daa1375db6262bd693b94d372b8efd8a03d59ca1485abe8cb2ac6029402d671",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-libero-object-swap-0",
+          "digest": "sha256:6a2bcfc48c23280032a97e7938bace2cffaac787d62a6b97d70ac4a7cabda1f3",
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        {
+          "id": "capx-libero-object-swap-1",
+          "digest": "sha256:1d671dc64749df45d4c28d54c6d10a34bdde8dff19023ebcaaa8936b6fa9fd78",
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        {
+          "id": "capx-libero-object-swap-2",
+          "digest": "sha256:a8c84c9c191fd93bf883bc7c1146e883436cab9a5b5f9fbe1a467227f508c315",
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        {
+          "id": "capx-libero-object-swap-3",
+          "digest": "sha256:2434900e539a8ccdb7df1e51615d92265d1f351cad3fa7f3c3119a3afd72dd6e",
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        {
+          "id": "capx-libero-object-swap-5",
+          "digest": "sha256:0372c1e4b4c79f0e06b021cf97f96bba9d98474ad1b52376b8f0e1f386b9c0ed",
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        {
+          "id": "capx-libero-object-swap-6",
+          "digest": "sha256:d043058a7577998e876badbb135fc659d90059b3b70c2c8309ae67d33561f0fe",
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        {
+          "id": "capx-libero-object-swap-7",
+          "digest": "sha256:7ddb7126e6107f88bd724dbbcb846cf6f34d052e3a2082c2fefa400cd502ffd0",
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        {
+          "id": "capx-libero-object-swap-9",
+          "digest": "sha256:51e266be56aea07b2bb2a5e18644bc721f3fb8d3586083ee797956d3d1705a5b",
+          "backend": "capx_libero",
+          "runtime": "capx-libero",
+          "suite": "capx-libero"
+        },
+        {
+          "id": "capx-nut-assembly-s1",
+          "digest": "sha256:6939ceac46df6405b4fdc3e75e0a4a7322f014ceb16252d8fe88642a7d8cd103",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-nut-assembly-s2",
+          "digest": "sha256:a96a09895ef81381762ffd6b799e8436cf907ae8dee03432064eee38d70cba85",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-nut-assembly-s3",
+          "digest": "sha256:1174bcab84afe9cefbf8803e31913d476c56400b09dddc03e02fd9cd888afe82",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-nut-assembly-s4",
+          "digest": "sha256:c8b2b8ff934687bee2d0f6938712131d43e3cfeaa744ecbf3d23c99f0e91c894",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-nut-assembly-s5",
+          "digest": "sha256:4d54607817569382f45abfad593a006aded73d7a83bc2913e2cd2636cc28f506",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-spill-wipe-s1",
+          "digest": "sha256:4320f22add2578c1704f16324b0beb5893e10752ac064fa919b4a5cb00547323",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-spill-wipe-s2",
+          "digest": "sha256:31123ec5c32bd888fd9257b452f666ad7dedfa8b1be4746e0dadd661d0aebba3",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-spill-wipe-s3",
+          "digest": "sha256:634fc9f192913c16280c3d1428e29a2d0603d81fae173ed90f78e48632891bca",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-spill-wipe-s4",
+          "digest": "sha256:ed139175b6777c967f6daa28e45a84a84be051694d1dff472fad0f75e3da0d42",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-spill-wipe-s5",
+          "digest": "sha256:7c163982006ac985204c64858393b8054b40c978508256370c0de6baa8ef8def",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-two-arm-handover-s1",
+          "digest": "sha256:ed1d779887436f588ca79fae85db3722888200f3031ee83b46b48048d980d32b",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-two-arm-handover-s2",
+          "digest": "sha256:9a66293d97fc870de01e2cebf8013d0c9ad8dbfddfa307266827cb14d769f3db",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-two-arm-handover-s3",
+          "digest": "sha256:303be3e345442ce781701182142ee747291b03f4ddaab0edf829dfc0bd763634",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-two-arm-handover-s4",
+          "digest": "sha256:563beaef3e40d46870742bf3c217d39543ee96e372e77a8b2f9c149d6a0b590c",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-two-arm-handover-s5",
+          "digest": "sha256:f7becce5c6f57a1e48d87bffa66add9a3b56e5a4b2b036e33cf0e9fd4930447a",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-two-arm-lift-s1",
+          "digest": "sha256:32b27d0f32bfc962c2b35483398ed397cb32e2aa727dc3d6e1b7431cacad213c",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-two-arm-lift-s3",
+          "digest": "sha256:ead7cbe769acd73424830aeab8cc2fab1f597e4e12ba196496c837ae45d04f8e",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-two-arm-lift-s5",
+          "digest": "sha256:114e6bcc4345ee9906499242bc8a8ffcf82beaacf7c41ea400e3ead46a233191",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-two-arm-lift-s7",
+          "digest": "sha256:6094ee7357cd8f4e9887a2c2287601fedc2dd5be7b0d6d8f28845b2a60565ec5",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        },
+        {
+          "id": "capx-two-arm-lift-s8",
+          "digest": "sha256:6bff3b3be71dee3ba9db575e72d7cbc3f8346a134b3d3a59f350bdb39ca566f0",
+          "backend": "capx",
+          "runtime": "capx",
+          "suite": "capx"
+        }
+      ]
+    },
+    {
       "name": "benchflow/robouse-noop-control",
       "org": "benchflow",
       "short_name": "robouse-noop-control",
@@ -8321,6 +8751,18 @@
     "gpu": {
       "simulators": "ManiSkill3 3.0.1, Genesis 1.4.2, MuJoCo Playground 0.2.0, Isaac Lab 2.3 on Isaac Sim 5.1, on a remote NVIDIA RTX GPU worker",
       "digest": "sha256:bd21e127de70c186268a3953e855ab2b671b584451415bb53512798e3d60ad14"
+    },
+    "rlebench": {
+      "simulators": "RLE-Bench scenes (34a73aa) on robosuite 5ce6643 and RoboCasa v1.0.1, MuJoCo 3.3.1",
+      "digest": "sha256:7fe78bb4ff576e3b6545f927bd90dff9810ef684effbe2c39daf9f5d9c273ae4"
+    },
+    "capx": {
+      "simulators": "CaP-X (53e9966) on its robosuite 1.5.1 fork (97292732), MuJoCo 3.5.0, PyRoKi IK on the CPU",
+      "digest": "sha256:c485668f75eeb5b28dfefd50b5e9d98539b0f6aaf04bf1563195949a0af5c8ab"
+    },
+    "capx-libero": {
+      "simulators": "CaP-X (53e9966) on LIBERO-PRO (5368540) and its robosuite 1.4 fork (a498b08), MuJoCo 3.5.0, PyRoKi IK on the CPU",
+      "digest": "sha256:15fad7671d649330899dfe99de2b157a5741bf6195fd5d4c379681476b7d8e11"
     },
     "robodojo": {
       "simulators": "RoboDojo (NVIDIA Isaac Sim 5.1, Isaac Lab 2.3), on a remote NVIDIA RTX GPU worker",
