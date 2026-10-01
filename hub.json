@@ -8660,6 +8660,18 @@
       "version": "0.2",
       "superseded_by": "benchflow/robouse-composed@0.3",
       "reason": "the inspect-tag judge accepted an answer listing every three-digit number, and the privacy check missed a PIN spelled out or split by separators; both fixed in 0.3"
+    },
+    {
+      "name": "benchflow/robouse-core",
+      "version": "0.2",
+      "superseded_by": "benchflow/robouse-core@0.3",
+      "reason": "superseded: 0.3 runs its five DexJoCo tasks on the Robo Use 0.2.0 runtime; its other 95 tasks are byte-identical"
+    },
+    {
+      "name": "benchflow/robouse-noop-control",
+      "version": "0.2",
+      "superseded_by": "benchflow/robouse-noop-control@0.3",
+      "reason": "superseded with benchflow/robouse-core@0.2: 0.3 runs the same five DexJoCo tasks on the Robo Use 0.2.0 runtime; the other 95 are byte-identical"
     }
   ]
 }
