@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/embodied"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:9375562aa57e6a3c3c7486a7e81b0e9d3e1b2a077384de5bda11d4d9e5b0eee4"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:9bf4f77a6208bba931749573b167c394399f8c13bdd472355192771748cb7cc7"
     network_mode: none
     init: true
     volumes:

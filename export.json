@@ -5,7 +5,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "behavior-bringing-in-wood": {
@@ -230,7 +230,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "il-factory-gear-mesh": {
@@ -265,7 +265,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "ms-lift-peg-upright": {
@@ -335,7 +335,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "robodojo-cover-blocks": {
@@ -390,7 +390,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "adroit-door-e11": {
@@ -460,7 +460,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "bimanual-relay--aloha-2--kitchen-counter--s5": {
@@ -710,7 +710,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "arc-count-marker": {
@@ -1220,7 +1220,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "crazyflie-gates": {
@@ -1265,7 +1265,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "cubepick-reach-layout-0": {
@@ -1300,7 +1300,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "leap-cube-in-hand": {
@@ -1345,7 +1345,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "dexjoco-click-mouse": {
@@ -1420,7 +1420,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "dmcontrol-acrobot-swingup": {
@@ -1515,7 +1515,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "driving-broken-down-car": {
@@ -1560,7 +1560,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "drone-buzz-crowd": {
@@ -1620,7 +1620,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "gs-pour-water": {
@@ -1645,7 +1645,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "gymrobotics-fetch-pick-place-s0": {
@@ -1715,7 +1715,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "roboharm-biohazard-benign-guardrail": {
@@ -2125,7 +2125,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "apollo-box-into-bin": {
@@ -2180,7 +2180,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "humanoidbench-pole": {
@@ -2220,7 +2220,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "kitchen-bottom-burner": {
@@ -2280,7 +2280,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "libero-10-0": {
@@ -2490,7 +2490,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "libero-90-0": {
@@ -2950,7 +2950,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "maniskill-lift-peg-upright": {
@@ -3020,7 +3020,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "menagerie-aloha-clutter-retrieval": {
@@ -3105,7 +3105,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "metaworld-assembly": {
@@ -3365,7 +3365,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "google-fetch-can": {
@@ -3425,7 +3425,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "myosuite-elbow-pose": {
@@ -3510,7 +3510,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "nav-h00-armchair": {
@@ -3720,7 +3720,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "arc-count-marker": {
@@ -4230,7 +4230,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "pg-go1-corridor-push": {
@@ -4265,7 +4265,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "anymal-inspection-round": {
@@ -4330,7 +4330,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "robocasa-close-drawer-kitchen10": {
@@ -4455,7 +4455,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "robosuite-door-iiwa": {
@@ -4570,7 +4570,7 @@
       "robouse": {
         "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
         "package_version": "0.2.0",
-        "repo": "https://github.com/benchflow-ai/robouse"
+        "repo": "https://pypi.org/project/robouse/"
       },
       "tasks": {
         "arc-colour-to-pad": {
@@ -5174,25 +5174,25 @@
   "robouse": {
     "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
     "package_version": "0.2.0",
-    "repo": "https://github.com/benchflow-ai/robouse"
+    "repo": "https://pypi.org/project/robouse/"
   },
   "runtimes": {
-    "base": "sha256:57282710e7812db5c5215a9691b13355ed556523b58b1318300ed1ec400abd10",
-    "behavior": "sha256:b76bc307ddf76da63c8496ce9a3df6e215b5110d4ba4af4fea4210c2d826f311",
+    "base": "sha256:16ae6e6a3c3b70fdf7d62473846ee401dbe85096d92b9f96b3efde95e78ebb4d",
+    "behavior": "sha256:ed6260be7a33eb35e97b3b891b0d922987b7665ef3c513d6ca5cda4d0ff03389",
     "composed": "sha256:4f5aa582409bcc0f86c3214485b86d0dac79f00a26ab9727219365c5fce2f9de",
-    "dexjoco": "sha256:67197a8563333126b0c527b0a2537e34e71c5f8b87a46370a8930e0d552edd3b",
-    "dmcontrol": "sha256:2e29f7549374df8855b25df265992c94219396ad0c5d5b3cb98e6036b6763cf1",
-    "driving": "sha256:6363e8b21e83061a89bf244a7164a90994f2a9a97413bf595c43dc87dfe7911c",
-    "embodied": "sha256:9375562aa57e6a3c3c7486a7e81b0e9d3e1b2a077384de5bda11d4d9e5b0eee4",
-    "gpu": "sha256:5565599a858f10b0829c6b83c6cfb42717cdcdc77970cb63ac670e51924058ff",
-    "humanoidbench": "sha256:5346f02530889bddfc582e546ecc3802ecd468de85b6006a77d9bb97cf0ccdbe",
-    "libero": "sha256:833afcf5143264a1c091b6f11418aa4b194af61bab55fcc9a096baff4de254fa",
-    "light": "sha256:fcae0c722856333de0587a4d394c773254a691781e2590954b50c0e89447601e",
-    "maniskill": "sha256:014fe37c90adba71b2c4d98523814a4cc56d13753f70d08aae5d05f98ef22799",
-    "menagerie": "sha256:7770156ecb1eccc0bda74b06a158cb69d911074c3c3affc0ebf970a235bb797d",
-    "myosuite": "sha256:76cb066ca33a224660fc3aeec313d8479556bc81b4c3c9520502d1553c2df813",
-    "robocasa": "sha256:53c1bd3a2b233a2bba94b9e16fd8cf48fd32d966a81212370689425813ae16b5",
-    "robodojo": "sha256:97a85bfcfc3c197823055dada1f29120cd746de1cd16a80c8fbd107fc91f973b",
-    "robosuite": "sha256:cd7d52484cf5f14b78de58144dd9a590d0f6c247d14ce6d75abb5a30cb81ddcc"
+    "dexjoco": "sha256:e73eebfcf96bf7213c82e6c4da28a13c12661c31a081f9111f34ee15fb4f0fb6",
+    "dmcontrol": "sha256:670434aba34601cb902c27fdaebf97598b387efdd636fcaf407468d6dd502d35",
+    "driving": "sha256:4abd093fc2f85569c1c2259182303f51354ba8d3134162a2a702db46856ccb72",
+    "embodied": "sha256:9bf4f77a6208bba931749573b167c394399f8c13bdd472355192771748cb7cc7",
+    "gpu": "sha256:b0c80bb5ccd168ae672d858f460a8e97f0c2448f2e1660c15150b62bed2fc862",
+    "humanoidbench": "sha256:56ae52ac4b339b81baa44c9a34797a738a4abdf4eb20240ac925427a8f3905fa",
+    "libero": "sha256:8965ba2d9b7336575e0cac338d12d3b386462344b1b6b3da65d1c354fea355f8",
+    "light": "sha256:c40339e7545073bd64f2accb6ac437d9a54f970d227a2b31ff07fb5b50c94326",
+    "maniskill": "sha256:696517b8ab43696fb3ac204397728bf99cc608410af186b41a0f945aa66e1ccc",
+    "menagerie": "sha256:4f80f09e16b0a74ff7a59f8e4c11ce15035357e040dcd6fe1d7b6c8bb7949279",
+    "myosuite": "sha256:74fa8b26b423bb31a999286252e2bba63f17e195e43529dc3e69c4698d029e84",
+    "robocasa": "sha256:e4164729f46ca3cbad76c770bde3884f49b63e23d67c483e01d103de01d219da",
+    "robodojo": "sha256:2425e623d907fb525547dea62ec58d7be707e4b07d7acc71d44aab07a54c884e",
+    "robosuite": "sha256:e65794b6cdd2900a289ed153db69da8028df999489e928aaf7dcc390463089f1"
   }
 }

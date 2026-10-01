@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/menagerie"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:7770156ecb1eccc0bda74b06a158cb69d911074c3c3affc0ebf970a235bb797d"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:4f80f09e16b0a74ff7a59f8e4c11ce15035357e040dcd6fe1d7b6c8bb7949279"
     network_mode: none
     init: true
     volumes:

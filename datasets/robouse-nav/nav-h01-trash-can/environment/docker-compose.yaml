@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/light"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:fcae0c722856333de0587a4d394c773254a691781e2590954b50c0e89447601e"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:c40339e7545073bd64f2accb6ac437d9a54f970d227a2b31ff07fb5b50c94326"
     network_mode: none
     init: true
     volumes:
