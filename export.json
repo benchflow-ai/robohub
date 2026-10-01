@@ -2183,11 +2183,6 @@
         "repo": "https://github.com/benchflow-ai/robouse"
       },
       "tasks": {
-        "humanoidbench-maze": {
-          "backend": "humanoidbench",
-          "runtime": "humanoidbench",
-          "suite": "humanoidbench"
-        },
         "humanoidbench-pole": {
           "backend": "humanoidbench",
           "runtime": "humanoidbench",

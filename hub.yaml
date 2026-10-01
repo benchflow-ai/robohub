@@ -268,6 +268,8 @@ datasets:
     upstream: {benchmark: HumanoidBench, org_name: 'Carmelo Sferrazza (UC Berkeley)', repo: 'https://github.com/carlosferrazza/humanoid-bench', licence: MIT}
     version: "0.2"
     suites: [humanoidbench]
+    # its reference solution calls one 999-step walk_to skill, which takes longer than the robo client's 120 s socket timeout in the Linux hub runtime (twice, 559 steps)
+    exclude_tasks: [humanoidbench-maze]
     description: 'Robo Use HumanoidBench 0.2: whole-body tasks for a Unitree H1 with two Shadow hands.'
   - name: mani-skill/maniskill
     dir: robouse-maniskill
