@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/behavior"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:b76bc307ddf76da63c8496ce9a3df6e215b5110d4ba4af4fea4210c2d826f311"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:ed6260be7a33eb35e97b3b891b0d922987b7665ef3c513d6ca5cda4d0ff03389"
     # This runtime's simulator runs on a remote GPU worker (remote_worker in hub.yaml): the episode server reaches it
     # over HTTPS, so this service keeps network access, and it reads the worker endpoints (URL, shared secret) from
     # the host file named by $ROBOUSE_BEHAVIOR_REMOTE, mounted read-only here only; the agent container never sees it.

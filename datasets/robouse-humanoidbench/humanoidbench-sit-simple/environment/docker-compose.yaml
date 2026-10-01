@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/humanoidbench"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:5346f02530889bddfc582e546ecc3802ecd468de85b6006a77d9bb97cf0ccdbe"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:56ae52ac4b339b81baa44c9a34797a738a4abdf4eb20240ac925427a8f3905fa"
     network_mode: none
     init: true
     volumes:

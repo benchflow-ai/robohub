@@ -3,7 +3,7 @@
 # scripts/build_registry.py pins every dataset version to a commit in registry.json.
 
 robouse:
-  repo: https://github.com/benchflow-ai/robouse
+  repo: https://pypi.org/project/robouse/
   package_version: 0.2.0
 
 # Simulator runtimes (runtimes/<name>, built from templates/runtimes/<name>). Every task's compose file builds its
@@ -203,6 +203,8 @@ datasets:
     upstream: {benchmark: "DexJoCo", org_name: "brave-eai", repo: "https://github.com/brave-eai/dexjoco", licence: "MIT (code and datasets; demonstration actions redistributed here)"}
     version: "0.2"
     suites: [dexjoco]
+    # its reference solution (an open-loop replay of the recorded demonstration) passes on macOS but not in the Linux hub runtime (twice: 707 steps, no success)
+    exclude_tasks: [dexjoco-assembly]
     description: 'Robo Use DexJoCo 0.2: tool use with Allegro hands, from DexJoCo.'
   - name: benchflow/robouse-drone
     dir: robouse-drone
@@ -281,6 +283,8 @@ datasets:
     upstream: {benchmark: HumanoidBench, org_name: 'Carmelo Sferrazza (UC Berkeley)', repo: 'https://github.com/carlosferrazza/humanoid-bench', licence: MIT}
     version: "0.2"
     suites: [humanoidbench]
+    # its reference solution calls one 999-step walk_to skill, which takes longer than the robo client's 120 s socket timeout in the Linux hub runtime (twice, 559 steps)
+    exclude_tasks: [humanoidbench-maze]
     description: 'Robo Use HumanoidBench 0.2: whole-body tasks for a Unitree H1 with two Shadow hands.'
   - name: mani-skill/maniskill
     dir: robouse-maniskill
@@ -301,12 +305,12 @@ datasets:
     upstream: {benchmark: "BEHAVIOR-1K", org_name: "Stanford Vision and Learning Lab", repo: "https://github.com/StanfordVL/BEHAVIOR-1K", licence: "MIT (code and BDDL); BEHAVIOR Data Bundle under its own non-commercial licence (not redistributed)"}
     version: "0.2"
     suites: [behavior]
-    # bench cannot give a sandbox a GPU, so this dataset runs from a Robo Use checkout
+    # bench cannot give a sandbox a GPU, so this dataset runs with Robo Use
     # against BEHAVIOR simulator workers on an NVIDIA RTX GPU machine
     run:
-      label: "Robo Use checkout + GPU worker"
+      label: "Robo Use + GPU worker"
       command: "robouse run-many --tasks tasks/behavior --harness oracle --out runs/behavior-oracle"
-      note: "The BEHAVIOR simulator (OmniGibson 3.9.3 on Isaac Sim 5.1) needs an NVIDIA RTX GPU with RT cores and host driver 580 (Isaac Sim 5.1 crashed at start-up on driver 595). Start one simulator worker per activity on the GPU machine, write their endpoints to <code>runs/_behavior/remote.json</code> in a Robo Use checkout (branch <code>behavior-expand</code>), and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/behavior-expand/docs/suites/behavior.md\">docs/suites/behavior.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
+      note: "The BEHAVIOR simulator (OmniGibson 3.9.3 on Isaac Sim 5.1) needs an NVIDIA RTX GPU with RT cores and host driver 580 (Isaac Sim 5.1 crashed at start-up on driver 595). Start one simulator worker per activity on the GPU machine, write their endpoints to <code>runs/_behavior/remote.json</code> in the folder you run Robo Use from, and run from there; the setup is in <a href=\"https://robouse.ai/docs/suites/behavior/\">the behavior docs</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
       bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_BEHAVIOR_REMOTE</code> on the host."
     description: 'Robo Use BEHAVIOR-1K 0.2: household activities from the 2026 BEHAVIOR Challenge on a Galaxea R1Pro.'
   - name: benchflow/robouse-composed
@@ -332,9 +336,9 @@ datasets:
     version: "0.2"
     suites: [gpu-maniskill]
     run:
-      label: "Robo Use checkout + GPU worker"
+      label: "Robo Use + GPU worker"
       command: "robouse run-many --tasks tasks/gpu-maniskill --harness oracle --out runs/gpu-maniskill-oracle"
-      note: "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in a Robo Use checkout (branch <code>gpu-track</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/gpu-track/docs/suites/gpu-track.md\">docs/suites/gpu-track.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
+      note: "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in the folder you run Robo Use from, and run from there; the setup is in <a href=\"https://robouse.ai/docs/suites/gpu-track/\">the gpu-track docs</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
       bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
     description: 'Robo Use ManiSkill3 GPU 0.2: hard ManiSkill3 tasks with ray-traced cameras, on a Franka Panda.'
   - name: benchflow/robouse-genesis
@@ -342,9 +346,9 @@ datasets:
     version: "0.2"
     suites: [gpu-genesis]
     run:
-      label: "Robo Use checkout + GPU worker"
+      label: "Robo Use + GPU worker"
       command: "robouse run-many --tasks tasks/gpu-genesis --harness oracle --out runs/gpu-genesis-oracle"
-      note: "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in a Robo Use checkout (branch <code>gpu-track</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/gpu-track/docs/suites/gpu-track.md\">docs/suites/gpu-track.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
+      note: "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in the folder you run Robo Use from, and run from there; the setup is in <a href=\"https://robouse.ai/docs/suites/gpu-track/\">the gpu-track docs</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
       bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
     description: 'Robo Use Genesis 0.2: pouring liquid with a Franka Panda in Genesis.'
   - name: benchflow/robouse-playground
@@ -352,9 +356,9 @@ datasets:
     version: "0.2"
     suites: [gpu-playground]
     run:
-      label: "Robo Use checkout + GPU worker"
+      label: "Robo Use + GPU worker"
       command: "robouse run-many --tasks tasks/gpu-playground --harness oracle --out runs/gpu-playground-oracle"
-      note: "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in a Robo Use checkout (branch <code>gpu-track</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/gpu-track/docs/suites/gpu-track.md\">docs/suites/gpu-track.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
+      note: "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in the folder you run Robo Use from, and run from there; the setup is in <a href=\"https://robouse.ai/docs/suites/gpu-track/\">the gpu-track docs</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
       bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
     description: 'Robo Use MuJoCo Playground 0.2: a Unitree Go1 with a learned gait navigating obstacles.'
   - name: isaac-sim/isaaclab-factory
@@ -363,9 +367,9 @@ datasets:
     version: "0.2"
     suites: [gpu-isaaclab]
     run:
-      label: "Robo Use checkout + GPU worker"
+      label: "Robo Use + GPU worker"
       command: "robouse run-many --tasks tasks/gpu-isaaclab --harness oracle --out runs/gpu-isaaclab-oracle"
-      note: "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in a Robo Use checkout (branch <code>gpu-track</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/gpu-track/docs/suites/gpu-track.md\">docs/suites/gpu-track.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
+      note: "The simulators run in remote workers on an NVIDIA RTX GPU machine (<code>src/robouse/backends/gpu_worker/server.py</code>, one per simulator; Isaac Lab without its RTX renderer on driver 595). Start the worker, write its endpoints to <code>runs/_gpu/remote.json</code> in the folder you run Robo Use from, and run from there; the setup is in <a href=\"https://robouse.ai/docs/suites/gpu-track/\">the gpu-track docs</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
       bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code> on the host."
     description: 'Robo Use Isaac Lab Factory 0.2: contact-rich assembly from Isaac Lab''s Factory on a Franka Panda.'
   - name: robodojo-benchmark/robodojo
@@ -373,12 +377,12 @@ datasets:
     upstream: {benchmark: "RoboDojo", org_name: "RoboDojo Benchmark (MMLab@HKU and partners)", repo: "https://github.com/RoboDojo-Benchmark/RoboDojo", licence: "MIT (LICENSE file); README states a non-commercial research licence"}
     version: "0.2"
     suites: [robodojo]
-    # bench cannot give a sandbox a GPU, so this dataset runs from a Robo Use checkout against RoboDojo simulator
+    # bench cannot give a sandbox a GPU, so this dataset runs with Robo Use against RoboDojo simulator
     # workers on an NVIDIA RTX GPU machine (driver 580)
     run:
-      label: "Robo Use checkout + GPU worker"
+      label: "Robo Use + GPU worker"
       command: "robouse run-many --tasks tasks/robodojo --harness oracle --out runs/robodojo-oracle"
-      note: "RoboDojo runs on NVIDIA Isaac Sim 5.1, which needs an RTX GPU with RT cores and a driver from the 580 branch (it crashed at start-up on driver 595). Start one worker per task on the GPU machine (<code>robodojo_worker.py</code> in a RoboDojo checkout with its Hugging Face assets), write their endpoints to <code>runs/_robodojo/remote.json</code> in a Robo Use checkout (branch <code>robodojo</code>) and run from that checkout; the setup is in <a href=\"https://github.com/benchflow-ai/robouse/blob/robodojo/docs/suites/robodojo.md\">docs/suites/robodojo.md</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
+      note: "RoboDojo runs on NVIDIA Isaac Sim 5.1, which needs an RTX GPU with RT cores and a driver from the 580 branch (it crashed at start-up on driver 595). Start one worker per task on the GPU machine (<code>robodojo_worker.py</code> in a RoboDojo checkout with its Hugging Face assets), write their endpoints to <code>runs/_robodojo/remote.json</code> in the folder you run Robo Use from, and run from there; the setup is in <a href=\"https://robouse.ai/docs/suites/robodojo/\">the robodojo docs</a>. Every task in this dataset was checked this way with the reference solutions and a no-op control."
       bench_note: "Not checked on this dataset: bench has no GPU sandbox. The packages expect the worker endpoints file in <code>$ROBOUSE_ROBODOJO_REMOTE</code> on the host."
     description: 'Robo Use RoboDojo 0.2: RoboDojo tasks on an ARX X5 bimanual platform in Isaac Sim.'
   - name: rle-bench/rle-bench

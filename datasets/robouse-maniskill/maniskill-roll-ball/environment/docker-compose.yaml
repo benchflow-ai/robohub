@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/maniskill"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:014fe37c90adba71b2c4d98523814a4cc56d13753f70d08aae5d05f98ef22799"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:696517b8ab43696fb3ac204397728bf99cc608410af186b41a0f945aa66e1ccc"
     network_mode: none
     init: true
     volumes:

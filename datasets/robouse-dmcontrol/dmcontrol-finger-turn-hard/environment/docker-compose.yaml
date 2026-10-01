@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/dmcontrol"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:2e29f7549374df8855b25df265992c94219396ad0c5d5b3cb98e6036b6763cf1"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:670434aba34601cb902c27fdaebf97598b387efdd636fcaf407468d6dd502d35"
     network_mode: none
     init: true
     volumes:
