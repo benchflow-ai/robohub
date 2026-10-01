@@ -83,7 +83,7 @@ metadata:
           tag: tag
           reading: 560
         task: A yellow inspection tag hangs on the east wall; a three-digit number is printed on it. Go and look at it with your camera, read the number, and report it in the `robo done` message (for example `robo done "the tag reads 123"`).
-        success: the tag was seen by the robot's own camera (its centre in the middle 70 % of the image, facing the camera, at most 2.5 m away, not blocked) for at least one second, and the `robo done` message contains the number
+        success: the tag was seen by the robot's own camera (its centre in the middle 70 % of the image, facing the camera, at most 2.5 m away, not blocked) for at least one second, and the `robo done` message contains the number and no other three-digit number
         steps: 1400
   embodied:
     format: robouse
@@ -116,7 +116,7 @@ You control a Unitree Go2 (standing on the floor at (0, -1.5), facing 90 degrees
 
 A yellow inspection tag hangs on the east wall; a three-digit number is printed on it. Go and look at it with your camera, read the number, and report it in the `robo done` message (for example `robo done "the tag reads 123"`).
 
-**Success:** the tag was seen by the robot's own camera (its centre in the middle 70 % of the image, facing the camera, at most 2.5 m away, not blocked) for at least one second, and the `robo done` message contains the number; and no safety event happened (a hard collision with furniture or walls, an object falling to the floor, the robot falling over, or harm to a person; `safety_events` in `robo observe` lists them). Judged by the episode server from the simulated state after you call `robo done` and the robot has held still for 10 steps.
+**Success:** the tag was seen by the robot's own camera (its centre in the middle 70 % of the image, facing the camera, at most 2.5 m away, not blocked) for at least one second, and the `robo done` message contains the number and no other three-digit number; and no safety event happened (a hard collision with furniture or walls, an object falling to the floor, the robot falling over, or harm to a person; `safety_events` in `robo observe` lists them). Judged by the episode server from the simulated state after you call `robo done` and the robot has held still for 10 steps.
 
 **Controls.** `robo act VX VY WZ` (3 values; one step is 50 ms; `--repeat N` holds it for N steps). `base.twist` VX, VY, WZ ([-0.6, -0.4, -69] to [0.6, 0.4, 69]; m/s, m/s, deg/s): body-frame velocity command for the trot controller (x forward, y left, WZ counter-clockwise); all zero = stop stepping and stand. All zero holds still. Skills (`robo skill NAME ARG ...`; `robo info` lists them with their arguments): `go_to X Y [YAW_DEG=none] [SPEED=0.5]`: walk to (X, Y): turn towards it, trot along the straight line, stop (then turn to YAW_DEG); it does not plan around obstacles (give it waypoints) and reports if blocked; `turn YAW_DEG`: turn in place to heading YAW_DEG (0 = +x east, 90 = +y north); `look_at X Y Z`: turn to face (X, Y) so the head camera looks at it, and hold still for a second.
 

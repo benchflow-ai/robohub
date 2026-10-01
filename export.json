@@ -458,9 +458,10 @@
     "robouse-composed": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "bimanual-relay--aloha-2--kitchen-counter--s5": {
@@ -750,26 +751,56 @@
         },
         "dexjoco-click-mouse": {
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-hammer-nail": {
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-photograph": {
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-unlock-ipad": {
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-water-plant": {
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
@@ -1343,11 +1374,17 @@
     "robouse-dexjoco": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
+        "dexjoco-assembly": {
+          "backend": "dexjoco",
+          "runtime": "dexjoco",
+          "suite": "dexjoco"
+        },
         "dexjoco-click-mouse": {
           "backend": "dexjoco",
           "runtime": "dexjoco",
@@ -2178,11 +2215,17 @@
     "robouse-humanoidbench": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
+        "humanoidbench-maze": {
+          "backend": "humanoidbench",
+          "runtime": "humanoidbench",
+          "suite": "humanoidbench"
+        },
         "humanoidbench-pole": {
           "backend": "humanoidbench",
           "runtime": "humanoidbench",
@@ -3760,26 +3803,56 @@
         },
         "dexjoco-click-mouse": {
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-hammer-nail": {
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-photograph": {
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-unlock-ipad": {
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-water-plant": {
           "backend": "dexjoco",
+          "robouse": {
+            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
+            "package_version": "0.2.0",
+            "repo": "https://pypi.org/project/robouse/0.2.0/",
+            "tag": "v0.2.0"
+          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
@@ -5179,13 +5252,13 @@
   "runtimes": {
     "base": "sha256:16ae6e6a3c3b70fdf7d62473846ee401dbe85096d92b9f96b3efde95e78ebb4d",
     "behavior": "sha256:ed6260be7a33eb35e97b3b891b0d922987b7665ef3c513d6ca5cda4d0ff03389",
-    "composed": "sha256:4f5aa582409bcc0f86c3214485b86d0dac79f00a26ab9727219365c5fce2f9de",
-    "dexjoco": "sha256:e73eebfcf96bf7213c82e6c4da28a13c12661c31a081f9111f34ee15fb4f0fb6",
+    "composed": "sha256:bf35428b062766f1759671abe0b534cf25a18a81b92181b7c69b7a5698e607c4",
+    "dexjoco": "sha256:21ac50856e673f412bf2031b25d0be334f18f01c3e7d75f77a5bd88ddd9b98d1",
     "dmcontrol": "sha256:670434aba34601cb902c27fdaebf97598b387efdd636fcaf407468d6dd502d35",
     "driving": "sha256:4abd093fc2f85569c1c2259182303f51354ba8d3134162a2a702db46856ccb72",
     "embodied": "sha256:9bf4f77a6208bba931749573b167c394399f8c13bdd472355192771748cb7cc7",
     "gpu": "sha256:b0c80bb5ccd168ae672d858f460a8e97f0c2448f2e1660c15150b62bed2fc862",
-    "humanoidbench": "sha256:56ae52ac4b339b81baa44c9a34797a738a4abdf4eb20240ac925427a8f3905fa",
+    "humanoidbench": "sha256:6f64a0b969422b413d228a966920917f69e78f8b047b230ed1567330886fd41c",
     "libero": "sha256:8965ba2d9b7336575e0cac338d12d3b386462344b1b6b3da65d1c354fea355f8",
     "light": "sha256:c40339e7545073bd64f2accb6ac437d9a54f970d227a2b31ff07fb5b50c94326",
     "maniskill": "sha256:696517b8ab43696fb3ac204397728bf99cc608410af186b41a0f945aa66e1ccc",

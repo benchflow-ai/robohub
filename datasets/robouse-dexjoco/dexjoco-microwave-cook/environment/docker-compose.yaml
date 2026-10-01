@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/dexjoco"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:e73eebfcf96bf7213c82e6c4da28a13c12661c31a081f9111f34ee15fb4f0fb6"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:21ac50856e673f412bf2031b25d0be334f18f01c3e7d75f77a5bd88ddd9b98d1"
     network_mode: none
     init: true
     volumes:

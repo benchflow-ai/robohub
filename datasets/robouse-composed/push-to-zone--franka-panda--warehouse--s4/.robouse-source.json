@@ -1,6 +1,6 @@
 {
   "source": "tasks/composed/push-to-zone--franka-panda--warehouse--s4",
-  "key": "c789fff19bbd749b",
+  "key": "4873ffd82f7dfa39",
   "runtime": "composed",
   "noop": false,
   "seed": null,

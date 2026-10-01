@@ -1,6 +1,6 @@
 {
   "source": "tasks/composed/put-in-container--franka-panda--kitchen-counter--safety-direct--s6",
-  "key": "2763dde177f7b10e",
+  "key": "e402c6ec0e41ca1f",
   "runtime": "composed",
   "noop": false,
   "seed": null,

@@ -3,7 +3,7 @@
 # scripts/build_registry.py pins every dataset version to a commit in registry.json.
 
 robouse:
-  repo: https://pypi.org/project/robouse/
+  repo: https://pypi.org/project/robouse/0.2.0/
   package_version: 0.2.0
 
 # Simulator runtimes (runtimes/<name>, built from templates/runtimes/<name>). Every task's compose file builds its
@@ -137,10 +137,10 @@ datasets:
   - name: benchflow/robouse-core
     dir: robouse-core
     former_names: [robouse-core]
-    version: "0.2"
+    version: "0.3"
     tasks_file: core.txt
     image: vision
-    description: 'Robo Use core 0.2: a cross-section of every Robo Use suite.'
+    description: 'Robo Use core 0.3: a cross-section of every Robo Use suite.'
   - name: farama-foundation/metaworld
     dir: robouse-metaworld
     former_names: [robouse-metaworld]
@@ -186,11 +186,9 @@ datasets:
     dir: robouse-dexjoco
     former_names: [robouse-dexjoco]
     upstream: {benchmark: "DexJoCo", org_name: "brave-eai", repo: "https://github.com/brave-eai/dexjoco", licence: "MIT (code and datasets; demonstration actions redistributed here)"}
-    version: "0.2"
+    version: "0.3"
     suites: [dexjoco]
-    # its reference solution (an open-loop replay of the recorded demonstration) passes on macOS but not in the Linux hub runtime (twice: 707 steps, no success)
-    exclude_tasks: [dexjoco-assembly]
-    description: 'Robo Use DexJoCo 0.2: tool use with Allegro hands, from DexJoCo.'
+    description: 'Robo Use DexJoCo 0.3: tool use with Allegro hands, from DexJoCo.'
   - name: benchflow/robouse-drone
     dir: robouse-drone
     former_names: [robouse-drone]
@@ -266,11 +264,9 @@ datasets:
   - name: carlosferrazza/humanoid-bench
     dir: robouse-humanoidbench
     upstream: {benchmark: HumanoidBench, org_name: 'Carmelo Sferrazza (UC Berkeley)', repo: 'https://github.com/carlosferrazza/humanoid-bench', licence: MIT}
-    version: "0.2"
+    version: "0.3"
     suites: [humanoidbench]
-    # its reference solution calls one 999-step walk_to skill, which takes longer than the robo client's 120 s socket timeout in the Linux hub runtime (twice, 559 steps)
-    exclude_tasks: [humanoidbench-maze]
-    description: 'Robo Use HumanoidBench 0.2: whole-body tasks for a Unitree H1 with two Shadow hands.'
+    description: 'Robo Use HumanoidBench 0.3: whole-body tasks for a Unitree H1 with two Shadow hands.'
   - name: mani-skill/maniskill
     dir: robouse-maniskill
     upstream: {benchmark: ManiSkill3, org_name: Hao Su Lab (UC San Diego) and Hillbot, repo: 'https://github.com/mani-skill/ManiSkill', licence: "Apache-2.0 (code); CC BY-NC 4.0 (assets, not redistributed)"}
@@ -301,9 +297,9 @@ datasets:
   - name: benchflow/robouse-composed
     dir: robouse-composed
     former_names: [benchflow/robouse-remix]
-    version: "0.2"
+    version: "0.3"
     suites: [composed]
-    description: 'Robo Use composed 0.2: tasks composed from embodiments, scenes, task templates and modifiers.'
+    description: 'Robo Use composed 0.3: tasks composed from embodiments, scenes, task templates and modifiers.'
   - name: benchflow/robouse-nav
     dir: robouse-nav
     version: "0.2"
@@ -373,7 +369,63 @@ datasets:
   - name: benchflow/robouse-noop-control
     dir: robouse-noop-control
     former_names: [robouse-noop-control]
-    version: "0.2"
+    version: "0.3"
     noop_of: benchflow/robouse-core
     image: vision
-    description: 'Robo Use no-op control 0.2: the tasks of robouse-core with a reference solution that does nothing; each must score 0.'
+    description: 'Robo Use no-op control 0.3: the tasks of robouse-core with a reference solution that does nothing; each must score 0.'
+
+# Versions not to use for evaluation. Their registry.json entries stay exactly as published (published versions are
+# immutable, and `bench` has no deprecation field), so old commands still resolve; hub.json lists these for the hub page.
+deprecated:
+  - {name: benchflow/robouse-core, version: "0.1", superseded_by: benchflow/robouse-core@0.3, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: farama-foundation/metaworld, version: "0.1", superseded_by: farama-foundation/metaworld@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: farama-foundation/gymnasium-robotics, version: "0.1", superseded_by: farama-foundation/gymnasium-robotics@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/robouse-tabletop, version: "0.1", superseded_by: benchflow/robouse-tabletop@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: lifelong-robot-learning/libero, version: "0.2", superseded_by: lifelong-robot-learning/libero@0.3, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: arise-initiative/robosuite, version: "0.1", superseded_by: arise-initiative/robosuite@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/robouse-menagerie, version: "0.1", superseded_by: benchflow/robouse-menagerie@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: brave-eai/dexjoco, version: "0.1", superseded_by: brave-eai/dexjoco@0.3, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/robouse-drone, version: "0.1", superseded_by: benchflow/robouse-drone@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/robouse-harm, version: "0.1", superseded_by: benchflow/robouse-harm@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/quadruped, version: "0.1", superseded_by: benchflow/quadruped@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/humanoid, version: "0.1", superseded_by: benchflow/humanoid@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/mobile-manip, version: "0.1", superseded_by: benchflow/mobile-manip@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/dexhand, version: "0.1", superseded_by: benchflow/dexhand@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/crazyflie, version: "0.1", superseded_by: benchflow/crazyflie@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/driving, version: "0.1", superseded_by: benchflow/driving@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: lifelong-robot-learning/libero-90, version: "0.1", superseded_by: lifelong-robot-learning/libero-90@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: farama-foundation/franka-kitchen, version: "0.1", superseded_by: farama-foundation/franka-kitchen@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: farama-foundation/adroit-hand, version: "0.1", superseded_by: farama-foundation/adroit-hand@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: google-deepmind/dm-control, version: "0.1", superseded_by: google-deepmind/dm-control@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: myohub/myosuite, version: "0.1", superseded_by: myohub/myosuite@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: carlosferrazza/humanoid-bench, version: "0.1", superseded_by: carlosferrazza/humanoid-bench@0.3, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: mani-skill/maniskill, version: "0.1", superseded_by: mani-skill/maniskill@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robocasa/robocasa, version: "0.1", superseded_by: robocasa/robocasa@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: stanfordvl/behavior-1k, version: "0.1", superseded_by: stanfordvl/behavior-1k@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/robouse-composed, version: "0.1", superseded_by: benchflow/robouse-composed@0.3, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/robouse-nav, version: "0.1", superseded_by: benchflow/robouse-nav@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robocurve/cubepick-reach, version: "0.1", superseded_by: robocurve/cubepick-reach@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: haosulab/maniskill-gpu, version: "0.1", superseded_by: haosulab/maniskill-gpu@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/robouse-genesis, version: "0.1", superseded_by: benchflow/robouse-genesis@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/robouse-playground, version: "0.1", superseded_by: benchflow/robouse-playground@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: isaac-sim/isaaclab-factory, version: "0.1", superseded_by: isaac-sim/isaaclab-factory@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robodojo-benchmark/robodojo, version: "0.1", superseded_by: robodojo-benchmark/robodojo@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/robouse-noop-control, version: "0.1", superseded_by: benchflow/robouse-noop-control@0.3, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robouse-core, version: "0.1", superseded_by: benchflow/robouse-core@0.3, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robouse-metaworld, version: "0.1", superseded_by: farama-foundation/metaworld@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robouse-gymrobotics, version: "0.1", superseded_by: farama-foundation/gymnasium-robotics@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robouse-tabletop, version: "0.1", superseded_by: benchflow/robouse-tabletop@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robouse-libero, version: "0.2", superseded_by: lifelong-robot-learning/libero@0.3, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robouse-robosuite, version: "0.1", superseded_by: arise-initiative/robosuite@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robouse-menagerie, version: "0.1", superseded_by: benchflow/robouse-menagerie@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robouse-dexjoco, version: "0.1", superseded_by: brave-eai/dexjoco@0.3, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robouse-drone, version: "0.1", superseded_by: benchflow/robouse-drone@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/robouse-roboharm, version: "0.1", superseded_by: benchflow/robouse-harm@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robouse-roboharm, version: "0.1", superseded_by: benchflow/robouse-harm@0.2, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: benchflow/robouse-remix, version: "0.1", superseded_by: benchflow/robouse-composed@0.3, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robouse-noop-control, version: "0.1", superseded_by: benchflow/robouse-noop-control@0.3, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: lifelong-robot-learning/libero, version: "0.1", superseded_by: lifelong-robot-learning/libero@0.3, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: robouse-libero, version: "0.1", superseded_by: lifelong-robot-learning/libero@0.3, reason: "published before the oracle token left the packages: its reference-solution token is in this public repository, so an agent could look it up and read the hidden state"}
+  - {name: brave-eai/dexjoco, version: "0.2", superseded_by: brave-eai/dexjoco@0.3, reason: "leaves out dexjoco-assembly, whose recorded demonstration did not replay to success on Linux; 0.3 has all 14 tasks"}
+  - {name: carlosferrazza/humanoid-bench, version: "0.2", superseded_by: carlosferrazza/humanoid-bench@0.3, reason: "leaves out humanoidbench-maze, where a long skill outlasted the robo client's 120 s timeout; 0.3 has all 7 tasks and a client that waits for long skills"}
+  - {name: benchflow/robouse-composed, version: "0.2", superseded_by: benchflow/robouse-composed@0.3, reason: "the inspect-tag judge accepted an answer listing every three-digit number, and the privacy check missed a PIN spelled out or split by separators; both fixed in 0.3"}
