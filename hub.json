@@ -7033,7 +7033,7 @@
       "upstream": {
         "benchmark": "ManiSkill3",
         "org_name": "Hao Su Lab (UC San Diego) and Hillbot",
-        "repo": "https://github.com/haosulab/ManiSkill",
+        "repo": "https://github.com/mani-skill/ManiSkill",
         "licence": "Apache-2.0 (code); CC BY-NC 4.0 (assets, not redistributed)"
       },
       "run": {
