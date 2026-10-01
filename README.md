@@ -162,6 +162,7 @@ Run on 2026-09-30 with the released `bench` 0.7.4 on a 16-core linux/arm64 cloud
 | `bench tasks check --sandbox docker`, every task package | 966/966 valid |
 | Reference solutions, all 27 CPU datasets (every task) | every task scored 1 (11 trials first failed to start with Docker's `No such container` race; each of those tasks scored 1 in another run with the same task digest) |
 | No-op reference solutions (`scripts/export.py --noop-out`), every task of every CPU dataset, and `benchflow/robouse-noop-control@0.2` | every task scored 0 (18 trials hit the same Docker race and scored 0 on rerun) |
+| `rle-bench/rle-bench@0.1` and `capgym/cap-x@0.1` (run 2026-10-01, same VM and `bench`): `bench tasks check`, reference solutions, no-op reference solutions | 49/49 valid; every task scored 1 (6/6, 43/43); every task scored 0 (0/6, 0/43) |
 | A scripted agent looking for the oracle token in a vision task and a composed task, with a token set on the host | no token in its environment, files or processes; none of about 5,400 candidate strings, including the token an earlier version committed, unlocked privileged state; a control with the reference solution's token did |
 
 Left out of their datasets because their reference solutions fail in this Linux runtime: `dexjoco-assembly` (a demonstration replay that does not reach success) and `humanoidbench-maze` (a skill call that outlasts the `robo` client's 120 s timeout), as `robocasa-close-kettle-lid-kitchen6` was before. The GPU datasets cannot run in `bench`; they were checked with `bench tasks check` only.
