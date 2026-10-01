@@ -45,7 +45,7 @@ def _trial_opts(p: argparse.ArgumentParser, many: bool) -> None:
         + ("each task's)" if many else "the task's agent.timeout_sec)"),
     )
     p.add_argument("--record-size", metavar="WxH", help=RECORD_SIZE_HELP)
-    p.add_argument("--seed", type=int, help="override " + ("every task's" if many else "the task's") + " seed")
+    p.add_argument("--seed", type=_seed, help="override " + ("every task's" if many else "the task's") + " seed")
     p.add_argument("--rig", help=argparse.SUPPRESS)  # real-robot rig file; listed once live hardware has run
     p.add_argument(
         "--split", help="placement split: nominal, interpolation or extrapolation (tasks with seeded placements)"
@@ -65,7 +65,7 @@ def register(sub: argparse._SubParsersAction) -> None:
     s.add_argument("--run-dir", required=True, help="where the episode record is written")
     s.add_argument("--socket", required=True, help="Unix socket path to listen on")
     s.add_argument("--workspace", help="agent workspace (camera images are saved in its observations/)")
-    s.add_argument("--seed", type=int, help="override the task's seed")
+    s.add_argument("--seed", type=_seed, help="override the task's seed")
     s.add_argument("--max-wall-s", type=float, default=1800, help="wall-clock budget in seconds (default 1800)")
     s.add_argument("--record-size", metavar="WxH", help=RECORD_SIZE_HELP)
     s.add_argument("--ready-file", help="file created once the server is listening")
@@ -126,14 +126,34 @@ def register(sub: argparse._SubParsersAction) -> None:
     ex.set_defaults(func=export)
 
 
+def _seed(x: str) -> int:
+    if not x.isdigit():
+        raise argparse.ArgumentTypeError(f"must be a non-negative integer, not {x!r}")
+    return int(x)
+
+
 def _task_ids(path: str | None) -> list[str] | None:
     if not path:
         return None
     return [ln.strip() for ln in Path(path).read_text().splitlines() if ln.strip() and not ln.startswith("#")]
 
 
+def _unknown_harness(name: str) -> int:
+    """0 when `name` is a harness of the local engine (built in or a `robouse.harnesses` entry point), else 2."""
+    from importlib.metadata import entry_points
+
+    from ..harnesses import HARNESSES
+
+    if name in HARNESSES or any(ep.name == name for ep in entry_points(group="robouse.harnesses")):
+        return 0
+    print(f"robouse: unknown harness {name!r}; harnesses: {', '.join(HARNESSES)}", file=sys.stderr)
+    return 2
+
+
 def _prepare_local(a: argparse.Namespace) -> int:
     """Settings the episode servers read from the environment, and the simulator check. 0 when ready."""
+    if getattr(a, "harness", None) and (rc := _unknown_harness(a.harness)):  # `serve` has no harness
+        return rc
     if getattr(a, "rig", None):
         os.environ["ROBOUSE_RIG"] = str(Path(a.rig).resolve())
     if getattr(a, "record_size", None):
@@ -201,7 +221,7 @@ def run(a: argparse.Namespace) -> int:
         prior_learnings=a.prior_learnings,
     )
     print(json.dumps(res, indent=2))
-    return 0
+    return 1 if res.get("exception") else 0  # the trial could not run to a result (reward 0 is a result)
 
 
 def run_many(a: argparse.Namespace) -> int:
@@ -217,9 +237,15 @@ def run_many(a: argparse.Namespace) -> int:
         print("robouse: use --seed or --seeds, not both", file=sys.stderr)
         return 2
     seeds = str(a.seed) if a.seed is not None else a.seeds
+    try:
+        plan_seeds = parse_seeds(seeds)
+    except ValueError as e:
+        print(f"robouse: --seeds: {e}", file=sys.stderr)
+        return 2
+    if rc := _unknown_harness(a.harness):
+        return rc
     if a.dry_run:
         ts = select_tasks(root, a.filter, ids, a.include, a.exclude, a.limit, a.sample, a.sample_seed, a.mode)
-        plan_seeds = parse_seeds(seeds)
         print(
             json.dumps(
                 {
@@ -242,7 +268,7 @@ def run_many(a: argparse.Namespace) -> int:
         return rc
     from ..runner import run_many as run_trials
 
-    run_trials(
+    results = run_trials(
         root,
         a.harness,
         a.model,
@@ -265,7 +291,13 @@ def run_many(a: argparse.Namespace) -> int:
         extra_instruction=a.extra_instruction,
         prior_learnings=a.prior_learnings,
     )
-    return 0
+    failed = sum(1 for r in results if r.get("exception"))
+    if failed:
+        print(
+            f"robouse: {failed} trial(s) failed on infrastructure (exception_info in their result.json)",
+            file=sys.stderr,
+        )
+    return 1 if failed else 0
 
 
 def _benchflow_missing(e: ImportError) -> int:

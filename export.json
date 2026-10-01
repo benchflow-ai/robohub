@@ -3,9 +3,10 @@
     "behavior-1k": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "behavior-bringing-in-wood": {
@@ -228,9 +229,10 @@
     "isaaclab-factory": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "il-factory-gear-mesh": {
@@ -263,9 +265,10 @@
     "maniskill-gpu": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "ms-lift-peg-upright": {
@@ -333,9 +336,10 @@
     "robodojo": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "robodojo-cover-blocks": {
@@ -388,9 +392,10 @@
     "robouse-adroit": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "adroit-door-e11": {
@@ -709,9 +714,10 @@
     "robouse-core": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "arc-count-marker": {
@@ -751,56 +757,26 @@
         },
         "dexjoco-click-mouse": {
           "backend": "dexjoco",
-          "robouse": {
-            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-            "package_version": "0.2.0",
-            "repo": "https://pypi.org/project/robouse/0.2.0/",
-            "tag": "v0.2.0"
-          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-hammer-nail": {
           "backend": "dexjoco",
-          "robouse": {
-            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-            "package_version": "0.2.0",
-            "repo": "https://pypi.org/project/robouse/0.2.0/",
-            "tag": "v0.2.0"
-          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-photograph": {
           "backend": "dexjoco",
-          "robouse": {
-            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-            "package_version": "0.2.0",
-            "repo": "https://pypi.org/project/robouse/0.2.0/",
-            "tag": "v0.2.0"
-          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-unlock-ipad": {
           "backend": "dexjoco",
-          "robouse": {
-            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-            "package_version": "0.2.0",
-            "repo": "https://pypi.org/project/robouse/0.2.0/",
-            "tag": "v0.2.0"
-          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-water-plant": {
           "backend": "dexjoco",
-          "robouse": {
-            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-            "package_version": "0.2.0",
-            "repo": "https://pypi.org/project/robouse/0.2.0/",
-            "tag": "v0.2.0"
-          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
@@ -1249,9 +1225,10 @@
     "robouse-crazyflie": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "crazyflie-gates": {
@@ -1294,9 +1271,10 @@
     "robouse-cubepick": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "cubepick-reach-layout-0": {
@@ -1329,9 +1307,10 @@
     "robouse-dexhand": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "leap-cube-in-hand": {
@@ -1455,9 +1434,10 @@
     "robouse-dmcontrol": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "dmcontrol-acrobot-swingup": {
@@ -1550,9 +1530,10 @@
     "robouse-driving": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "driving-broken-down-car": {
@@ -1595,9 +1576,10 @@
     "robouse-drone": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "drone-buzz-crowd": {
@@ -1655,9 +1637,10 @@
     "robouse-genesis": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "gs-pour-water": {
@@ -1680,9 +1663,10 @@
     "robouse-gymrobotics": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "gymrobotics-fetch-pick-place-s0": {
@@ -1750,9 +1734,10 @@
     "robouse-harm": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "roboharm-biohazard-benign-guardrail": {
@@ -2160,9 +2145,10 @@
     "robouse-humanoid": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "apollo-box-into-bin": {
@@ -2261,9 +2247,10 @@
     "robouse-kitchen": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "kitchen-bottom-burner": {
@@ -2321,9 +2308,10 @@
     "robouse-libero": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "libero-10-0": {
@@ -2531,9 +2519,10 @@
     "robouse-libero-90": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "libero-90-0": {
@@ -2991,9 +2980,10 @@
     "robouse-maniskill": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "maniskill-lift-peg-upright": {
@@ -3061,9 +3051,10 @@
     "robouse-menagerie": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "menagerie-aloha-clutter-retrieval": {
@@ -3146,9 +3137,10 @@
     "robouse-metaworld": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "metaworld-assembly": {
@@ -3406,9 +3398,10 @@
     "robouse-mobile-manip": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "google-fetch-can": {
@@ -3466,9 +3459,10 @@
     "robouse-myosuite": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "myosuite-elbow-pose": {
@@ -3551,9 +3545,10 @@
     "robouse-nav": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "nav-h00-armchair": {
@@ -3761,9 +3756,10 @@
     "robouse-noop-control": {
       "noop": true,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "arc-count-marker": {
@@ -3803,56 +3799,26 @@
         },
         "dexjoco-click-mouse": {
           "backend": "dexjoco",
-          "robouse": {
-            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-            "package_version": "0.2.0",
-            "repo": "https://pypi.org/project/robouse/0.2.0/",
-            "tag": "v0.2.0"
-          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-hammer-nail": {
           "backend": "dexjoco",
-          "robouse": {
-            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-            "package_version": "0.2.0",
-            "repo": "https://pypi.org/project/robouse/0.2.0/",
-            "tag": "v0.2.0"
-          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-photograph": {
           "backend": "dexjoco",
-          "robouse": {
-            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-            "package_version": "0.2.0",
-            "repo": "https://pypi.org/project/robouse/0.2.0/",
-            "tag": "v0.2.0"
-          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-unlock-ipad": {
           "backend": "dexjoco",
-          "robouse": {
-            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-            "package_version": "0.2.0",
-            "repo": "https://pypi.org/project/robouse/0.2.0/",
-            "tag": "v0.2.0"
-          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
         "dexjoco-water-plant": {
           "backend": "dexjoco",
-          "robouse": {
-            "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-            "package_version": "0.2.0",
-            "repo": "https://pypi.org/project/robouse/0.2.0/",
-            "tag": "v0.2.0"
-          },
           "runtime": "dexjoco",
           "suite": "dexjoco"
         },
@@ -4301,9 +4267,10 @@
     "robouse-playground": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "pg-go1-corridor-push": {
@@ -4336,9 +4303,10 @@
     "robouse-quadruped": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "anymal-inspection-round": {
@@ -4401,9 +4369,10 @@
     "robouse-robocasa": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "robocasa-close-drawer-kitchen10": {
@@ -4427,6 +4396,11 @@
           "suite": "robocasa"
         },
         "robocasa-close-kettle-lid-kitchen10": {
+          "backend": "robocasa",
+          "runtime": "robocasa",
+          "suite": "robocasa"
+        },
+        "robocasa-close-kettle-lid-kitchen6": {
           "backend": "robocasa",
           "runtime": "robocasa",
           "suite": "robocasa"
@@ -4526,9 +4500,10 @@
     "robouse-robosuite": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "robosuite-door-iiwa": {
@@ -4641,9 +4616,10 @@
     "robouse-tabletop": {
       "noop": false,
       "robouse": {
-        "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
         "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/"
+        "repo": "https://pypi.org/project/robouse/0.2.0/",
+        "tag": "v0.2.0"
       },
       "tasks": {
         "arc-colour-to-pad": {
@@ -5245,27 +5221,28 @@
     }
   },
   "robouse": {
-    "commit": "4641fa864d1539e47fcc3ff08d78e25c181c27ad",
+    "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
     "package_version": "0.2.0",
-    "repo": "https://pypi.org/project/robouse/"
+    "repo": "https://pypi.org/project/robouse/0.2.0/",
+    "tag": "v0.2.0"
   },
   "runtimes": {
-    "base": "sha256:16ae6e6a3c3b70fdf7d62473846ee401dbe85096d92b9f96b3efde95e78ebb4d",
-    "behavior": "sha256:ed6260be7a33eb35e97b3b891b0d922987b7665ef3c513d6ca5cda4d0ff03389",
+    "base": "sha256:76ca877fb0b1008d896761538a5e7e5c3e8610b33004ac99b9c5f0e7a91127bc",
+    "behavior": "sha256:11f5eef83311f0ff86993fda9031fdb3b295fc646935c888c4f57535b302b234",
     "composed": "sha256:bf35428b062766f1759671abe0b534cf25a18a81b92181b7c69b7a5698e607c4",
     "dexjoco": "sha256:21ac50856e673f412bf2031b25d0be334f18f01c3e7d75f77a5bd88ddd9b98d1",
-    "dmcontrol": "sha256:670434aba34601cb902c27fdaebf97598b387efdd636fcaf407468d6dd502d35",
-    "driving": "sha256:4abd093fc2f85569c1c2259182303f51354ba8d3134162a2a702db46856ccb72",
-    "embodied": "sha256:9bf4f77a6208bba931749573b167c394399f8c13bdd472355192771748cb7cc7",
-    "gpu": "sha256:b0c80bb5ccd168ae672d858f460a8e97f0c2448f2e1660c15150b62bed2fc862",
+    "dmcontrol": "sha256:549bc1819e2cbc972a3e45bc9d81c6eee41356765740e0551e8972c8bae5d19c",
+    "driving": "sha256:c17dbccef41bc3f9c6c75ec76a7dfd063b2b6b905f3ee2eb38e7de475b0ad2f2",
+    "embodied": "sha256:b8b0c93cbffede79e353cfef6371f3fea6806982f15298e5c8a0b0086e9953e0",
+    "gpu": "sha256:bd21e127de70c186268a3953e855ab2b671b584451415bb53512798e3d60ad14",
     "humanoidbench": "sha256:6f64a0b969422b413d228a966920917f69e78f8b047b230ed1567330886fd41c",
-    "libero": "sha256:8965ba2d9b7336575e0cac338d12d3b386462344b1b6b3da65d1c354fea355f8",
-    "light": "sha256:c40339e7545073bd64f2accb6ac437d9a54f970d227a2b31ff07fb5b50c94326",
-    "maniskill": "sha256:696517b8ab43696fb3ac204397728bf99cc608410af186b41a0f945aa66e1ccc",
-    "menagerie": "sha256:4f80f09e16b0a74ff7a59f8e4c11ce15035357e040dcd6fe1d7b6c8bb7949279",
-    "myosuite": "sha256:74fa8b26b423bb31a999286252e2bba63f17e195e43529dc3e69c4698d029e84",
-    "robocasa": "sha256:e4164729f46ca3cbad76c770bde3884f49b63e23d67c483e01d103de01d219da",
-    "robodojo": "sha256:2425e623d907fb525547dea62ec58d7be707e4b07d7acc71d44aab07a54c884e",
-    "robosuite": "sha256:e65794b6cdd2900a289ed153db69da8028df999489e928aaf7dcc390463089f1"
+    "libero": "sha256:93160a0b0fa71b29a6fe2db2b669bed017b243755f9d21cdec81e3550f07c749",
+    "light": "sha256:420e3b3167ddd4996377f3c5d94019ba3ef1b85a3212b14c09b367e129579b5d",
+    "maniskill": "sha256:7aa54af2c8fda2df7b64de1c8ab6c1aa24cbe7056b1b2907cdb379dd9dadd907",
+    "menagerie": "sha256:ae71dbdd3a1c1a8114bc44c51411039e11c32fef199042a9858eb11bec1b1f36",
+    "myosuite": "sha256:d0a9c75adec6668cade6419c4ea89f174d5ca383466b8935c21bda6642bd15e7",
+    "robocasa": "sha256:7d487d7ecae857f0c84c915c1ea4e28f859954450833a30519fd06ae42effab6",
+    "robodojo": "sha256:05cf41ab0ac67408847feda2672513577d04f7d127c733b3d9f7327b8b2c09bb",
+    "robosuite": "sha256:2ec475a68ded7bbf7906a0b2ea986470598305201c15971fdc458edb9a5a09f5"
   }
 }

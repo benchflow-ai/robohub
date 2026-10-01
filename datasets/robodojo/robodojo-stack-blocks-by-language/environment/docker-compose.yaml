@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/robodojo"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:2425e623d907fb525547dea62ec58d7be707e4b07d7acc71d44aab07a54c884e"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:05cf41ab0ac67408847feda2672513577d04f7d127c733b3d9f7327b8b2c09bb"
     # This runtime's simulator runs on a remote GPU worker (remote_worker in hub.yaml): the episode server reaches it
     # over HTTPS, so this service keeps network access, and it reads the worker endpoints (URL, shared secret) from
     # the host file named by $ROBOUSE_ROBODOJO_REMOTE, mounted read-only here only; the agent container never sees it.

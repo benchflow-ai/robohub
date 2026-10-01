@@ -994,11 +994,22 @@ class Controller:
 # ======================================================================================================================
 
 
-def check_compat(cfg: dict, info: dict, amap: ActionMap, chunk: np.ndarray) -> str | None:
-    """Fail fast (before anything moves) when the policy and the embodiment do not fit together."""
+def check_static(cfg: dict, info: dict) -> str | None:
+    """What can be checked before the first inference: the preset's simulators and action mode against the task's."""
     backends = cfg.get("backends")
     if backends and info.get("backend") not in backends:
         return f"policy preset is for backends {backends}, this task uses {info.get('backend')!r}"
+    need = cfg.get("action", {}).get("mode")
+    modes = [g.get("mode") for g in (info.get("embodiment") or {}).get("action_groups", [])]
+    if need and modes and need not in modes:
+        return f"policy outputs {need!r} actions, the embodiment's action groups are {modes}"
+    return None
+
+
+def check_compat(cfg: dict, info: dict, amap: ActionMap, chunk: np.ndarray) -> str | None:
+    """Fail fast (before anything moves) when the policy and the embodiment do not fit together."""
+    if why := check_static(cfg, info):
+        return why
     if chunk.ndim != 2 or chunk.shape[0] == 0:
         return f"policy returned no action chunk (shape {chunk.shape})"
     want = amap.expected_policy_dim()
@@ -1010,10 +1021,6 @@ def check_compat(cfg: dict, info: dict, amap: ActionMap, chunk: np.ndarray) -> s
             f"policy actions have {chunk.shape[1]} values but the task takes {amap.dim} "
             f"({', '.join(info['action']['names'])}); map them with action.index / action.pad"
         )
-    need = a.get("mode")
-    modes = [g.get("mode") for g in (info.get("embodiment") or {}).get("action_groups", [])]
-    if need and modes and need not in modes:
-        return f"policy outputs {need!r} actions, the embodiment's action groups are {modes}"
     return None
 
 
@@ -1043,9 +1050,21 @@ def main() -> int:
         emit(type="error", error=f"need ROBOUSE_VLA_URL and a wire in {sorted(WIRES)}")
         robo({"op": "give_up", "text": "vla harness misconfigured"})
         return 1
+
+    def incompatible(why: str) -> int:
+        emit(type="incompatible", reason=why)
+        robo({"op": "give_up", "text": f"vla: incompatible policy/embodiment: {why}"})
+        return 2
+
+    # before connecting or observing: a preset for another simulator stops here with the reason, not a KeyError
+    if why := check_static(cfg, info):
+        return incompatible(why)
+    try:
+        obsr, amap, ctl = Observer(cfg, info, language), ActionMap(cfg, info), Controller(cfg)
+    except (KeyError, IndexError, ValueError) as e:
+        return incompatible(f"the preset does not fit this task's observation or actions ({type(e).__name__}: {e})")
     wire = WIRES[cfg["wire"]](cfg, url)
     emit(type="connected", metadata=wire.metadata if isinstance(wire.metadata, dict) else str(wire.metadata))
-    obsr, amap, ctl = Observer(cfg, info, language), ActionMap(cfg, info), Controller(cfg)
     wire.reset(f"{info.get('task')}-{os.getpid()}-{int(time.time())}")
     t, n_inf, checked = 0, 0, False
     max_inf = int(cfg.get("max_inferences", 100000))
@@ -1059,16 +1078,20 @@ def main() -> int:
                 emit(type="end", reason=err)
                 return 0
             images, state, steps = got
-            obs = obsr.build(images, state)
+            try:
+                obs = obsr.build(images, state)
+            except (KeyError, IndexError) as e:
+                if checked:
+                    raise
+                return incompatible(
+                    f"the task's observation has no {e} for this preset (backend {info.get('backend')!r})"
+                )
             t0 = time.time()
             chunk = np.atleast_2d(wire.infer(obs))
             n_inf += 1
             if not checked:
-                why = check_compat(cfg, info, amap, chunk)
-                if why:
-                    emit(type="incompatible", reason=why)
-                    robo({"op": "give_up", "text": f"vla: incompatible policy/embodiment: {why}"})
-                    return 2
+                if why := check_compat(cfg, info, amap, chunk):
+                    return incompatible(why)
                 checked = True
             acts = ctl.plan(t, chunk)
             emit(

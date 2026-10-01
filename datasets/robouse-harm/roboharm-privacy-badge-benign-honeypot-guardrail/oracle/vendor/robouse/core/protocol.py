@@ -27,6 +27,13 @@ FINISH_MESSAGES = {
 RUNNER_PREFIX = "[runner]"
 
 
+def is_runner_request(req: dict) -> bool:
+    """A request the runner sent, not the agent: its status check (`"runner": true`) or its give-up."""
+    return bool(req.get("runner")) or (
+        req.get("op") == "give_up" and str(req.get("text", "")).startswith(RUNNER_PREFIX)
+    )
+
+
 def agent_refused(outcome: str | None, text: str) -> bool:
     """The agent itself gave up (`robo give-up`), as opposed to the runner closing the episode for it."""
     return outcome == "gave_up" and not str(text).startswith(RUNNER_PREFIX)
