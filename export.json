@@ -4880,6 +4880,76 @@
         }
       }
     },
+    "robouse-so101": {
+      "noop": false,
+      "robouse": {
+        "commit": "7409b3fb065b2dbe48f90da546909c8d35684e99",
+        "package_version": "0.4.0",
+        "repo": "https://pypi.org/project/robouse/0.4.0/"
+      },
+      "tasks": {
+        "koch-cube-in-cup": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "koch-stack-two-cubes": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-bimanual-lift-box": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-bimanual-ruler-handover": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-block-lift": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-cube-in-cup": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-open-drawer": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-press-button": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-push-puck-to-zone": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-reach": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-sort-by-color": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-stack-two-cubes": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        }
+      }
+    },
     "robouse-tabletop": {
       "noop": false,
       "robouse": {
@@ -5513,6 +5583,7 @@
     "rlebench": "sha256:7fe78bb4ff576e3b6545f927bd90dff9810ef684effbe2c39daf9f5d9c273ae4",
     "robocasa": "sha256:7d487d7ecae857f0c84c915c1ea4e28f859954450833a30519fd06ae42effab6",
     "robodojo": "sha256:05cf41ab0ac67408847feda2672513577d04f7d127c733b3d9f7327b8b2c09bb",
-    "robosuite": "sha256:2ec475a68ded7bbf7906a0b2ea986470598305201c15971fdc458edb9a5a09f5"
+    "robosuite": "sha256:2ec475a68ded7bbf7906a0b2ea986470598305201c15971fdc458edb9a5a09f5",
+    "so101": "sha256:de4197c30be51ad246303b6c05aedbc468c1424a75bd6fccbd2edf1697945f05"
   }
 }
