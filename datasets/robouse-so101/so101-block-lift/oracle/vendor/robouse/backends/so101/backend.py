@@ -1,5 +1,5 @@
 """so101 backend: the SO-101 follower arm (one, or two as StationeryBench's rig) and the Koch v1.1 low-cost arm in
-MuJoCo 3.3.0, on a small hobby desk scaled to them (sim/scene.py). The interface mirrors the real backend's `so101`
+MuJoCo 3.3.0, on a small hobby desk scaled to them (scene.py). The interface mirrors the real backend's `so101`
 and `so101-bimanual` profiles (backends/real/backend.py, real/robots.py), so prompts and reference solutions transfer
 to the real arm:
 

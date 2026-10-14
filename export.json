@@ -4883,7 +4883,7 @@
     "robouse-so101": {
       "noop": false,
       "robouse": {
-        "commit": "7409b3fb065b2dbe48f90da546909c8d35684e99",
+        "commit": "857f5de05b978861c24c2f00aa19a7f611b3fa55",
         "package_version": "0.4.0",
         "repo": "https://pypi.org/project/robouse/0.4.0/"
       },
@@ -5584,6 +5584,6 @@
     "robocasa": "sha256:7d487d7ecae857f0c84c915c1ea4e28f859954450833a30519fd06ae42effab6",
     "robodojo": "sha256:05cf41ab0ac67408847feda2672513577d04f7d127c733b3d9f7327b8b2c09bb",
     "robosuite": "sha256:2ec475a68ded7bbf7906a0b2ea986470598305201c15971fdc458edb9a5a09f5",
-    "so101": "sha256:de4197c30be51ad246303b6c05aedbc468c1424a75bd6fccbd2edf1697945f05"
+    "so101": "sha256:9872976404b823380df2b35b5785e41a78b74aba705ac6f5616c4df6a0198500"
   }
 }
