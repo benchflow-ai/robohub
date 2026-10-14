@@ -104,6 +104,7 @@ ZONE_R = 0.04
 DRAWER_W, DRAWER_H, DRAWER_D, DRAWER_TRAVEL = 0.06, 0.035, 0.07, 0.06
 KNOB_R, KNOB_L, KNOB_HEAD_R, KNOB_HEAD_T = 0.0045, 0.022, 0.0085, 0.005
 BUTTON_R, BUTTON_TRAVEL, BUTTON_BASE, BUTTON_CAP_H = 0.011, 0.008, (0.045, 0.045, 0.022), 0.016
+LED_OFF, LED_ON = [0.12, 0.12, 0.12, 1], [1.0, 0.95, 0.55, 1]
 
 OBJ_FRICTION = [0.9, 0.005, 0.0001]
 
@@ -439,7 +440,7 @@ def _add_prop(s, w, p: dict) -> None:
     elif k == "drawer":
         _add_drawer(s, w, n, x, y)
     elif k == "button":
-        _add_button(s, w, n, x, y)
+        _add_button(s, w, n, x, y, p.get("color", "red"))
     else:
         raise ValueError(f"unknown prop kind {k!r}")
 
@@ -533,9 +534,10 @@ def _add_drawer(s, w, n: str, fx: float, y: float) -> None:
     )
 
 
-def _add_button(s, w, n: str, x: float, y: float) -> None:
-    """A push-button switch fixed to the desk: a cap on a sprung vertical joint `n` (0 = up, negative = pressed in).
-    The backend latches it on and off (push on, push off) from the cap's travel; an LED shows the state."""
+def _add_button(s, w, n: str, x: float, y: float, color: str = "red") -> None:
+    """A momentary push button fixed to the desk: a cap of `color` on a sprung vertical joint `n` (0 = up, negative =
+    pressed in) and an LED. The backend reads full presses from the cap's travel and lights the LED (the button panel
+    of the backend's `_press`)."""
     import mujoco
 
     BOX, CYL, SPH = mujoco.mjtGeom.mjGEOM_BOX, mujoco.mjtGeom.mjGEOM_CYLINDER, mujoco.mjtGeom.mjGEOM_SPHERE
@@ -549,7 +551,7 @@ def _add_button(s, w, n: str, x: float, y: float) -> None:
         type=SPH,
         pos=[bx / 2 - 0.007, by / 2 - 0.007, bz],
         size=[0.003, 0, 0],
-        rgba=[0.25, 0.08, 0.08, 1],
+        rgba=LED_OFF,
         contype=0,
         conaffinity=0,
         group=1,
@@ -561,7 +563,7 @@ def _add_button(s, w, n: str, x: float, y: float) -> None:
         axis=[0, 0, 1],
         range=[-BUTTON_TRAVEL, 0],
         limited=True,
-        stiffness=350.0,
+        stiffness=150.0,
         springref=0.004,
         damping=2.0,
         armature=0.002,
@@ -571,7 +573,7 @@ def _add_button(s, w, n: str, x: float, y: float) -> None:
         type=CYL,
         pos=[0, 0, BUTTON_CAP_H / 2],
         size=[BUTTON_R, BUTTON_CAP_H / 2, 0],
-        rgba=[0.86, 0.18, 0.16, 1],
+        rgba=COLORS[color],
         mass=0.005,
         friction=[1.0, 0.005, 0.0001],
     )

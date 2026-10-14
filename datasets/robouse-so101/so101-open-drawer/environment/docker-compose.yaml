@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/so101"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:9872976404b823380df2b35b5785e41a78b74aba705ac6f5616c4df6a0198500"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:10ec2443b5cc99c9b69215e3c7782fc63b96ad3cb0667164fef10c8ef0eea076"
     network_mode: none
     init: true
     volumes:

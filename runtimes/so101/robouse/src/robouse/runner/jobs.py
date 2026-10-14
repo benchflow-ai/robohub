@@ -62,6 +62,38 @@ def select_tasks(
     return tasks
 
 
+def resume_refusal(job_dir: Path, harness: str, model: str) -> str | None:
+    """Why `--resume` cannot add trials of (harness, model) to this job folder, or None. A job holds one pair: when its
+    trials recorded another (models.canonical; robouse 0.4.0 left the model empty for its default, which reads as
+    baseten/zai-org/GLM-5.3), resuming would fill the rest of the job with a different pair."""
+    from ..harnesses import models
+    from .trial import image_input_plan
+
+    plan = image_input_plan(harness, model)
+    want = models.canonical(plan["harness"], plan["model"] or "")
+    other: dict[tuple[str, str], int] = {}
+    for cj in job_dir.glob("*/config.json"):
+        try:
+            c = json.loads(cj.read_text())
+        except (OSError, ValueError):  # a trial folder that is still being written, or broken
+            continue
+        if isinstance(c, dict) and c.get("harness"):
+            pair = models.canonical(str(c["harness"]), str(c.get("model") or ""))
+            if pair != want:
+                other[pair] = other.get(pair, 0) + 1
+    if not other:
+        return None
+
+    def name(pair: tuple[str, str]) -> str:
+        return f"{pair[0]} with {pair[1]}" if pair[1] else pair[0]
+
+    found = ", ".join(f"{name(p)} ({n} trial{'s' * (n != 1)})" for p, n in sorted(other.items()))
+    return (
+        f"--resume: {job_dir} holds trials of {found}, not of {name(want)}; a job holds one harness and model, so run "
+        "this pair into a new --out"
+    )
+
+
 def run_many(
     root: Path,
     harness: str,
@@ -95,6 +127,8 @@ def run_many(
     if (
         resume
     ):  # skip (task, seed, epoch) already finished in this job (an unfinished trial dir is left as evidence and rerun)
+        if why := resume_refusal(job_dir, harness, model):  # only trials of the same pair count as done
+            raise ValueError(why)
         done = set()
         for rj in job_dir.glob("*/result.json"):
             try:

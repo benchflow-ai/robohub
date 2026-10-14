@@ -124,7 +124,7 @@ class Profile:
 
 
 # MakerMods Metal: vendor soft limits (LeRobot MetalFollowerConfigBase.joint_limits) shaved by 1 deg, and kept at least
-# 2.2 deg inside the mechanical stops measured on the bench on 2026-09-05 (~/benchflow/robot/recordings): elbow_flex
+# 2.2 deg inside the mechanical stops measured on the bench on 2026-09-05 (recorded sessions): elbow_flex
 # 174 (the forearm stopped at 176.37 against its stop while commanded to 180, 13:16 session), shoulder_lift -2.5 (with
 # torque off the parked arm reads up to +0.09) and gripper 2 (the closed jaws read -0.25). Gripper capped at 115 deg
 # (the vendor stroke table's widest jaw opening), 0 = closed. Tool point: 0.122 m along Link6's x axis (fingertip

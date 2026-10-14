@@ -45,7 +45,7 @@ GRIP_LOW, GRIP_HIGH = 2.0, 98.0  # the real profile's gripper limits
 TOOL_CLEARANCE = 0.004  # move_to refuses targets closer to the desk than this (the real envelope's tool clearance)
 IK_TOL = 0.005  # m: a move_to whose best joint solution misses by more is refused, as on the real arm
 SETTLE_DEG = 1.0
-BUTTON_ON_DEPTH, BUTTON_OFF_DEPTH = 0.0045, 0.0015
+BUTTON_ON_DEPTH, BUTTON_OFF_DEPTH = 0.0045, 0.0015  # a press: the cap in past 4.5 mm; let up: back above 1.5 mm
 
 
 class So101Backend(EmbodiedBackend):
@@ -105,44 +105,37 @@ class So101Backend(EmbodiedBackend):
                     "zero holds",
                 )
             )
+        fr = "rig" if self.bimanual else "base"  # the rig frame (midway between the bases) or the arm's base frame
+        fixtures = any(p["kind"] in ("drawer", "button", "zone", "marker") for p in self.task.props)
+        fields = [  # one per `robo observe` field: (name, kind, doc, units, frame)
+            ("joint_pos", "proprio", "measured arm joints by name", "deg", ""),
+            (
+                "target",
+                "proprio",
+                "current joint and gripper targets (what `robo act` changes)",
+                "deg; gripper 0-100",
+                "",
+            ),
+            ("gripper", "proprio", "measured gripper: 0 = closed, 100 = fully open", "0-100", ""),
+            ("gripper_opening_m", "proprio", "distance between the inner faces of the jaw tips", "m", ""),
+            ("holding", "proprio", "the object both jaws touch, or null", "", ""),
+            ("tool_pos", "proprio", "tool point between the fingertips", "m", fr),
+            ("tool_axis", "proprio", "direction the fingers point (unit vector)", "", fr),
+            ("jaw_axis", "proprio", "direction from the fixed jaw toward the moving jaw (unit vector)", "", fr),
+            ("jaw_tips", "proprio", "inner faces of the fixed and the moving jaw at their tips", "m", fr),
+            ("objects", "world", "free objects: position, yaw, tilt, size and colour", "m, deg", fr),
+            *(
+                [("fixtures", "world", "drawer, buttons, zone or marker: position and state", "m", fr)]
+                if fixtures
+                else []
+            ),
+            ("desk", "world", "the desk top's height and extent", "m", fr),
+            *([("arm_bases", "world", "each arm's base position", "m", fr)] if self.bimanual else []),
+            *([("progress", "world", "the task's stage as a fraction (0 to 1)", "", "")] if self.task.progress else []),
+            ("time_s", "proprio", "simulated time since the episode started", "s", ""),
+        ]
         sensors = [
-            Sensor(
-                "joint_pos",
-                "proprio",
-                ["joint_pos", "target"],
-                "measured joints by name and the current targets",
-                units="deg",
-            ),
-            Sensor(
-                "gripper",
-                "proprio",
-                ["gripper", "gripper_opening_m", "holding"],
-                "measured gripper (0-100), the distance between the jaw tips, the object both jaws touch",
-            ),
-            Sensor(
-                "tool",
-                "proprio",
-                ["tool_pos", "tool_axis", "jaw_axis"],
-                "tool point between the fingertips, approach direction and jaw closing direction",
-                units="m",
-                frame="world",
-            ),
-            Sensor(
-                "objects",
-                "world",
-                ["objects"],
-                "free objects: position, yaw, tilt, size",
-                units="m, deg",
-                frame="world",
-            ),
-            Sensor(
-                "fixtures",
-                "world",
-                ["fixtures", "desk"],
-                "drawer opening, button state, zones, trays' places",
-                units="m",
-                frame="world",
-            ),
+            *[Sensor(n, k, [n], doc, units=u, frame=f) for n, k, doc, u, f in fields],
             *[Sensor(f"camera:{c}", "camera", [], mount="wrist" if "wrist" in c else "world") for c in self._cameras()],
         ]
         arm_arg = [SkillArg("arm", "enum", choices=["left", "right"], doc="which arm")] if self.bimanual else []
@@ -233,7 +226,8 @@ class So101Backend(EmbodiedBackend):
         mujoco.mj_forward(m, d)
         self._tables()
         self.events, self._event_keys = [], set()
-        self.button_on, self.button_pressed = False, False
+        self.pressed = {n: False for n in self.buttons}  # cap in past the press depth (until it comes back up)
+        self.entered, self.unlocked = [], False
         self.since: dict[str, float | None] = {}
         self.stage = 0
         self.task_state: dict = {}
@@ -268,10 +262,9 @@ class So101Backend(EmbodiedBackend):
         self.desk = m.geom("desk").id
         self.label[self.desk] = "desk"
         self.drawer = next((p["name"] for p in self.task.props if p["kind"] == "drawer"), None)
-        self.button = next((p["name"] for p in self.task.props if p["kind"] == "button"), None)
-        if self.button:
-            self.button_q = m.jnt_qposadr[m.joint(self.button).id]
-            self.button_led = m.geom(f"{self.button}_led").id
+        self.buttons = [p["name"] for p in self.task.props if p["kind"] == "button"]
+        self.button_q = {n: m.jnt_qposadr[m.joint(n).id] for n in self.buttons}
+        self.button_led = {n: m.geom(f"{n}_led").id for n in self.buttons}
         if self.drawer:
             self.drawer_q = m.jnt_qposadr[m.joint(self.drawer).id]
 
@@ -308,18 +301,36 @@ class So101Backend(EmbodiedBackend):
             for pre in self.arms:
                 d.ctrl[self.act[pre]] = old[pre] + f * (new[pre] - old[pre])
             mujoco.mj_step(m, d)
-            if self.button and k % 5 == 4:
-                self._button()
+            if self.buttons and k % 5 == 4:
+                self._buttons()
         self._monitor()
 
-    def _button(self) -> None:
-        depth = -float(self.data.qpos[self.button_q])
-        if not self.button_pressed and depth > BUTTON_ON_DEPTH:
-            self.button_pressed = True
-            self.button_on = not self.button_on  # push on, push off
-            self.model.geom_rgba[self.button_led] = [0.2, 0.95, 0.3, 1] if self.button_on else [0.25, 0.08, 0.08, 1]
-        elif self.button_pressed and depth < BUTTON_OFF_DEPTH:
-            self.button_pressed = False
+    def _depth(self, n: str) -> float:
+        return max(0.0, -float(self.data.qpos[self.button_q[n]]))
+
+    def _buttons(self) -> None:
+        for n in self.buttons:
+            depth = self._depth(n)
+            if not self.pressed[n] and depth > BUTTON_ON_DEPTH:
+                self.pressed[n] = True
+                self._press(n)
+            elif self.pressed[n] and depth < BUTTON_OFF_DEPTH:
+                self.pressed[n] = False
+
+    def _press(self, n: str) -> None:
+        """The button panel: a press of the code's next button extends the entry and lights that button's LED; any
+        other press clears the entry (all LEDs off), and a press of the code's first button then starts a new one.
+        Once the whole code is entered the panel stays unlocked, its LEDs lit."""
+        code = self.task.code or []
+        if self.unlocked or not code:
+            return
+        if n == code[len(self.entered)]:
+            self.entered.append(n)
+        else:
+            self.entered = [n] if n == code[0] else []
+        self.unlocked = len(self.entered) == len(code)
+        for b in self.buttons:
+            self.model.geom_rgba[self.button_led[b]] = S.LED_ON if b in self.entered else S.LED_OFF
 
     def _monitor(self) -> None:
         t = float(self.data.time)
@@ -492,14 +503,14 @@ class So101Backend(EmbodiedBackend):
                     "width_m": S.DRAWER_W,
                 }
             elif k == "button":
-                depth = max(0.0, -float(self.data.qpos[self.button_q]))
+                depth = self._depth(n)
                 fx[n] = {
                     "pos": r3([p["pos"][0], p["pos"][1], S.BUTTON_BASE[2] + S.BUTTON_CAP_H - depth], 4),
-                    "on": bool(self.button_on),
+                    "color": p.get("color", "red"),
+                    "lit": n in self.entered,
                     "pressed_in_m": round(depth, 4),
                     "cap_diameter_m": 2 * S.BUTTON_R,
                     "travel_m": S.BUTTON_TRAVEL,
-                    "how": "push on, push off: each full press toggles it",
                 }
             elif k == "zone":
                 fx[n] = {"pos": r3([p["pos"][0], p["pos"][1], 0.0]), "diameter_m": 2 * S.ZONE_R}
@@ -509,7 +520,7 @@ class So101Backend(EmbodiedBackend):
             st["fixtures"] = fx
         x0, x1, y0, y1 = S.desk_extent(self.rig)
         st["desk"] = {"top_z": 0.0, "x": [round(x0, 3), round(x1, 3)], "y": [round(y0, 3), round(y1, 3)]}
-        pr = self.task.progress(self)
+        pr = self.task.progress(self) if self.task.progress else None
         if pr is not None:
             st["progress"] = pr
         st["time_s"] = round(float(self.data.time), 2)

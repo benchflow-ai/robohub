@@ -5,4 +5,4 @@ command. A trusted episode server (`robouse serve`) owns the simulator, the step
 and the success check; the agent never touches simulator objects directly.
 """
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"

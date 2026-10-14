@@ -1,5 +1,5 @@
-"""Contact watch for real arms, ported from the 2026-09-05 Metal harness (~/benchflow/robot/safety.py,
-SafeArm.move_joints), which watched descents near the table on the MakerMods Metal arm.
+"""Contact watch for real arms, ported from the bench harness of the 2026-09-05 Metal sessions (its
+SafeArm.move_joints; not published), which watched descents near the table on the MakerMods Metal arm.
 
 Fed once per control step (the command just sent, the joints and telemetry read after it), it follows the motion from the
 command stream (a move, the arm settling after it, a hold) and reports a contact when:

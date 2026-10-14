@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/so101"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:9872976404b823380df2b35b5785e41a78b74aba705ac6f5616c4df6a0198500"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:10ec2443b5cc99c9b69215e3c7782fc63b96ad3cb0667164fef10c8ef0eea076"
     network_mode: none
     init: true
     volumes:
@@ -41,14 +41,14 @@ services:
         ---
         schema_version: '1.3'
         task:
-          name: robouse/so101-press-button
-          description: 'SO-101 arm: switch the push button on'
+          name: robouse/so101-press-buttons-in-order
+          description: 'SO-101 arm: press the three buttons in the right order'
         metadata:
           source_benchmark: robouse original (so101 suite; SO-101 follower arm from MuJoCo Menagerie)
-          source_task: so101-press-button
+          source_task: so101-press-buttons-in-order
           suite: so101
           category: articulated
-          difficulty: easy
+          difficulty: medium
           tags:
           - so101
           - menagerie
@@ -59,11 +59,11 @@ services:
         verifier:
           timeout_sec: 120
         robouse:
-          id: so101-press-button
+          id: so101-press-buttons-in-order
           backend: so101
-          env: so101-press-button
+          env: so101-press-buttons-in-order
           seed: 0
-          max_steps: 400
+          max_steps: 600
           camera: front
           cameras:
           - front

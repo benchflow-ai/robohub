@@ -2,13 +2,15 @@
 # scripts/export.py reads this file and a Robo Use checkout and writes runtimes/ and datasets/;
 # scripts/build_registry.py pins every dataset version to a commit in registry.json.
 
-# The Robo Use release the next export comes from (scripts/export.py refuses a checkout of another version).
-# export.json records the release each dataset was exported from: rle-bench/rle-bench and capgym/cap-x from 0.3.0,
-# every other dataset from 0.2.0; benchflow/so101 from Robo Use 0.4.0 with the so101 backend and suite (branch
-# hub-1014/so101-desk; the commit is in export.json).
+# The Robo Use source the next export comes from (scripts/export.py refuses a checkout of another version): a release
+# on PyPI (repo: its PyPI page), or an unreleased build (repo: the git repository, and `branch`), whose commit export.json
+# records. export.json records the source of each dataset: rle-bench/rle-bench and capgym/cap-x from 0.3.0, every
+# other dataset from 0.2.0 (PyPI releases), except benchflow/so101: an unreleased build, Robo Use 0.4.1 plus the so101
+# backend and suite (branch hub-1014/so101-desk), which PyPI's 0.4.1 does not contain.
 robouse:
-  repo: https://pypi.org/project/robouse/0.4.0/
-  package_version: 0.4.0
+  repo: https://github.com/benchflow-ai/robouse
+  branch: hub-1014/so101-desk
+  package_version: 0.4.1
 
 # Simulator runtimes (runtimes/<name>, built from templates/runtimes/<name>). Every task's compose file builds its
 # simulator image from one of them.

@@ -4,9 +4,9 @@ through `dimcode run PROMPT`.
 Isolation: every dimcode path is per trial, inside the workspace's `.robouse/dimcode/` (DIMCODE_HOME with config.json,
 settings.json and models.json; XDG state, cache and runtime folders; HOME), so no user config, credentials, sessions
 or DimOS installation leak in, and automatic DimOS installation is off. The model is a provider-prefixed id (default
-baseten/zai-org/GLM-5.3), always reached through the trial's model gateway over Anthropic Messages (gateway.py), which
-holds the provider key, applies the trial's image input and spend cap: Pi gets the gateway's URL and the per-trial
-gateway key (from $ROBOUSE_GATEWAY_KEY; no key is written to a file).
+glm/glm-5.3: GLM-5.3 on the Z.ai Coding Plan), always reached through the trial's model gateway over Anthropic Messages
+(gateway.py), which holds the provider key, applies the trial's image input and spend cap: Pi gets the gateway's URL and
+the per-trial gateway key (from $ROBOUSE_GATEWAY_KEY; no key is written to a file).
 
 Interface (harnesses/interface.py): with cli, dimcode's shell tool runs `robo`. With mcp or both, `robo mcp --http`
 serves a streamable HTTP endpoint on 127.0.0.1 at an unguessable path for the life of the agent (dimcode speaks MCP
@@ -53,14 +53,14 @@ def _exe() -> list[str]:
 
 
 def build(model, prompt, workspace: Path, task, env: dict):
-    from . import PROMPT_PREFIX, _gateway, _gateway_launch, models
+    from . import GATEWAY_PROTOCOLS, PROMPT_PREFIX, _gateway, _gateway_launch, models
     from . import interface as iface
 
     interface = env.get("ROBOUSE_INTERFACE", "cli")
     ref = models.resolve("dimcode", model or models.DEFAULT_MODELS["dimcode"])
     exe = _exe()
     images = env.get("_ROBOUSE_IMAGE_INPUT", "1") == "1"  # read before _gateway removes the private variables
-    gw = _gateway(ref, env, "anthropic-messages")
+    gw = _gateway(ref, env, GATEWAY_PROTOCOLS["dimcode"])
 
     root = workspace / ".robouse" / "dimcode"
     home, state = root / "home", root / "state"

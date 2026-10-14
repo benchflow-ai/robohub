@@ -1,6 +1,6 @@
 """Safety layer for real arms, enforced inside the trusted episode server (the agent cannot bypass it).
 
-Every command goes through `Guard.command()`, in this order (a port of ~/benchflow/robot/safety.py and the
+Every command goes through `Guard.command()`, in this order (a port of the bench harness's safety layer and the
 inspect-robots-metal adapter, which ran the 2026-09-05 Metal arm sessions without damage):
 
 1. e-stop latch: if the e-stop file exists (`robouse estop`), nothing is sent; the episode ends with `safety_stop`.

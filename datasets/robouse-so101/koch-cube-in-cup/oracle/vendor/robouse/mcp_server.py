@@ -418,7 +418,8 @@ def _host_port(spec: str) -> tuple[str, int]:
 
 def main(argv: list[str] | None = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
-    if args[:1] in (["-h"], ["--help"]):
+    own = args[: args.index("--run")] if "--run" in args else args  # what follows --run is the command's own
+    if any(a in ("-h", "--help") for a in own):
         print(__doc__)
         return 0
     if "--http" not in args:

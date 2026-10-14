@@ -149,7 +149,11 @@ def _verify(task: Task, episode: dict, tdir: Path) -> float:
             ["bash", str(task.verifier_script)],
             capture_output=True,
             text=True,
-            env={**os.environ, "ROBOUSE_EPISODE_DIR": private, "ROBOUSE_VERIFIER_DIR": str(tdir / "verifier")},
+            env={
+                **without_provider_keys(os.environ),
+                "ROBOUSE_EPISODE_DIR": private,
+                "ROBOUSE_VERIFIER_DIR": str(tdir / "verifier"),
+            },
             check=False,
         )
     (tdir / "verifier" / "test-stdout.txt").write_text(vt.stdout + vt.stderr)
@@ -177,14 +181,26 @@ def image_input_plan(harness: str, model: str) -> dict:
     model as text-only or does not describe it (harnesses/models.py), or ROBOUSE_AGENT_IMAGES=0 turns images off for
     the run. The trial's model gateway then replaces every image part before it reaches the provider. The task itself
     is unchanged: the agent's workspace still holds the camera images as files (code may read their pixels), and a
-    vision task never falls back to the object state it hides. Harnesses without a language model record None."""
+    vision task never falls back to the object state it hides. Harnesses without a language model record None.
+
+    Refused (ValueError): a legacy -glm harness name or a baseten/ model (recorded trials only), and show-harness
+    through the gateway with a model the registry does not list as reading images (its policy is the model's reading
+    of the camera images, which the gateway would remove)."""
     from .. import config
     from ..harnesses import models
 
-    canon, mid = models.legacy(harness, model)
+    if why := models.legacy_refusal(harness):  # claude-code-glm etc.: names of recorded trials only
+        raise ValueError(why)
+    if why := models.history_refusal(model):  # baseten/...: the models of recorded trials only
+        raise ValueError(why)
+    canon, mid = harness, model
     if canon not in LLM_HARNESSES:
         return {"harness": canon, "model": mid, "image_input": None, "image_input_reason": "no language model"}
     mid = mid or models.DEFAULT_MODELS.get(canon, "")
+    if not mid:  # show-harness: no default model
+        from ..harnesses.show_harness import NO_MODEL
+
+        raise ValueError(NO_MODEL)
     if canon in SELF_HOSTED_HARNESSES and models.split(mid)[0] is None:
         # a model served by the user (e.g. a fine-tuned VLM on vLLM): no gateway, so nothing removes images
         return {
@@ -198,6 +214,13 @@ def image_input_plan(harness: str, model: str) -> dict:
     plan = {"harness": canon, "model": ref.id if models.split(mid)[0] else mid, "accepts_images": accepts}
     if canon in models.NO_IMAGE_HARNESSES:
         plan.update(image_input=False, image_input_reason=f"{canon} passes no images to its model")
+    elif accepts is not True and canon == "show-harness":  # its policy is the model's reading of the camera images
+        listed = f"lists {ref.id} as text-only" if accepts is False else f"lists no image input for {ref.id}"
+        raise ValueError(
+            f"show-harness needs a model that reads images, and the model registry {listed}: through the model "
+            "gateway it would get no camera image. A model you serve at ROBOUSE_SHOW_HARNESS_URL, named without a "
+            "provider prefix, gets them"
+        )
     elif accepts is not True:
         why = (
             "the model registry lists it as text-only"
@@ -215,6 +238,22 @@ def image_input_plan(harness: str, model: str) -> dict:
     return plan
 
 
+def check_model(harness: str, model: str) -> dict:
+    """image_input_plan(harness, model), after checking that the harness can start with this model: a model behind the
+    model gateway has its provider's settings (its key, a base URL without a default) and, with the spend cap on, a
+    price. Raises ValueError or RuntimeError naming what is missing; sends no request and creates nothing. `robouse
+    run`/`run-many` and tools that start trials themselves call it before any trial folder exists."""
+    from ..harnesses import GATEWAY_PROTOCOLS, gateway, models
+
+    plan = image_input_plan(harness, model)
+    h, m = plan["harness"], plan["model"] or ""
+    if h in GATEWAY_PROTOCOLS and models.split(m)[0] is not None:
+        ref = models.resolve(h, m)
+        if models.NATIVE_VENDORS.get(h) != ref.provider:
+            gateway.check_settings(ref, GATEWAY_PROTOCOLS[h], spend_cap_usd())
+    return plan
+
+
 def spend_cap_usd() -> float:
     """The per-trial model spend cap in USD (ROBOUSE_SPEND_CAP_USD, default 5; 0 turns it off). The model gateway
     enforces it; harnesses on their own vendor (no gateway) are not capped."""
@@ -227,6 +266,27 @@ def _secret_env_names() -> set[str]:
     from ..harnesses import models
 
     return models.secret_env_names()
+
+
+# Model provider settings by prefix (the registry's key names come from `_secret_env_names`); GLM_ and ZAI_ also cover
+# a Z.ai key kept under another name, such as GLM_CODING_API_KEY, and its endpoint
+PROVIDER_KEY_PREFIXES = ("ANTHROPIC_", "CLAUDE_CODE_OAUTH", "OPENAI_", "BASETEN", "OPENROUTER", "GLM_", "ZAI_")
+# A variable whose name has one of these parts holds a credential: a token, key, secret, password or login
+SECRET_NAME = re.compile(r"SECRET|PASSWORD|PASSWD|APIKEY|(?:^|_)(?:TOKEN|KEY|PASS|AUTH|CREDENTIALS?)(?:_|$)", re.I)
+
+
+def without_provider_keys(environ) -> dict[str, str]:
+    """An environment without model provider keys: the episode server's and the verifier's (neither calls a model)."""
+    names = _secret_env_names()
+    return {k: v for k, v in environ.items() if not k.startswith(PROVIDER_KEY_PREFIXES) and k not in names}
+
+
+def agent_env(environ) -> dict[str, str]:
+    """The environment an agent starts from: the runner's, without model provider keys and without any variable whose
+    name marks a credential (`SECRET_NAME`, e.g. GITHUB_TOKEN, HF_TOKEN, AWS_SECRET_ACCESS_KEY, SSH_AUTH_SOCK, or the
+    session token of an agent that launched the runner), whatever set it. A harness adds back what its program needs:
+    its vendor's login, a gateway key, a policy server's token."""
+    return {k: v for k, v in without_provider_keys(environ).items() if not SECRET_NAME.search(k)}
 
 
 def _wait_agent(agent: subprocess.Popen, timeout: float, stop_file: Path | None) -> tuple[int | None, bool]:
@@ -310,6 +370,26 @@ def _harness_error(tdir: Path, harness: str, agent_rc: int | None, episode: dict
     if detail:
         return f"AgentError: the {harness} harness reported an error without ending the episode ({detail})"
     return None
+
+
+def _provider_error(stats: object, episode: dict) -> str | None:
+    """An agent that never ended the episode itself, behind a model gateway where none of its model requests succeeded
+    (each one failed, e.g. with HTTP 429 at a plan's usage limit, while the harness kept retrying until its time
+    limit): the model never answered, so the trial is an infrastructure failure, not the model's result. Once one
+    request has succeeded, the trial is scored as usual, however the rest went."""
+    if not isinstance(stats, dict) or not stats.get("failures") or stats.get("successes"):
+        return None
+    if not (episode.get("outcome") == "gave_up" and str(episode.get("agent_text", "")).startswith(RUNNER_PREFIX)):
+        return None
+    limit = ""
+    if stats.get("rate_limited"):
+        some = "all" if stats["rate_limited"] == stats["failures"] else "some"
+        limit = f", {some} answered with HTTP 429: the provider's rate or usage limit"
+    n, calls = int(stats.get("requests") or 0), int(stats.get("upstream_calls") or 0)
+    return (
+        f"ProviderError: every model request of the agent failed ({n} request{'s' * (n != 1)}, {calls} "
+        f"call{'s' * (calls != 1)} to the provider{limit}); gateway/requests.jsonl has the errors"
+    )
 
 
 def run_trial(
@@ -400,7 +480,8 @@ def run_trial(
     # the reference solution's token and the key that signs the verdict go to the server on its stdin: never in an
     # environment or a command line, which other processes of this user can read
     oracle_token, result_key = secrets.token_hex(16), secrets.token_hex(32)
-    server_env = {k: v for k, v in os.environ.items() if k != "ROBOUSE_ORACLE_TOKEN"}
+    # nor a provider key: the server calls no model, and other processes of this user may read its environment
+    server_env = {k: v for k, v in without_provider_keys(os.environ).items() if k != "ROBOUSE_ORACLE_TOKEN"}
     with open(tdir / "episode" / "server.log", "w") as server_log:  # the child keeps its own copy of the handle
         server = subprocess.Popen(
             server_cmd, env=server_env, stdin=subprocess.PIPE, stdout=server_log, stderr=subprocess.STDOUT
@@ -419,20 +500,18 @@ def run_trial(
             ready, server, timeout=float(task.spec.get("ready_timeout_s", 300)), log=tdir / "episode" / "server.log"
         )
         (ws / ".robouse" / "socket").write_text(sock)
-        # no provider key reaches an agent: a harness adds its own vendor's login back; others use the gateway
-        secret_names = _secret_env_names()
-        base_env = {
-            k: v
-            for k, v in os.environ.items()
-            if not k.startswith(("ANTHROPIC_", "CLAUDE_CODE_OAUTH", "OPENAI_", "BASETEN", "OPENROUTER"))
-            and k not in secret_names
-        }
+        # no provider key or other credential reaches an agent: a harness adds its own vendor's login back; others use
+        # the gateway. That includes the VLM grader's key (ROBOUSE_GRADER_API_KEY), which the episode server keeps for
+        # `real.verdict: vlm`
+        base_env = agent_env(dict(os.environ))
         base_env["PATH"] = (
             f"{ws / '.robouse' / 'bin'}:{Path(py).parent}:{base_env.get('PATH', '')}"
             if harness == "oracle"
             else f"{ws / '.robouse' / 'bin'}:{base_env.get('PATH', '')}"
         )
         base_env["ROBOUSE_SOCKET"] = sock
+        for k in (*sandbox.HOME_VARS, "SSH_AUTH_SOCK"):  # the runner's own config homes (a harness sets the agent's)
+            base_env.pop(k, None)  # and its SSH agent
         base_env["_ROBOUSE_TRIAL_DIR"] = str(tdir)  # read and removed by the harness builder (model gateway)
         base_env["_ROBOUSE_IMAGE_INPUT"] = "0" if plan["image_input"] is False else "1"
         base_env["_ROBOUSE_SPEND_CAP_USD"] = str(cap)
@@ -451,7 +530,11 @@ def run_trial(
             ports = tuple(
                 int(m) for v in launch.env.values() for m in re.findall(r"//(?:127\.0\.0\.1|localhost):(\d+)", str(v))
             )
-            launch.cmd, cfg["sandbox"] = sandbox.wrap(launch.cmd, ws, sock, [job_dir, task.path], ports)
+            deny = [job_dir, task.path]
+            own = sandbox.own_homes(launch.env)
+            launch.cmd, cfg["sandbox"] = sandbox.wrap(launch.cmd, ws, sock, deny, ports, own)
+            if cfg["sandbox"] != "none":  # PATH entries the agent cannot read (e.g. `uvx`'s, in the uv cache)
+                launch.env["PATH"] = sandbox.reachable_path(launch.env.get("PATH", ""), deny, own)
         # what the agent was given besides its prompt (the task.md body): the files in its workspace
         cfg["workspace_files"] = _workspace_files(ws)
         (tdir / "config.json").write_text(json.dumps(cfg, indent=2))
@@ -534,6 +617,8 @@ def run_trial(
         exc = "VerdictError: the episode's result.json is missing or does not carry the server's signature"
     if exc is None and not timed_out and not budget_stop:  # a harness stopped at the spend cap did not fail
         exc = _harness_error(tdir, harness, agent_rc, episode)
+    if exc is None and not budget_stop and launch is not None:  # also after a timeout: the harness may retry until then
+        exc = _provider_error(launch.helper, episode)
     if timed_out and episode.get("outcome") == "gave_up":
         episode["outcome"] = "agent_timeout"
     if budget_stop and episode.get("outcome") in ("gave_up", "agent_timeout"):

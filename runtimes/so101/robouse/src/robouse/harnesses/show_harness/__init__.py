@@ -3,9 +3,9 @@
 (client.py, standard library only) runs inside the agent sandbox and drives the episode socket directly, like the VLA
 clients; see its docstring for the loop.
 
-Models:
-  provider-prefixed (default baseten/zai-org/GLM-5.3)  zero-shot mode, through the trial's model gateway
-                                                      (chat completions; image input and spend cap apply)
+Models (--model is required: the policy is the model's reading of the camera images, so there is no default):
+  provider-prefixed, of a model the provider registry  zero-shot mode, through the trial's model gateway
+  lists as reading images (others are refused)         (chat completions; image input and spend cap apply)
   any other name, with ROBOUSE_SHOW_HARNESS_URL        a self-hosted OpenAI-compatible server (vLLM serving a
                                                       Show-Harness LoRA, e.g. Qwen3.5-2B): fine-tuned mode, no gateway
   ROBOUSE_SHOW_HARNESS_TOKEN   token for that server (optional): a bearer token, or under the header the overrides name
@@ -25,6 +25,10 @@ from ... import config
 
 CLIENT = Path(__file__).with_name("client.py")
 MODES = ("zs", "ft")
+NO_MODEL = (
+    "show-harness needs --model: a provider-prefixed id of a model that reads images (through the model gateway), or "
+    "the name of a model you serve at ROBOUSE_SHOW_HARNESS_URL"
+)
 
 
 def overrides() -> dict:
@@ -39,11 +43,13 @@ def overrides() -> dict:
 
 
 def build(model, prompt, workspace: Path, task, env: dict):
-    from .. import Launch, _gateway, _gateway_launch, _task_language, models
+    from .. import GATEWAY_PROTOCOLS, Launch, _gateway, _gateway_launch, _task_language, models
 
+    if not model:
+        raise ValueError(NO_MODEL)
     over = overrides()
     served = config.env("ROBOUSE_SHOW_HARNESS_URL")
-    m = model or models.DEFAULT_MODELS["show-harness"]
+    m = model
     via_gateway = models.split(m)[0] is not None
     mode = str(over.pop("mode", "") or ("zs" if via_gateway or not served else "ft"))
     if mode not in MODES:
@@ -54,7 +60,7 @@ def build(model, prompt, workspace: Path, task, env: dict):
     cmd = ["python3", str(client), prompt]
     if via_gateway:
         ref = models.resolve("show-harness", m)
-        gw = _gateway(ref, env, "openai-completions")
+        gw = _gateway(ref, env, GATEWAY_PROTOCOLS["show-harness"])
         env.update(
             {
                 "ROBOUSE_GATEWAY_URL": gw.url,  # also lets the macOS sandbox allow this local port
@@ -70,7 +76,7 @@ def build(model, prompt, workspace: Path, task, env: dict):
         raise RuntimeError(
             f"show-harness model {m!r} has no provider prefix, so it needs ROBOUSE_SHOW_HARNESS_URL (an OpenAI-"
             "compatible server, e.g. vLLM serving a Show-Harness adapter); for a hosted model use a provider-prefixed "
-            "id such as baseten/zai-org/GLM-5.3"
+            "id of a model that reads images"
         )
     env.update(
         {

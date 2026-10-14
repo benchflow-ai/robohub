@@ -1,6 +1,6 @@
 """Reference solutions of the so101 suite. Each drives the arm(s) only through `robo` (the episode socket), like an
 agent: `move_to` and `grip` sequences computed from `robo observe` (above the object, descend, close, lift, move,
-lower, open), re-observing between grasps; scripted pulls and presses for the drawer and the button; for the ruler
+lower, open), re-observing between grasps; scripted pulls and presses for the drawer and the buttons; for the ruler
 handover the left arm presents the ruler at a fixed handover pose and the right arm grasps it before the left opens.
 
 The only robot facts they use besides the observation: the jaws close toward the fixed jaw (an object ends with its
@@ -285,29 +285,37 @@ def open_drawer(o) -> None:
     arm.move(t[0], t[1], 0.08, 0.5)
 
 
-def press_button(o) -> None:
+CODE = ["green_button", "green_button", "red_button", "blue_button"]  # the order the task's prompt gives
+
+
+def press_buttons(o) -> None:
     arm = Arm(o)
     arm.grip(CLOSED)
-    cap = np.asarray(o.state()["fixtures"]["button"]["pos"], float)
-    arm.move(cap[0], cap[1], cap[2] + 0.05)  # gripper pointing down over the button first
-    for _ in range(2):
-        s = o.state()
-        b = s["fixtures"]["button"]
-        if b["on"]:
+    for _ in range(2):  # a missed press leaves the code unfinished: enter it again from the start
+        for name in CODE:
+            press_once(o, arm, name)
+        if all(b["lit"] for b in o.state()["fixtures"].values()):
             break
-        cap = np.asarray(b["pos"], float)
-        off = arm.tool(s) - arm.tips_mid(s)  # the closed fingertips press the cap (measured pointing down)
-        above = cap + off + np.array([0, 0, 0.04])
-        arm.move(*above)
-        # press down in 2 mm steps until the switch reads on (or the cap is in 5.5 mm of its 8), then let it up
-        z = cap[2] + off[2] + 0.004
-        for _ in range(12):
-            arm.move(cap[0] + off[0], cap[1] + off[1], z, 0.3)
-            b = o.state()["fixtures"]["button"]
-            if b["on"] or b["pressed_in_m"] >= 0.0055:
-                break
-            z -= 0.002
-        arm.move(*above, 0.5)
+
+
+def press_once(o, arm: Arm, name: str) -> None:
+    """One full press of a button with the closed fingertips: down in 2 mm steps until the cap is in 5 mm (a press
+    counts past 4.5 mm of its 8), then up 4 cm, which lets it up."""
+    s = o.state()
+    cap = np.asarray(s["fixtures"][name]["pos"], float)
+    if np.linalg.norm(arm.tool(s)[:2] - cap[:2]) > 0.03:
+        arm.move(cap[0], cap[1], cap[2] + 0.05)  # gripper pointing down over the button first
+        s = o.state()
+    off = arm.tool(s) - arm.tips_mid(s)  # from the closed fingertips to the tool point (measured pointing down)
+    above = cap + off + np.array([0, 0, 0.04])
+    arm.move(*above)
+    z = cap[2] + off[2] + 0.004
+    for _ in range(14):
+        arm.move(cap[0] + off[0], cap[1] + off[1], z, 0.3)
+        if o.state()["fixtures"][name]["pressed_in_m"] >= 0.005:
+            break
+        z -= 0.002
+    arm.move(*above, 0.5)
 
 
 def _ruler(o) -> tuple[np.ndarray, float, np.ndarray]:
@@ -416,7 +424,7 @@ ORACLES = {
     "so101-sort-by-color": sort_by_color,
     "so101-push-puck-to-zone": push_puck,
     "so101-open-drawer": open_drawer,
-    "so101-press-button": press_button,
+    "so101-press-buttons-in-order": press_buttons,
     "so101-bimanual-ruler-handover": ruler_handover,
     "so101-bimanual-lift-box": lift_box,
     "koch-cube-in-cup": koch_cube_in_cup,

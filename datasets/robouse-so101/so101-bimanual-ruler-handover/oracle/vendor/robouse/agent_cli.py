@@ -12,7 +12,7 @@ request.
   robo done ["message"]              end the episode and ask for scoring
   robo give-up ["message"]           end the episode without claiming success
   robo mcp [--http [HOST:]PORT]      serve these operations as MCP tools (stdio; --http: streamable HTTP)
-Add --json to any command for raw JSON output.
+Add --json to any command for raw JSON output. -h or --help anywhere prints this help and sends nothing.
 """
 
 from __future__ import annotations
@@ -24,6 +24,7 @@ import sys
 
 STEPPING_OPS = ("act", "move_to", "grip", "skill", "done", "give_up")
 STEPPING_TIMEOUT_S = 3600
+HELP_FLAGS = ("-h", "--help")
 
 
 def _send(req: dict, path: str | None = None) -> dict:
@@ -158,7 +159,8 @@ def main(argv: list[str] | None = None) -> int:
         return _mcp().main(args[1:])
     as_json = "--json" in args
     args = [a for a in args if a != "--json"]
-    if not args or args[0] in ("-h", "--help", "help"):
+    # a help flag anywhere is a request for help, never a message: `robo give-up --help` must not end the episode
+    if not args or args[0] == "help" or any(a in HELP_FLAGS for a in args):
         print(__doc__)
         return 0
     cmd, rest = args[0], args[1:]

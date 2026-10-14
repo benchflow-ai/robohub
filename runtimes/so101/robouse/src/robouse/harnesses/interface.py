@@ -66,9 +66,18 @@ def prompt_prefix(interface: str) -> str:
     return PROMPTS.get(interface, PROMPT_PREFIX)
 
 
-def robo_mcp_cmd(workspace: Path) -> list[str]:
-    """The stdio MCP server command, by absolute paths (the agent's PATH may not have `robo`)."""
-    return [shutil.which("python3") or "python3", str(workspace / ".robouse" / "bin" / "robo"), "mcp"]
+def robo_mcp_cmd(workspace: Path, path: str | None = None) -> list[str]:
+    """The stdio MCP server command, by absolute paths (the agent's PATH may not have `robo`). The server runs inside the
+    agent's sandbox and needs only the standard library, so its python3 is the first on `path` (default: this
+    process's PATH) that the sandbox lets the agent run: `uvx`, for one, puts the runner's Python, in the uv cache that
+    the sandbox denies, first on PATH."""
+    from .. import config
+    from ..runner import sandbox
+
+    path = os.environ.get("PATH", "") if path is None else path
+    if config.flag("ROBOUSE_SANDBOX", default=True):
+        path = sandbox.reachable_path(path, [])
+    return [shutil.which("python3", path=path) or "python3", str(workspace / ".robouse" / "bin" / "robo"), "mcp"]
 
 
 def server_env(sock: str, env: dict) -> dict:
@@ -79,7 +88,7 @@ def server_env(sock: str, env: dict) -> dict:
 
 
 def stdio_config(workspace: Path, sock: str, env: dict) -> dict:
-    cmd = robo_mcp_cmd(workspace)
+    cmd = robo_mcp_cmd(workspace, env.get("PATH"))
     return {"type": "stdio", "command": cmd[0], "args": cmd[1:], "env": server_env(sock, env)}
 
 

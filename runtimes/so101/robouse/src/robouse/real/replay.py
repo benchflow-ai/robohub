@@ -1,7 +1,7 @@
 """Hardware-in-the-loop mock: replays recorded real-robot sessions behind the vendor SDK seam.
 
 A fixture (`real/fixtures/<name>/fixture.json` + `keyframes/*.jpg`, built by `tools/assets/make_hil_fixture.py` from a session
-recorded on the bench by ~/benchflow/robot/recorder.py) holds:
+recorded on the bench with the bench recorder, whose logs are not published) holds:
   - the recorded control log: per step the command sent, the measured joints, torques and temperatures;
   - a per-joint tracking model fitted to that log (measured_next = measured + gain * (command - measured) + bias), so
     the mock follows commands the way the real arm did (lag, gravity sag);

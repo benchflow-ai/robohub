@@ -16,7 +16,7 @@ from ..tasks import Task, bundled_tasks_root, find_tasks, load_task, resolve_tas
 
 HARNESS_HELP = (
     "harness: oracle, noop, claude-code, codex, mini-swe-agent, dimcode, show-harness, molmoact2 or vla; --model takes "
-    "a provider-prefixed id such as baseten/zai-org/GLM-5.3 (https://robouse.ai/docs/harnesses/)"
+    "a provider-prefixed id such as glm/glm-5.3 (https://robouse.ai/docs/harnesses/)"
 )
 RECORD_SIZE_HELP = (
     "render the episode video at this size, e.g. 1280x720; agent images are unchanged "
@@ -30,7 +30,7 @@ SIM_HINT = (
 
 
 def _engine_opts(p: argparse.ArgumentParser) -> None:
-    # The BenchFlow engine needs a BenchFlow release with the task-format hook (on BenchFlow's `robouse` branch today),
+    # The BenchFlow engine needs a BenchFlow release with the task-format hook (no PyPI release of BenchFlow has it yet),
     # so these options work but are not listed until that release exists.
     p.add_argument("--engine", choices=("local", "benchflow"), default="local", help=argparse.SUPPRESS)
     p.add_argument("--sandbox", default="docker", help=argparse.SUPPRESS)
@@ -121,7 +121,8 @@ def register(sub: argparse._SubParsersAction) -> None:
     m.add_argument(
         "--resume",
         action="store_true",
-        help="skip tasks that have a finished trial in --out that did not fail on infrastructure",
+        help="skip tasks that have a finished trial in --out that did not fail on infrastructure (refused when --out "
+        "holds trials of another harness or model)",
     )
     m.add_argument("--dry-run", action="store_true", help="print the resolved trial plan and exit")
     _trial_opts(m, many=True)
@@ -152,21 +153,35 @@ def _unknown_harness(name: str) -> int:
     from importlib.metadata import entry_points
 
     from ..harnesses import HARNESSES
-    from ..harnesses.models import LEGACY_HARNESSES
+    from ..harnesses.models import legacy_refusal
 
-    if (
-        name in HARNESSES
-        or name in LEGACY_HARNESSES
-        or any(ep.name == name for ep in entry_points(group="robouse.harnesses"))
-    ):
+    if why := legacy_refusal(name):  # claude-code-glm etc.: kept to read the September runs, not to run
+        print(f"robouse: {why}", file=sys.stderr)
+        return 2
+    if name in HARNESSES or any(ep.name == name for ep in entry_points(group="robouse.harnesses")):
         return 0
     print(f"robouse: unknown harness {name!r}; harnesses: {', '.join(HARNESSES)}", file=sys.stderr)
     return 2
 
 
+def _check_model(harness: str, model: str) -> int:
+    """0 when the harness can start with this model (runner.trial.check_model), else the message, naming what to set,
+    and 2. Sends no request."""
+    from ..runner.trial import check_model
+
+    try:
+        check_model(harness, model)
+    except (ValueError, RuntimeError) as e:
+        print(f"robouse: {e}", file=sys.stderr)
+        return 2
+    return 0
+
+
 def _prepare_local(a: argparse.Namespace) -> int:
     """Settings the episode servers read from the environment, and the simulator check. 0 when ready."""
-    if getattr(a, "harness", None) and (rc := _unknown_harness(a.harness)):  # `serve` has no harness
+    if getattr(a, "harness", None) and (  # `serve` has no harness
+        (rc := _unknown_harness(a.harness)) or (rc := _check_model(a.harness, a.model))
+    ):
         return rc
     if getattr(a, "rig", None):
         os.environ["ROBOUSE_RIG"] = str(Path(a.rig).resolve())
@@ -299,6 +314,11 @@ def run_many(a: argparse.Namespace) -> int:
     if rc := _prepare_local(a):
         return rc
     from ..runner import run_many as run_trials
+    from ..runner.jobs import resume_refusal
+
+    if a.resume and (why := resume_refusal(Path(a.out), a.harness, a.model)):
+        print(f"robouse: {why}", file=sys.stderr)
+        return 2
 
     results = run_trials(
         root,
@@ -367,6 +387,11 @@ def _benchflow_missing(e: ImportError, what: str) -> int:
 
 
 def _run_benchflow(a: argparse.Namespace, tasks: list[Task]) -> int:
+    from ..harnesses.models import history_refusal
+
+    if why := history_refusal(a.model or ""):  # baseten/...: the models of recorded trials only, on either engine
+        print(f"robouse: {why}", file=sys.stderr)
+        return 2
     try:
         from benchflow.embodied.rollouts import parse_seeds
 

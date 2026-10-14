@@ -48,7 +48,8 @@ FPS = 30
 OBS_LIMIT = 4000  # characters kept of one tool result (head and tail)
 MSG_LIMIT = 20000
 ORACLE_ACTS_PER_STEP = 10
-# what the harnesses run when config.json leaves the model empty (see harnesses.py)
+# History: what the harnesses ran in the trial folders whose config.json leaves the model empty (robouse 0.4.0 and
+# earlier, when Baseten served the provider-prefixed defaults). A newer trial records its model, so these never change.
 DEFAULT_MODELS = {
     "claude-code": "claude-opus-5-5",
     "codex": "gpt-6-astra",

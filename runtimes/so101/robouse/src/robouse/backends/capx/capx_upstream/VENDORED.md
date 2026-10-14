@@ -12,7 +12,7 @@ Source: https://github.com/capgym/cap-x at commit 53e9966d7a8e2fa7494676772bccc3
 | integrations/franka/control_privileged.py, nut_assembly_privileged.py, two_arm_lift_privileged.py, handover_privileged.py, libero_privileged.py | none |
 | integrations/franka/spill_wipe_privileged.py | unused perception imports removed (Contact-GraspNet, OWL-ViT, SAM2, open3d, depth utilities) |
 | integrations/franka/common.py | open3d imported inside the one function that uses it (the perception APIs' bounding boxes) |
-| integrations/motion/pyroki_context.py, pyroki_snippets/ | none |
+| integrations/motion/pyroki_context.py, pyroki_snippets/ | none. The snippets are PyRoKi's `examples/pyroki_snippets` (https://github.com/chungmin99/pyroki, MIT, copyright 2025 Chung Min Kim) as CaP-X copied them; PyRoKi's licence is in pyroki_snippets/LICENSE |
 | integrations/motion/pyroki.py | replaced: CaP-X's version posts IK requests to its PyRoKi server; this one runs the server's solve in-process (same robot model, joint-limit margin, target link and solver calls) |
 | integrations/robosuite/controllers/config/robots/*.json | none |
 | the `__init__.py` files | empty (CaP-X's register every environment, including ones needing other simulators) |

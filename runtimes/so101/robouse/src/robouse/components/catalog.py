@@ -189,8 +189,8 @@ FIXED_SCENES = {
     "flight-arena": dict(title="Flight arena", scenario="flight-arena", summary="Gates, a window and pads (crazyflie and drone suites)."),
     "roads": dict(title="MetaDrive roads", scenario="road", summary="Highways, intersections and winding roads with traffic."),
     "hobby-desk": dict(title="Hobby desk", scenario="tabletop",
-                       summary="A 45 x 35 cm desk scaled to small arms: 2.5 cm cubes, cups, trays, a drawer, a push button, a "
-                               "ruler, a puck and a light box (so101 suite)."),
+                       summary="A 45 x 35 cm desk scaled to small arms: 2.5 cm cubes, cups, trays, a drawer, three push "
+                               "buttons (a code panel), a ruler, a puck and a light box (so101 suite)."),
     "upstream-scenes": dict(title="Upstream benchmark scenes", scenario="tabletop",
                             summary="Meta-World, robosuite, LIBERO, RoboCasa, BEHAVIOR and Gymnasium-Robotics scenes, as the "
                                     "benchmarks define them."),

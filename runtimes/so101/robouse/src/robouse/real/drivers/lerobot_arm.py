@@ -8,7 +8,7 @@ it on the rig machine (`pip install -e "lerobot[metal]"` from the makermods fork
 "lerobot[feetech]"` for SO-101).
 
 Status: the Metal factory mirrors the configuration used by inspect-robots-metal on the 2026-09-05 bench sessions; the
-SO-101 factory mirrors ~/benchflow/robot/so101_sort_control.py. Neither live path has run through Robo Use yet (the
+SO-101 factory mirrors the bench control script of the SO-101 sort sessions (not published). Neither live path has run through Robo Use yet (the
 hardware was not connected while this was built); both are covered by the mock.
 """
 

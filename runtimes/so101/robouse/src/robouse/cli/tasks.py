@@ -432,8 +432,8 @@ def _from(a) -> int:
 
 def _bench_check(d: Path, level: str) -> list[str]:
     """BenchFlow's own `bench tasks check`, run when the installed BenchFlow can read robouse task folders: its
-    task-format hook, and robouse's format on its embodied layer (BenchFlow's `robouse` branch today). Otherwise it
-    says which case it is. Returns the problems it found."""
+    task-format hook, and robouse's format on its embodied layer (an unreleased BenchFlow build today; no release on
+    PyPI has it). Otherwise it says which case it is. Returns the problems it found."""
     if importlib.util.find_spec("benchflow") is None:  # BenchFlow is optional
         print("bench tasks check: skipped (BenchFlow is not installed)")
         return []

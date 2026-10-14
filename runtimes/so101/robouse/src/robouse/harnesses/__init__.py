@@ -8,17 +8,19 @@ Harnesses
   oracle                 the task's reference solution (oracle/solve.sh)
   noop                   calls `robo done` immediately (negative control)
   claude-code            Claude Code CLI; model: a bare Claude id (Anthropic, own credentials) or any provider-prefixed
-                         id, e.g. baseten/zai-org/GLM-5.3, reached through the trial's model gateway (gateway.py)
+                         id, e.g. glm/glm-5.3, reached through the trial's model gateway (gateway.py)
   codex                  Codex CLI; model: a bare OpenAI id (own credentials or the account pool) or a provider-prefixed
-                         id through the gateway
-  mini-swe-agent         mini-swe-agent; model: a provider-prefixed id, always through the gateway
-  (claude-code-glm, codex-glm and mini-swe-agent-glm: hidden aliases for the three above with a baseten/ model)
+                         id through the gateway (a provider with a Responses endpoint)
+  mini-swe-agent         mini-swe-agent; model: a provider-prefixed id, always through the gateway (default
+                         glm/glm-5.3: GLM-5.3 on the Z.ai Coding Plan)
   dimcode                Dimensional's dimcode (built on Pi); model: a provider-prefixed id, always through the
-                         gateway (default baseten/zai-org/GLM-5.3); see dimcode.py
+                         gateway (default glm/glm-5.3); see dimcode.py
   show-harness           NUS Show Lab's Show-Harness: a VLM picks one parameter-free action unit at a time
-                         (MV_FWD, GRASP, ...) and an interpreter grounds it; model: a provider-prefixed id through
-                         the gateway (zero-shot mode, default baseten/zai-org/GLM-5.3) or a self-hosted fine-tuned
-                         model at $ROBOUSE_SHOW_HARNESS_URL; see show_harness/
+                         (MV_FWD, GRASP, ...) and an interpreter grounds it; model (required): a provider-prefixed id
+                         through the gateway (zero-shot mode) or a self-hosted fine-tuned model at
+                         $ROBOUSE_SHOW_HARNESS_URL; see show_harness/
+  (claude-code-glm, codex-glm and mini-swe-agent-glm: the September 2026 runs' names for the first three with a
+  Baseten model; read in their trial folders, refused for a new run)
   molmoact2              MolmoAct2 VLA policy: molmoact2/client.py drives `robo` with action chunks from a policy
                          server at $ROBOUSE_MOLMOACT2_URL; model e.g. allenai/MolmoAct2-LIBERO-LeRobot
   vla                    any served VLA (vla/client.py): --model is a preset from vla/presets.json; server at
@@ -38,7 +40,11 @@ from typing import Any
 from .. import config
 from . import credentials
 
-DISALLOWED_CLAUDE_TOOLS = "WebFetch,WebSearch,Task"
+# the only built-in tools Claude Code offers its model (`--tools`); the robo MCP tools come on top with --interface
+# mcp or both. Without an allowlist it also offered web, scheduling, messaging, worktree and workflow tools
+CLAUDE_TOOLS = "Bash,Read,Write,Edit,Glob,Grep"
+# Codex offers its model a web search tool unless told not to (0.155 and later: on by default)
+CODEX_WEB_SEARCH = 'web_search="disabled"'
 
 PROMPT_PREFIX = (
     "You are controlling a simulated robot. Read the task below, then solve it by running the `robo` command "
@@ -73,8 +79,8 @@ def _claude_cmd(prompt: str, model: str) -> list[str]:
         "--dangerously-skip-permissions",
         "--max-turns",
         "400",
-        "--disallowedTools",
-        DISALLOWED_CLAUDE_TOOLS,
+        "--tools",
+        CLAUDE_TOOLS,
     ]
 
 
@@ -85,6 +91,8 @@ def _codex_cmd(prompt: str, model: str, workspace: Path, extra: tuple[str, ...] 
         "--json",
         "--skip-git-repo-check",
         "--dangerously-bypass-approvals-and-sandbox",
+        "-c",
+        CODEX_WEB_SEARCH,
         *extra,
         "-m",
         model,
@@ -103,6 +111,14 @@ def _noop(model, prompt, workspace, task, env) -> Launch:
 
 
 PRIVATE_ENV = ("_ROBOUSE_TRIAL_DIR", "_ROBOUSE_IMAGE_INPUT", "_ROBOUSE_SPEND_CAP_USD")  # runner to builder only
+# the protocol each harness speaks to its model gateway (claude-code and codex only for a model not of their own vendor)
+GATEWAY_PROTOCOLS = {
+    "claude-code": "anthropic-messages",
+    "codex": "openai-responses",
+    "mini-swe-agent": "openai-completions",
+    "dimcode": "anthropic-messages",
+    "show-harness": "openai-completions",
+}
 
 
 def _gateway(ref, env: dict, protocol: str):
@@ -137,8 +153,8 @@ def _via_gateway(harness: str, model: str) -> object | None:
 
 def _claude_code(model, prompt, workspace, task, env) -> Launch:
     if model and (ref := _via_gateway("claude-code", model)) is not None:
-        home = credentials.clean_claude_home()
-        gw = _gateway(ref, env, "anthropic-messages")
+        home = credentials.clean_claude_home(workspace)
+        gw = _gateway(ref, env, GATEWAY_PROTOCOLS["claude-code"])
         env.update(
             {
                 "ANTHROPIC_BASE_URL": gw.url,
@@ -155,7 +171,7 @@ def _claude_code(model, prompt, workspace, task, env) -> Launch:
         return _gateway_launch(gw, ref, _claude_cmd(prompt, gw.model), env)
     m = (model or "claude-sonnet-5").removeprefix("anthropic/")
     env.update(credentials.claude_auth())
-    env["CLAUDE_CONFIG_DIR"] = credentials.clean_claude_home()
+    env["CLAUDE_CONFIG_DIR"] = credentials.clean_claude_home(workspace)
     return Launch(_claude_cmd(prompt, m), env, notes={"model": m})
 
 
@@ -164,7 +180,11 @@ def _codex(model, prompt, workspace, task, env) -> Launch:
 
     if model and (ref := _via_gateway("codex", model)) is not None:
         home = credentials.clean_codex_home("# model provider: the trial's gateway, set on the command line\n")
-        gw = _gateway(ref, env, "openai-responses")
+        try:
+            gw = _gateway(ref, env, GATEWAY_PROTOCOLS["codex"])
+        except BaseException:
+            credentials.remove_trial_home(home)
+            raise
         env["ROBOUSE_GATEWAY_KEY"] = gw.key
         env["ROBOUSE_GATEWAY_URL"] = gw.url  # also lets the macOS sandbox allow this local port
         env["CODEX_HOME"] = home
@@ -182,27 +202,60 @@ def _codex(model, prompt, workspace, task, env) -> Launch:
         ]
         # the provider's own Responses endpoint, the request passed through unchanged (reasoning effort and earlier
         # reasoning kept); the gateway moves any image out of a tool result into the next user message
-        return _gateway_launch(gw, ref, _codex_cmd(prompt, gw.model, workspace, cfg), env)
+        launch = _gateway_launch(gw, ref, _codex_cmd(prompt, gw.model, workspace, cfg), env)
+        launch.stop = _removing(home, launch.stop)
+        return launch
     m = (model or "gpt-6-astra").removeprefix("openai/")
     key = os.environ.get("OPENAI_API_KEY", "")
-    env["CODEX_HOME"] = credentials.clean_codex_home(api_key=key)
+    env["CODEX_HOME"] = home = credentials.clean_codex_home(api_key=key)
     if key:
         env["CODEX_API_KEY"] = key
-    return Launch(_codex_cmd(prompt, m, workspace), env, notes={"model": m})
+    return Launch(_codex_cmd(prompt, m, workspace), env, stop=_removing(home), notes={"model": m})
+
+
+def _removing(home: str, stop: Callable[[], None] | None = None) -> Callable[[], None]:
+    """`stop`, then the removal of the trial's own Codex home (`remove_trial_home` leaves a pool home alone)."""
+
+    def run() -> None:
+        try:
+            if stop is not None:
+                stop()
+        finally:
+            credentials.remove_trial_home(home)
+
+    return run
+
+
+def mini_exe() -> str | None:
+    """mini-swe-agent's `mini`: on PATH, else next to this Python (`pip install mini-swe-agent` into Robo Use's own
+    environment, not activated), else in ~/.local/bin (a `uv tool` or `pipx` install). None when it is not installed:
+    mini-swe-agent is not a dependency of robouse."""
+    import os
+    import sys
+
+    here = os.pathsep.join([str(Path(sys.executable).parent), str(Path.home() / ".local" / "bin")])
+    return shutil.which("mini") or shutil.which("mini", path=here)
 
 
 def _mini_swe_agent(model, prompt, workspace, task, env) -> Launch:
     from . import models
 
     ref = models.resolve("mini-swe-agent", model or models.DEFAULT_MODELS["mini-swe-agent"])
-    exe = shutil.which("mini") or str(Path.home() / ".local" / "bin" / "mini")
-    gw = _gateway(ref, env, "openai-completions")
+    exe = mini_exe()
+    if exe is None:  # before the gateway starts: nothing to stop
+        raise RuntimeError(
+            "mini-swe-agent is not installed: no `mini` on PATH, next to this Python or in ~/.local/bin "
+            "(pip install mini-swe-agent)"
+        )
+    gw = _gateway(ref, env, GATEWAY_PROTOCOLS["mini-swe-agent"])
     env.update(
         {
             "OPENAI_API_KEY": gw.key,
             "OPENAI_API_BASE": f"{gw.url}/v1",
             "MSWEA_CONFIGURED": "true",
             "MSWEA_COST_TRACKING": "ignore_errors",
+            # its global .env (which may hold provider keys) is per trial: the user's is never loaded
+            "MSWEA_GLOBAL_CONFIG_DIR": str(workspace / ".robouse" / "mini-config"),
         }
     )
     cmd = [
@@ -237,6 +290,8 @@ def _molmoact2(model, prompt, workspace, task, env) -> Launch:
         raise RuntimeError("molmoact2 needs ROBOUSE_MOLMOACT2_URL (the URL of a MolmoAct2 policy server)")
     client = workspace / ".robouse" / "molmoact2_client.py"
     client.write_text((Path(__file__).parent / "molmoact2" / "client.py").read_text())
+    if config.env("ROBOUSE_MOLMOACT2_TOKEN"):  # the runner passes no credential on its own
+        env["ROBOUSE_MOLMOACT2_TOKEN"] = config.env("ROBOUSE_MOLMOACT2_TOKEN")
     env["ROBOUSE_TASK_LANGUAGE"] = _task_language(task)
     m = model or "allenai/MolmoAct2-LIBERO-LeRobot"
     return Launch(["python3", str(client)], env, notes={"model": m, "server": url})
@@ -290,11 +345,13 @@ HARNESSES: dict[str, Builder] = {
 
 
 def build(harness: str, model: str, prompt: str, workspace: Path, task, base_env: dict) -> Launch:
-    """The launch for one trial. Raises KeyError for an unknown harness and RuntimeError for missing credentials."""
+    """The launch for one trial. Raises KeyError for an unknown harness, ValueError for a legacy name or a missing
+    model, and RuntimeError for missing credentials."""
     from . import models
 
+    if why := models.legacy_refusal(harness):  # claude-code-glm etc.: names of recorded trials only
+        raise ValueError(why)
     env = dict(base_env)
-    harness, model = models.legacy(harness, model)  # claude-code-glm etc.: hidden aliases
     fn = HARNESSES.get(harness)
     if fn is None:
         from importlib.metadata import entry_points

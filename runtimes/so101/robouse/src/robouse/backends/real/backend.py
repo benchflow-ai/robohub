@@ -141,6 +141,14 @@ class RealArmBackend(EmbodiedBackend):
         self.verdict_mode = self.cfg.get(
             "verdict", "pose" if (self.goal.get("tool") or self.goal.get("joints")) else "operator"
         )
+        if self.verdict_mode == "vlm":  # checked before any motion: the verdict is asked only at the episode's end
+            if not self.cfg.get("vlm_model"):
+                raise ValueError(
+                    "real.verdict: vlm needs real.vlm_model, a vision-language model at ROBOUSE_GRADER_URL (no default)"
+                )
+            from ...analysis.grader import endpoint
+
+            endpoint()  # RuntimeError naming ROBOUSE_GRADER_URL / ROBOUSE_GRADER_API_KEY when either is missing
         # stages: ordered checkpoints on the measured state ({"tool": [x,y,z], "tol": m, "gripper": open|closed} or
         # {"joints": [...], "tol": deg}); they give the task-progress metric and the mock operator's verdict proxy
         self.stages = list(self.cfg.get("stages") or [])
@@ -1186,7 +1194,7 @@ class RealArmBackend(EmbodiedBackend):
                 frames,
                 self.cfg.get("goal_text") or str(self.spec.get("id")),
                 self.cfg.get("rubric"),
-                self.cfg.get("vlm_model", "moonshotai/Kimi-K3"),
+                self.cfg["vlm_model"],
             )
             self.last_judge = {"verdict": "vlm", **v}
             if self.cfg.get("rubric") and isinstance(v.get("stage"), int):

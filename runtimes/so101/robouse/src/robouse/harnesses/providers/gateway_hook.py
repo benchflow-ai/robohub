@@ -9,7 +9,9 @@ capability, read from ROBOUSE_GATEWAY_MAX_IMAGES:
   -1  no limit
 In a Responses request (Codex) it then moves every image left in a tool result (function_call_output) into a user
 message right after it: Baseten's Responses endpoint rejects an image inside a tool result and takes it in a user
-message. Nothing else in the request changes (reasoning effort and earlier reasoning items pass through as sent).
+message. With $ROBOUSE_GATEWAY_DROP_THINKING=1 (a provider without a Responses API, such as glm) it removes `thinking`
+from an Anthropic Messages request, which LiteLLM would otherwise send to the provider's missing Responses endpoint.
+Nothing else in the request changes (reasoning effort and earlier reasoning items pass through as sent).
 Right before the upstream call it counts the image parts that actually leave the gateway, and appends one line per
 request to $ROBOUSE_GATEWAY_LOG (JSON: call type, images in, removed, sent upstream). No request content is logged.
 
@@ -150,6 +152,7 @@ class RobouseGateway(CustomLogger):
         self.spend_cap = float(os.environ.get("ROBOUSE_GATEWAY_SPEND_CAP", "0") or 0)
         self.price = json.loads(os.environ.get("ROBOUSE_GATEWAY_PRICE") or "{}")
         self.stop_file = os.environ.get("ROBOUSE_GATEWAY_STOP_FILE", "")
+        self.drop_thinking = os.environ.get("ROBOUSE_GATEWAY_DROP_THINKING") == "1"
         self.spent = 0.0
 
     def over_cap(self) -> bool:
@@ -173,6 +176,8 @@ class RobouseGateway(CustomLogger):
         _dump("in", data)
         n, k = apply_cap(data, self.cap)
         moved = move_tool_images(data)  # Responses bodies only: images out of tool results into the next user message
+        # a provider without a Responses API: LiteLLM would send a Messages request with thinking enabled there
+        dropped = self.drop_thinking and "anthropic" in str(call_type) and data.pop("thinking", None) is not None
         bearer = os.environ.get("ROBOUSE_GATEWAY_BEARER_ENV")
         if bearer and os.environ.get(bearer):  # providers whose Anthropic endpoint wants a Bearer token, not x-api-key
             data["extra_headers"] = {
@@ -187,6 +192,7 @@ class RobouseGateway(CustomLogger):
                 "images_in": n,
                 "images_removed": k,
                 "images_moved": moved,
+                **({"thinking_dropped": True} if dropped else {}),
                 "tool_types": sorted({str(t.get("type")) for t in tools if isinstance(t, dict)})
                 if isinstance(tools, list)
                 else [],

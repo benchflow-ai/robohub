@@ -448,6 +448,8 @@ def main(argv=None) -> int:
         return 1
     hub = yaml.safe_load((HUB / "hub.yaml").read_text())
     prov = {"repo": hub["robouse"]["repo"], "commit": sha, "package_version": hub["robouse"]["package_version"]}
+    if hub["robouse"].get("branch"):  # an unreleased build: the branch its commit is on
+        prov["branch"] = hub["robouse"]["branch"]
     m = re.search(r'^__version__ = "([^"]+)"', (robouse / "src" / "robouse" / "__init__.py").read_text(), re.M)
     if not m or m.group(1) != prov["package_version"]:
         raise SystemExit(f"{robouse} is Robo Use {m.group(1) if m else '?'}, but hub.yaml robouse.package_version is "
@@ -456,6 +458,9 @@ def main(argv=None) -> int:
                          capture_output=True, text=True).stdout.strip()
     if tag:  # a release: the commit the package on PyPI was built from
         prov["tag"] = tag
+    elif "pypi.org" in prov["repo"]:
+        raise SystemExit(f"{robouse} HEAD is not a release tag, so it is not the package on {prov['repo']}; set hub.yaml "
+                         "robouse.repo to the git repository and robouse.branch to the branch it is on")
 
     by_id, suite_of = {}, {}
     for t in find_tasks(robouse / "tasks"):

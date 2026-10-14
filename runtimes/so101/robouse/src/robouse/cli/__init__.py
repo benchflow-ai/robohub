@@ -54,8 +54,9 @@ def _analysis(sub: argparse._SubParsersAction) -> None:
     gr.add_argument("trials", nargs="+", help="trial folders or run folders")
     gr.add_argument(
         "--model",
-        default="moonshotai/Kimi-K3",
-        help="vision-language model, OpenAI-compatible (default: Kimi K3 on Baseten)",
+        required=True,
+        help="vision-language model at ROBOUSE_GRADER_URL (an OpenAI-compatible endpoint; key in "
+        "ROBOUSE_GRADER_API_KEY); it must read images",
     )
     gr.add_argument("--rubric", help="extra rubric text appended to the task's success rule")
     gr.set_defaults(func=lambda a: _call("..analysis.grader", "main", a.trials, a.model, a.rubric))

@@ -35,9 +35,10 @@ class Task:
     check: Callable  # backend -> (ok, why)
     holds: Callable = field(default=lambda b: {})  # backend -> {key: bool}, timed by the backend
     track: Callable = field(default=lambda b: None)  # backend -> None (stage tracking)
-    progress: Callable = field(default=lambda b: None)
+    progress: Callable | None = None  # backend -> stage as a fraction, reported as `progress`
     start: list[float] | None = None  # start pose of the arm joints (deg); default: the robot's home
     start_grip: float = 2.0
+    code: list[str] | None = None  # the buttons to press, in order (the button panel; a name twice = press it twice)
 
 
 def _free(b, name: str) -> bool:
@@ -120,8 +121,11 @@ def drawer_check(b):
     return q >= DRAWER_OPEN, f"drawer open {q * 100:.1f} cm (needs >= {DRAWER_OPEN * 100:.0f} cm)"
 
 
-def button_check(b):
-    return bool(b.button_on), f"button {'on' if b.button_on else 'off'}"
+def code_check(b):
+    n = len(b.task.code)
+    return b.unlocked, (
+        f"all {n} presses entered in order" if b.unlocked else f"{len(b.entered)} of {n} presses entered in order"
+    )
 
 
 # ruler handover: stages 1 left arm holds it alone in the air, 2 both arms hold it, 3 right arm holds it alone
@@ -261,12 +265,17 @@ _add(
 )
 _add(
     Task(
-        "so101-press-button",
+        "so101-press-buttons-in-order",
         "so101",
         "single",
-        [{"kind": "button", "name": "button", "pos": [0.21, -0.04]}],
-        400,
-        button_check,
+        [
+            {"kind": "button", "name": "red_button", "color": "red", "pos": [0.179, -0.065]},
+            {"kind": "button", "name": "green_button", "color": "green", "pos": [0.15, -0.117]},
+            {"kind": "button", "name": "blue_button", "color": "blue", "pos": [0.106, -0.158]},
+        ],
+        600,
+        code_check,
+        code=["green_button", "green_button", "red_button", "blue_button"],
     )
 )
 _add(

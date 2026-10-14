@@ -2,7 +2,7 @@
 
 Code reads settings through the helpers here (`env`, `flag`, `path`, `cache_dir`, `sim_python`, ...), never through
 `os.environ` directly, so the list below stays complete (tests/test_config.py checks it against the source).
-Maintainer-only fallbacks (credential pools, endpoint files inside a checkout) live in `robouse._maintainer`.
+Optional credential pools (ROBOUSE_CLAUDE_TOKEN_FILE, ROBOUSE_CODEX_AUTH_DIR) are read in `robouse._maintainer`.
 """
 
 from __future__ import annotations
@@ -22,7 +22,8 @@ ENV: dict[str, str] = {
     "ROBOUSE_MENAGERIE_ASSETS": "MuJoCo Menagerie robot models (default: the checkout's assets/menagerie, else "
     "<cache>/menagerie)",
     "ROBOUSE_ROBOHARM_TEX": "generated texture cache for the roboharm scenes (default <cache>/roboharm_tex)",
-    "ROBOUSE_PRICING": "JSON price table for trial cost (default: the packaged pricing.json)",
+    "ROBOUSE_PRICING": "JSON price table for trial cost and the spend cap, used instead of the packaged pricing.json "
+    "(not added to it)",
     # episode server
     "ROBOUSE_SOCKET": "episode server socket the `robo` client talks to (set by the runner)",
     "ROBOUSE_ORACLE_TOKEN": "per-episode token that unlocks privileged state for the reference solution (set by the "
@@ -33,13 +34,16 @@ ENV: dict[str, str] = {
     "ROBOUSE_AGENT_IMAGES": "0: the model gets no image input in this run, whatever it takes (its gateway replaces every "
     "image part; recorded as image_input: false). Default: from the model registry",
     "ROBOUSE_SPEND_CAP_USD": "the model spend at which the model gateway stops a trial, in USD (default 5; 0: no cap; "
-    "recorded as a budget stop)",
+    "recorded as a budget stop). A model without a price, such as glm/glm-5.3, runs with 0 or with its price in "
+    "ROBOUSE_PRICING",
     "ROBOUSE_GATEWAY_KEY": "the per-trial key a harness uses for its model gateway (set by the runner, never a provider "
     "key)",
     "ROBOUSE_GATEWAY_URL": "the trial's model gateway, http://127.0.0.1:<port> (set by the runner)",
     "ROBOUSE_GATEWAY_MAX_IMAGES": "gateway process only: images per request (0 none, -1 no limit), from the registry",
     "ROBOUSE_GATEWAY_LOG": "gateway process only: the request log (image counts, no content)",
     "ROBOUSE_GATEWAY_BEARER_ENV": "gateway process only: the provider key variable sent as a Bearer token",
+    "ROBOUSE_GATEWAY_DROP_THINKING": "gateway process only: 1 removes `thinking` from Anthropic Messages requests (a "
+    "provider without a Responses API, where LiteLLM would send such a request)",
     "ROBOUSE_GATEWAY_SPEND_CAP": "gateway process only: the trial's spend cap in USD (0: none)",
     "ROBOUSE_GATEWAY_PRICE": "gateway process only: the model's price, USD per 1M tokens (JSON, from pricing.json)",
     "ROBOUSE_GATEWAY_STOP_FILE": "gateway process only: the file it writes when the spend cap is reached",
@@ -50,8 +54,12 @@ ENV: dict[str, str] = {
     "the runner for oracle and noop with --interface mcp)",
     "ROBOUSE_MCP_URL": "the `robo` MCP endpoint of a harness that speaks MCP over HTTP (set by the runner)",
     # local runner sandbox
-    "ROBOUSE_SANDBOX": "0 disables the macOS Seatbelt sandbox around agent processes (default 1)",
+    "ROBOUSE_SANDBOX": "0 disables the sandbox around agent processes (macOS Seatbelt, Linux bubblewrap; default 1)",
     "ROBOUSE_SANDBOX_DENY": "extra colon-separated paths agents may neither read nor write",
+    "ROBOUSE_CLAUDE_TOKEN_FILE": "optional env file of Claude Code OAuth tokens (NAME=token lines), used in turn when "
+    "neither ANTHROPIC_API_KEY nor CLAUDE_CODE_OAUTH_TOKEN is set; denied to agents",
+    "ROBOUSE_CODEX_AUTH_DIR": "optional folder of Codex logins (<account>.json, copies of a `codex login` auth.json), "
+    "used in turn when OPENAI_API_KEY is not set; denied to agents",
     # simulator worker interpreters (one virtualenv per simulator that conflicts with the main environment)
     "ROBOUSE_DEXJOCO_PYTHON": "Python of the DexJoCo virtualenv (default <cache>/dexjoco-venv/bin/python)",
     "ROBOUSE_DMCONTROL_PYTHON": "Python of the dm_control virtualenv (default <cache>/dmcontrol-venv/bin/python)",
@@ -120,8 +128,10 @@ ENV: dict[str, str] = {
     "ROBOUSE_SHOW_HARNESS_MODEL": "the model name the `show-harness` client sends (set by the runner)",
     "ROBOUSE_SHOW_HARNESS_SETTINGS": "the `show-harness` client's mode, task sentence and overrides (set by the runner)",
     "ROBOUSE_TASK_LANGUAGE": "the language instruction a VLA client sends (set by the runner)",
-    "ROBOUSE_GRADER_URL": "OpenAI-compatible endpoint for `robouse grade` (default: Baseten)",
-    "ROBOUSE_GRADER_API_KEY": "API key for `robouse grade` (default: BASETEN_API_KEY)",
+    "ROBOUSE_GRADER_URL": "OpenAI-compatible endpoint (base URL) of the vision-language model for `robouse grade` and "
+    "`real.verdict: vlm` (required by both; no default)",
+    "ROBOUSE_GRADER_API_KEY": "API key for that endpoint, sent as a bearer token (required; no default). The runner "
+    "keeps it out of agents' environments",
     # real robots
     "ROBOUSE_RIG": "real-robot rig file; real tasks run on live hardware instead of the hardware-in-the-loop mock",
     "ROBOUSE_OPERATOR_DIR": "operator channel and e-stop latch for real robots (default ~/.config/robouse-operator)",
@@ -207,22 +217,16 @@ def sim_python(backend: str, venv: str | None = None) -> Path:
 
 
 def remote_endpoints(name: str) -> Path | None:
-    """Endpoints file of a remote worker pool: $ROBOUSE_<NAME>_REMOTE, <config>/remote/<name>.json, or a maintainer
-    fallback; None when there is none."""
-    from . import _maintainer
-
+    """Endpoints file of a remote worker pool: $ROBOUSE_<NAME>_REMOTE, else <config>/remote/<name>.json (a folder the
+    sandbox denies to agents); None when there is none. No file inside a checkout is read: agents can read those."""
     explicit = env(f"ROBOUSE_{name.upper()}_REMOTE")
-    candidates = (
-        [Path(explicit).expanduser()]
-        if explicit
-        else [config_dir() / "remote" / f"{name}.json", *_maintainer.remote_endpoint_files(name)]
-    )
-    return next((p for p in candidates if p.is_file()), None)
+    p = Path(explicit).expanduser() if explicit else config_dir() / "remote" / f"{name}.json"
+    return p if p.is_file() else None
 
 
 def sandbox_denied_paths() -> list[str]:
-    """Paths agents may neither read nor write: private settings, the operator channel, maintainer folders, and
-    $ROBOUSE_SANDBOX_DENY."""
+    """Paths agents may neither read nor write: private settings, the operator channel, the optional credential pools
+    (robouse._maintainer), and $ROBOUSE_SANDBOX_DENY."""
     from . import _maintainer
 
     paths = [config_dir(), operator_dir(), *_maintainer.private_dirs()]
