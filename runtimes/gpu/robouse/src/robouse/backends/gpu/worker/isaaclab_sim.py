@@ -101,6 +101,7 @@ def _probe_rtx() -> int:
     print(f"RTX OK: {img.shape[1]}x{img.shape[0]} frame", flush=True)
     return 0
 
+
 TASKS: dict[str, dict] = {}
 
 
@@ -467,7 +468,7 @@ if __name__ == "__main__":
     RTX = True
     try:
         rc = _probe_rtx()
-    except Exception as e:  # noqa: BLE001 - reported to prepare() on stdout
+    except Exception as e:  # reported to prepare() on stdout
         print(f"RTX FAILED: {type(e).__name__}: {e}"[:400], flush=True)
         rc = 1
     sys.stdout.flush()

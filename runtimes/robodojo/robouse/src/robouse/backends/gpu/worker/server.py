@@ -190,10 +190,16 @@ def handle(req: dict) -> dict:
 
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description="Robo Use GPU simulator worker (one simulator family per process)")
-    ap.add_argument("--sim", required=True, help=f"the family's name in task folders (`sim:`); built in: {', '.join(sorted(SIMS))}")
-    ap.add_argument("--module", default="", help="the family module, for a family that is not built in: a module name or a .py file")
+    ap.add_argument(
+        "--sim", required=True, help=f"the family's name in task folders (`sim:`); built in: {', '.join(sorted(SIMS))}"
+    )
+    ap.add_argument(
+        "--module", default="", help="the family module, for a family that is not built in: a module name or a .py file"
+    )
     ap.add_argument("--port", type=int, default=8800)
-    ap.add_argument("--host", default="127.0.0.1", help="address to listen on (default 127.0.0.1; 0.0.0.0 for every interface)")
+    ap.add_argument(
+        "--host", default="127.0.0.1", help="address to listen on (default 127.0.0.1; 0.0.0.0 for every interface)"
+    )
     a = ap.parse_args(argv)
     if not a.module and a.sim not in SIMS:
         ap.error(f"unknown --sim {a.sim!r}: built in are {', '.join(sorted(SIMS))}; give --module for another family")

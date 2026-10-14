@@ -190,7 +190,11 @@ class MSTask:
     # ---- server methods ----------------------------------------------------------------------------------------------
     def renderer(self) -> dict:
         """The renderer that draws this episode's images."""
-        return {"name": "sapien-rt", "about": "SAPIEN's ray tracer (\"rt\" shader pack) on the GPU", "used": ["sapien-rt"]}
+        return {
+            "name": "sapien-rt",
+            "about": "SAPIEN's ray tracer (\"rt\" shader pack) on the GPU",
+            "used": ["sapien-rt"],
+        }
 
     def info(self) -> dict:
         names = ["dx", "dy", "dz", "drx", "dry", "drz", "grip"]
