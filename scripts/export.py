@@ -319,6 +319,10 @@ REMOTE_WORKER = """\
     # This runtime's simulator runs on a remote GPU worker (remote_worker in hub.yaml): the episode server reaches it
     # over HTTPS, so this service keeps network access, and it reads the worker endpoints (URL, shared secret) from
     # the host file named by $__REMOTE_ENV__, mounted read-only here only; the agent container never sees it.
+    # host.docker.internal is the machine running bench, for a worker there (Docker Engine on Linux needs this entry;
+    # the worker must listen on an address the containers reach, such as the docker0 bridge's).
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 """
 
 
