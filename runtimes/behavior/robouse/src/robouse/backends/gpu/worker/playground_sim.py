@@ -261,7 +261,7 @@ class PGTask:
         self.policy = jax.jit(ppo_networks.make_inference_fn(nets)(params, deterministic=True))
         self.jstep = jax.jit(self.env.step)
         self.jreset = jax.jit(self.env.reset)
-        self.renderer = mujoco.Renderer(self.env.mj_model, height=IMG_H, width=IMG_W)
+        self.mj_renderer = mujoco.Renderer(self.env.mj_model, height=IMG_H, width=IMG_W)
         self.mjd = mujoco.MjData(self.env.mj_model)
         self.frames: list[str] = []
         self._recording = False
@@ -384,6 +384,10 @@ class PGTask:
         return n
 
     # ---- server methods ----------------------------------------------------------------------------------------------
+    def renderer(self) -> dict:
+        """The renderer that draws this episode's images."""
+        return {"name": "mujoco-opengl", "about": "MuJoCo's OpenGL renderer", "used": ["mujoco-opengl"]}
+
     def info(self) -> dict:
         v = self.rb["vmax"]
         cams = ["chase", "overview"] + (["head"] if self.cfg.get("vision") else ["head"])
@@ -403,6 +407,7 @@ class PGTask:
             "hold_last": 0.0,
             "max_steps": self.cfg["max_steps"],
             "embodiment": self.embodiment(),
+            "renderer": self.renderer(),
         }
 
     def embodiment(self) -> dict:
@@ -574,8 +579,8 @@ class PGTask:
             c.distance, c.azimuth, c.elevation = 1.0, math.degrees(yaw), -8
         else:
             raise ValueError(f"unknown camera {cam!r}")
-        self.renderer.update_scene(d, camera=c)
-        return self.renderer.render()
+        self.mj_renderer.update_scene(d, camera=c)
+        return self.mj_renderer.render()
 
     def render(self, camera: str | None = None) -> dict:
         return {"jpeg": jpeg(self._render(camera or "chase"))}

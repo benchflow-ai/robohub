@@ -15,6 +15,8 @@ robouse components list [KIND] | show ID | check E S T [modifiers]
 from __future__ import annotations
 
 import argparse
+import importlib
+import importlib.util
 import itertools
 import json
 import math
@@ -428,11 +430,37 @@ def _from(a) -> int:
 # ---- check ------------------------------------------------------------------------------------------------------------
 
 
+def _bench_check(d: Path, level: str) -> list[str]:
+    """BenchFlow's own `bench tasks check`, run when the installed BenchFlow can read robouse task folders: its
+    task-format hook, and robouse's format on its embodied layer (an unreleased BenchFlow build today; no release on
+    PyPI has it). Otherwise it says which case it is. Returns the problems it found."""
+    if importlib.util.find_spec("benchflow") is None:  # BenchFlow is optional
+        print("bench tasks check: skipped (BenchFlow is not installed)")
+        return []
+    try:
+        from benchflow._utils.task_authoring import check_task as bf_check
+        from benchflow.task.formats import detect_task_format, materialize_task_dir
+
+        importlib.import_module("robouse.engine.format")  # BenchFlow skips a format that fails to load
+    except ImportError:  # e.g. 0.7.9.dev2354 from PyPI, which `robouse[benchflow]` installs: no task-format hook
+        print("bench tasks check: installed BenchFlow has no robouse task-format support; skipped")
+        return []
+    try:
+        pkg = materialize_task_dir(d) if detect_task_format(d) is not None else d
+        issues = bf_check(pkg, validation_level=level)
+    except Exception as e:  # noqa: BLE001
+        return [f"bench tasks check could not run: {type(e).__name__}: {e}"]
+    print(f"bench tasks check ({level}): {'ok' if not issues else f'{len(issues)} issue(s)'}")
+    return [f"bench tasks check: {i}" for i in issues]
+
+
 def check_task(d: Path, level: str = "structural", run: bool = True, keep_runs: str | None = None) -> int:
-    from ..tasks import SCHEMA_VERSION, load_task
+    from ..tasks import SCHEMA_VERSION, load_task, older_layout, older_layout_message
 
     if not d.is_dir():
         return _err(f"no such task folder: {d}")
+    if older_layout(d):
+        return _err(older_layout_message(d))
     problems = []
     if (d / "task.md").is_file() and not (d / "environment" / "Dockerfile").is_file():
         problems += [f"{rel} is missing" for rel in ("oracle/solve.sh", "verifier/test.sh") if not (d / rel).is_file()]
@@ -455,23 +483,7 @@ def check_task(d: Path, level: str = "structural", run: bool = True, keep_runs: 
     except Exception as e:  # noqa: BLE001 - reported as a schema problem
         problems.append(f"task.md: {type(e).__name__}: {e}")
         print("schema: problems")
-    try:
-        from benchflow._utils.task_authoring import check_task as bf_check
-        from benchflow.task.formats import detect_task_format, materialize_task_dir
-    except ImportError:  # BenchFlow is optional: `pip install 'robouse[benchflow]'` adds this check
-        bf_check = None
-        print("bench tasks check: skipped (BenchFlow is not installed)")
-    try:
-        if bf_check is None:
-            raise LookupError
-        pkg = materialize_task_dir(d) if detect_task_format(d) is not None else d
-        issues = bf_check(pkg, validation_level=level)
-        print(f"bench tasks check ({level}): {'ok' if not issues else f'{len(issues)} issue(s)'}")
-        problems += [f"bench tasks check: {i}" for i in issues]
-    except LookupError:
-        pass
-    except Exception as e:  # noqa: BLE001
-        problems.append(f"bench tasks check could not run: {type(e).__name__}: {e}")
+    problems += _bench_check(d, level)
     if run and not problems and (d / "environment" / "Dockerfile").is_file():
         # an exported package (`robouse export`, the hub datasets) runs in its own containers, not in the local engine
         print(

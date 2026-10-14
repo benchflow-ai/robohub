@@ -2,7 +2,9 @@
  "robot": "metal",
  "sources": {
   "arm": "metal_with_gripper.canonical.urdf",
-  "gripper": "metal_with_gripper.description.urdf"
+  "gripper": "metal_with_gripper.description.urdf",
+  "repository": "makermods-robotics/metal-python-ros@ef4181f1305cbcfc63431d3bcfb96f5fb7f72763 (the URDFs under metal_ros2/src/)",
+  "licence": "none stated in the upstream repository; MakerMods has not confirmed terms (see NOTICE)"
  },
  "joint_mapping": "identity: motor degrees -> radians on joint1..joint6, no offsets",
  "joints": [

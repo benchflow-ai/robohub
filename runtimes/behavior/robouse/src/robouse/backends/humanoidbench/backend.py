@@ -72,14 +72,14 @@ class HumanoidBenchBackend(EmbodiedBackend):
         )
         if not Path(self.policy_path).exists():
             raise FileNotFoundError(
-                f"Unitree H1 locomotion policy not found at {self.policy_path}; see docs/suites/humanoidbench.md"
+                f"Unitree H1 locomotion policy not found at {self.policy_path}; see {config.SUITES_DOCS}"
             )
         # run from the worker's own folder so no stray module in the cwd shadows the stdlib
         self.worker = StdioWorker(
             "humanoidbench",
             config.sim_python("humanoidbench", "humanoidbench"),
             WORKER,
-            setup="docs/suites/humanoidbench.md",
+            setup=config.SUITES_DOCS,
             env={"MKL_NUM_THREADS": "1"},
         )
         self._state = None

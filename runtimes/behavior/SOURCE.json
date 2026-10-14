@@ -1,9 +1,8 @@
 {
   "robouse": {
-    "repo": "https://pypi.org/project/robouse/0.2.0/",
-    "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-    "package_version": "0.2.0",
-    "tag": "v0.2.0"
+    "repo": "https://pypi.org/project/robouse/0.4.1/",
+    "commit": "b68c37eded7f889d36ee6d73c8ca243d3a9d9b85",
+    "package_version": "0.4.1"
   },
   "runtime": "behavior"
 }

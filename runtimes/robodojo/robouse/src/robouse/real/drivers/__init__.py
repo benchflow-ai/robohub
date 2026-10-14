@@ -22,7 +22,8 @@ def make_driver(prof: Profile, cfg: dict) -> ArmDriver:
             if not isinstance(cfg.get("cameras"), dict)
             else cfg["cameras"]
         )
-        srv = MockRosbridge(prof.joints, [v * scale for v in prof.park], cameras=list(topics.values()))
+        start = prof.park or [0.0] * len(prof.joints)
+        srv = MockRosbridge(prof.joints, [v * scale for v in start], cameras=list(topics.values()))
         drv = RosbridgeDriver(prof, {**cfg, "url": srv.url, "cameras": topics}, mock=True)
         drv.mock_server = srv
         return drv
@@ -39,7 +40,9 @@ def make_driver(prof: Profile, cfg: dict) -> ArmDriver:
         if prof.name == "piper":
             from .piper import PiperDriver
 
-            return PiperDriver(prof, cfg, sdk_factory=lambda c: ReplayPiperSDK(fx, prof), mock=True)
+            return PiperDriver(
+                prof, cfg, sdk_factory=lambda c: ReplayPiperSDK(fx, prof, fault=cfg.get("mock_fault")), mock=True
+            )
         from .lerobot_arm import LeRobotArmDriver
 
         cams = list(cfg.get("cameras") or fx.cameras)
@@ -47,7 +50,12 @@ def make_driver(prof: Profile, cfg: dict) -> ArmDriver:
             prof,
             {**cfg, "cameras": {c: "mock" for c in cams}},
             robot_factory=lambda c, p: ReplayRobot(
-                fx, p, cameras=cams, noise_deg=float(cfg.get("mock_noise_deg", 0.0))
+                fx,
+                p,
+                cameras=cams,
+                noise_deg=float(cfg.get("mock_noise_deg", 0.0)),
+                playback=bool(cfg.get("mock_playback", False)),  # the recorded joints and torques, step by step
+                fault=cfg.get("mock_fault"),  # injected link failure (tests of the watchdog and stale telemetry)
             ),
             mock=True,
         )

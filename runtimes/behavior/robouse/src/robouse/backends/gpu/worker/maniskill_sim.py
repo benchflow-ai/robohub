@@ -188,6 +188,10 @@ class MSTask:
         return p.p[0].cpu().numpy(), p.q[0].cpu().numpy()
 
     # ---- server methods ----------------------------------------------------------------------------------------------
+    def renderer(self) -> dict:
+        """The renderer that draws this episode's images."""
+        return {"name": "sapien-rt", "about": "SAPIEN's ray tracer (\"rt\" shader pack) on the GPU", "used": ["sapien-rt"]}
+
     def info(self) -> dict:
         names = ["dx", "dy", "dz", "drx", "dry", "drz", "grip"]
         skills = [
@@ -211,6 +215,7 @@ class MSTask:
             "hold_last": 1.0,
             "max_steps": self.cfg.get("max_steps", 40),
             "embodiment": self.embodiment(),
+            "renderer": self.renderer(),
         }
 
     def embodiment(self) -> dict:

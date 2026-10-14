@@ -3,10 +3,9 @@
     "behavior-1k": {
       "noop": false,
       "robouse": {
-        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-        "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/0.2.0/",
-        "tag": "v0.2.0"
+        "commit": "b68c37eded7f889d36ee6d73c8ca243d3a9d9b85",
+        "package_version": "0.4.1",
+        "repo": "https://pypi.org/project/robouse/0.4.1/"
       },
       "tasks": {
         "behavior-bringing-in-wood": {
@@ -455,10 +454,9 @@
     "isaaclab-factory": {
       "noop": false,
       "robouse": {
-        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-        "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/0.2.0/",
-        "tag": "v0.2.0"
+        "commit": "b68c37eded7f889d36ee6d73c8ca243d3a9d9b85",
+        "package_version": "0.4.1",
+        "repo": "https://pypi.org/project/robouse/0.4.1/"
       },
       "tasks": {
         "il-factory-gear-mesh": {
@@ -491,10 +489,9 @@
     "maniskill-gpu": {
       "noop": false,
       "robouse": {
-        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-        "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/0.2.0/",
-        "tag": "v0.2.0"
+        "commit": "b68c37eded7f889d36ee6d73c8ca243d3a9d9b85",
+        "package_version": "0.4.1",
+        "repo": "https://pypi.org/project/robouse/0.4.1/"
       },
       "tasks": {
         "ms-lift-peg-upright": {
@@ -603,10 +600,9 @@
     "robodojo": {
       "noop": false,
       "robouse": {
-        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-        "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/0.2.0/",
-        "tag": "v0.2.0"
+        "commit": "b68c37eded7f889d36ee6d73c8ca243d3a9d9b85",
+        "package_version": "0.4.1",
+        "repo": "https://pypi.org/project/robouse/0.4.1/"
       },
       "tasks": {
         "robodojo-cover-blocks": {
@@ -1904,10 +1900,9 @@
     "robouse-genesis": {
       "noop": false,
       "robouse": {
-        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-        "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/0.2.0/",
-        "tag": "v0.2.0"
+        "commit": "b68c37eded7f889d36ee6d73c8ca243d3a9d9b85",
+        "package_version": "0.4.1",
+        "repo": "https://pypi.org/project/robouse/0.4.1/"
       },
       "tasks": {
         "gs-pour-water": {
@@ -4534,10 +4529,9 @@
     "robouse-playground": {
       "noop": false,
       "robouse": {
-        "commit": "a92ffa65d78102f14f02fbd710e74a5af0dc16cf",
-        "package_version": "0.2.0",
-        "repo": "https://pypi.org/project/robouse/0.2.0/",
-        "tag": "v0.2.0"
+        "commit": "b68c37eded7f889d36ee6d73c8ca243d3a9d9b85",
+        "package_version": "0.4.1",
+        "repo": "https://pypi.org/project/robouse/0.4.1/"
       },
       "tasks": {
         "pg-go1-corridor-push": {
@@ -5495,7 +5489,7 @@
   },
   "runtimes": {
     "base": "sha256:76ca877fb0b1008d896761538a5e7e5c3e8610b33004ac99b9c5f0e7a91127bc",
-    "behavior": "sha256:11f5eef83311f0ff86993fda9031fdb3b295fc646935c888c4f57535b302b234",
+    "behavior": "sha256:b344be1105483177cf8862310804d661c60a965343d9e577aabee139c6cf2516",
     "capx": "sha256:c485668f75eeb5b28dfefd50b5e9d98539b0f6aaf04bf1563195949a0af5c8ab",
     "capx-libero": "sha256:15fad7671d649330899dfe99de2b157a5741bf6195fd5d4c379681476b7d8e11",
     "composed": "sha256:bf35428b062766f1759671abe0b534cf25a18a81b92181b7c69b7a5698e607c4",
@@ -5503,7 +5497,7 @@
     "dmcontrol": "sha256:549bc1819e2cbc972a3e45bc9d81c6eee41356765740e0551e8972c8bae5d19c",
     "driving": "sha256:c17dbccef41bc3f9c6c75ec76a7dfd063b2b6b905f3ee2eb38e7de475b0ad2f2",
     "embodied": "sha256:b8b0c93cbffede79e353cfef6371f3fea6806982f15298e5c8a0b0086e9953e0",
-    "gpu": "sha256:bd21e127de70c186268a3953e855ab2b671b584451415bb53512798e3d60ad14",
+    "gpu": "sha256:58120358d774adedcb2dda8f6313eb2883c68200d6decf60a1a9aaf2a81a86a6",
     "humanoidbench": "sha256:6f64a0b969422b413d228a966920917f69e78f8b047b230ed1567330886fd41c",
     "libero": "sha256:93160a0b0fa71b29a6fe2db2b669bed017b243755f9d21cdec81e3550f07c749",
     "light": "sha256:420e3b3167ddd4996377f3c5d94019ba3ef1b85a3212b14c09b367e129579b5d",
@@ -5512,7 +5506,7 @@
     "myosuite": "sha256:d0a9c75adec6668cade6419c4ea89f174d5ca383466b8935c21bda6642bd15e7",
     "rlebench": "sha256:7fe78bb4ff576e3b6545f927bd90dff9810ef684effbe2c39daf9f5d9c273ae4",
     "robocasa": "sha256:7d487d7ecae857f0c84c915c1ea4e28f859954450833a30519fd06ae42effab6",
-    "robodojo": "sha256:05cf41ab0ac67408847feda2672513577d04f7d127c733b3d9f7327b8b2c09bb",
+    "robodojo": "sha256:3473cc20d214c834dfba9ed5e7572c94353e291b22a661ecfc7f2759d34b1846",
     "robosuite": "sha256:2ec475a68ded7bbf7906a0b2ea986470598305201c15971fdc458edb9a5a09f5"
   }
 }

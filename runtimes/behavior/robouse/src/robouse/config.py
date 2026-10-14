@@ -2,13 +2,17 @@
 
 Code reads settings through the helpers here (`env`, `flag`, `path`, `cache_dir`, `sim_python`, ...), never through
 `os.environ` directly, so the list below stays complete (tests/test_config.py checks it against the source).
-Maintainer-only fallbacks (credential pools, endpoint files inside a checkout) live in `robouse._maintainer`.
+Optional credential pools (ROBOUSE_CLAUDE_TOKEN_FILE, ROBOUSE_CODEX_AUTH_DIR) are read in `robouse._maintainer`.
 """
 
 from __future__ import annotations
 
 import os
 from pathlib import Path
+
+# The published documentation. Messages point here, not at files under docs/ in the repository, which are not published.
+DOCS_URL = "https://robouse.ai/docs/"
+SUITES_DOCS = DOCS_URL + "suites/"  # the suites page, with the setup of the simulators that need their own virtualenv
 
 ENV: dict[str, str] = {
     # locations
@@ -18,7 +22,8 @@ ENV: dict[str, str] = {
     "ROBOUSE_MENAGERIE_ASSETS": "MuJoCo Menagerie robot models (default: the checkout's assets/menagerie, else "
     "<cache>/menagerie)",
     "ROBOUSE_ROBOHARM_TEX": "generated texture cache for the roboharm scenes (default <cache>/roboharm_tex)",
-    "ROBOUSE_PRICING": "JSON price table for trial cost (default: the packaged pricing.json)",
+    "ROBOUSE_PRICING": "JSON price table for trial cost and the spend cap, used instead of the packaged pricing.json "
+    "(not added to it)",
     # episode server
     "ROBOUSE_SOCKET": "episode server socket the `robo` client talks to (set by the runner)",
     "ROBOUSE_ORACLE_TOKEN": "per-episode token that unlocks privileged state for the reference solution (set by the "
@@ -26,11 +31,35 @@ ENV: dict[str, str] = {
     "ROBOUSE_RECORD_SIZE": "episode video size WIDTHxHEIGHT (default: the backend's native size)",
     "ROBOUSE_EPISODE_DIR": "episode folder a task verifier reads (set by the runner)",
     "ROBOUSE_VERIFIER_DIR": "folder a task verifier writes reward.txt to (set by the runner)",
-    "ROBOUSE_TEXT_ONLY": "1: `robo observe --image` prints the path without attaching the image (set for harnesses "
-    "whose API rejects images)",
+    "ROBOUSE_AGENT_IMAGES": "0: the model gets no image input in this run, whatever it takes (its gateway replaces every "
+    "image part; recorded as image_input: false). Default: from the model registry",
+    "ROBOUSE_SPEND_CAP_USD": "the model spend at which the model gateway stops a trial, in USD (default 5; 0: no cap; "
+    "recorded as a budget stop). A model without a price, such as glm/glm-5.3, runs with 0 or with its price in "
+    "ROBOUSE_PRICING",
+    "ROBOUSE_GATEWAY_KEY": "the per-trial key a harness uses for its model gateway (set by the runner, never a provider "
+    "key)",
+    "ROBOUSE_GATEWAY_URL": "the trial's model gateway, http://127.0.0.1:<port> (set by the runner)",
+    "ROBOUSE_GATEWAY_MAX_IMAGES": "gateway process only: images per request (0 none, -1 no limit), from the registry",
+    "ROBOUSE_GATEWAY_LOG": "gateway process only: the request log (image counts, no content)",
+    "ROBOUSE_GATEWAY_BEARER_ENV": "gateway process only: the provider key variable sent as a Bearer token",
+    "ROBOUSE_GATEWAY_DROP_THINKING": "gateway process only: 1 removes `thinking` from Anthropic Messages requests (a "
+    "provider without a Responses API, where LiteLLM would send such a request)",
+    "ROBOUSE_GATEWAY_SPEND_CAP": "gateway process only: the trial's spend cap in USD (0: none)",
+    "ROBOUSE_GATEWAY_PRICE": "gateway process only: the model's price, USD per 1M tokens (JSON, from pricing.json)",
+    "ROBOUSE_GATEWAY_STOP_FILE": "gateway process only: the file it writes when the spend cap is reached",
+    "ROBOUSE_GATEWAY_DUMP": "debugging only: a folder where the gateway writes every request body it receives and "
+    "sends (trial content; never for published runs)",
+    "ROBOUSE_INTERFACE": "the trial's robot interface: cli, mcp or both (set by the runner; see harnesses/interface.py)",
+    "ROBOUSE_SEND_VIA": "mcp: `robo` and reference solutions send every request through a `robo mcp` server (set by "
+    "the runner for oracle and noop with --interface mcp)",
+    "ROBOUSE_MCP_URL": "the `robo` MCP endpoint of a harness that speaks MCP over HTTP (set by the runner)",
     # local runner sandbox
-    "ROBOUSE_SANDBOX": "0 disables the macOS Seatbelt sandbox around agent processes (default 1)",
+    "ROBOUSE_SANDBOX": "0 disables the sandbox around agent processes (macOS Seatbelt, Linux bubblewrap; default 1)",
     "ROBOUSE_SANDBOX_DENY": "extra colon-separated paths agents may neither read nor write",
+    "ROBOUSE_CLAUDE_TOKEN_FILE": "optional env file of Claude Code OAuth tokens (NAME=token lines), used in turn when "
+    "neither ANTHROPIC_API_KEY nor CLAUDE_CODE_OAUTH_TOKEN is set; denied to agents",
+    "ROBOUSE_CODEX_AUTH_DIR": "optional folder of Codex logins (<account>.json, copies of a `codex login` auth.json), "
+    "used in turn when OPENAI_API_KEY is not set; denied to agents",
     # simulator worker interpreters (one virtualenv per simulator that conflicts with the main environment)
     "ROBOUSE_DEXJOCO_PYTHON": "Python of the DexJoCo virtualenv (default <cache>/dexjoco-venv/bin/python)",
     "ROBOUSE_DMCONTROL_PYTHON": "Python of the dm_control virtualenv (default <cache>/dmcontrol-venv/bin/python)",
@@ -39,9 +68,23 @@ ENV: dict[str, str] = {
     "ROBOUSE_METADRIVE_PYTHON": "Python of the MetaDrive virtualenv (default <cache>/metadrive-venv/bin/python)",
     "ROBOUSE_MYOSUITE_PYTHON": "Python of the MyoSuite virtualenv (default <cache>/myosuite-venv/bin/python)",
     "ROBOUSE_ROBOCASA_PYTHON": "Python of the RoboCasa virtualenv (default <cache>/robocasa-venv/bin/python)",
+    "ROBOUSE_RLEBENCH_PYTHON": "Python of the RLE-Bench virtualenv (default <cache>/rlebench-venv/bin/python)",
+    "ROBOUSE_CAPX_PYTHON": "Python of the CaP-X virtualenv (default <cache>/capx-venv/bin/python)",
+    "ROBOUSE_CAPX_LIBERO_PYTHON": "Python of the CaP-X LIBERO virtualenv (default <cache>/capx-libero-venv/bin/python)",
     **{
         f"ROBOUSE_{b}_QUIET": f"0 shows the {b.lower()} worker's stderr (default 1)"
-        for b in ("DEXJOCO", "DMCONTROL", "HUMANOIDBENCH", "MANISKILL", "METADRIVE", "MYOSUITE", "ROBOCASA")
+        for b in (
+            "DEXJOCO",
+            "DMCONTROL",
+            "HUMANOIDBENCH",
+            "MANISKILL",
+            "METADRIVE",
+            "MYOSUITE",
+            "ROBOCASA",
+            "RLEBENCH",
+            "CAPX",
+            "CAPX_LIBERO",
+        )
     },
     "ROBOUSE_MANISKILL_DEBUG": "1: the ManiSkill worker logs each request",
     "ROBOUSE_HUMANOIDBENCH_POLICY": "HumanoidBench low-level walking policy (default <cache>/humanoidbench/h1_motion.pt)",
@@ -67,7 +110,9 @@ ENV: dict[str, str] = {
     "ROBOUSE_GPU_IDLE_S": "GPU-track worker: idle seconds before a session is closed",
     "ROBOUSE_MS_SIM": "GPU-track worker: ManiSkill simulation backend",
     "ROBOUSE_PG_POLICIES": "GPU-track worker: folder of trained MuJoCo Playground policies",
-    "ROBOUSE_IL_RTX": "GPU-track worker: 1 renders Isaac Lab with RTX",
+    "ROBOUSE_IL_RTX": "GPU-track worker: Isaac Lab images from RTX (1), the MuJoCo schematic (0), or RTX if a probe at start renders (auto, the default)",
+    "ROBOUSE_IL_RTX_PROBE_TIMEOUT_S": "GPU-track worker: seconds the Isaac Lab RTX probe may take (default 900)",
+    "ROBOUSE_IL_RTX_NOTE": "GPU-track worker (set by the worker): why Isaac Lab renders as it does",
     # harnesses
     "ROBOUSE_VLA_URL": "policy server for the `vla` harness",
     "ROBOUSE_VLA_TOKEN": "bearer token for the policy server",
@@ -76,9 +121,19 @@ ENV: dict[str, str] = {
     "ROBOUSE_VLA_CONFIG": "resolved `vla` preset, passed to the client (set by the runner)",
     "ROBOUSE_MOLMOACT2_URL": "MolmoAct2 policy server for the `molmoact2` harness",
     "ROBOUSE_MOLMOACT2_TOKEN": "bearer token for the MolmoAct2 server",
+    "ROBOUSE_DIMCODE": "the dimcode executable for the `dimcode` harness (default: `dimcode` on PATH)",
+    "ROBOUSE_DIMCODE_NODE": "Node 24 or 26 that runs dimcode (default: `node` on PATH)",
+    "ROBOUSE_SHOW_HARNESS_URL": "OpenAI-compatible server (base URL ending in /v1) of a self-hosted model for the "
+    "`show-harness` harness, e.g. vLLM serving a Show-Harness adapter",
+    "ROBOUSE_SHOW_HARNESS_TOKEN": "token for that server: a bearer token, or sent under the overrides' `token_header`",
+    "ROBOUSE_SHOW_HARNESS_CONFIG": "JSON file of `show-harness` overrides (mode zs or ft, step sizes, plugins)",
+    "ROBOUSE_SHOW_HARNESS_MODEL": "the model name the `show-harness` client sends (set by the runner)",
+    "ROBOUSE_SHOW_HARNESS_SETTINGS": "the `show-harness` client's mode, task sentence and overrides (set by the runner)",
     "ROBOUSE_TASK_LANGUAGE": "the language instruction a VLA client sends (set by the runner)",
-    "ROBOUSE_GRADER_URL": "OpenAI-compatible endpoint for `robouse grade` (default: Baseten)",
-    "ROBOUSE_GRADER_API_KEY": "API key for `robouse grade` (default: BASETEN_API_KEY)",
+    "ROBOUSE_GRADER_URL": "OpenAI-compatible endpoint (base URL) of the vision-language model for `robouse grade` and "
+    "`real.verdict: vlm` (required by both; no default)",
+    "ROBOUSE_GRADER_API_KEY": "API key for that endpoint, sent as a bearer token (required; no default). The runner "
+    "keeps it out of agents' environments",
     # real robots
     "ROBOUSE_RIG": "real-robot rig file; real tasks run on live hardware instead of the hardware-in-the-loop mock",
     "ROBOUSE_OPERATOR_DIR": "operator channel and e-stop latch for real robots (default ~/.config/robouse-operator)",
@@ -100,6 +155,8 @@ PUBLIC = frozenset(
         "ROBOUSE_RECORD_SIZE",
         "ROBOUSE_SANDBOX",
         "ROBOUSE_SANDBOX_DENY",
+        "ROBOUSE_SPEND_CAP_USD",
+        "ROBOUSE_AGENT_IMAGES",
         "ROBOUSE_DEXJOCO_PYTHON",
         "ROBOUSE_DMCONTROL_PYTHON",
         "ROBOUSE_HUMANOIDBENCH_PYTHON",
@@ -107,11 +164,19 @@ PUBLIC = frozenset(
         "ROBOUSE_METADRIVE_PYTHON",
         "ROBOUSE_MYOSUITE_PYTHON",
         "ROBOUSE_ROBOCASA_PYTHON",
+        "ROBOUSE_RLEBENCH_PYTHON",
+        "ROBOUSE_CAPX_PYTHON",
+        "ROBOUSE_CAPX_LIBERO_PYTHON",
         "ROBOUSE_VLA_URL",
         "ROBOUSE_VLA_TOKEN",
         "ROBOUSE_VLA_POLICY_CONFIG",
         "ROBOUSE_MOLMOACT2_URL",
         "ROBOUSE_MOLMOACT2_TOKEN",
+        "ROBOUSE_DIMCODE",
+        "ROBOUSE_DIMCODE_NODE",
+        "ROBOUSE_SHOW_HARNESS_URL",
+        "ROBOUSE_SHOW_HARNESS_TOKEN",
+        "ROBOUSE_SHOW_HARNESS_CONFIG",
     }
 )
 
@@ -154,22 +219,16 @@ def sim_python(backend: str, venv: str | None = None) -> Path:
 
 
 def remote_endpoints(name: str) -> Path | None:
-    """Endpoints file of a remote worker pool: $ROBOUSE_<NAME>_REMOTE, <config>/remote/<name>.json, or a maintainer
-    fallback; None when there is none."""
-    from . import _maintainer
-
+    """Endpoints file of a remote worker pool: $ROBOUSE_<NAME>_REMOTE, else <config>/remote/<name>.json (a folder the
+    sandbox denies to agents); None when there is none. No file inside a checkout is read: agents can read those."""
     explicit = env(f"ROBOUSE_{name.upper()}_REMOTE")
-    candidates = (
-        [Path(explicit).expanduser()]
-        if explicit
-        else [config_dir() / "remote" / f"{name}.json", *_maintainer.remote_endpoint_files(name)]
-    )
-    return next((p for p in candidates if p.is_file()), None)
+    p = Path(explicit).expanduser() if explicit else config_dir() / "remote" / f"{name}.json"
+    return p if p.is_file() else None
 
 
 def sandbox_denied_paths() -> list[str]:
-    """Paths agents may neither read nor write: private settings, the operator channel, maintainer folders, and
-    $ROBOUSE_SANDBOX_DENY."""
+    """Paths agents may neither read nor write: private settings, the operator channel, the optional credential pools
+    (robouse._maintainer), and $ROBOUSE_SANDBOX_DENY."""
     from . import _maintainer
 
     paths = [config_dir(), operator_dir(), *_maintainer.private_dirs()]

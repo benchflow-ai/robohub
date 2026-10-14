@@ -169,7 +169,7 @@ def serve_http(
     if stop is not None:
         one = HTTPServer((host, port), Handler)
         one.timeout = 1.0
-        print(f"{name} on :{port}", flush=True)
+        print(f"{name} on {host}:{port}", flush=True)
         while not stop():
             one.handle_request()
         one.server_close()
@@ -180,7 +180,7 @@ def serve_http(
         srv.daemon_threads = True
     else:
         srv = HTTPServer((host, port), Handler)
-    print(f"{name} on :{port}", flush=True)
+    print(f"{name} on {host}:{port}", flush=True)
     srv.serve_forever()
 
 

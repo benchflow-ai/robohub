@@ -20,13 +20,14 @@ import logging
 
 import numpy as np
 
+from ... import config
 from ...workers.client import WorkerError, decode_png_b64, load_endpoints, remote_worker
 from ..base import ActionSpec, Backend, StepInfo
 
 log = logging.getLogger(__name__)
 
-RETRY_METHODS = frozenset({"info", "observe", "render", "success", "camera_info", "goal_status"})
-SETUP = "docs/suites/gpu-track.md"
+RETRY_METHODS = frozenset({"info", "observe", "render", "success", "camera_info", "goal_status", "renderer"})
+SETUP = config.SUITES_DOCS
 
 
 class GpuBackend(Backend):
@@ -119,6 +120,17 @@ class GpuBackend(Backend):
     def embodiment(self) -> dict:
         """The robot as a BenchFlow embodiment spec (docs/embodied.md), as the worker declares it."""
         return self.remote_info.get("embodiment", {})
+
+    def renderer(self) -> dict | None:
+        """What draws the images: {"name", "about", "used": [renderers that drew a frame so far], ...}, from the worker
+        (the episode server puts it in `robo info`, the trace and result.json). None for a worker that does not say."""
+        if "renderer" not in self.remote_info:
+            return None
+        try:
+            return self._call("renderer")
+        except WorkerError as e:
+            log.warning("asking the GPU worker for its renderer failed: %s", e)
+            return self.remote_info["renderer"]
 
     def close(self) -> None:
         if self.worker.session:

@@ -3,17 +3,20 @@
 from __future__ import annotations
 
 import argparse
+import gc
 import importlib.util
 import json
 import os
 import sys
+import traceback
 from pathlib import Path
 
+from .. import config
 from ..tasks import Task, bundled_tasks_root, find_tasks, load_task, resolve_task_path
 
 HARNESS_HELP = (
-    "harness: oracle, noop, claude-code, codex, claude-code-glm, codex-glm, mini-swe-agent-glm, molmoact2 or "
-    "vla (https://robouse.ai/docs/harnesses/)"
+    "harness: oracle, noop, claude-code, codex, mini-swe-agent, dimcode, show-harness, molmoact2 or vla; --model takes "
+    "a provider-prefixed id such as glm/glm-5.3 (https://robouse.ai/docs/harnesses/)"
 )
 RECORD_SIZE_HELP = (
     "render the episode video at this size, e.g. 1280x720; agent images are unchanged "
@@ -27,7 +30,7 @@ SIM_HINT = (
 
 
 def _engine_opts(p: argparse.ArgumentParser) -> None:
-    # The BenchFlow engine needs a BenchFlow release with the task-format hook (on BenchFlow's `robouse` branch today),
+    # The BenchFlow engine needs a BenchFlow release with the task-format hook (no PyPI release of BenchFlow has it yet),
     # so these options work but are not listed until that release exists.
     p.add_argument("--engine", choices=("local", "benchflow"), default="local", help=argparse.SUPPRESS)
     p.add_argument("--sandbox", default="docker", help=argparse.SUPPRESS)
@@ -38,6 +41,12 @@ def _engine_opts(p: argparse.ArgumentParser) -> None:
 def _trial_opts(p: argparse.ArgumentParser, many: bool) -> None:
     p.add_argument("--harness", "--agent", dest="harness", metavar="HARNESS", required=True, help=HARNESS_HELP)
     p.add_argument("--model", default="", help="model for the harness (default: the harness's)")
+    p.add_argument(
+        "--interface",
+        choices=("cli", "mcp", "both"),
+        help="what the agent drives the robot with: the robo CLI, the robo MCP tools, or both "
+        "(default: " + ("each task's" if many else "the task's") + " robouse.interface, else cli)",
+    )
     p.add_argument(
         "--timeout",
         type=float,
@@ -77,14 +86,14 @@ def register(sub: argparse._SubParsersAction) -> None:
 
     r = sub.add_parser("run", help="run one trial end to end")
     r.add_argument("--task", required=True, help="task folder or bundled task id")
-    r.add_argument("--out", required=True, help="job folder; the trial is written to OUT/<task>__<harness>__<id>/")
+    r.add_argument("--out", required=True, help="run folder; the trial is written to OUT/<task>__<harness>__<id>/")
     r.add_argument("--seeds", help=argparse.SUPPRESS)  # BenchFlow engine only
     _trial_opts(r, many=False)
     r.set_defaults(func=run)
 
     m = sub.add_parser("run-many", help="run a set of trials")
     m.add_argument("--tasks", help="task root (default: the bundled tasks)")
-    m.add_argument("--out", required=True, help="job folder; one trial folder per task")
+    m.add_argument("--out", required=True, help="run folder; one trial folder per task")
     m.add_argument("--filter", default="", help="only task ids containing this substring")
     m.add_argument("--task-list", help="file with one task id per line (a subset of --tasks)")
     m.add_argument(
@@ -112,7 +121,8 @@ def register(sub: argparse._SubParsersAction) -> None:
     m.add_argument(
         "--resume",
         action="store_true",
-        help="skip tasks that have a finished trial in --out that did not fail on infrastructure",
+        help="skip tasks that have a finished trial in --out that did not fail on infrastructure (refused when --out "
+        "holds trials of another harness or model)",
     )
     m.add_argument("--dry-run", action="store_true", help="print the resolved trial plan and exit")
     _trial_opts(m, many=True)
@@ -143,16 +153,40 @@ def _unknown_harness(name: str) -> int:
     from importlib.metadata import entry_points
 
     from ..harnesses import HARNESSES
+    from ..harnesses.models import legacy_refusal
 
+    if why := legacy_refusal(name):  # claude-code-glm etc.: kept to read the September runs, not to run
+        print(f"robouse: {why}", file=sys.stderr)
+        return 2
     if name in HARNESSES or any(ep.name == name for ep in entry_points(group="robouse.harnesses")):
         return 0
     print(f"robouse: unknown harness {name!r}; harnesses: {', '.join(HARNESSES)}", file=sys.stderr)
     return 2
 
 
-def _prepare_local(a: argparse.Namespace) -> int:
-    """Settings the episode servers read from the environment, and the simulator check. 0 when ready."""
-    if getattr(a, "harness", None) and (rc := _unknown_harness(a.harness)):  # `serve` has no harness
+# backends whose simulator runs in a remote worker (a thin HTTP client here): the host needs no MuJoCo for them
+REMOTE_BACKENDS = frozenset({"gpu", "behavior", "robodojo"})
+
+
+def _check_model(harness: str, model: str) -> int:
+    """0 when the harness can start with this model (runner.trial.check_model), else the message, naming what to set,
+    and 2. Sends no request."""
+    from ..runner.trial import check_model
+
+    try:
+        check_model(harness, model)
+    except (ValueError, RuntimeError) as e:
+        print(f"robouse: {e}", file=sys.stderr)
+        return 2
+    return 0
+
+
+def _prepare_local(a: argparse.Namespace, backends: set[str] | None = None) -> int:
+    """Settings the episode servers read from the environment, and the simulator check. 0 when ready. `backends`: the
+    backends of the tasks about to run (None: unknown, so MuJoCo is required)."""
+    if getattr(a, "harness", None) and (  # `serve` has no harness
+        (rc := _unknown_harness(a.harness)) or (rc := _check_model(a.harness, a.model))
+    ):
         return rc
     if getattr(a, "rig", None):
         os.environ["ROBOUSE_RIG"] = str(Path(a.rig).resolve())
@@ -165,33 +199,52 @@ def _prepare_local(a: argparse.Namespace) -> int:
             print(f"robouse: {e}", file=sys.stderr)
             return 2
         os.environ["ROBOUSE_RECORD_SIZE"] = f"{w}x{h}"
-    missing = [m for m in ("mujoco", "imageio", "PIL") if importlib.util.find_spec(m) is None]
+    needs = ("imageio", "PIL") if backends and backends <= REMOTE_BACKENDS else ("mujoco", "imageio", "PIL")
+    missing = [m for m in needs if importlib.util.find_spec(m) is None]
     if missing:
         print(SIM_HINT.format(err="missing: " + ", ".join(missing)), file=sys.stderr)
         return 1
+    if "mujoco" in needs:
+        from ..core import gl
+
+        gl.auto_select()  # MUJOCO_GL unset on Linux without a display: OSMesa or EGL, whichever renders; inherited by trials
     return 0
 
 
 def serve(a: argparse.Namespace) -> int:
-    if rc := _prepare_local(a):
+    spec = load_task(resolve_task_path(a.task)).spec
+    if rc := _prepare_local(a, {spec.get("backend", "")}):
         return rc
     from ..session import serve as serve_episode
 
-    spec = load_task(resolve_task_path(a.task)).spec
     if a.seed is not None:
         spec["seed"] = a.seed
     if a.split:
         spec["placement"] = {**(spec.get("placement") or {}), "split": a.split}
     secrets = json.loads(sys.stdin.readline() or "{}") if a.secrets_stdin else None
-    res = serve_episode(
-        spec,
-        Path(a.run_dir),
-        a.socket,
-        Path(a.workspace) if a.workspace else None,
-        max_wall_s=a.max_wall_s,
-        ready_file=Path(a.ready_file) if a.ready_file else None,
-        secrets=secrets,
-    )
+    from ..core import gl
+
+    why = None
+    try:
+        res = serve_episode(
+            spec,
+            Path(a.run_dir),
+            a.socket,
+            Path(a.workspace) if a.workspace else None,
+            max_wall_s=a.max_wall_s,
+            ready_file=Path(a.ready_file) if a.ready_file else None,
+            secrets=secrets,
+        )
+    except Exception as e:
+        if (why := gl.explain(e)) is None:
+            raise
+        traceback.print_exc()  # the details stay in the log
+    if why:
+        # outside the handler, so MuJoCo's half-built Renderer is collected (and prints its own follow-on error) first:
+        # the plain message is the last line, the one the runner reports
+        gc.collect()
+        print(f"robouse: {why}", file=sys.stderr, flush=True)
+        return 1
     print(json.dumps({k: v for k, v in res.items() if k != "signature"}))
     return 0
 
@@ -205,12 +258,13 @@ def run(a: argparse.Namespace) -> int:
             file=sys.stderr,
         )
         return 2
-    if rc := _prepare_local(a):
+    task = load_task(resolve_task_path(a.task))
+    if rc := _prepare_local(a, {task.spec.get("backend", "")}):
         return rc
     from ..runner import run_trial
 
     res = run_trial(
-        load_task(resolve_task_path(a.task)),
+        task,
         a.harness,
         a.model,
         Path(a.out),
@@ -219,6 +273,7 @@ def run(a: argparse.Namespace) -> int:
         split=a.split,
         extra_instruction=a.extra_instruction,
         prior_learnings=a.prior_learnings,
+        interface=a.interface,
     )
     print(json.dumps(res, indent=2))
     return 1 if res.get("exception") else 0  # the trial could not run to a result (reward 0 is a result)
@@ -256,7 +311,7 @@ def run_many(a: argparse.Namespace) -> int:
                     "epochs": a.epochs,
                     "trials": len(ts) * len(plan_seeds) * max(1, a.epochs),
                     "split": a.split,
-                    "concurrency": 1 if a.rig else a.concurrency,
+                    "concurrency": 1 if a.rig or config.env("ROBOUSE_RIG") else a.concurrency,
                     "rig": a.rig,
                     "retries": a.retries,
                 },
@@ -264,9 +319,15 @@ def run_many(a: argparse.Namespace) -> int:
             )
         )
         return 0
-    if rc := _prepare_local(a):
+    ts = select_tasks(root, a.filter, ids, a.include, a.exclude, a.limit, a.sample, a.sample_seed, a.mode)
+    if rc := _prepare_local(a, {t.spec.get("backend", "") for t in ts} or None):
         return rc
     from ..runner import run_many as run_trials
+    from ..runner.jobs import resume_refusal
+
+    if a.resume and (why := resume_refusal(Path(a.out), a.harness, a.model)):
+        print(f"robouse: {why}", file=sys.stderr)
+        return 2
 
     results = run_trials(
         root,
@@ -275,7 +336,7 @@ def run_many(a: argparse.Namespace) -> int:
         Path(a.out),
         filt=a.filter,
         limit=a.limit,
-        concurrency=1 if a.rig else a.concurrency,
+        concurrency=1 if a.rig or config.env("ROBOUSE_RIG") else a.concurrency,  # one trial at a time on a rig
         timeout=a.timeout,
         ids=ids,
         resume=a.resume,
@@ -290,6 +351,7 @@ def run_many(a: argparse.Namespace) -> int:
         mode=a.mode,
         extra_instruction=a.extra_instruction,
         prior_learnings=a.prior_learnings,
+        interface=a.interface,
     )
     failed = sum(1 for r in results if r.get("exception"))
     if failed:
@@ -297,21 +359,54 @@ def run_many(a: argparse.Namespace) -> int:
             f"robouse: {failed} trial(s) failed on infrastructure (exception_info in their result.json)",
             file=sys.stderr,
         )
+    if any(r.get("halted_batch") for r in results):  # a real robot stopped and the operator did not clear it
+        return 3
     return 1 if failed else 0
 
 
-def _benchflow_missing(e: ImportError) -> int:
-    print(f"robouse: this needs BenchFlow ({e}); install robouse[benchflow] (Python 3.12)", file=sys.stderr)
+def _benchflow_missing(e: ImportError, what: str) -> int:
+    """`what` (the BenchFlow engine, export) needs BenchFlow's embodied support, which no PyPI release of BenchFlow has
+    yet: say so, and what this environment has."""
+    import importlib.metadata
+    import importlib.util
+
+    try:
+        installed = importlib.util.find_spec("benchflow") is not None
+        embodied = installed and importlib.util.find_spec("benchflow.embodied") is not None
+    except Exception:  # noqa: BLE001 - a BenchFlow that does not import: its own error says why
+        installed = embodied = True
+    if embodied:  # BenchFlow has it, and something else did not load
+        print(f"robouse: {what} could not load BenchFlow: {type(e).__name__}: {e}", file=sys.stderr)
+        return 1
+    if installed:
+        try:
+            have = f"the installed BenchFlow ({importlib.metadata.version('benchflow')}) does not have it"
+        except importlib.metadata.PackageNotFoundError:
+            have = "the installed BenchFlow does not have it"
+    else:
+        have = "BenchFlow is not installed"
+        if sys.version_info[:2] < (3, 12):
+            have += f", and it needs Python 3.12 or newer (this is {sys.version_info[0]}.{sys.version_info[1]})"
+    print(
+        f"robouse: {what} needs BenchFlow's embodied support (benchflow.embodied), which is not in a PyPI release of "
+        f"BenchFlow yet; {have}",
+        file=sys.stderr,
+    )
     return 1
 
 
 def _run_benchflow(a: argparse.Namespace, tasks: list[Task]) -> int:
+    from ..harnesses.models import history_refusal
+
+    if why := history_refusal(a.model or ""):  # baseten/...: the models of recorded trials only, on either engine
+        print(f"robouse: {why}", file=sys.stderr)
+        return 2
     try:
         from benchflow.embodied.rollouts import parse_seeds
 
         from ..engine.run import run_job
     except ImportError as e:
-        return _benchflow_missing(e)
+        return _benchflow_missing(e, "--engine benchflow")
     seeds = parse_seeds(a.seeds) if a.seeds else None
     if seeds and a.seed is not None:
         print("robouse: use --seed or --seeds, not both", file=sys.stderr)
@@ -336,7 +431,7 @@ def export(a: argparse.Namespace) -> int:
     try:
         from ..engine.format import materialize
     except ImportError as e:
-        return _benchflow_missing(e)
+        return _benchflow_missing(e, "export")
     keys = [k for k in a.filter.split(",") if k]
     n = 0
     for root in a.tasks:

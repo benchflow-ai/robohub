@@ -1,23 +1,26 @@
-"""Maintainer-only fallbacks, isolated here. None of them is needed to use robouse; each applies only when its folder
-exists on the machine.
+"""Optional credential pools for running many trials in a row. Nothing here is needed to use robouse, and nothing is
+read unless its variable is set.
 
-- Credential pools under ~/.config/bf-agents: `oauth.env` (Claude Code OAuth tokens, rotated), `baseten.env`
-  (BASETEN_API_KEY) and `codex-auth/*.json` (a pool of Codex accounts).
-- Remote worker endpoint files inside a development checkout: <repo>/runs/_<name>/remote.json.
-- Folders agents must never read in the local runner's sandbox: the maintainers' workspace (~/benchflow) and the
-  credential pools.
+- ROBOUSE_CLAUDE_TOKEN_FILE: a shell-style env file of Claude Code OAuth tokens (`NAME=token` lines; every non-empty
+  value is a token), used in turn when neither ANTHROPIC_API_KEY nor CLAUDE_CODE_OAUTH_TOKEN is set.
+- ROBOUSE_CODEX_AUTH_DIR: a folder of Codex logins (`<account>.json`, each a copy of a `codex login` auth.json), used in
+  turn instead of ~/.codex/auth.json when OPENAI_API_KEY is not set.
+
+No model provider's key is read from a file: the model gateway takes it from the environment only. Both locations go
+on the local runner's sandbox deny list (`config.sandbox_denied_paths`), so agents can read neither; for the token file
+that is the file alone, not its folder. Other private folders go in ROBOUSE_SANDBOX_DENY. Use a pool only as far as your providers' terms allow.
 """
 
 from __future__ import annotations
 
 from pathlib import Path
 
-AGENTS_DIR = Path.home() / ".config" / "bf-agents"
-OAUTH_ENV = AGENTS_DIR / "oauth.env"
-BASETEN_ENV = AGENTS_DIR / "baseten.env"
-CODEX_POOL = AGENTS_DIR / "codex-auth"
-WORKSPACE = Path.home() / "benchflow"
-CHECKOUT = Path(__file__).resolve().parents[2]
+from . import config
+
+
+def _location(name: str) -> Path | None:
+    v = config.env(name).strip()
+    return Path(v).expanduser() if v else None
 
 
 def read_env_file(path: Path) -> dict[str, str]:
@@ -33,21 +36,17 @@ def read_env_file(path: Path) -> dict[str, str]:
 
 
 def claude_tokens() -> list[str]:
-    """Claude Code OAuth tokens from the pool (BF_REVIEW_TOKEN_* entries), in a stable order."""
-    return [v for k, v in sorted(read_env_file(OAUTH_ENV).items()) if k.startswith("BF_REVIEW_TOKEN") and v]
-
-
-def baseten_key() -> str:
-    return read_env_file(BASETEN_ENV).get("BASETEN_API_KEY", "")
+    """Claude Code OAuth tokens from $ROBOUSE_CLAUDE_TOKEN_FILE, in a stable order (by name); [] when it is not set."""
+    f = _location("ROBOUSE_CLAUDE_TOKEN_FILE")
+    return [v for _, v in sorted(read_env_file(f).items()) if v] if f else []
 
 
 def codex_accounts() -> list[Path]:
-    return sorted(CODEX_POOL.glob("*.json")) if CODEX_POOL.is_dir() else []
-
-
-def remote_endpoint_files(name: str) -> list[Path]:
-    return [CHECKOUT / "runs" / f"_{name}" / "remote.json"]
+    """Codex logins in $ROBOUSE_CODEX_AUTH_DIR, sorted; [] when it is not set."""
+    d = _location("ROBOUSE_CODEX_AUTH_DIR")
+    return sorted(d.glob("*.json")) if d and d.is_dir() else []
 
 
 def private_dirs() -> list[Path]:
-    return [WORKSPACE, AGENTS_DIR]
+    """The configured pool locations, which agents must never read."""
+    return [p for p in (_location("ROBOUSE_CLAUDE_TOKEN_FILE"), _location("ROBOUSE_CODEX_AUTH_DIR")) if p]

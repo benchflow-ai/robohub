@@ -1,6 +1,6 @@
 """Safety layer for real arms, enforced inside the trusted episode server (the agent cannot bypass it).
 
-Every command goes through `Guard.command()`, in this order (a port of ~/benchflow/robot/safety.py and the
+Every command goes through `Guard.command()`, in this order (a port of the bench harness's safety layer and the
 inspect-robots-metal adapter, which ran the 2026-09-05 Metal arm sessions without damage):
 
 1. e-stop latch: if the e-stop file exists (`robouse estop`), nothing is sent; the episode ends with `safety_stop`.
@@ -12,8 +12,12 @@ inspect-robots-metal adapter, which ran the 2026-09-05 Metal arm sessions withou
 4. per-step delta limit (velocity ceiling; slower in the slow zone near the table) from the last command.
 5. wind-up guard: the command never leads the measured position by more than `windup_deg`, so a blocked joint pushes
    with a bounded torque.
-After each step: thermal guard (warn, then stop and hold above `temp_stop_c`) and a loop watchdog (a step slower than
-`watchdog_s` is logged). Every veto, clamp, warning and stop is appended to the intervention log (events.jsonl).
+After each step: stale telemetry (a joint reading older than `telemetry_timeout_s`, as a cached bus serves when the link
+is dead, stops the episode), thermal guard (warn, then stop and hold above `temp_stop_c`; also checked at connect) and
+the loop watchdog (a step slower than `watchdog_s` is a stall: one slower than `watchdog_hard_s`, or
+`watchdog_max_stalls` stalls in a row, stop the episode; on a slow rig both stretch to `watchdog_periods` and
+`watchdog_hard_periods` control periods). The contact watch (contact.py) runs in the backend. Every veto, clamp,
+warning and stop is appended to the intervention log (events.jsonl).
 
 `HardwareLock` makes sure only one controller uses a robot at a time (flock on ~/.config/robouse-operator/<robot>.lock).
 """
@@ -39,7 +43,12 @@ class Veto(RuntimeError):
 
 
 class SafetyStop(RuntimeError):
-    """E-stop, over-temperature or a hardware fault: the episode must end and the robot hold (halt-for-human)."""
+    """E-stop, over-temperature, watchdog, lost telemetry, contact or a hardware fault: the episode must end and the robot
+    hold (halt-for-human). `kind` names the cause for the session record and for halting a batch of trials."""
+
+    def __init__(self, message: str, kind: str = "safety_stop"):
+        super().__init__(message)
+        self.kind = kind
 
 
 def estop_path(robot: str = "") -> Path:
@@ -83,7 +92,9 @@ class HardwareLock:
             fcntl.flock(self._fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except OSError as exc:
             self._fh.close()
-            raise SafetyStop(f"another process controls {robot} ({self.path}); only one controller may use it") from exc
+            raise SafetyStop(
+                f"another process controls {robot} ({self.path}); only one controller may use it", "hardware_lock"
+            ) from exc
         self._fh.seek(0)
         self._fh.truncate()
         self._fh.write(f"{os.getpid()} {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
@@ -176,16 +187,20 @@ class Guard:
             speeds[g] = slow[g] = self.e.gripper_speed / self.hz
             wind[g] = self.e.windup_gripper
         self.max_step, self.max_step_slow, self.windup = speeds, slow, wind
+        # loop watchdog limits: the absolute ones, or a number of control periods on a slow rig (whichever is longer)
+        self.stall_s = max(self.e.watchdog_s, self.e.watchdog_periods / self.hz)
+        self.hard_s = max(self.e.watchdog_hard_s, self.e.watchdog_hard_periods / self.hz)
         self.last_cmd: np.ndarray | None = None
         self.last_pos: np.ndarray | None = None
         self._warned_at = -1e9
         self.n_clamped = 0
+        self.stalls = 0  # loop stalls in a row
 
     def check_estop(self) -> None:
         why = self.estop_check()
         if why:
             self.log("estop", reason=why)
-            raise SafetyStop(f"e-stop: {why}")
+            raise SafetyStop(f"e-stop: {why}", "estop")
 
     def validate_target(self, target) -> np.ndarray:
         t = np.asarray(target, dtype=float).reshape(-1)
@@ -231,15 +246,52 @@ class Guard:
 
     def after_step(self, pos, extra: dict, dt: float) -> None:
         self.last_pos = np.asarray(pos, dtype=float)
+        self.check_thermal(extra)
+        self.check_loop(dt)
+
+    def check_thermal(self, extra: dict) -> None:
         temps = [float(x) for k in ("temp_mos_c", "temp_rotor_c", "temp_c") for x in (extra.get(k) or [])]
         if temps and max(temps) > self.e.temp_stop_c:
             self.log("stop", kind="overtemperature", temps=temps, limit_c=self.e.temp_stop_c)
-            raise SafetyStop(f"motor temperature {max(temps):.0f} C above {self.e.temp_stop_c:.0f} C")
+            raise SafetyStop(
+                f"motor temperature {max(temps):.0f} C above {self.e.temp_stop_c:.0f} C", "overtemperature"
+            )
         if temps and max(temps) > self.e.temp_warn_c and time.time() - self._warned_at > 5:
             self._warned_at = time.time()
             self.log("warn", kind="temperature", temps=temps)
-        if dt > self.e.watchdog_s:
-            self.log("warn", kind="loop_stall", dt=round(dt, 3))
+
+    def check_loop(self, dt: float) -> None:
+        """Loop watchdog: one control step slower than `hard_s`, or watchdog_max_stalls steps in a row slower than
+        `stall_s`, stop the episode (a controller this late is not watching the arm). Both scale with the control
+        period on a slow rig (watchdog_periods, watchdog_hard_periods); at 10-20 Hz they are 0.5 s and 2 s."""
+        if dt > self.hard_s:
+            why = f"a control step took {dt:.2f} s (limit {self.hard_s:g} s)"
+            self.log("stop", kind="watchdog", reason=why, dt=round(dt, 3), limit_s=self.hard_s)
+            raise SafetyStop(f"watchdog: {why}", "watchdog")
+        if dt <= self.stall_s:
+            self.stalls = 0
+            return
+        self.stalls += 1
+        self.log("warn", kind="loop_stall", dt=round(dt, 3), in_a_row=self.stalls)
+        if self.stalls >= self.e.watchdog_max_stalls:
+            why = f"{self.stalls} control steps in a row slower than {self.stall_s:g} s (last {dt:.2f} s)"
+            self.log("stop", kind="watchdog", reason=why, dt=round(dt, 3), in_a_row=self.stalls)
+            raise SafetyStop(f"watchdog: {why}", "watchdog")
+
+    def check_telemetry(self, stamp: float | None, now: float | None = None, source: str | None = None) -> None:
+        """Stale telemetry: a joint reading older than telemetry_timeout_s stops the episode instead of letting it go on
+        on old state (a cached bus keeps serving its last values when the link dies). A driver that cannot date its
+        readings (stamp None) is not checked. `source`: what the stamp dates (e.g. the Piper's joints 3-4), named in
+        the stop."""
+        if stamp is None:
+            return
+        age = (time.monotonic() if now is None else now) - stamp
+        if age > self.e.telemetry_timeout_s:
+            of, limit = (f" from {source}" if source else ""), self.e.telemetry_timeout_s
+            why = f"no fresh joint reading{of} for {age:.1f} s (limit {limit:g} s); the link may be down"
+            extra = {"source": source} if source else {}
+            self.log("stop", kind="telemetry_lost", reason=why, age_s=round(age, 3), limit_s=limit, **extra)
+            raise SafetyStop(f"lost telemetry: {why}", "telemetry_lost")
 
 
 class EventLog:
