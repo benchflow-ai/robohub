@@ -264,7 +264,7 @@ def write_oracle(task, robouse: Path, dst: Path, noop: bool) -> None:
         return
     spec = task.spec
     source = task.oracle_script.read_text()
-    backends = {spec["backend"], *re.findall(r"--backend[ =]([a-z_]+)", source)}  # hard tasks run tabletop_hard
+    backends = {spec["backend"], *re.findall(r"--backend[ =]([a-z0-9_]+)", source)}  # hard tasks run tabletop_hard
     vendor = dst / "vendor"
     for b in sorted(backends):
         vendor_robouse(robouse, b, vendor)
