@@ -45,6 +45,7 @@ A dataset is named `<org>/<name>`. A dataset adapted from another benchmark sits
 | `robocasa/robocasa@0.3` | 24 | robocasa | RoboCasa |
 | `benchflow/robouse-nav@0.3` | 40 | light | |
 | `robocurve/cubepick-reach@0.3` | 5 | light | inspect-robots cubepick-reach |
+| `benchflow/so101@0.1` | 12 | so101 | |
 | `benchflow/robouse-noop-control@0.4` | 100 | as robouse-core | robouse-core's tasks with reference solutions that do nothing; each must score 0 |
 | `stanfordvl/behavior-1k@0.3` | 43 | behavior (GPU) | BEHAVIOR-1K |
 | `haosulab/maniskill-gpu@0.3` | 12 | gpu (GPU) | ManiSkill3 |
@@ -126,6 +127,7 @@ The simulator images are built from this repository, not pulled from a registry.
 | `rlebench` | robosuite at `5ce6643` and RoboCasa at `b4684e6` (RLE-Bench's pins), pinned pip packages |
 | `capx` | CaP-X's robosuite fork at `9729273`, PyRoKi at `95afccc`, jaxls at `6fe7cf9`, pinned pip packages (a complete lock), the `panda_description` robot model |
 | `capx-libero` | LIBERO-PRO with its assets at `5368540`, CaP-X's robosuite 1.4 fork at `a498b08`, PyRoKi at `95afccc`, CPU PyTorch 2.8.0, pinned pip packages (a complete lock), the `panda_description` robot model |
+| `so101` | pinned pip packages; 54 MuJoCo Menagerie files (SO-101, Koch v1.1) from commit `8161bba`, each checked against its SHA-256 |
 | `behavior`, `gpu`, `robodojo` | a thin client; the simulators run on remote GPU workers |
 
 ## Third-party simulators and assets

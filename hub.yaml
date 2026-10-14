@@ -4,10 +4,11 @@
 
 # The Robo Use release the next export comes from (scripts/export.py refuses a checkout of another version).
 # export.json records the release each dataset was exported from: rle-bench/rle-bench and capgym/cap-x from 0.3.0,
-# every other dataset from 0.2.0.
+# every other dataset from 0.2.0; benchflow/so101 from Robo Use 0.4.0 with the so101 backend and suite (branch
+# hub-1014/so101-desk; the commit is in export.json).
 robouse:
-  repo: https://pypi.org/project/robouse/0.3.0/
-  package_version: 0.3.0
+  repo: https://pypi.org/project/robouse/0.4.0/
+  package_version: 0.4.0
 
 # Simulator runtimes (runtimes/<name>, built from templates/runtimes/<name>). Every task's compose file builds its
 # simulator image from one of them.
@@ -103,6 +104,11 @@ runtimes:
     gpu: required
     # remote GPU workers (robodojo_worker.py); the endpoints file is named by $ROBOUSE_ROBODOJO_REMOTE on the host
     remote_worker: ROBOUSE_ROBODOJO_REMOTE
+  so101:
+    backends: [so101]
+    simulators: MuJoCo 3.3.0, MuJoCo Menagerie models (The Robot Studio SO-101, Koch v1.1 low-cost robot arm)
+    # every file of the two Menagerie folders, LICENSE files included (54 files), each SHA-256 checked at build
+    assets: {so101.json: assets/menagerie/so101.json}
 
 # Per-suite facts for the hub page ("; " separates several values).
 suites:
@@ -146,6 +152,7 @@ suites:
   rle-bench: {embodiment: "Franka Panda on a mobile base (PandaOmron); Franka Panda", simulator: "RLE-Bench scenes (robosuite, MuJoCo 3.3.1)", image: rle-bench}
   capx: {embodiment: "Franka Panda; two Franka Pandas", simulator: "CaP-X robosuite 1.5.1 fork (MuJoCo 3.5.0)", image: capx}
   capx-libero: {embodiment: "Franka Panda", simulator: "LIBERO-PRO (robosuite 1.4 fork, MuJoCo 3.5.0)", image: capx-libero}
+  so101: {embodiment: 'SO-101 (single and bimanual); Koch v1.1', simulator: 'MuJoCo Menagerie models (MuJoCo 3.3.0)', image: so101}
 
 # Datasets are named <org>/<name>. The org is whoever designed the benchmark's tasks: a dataset adapted from someone
 # else's benchmark goes under that benchmark's GitHub org (lowercased) and records it under `upstream`; tasks BenchFlow
@@ -396,6 +403,11 @@ datasets:
     version: "0.1"
     suites: [capx, capx-libero]
     description: 'Robo Use CaP-X 0.1: CaP-Bench''s RoboSuite and LIBERO-PRO tasks as code as policy with CaP-X''s privileged API (object poses from the simulator and inverse kinematics; no perception models). The agent runs code over many turns, which is not one of CaP-Bench''s tiers.'
+  - name: benchflow/so101
+    dir: robouse-so101
+    version: "0.1"
+    suites: [so101]
+    description: 'Robo Use SO-101 0.1: the SO-101 follower arm, alone and as a two-arm rig, and the Koch v1.1 low-cost arm in simulation on a small hobby desk, with the skills and units of Robo Use''s real SO-101 (its reach and block-lift tasks have twins here).'
   - name: benchflow/robouse-noop-control
     dir: robouse-noop-control
     former_names: [robouse-noop-control]
