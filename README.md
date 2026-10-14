@@ -45,7 +45,7 @@ A dataset is named `<org>/<name>`. A dataset adapted from another benchmark sits
 | `robocasa/robocasa@0.3` | 24 | robocasa | RoboCasa |
 | `benchflow/robouse-nav@0.3` | 40 | light | |
 | `robocurve/cubepick-reach@0.3` | 5 | light | inspect-robots cubepick-reach |
-| `benchflow/so101@0.1` | 12 | so101 | |
+| `benchflow/so101@0.1` | 12 | so101 | the SO-101 (one arm or two) and the Koch v1.1 on a small desk; simulated twins of Robo Use's real SO-101 tasks |
 | `benchflow/robouse-noop-control@0.4` | 100 | as robouse-core | robouse-core's tasks with reference solutions that do nothing; each must score 0 |
 | `stanfordvl/behavior-1k@0.3` | 43 | behavior (GPU) | BEHAVIOR-1K |
 | `haosulab/maniskill-gpu@0.3` | 12 | gpu (GPU) | ManiSkill3 |
@@ -177,7 +177,8 @@ Run on 2026-10-01 with the released `bench` 0.7.4 on a 16-core linux/arm64 cloud
 | Reference solutions, every task of the 27 CPU datasets | every task scored 1 |
 | No-op reference solutions (`scripts/export.py --noop-out`), every task of every CPU dataset, and `benchflow/robouse-noop-control@0.4` | every task scored 0 |
 | `rle-bench/rle-bench@0.1` and `capgym/cap-x@0.1`, exported from Robo Use 0.3.0 (run 2026-10-01, same VM and `bench`): `bench tasks check`, reference solutions, no-op reference solutions | 49/49 valid; every task scored 1 (6/6, 43/43); every task scored 0 (0/6, 0/43) |
+| `benchflow/so101@0.1`, exported from Robo Use 0.4.0 with the so101 backend (run 2026-10-14 with `bench` 0.7.8 in Daytona sandboxes, x86_64, and natively on the arm64 VM): `bench tasks check` (also with `--sandbox docker`, `bench` 0.7.4 on the VM); reference solutions 3 times per task through `bench --tasks-dir`, 3 times through `robouse run-many` in the runtime image (x86_64) and 3 times on the arm64 host; no-op reference solutions once on each path | 12/12 valid; every task scored 1 in every run (36/36, 36/36, 36/36); every task scored 0 (0/12 bench, 0/12 native x86_64, 0/12 native arm64) |
 | A scripted agent looking for the oracle token in a vision task and a composed task, with a token set on the host (0.2 packages; the token handling has not changed since) | no token in its environment, files or processes; none of about 5,400 candidate strings, including the token an earlier version committed, unlocked privileged state; a control with the reference solution's token did |
 | The composed inspect-tag judge, with the robot driven to the tag and an answer that lists every three-digit number | 1 on `benchflow/robouse-composed@0.2`, 0 on 0.3 |
 
-Every dataset comes from a Robo Use release as published on PyPI, and every file the runtimes copy is identical to that release's wheel: `rle-bench/rle-bench@0.1` and `capgym/cap-x@0.1` come from 0.3.0, every other dataset from 0.2.0. `brave-eai/dexjoco@0.3` and `carlosferrazza/humanoid-bench@0.3` were run in full when they were published; the 0.2.0 export left their packages unchanged. The GPU datasets were not run in the hub's checks; their packages passed `bench tasks check` only.
+Every dataset comes from a Robo Use release as published on PyPI, and every file the runtimes copy is identical to that release's wheel: `rle-bench/rle-bench@0.1` and `capgym/cap-x@0.1` come from 0.3.0, every other dataset from 0.2.0. The exception is `benchflow/so101@0.1`: it comes from Robo Use 0.4.0 with the so101 backend and suite added (branch `hub-1014/so101-desk`, commit `7409b3f`, recorded in `export.json`), which is not on PyPI yet. `brave-eai/dexjoco@0.3` and `carlosferrazza/humanoid-bench@0.3` were run in full when they were published; the 0.2.0 export left their packages unchanged. The GPU datasets were not run in the hub's checks; their packages passed `bench tasks check` only.
