@@ -6741,6 +6741,99 @@
     ]
   },
   {
+    "name": "benchflow/so101",
+    "version": "0.1",
+    "description": "Robo Use SO-101 0.1: the SO-101 follower arm, alone and as a two-arm rig, and the Koch v1.1 low-cost arm in simulation on a small hobby desk, with the skills and units of Robo Use's real SO-101 (its reach and block-lift tasks have twins here).",
+    "git_tag": "benchflow/so101-v0.1",
+    "bench_version": ">=0.7.4,<0.8",
+    "tasks": [
+      {
+        "name": "koch-cube-in-cup",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "path": "datasets/robouse-so101/koch-cube-in-cup",
+        "digest": "sha256:f0cfbc2a66a92e5e10047e992c2aecd9994514e94e1ec835e298330772f6368c"
+      },
+      {
+        "name": "koch-stack-two-cubes",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "path": "datasets/robouse-so101/koch-stack-two-cubes",
+        "digest": "sha256:7d31c62b92f57d5f01e5f33c6eae3ef4f87e1b6ef8a09716f0e8ae6d550d086c"
+      },
+      {
+        "name": "so101-bimanual-lift-box",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "path": "datasets/robouse-so101/so101-bimanual-lift-box",
+        "digest": "sha256:40366a8e9958ad95b50bc93964c33171f05a005195c869a4da9396045ca407cc"
+      },
+      {
+        "name": "so101-bimanual-ruler-handover",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "path": "datasets/robouse-so101/so101-bimanual-ruler-handover",
+        "digest": "sha256:13280a26714f0bf2785cce27f828b4bbe9749c7f39d7d8f2b7093a8c9f6c3628"
+      },
+      {
+        "name": "so101-block-lift",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "path": "datasets/robouse-so101/so101-block-lift",
+        "digest": "sha256:e56141f81ba8eeefecc16da0278f17a7aa787dbc110238eb1bd8cdf485f3f85c"
+      },
+      {
+        "name": "so101-cube-in-cup",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "path": "datasets/robouse-so101/so101-cube-in-cup",
+        "digest": "sha256:1531dfc61d165c664c4a12a004299effd2c9d3e422c851006b4910b0c6b989ff"
+      },
+      {
+        "name": "so101-open-drawer",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "path": "datasets/robouse-so101/so101-open-drawer",
+        "digest": "sha256:6dcac3b878a4be9301e7f33781606eaf33f1ac6ab545cff202ebb61b13dee0cc"
+      },
+      {
+        "name": "so101-press-buttons-in-order",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "path": "datasets/robouse-so101/so101-press-buttons-in-order",
+        "digest": "sha256:7e2e769c0fbeabf13c409a5a280b091e69c8a9263455b782257eb2bec77f292b"
+      },
+      {
+        "name": "so101-push-puck-to-zone",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "path": "datasets/robouse-so101/so101-push-puck-to-zone",
+        "digest": "sha256:9da4ccff79ef0cb0c2506eaee34082de8e1c049e3b7fba120885121b456d1c3f"
+      },
+      {
+        "name": "so101-reach",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "path": "datasets/robouse-so101/so101-reach",
+        "digest": "sha256:8bde40d217c0255f53a4bc94daac9f408c5f314a72ba18e4cfea177182c2fcd6"
+      },
+      {
+        "name": "so101-sort-by-color",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "path": "datasets/robouse-so101/so101-sort-by-color",
+        "digest": "sha256:80ea5bd3744b59d628a3479a0da029a82758f82889aff004deefdd2ae7392b0f"
+      },
+      {
+        "name": "so101-stack-two-cubes",
+        "git_url": "https://github.com/benchflow-ai/robohub.git",
+        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "path": "datasets/robouse-so101/so101-stack-two-cubes",
+        "digest": "sha256:5f67598e1b6e06117be7ddd9f71d64acdec8daeea586ab16a9058f30722ace06"
+      }
+    ]
+  },
+  {
     "name": "benchflow/robouse-noop-control",
     "version": "0.4",
     "description": "Robo Use no-op control 0.4: the tasks of robouse-core with a reference solution that does nothing; each must score 0.",
