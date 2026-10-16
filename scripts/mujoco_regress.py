@@ -88,6 +88,22 @@ def sim_pin(runtime: Path) -> str | None:
     return pins.get("requirements.txt")
 
 
+def sim_memory(hub: Path, runtime: str) -> float | None:
+    """The memory one simulator of a runtime needs (hub.yaml runtimes: <name>: sim_memory: 4G), in GB."""
+    text = (hub / "hub.yaml").read_text() if (hub / "hub.yaml").exists() else ""
+    block = re.search(rf"^runtimes:\n(?:.*\n)*?  {re.escape(runtime)}:\n((?:    .*\n)+)", text, re.M)
+    m = re.search(r"sim_memory:\s*([0-9.]+)\s*G", block.group(1)) if block else None
+    return float(m.group(1)) if m else None
+
+
+def mem_quota_gb() -> float | None:
+    try:
+        v = Path("/sys/fs/cgroup/memory.max").read_text().strip()
+        return None if v == "max" else int(v) / 2**30
+    except (OSError, ValueError):
+        return None
+
+
 def task_key(task_dir: Path) -> str:
     """Content hash of what a trial runs: the simulator service definition and the reference solution."""
     h = hashlib.sha256()
@@ -121,6 +137,7 @@ def plan(a: argparse.Namespace) -> int:
                 else:
                     runtimes[rt] = {
                         "pins": pins,
+                        "sim_memory_gb": sim_memory(a.hub, rt),
                         "sim_mujoco": sim_pin(rdir),
                         "pythons": worker_pythons((rdir / "Dockerfile").read_text()),
                         "source": json.loads((rdir / "SOURCE.json").read_text()) if (rdir / "SOURCE.json").exists() else None,
@@ -488,6 +505,17 @@ def trial(task: Path, harness: str, out: Path, renv: dict, seed: int | None = No
         if res.exists():
             r = json.loads(res.read_text())
             rec.update({k: r.get(k) for k in ("outcome", "success", "steps_used", "max_steps", "judge_error")})
+        # an error the episode server returned to a robo request (a worker exception inside a step): the trial still
+        # scores, but the error is what changed
+        tr = ep / "trace.jsonl"
+        for line in tr.read_text(errors="replace").splitlines() if tr.exists() else []:
+            try:
+                resp = json.loads(line).get("resp") or {}
+            except ValueError:
+                continue
+            if resp.get("ok") is False and re.search(r"(WorkerError|[A-Z][A-Za-z]+Error): ", str(resp.get("error"))):
+                rec["robo_error"] = str(resp["error"])[:1000]
+                break
         if rec["reward"] is None:
             rec["error"] = "no reward: " + (out / "verifier.log").read_text()[-800:] + (ep / "serve.log").read_text()[-1500:]
         return finish(rec, out, t0)
@@ -509,7 +537,7 @@ def finish(rec: dict, out: Path, t0: float) -> dict:
     for big in ("recording.mp4",):
         for f in out.rglob(big):
             f.unlink()
-    for d in ("artifacts", "rpc"):
+    for d in ("artifacts", "rpc", "bin"):
         shutil.rmtree(out / d, ignore_errors=True)
     shutil.rmtree(out / "verifier" / "episode", ignore_errors=True)  # a copy of episode/
     (out / "trial.json").write_text(json.dumps(rec, indent=1))
@@ -565,6 +593,12 @@ def job(a: argparse.Namespace) -> int:
     meta["resolver"] = resolver_check(runtime, p["mujoco"], renv, {f: sim_python for f in rinfo["pins"]})
     (out / "meta.json").write_text(json.dumps(meta, indent=1))
     keys = unit["tasks"][: a.limit or None]
+    # as many trials at once as the machine's memory holds simulators of this runtime (hub.yaml sim_memory)
+    need, have = rinfo.get("sim_memory_gb") or sim_memory(a.hub, rt), mem_quota_gb()
+    if need and have:
+        a.concurrency = max(1, min(a.concurrency, int(have // need)))
+    meta["concurrency"] = a.concurrency
+    (out / "meta.json").write_text(json.dumps(meta, indent=1))
 
     def batch(label: str, items: list[tuple[str, str, int | None]]):
         res_f = out / f"{label}.jsonl"
@@ -588,18 +622,64 @@ def job(a: argparse.Namespace) -> int:
             return r
 
         with concurrent.futures.ThreadPoolExecutor(a.concurrency) as ex, open(res_f, "a") as f:
-            for i, r in enumerate(ex.map(one, todo)):
-                f.write(json.dumps(r) + "\n")
+            futs = [ex.submit(one, i) for i in todo]
+            for i, fut in enumerate(concurrent.futures.as_completed(futs)):  # written as they finish, so a re-run resumes
+                f.write(json.dumps(fut.result()) + "\n")
                 f.flush()
                 if i % 10 == 0:
                     note(phase=label, done=i + 1, of=len(todo))
-        return {(r["key"], r["harness"], r.get("seed")): r for r in map(json.loads, res_f.read_text().splitlines())}
+        got = {(r["key"], r["harness"], r.get("seed")): r for r in map(json.loads, res_f.read_text().splitlines())}
+        # an infrastructure failure (the kernel killed a process for memory, a server that never started) says nothing
+        # about MuJoCo: run it again, alone; the later line wins when the file is read
+        again = [i for i in items if infra_failure(got.get(i))]
+        if again:
+            note(phase=label, retry_alone=len(again))
+            with open(res_f, "a") as f:
+                for item in again:
+                    r = one(item)
+                    r["retried_after"] = (got[item].get("error") or "")[-300:]
+                    f.write(json.dumps(r) + "\n")
+                    got[item] = r
+        return got
 
+    if unit.get("sweep"):  # a follow-up: given trials at given versions, nothing else (plan unit "sweep")
+        sw_ = unit["sweep"]
+        if sw_.get("pinned_keys"):
+            batch("pinned-again", [(k, h, None) for k in sw_["pinned_keys"] for h in p["tasks"][k]["harnesses"]])
+        for v in sw_["versions"]:
+            switch({py: v for py in pythons}, renv, out / "setup.log")
+            batch(f"at-{v}", [(k, h, None) for k in keys for h in sw_.get("harnesses") or p["tasks"][k]["harnesses"]])
+        switch(pinned, renv, out / "setup.log")
+        note(phase="done")
+        return 0
     plan_items = [(k, h, None) for k in keys for h in p["tasks"][k]["harnesses"]]
-    base = batch("pinned", plan_items)
-    sw = switch({py: p["mujoco"] for py in pythons}, renv, out / "setup.log")
-    (out / "switch.json").write_text(json.dumps(sw, indent=1))
-    new = batch("new", plan_items)
+    to_new = {py: p["mujoco"] for py in pythons}
+    if not a.pinned_only_changed:
+        base = batch("pinned", plan_items)
+        sw = switch(to_new, renv, out / "setup.log")
+        (out / "switch.json").write_text(json.dumps(sw, indent=1))
+        new = batch("new", plan_items)
+    else:
+        # for suites too slow to run twice: the new version first, then the pinned version only where the new verdict is
+        # not the expected one (and for --sample-unchanged tasks); elsewhere the baseline is the hub's published check
+        # (every reference 1, every no-op 0 on the pinned runtime), marked "assumed"
+        sw = switch(to_new, renv, out / "setup.log")
+        (out / "switch.json").write_text(json.dumps(sw, indent=1))
+        new = batch("new", plan_items)
+        off = {k for (k, h, _s) in plan_items if verdict(new.get((k, h, None))) != p["tasks"][k]["expect"][h]}
+        # a task that failed on the new version with an error needs no full pinned run each: a few confirm the baseline
+        erred = sorted(k for k in off if any((new.get((k, h, None)) or {}).get("error") or (new.get((k, h, None)) or {}).get("robo_error")
+                                             for h in p["tasks"][k]["harnesses"]))
+        need = (off - set(erred)) | set(erred[: a.sample_unchanged])
+        sample = [k for k in keys if k not in off][: a.sample_unchanged]
+        switch(pinned, renv, out / "setup.log")
+        base = batch("pinned", [(k, h, None) for (k, h, _s) in plan_items if k in need or k in sample])
+        for k, h, _s in plan_items:
+            if (k, h, None) not in base:
+                base[(k, h, None)] = {"key": k, "harness": h, "seed": None, "reward": float(p["tasks"][k]["expect"][h]), "assumed": True}
+        jl_assumed = [r for r in base.values() if r.get("assumed")]
+        (out / "pinned-assumed.jsonl").write_text("".join(json.dumps(r) + "\n" for r in jl_assumed))
+        switch(to_new, renv, out / "setup.log")
     changed_h = [(k, h) for (k, h, _s) in plan_items if verdict(base.get((k, h, None))) != verdict(new.get((k, h, None)))]
     changed = sorted({k for k, _h in changed_h})
     note(phase="changed", n=len(changed))
@@ -678,6 +758,13 @@ def job(a: argparse.Namespace) -> int:
     return 0
 
 
+INFRA = re.compile(r"\bKilled\b|worker died|MemoryError|Cannot allocate memory|out of memory|episode server did not start: $|No space left on device")
+
+
+def infra_failure(r: dict | None) -> bool:
+    return bool(r and r.get("reward") is None and INFRA.search(r.get("error") or ""))
+
+
 def cpu_quota() -> float:
     """CPUs this container may use (cgroup v2 cpu.max), else the CPUs it can see."""
     try:
@@ -751,6 +838,7 @@ def error_sig(err: str | None) -> dict | None:
         return None
     lines = [x.strip() for x in err.splitlines() if x.strip()]
     exc = next((x for x in reversed(lines) if re.match(r"^[A-Za-z_.]*(Error|Exception|Exit|Interrupt)\b", x)), lines[-1] if lines else "")
+    exc = re.sub(r"0x[0-9a-f]{6,}", "0x...", exc)
     frames = re.findall(r'File "([^"]+)", line (\d+)', err)
 
     def pkg_of(path: str) -> str:
@@ -775,11 +863,13 @@ def classify(row: dict) -> tuple[str, str]:
     sigs = [row[h].get("new_error_sig") for h in hs if row[h].get("new_error_sig")]
     if sigs:
         sig = sigs[0]
+        if sig["package"] == "robouse":
+            return "simulator change", f"Robo Use's own code calls MuJoCo API that changed: {sig['exception']}"
+        if sig["package"] and sig["package"] != "mujoco":
+            return "our pin", f"fails inside the pinned package `{sig['package']}`: {sig['exception']}"
         if row.get("pin_conflict"):
             return "our pin", f"the runtime's requirements do not resolve with MuJoCo {row['new_mujoco']}; the trial failed: {sig['exception']}"
-        if sig["package"] and sig["package"] not in ("robouse", "mujoco"):
-            return "our pin", f"fails inside the pinned package `{sig['package']}`: {sig['exception']}"
-        return "simulator change", f"the new MuJoCo raised an error in {sig['package'] or 'the simulator'}: {sig['exception']}"
+        return "simulator change", f"the new MuJoCo raised an error: {sig['exception']}"
     if any((row[h].get("repeat") not in (None, row[h].get("pinned"))) for h in hs):
         return "task fragility", "the pinned version gave another verdict on a second run of the same seed"
     sd = (row.get("seeds") or {}).get("reference")
@@ -808,6 +898,8 @@ def diff(a: argparse.Namespace) -> int:
         divf = json.loads((rdir / "divergence.json").read_text()) if (rdir / "divergence.json").exists() else None
         sets = {lab: {(r["key"], r["harness"], r.get("seed")): r for r in _load_jsonl(rdir / f"{lab}.jsonl")}
                 for lab in ("pinned", "new", "new-seeds", "pinned-repeat", "pinned-seeds")}
+        for r in _load_jsonl(rdir / "pinned-assumed.jsonl"):  # --pinned-only-changed: the hub's published baseline
+            sets["pinned"].setdefault((r["key"], r["harness"], None), r)
         pinned_v = meta["pinned"][meta["simulator_python"]] if meta.get("pinned") else None
         pin_conflict = [f for f, r in (meta.get("resolver") or {}).items() if not r["resolves"]]
         for key in p["units"][meta["unit"]]["tasks"]:
@@ -823,11 +915,17 @@ def diff(a: argparse.Namespace) -> int:
                 ran = True
                 e = {"pinned": verdict(b), "new": verdict(n)}
                 for lab, r in (("pinned", b), ("new", n)):
-                    if r:
+                    if r and r.get("assumed"):
+                        e["pinned_assumed"] = True
+                    elif r:
                         e[f"{lab}_reward"], e[f"{lab}_outcome"], e[f"{lab}_steps"] = r.get("reward"), r.get("outcome"), r.get("steps_used")
+                        if r.get("robo_error"):
+                            e[f"{lab}_robo_error"] = r["robo_error"]
+                            e.setdefault(f"{lab}_error_sig", error_sig(r["robo_error"]))
                         if r.get("error"):
                             e[f"{lab}_error"] = r["error"][-1500:]
-                            e[f"{lab}_error_sig"] = error_sig(r["error"])
+                            log = rdir / r.get("dir", "-") / "episode" / "serve.log"  # the whole log when it came back
+                            e[f"{lab}_error_sig"] = error_sig(log.read_text(errors="replace") if log.is_file() else r["error"])
                 rep = sets["pinned-repeat"].get((key, h, None))
                 if rep is not None:
                     e["repeat"] = verdict(rep)
@@ -850,7 +948,16 @@ def diff(a: argparse.Namespace) -> int:
                     row.setdefault("seeds", {})[h] = {"seeds": ss, "n": len(ss), "pinned_pass": sum(ok("pinned-seeds", s) for s in ss),
                                                       "new_pass": sum(ok("new-seeds", s) for s in ss)}
             if key in bis:
-                row["bisect"] = bis[key]
+                row["bisect"] = dict(bis[key])
+                # the narrowest range the checks support: the last release known to behave as pinned, the first as new
+                b0 = row["bisect"]
+                chk = {pinned_v: "as pinned", p["mujoco"]: "as new",
+                       **({b0["last_unchanged"]: "as pinned"} if b0.get("last_unchanged") else {}),
+                       **({b0["first_changed"]: "as new"} if b0.get("first_changed") else {}), **b0.get("checked", {})}
+                hi = min((v for v, c in chk.items() if c == "as new"), key=vkey)
+                lo = max((v for v, c in chk.items() if c == "as pinned" and vkey(v) < vkey(hi)), key=vkey)
+                rel = [v for v in p.get("releases") or [] if vkey(lo) < vkey(v) <= vkey(hi)]
+                row["bisect"].update(last_unchanged=lo, first_changed=hi, exact=len(rel) <= 1, releases_between=rel[:-1])
             exp = t["expect"]
             row["pinned_ok"] = all((row.get(h) or {}).get("pinned") == v for h, v in exp.items())
             row["new_ok"] = all((row.get(h) or {}).get("new") == v for h, v in exp.items())
@@ -887,9 +994,30 @@ def first_step(e: dict | None) -> str:
     return "none" if dv else "– (no episode on one side)" if (e or {}).get("new") == "error" or (e or {}).get("pinned") == "error" else "–"
 
 
+def bisect_text(b: dict | None) -> str:
+    """"3.12.0" when the change is pinned to one release, else "3.3.1 to 3.4.0" (the releases it may have come with)."""
+    if not b or not b.get("first_changed"):
+        return ""
+    if b.get("exact", True) or not b.get("releases_between"):
+        return b["first_changed"]
+    return f"{b['releases_between'][0]} to {b['first_changed']}"
+
+
 def report(a: argparse.Namespace) -> int:
     d = json.loads(Path(a.diff).read_text())
     rows, s = d["tasks"], d["summary"]
+    # reviewed attributions: [{"runtime", "match" (a substring of the change's description), "class", "evidence"}]
+    notes = json.loads(Path(a.notes).read_text()) if a.notes else []
+    for r in rows:
+        if not r["changed"]:
+            continue
+        sig = next(((r.get(h) or {}).get("new_error_sig") or {} for h in ("reference", "noop") if (r.get(h) or {}).get("new_error_sig")), {})
+        what = sig.get("exception") or r.get("why") or ""
+        for n in notes:
+            if n["runtime"] == r["runtime"] and n["match"] in f"{what} {r['task']}":
+                r["class"], r["evidence"] = n["class"], n["evidence"]
+                break
+    s["classes"] = dict(Counter(r.get("class") for r in rows if r["changed"]))
     by: dict[str, list] = {}
     for r in rows:
         by.setdefault(r["runtime"], []).append(r)
@@ -905,21 +1033,21 @@ def report(a: argparse.Namespace) -> int:
         refn = sum(1 for r in rs if r["expect"].get("reference") == 1 and r["reference"]["new"] == 1)
         noopp = cnt("noop", "pinned", 0) + sum(1 for r in rs if r["expect"].get("reference") == 0 and r["reference"]["pinned"] == 0)
         noopn = cnt("noop", "new", 0) + sum(1 for r in rs if r["expect"].get("reference") == 0 and r["reference"]["new"] == 0)
-        firsts = Counter((r.get("bisect") or {}).get("first_changed") for r in rs if r["changed"] and (r.get("bisect") or {}).get("first_changed"))
+        firsts = Counter(bisect_text(r.get("bisect")) for r in rs if r["changed"] and r.get("bisect"))
         L.append(f"| {rt} | {rs[0]['pinned_mujoco']} | {len(rs)} | {refp} / {refn} of {nref} | {noopp} / {noopn} of {nnoop} | {sum(r['changed'] for r in rs)} | {', '.join(f'{v} ({n})' for v, n in firsts.most_common()) or '–'} |")
     L += ["", "A no-op count includes the tasks of benchflow/robouse-noop-control, whose reference solution is the no-op. \"error\" is a trial that produced no reward. The first release that changes comes from a bisection over the MuJoCo releases in between (a sample of the changed tasks, then the others checked on both sides of the boundary).", ""]
     ch = sorted((r for r in rows if r["changed"]), key=lambda r: (r["runtime"], r["task"]))
     groups: dict[tuple, list] = {}
     for r in ch:
         sig = next(((r.get(h) or {}).get("new_error_sig") or {} for h in ("reference", "noop") if (r.get(h) or {}).get("new_error_sig")), {})
-        groups.setdefault((r["runtime"], r.get("class"), sig.get("exception") or r.get("why")), []).append(r)
+        groups.setdefault((r["runtime"], r.get("class"), sig.get("exception") or r.get("why"), r.get("evidence", "")), []).append(r)
     if groups:
         L += ["## What changed", ""]
-        for (rt, cls, what), rs in sorted(groups.items(), key=lambda kv: (kv[0][0], -len(kv[1]))):
-            firsts = sorted({(r.get("bisect") or {}).get("first_changed") for r in rs} - {None}, key=vkey)
+        for (rt, cls, what, ev), rs in sorted(groups.items(), key=lambda kv: (kv[0][0], -len(kv[1]))):
+            firsts = sorted({bisect_text(r.get("bisect")) for r in rs if r.get("bisect")})
             names = ", ".join(f"`{r['task']}`" for r in rs[:6]) + (f" and {len(rs) - 6} more" if len(rs) > 6 else "")
             what = what if what.endswith((".", "!", "?")) else what + "."
-            L.append(f"- **{rt}, {len(rs)} task{'s' if len(rs) != 1 else ''} ({cls}):** {what}" + (f" First release with the change: {', '.join(firsts)}." if firsts else "") + f" Tasks: {names}.")
+            L.append(f"- **{rt}, {len(rs)} task{'s' if len(rs) != 1 else ''} ({cls}):** {what}" + (f" First release with the change: {', '.join(firsts)}." if firsts else "") + (f" {ev}" if ev else "") + f" Tasks: {names}.")
         L.append("")
     if ch:
         L += ["## Changed tasks", "", "| Task | Datasets | Pinned | New | Reference, pinned → new | No-op, pinned → new | First diverging step | Class |", "|---|---|---|---|---|---|---|---|"]
@@ -956,6 +1084,9 @@ def main(argv: list[str] | None = None) -> int:
     jb.add_argument("--limit", type=int, default=0, help="first N tasks of the unit only")
     jb.add_argument("--seeds", default="1,2", help="extra seeds for changed tasks (default 1,2; empty: none)")
     jb.add_argument("--bisect", type=int, default=4, help="bisect at most N changed tasks per unit (0: none)")
+    jb.add_argument("--pinned-only-changed", action="store_true",
+                    help="run the new version first and the pinned version only where the new verdict is not the expected one")
+    jb.add_argument("--sample-unchanged", type=int, default=2, help="with --pinned-only-changed: also run the pinned version on N tasks")
     jb.add_argument("--repeat", type=int, default=24, help="run the pinned version again for at most N changed tasks")
     jb.add_argument("--recheck", type=int, default=8, help="run the extra seeds for at most N changed tasks per unit")
     jb.add_argument("--boundary", type=int, default=12,
@@ -969,6 +1100,7 @@ def main(argv: list[str] | None = None) -> int:
     rp = sub.add_parser("report")
     rp.add_argument("--diff", required=True)
     rp.add_argument("--out", required=True)
+    rp.add_argument("--notes", help="JSON list of reviewed attributions (runtime, match, class, evidence)")
     rp.set_defaults(func=report)
     a = ap.parse_args(argv)
     a.hub = a.hub.resolve()

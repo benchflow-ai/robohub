@@ -97,6 +97,16 @@ class Evidence(unittest.TestCase):
         steady = {"reference": {"changed": True, "pinned": 1, "new": 0, "repeat": 1}, "seeds": {"reference": {"n": 2, "pinned_pass": 2, "new_pass": 0}}}
         self.assertEqual(M.classify(steady)[0], "simulator change")
 
+    def test_memory_infra_and_bisect_text(self) -> None:
+        self.assertEqual(M.sim_memory(HUB, "libero"), 4.0)
+        self.assertIsNone(M.sim_memory(HUB, "base"))
+        self.assertTrue(M.infra_failure({"reward": None, "error": "no reward: ... Assets already downloaded\nKilled\n"}))
+        self.assertTrue(M.infra_failure({"reward": None, "error": "WorkerError: robocasa worker died (EOFError: no reply)"}))
+        self.assertFalse(M.infra_failure({"reward": None, "error": "AssertionError"}))
+        self.assertFalse(M.infra_failure({"reward": 0.0, "error": "Killed"}))
+        self.assertEqual(M.bisect_text({"first_changed": "3.12.0", "exact": True}), "3.12.0")
+        self.assertEqual(M.bisect_text({"first_changed": "3.4.0", "exact": False, "releases_between": ["3.3.1", "3.3.2"]}), "3.3.1 to 3.4.0")
+
     def test_verdict(self) -> None:
         self.assertEqual([M.verdict(None), M.verdict({"reward": None}), M.verdict({"reward": 1.0}), M.verdict({"reward": 0.0})],
                          [None, "error", 1, 0])
@@ -124,7 +134,7 @@ class DiffAndReport(unittest.TestCase):
             jl(job / "progress.jsonl", [{"phase": "pinned", "utc": "a"}, {"phase": "done", "utc": "b"}])
             M.diff(argparse.Namespace(plan=str(root / "plan.json"), results=[str(job)], out=str(root / "diff.json")))
             d = json.loads((root / "diff.json").read_text())
-            M.report(argparse.Namespace(diff=str(root / "diff.json"), out=str(root / "R.md")))
+            M.report(argparse.Namespace(diff=str(root / "diff.json"), out=str(root / "R.md"), notes=None))
             md = (root / "R.md").read_text()
         self.assertEqual(d["summary"]["changed"], 1)
         t2 = next(r for r in d["tasks"] if r["task"] == "t2")

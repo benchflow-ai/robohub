@@ -100,7 +100,7 @@ def run_unit(d, a, plan: dict, unit: str) -> dict:
         say(unit, f"bootstrapped: {' '.join(o.split())}")
         lim = f" --limit {a.limit}" if a.limit else ""
         job = (f"cd /work && /opt/mujoco-regress/uv/bin/python scripts/mujoco_regress.py --hub /work job"
-               f" --plan plan.json --unit {unit} --out /work/out --concurrency {a.concurrency}{lim}"
+               f" --plan plan.json --unit {unit} --out /work/out --concurrency {a.concurrency}{lim} {a.job_args}"
                f" > /work/job.log 2>&1 < /dev/null; echo $? > /work/job.exit")
         from daytona import SessionExecuteRequest
 
@@ -163,6 +163,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--disk-unit", action="append", default=[], metavar="UNIT=GB", help="disk for one unit (repeatable)")
     ap.add_argument("--concurrency", type=int, default=4, help="trials in parallel inside a sandbox")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--job-args", default="", help="extra arguments for `mujoco_regress.py job`, e.g. '--pinned-only-changed --seeds='")
     ap.add_argument("--prefix", default="mujoco-regress")
     ap.add_argument("--label", action="append", default=[], help="sandbox label KEY=VALUE (repeatable)")
     ap.add_argument("--ledger", type=Path, default=Path("sandboxes.jsonl"))
