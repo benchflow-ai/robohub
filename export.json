@@ -4874,6 +4874,77 @@
         }
       }
     },
+    "robouse-so101": {
+      "noop": false,
+      "robouse": {
+        "branch": "w2-1015/lerobot-so101",
+        "commit": "282005264150d9b35a3f303311f5523d16e88c89",
+        "package_version": "0.4.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "tasks": {
+        "koch-cube-in-cup": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "koch-stack-two-cubes": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-bimanual-lift-box": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-bimanual-ruler-handover": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-block-lift": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-cube-in-cup": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-open-drawer": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-press-buttons-in-order": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-push-puck-to-zone": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-reach": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-sort-by-color": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        "so101-stack-two-cubes": {
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        }
+      }
+    },
     "robouse-tabletop": {
       "noop": false,
       "robouse": {
@@ -5507,6 +5578,7 @@
     "rlebench": "sha256:7fe78bb4ff576e3b6545f927bd90dff9810ef684effbe2c39daf9f5d9c273ae4",
     "robocasa": "sha256:7d487d7ecae857f0c84c915c1ea4e28f859954450833a30519fd06ae42effab6",
     "robodojo": "sha256:a9bdc7eb7e1f77af26219b956720b7ecda9ef2f8f1e9e6f58ce7012a24b719d0",
-    "robosuite": "sha256:2ec475a68ded7bbf7906a0b2ea986470598305201c15971fdc458edb9a5a09f5"
+    "robosuite": "sha256:2ec475a68ded7bbf7906a0b2ea986470598305201c15971fdc458edb9a5a09f5",
+    "so101": "sha256:5955cbbc3f9ab7a9a45e9200f1788c249e8818afb39642638a15e144f72aa34d"
   }
 }

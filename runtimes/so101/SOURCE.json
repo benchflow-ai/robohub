@@ -1,0 +1,9 @@
+{
+  "robouse": {
+    "repo": "https://github.com/benchflow-ai/robouse",
+    "commit": "282005264150d9b35a3f303311f5523d16e88c89",
+    "package_version": "0.4.1",
+    "branch": "w2-1015/lerobot-so101"
+  },
+  "runtime": "so101"
+}

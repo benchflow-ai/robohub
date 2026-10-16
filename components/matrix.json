@@ -553,6 +553,20 @@
     "pick-and-place",
     "long-horizon"
    ]
+  },
+  "so101": {
+   "embodiments": [
+    "so101-arm",
+    "koch-v1-1"
+   ],
+   "scene": "hobby-desk",
+   "scenario": "tabletop",
+   "track": "arm",
+   "capabilities": [
+    "pick-and-place",
+    "contact-rich",
+    "bimanual-coordination"
+   ]
   }
  },
  "embodiments": [

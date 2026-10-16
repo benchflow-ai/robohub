@@ -2,12 +2,18 @@
 # scripts/export.py reads this file and a Robo Use checkout and writes runtimes/ and datasets/;
 # scripts/build_registry.py pins every dataset version to a commit in registry.json.
 
-# The Robo Use release the next export comes from (scripts/export.py refuses a checkout of another version).
-# export.json records the release each dataset was exported from: rle-bench/rle-bench and capgym/cap-x from 0.3.0,
-# the six GPU datasets' 0.4 versions from Robo Use branch int-1014/gpu (version string 0.4.1, not a release; to be
-# re-exported from the next release before they are pinned), every other dataset from 0.2.0.
+# The Robo Use source the next export comes from (scripts/export.py refuses a checkout of another version): a release
+# on PyPI (repo: its PyPI page), or an unreleased build (repo: the git repository, and `branch`), whose commit export.json
+# records. Until Robo Use 0.4.2 is on PyPI this is the unreleased build on branch w2-1015/integrate (the wave-2
+# integration branch, 0.4.1 plus the so101 backend and suite, the isaaclab3 worker and the rest of wave 2).
+# export.json records the source of each dataset: rle-bench/rle-bench and capgym/cap-x from 0.3.0 and every other
+# dataset from 0.2.0 (PyPI releases), with two exceptions from Robo Use code after 0.4.1 (version string 0.4.1, not a
+# release): the six GPU datasets' 0.4 versions and isaac-sim/isaaclab-factory 0.5 (branches int-1014/gpu and
+# w2-1015/isaac3; to be re-exported from the next release before they are pinned), and benchflow/so101 (branch
+# w2-1015/lerobot-so101, which builds on hub-1014/so101-desk), which PyPI's 0.4.1 does not contain.
 robouse:
-  repo: https://pypi.org/project/robouse/0.4.1/
+  repo: https://github.com/benchflow-ai/robouse
+  branch: w2-1015/integrate
   package_version: 0.4.1
 
 # Simulator runtimes (runtimes/<name>, built from templates/runtimes/<name>). Every task's compose file builds its
@@ -104,6 +110,11 @@ runtimes:
     gpu: required
     # remote GPU workers (robodojo_worker.py); the endpoints file is named by $ROBOUSE_ROBODOJO_REMOTE on the host
     remote_worker: ROBOUSE_ROBODOJO_REMOTE
+  so101:
+    backends: [so101]
+    simulators: MuJoCo 3.3.0, MuJoCo Menagerie models (The Robot Studio SO-101, Koch v1.1 low-cost robot arm)
+    # every file of the two Menagerie folders, LICENSE files included (54 files), each SHA-256 checked at build
+    assets: {so101.json: assets/menagerie/so101.json}
 
 # Per-suite facts for the hub page ("; " separates several values).
 suites:
@@ -147,6 +158,7 @@ suites:
   rle-bench: {embodiment: "Franka Panda on a mobile base (PandaOmron); Franka Panda", simulator: "RLE-Bench scenes (robosuite, MuJoCo 3.3.1)", image: rle-bench}
   capx: {embodiment: "Franka Panda; two Franka Pandas", simulator: "CaP-X robosuite 1.5.1 fork (MuJoCo 3.5.0)", image: capx}
   capx-libero: {embodiment: "Franka Panda", simulator: "LIBERO-PRO (robosuite 1.4 fork, MuJoCo 3.5.0)", image: capx-libero}
+  so101: {embodiment: 'SO-101 (single and bimanual); Koch v1.1', simulator: 'MuJoCo Menagerie models (MuJoCo 3.3.0)', image: so101}
 
 # Datasets are named <org>/<name>. The org is whoever designed the benchmark's tasks: a dataset adapted from someone
 # else's benchmark goes under that benchmark's GitHub org (lowercased) and records it under `upstream`; tasks BenchFlow
@@ -397,6 +409,11 @@ datasets:
     version: "0.1"
     suites: [capx, capx-libero]
     description: 'Robo Use CaP-X 0.1: CaP-Bench''s RoboSuite and LIBERO-PRO tasks as code as policy with CaP-X''s privileged API (object poses from the simulator and inverse kinematics; no perception models). The agent runs code over many turns, which is not one of CaP-Bench''s tiers.'
+  - name: benchflow/so101
+    dir: robouse-so101
+    version: "0.1"
+    suites: [so101]
+    description: 'Robo Use SO-101 0.1: the SO-101 follower arm, alone and as a two-arm rig, and the Koch v1.1 low-cost arm in simulation on a small hobby desk, with the skills and units of Robo Use''s real SO-101 (its reach and block-lift tasks have twins here).'
   - name: benchflow/robouse-noop-control
     dir: robouse-noop-control
     former_names: [robouse-noop-control]

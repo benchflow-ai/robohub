@@ -1,0 +1,9 @@
+id: hobby-desk
+type: scene
+version: 0.1.0
+title: Hobby desk
+scenario: tabletop
+summary: 'A 45 x 35 cm desk scaled to small arms: 2.5 cm cubes, cups, trays, a drawer, three push buttons (a code panel), a ruler, a puck and a light box (so101 suite).'
+composable: false
+suites:
+- so101

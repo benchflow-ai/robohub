@@ -1,0 +1,204 @@
+{
+ "robot": "so101",
+ "sources": {
+  "urdf": "TheRobotStudio/SO-ARM100@5f6d2b876a53a4872e405b991dd925556c9e38a4 Simulation/SO101/so101_new_calib.urdf (Apache-2.0)",
+  "sha256": "3a65d2d35e68a8d2f0c2cc176d19b884506543c93ba72980145b80abe276022c"
+ },
+ "joint_mapping": "identity: degrees -> radians",
+ "joints": [
+  {
+   "name": "shoulder_pan",
+   "type": "revolute",
+   "parent": "base_link",
+   "child": "shoulder_link",
+   "xyz": [
+    0.0388353,
+    -8.97657e-09,
+    0.0624
+   ],
+   "rpy": [
+    3.14159,
+    4.18253e-17,
+    -3.14159
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "limit": {
+    "lower": -1.91986,
+    "upper": 1.91986
+   }
+  },
+  {
+   "name": "shoulder_lift",
+   "type": "revolute",
+   "parent": "shoulder_link",
+   "child": "upper_arm_link",
+   "xyz": [
+    -0.0303992,
+    -0.0182778,
+    -0.0542
+   ],
+   "rpy": [
+    -1.5708,
+    -1.5708,
+    0.0
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "limit": {
+    "lower": -1.74533,
+    "upper": 1.74533
+   }
+  },
+  {
+   "name": "elbow_flex",
+   "type": "revolute",
+   "parent": "upper_arm_link",
+   "child": "lower_arm_link",
+   "xyz": [
+    -0.11257,
+    -0.028,
+    1.73763e-16
+   ],
+   "rpy": [
+    -3.63608e-16,
+    8.74301e-16,
+    1.5708
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "limit": {
+    "lower": -1.69,
+    "upper": 1.69
+   }
+  },
+  {
+   "name": "wrist_flex",
+   "type": "revolute",
+   "parent": "lower_arm_link",
+   "child": "wrist_link",
+   "xyz": [
+    -0.1349,
+    0.0052,
+    3.62355e-17
+   ],
+   "rpy": [
+    4.02456e-15,
+    8.67362e-16,
+    -1.5708
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "limit": {
+    "lower": -1.65806,
+    "upper": 1.65806
+   }
+  },
+  {
+   "name": "wrist_roll",
+   "type": "revolute",
+   "parent": "wrist_link",
+   "child": "gripper_link",
+   "xyz": [
+    5.55112e-17,
+    -0.0611,
+    0.0181
+   ],
+   "rpy": [
+    1.5708,
+    0.0486795,
+    3.14159
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "limit": {
+    "lower": -2.74385,
+    "upper": 2.84121
+   }
+  },
+  {
+   "name": "gripper_frame_joint",
+   "type": "fixed",
+   "parent": "gripper_link",
+   "child": "gripper_frame_link",
+   "xyz": [
+    -0.0079,
+    -0.000218121,
+    -0.0981274
+   ],
+   "rpy": [
+    0.0,
+    3.14159,
+    0.0
+   ],
+   "axis": null,
+   "limit": null
+  },
+  {
+   "name": "gripper",
+   "type": "revolute",
+   "parent": "gripper_link",
+   "child": "moving_jaw_so101_v1_link",
+   "xyz": [
+    0.0202,
+    0.0188,
+    -0.0234
+   ],
+   "rpy": [
+    1.5708,
+    -5.24284e-08,
+    -1.41553e-15
+   ],
+   "axis": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "limit": {
+    "lower": -0.174533,
+    "upper": 1.74533
+   }
+  }
+ ],
+ "links": [
+  {
+   "name": "base_link"
+  },
+  {
+   "name": "shoulder_link"
+  },
+  {
+   "name": "upper_arm_link"
+  },
+  {
+   "name": "lower_arm_link"
+  },
+  {
+   "name": "wrist_link"
+  },
+  {
+   "name": "gripper_link"
+  },
+  {
+   "name": "gripper_frame_link"
+  },
+  {
+   "name": "moving_jaw_so101_v1_link"
+  }
+ ]
+}

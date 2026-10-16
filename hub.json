@@ -7916,6 +7916,127 @@
       ]
     },
     {
+      "name": "benchflow/so101",
+      "org": "benchflow",
+      "short_name": "so101",
+      "dir": "robouse-so101",
+      "aliases": [],
+      "upstream": null,
+      "run": null,
+      "robouse": {
+        "branch": "w2-1015/lerobot-so101",
+        "commit": "282005264150d9b35a3f303311f5523d16e88c89",
+        "package_version": "0.4.1",
+        "repo": "https://github.com/benchflow-ai/robouse"
+      },
+      "version": "0.1",
+      "description": "Robo Use SO-101 0.1: the SO-101 follower arm, alone and as a two-arm rig, and the Koch v1.1 low-cost arm in simulation on a small hobby desk, with the skills and units of Robo Use's real SO-101 (its reach and block-lift tasks have twins here).",
+      "git_tag": "benchflow/so101-v0.1",
+      "commit": "01bc0c956e083b9ff5b0fd3a41506699db396e36",
+      "n_tasks": 12,
+      "suites": [
+        "so101"
+      ],
+      "embodiments": [
+        "SO-101 (single and bimanual)",
+        "Koch v1.1"
+      ],
+      "simulators": [
+        "MuJoCo Menagerie models (MuJoCo 3.3.0)"
+      ],
+      "image": "so101",
+      "noop": false,
+      "runtimes": [
+        "so101"
+      ],
+      "tasks": [
+        {
+          "id": "koch-cube-in-cup",
+          "digest": "sha256:6e7f4107a341604556772f32b9e5fce04b6ac507425a1f8404e82fe279ca7552",
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        {
+          "id": "koch-stack-two-cubes",
+          "digest": "sha256:30fa18ad38141cd6bbd3a816a73f1de42f0f5a2b6a53fd0a3c7a0eee1946a628",
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        {
+          "id": "so101-bimanual-lift-box",
+          "digest": "sha256:9f0cec49bac0d135424a9b289cb81f809f14b95e951248fbed32cc7b11c1e805",
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        {
+          "id": "so101-bimanual-ruler-handover",
+          "digest": "sha256:52bbd347685ada51cfde6e8ad176b8548266c8656591ffdd9564859a863abf4f",
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        {
+          "id": "so101-block-lift",
+          "digest": "sha256:1a530b238a74886b235ecf12be8d315d96e20052fb7a7907c2128f931dccc882",
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        {
+          "id": "so101-cube-in-cup",
+          "digest": "sha256:7434e011e3e7ca1094f181fc392c7e2232ffe6a7104e22aebf85909bd361dd0e",
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        {
+          "id": "so101-open-drawer",
+          "digest": "sha256:e71a01cd792dac6396cbe0e41b0d16428f799ff52a12e226fcf5405f03237eb6",
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        {
+          "id": "so101-press-buttons-in-order",
+          "digest": "sha256:5c887e7e0fa61d8d34c3dd70fe6998f1106e505b32577c96e2a7e5129ae4e0bf",
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        {
+          "id": "so101-push-puck-to-zone",
+          "digest": "sha256:5f0761a2c85821699077ae15410ebd93d203f83947e05ddfeb5d8ad638cdafb2",
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        {
+          "id": "so101-reach",
+          "digest": "sha256:4e4129c74b9473ff5303233a5a753701c9c846bdf8ce4f03e0cccb5157e6ed6f",
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        {
+          "id": "so101-sort-by-color",
+          "digest": "sha256:cdb3583eee3a0a67df907cfb23441f13f53cc09a5d9b77ad9af38ce7013a3cc9",
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        },
+        {
+          "id": "so101-stack-two-cubes",
+          "digest": "sha256:13c48702c4b77d85c384720c2ca4171a7bcb55796e61807726768c0b7cdfbb60",
+          "backend": "so101",
+          "runtime": "so101",
+          "suite": "so101"
+        }
+      ]
+    },
+    {
       "name": "benchflow/robouse-noop-control",
       "org": "benchflow",
       "short_name": "robouse-noop-control",
@@ -8767,6 +8888,10 @@
     "robodojo": {
       "simulators": "RoboDojo (NVIDIA Isaac Sim 5.1, Isaac Lab 2.3), on a remote NVIDIA RTX GPU worker",
       "digest": "sha256:05cf41ab0ac67408847feda2672513577d04f7d127c733b3d9f7327b8b2c09bb"
+    },
+    "so101": {
+      "simulators": "MuJoCo 3.3.0, MuJoCo Menagerie models (The Robot Studio SO-101, Koch v1.1 low-cost robot arm)",
+      "digest": "sha256:5955cbbc3f9ab7a9a45e9200f1788c249e8818afb39642638a15e144f72aa34d"
     }
   },
   "deprecated": [
