@@ -5,7 +5,8 @@
 
 Runs where the task's environment is installed (a sandbox built like the task image, with the upstream repository at
 --workdir committed as one pristine git commit). For each task, variant and mode it resets the repository, replays the
-image's own steps (environment/setup/apply.sh, environment/variant.sh, the integrity manifest), applies the mode
+image's own steps (environment/setup/apply.sh, environment/variant.sh, the integrity manifest, the workspace commit kept
+in base_commit), applies the mode
 (noop: nothing; oracle: oracle/solve.sh; trivial-N: src/<id>/trivial/N.sh; valid-N: src/<id>/valid/N.sh) and runs
 verifier/test.sh as BenchFlow does.
 Prints one JSON line per check and exits 1 if any check has the wrong outcome. Must run as root (it writes /opt/skills-study).
@@ -27,9 +28,23 @@ def sh(cmd, cwd, env=None, timeout=900):
     return subprocess.run(cmd, cwd=cwd, shell=True, env=env, timeout=timeout, capture_output=True, text=True)
 
 
-def reset(w, base):
+GIT_META = ("config", "info/attributes", "info/exclude")
+
+
+def git_meta(w):
+    """The repository-local git settings a mode may change (attributes, excludes, filters and drivers in config)."""
+    return {m: ((w / ".git" / m).read_bytes() if (w / ".git" / m).exists() else None) for m in GIT_META}
+
+
+def reset(w, base, meta):
     # A mode may commit (the agent is allowed to); move the branch back to the pristine commit, keeping the files,
-    # then drop every change.
+    # then drop every change. Repository-local git settings go back first, so a filter a mode set cannot touch the reset.
+    for m, data in meta.items():
+        f = w / ".git" / m
+        if data is None:
+            f.unlink(missing_ok=True)
+        else:
+            f.write_bytes(data)
     head = sh("git rev-parse HEAD", w).stdout.strip()
     if head != base:
         r = sh(f"git reset -q --soft {base}", w)
@@ -47,9 +62,9 @@ def reset(w, base):
         raise SystemExit(f"reset left changes: {left.stdout[:500]} {left.stderr[:300]}")
 
 
-def run_check(task_dir, src_dir, w, mode, base):
+def run_check(task_dir, src_dir, w, mode, base, meta):
     import os
-    reset(w, base)
+    reset(w, base, meta)
     if S.exists():
         shutil.rmtree(S)
     S.mkdir(parents=True)
@@ -63,7 +78,12 @@ def run_check(task_dir, src_dir, w, mode, base):
     r = sh(f"python3 {S}/integrity.py write {protect} > {S}/protected.sha256", w)
     if r.returncode:
         return {"error": r.stderr[-400:]}
-    (S / "base_commit").write_text(base + "\n")
+    # As the image does: commit the starting state and keep that commit for the verifier (reset() moves back to base).
+    r = sh("git add -A && git -c user.name=workspace -c user.email=workspace@localhost commit -q --allow-empty -m Workspace"
+           " && git rev-parse HEAD", w)
+    if r.returncode:
+        return {"error": f"workspace commit: {r.stdout[-200:]} {r.stderr[-400:]}"}
+    (S / "base_commit").write_text(r.stdout.split()[-1] + "\n")
     env = dict(os.environ, SKILLS_STUDY_WORKDIR=str(w), SKILLS_STUDY_DIR=str(S))
     if mode == "oracle":
         r = sh(f"bash {task_dir}/oracle/solve.sh", w, env)
@@ -98,6 +118,7 @@ def main():
     base = sh("git rev-parse HEAD", w).stdout.strip()
     if not base:
         raise SystemExit(f"no git commit in {w}")
+    meta = git_meta(w)
     bad = 0
     for tid in ids:
         src_dir = ROOT / "src" / tid
@@ -109,12 +130,12 @@ def main():
                 modes.append(m)
         for variant in a.variants.split(","):
             for mode in modes:
-                res = run_check(ROOT / "tasks" / variant / tid, src_dir, w, mode, base)
+                res = run_check(ROOT / "tasks" / variant / tid, src_dir, w, mode, base, meta)
                 want = "1" if mode == "oracle" or mode.startswith("valid-") else "0"
                 ok = res.get("reward") == want
                 bad += not ok
                 print(json.dumps({"task": tid, "variant": variant, "mode": mode, "want": want, "ok": ok, **res}), flush=True)
-    reset(w, base)
+    reset(w, base, meta)
     sys.exit(1 if bad else 0)
 
 
