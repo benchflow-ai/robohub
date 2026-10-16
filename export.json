@@ -454,7 +454,7 @@
     "isaaclab-factory": {
       "noop": false,
       "robouse": {
-        "commit": "baba401fc322456366f6789a9a99b598b01f9de9",
+        "commit": "d871a44105012405072ff5e6382799de38bc1eea",
         "package_version": "0.4.1",
         "repo": "https://pypi.org/project/robouse/0.4.1/"
       },
@@ -489,7 +489,7 @@
     "maniskill-gpu": {
       "noop": false,
       "robouse": {
-        "commit": "baba401fc322456366f6789a9a99b598b01f9de9",
+        "commit": "d871a44105012405072ff5e6382799de38bc1eea",
         "package_version": "0.4.1",
         "repo": "https://pypi.org/project/robouse/0.4.1/"
       },
@@ -1900,7 +1900,7 @@
     "robouse-genesis": {
       "noop": false,
       "robouse": {
-        "commit": "baba401fc322456366f6789a9a99b598b01f9de9",
+        "commit": "d871a44105012405072ff5e6382799de38bc1eea",
         "package_version": "0.4.1",
         "repo": "https://pypi.org/project/robouse/0.4.1/"
       },
@@ -4529,7 +4529,7 @@
     "robouse-playground": {
       "noop": false,
       "robouse": {
-        "commit": "baba401fc322456366f6789a9a99b598b01f9de9",
+        "commit": "d871a44105012405072ff5e6382799de38bc1eea",
         "package_version": "0.4.1",
         "repo": "https://pypi.org/project/robouse/0.4.1/"
       },
@@ -5497,7 +5497,7 @@
     "dmcontrol": "sha256:549bc1819e2cbc972a3e45bc9d81c6eee41356765740e0551e8972c8bae5d19c",
     "driving": "sha256:c17dbccef41bc3f9c6c75ec76a7dfd063b2b6b905f3ee2eb38e7de475b0ad2f2",
     "embodied": "sha256:b8b0c93cbffede79e353cfef6371f3fea6806982f15298e5c8a0b0086e9953e0",
-    "gpu": "sha256:204019fc5c706fe5d99651906c521d0ad114f39f3f74b685f4453b5cbbf00444",
+    "gpu": "sha256:cb789e80b190dbd416e8b015644c0c8981effdffab8db5b047733524426cd10e",
     "humanoidbench": "sha256:6f64a0b969422b413d228a966920917f69e78f8b047b230ed1567330886fd41c",
     "libero": "sha256:93160a0b0fa71b29a6fe2db2b669bed017b243755f9d21cdec81e3550f07c749",
     "light": "sha256:420e3b3167ddd4996377f3c5d94019ba3ef1b85a3212b14c09b367e129579b5d",

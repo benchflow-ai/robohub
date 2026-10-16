@@ -24,7 +24,7 @@ services:
       context: "../../../../runtimes/gpu"
       dockerfile: Dockerfile
       args:
-        ROBOHUB_RUNTIME_DIGEST: "sha256:204019fc5c706fe5d99651906c521d0ad114f39f3f74b685f4453b5cbbf00444"
+        ROBOHUB_RUNTIME_DIGEST: "sha256:cb789e80b190dbd416e8b015644c0c8981effdffab8db5b047733524426cd10e"
     # This runtime's simulator runs on a remote GPU worker (remote_worker in hub.yaml): the episode server reaches it
     # over HTTPS, so this service keeps network access, and it reads the worker endpoints (URL, shared secret) from
     # the host file named by $ROBOUSE_GPU_REMOTE, mounted read-only here only; the agent container never sees it.

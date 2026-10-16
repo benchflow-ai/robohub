@@ -5,8 +5,8 @@ task:
   description: Thread the held M16 nut onto the bolt when the measured bolt position is off by a few millimetres.
 metadata:
   author_name: benchflow
-  source_benchmark: 'NVIDIA Isaac Lab 2.3.0 (isaac-sim/IsaacLab, BSD-3-Clause) on Isaac Sim 5.1 (NVIDIA Isaac Sim license): the Factory assembly environments (Narang et al., RSS 2022), PhysX GPU dynamics'
-  source_task: Isaac-Factory-NutThread-Direct-v0 with 3 mm observation noise
+  source_benchmark: 'NVIDIA Isaac Lab 3.0.0-EA (isaac-sim/IsaacLab, BSD-3-Clause), kit-less container (no Isaac Sim): the Factory assembly environments (Narang et al., RSS 2022), PhysX GPU dynamics through OvPhysX'
+  source_task: IsaacContrib-Factory-NutThread-Direct with 3 mm observation noise
   suite: gpu-isaaclab
   category: contact-rich-assembly
   difficulty: hard
@@ -23,7 +23,7 @@ metadata:
   robouse:
     id: il-factory-nut-thread-noisy
     backend: gpu
-    sim: isaaclab
+    sim: isaaclab3
     env: factory-nut-thread-noisy
     seed: 0
     max_steps: 600
@@ -63,7 +63,7 @@ The step budget is 600 steps: every `robo act` step and every `robo skill` call 
 
 World frame: metres, z up. The fixed part (hole, gear base or bolt) is bolted to the table; the robot already holds the other part a few centimetres above it, as Factory starts every episode. `held_part_base` is the pose of the held part's base (the peg's bottom end, the gear's hub, the nut's bottom face); `fixed_part_position_estimate` is where the fixed part's top centre is measured to be.
 
-Images come from one of two renderers, chosen when the simulator worker starts: Isaac Sim's RTX renderer, where the machine's NVIDIA driver supports it, or otherwise a schematic drawn with MuJoCo, in which the parts are plain boxes and cylinders sized from Factory's models and the hand is a box with two fingers, all posed as in Isaac Lab every frame. The physics and the success check are Isaac Lab's either way. `robo info` names this episode's renderer (`renderer`).
+Images come from one of three renderers, chosen when the simulator worker starts: NVIDIA's RTX renderer (OVRTX, without Isaac Sim), Newton's Warp rasterizer, or, where neither runs, a schematic drawn with MuJoCo, in which the parts are plain boxes and cylinders sized from Factory's models and the hand is a box with two fingers, all posed as in Isaac Lab every frame. The physics and the success check are Isaac Lab's either way. `robo info` names this episode's renderer (`renderer`) and physics engine (`physics`).
 
 ## How to control the robot
 

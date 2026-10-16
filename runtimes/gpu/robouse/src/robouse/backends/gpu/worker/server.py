@@ -1,6 +1,6 @@
 """GPU simulator worker for Robo Use's GPU track. Runs on an NVIDIA RTX GPU machine, never on the Robo Use host.
 
-One worker process per simulator family (ManiSkill3, Genesis, MuJoCo Playground, Isaac Lab) listens on one port.
+One worker process per simulator family (ManiSkill3, Genesis, MuJoCo Playground, Isaac Lab 2.3, Isaac Lab 3.0) listens on one port.
 Every episode gets its own child process (`open`), because GPU physics engines hold process-wide state (PhysX GPU,
 Taichi/Genesis, JAX, Isaac Sim), so two episodes can never share one. The Robo Use `gpu` backend (backends/gpu/backend.py)
 talks to it over HTTPS (Daytona preview URLs) with a shared secret:
@@ -48,6 +48,7 @@ SIMS = {
     "genesis": "genesis_sim",
     "playground": "playground_sim",
     "isaaclab": "isaaclab_sim",
+    "isaaclab3": "isaaclab3_sim",
 }
 
 
