@@ -17,7 +17,7 @@ COPY variant.sh integrity.py /opt/skills-study/
 # integrity manifest of the protected upstream files and a fresh one-commit git repository, whose commit id is kept for the verifier (both root-only).
 RUN cd /workspace/genesis-world && sh /opt/skills-study/setup/apply.sh && rm -rf /opt/skills-study/setup \
  && sh /opt/skills-study/variant.sh \
- && python3 /opt/skills-study/integrity.py write tests genesis/engine genesis/utils/misc.py > /opt/skills-study/protected.sha256 \
+ && python3 /opt/skills-study/integrity.py write +tests genesis/engine genesis/utils/misc.py > /opt/skills-study/protected.sha256 \
  && chmod -R go-rwx /opt/skills-study \
  && git init -q && git add -A \
  && git -c user.name=workspace -c user.email=workspace@localhost commit -qm "Workspace" \

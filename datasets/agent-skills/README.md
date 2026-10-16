@@ -13,7 +13,7 @@ Every task exists in two variants with the same task name:
 - `tasks/with-skill/<id>/`: the repository exactly as shipped, guides included (for Isaac Lab, also the `.agents/skills` and `.claude/skills` aliases that Codex and Claude Code discover automatically);
 - `tasks/no-skill/<id>/`: the same, with the guide files deleted before the workspace is committed as a fresh one-commit git repository (no history to recover them from). The build fails if any guide file is left.
 
-The verifier also fails a trial that edits protected upstream files (an integrity manifest the agent cannot read), so a task cannot be passed by changing the library under test.
+The verifier also fails a trial that edits protected upstream files (an integrity manifest the agent cannot read), so a task cannot be passed by changing the library under test. Upstream test folders listed as add-only (`+tests` for Genesis) accept new test files and tests added to existing files, as the Genesis guide asks of a bug fix, but every original line must stay; the verifier runs only its own hidden tests, never the workspace tests.
 
 ## Layout
 

@@ -3,7 +3,8 @@
 # (the with-skill variant keeps the repository exactly as shipped). Paths are relative to the repository root;
 # `**/NAME` deletes every file of that name. Human documentation (docs/, CONTRIBUTING, CODING_GUIDELINES.md) stays in both.
 # protect: upstream files the agent must leave unchanged; the verifier fails a trial that edits them
-# (a task can add its own entries with `protect:` in task.yaml, or exempt paths with `allow:`).
+# (a task can add its own entries with `protect:` in task.yaml, or exempt paths with `allow:`). A path written +PATH is
+# add-only (upstream tests): new files and new lines are allowed there, but every original line must stay, in order.
 isaaclab:
   name: Isaac Lab
   repo: https://github.com/isaac-sim/IsaacLab
@@ -33,4 +34,4 @@ genesis:
   licence_file: LICENSE
   workdir: /workspace/genesis-world
   guide_files: ['**/CLAUDE.md', '**/AGENTS.md']
-  protect: [tests]
+  protect: [+tests]
