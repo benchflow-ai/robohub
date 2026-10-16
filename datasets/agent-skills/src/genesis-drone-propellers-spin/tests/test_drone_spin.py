@@ -83,9 +83,11 @@ def test_spin_field_uses_shared_typing_alias():
 
 
 def test_added_genesis_code_is_ascii():
-    # Lines added to the package (tracked changes and new files) must be plain ASCII.
+    # Lines added to the package (changes, committed or not, and new files) must be plain ASCII.
     git = ["git", "-c", "safe.directory=*", "-C", str(WORKDIR)]
-    diff = subprocess.run([*git, "diff", "HEAD", "--unified=0", "--no-color", "--", "genesis"], capture_output=True)
+    # Compare with the workspace's build commit (recorded root-only at image build), so committed changes count too.
+    base = (Path(os.environ.get("SKILLS_STUDY_DIR", "/opt/skills-study")) / "base_commit").read_text().strip()
+    diff = subprocess.run([*git, "diff", base, "--unified=0", "--no-color", "--", "genesis"], capture_output=True)
     assert diff.returncode == 0, diff.stderr
     added = [line for line in diff.stdout.splitlines() if line.startswith(b"+") and not line.startswith(b"+++")]
     untracked = subprocess.run(
