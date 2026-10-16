@@ -1,0 +1,3 @@
+We just moved our Trail Walker task (`source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker/`, Gym ID `IsaacContrib-TrailWalker-Flat`) from Isaac Lab 2.3 to this Isaac Lab 3.0 checkout. Since the upgrade the robot spawns upside down and the heading observation is wrong. We hard-coded quaternions in a few places in the project, in the env config and in `heading.py`.
+
+Migrate the project to Isaac Lab 3.0 so it behaves as it did on 2.3: the robot spawns upright with no rotation, the goal marker is turned 90 degrees about z, the marker stays opaque red, and `yaw_quat` and `heading_from_quat` in `heading.py` keep their documented meaning (with quaternions in the convention Isaac Lab 3.0 uses everywhere else). Only change the Trail Walker project.

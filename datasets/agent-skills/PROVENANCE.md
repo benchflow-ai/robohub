@@ -1,0 +1,17 @@
+# Provenance and licences
+
+The tasks run inside three upstream repositories. No upstream file is copied into this dataset: each task image fetches its repository from GitHub at the pinned commit (`git fetch --depth 1 <repo> <commit>`, history removed) when the image is built. What this folder contains is BenchFlow's own work: prompts, starting-state files and scripts, reference solutions, hidden tests, the build and check tools. Starting projects and solutions follow the patterns of each repository's maintained code (for Isaac Lab, the velocity, cartpole and lift tasks; for LeRobot and Genesis, the modules they extend) and are released under the licence of the repository they are written for, so they can be contributed back.
+
+| Source | Repository | Pinned commit (date) | Licence | Checked in | Guide files measured |
+|---|---|---|---|---|---|
+| Isaac Lab 3.0 (NVIDIA and the Isaac Lab Project Developers) | https://github.com/isaac-sim/IsaacLab | `f87ae20f93cd68ce1c477b73b8b09bac7df01ff9` (2026-10-15) | BSD-3-Clause | `LICENSE` at that commit (SPDX BSD-3-Clause); `LICENSE-mimic` (Apache-2.0) covers `isaaclab_mimic`, which no task uses; `skills/developer/test-audit/LICENSE-openclaw.txt` (MIT, OpenClaw Foundation) covers parts of one developer skill | `skills/` (17 user and 7 developer skills, added in PR #5769), the `.agents/skills` and `.claude/skills` discovery aliases, `AGENTS.md`, `CLAUDE.md` |
+| LeRobot (Hugging Face) | https://github.com/huggingface/lerobot | `297774fca4e3ad0aa34e7425fbf937111637e77b` (2026-10-15) | Apache-2.0 | `LICENSE` at that commit | `AGENT_GUIDE.md`, `AGENTS.md`, `CLAUDE.md` (the last two are identical) |
+| Genesis (Genesis-Embodied-AI) | https://github.com/Genesis-Embodied-AI/genesis-world | `1a6d3c40b566038f846d75335ca4c07e74b88fc0` (2026-10-15) | Apache-2.0 | `LICENSE` at that commit | `CLAUDE.md` |
+
+All three licences permit redistribution, modification and public trial records. Assets: no task uses NVIDIA USD assets or Omniverse content, so nothing under NVIDIA's asset terms is downloaded or rendered (the Isaac Lab tests load configs and call functions on CPU tensors; they never spawn a scene). Genesis tasks only use the robot and mesh files shipped in the Genesis repository at the pinned commit. LeRobot tasks generate their tiny datasets in the task setup; nothing is downloaded from the Hugging Face Hub.
+
+Python packages are installed from PyPI and from the PyTorch CPU index at the versions pinned in `env/<source>/requirements.txt`; each package keeps its own licence. The images are built from the official `python:3.12-slim-bookworm` image.
+
+What the no-skill variant removes is listed in `sources.yaml` (`guide_files`). Human-facing documentation stays in both variants: Isaac Lab's `docs/` (including the migration guide the skills route to), LeRobot's `docs/` and `CONTRIBUTING.md`, Genesis's `CODING_GUIDELINES.md` (a contributor guide that overlaps `CLAUDE.md` in substance). So the study measures what the agent-facing files add on top of the repository's own documentation.
+
+Credits: the scenarios come from the maintainers' written evaluations (Isaac Lab `skills/user/*/evaluations.md`) and guides (LeRobot `AGENT_GUIDE.md` and `AGENTS.md`, Genesis `CLAUDE.md`). Each task's `task.yaml` names the file and section it turns into a job (`skill`, `scenario`). The tasks are BenchFlow's adaptation; the upstream teams did not write or review them.

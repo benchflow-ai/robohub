@@ -1,0 +1,11 @@
+id: isaaclab-migrate-write-index
+source: isaaclab
+summary: Migrate a 2.x reset event from the deprecated write_*_to_sim and default_root_state APIs to Isaac Lab 3.0's index writers and split default pose and velocity.
+skill: skills/user/migrate-2x-to-3x
+scenario: 'migrate-2x-to-3x reference.md "Asset and physics view API renames" and the migration guide sections "Write Method Index/Mask Split" and ProxyArray data access, applied to a downstream reset term'
+difficulty: medium
+timeout_sec: 1800
+tags: [migration, assets]
+shared:
+  - {from: _shared/isaaclab/trail_walker, to: source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker}
+protect: [source/isaaclab_assets/isaaclab_assets]

@@ -1,0 +1,9 @@
+id: isaaclab-dr-direct-events
+source: isaaclab
+summary: Add startup domain randomization (pole mass, pole joint friction) to a direct-workflow task through the event manager.
+skill: skills/user/domain-randomization-events
+scenario: 'domain-randomization-events evaluations.md Scenario 5 "Direct Workflow Events": an EventCfg of EventTerm entries assigned to the direct task config''s events field, scoped to the right entities'
+difficulty: medium
+timeout_sec: 1500
+tags: [events, domain-randomization, direct-workflow]
+protect: [source/isaaclab_assets/isaaclab_assets]

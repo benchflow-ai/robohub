@@ -1,0 +1,11 @@
+id: isaaclab-migrate-proxyarray
+source: isaaclab
+summary: Migrate a 2.x task's reward functions from implicit tensor use of asset data to Isaac Lab 3.0's explicit ProxyArray accessors.
+skill: skills/user/migrate-2x-to-3x
+scenario: 'migrate-2x-to-3x evaluations.md Scenario 2 "ProxyArray Migration": route to the current ProxyArray guidance (.torch accessors), avoid stale raw wp.to_torch guidance, do not change unrelated asset APIs'
+difficulty: medium
+timeout_sec: 1800
+tags: [migration, proxyarray]
+shared:
+  - {from: _shared/isaaclab/trail_walker, to: source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker}
+protect: [source/isaaclab_assets/isaaclab_assets]

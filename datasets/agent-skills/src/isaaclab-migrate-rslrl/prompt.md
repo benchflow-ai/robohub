@@ -1,0 +1,3 @@
+We moved our Trail Walker task (`source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker/`, Gym ID `IsaacContrib-TrailWalker-Flat`) from Isaac Lab 2.3 to this Isaac Lab 3.0 checkout, and `isaaclab train --rl_library rsl_rl --task IsaacContrib-TrailWalker-Flat` now fails while loading our RSL-RL config, `agents/rsl_rl_ppo_cfg.py`.
+
+Migrate that config to what Isaac Lab 3.0 and its RSL-RL version expect, keeping the same network and training setup: actor layers 512-256-128 and critic layers 256-128 with ELU, initial action noise standard deviation 0.8, observation normalization on as before, and the same PPO and runner settings. Keep the class name and the registration.
