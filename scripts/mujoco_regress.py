@@ -49,7 +49,17 @@ HUB = Path(__file__).resolve().parents[1]
 PIN = re.compile(r"^(\s*mujoco\s*==\s*)([0-9][0-9A-Za-z.\-+]*)(.*)$", re.M)
 # Runtimes that pin MuJoCo but whose physics is not MuJoCo: `light` (numpy-only simulators; MuJoCo is imported only by
 # the episode server's start-up check), `driving` (MetaDrive) and `maniskill` (SAPIEN).
-NOT_MUJOCO = {"light": "numpy-only simulators", "driving": "MetaDrive (Panda3D/Bullet)", "maniskill": "SAPIEN"}
+# runtimes that pin MuJoCo without stepping their physics with it; the GPU-worker runtimes pin it only because
+# robouse serve (<= 0.4.0) checks for MuJoCo before any episode server starts
+_GPU_WORKERS = "remote GPU simulator workers (MuJoCo pinned only for robouse serve's start-up check)"
+NOT_MUJOCO = {
+    "light": "numpy-only simulators",
+    "driving": "MetaDrive (Panda3D/Bullet)",
+    "maniskill": "SAPIEN",
+    "gpu": _GPU_WORKERS,
+    "behavior": _GPU_WORKERS,
+    "robodojo": _GPU_WORKERS,
+}
 NOOP = "robo info\nrobo observe\n"  # benchflow/robouse-noop-control's reference solution
 STATE = Path("/opt/mujoco-regress")  # on the sandbox: the replayed runtime's environment
 UV = "/opt/mujoco-regress/uv/bin/uv"  # uv in its own virtualenv, so installing it changes none of the runtime's interpreters

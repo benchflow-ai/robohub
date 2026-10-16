@@ -34,7 +34,8 @@ class Plan(unittest.TestCase):
         self.assertEqual(rts["humanoidbench"]["sim_mujoco"], "3.1.6")
         self.assertEqual(rts["base"]["sim_mujoco"], "3.3.0")
         self.assertEqual(rts["dmcontrol"]["pythons"], {"ROBOUSE_DMCONTROL_PYTHON": "/opt/dmcontrol-venv/bin/python"})
-        # seven pinned versions across the MuJoCo runtimes; light, driving and maniskill pin MuJoCo but do not use it
+        # seven pinned versions across the MuJoCo runtimes; light, driving, maniskill and the GPU-worker runtimes
+        # pin MuJoCo but do not use it
         self.assertEqual(sorted({r["sim_mujoco"] for r in rts.values()}, key=M.vkey),
                          ["3.1.6", "3.3.0", "3.3.1", "3.4.0", "3.5.0", "3.6.0", "3.14.0"])
         for rt in ("light", "driving", "maniskill", "gpu", "behavior", "robodojo"):
