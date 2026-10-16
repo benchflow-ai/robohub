@@ -56,5 +56,7 @@ Total: about 145 CPU sandbox-hours, 0 GPU hours, about $435 of Claude usage plus
 ## Reading the result
 
 - Report per agent and per source, with 95% Wilson intervals and the paired per-task difference; 5 trials per cell is enough to see large effects, not small ones.
-- Separate infrastructure errors (excluded and re-run) from failures (counted).
+- Separate errors from failures. bench retries an errored trial once (sandbox or verifier infrastructure errors, agent install or ACP errors, agent idle timeouts, transient API errors); a trial that still errors is excluded and re-run, a scored failure counts. Report how many trials were retried, per cell.
+- Leakage: no-skill sandboxes have open network access and the prompt names the upstream repository and commit, so an agent can fetch the deleted guides. `tools/summarize.py` lists such trials but keeps them in the pass rates; report the result with and without them.
+- Genesis measures little: its human-facing `CODING_GUIDELINES.md` stays in both variants and states the same conventions as `CLAUDE.md` that the Genesis tests check, so the Genesis difference is what `CLAUDE.md` adds on top of that file, not what the conventions are worth. Isaac Lab's docs also stay, and some of them link to `skills/` or describe the agent skills (`docs/source/developer-tools/agent_skills.rst`), without their content.
 - Before publishing, check the leakage list, and offer each upstream team its results first (the playbook's "offer the results to each team before publishing").

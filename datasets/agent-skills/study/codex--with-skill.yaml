@@ -7,6 +7,7 @@ agent: codex-acp
 model: gpt-6-astra
 environment: daytona
 concurrency: 8
-# retry only infrastructure errors (sandbox build or start failures), never a scored trial
+# retry an errored trial once, with bench's default retry categories: sandbox and verifier infrastructure errors,
+# agent install, pipe and ACP errors, agent idle timeouts and transient provider API errors; a scored trial is never retried
 max_retries: 1
 agent_idle_timeout_sec: 900
