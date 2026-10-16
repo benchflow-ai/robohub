@@ -151,6 +151,7 @@ templates/                  the templates scripts/export.py writes packages and 
 scripts/export.py           Robo Use checkout -> runtimes/ and datasets/
 scripts/build_registry.py   datasets at a commit -> registry.json and hub.json
 scripts/summarize_jobs.py   bench job folders -> dogfood.json
+scripts/mujoco_regress.py   a MuJoCo release -> reference and no-op verdicts of every MuJoCo-based task, diffed against the pins
 ```
 
 ## Regenerating
@@ -164,6 +165,23 @@ python scripts/build_registry.py --tag
 ```
 
 To change a dataset, bump its version in `hub.yaml`, export, commit and pin; `build_registry.py` keeps every entry already in `registry.json` and pins only versions that are new.
+
+## MuJoCo regression check
+
+`scripts/mujoco_regress.py` re-runs every MuJoCo-based task's reference solution and no-op on a new MuJoCo release, with only MuJoCo changed, and compares the verdicts with the pinned runtime's. The MuJoCo-based runtimes pin seven versions: 3.1.6 (`humanoidbench`), 3.3.0 (`base` and most others), 3.3.1 (`robocasa`, `rlebench`), 3.4.0 (`dexjoco`), 3.5.0 (`capx`, `capx-libero`), 3.6.0 (`myosuite`) and 3.14.0 (`dmcontrol`). `light`, `driving` and `maniskill` pin MuJoCo but their physics is not MuJoCo; the GPU runtimes have no MuJoCo pin.
+
+Each job runs on a throwaway Linux machine as root (the tool replays the runtime's Dockerfile onto it). It runs every task of its share on the pinned runtime, then switches MuJoCo in every interpreter of the runtime (`uv pip install mujoco==VERSION`, which adds only what the new MuJoCo needs and records the change) and runs them again. For the tasks whose verdict changed, it runs the pinned version once more (repeatability), seeds 1 and 2 on both versions for up to eight of them, and a bisection over the MuJoCo releases in between (four tasks in full, up to twelve more on both sides of each boundary found). Trials run as many at a time as the machine's memory holds simulators of the runtime (`hub.yaml` `sim_memory`), and a trial killed for memory is run again alone. A trial reproduces the task's BenchFlow topology without Docker: the simulator service's command and environment from `environment/docker-compose.yaml`, then `oracle/solve.sh` or the no-op (`robo info; robo observe`, then exit without `robo done`, as in `benchflow/robouse-noop-control`), then `verifier/test.sh`.
+
+```sh
+python3 scripts/mujoco_regress.py plan --mujoco 3.16.0 --out plan.json --shards base=3,menagerie=2,libero=3
+python3 scripts/mujoco_regress_daytona.py --plan plan.json --results results --parallel 10 \
+    --label KEY=VALUE --ledger sandboxes.jsonl            # Daytona CPU sandboxes, DAYTONA_API_KEY set
+python3 scripts/mujoco_regress.py diff --plan plan.json --results results/* --out diff.json
+python3 scripts/mujoco_regress.py report --diff diff.json --notes notes.json --out REPORT.md
+python3 -m unittest scripts/test_mujoco_regress.py      # the tool's own tests
+```
+
+`diff.json` has, per task, both verdicts, outcomes and steps, the error and the file it was raised in, the first diverging step (from the episode's physics samples, else its robo trace), the repeat and seed checks, the bisection, and a first classification: our pin, simulator change or task fragility. `--notes` replaces that classification with reviewed attributions. `variant RUNTIME --mujoco VERSION --out DIR` writes the same switch as a copy of a runtime folder whose Dockerfile ends with it, for a Docker build. Slow suites can run the new version first and the pinned one only where the verdict moved (`job --pinned-only-changed`; the rest keep the published check as their baseline).
 
 ## Checks
 
