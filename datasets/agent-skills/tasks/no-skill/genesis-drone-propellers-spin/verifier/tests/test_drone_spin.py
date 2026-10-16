@@ -1,4 +1,5 @@
 import ast
+import hashlib
 import os
 import subprocess
 import tempfile
@@ -83,18 +84,37 @@ def test_spin_field_uses_shared_typing_alias():
 
 
 def test_added_genesis_code_is_ascii():
-    # Lines added to the package (changes, committed or not, and new files) must be plain ASCII.
-    git = ["git", "-c", "safe.directory=*", "-C", str(WORKDIR)]
-    # Compare with the workspace's build commit (recorded root-only at image build), so committed changes count too.
+    # Lines added to the package (changes, committed or not, and new files) must be plain ASCII. Files are read from disk
+    # and compared byte for byte with the workspace's build commit (recorded root-only at image build), with replace refs
+    # and user git config ignored, so commits, git attributes, filters and ignore files cannot hide a change.
     base = (Path(os.environ.get("SKILLS_STUDY_DIR", "/opt/skills-study")) / "base_commit").read_text().strip()
-    diff = subprocess.run([*git, "diff", base, "--unified=0", "--no-color", "--", "genesis"], capture_output=True)
-    assert diff.returncode == 0, diff.stderr
-    added = [line for line in diff.stdout.splitlines() if line.startswith(b"+") and not line.startswith(b"+++")]
-    untracked = subprocess.run(
-        [*git, "ls-files", "--others", "--exclude-standard", "--", "genesis"], capture_output=True, text=True
-    ).stdout.split()
-    for name in untracked:
-        if name.endswith(".py"):
-            added += (WORKDIR / name).read_bytes().splitlines()
+    env = dict(os.environ, GIT_NO_REPLACE_OBJECTS="1", GIT_CONFIG_NOSYSTEM="1", GIT_CONFIG_GLOBAL=os.devnull)
+    git = ["git", "-c", "safe.directory=*", "-C", str(WORKDIR)]
+    tree = subprocess.run([*git, "ls-tree", "-r", "-z", "--full-tree", base], capture_output=True, env=env)
+    assert tree.returncode == 0, tree.stderr
+    blobs = {}
+    for rec in tree.stdout.split(b"\0"):
+        if rec:
+            meta, path = rec.split(b"\t", 1)
+            blobs[path] = meta.split()[2].decode()
+    root = os.fsencode(WORKDIR)
+    added = []
+    for d, dirs, names in os.walk(os.path.join(root, b"genesis")):
+        dirs[:] = [x for x in dirs if x != b"__pycache__"]
+        for n in names:
+            p = os.path.join(d, n)
+            rel = os.path.relpath(p, root)
+            if os.path.islink(p) or not os.path.isfile(p):
+                continue
+            data = open(p, "rb").read()
+            if rel in blobs:
+                if hashlib.sha1(b"blob %d\0" % len(data) + data).hexdigest() == blobs[rel]:
+                    continue
+                old = subprocess.run([*git, "cat-file", "blob", blobs[rel]], capture_output=True, env=env)
+                assert old.returncode == 0, old.stderr
+                before = set(old.stdout.splitlines())
+                added += [line for line in data.splitlines() if line not in before]
+            elif n.endswith(b".py"):
+                added += data.splitlines()
     bad = [line for line in added if any(b > 127 for b in line)]
     assert not bad, f"non-ASCII characters added to genesis/: {bad[:3]}"
