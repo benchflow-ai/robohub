@@ -1,0 +1,11 @@
+id: isaaclab-dr-reset-joints
+source: isaaclab
+summary: Randomize a locomotion task's initial joint positions every episode with an event term.
+skill: skills/user/domain-randomization-events
+scenario: 'domain-randomization-events evaluations.md Scenario 1 "Reset Randomization": a reset-mode event scoped to the robot articulation'
+difficulty: easy
+timeout_sec: 1200
+tags: [events, domain-randomization]
+shared:
+  - {from: _shared/isaaclab/trail_walker, to: source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker}
+protect: [source/isaaclab_assets/isaaclab_assets]

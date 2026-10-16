@@ -1,0 +1,11 @@
+id: isaaclab-dr-interval-push
+source: isaaclab
+summary: Add random pushes during training to a locomotion task with an interval event term.
+skill: skills/user/domain-randomization-events
+scenario: 'domain-randomization-events evaluations.md Scenario 3 "Interval Disturbance": an interval-mode event with a clear interval and magnitude range'
+difficulty: easy
+timeout_sec: 1200
+tags: [events, domain-randomization]
+shared:
+  - {from: _shared/isaaclab/trail_walker, to: source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker}
+protect: [source/isaaclab_assets/isaaclab_assets]

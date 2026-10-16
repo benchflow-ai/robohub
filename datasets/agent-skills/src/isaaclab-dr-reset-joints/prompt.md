@@ -1,0 +1,1 @@
+In our Trail Walker task (`source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker/`, Gym ID `IsaacContrib-TrailWalker-Flat`), randomize the robot's initial joint positions at the start of every episode: multiply the default joint positions by a random factor between 0.5 and 1.5, and start every joint with zero velocity. Keep the existing base pose reset as it is.
