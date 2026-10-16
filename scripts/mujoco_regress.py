@@ -540,6 +540,7 @@ def finish(rec: dict, out: Path, t0: float) -> dict:
     for d in ("artifacts", "rpc", "bin"):
         shutil.rmtree(out / d, ignore_errors=True)
     shutil.rmtree(out / "verifier" / "episode", ignore_errors=True)  # a copy of episode/
+    shutil.rmtree(out / "episode" / "observations", ignore_errors=True)  # the camera images the agent asked for
     (out / "trial.json").write_text(json.dumps(rec, indent=1))
     return rec
 
