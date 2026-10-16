@@ -36,8 +36,7 @@ from ... import config
 from ...real.contact import ContactWatch, ParkWatch
 from ...real.drivers import make_driver
 from ...real.operator import Operator
-from ...real.robots import ContactSettings
-from ...real.robots import profile as get_profile
+from ...real.robots import ContactSettings, profile_from_config
 from ...real.safety import EventLog, Guard, HardwareLock, SafetyStop, Veto, estop_engaged
 from ..embodied import ActionGroup, Budget, EmbodiedBackend, Embodiment, Sensor, Skill, SkillArg
 
@@ -77,8 +76,8 @@ class RealArmBackend(EmbodiedBackend):
             from ...real.drivers.rosbridge import ros_profile
 
             self.prof = ros_profile(self.cfg)
-        else:
-            self.prof = get_profile(self.cfg.get("robot", "metal"))
+        else:  # a built-in profile, or the rig's own (any LeRobot robot: real/drivers/lerobot_robot.py)
+            self.prof = profile_from_config(self.cfg)
         self.mock = self.cfg.get("driver", "mock") == "mock"
         self.mode = "hil-mock" if self.mock else "real"
         # live robots (and the real-time mock rosbridge server) are paced to the control rate; replay mocks run as fast as possible

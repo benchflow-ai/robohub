@@ -4,7 +4,7 @@ lower, open), re-observing between grasps; scripted pulls and presses for the dr
 handover the left arm presents the ruler at a fixed handover pose and the right arm grasps it before the left opens.
 
 The only robot facts they use besides the observation: the jaws close toward the fixed jaw (an object ends with its
-near face on the fixed jaw, `jaw_tips.fixed`), and `robo act` takes joint deltas with the wrist roll fifth.
+near face on the fixed jaw, `jaw_tips.fixed`), and `robo act` takes absolute joint targets with the wrist roll fifth.
 """
 
 from __future__ import annotations
@@ -65,14 +65,13 @@ class Arm:
         return self.o.skill("grip", v, *([self.arm] if self.arm else []))
 
     def turn_roll(self, deg: float) -> None:
-        """Turn the wrist roll by `deg` with low-level joint deltas (the other joints hold)."""
+        """Turn the wrist roll by `deg` with a low-level absolute target (the other joints keep theirs)."""
         n = int(math.ceil(abs(deg) / MAX_DQ))
         if n == 0:
             return
-        s = self.state()
-        dim = 12 if isinstance(s["tool_pos"], dict) else 6
-        a = [0.0] * dim
-        a[(6 if self.arm == "right" else 0) + ROLL] = deg / n
+        a = targets(self.state())
+        a[(6 if self.arm == "right" else 0) + ROLL] += deg
+        n += 2  # the speed limit spreads the turn over n steps; two more to arrive
         while n > 0:  # at most 50 repeats per request
             self.o.act(a, min(n, 50))
             n -= 50
@@ -161,10 +160,15 @@ def place(arm: Arm, name: str, dest_xy, center_z: float, z_above: float) -> None
     arm.move(t[0], t[1], z_above, 0.5)
 
 
+def targets(s: dict) -> list[float]:
+    """Every joint's current target (the left arm's six, then the right arm's, on the two-arm rig): `robo act` with
+    these holds the arm(s)."""
+    t = s["target"]
+    return [float(v) for v in (t["left"] + t["right"] if isinstance(t, dict) else t)]
+
+
 def settle(o, steps: int = 5) -> None:
-    s = o.state()
-    dim = 12 if isinstance(s["tool_pos"], dict) else 6
-    o.act([0.0] * dim, steps)
+    o.act(targets(o.state()), steps)
 
 
 # ---- tasks -----------------------------------------------------------------------------------------------------------

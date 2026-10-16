@@ -4883,8 +4883,8 @@
     "robouse-so101": {
       "noop": false,
       "robouse": {
-        "branch": "hub-1014/so101-desk",
-        "commit": "64e8fe968e0023c80f4c7e889cf3f4f5ae3c5fa2",
+        "branch": "w2-1015/lerobot-so101",
+        "commit": "282005264150d9b35a3f303311f5523d16e88c89",
         "package_version": "0.4.1",
         "repo": "https://github.com/benchflow-ai/robouse"
       },
@@ -5585,6 +5585,6 @@
     "robocasa": "sha256:7d487d7ecae857f0c84c915c1ea4e28f859954450833a30519fd06ae42effab6",
     "robodojo": "sha256:05cf41ab0ac67408847feda2672513577d04f7d127c733b3d9f7327b8b2c09bb",
     "robosuite": "sha256:2ec475a68ded7bbf7906a0b2ea986470598305201c15971fdc458edb9a5a09f5",
-    "so101": "sha256:10ec2443b5cc99c9b69215e3c7782fc63b96ad3cb0667164fef10c8ef0eea076"
+    "so101": "sha256:5955cbbc3f9ab7a9a45e9200f1788c249e8818afb39642638a15e144f72aa34d"
   }
 }

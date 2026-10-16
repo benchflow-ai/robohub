@@ -1,5 +1,6 @@
 """Driver registry: `make_driver(profile, cfg)` by `cfg["driver"]` (lerobot | piper | rosbridge | mock) or a `robouse.drivers`
-entry point. `mock` replays a recorded fixture, or for `robot: ros` runs a mock rosbridge server."""
+entry point (Robo Use registers `lerobot-robot` there: any LeRobot robot or `lerobot_robot_*` plugin, lerobot_robot.py).
+`mock` replays a recorded fixture, or for `robot: ros` runs a mock rosbridge server."""
 
 from __future__ import annotations
 

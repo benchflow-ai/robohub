@@ -6,10 +6,11 @@
 # on PyPI (repo: its PyPI page), or an unreleased build (repo: the git repository, and `branch`), whose commit export.json
 # records. export.json records the source of each dataset: rle-bench/rle-bench and capgym/cap-x from 0.3.0, every
 # other dataset from 0.2.0 (PyPI releases), except benchflow/so101: an unreleased build, Robo Use 0.4.1 plus the so101
-# backend and suite (branch hub-1014/so101-desk), which PyPI's 0.4.1 does not contain.
+# backend and suite (branch w2-1015/lerobot-so101, which builds on hub-1014/so101-desk), which PyPI's 0.4.1 does not
+# contain.
 robouse:
   repo: https://github.com/benchflow-ai/robouse
-  branch: hub-1014/so101-desk
+  branch: w2-1015/lerobot-so101
   package_version: 0.4.1
 
 # Simulator runtimes (runtimes/<name>, built from templates/runtimes/<name>). Every task's compose file builds its

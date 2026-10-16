@@ -11,8 +11,12 @@ to the real arm:
 - joints in degrees with the zero of LeRobot's calibration (the middle of each joint's range; so101_new_calib, which
   the Menagerie SO-101 model is derived from); limits, home and rest poses and the 30 deg/s speed limit of the real
   profile; 10 Hz control.
-- low level (`robo act`): joint-position deltas, five arm joints (deg) plus the gripper (0-100 units) per arm; zero
-  holds.
+- low level (`robo act`): absolute joint targets, five arm joints (deg) plus the gripper (0-100) per arm, as on the
+  real arm. Each control step passes them through the real profile's safety guard (robouse.real.safety.Guard, the same
+  code the real backend runs): joint-limit clamp, the speed limit (slower near the desk), the wind-up limit against the
+  measured joints, and, on the single SO-101, the workspace veto by the URDF's forward kinematics before anything
+  moves. What the sim does not model of the real safety layer (e-stop, telemetry, temperature, watchdog, contact
+  watch, operator) is listed in docs/lerobot.md.
 
 Inverse kinematics (ik.py): damped least squares on the MJCF for the tool point's position, with the gripper's
 approach axis held straight down (a fixed top-down pitch). The arms have five joints, so the wrist roll is not solved:
@@ -28,8 +32,11 @@ import math
 
 import numpy as np
 
+from ...real import safety
+
 # MuJoCo is imported inside the methods that need it: the reference solution (oracles.py, through oracle_main) imports
 # this package in the agent container, which has numpy but no MuJoCo
+from ...real.robots import SO101, SO101_BI, Profile
 from ..embodied import ActionGroup, Budget, EmbodiedBackend, Embodiment, Sensor, Skill, SkillArg, r3
 from . import scene as S
 from .ik import ArmIK
@@ -48,6 +55,55 @@ SETTLE_DEG = 1.0
 BUTTON_ON_DEPTH, BUTTON_OFF_DEPTH = 0.0045, 0.0015  # a press: the cap in past 4.5 mm; let up: back above 1.5 mm
 
 
+MOVABLE = ("cube", "cup", "tray", "ruler", "puck", "box", "drawer", "button")  # the marker and the zone stay put
+
+
+def perturbed(props: list[dict], seed: int, spec: dict | None) -> list[dict]:
+    """The layout with every movable prop shifted up to `pos_m` in x and y (buttons at most 1 cm: their housings stand
+    1.4 cm apart) and boxes, rulers and trays turned up to `yaw_deg`, drawn from the episode seed. Off unless the task
+    (or the LeRobot env plugin) asks for it with `perturb: {pos_m, yaw_deg}`; the hub tasks use the fixed layout. The
+    reference solutions were checked on layouts moved up to 2 cm and turned up to 15 degrees (docs/suites/so101.md)."""
+    if not spec:
+        return props
+    import copy
+    import random
+
+    rng = random.Random(int(seed))
+    dpos, dyaw = float(spec.get("pos_m", 0.0)), float(spec.get("yaw_deg", 0.0))
+    out = copy.deepcopy(props)
+    for p in out:
+        if p["kind"] in MOVABLE:
+            d = min(dpos, 0.01) if p["kind"] == "button" else dpos
+            p["pos"] = [p["pos"][0] + rng.uniform(-d, d), p["pos"][1] + rng.uniform(-d, d), *p["pos"][2:]]
+            if p["kind"] in ("cube", "ruler", "box", "tray"):
+                p["yaw"] = p.get("yaw", 0.0) + rng.uniform(-dyaw, dyaw)
+    return out
+
+
+def real_profile(robot: str, bimanual: bool) -> Profile:
+    """The real profile whose guard the sim applies: so101 or so101-bimanual from robouse.real.robots; the Koch v1.1,
+    which has no real profile, gets its own joint limits and the SO-101's speed and wind-up limits (no kinematic chain,
+    so no workspace veto, as on the bimanual rig)."""
+    if robot == "so101":
+        return SO101_BI if bimanual else SO101
+    R = S.ROBOTS[robot]
+    return Profile(
+        name=f"{robot}-sim",
+        display=R["name"],
+        joints=list(R["joints"]) + ["gripper"],
+        low=list(R["low"]) + [GRIP_LOW],
+        high=list(R["high"]) + [GRIP_HIGH],
+        units=["deg"] * 5 + ["0-100"],
+        gripper=5,
+        gripper_open=60.0,
+        gripper_closed=GRIP_LOW,
+        control_hz=1.0 / CONTROL_DT,
+        home=list(R["home"]) + [GRIP_LOW],
+        park=list(R["park"]) + [GRIP_LOW],
+        envelope=SO101.envelope,
+    )
+
+
 class So101Backend(EmbodiedBackend):
     name = "so101"
 
@@ -63,6 +119,8 @@ class So101Backend(EmbodiedBackend):
         self.arms = list(S.arm_bases(self.rig))  # ["arm"] or ["left", "right"]
         self.bimanual = self.rig == "bimanual"
         self.camera = spec.get("camera", "front")
+        self.prof = real_profile(self.task.robot, self.bimanual)
+        self.props = self.task.props
         self.decl = self._declare()
 
     # ---- declaration -------------------------------------------------------------------------------------------
@@ -82,14 +140,15 @@ class So101Backend(EmbodiedBackend):
             p = f"{pre}_" if self.bimanual else ""
             groups.append(
                 ActionGroup(
-                    f"{p}arm.joint_delta",
-                    "joint_delta",
+                    f"{p}arm.joint_pos",
+                    "joint_pos",
                     [self._jname(pre, j) for j in R["joints"]],
-                    [-MAX_DQ] * 5,
-                    [MAX_DQ] * 5,
-                    "deg per step",
-                    f"change of each joint's target this step (at most {MAX_DQ:g} deg, the {JOINT_SPEED:g} deg/s speed "
-                    "limit at 10 Hz); zero holds; targets stay inside the joint limits",
+                    list(R["low"]),
+                    list(R["high"]),
+                    "deg",
+                    "absolute joint targets, as on the real arm; each control step moves the command toward them at "
+                    f"most {MAX_DQ:g} deg (the {JOINT_SPEED:g} deg/s speed limit at 10 Hz; slower near the desk on the "
+                    "SO-101); the real arm's safety guard limits speed and vetoes moves that leave its workspace",
                     frame="joint",
                 )
             )
@@ -98,21 +157,21 @@ class So101Backend(EmbodiedBackend):
                     f"{p}gripper",
                     "gripper",
                     [self._jname(pre, "gripper")],
-                    [-MAX_DG],
-                    [MAX_DG],
-                    "0-100 units per step",
-                    f"change of the gripper target (0 = closed, 100 = fully open; kept within {GRIP_LOW:g}-{GRIP_HIGH:g}); "
-                    "zero holds",
+                    [GRIP_LOW],
+                    [GRIP_HIGH],
+                    "0-100",
+                    f"absolute gripper target: 0 = closed, 100 = fully open (kept within {GRIP_LOW:g}-{GRIP_HIGH:g}; "
+                    f"at most {MAX_DG:g} units per step)",
                 )
             )
         fr = "rig" if self.bimanual else "base"  # the rig frame (midway between the bases) or the arm's base frame
-        fixtures = any(p["kind"] in ("drawer", "button", "zone", "marker") for p in self.task.props)
+        fixtures = any(p["kind"] in ("drawer", "button", "zone", "marker") for p in self.props)
         fields = [  # one per `robo observe` field: (name, kind, doc, units, frame)
             ("joint_pos", "proprio", "measured arm joints by name", "deg", ""),
             (
                 "target",
                 "proprio",
-                "current joint and gripper targets (what `robo act` changes)",
+                "current joint and gripper targets (what `robo act` and the skills set)",
                 "deg; gripper 0-100",
                 "",
             ),
@@ -176,6 +235,24 @@ class So101Backend(EmbodiedBackend):
             cameras=self._cameras(),
         )
 
+    def embodiment(self) -> dict:
+        """The embodiment spec, with the guard's limits under `safety` in the real backend's keys."""
+        spec = super().embodiment()
+        e, chain = self.prof.envelope, self.prof.chain_file is not None and not self.bimanual
+        spec["safety"] = {
+            "profile": self.prof.name,
+            "joint_limits": {"low": self.prof.low, "high": self.prof.high},
+            "max_joint_speed": e.joint_speed_deg_s,
+            "slow_joint_speed_deg_s": e.slow_joint_speed_deg_s if chain else None,
+            "slow_zone_m": e.slow_zone if chain else None,
+            "workspace": {"table_z": e.table_z, "x": [e.x_min, e.x_max], "y_abs_max": e.y_abs_max, "z_max": e.z_max}
+            if chain
+            else None,
+            "windup_deg": e.windup_deg,
+            "not_simulated": "e-stop, temperature, telemetry and loop watchdog, contact watch, operator gates",
+        }
+        return spec
+
     def info_extra(self) -> dict:
         R = self.robot
         return {
@@ -206,7 +283,8 @@ class So101Backend(EmbodiedBackend):
 
         self._reset_renderers()
         R = self.robot
-        self.model = m = S.build(self.task.robot, self.rig, self.task.props)
+        self.props = perturbed(self.task.props, seed, self.spec.get("perturb"))
+        self.model = m = S.build(self.task.robot, self.rig, self.props)
         self.data = d = mujoco.MjData(m)
         self.base = {pre: np.array(b, float) for pre, b in S.arm_bases(self.rig).items()}
         self.jq, self.jd, self.act = {}, {}, {}
@@ -224,6 +302,11 @@ class So101Backend(EmbodiedBackend):
             d.qpos[self.jq[pre]] = self._to_raw(c)
             d.ctrl[self.act[pre]] = self._to_raw(c)
         mujoco.mj_forward(m, d)
+        # the real profile's guard (no e-stop file in simulation); it starts holding the start pose
+        self.guard = safety.Guard(self.prof, estop_check=lambda: None)
+        self.guard.last_cmd = self._cmd_vec()
+        self.guard.last_pos = self._measured_vec()
+        self.goal = self._cmd_vec()  # the absolute target `robo act` or a skill set
         self._tables()
         self.events, self._event_keys = [], set()
         self.pressed = {n: False for n in self.buttons}  # cap in past the press depth (until it comes back up)
@@ -232,7 +315,7 @@ class So101Backend(EmbodiedBackend):
         self.stage = 0
         self.task_state: dict = {}
         for _ in range(5):  # let the props settle on the desk (the arm holds its start pose)
-            self.control_step(np.zeros(self.action_spec.dim))
+            self.control_step(self.hold_action())
         self.since, self.stage, self.task_state = {}, 0, {}
 
     def _tables(self) -> None:
@@ -247,9 +330,7 @@ class So101Backend(EmbodiedBackend):
             self.fixed_geoms[pre] = {g for g in range(m.ngeom) if m.geom_bodyid[g] == fb}
             self.moving_geoms[pre] = {g for g in range(m.ngeom) if m.geom_bodyid[g] == mb}
         self.robot_geom = set().union(*self.arm_geoms.values())
-        self.obj = {
-            p["name"]: p for p in self.task.props if p["kind"] in ("cube", "cup", "tray", "ruler", "puck", "box")
-        }
+        self.obj = {p["name"]: p for p in self.props if p["kind"] in ("cube", "cup", "tray", "ruler", "puck", "box")}
         self.obj_body = {n: m.body(n).id for n in self.obj}
         self.obj_geoms = {
             n: {g for g in range(m.ngeom) if m.geom_bodyid[g] == b and m.geom_contype[g]}
@@ -261,8 +342,8 @@ class So101Backend(EmbodiedBackend):
                 self.label[g] = n
         self.desk = m.geom("desk").id
         self.label[self.desk] = "desk"
-        self.drawer = next((p["name"] for p in self.task.props if p["kind"] == "drawer"), None)
-        self.buttons = [p["name"] for p in self.task.props if p["kind"] == "button"]
+        self.drawer = next((p["name"] for p in self.props if p["kind"] == "drawer"), None)
+        self.buttons = [p["name"] for p in self.props if p["kind"] == "button"]
         self.button_q = {n: m.jnt_qposadr[m.joint(n).id] for n in self.buttons}
         self.button_led = {n: m.geom(f"{n}_led").id for n in self.buttons}
         if self.drawer:
@@ -282,18 +363,43 @@ class So101Backend(EmbodiedBackend):
         return self._from_raw(self.data.qpos[self.jq[pre]])
 
     # ---- control -------------------------------------------------------------------------------------------------
+    def _cmd_vec(self) -> np.ndarray:
+        return np.concatenate([self.cmd[pre] for pre in self.arms])
+
+    def _measured_vec(self) -> np.ndarray:
+        return np.concatenate([self.measured(pre) for pre in self.arms])
+
+    def hold_action(self) -> list[float]:
+        """Hold still: the last command, as on the real arm."""
+        return [float(x) for x in self.guard.last_cmd]
+
     def control_step(self, a: np.ndarray) -> None:
+        """One 10 Hz step toward the absolute target `a`, through the real profile's guard: a new target is checked
+        end to end first (a move that leaves the workspace raises Veto and nothing moves), then the command moves toward
+        it within the speed and wind-up limits."""
+        target = np.asarray(a, float)
+        if np.max(np.abs(target - self.goal)) > 1e-6:
+            self.goal = self.guard.check_move(target)
+        cmd = self.guard.step_command(self.goal)
+        self.guard.last_cmd = cmd
+        self._drive(cmd)
+
+    def servo_step(self, cmd) -> None:
+        """One 10 Hz step with `cmd` sent to the servos as it is (clamped to the joint limits only), as a real arm
+        takes it: the LeRobot robot plugin integrations/lerobot/lerobot_robot_robouse drives the sim this way, behind
+        the real backend's guard."""
+        cmd = np.clip(np.asarray(cmd, float), self.guard.env.low, self.guard.env.high)
+        self.guard.last_cmd = cmd
+        self.goal = cmd
+        self._drive(cmd)
+
+    def _drive(self, cmd: np.ndarray) -> None:
         import mujoco
 
-        a = np.asarray(a, float)
-        R = self.robot
-        lo = np.array(R["low"] + [GRIP_LOW])
-        hi = np.array(R["high"] + [GRIP_HIGH])
         old, new = {}, {}
         for i, pre in enumerate(self.arms):
-            delta = np.clip(a[6 * i : 6 * i + 6], [-MAX_DQ] * 5 + [-MAX_DG], [MAX_DQ] * 5 + [MAX_DG])
             old[pre] = self._to_raw(self.cmd[pre])
-            self.cmd[pre] = np.clip(self.cmd[pre] + delta, lo, hi)
+            self.cmd[pre] = cmd[6 * i : 6 * i + 6].copy()
             new[pre] = self._to_raw(self.cmd[pre])
         m, d = self.model, self.data
         for k in range(N_SUB):
@@ -303,6 +409,7 @@ class So101Backend(EmbodiedBackend):
             mujoco.mj_step(m, d)
             if self.buttons and k % 5 == 4:
                 self._buttons()
+        self.guard.last_pos = self._measured_vec()
         self._monitor()
 
     def _depth(self, n: str) -> float:
@@ -449,7 +556,7 @@ class So101Backend(EmbodiedBackend):
             grip[self._jname(pre, "gripper")] = round(float(mv[5]), 2)
             p, a, jw = self.tool(pre)
             tool[pre], axis[pre], jaw[pre] = r3(p, 4), r3(a), r3(jw)
-            tgt[pre] = [round(float(v), 2) for v in self.cmd[pre]]
+            tgt[pre] = [round(float(v), 2) for v in self.goal[6 * self.arms.index(pre) : 6 * self.arms.index(pre) + 6]]
             ft, mt = self.tips(pre)
             opening[pre] = round(float(np.linalg.norm(mt - ft)), 4)
             tips[pre] = {"fixed": r3(ft, 4), "moving": r3(mt, 4)}
@@ -487,7 +594,7 @@ class So101Backend(EmbodiedBackend):
             objs[n] = o
         st["objects"] = objs
         fx: dict = {}
-        for p in self.task.props:
+        for p in self.props:
             k, n = p["kind"], p["name"]
             if k == "drawer":
                 kz = S.DRAWER_H / 2 + 0.002
@@ -572,11 +679,34 @@ class So101Backend(EmbodiedBackend):
         return bool(ok)
 
     def judge(self, outcome: str, text: str = "") -> bool:
+        """`robo done` and the task's check after the still steps; with `success_mode: first` (the LeRobot env
+        plugin's default) the server ends the episode as `success_reached` the moment the check first passes."""
         ok, why = self.task.check(self)
         self.last_judge = {"success": bool(ok), "why": why}
-        return outcome == "done" and bool(ok)
+        return outcome in ("done", "success_reached") and bool(ok)
 
     # ---- skills ------------------------------------------------------------------------------------------------
+    def start_skill(self, name: str, raw_args: list[str]):
+        """A skill whose path the guard vetoes is refused before it moves, with the reason (as on the real arm)."""
+        gen = super().start_skill(name, raw_args)
+        try:
+            first = next(gen)
+        except StopIteration as e:  # finished without moving (e.g. no IK solution)
+
+            def done(v=e.value):
+                return v
+                yield  # unreachable: makes this function a generator
+
+            return done()
+        except safety.Veto as v:
+            raise ValueError(f"vetoed by the safety envelope: {v}") from None
+
+        def chain():
+            yield first
+            return (yield from gen)
+
+        return chain()
+
     def _arms_of(self, arm: str | None) -> list[str]:
         if not self.bimanual:
             return ["arm"]
@@ -593,19 +723,24 @@ class So101Backend(EmbodiedBackend):
         start = {pre: self.cmd[pre].copy() for pre in goals}
         lim = np.array([MAX_DQ] * 5 + [MAX_DG]) * speed
         n = max(1, int(math.ceil(max(float(np.max(np.abs(goals[p] - start[p]) / lim)) for p in goals))))
+        full = self._cmd_vec()  # the arms that do not move hold their command
+        for i, pre in enumerate(self.arms):
+            if pre in goals:
+                full[6 * i : 6 * i + 6] = goals[pre]
+        self.guard.check_move(full)  # the whole move first, as on the real arm (Veto: nothing moves)
         for k in range(1, n + 1):
-            a = np.zeros(self.action_spec.dim)
+            a = full.copy()
             for i, pre in enumerate(self.arms):
                 if pre in goals:
-                    a[6 * i : 6 * i + 6] = start[pre] + (goals[pre] - start[pre]) * k / n - self.cmd[pre]
+                    a[6 * i : 6 * i + 6] = start[pre] + (goals[pre] - start[pre]) * k / n
             yield list(a)
         if grip_only:
             return {}
-        for _ in range(30):  # settle: hold until the measured joints are there
+        for _ in range(30):  # settle: keep commanding the goal until the measured joints are there
             err = max(float(np.max(np.abs(self.measured(p)[:5] - goals[p][:5]))) for p in goals)
             if err < SETTLE_DEG:
                 break
-            yield [0.0] * self.action_spec.dim
+            yield list(full)
         err = {p: self.measured(p)[:5] - goals[p][:5] for p in goals}
         return {"arrived": all(float(np.max(np.abs(e))) < 2.0 for e in err.values())}
 
@@ -667,8 +802,12 @@ class So101Backend(EmbodiedBackend):
         yield from self._move(goals, 1.0, grip_only=True)
         last = {pre: self.measured(pre)[5] for pre in pres}
         still = 0
-        for _ in range(40):  # wait until the jaws stop moving
-            yield [0.0] * self.action_spec.dim
+        hold = self._cmd_vec()
+        for i, pre in enumerate(self.arms):
+            if pre in goals:
+                hold[6 * i : 6 * i + 6] = goals[pre]
+        for _ in range(40):  # wait until the jaws stop moving (commanding the grip value)
+            yield list(hold)
             now = {pre: self.measured(pre)[5] for pre in pres}
             still = still + 1 if all(abs(now[p] - last[p]) < 0.3 for p in pres) else 0
             last = now

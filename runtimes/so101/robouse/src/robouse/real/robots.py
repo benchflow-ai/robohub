@@ -98,6 +98,7 @@ class Profile:
     contact: ContactSettings = field(default_factory=ContactSettings)
     notes: str = ""
     tested_on_hardware: bool = False
+    chain_data: dict | None = None  # a chain parsed from a rig's URDF (profile_from_config), instead of chain_file
 
     @property
     def gidx(self) -> list[int]:
@@ -118,6 +119,8 @@ class Profile:
         return pre or [""]
 
     def chain(self) -> Chain | None:
+        if self.chain_data is not None:
+            return Chain(self.chain_data, self.joint_map, self.tool, self.points)
         if not self.chain_file:
             return None
         return Chain(load_chain_file(self.chain_file), self.joint_map, self.tool, self.points)
@@ -318,3 +321,84 @@ def profile(name: str) -> Profile:
         return PROFILES[name]
     except KeyError:
         raise KeyError(f"unknown robot {name!r}; known: {sorted(PROFILES)}") from None
+
+
+def profile_from_config(cfg: dict) -> Profile:
+    """The safety profile for a task's `real:` block merged with the rig entry: `profile:` names a built-in profile
+    (default: `robot`), or is a full profile for an arm Robo Use has none for (any LeRobot robot through the
+    lerobot-robot driver):
+
+        profile:
+          base: so101              # optional: start from a built-in profile and override fields
+          name: myarm
+          joints: [j1, j2, j3, j4, j5, gripper]
+          low: [...]               # joint limits in the robot's units (inside its stops)
+          high: [...]
+          units: [deg, deg, deg, deg, deg, 0-100]
+          gripper: 5               # index of the gripper (null: none)
+          gripper_open: 60
+          gripper_closed: 2
+          home: [...]              # a safe pose above the table; park: the rest pose
+          park: [...]
+          control_hz: 10
+          urdf: ~/arms/myarm.urdf  # kinematic chain for the workspace veto (joints of the same names, degrees)
+          tool: [tool_link, [0, 0, 0]]
+          points: {elbow: [forearm_link, [0, 0, 0]], wrist: [wrist_link, [0, 0, 0]]}
+          envelope: {x_max: 0.4, joint_speed_deg_s: 20, ...}
+          contact: {stall_mm: 4}
+
+    Every profile is a copy: a rig's values never change the built-in profiles."""
+    import copy
+    from pathlib import Path
+
+    spec = cfg.get("profile")
+    if spec is None or isinstance(spec, str):
+        return copy.deepcopy(profile(spec or cfg.get("robot", "metal")))
+    d = dict(spec)
+    base = copy.deepcopy(profile(d.pop("base"))) if d.get("base") else None
+    urdf = d.pop("urdf", None)
+    env = d.pop("envelope", None) or {}
+    contact = d.pop("contact", None) or {}
+    for k in ("tool",):
+        if k in d:
+            d[k] = (str(d[k][0]), [float(v) for v in d[k][1]])
+    if "points" in d:
+        d["points"] = {n: (str(v[0]), [float(x) for x in v[1]]) for n, v in d["points"].items()}
+    if base is not None:
+        prof = base
+        for k, v in d.items():
+            if not hasattr(prof, k):
+                raise KeyError(f"profile has no field {k!r}")
+            setattr(prof, k, v)
+    else:
+        missing = [k for k in ("name", "joints", "low", "high", "units", "gripper") if k not in d]
+        if missing:
+            raise KeyError(f"a profile without base needs {missing}")
+        d.setdefault("display", d["name"])
+        prof = Profile(**d)
+    if not (len(prof.joints) == len(prof.low) == len(prof.high) == len(prof.units)):
+        raise ValueError("profile joints, low, high and units must have the same length")
+    if any(lo >= hi for lo, hi in zip(prof.low, prof.high, strict=True)):
+        raise ValueError("every profile joint needs low < high")
+    if urdf:
+        from .kinematics import urdf_to_chain
+
+        path = Path(str(urdf)).expanduser()
+        prof.chain_data = urdf_to_chain(path, prof.name, source=str(path))
+        prof.chain_file = str(path)
+        names = {j["name"] for j in prof.chain_data["joints"]}
+        if not prof.joint_map:
+            prof.joint_map = {
+                i: (n, D2R if prof.units[i] == "deg" else 1.0, 0.0)
+                for i, n in enumerate(prof.joints)
+                if i not in prof.gidx and n in names
+            }
+        if len(prof.joint_map) != len(prof.arm_idx):
+            raise ValueError(
+                f"the URDF {path.name} lacks joints {[prof.joints[i] for i in prof.arm_idx if i not in prof.joint_map]}"
+            )
+        if not prof.tool[0]:
+            raise ValueError("a profile with a urdf needs tool: [link, [x, y, z]] (the tool point the envelope checks)")
+    prof.envelope = EnvelopeDefaults(**{**prof.envelope.__dict__, **env})
+    prof.contact = ContactSettings(**{**prof.contact.__dict__, **contact})
+    return prof
