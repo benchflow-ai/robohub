@@ -1,6 +1,9 @@
 """Hidden verifier: the reward terms give the 2.3 values on ProxyArray data with no implicit-tensor bridge and no wp.to_torch shim."""
 
+import ast
 import importlib
+import os
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -32,7 +35,37 @@ def strict(monkeypatch):
         return original(a, *args, **kwargs)
 
     monkeypatch.setattr(wp, "to_torch", to_torch)
+    guarded = dict(vars(ProxyArray))
     yield
+    # The terms (or anything they import) must not switch the bridge off or patch ProxyArray.
+    changed = sorted(k for k in set(guarded) | set(vars(ProxyArray)) if vars(ProxyArray).get(k) is not guarded.get(k))
+    assert not changed, f"ProxyArray was patched: {changed}"
+    assert wp.to_torch is to_torch, "wp.to_torch was patched"
+
+
+REWARDS = Path(os.environ.get("SKILLS_STUDY_WORKDIR", "/workspace/IsaacLab")) / "source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker/rewards.py"
+BANNED_CALLS = {"setattr", "delattr", "exec", "eval", "compile", "__import__", "globals", "vars"}
+
+
+def test_no_bridge_patching():
+    """rewards.py migrates the terms; it must not monkeypatch modules or classes to hide the bridge."""
+    tree = ast.parse(REWARDS.read_text())
+    for node in ast.walk(tree):
+        targets = []
+        if isinstance(node, (ast.Assign, ast.Delete)):
+            targets = node.targets
+        elif isinstance(node, (ast.AugAssign, ast.AnnAssign)):
+            targets = [node.target]
+        for t in targets:
+            for sub in ast.walk(t):
+                assert not isinstance(sub, ast.Attribute), f"line {node.lineno}: rewards.py assigns to an attribute"
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
+            assert node.func.id not in BANNED_CALLS, f"line {node.lineno}: rewards.py calls {node.func.id}()"
+        if isinstance(node, (ast.ImportFrom, ast.Import)):
+            names = [node.module or ""] if isinstance(node, ast.ImportFrom) else [a.name for a in node.names]
+            assert not any(n.split(".")[0] in ("importlib", "builtins") for n in names), f"line {node.lineno}: unexpected import {names}"
+        name = node.attr if isinstance(node, ast.Attribute) else node.id if isinstance(node, ast.Name) else node.value if isinstance(node, ast.Constant) and isinstance(node.value, str) else ""
+        assert "_warn_implicit" not in name and "__dict__" not in name, f"line {getattr(node, 'lineno', '?')}: rewards.py touches the ProxyArray bridge"
 
 
 def rewards():
