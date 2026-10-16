@@ -96,6 +96,26 @@ class Articulation:
     def write_root_velocity_to_sim_mask(self, *, root_velocity, env_mask=None, skip_forward=False):
         self._mask(self.root_vel, root_velocity, env_mask)
 
+    # The link-frame pose writer sets the same state as the root pose writer. The spawn velocity is zero, so the
+    # link-frame and CoM-frame velocity writers agree. The CoM pose writer is left out: the default pose is a link pose.
+    def write_root_link_pose_to_sim_index(self, *, root_pose, env_ids=None, skip_forward=False):
+        self._index(self.root_pose, root_pose, env_ids)
+
+    def write_root_link_pose_to_sim_mask(self, *, root_pose, env_mask=None, skip_forward=False):
+        self._mask(self.root_pose, root_pose, env_mask)
+
+    def write_root_com_velocity_to_sim_index(self, *, root_velocity, env_ids=None, skip_forward=False):
+        self._index(self.root_vel, root_velocity, env_ids)
+
+    def write_root_com_velocity_to_sim_mask(self, *, root_velocity, env_mask=None, skip_forward=False):
+        self._mask(self.root_vel, root_velocity, env_mask)
+
+    def write_root_link_velocity_to_sim_index(self, *, root_velocity, env_ids=None, skip_forward=False):
+        self._index(self.root_vel, root_velocity, env_ids)
+
+    def write_root_link_velocity_to_sim_mask(self, *, root_velocity, env_mask=None, skip_forward=False):
+        self._mask(self.root_vel, root_velocity, env_mask)
+
     def write_joint_position_to_sim_index(self, *, position, joint_ids=None, env_ids=None, skip_forward=False):
         self._index(self.joint_pos, position, env_ids, joint_ids)
 

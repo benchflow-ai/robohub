@@ -57,8 +57,12 @@ def test_lr_schedule_fits_the_run(cfg):
 
     sched = cfg.scheduler  # what lerobot-train will actually build (after the policy preset is applied)
     assert isinstance(sched, CosineDecayWithWarmupSchedulerConfig)
-    assert sched.num_decay_steps == STEPS
-    assert sched.num_warmup_steps == int(0.05 * STEPS)
+    # The schedule build() makes for this run: it scales warmup and decay down when the run is shorter than the decay.
+    warmup, decay = sched.num_warmup_steps, sched.num_decay_steps
+    if cfg.steps < decay:
+        warmup, decay = int(warmup * (cfg.steps / decay)), cfg.steps
+    assert decay == STEPS
+    assert warmup == int(0.05 * STEPS)
 
     param = torch.nn.Parameter(torch.zeros(1))
     opt = cfg.optimizer.build([param])
@@ -71,7 +75,7 @@ def test_lr_schedule_fits_the_run(cfg):
     lrs.append(opt.param_groups[0]["lr"])
     peak = max(lrs)
     assert peak > 0.95 * sched.peak_lr  # warmup reaches the peak ...
-    assert lrs.index(peak) == sched.num_warmup_steps  # ... at the end of the warmup
+    assert lrs.index(peak) == warmup  # ... at the end of the warmup
     assert abs(lrs[-1] - sched.decay_lr) / sched.decay_lr < 1e-3  # fully decayed at the last step
     assert lrs[int(0.9 * cfg.steps)] > 1.5 * sched.decay_lr  # ... and not long before it
 
