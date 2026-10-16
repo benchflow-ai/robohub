@@ -712,6 +712,11 @@ def job(a: argparse.Namespace) -> int:
                 switch({py: v for py in pythons}, renv, out / "setup.log")
                 got = batch(f"bisect-{v}", [(k, h, None) for (k, h) in changed_h if k in ks])
                 for k in ks:
+                    if any(infra_failure(got.get((k, h, None))) for (kk, h) in changed_h if kk == k):
+                        hist[k][v] = "unknown (infrastructure failure)"  # killed twice: bisect the rest of the range
+                        lo, hi = state[k]
+                        state[k] = (mid, hi) if mid - lo <= hi - mid else (lo, mid)
+                        continue
                     same = all(verdict(got.get((k, h, None))) == verdict(base.get((k, h, None)))
                                for (kk, h) in changed_h if kk == k)
                     hist[k][v] = "as pinned" if same else "as new"
@@ -731,6 +736,9 @@ def job(a: argparse.Namespace) -> int:
                 switch({py: v for py in pythons}, renv, out / "setup.log")
                 got = batch(f"bisect-{v}", [(k, h, None) for (k, h) in changed_h if k in rest])
                 for k in rest:
+                    if any(infra_failure(got.get((k, h, None))) for (kk, h) in changed_h if kk == k):
+                        found[k]["checked"][v] = "unknown (infrastructure failure)"
+                        continue
                     same = all(verdict(got.get((k, h, None))) == verdict(base.get((k, h, None)))
                                for (kk, h) in changed_h if kk == k)
                     found[k]["checked"][v] = "as pinned" if same else "as new"
@@ -895,6 +903,14 @@ def diff(a: argparse.Namespace) -> int:
             "started_utc": prog[0]["utc"] if prog else None, "ended_utc": prog[-1]["utc"] if prog else None,
         }
         bis = json.loads((rdir / "bisect.json").read_text()) if (rdir / "bisect.json").exists() else {}
+        for bf in rdir.glob("bisect-*.jsonl"):
+            v = bf.stem.removeprefix("bisect-")
+            for r in _load_jsonl(bf):
+                e = bis.get(r["key"])
+                if e and (infra_failure(r) or "Segmentation fault" in (r.get("error") or "")) and v in e.get("checked", {}):
+                    e["checked"][v] = "unknown (infrastructure failure)"
+                    if v in (e.get("first_changed"), e.get("last_unchanged")):
+                        e.pop("first_changed", None), e.pop("last_unchanged", None)
         divf = json.loads((rdir / "divergence.json").read_text()) if (rdir / "divergence.json").exists() else None
         sets = {lab: {(r["key"], r["harness"], r.get("seed")): r for r in _load_jsonl(rdir / f"{lab}.jsonl")}
                 for lab in ("pinned", "new", "new-seeds", "pinned-repeat", "pinned-seeds")}
@@ -1046,8 +1062,10 @@ def report(a: argparse.Namespace) -> int:
         for (rt, cls, what, ev), rs in sorted(groups.items(), key=lambda kv: (kv[0][0], -len(kv[1]))):
             firsts = sorted({bisect_text(r.get("bisect")) for r in rs if r.get("bisect")})
             names = ", ".join(f"`{r['task']}`" for r in rs[:6]) + (f" and {len(rs) - 6} more" if len(rs) > 6 else "")
-            what = what if what.endswith((".", "!", "?")) else what + "."
-            L.append(f"- **{rt}, {len(rs)} task{'s' if len(rs) != 1 else ''} ({cls}):** {what}" + (f" First release with the change: {', '.join(firsts)}." if firsts else "") + (f" {ev}" if ev else "") + f" Tasks: {names}.")
+            if ev and what.startswith("same reference solution"):  # the reviewed evidence says it better
+                what = ""
+            what = what if not what or what.endswith((".", "!", "?")) else what + "."
+            L.append(f"- **{rt}, {len(rs)} task{'s' if len(rs) != 1 else ''} ({cls}):**" + (f" {what}" if what else "") + (f" First release with the change: {', '.join(firsts)}." if firsts else "") + (f" {ev}" if ev else "") + f" Tasks: {names}.")
         L.append("")
     if ch:
         L += ["## Changed tasks", "", "| Task | Datasets | Pinned | New | Reference, pinned → new | No-op, pinned → new | First diverging step | Class |", "|---|---|---|---|---|---|---|---|"]
