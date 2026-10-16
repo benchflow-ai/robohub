@@ -12,7 +12,8 @@ Rig keys (`real:` block or the rig file, robot `ros`):
   command_type      trajectory_msgs/JointTrajectory (one point per step) or std_msgs/Float64MultiArray
   cameras           {name: /camera/image_raw/compressed}  (sensor_msgs/CompressedImage, JPEG or PNG)
   control_hz        10
-  stale_s           1.0   a joint state older than this is a fault (the robot stopped publishing)
+  stale_s           1.0   a joint state older than this is lost telemetry (the robot stopped publishing): the
+                          episode stops and the arm keeps its last command (the frozen state is never sent)
 
 Protocol used: {"op": "subscribe", "topic", "type"}, {"op": "advertise", "topic", "type"}, {"op": "publish", "topic",
 "msg"}, {"op": "unsubscribe" / "unadvertise"}. Messages arrive as {"op": "publish", "topic", "msg"}.
@@ -29,7 +30,7 @@ import time
 
 import numpy as np
 
-from ..robots import EnvelopeDefaults, Profile
+from ..robots import ContactSettings, EnvelopeDefaults, Profile
 from .base import ArmDriver, Reading
 
 
@@ -55,7 +56,8 @@ def ros_profile(cfg: dict) -> Profile:
         gripper_closed=float(cfg.get("gripper_closed", low[g] if g is not None else 0)),
         control_hz=float(cfg.get("control_hz", 10.0)),
         home=[float(x) for x in cfg.get("home", [0.0] * n)],
-        park=[float(x) for x in cfg.get("park", [0.0] * n)],
+        # a rest pose only when the rig names one: an all-zero pose may be an outstretched arm
+        park=[float(x) for x in cfg.get("park") or []],
         envelope=EnvelopeDefaults(
             joint_speed_deg_s=speed,
             slow_joint_speed_deg_s=speed / 2,
@@ -63,12 +65,16 @@ def ros_profile(cfg: dict) -> Profile:
             windup_gripper=float(cfg.get("windup", 10.0 if units == "deg" else 0.2)),
             gripper_speed=float(cfg.get("gripper_speed", speed)),
         ),
+        # contact thresholds on the JointState effort, from the rig file ({dtorque: {joint: limit}, ...}); none: no torque watch
+        contact=ContactSettings(**(cfg.get("contact") or {})),
         notes=cfg.get("notes", "Joint names and limits come from the rig file; positions in " + units + "."),
         tested_on_hardware=False,
     )
 
 
 class RosbridgeDriver(ArmDriver):
+    releases_torque = False  # the bridge cannot turn the motors off: the arm's controller holds its last command
+
     def __init__(self, prof: Profile, cfg: dict, mock: bool = False):
         self.profile, self.cfg, self.mock = prof, dict(cfg), mock
         cams = cfg.get("cameras") or {}
@@ -77,7 +83,8 @@ class RosbridgeDriver(ArmDriver):
         self.to_rad = math.pi / 180 if prof.units[0] == "deg" else 1.0
         self.ws = None
         self._state: dict[str, float] = {}
-        self._state_t = 0.0
+        self._effort: dict[str, float] = {}
+        self._state_t = 0.0  # time.monotonic() of the last joint state message
         self._images: dict[str, np.ndarray] = {}
         self._lock = threading.Lock()
         self._stop = threading.Event()
@@ -136,9 +143,12 @@ class RosbridgeDriver(ArmDriver):
             msg = m.get("msg") or {}
             if m.get("topic") == state_topic:
                 with self._lock:
-                    for name, pos in zip(msg.get("name", []), msg.get("position", []), strict=False):
+                    effort = msg.get("effort") or []
+                    for i, (name, pos) in enumerate(zip(msg.get("name", []), msg.get("position", []), strict=False)):
                         self._state[name] = float(pos)
-                    self._state_t = time.time()
+                        if i < len(effort):
+                            self._effort[name] = float(effort[i])
+                    self._state_t = time.monotonic()
             elif m.get("topic") in cams:
                 try:
                     from PIL import Image
@@ -153,12 +163,21 @@ class RosbridgeDriver(ArmDriver):
         with self._lock:
             if self._err and not self._stop.is_set():
                 raise RuntimeError(f"rosbridge connection lost: {self._err}")
-            age = time.time() - self._state_t
+            age = time.monotonic() - self._state_t
             if age > float(self.cfg.get("stale_s", 1.0)):
-                raise RuntimeError(f"joint states are {age:.1f} s old (the robot stopped publishing)")
+                # lost telemetry, not a hardware fault: the stop holds the last command and never sends this frozen state
+                from ..safety import SafetyStop  # at the raise: the class of the safety module now loaded
+
+                raise SafetyStop(
+                    f"lost telemetry: joint states are {age:.1f} s old (the robot stopped publishing)", "telemetry_lost"
+                )
             q = np.asarray([self._state[j] / self.to_rad for j in self.profile.joints], dtype=float)
             imgs = dict(self._images)
-        return Reading(q=q, extra={}, images=imgs)
+            extra = {}
+            if all(j in self._effort for j in self.profile.joints):  # JointState effort (N m on revolute joints)
+                extra["joint_torque_nm"] = [self._effort[j] for j in self.profile.joints]
+            stamp = self._state_t
+        return Reading(q=q, extra=extra, images=imgs, stamp=stamp)
 
     def send(self, q) -> None:
         pos = [float(v) * self.to_rad for v in np.asarray(q, dtype=float)]

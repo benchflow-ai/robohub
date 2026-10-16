@@ -114,7 +114,7 @@ class RobocasaBackend(Backend):
             "robocasa",
             config.sim_python("robocasa", "robocasa"),
             WORKER,
-            setup="docs/suites/robocasa.md",
+            setup=config.SUITES_DOCS,
             env={"PYTHONHASHSEED": "0"},
         )
         self._state = None

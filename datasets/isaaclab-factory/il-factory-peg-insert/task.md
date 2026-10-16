@@ -5,8 +5,8 @@ task:
   description: Insert the held 8 mm peg into the hole in the fixed socket, all the way down.
 metadata:
   author_name: benchflow
-  source_benchmark: 'NVIDIA Isaac Lab 2.3.0 (isaac-sim/IsaacLab, BSD-3-Clause) on Isaac Sim 5.1 (NVIDIA Isaac Sim license): the Factory assembly environments (Narang et al., RSS 2022), PhysX GPU dynamics, RTX rendering'
-  source_task: Isaac-Factory-PegInsert-Direct-v0
+  source_benchmark: 'NVIDIA Isaac Lab 3.0.0-EA (isaac-sim/IsaacLab, BSD-3-Clause), kit-less container (no Isaac Sim): the Factory assembly environments (Narang et al., RSS 2022), PhysX GPU dynamics through OvPhysX'
+  source_task: IsaacContrib-Factory-PegInsert-Direct
   suite: gpu-isaaclab
   category: contact-rich-assembly
   difficulty: hard
@@ -16,13 +16,13 @@ metadata:
   - gpu-required
   - isaaclab
   - tight-tolerance
-  - isaac-sim
+  - physx
   reference_solution: 'scripted: align the peg''s base over the hole from the privileged fixed-part pose, then descend with small lateral corrections'
   gpu: required (NVIDIA RTX, remote worker)
   robouse:
     id: il-factory-peg-insert
     backend: gpu
-    sim: isaaclab
+    sim: isaaclab3
     env: factory-peg-insert
     seed: 0
     max_steps: 300
@@ -60,6 +60,8 @@ The step budget is 300 steps: every `robo act` step and every `robo skill` call 
 
 World frame: metres, z up. The fixed part (hole, gear base or bolt) is bolted to the table; the robot already holds the other part a few centimetres above it, as Factory starts every episode. `held_part_base` is the pose of the held part's base (the peg's bottom end, the gear's hub, the nut's bottom face); `fixed_part_position_estimate` is where the fixed part's top centre is measured to be.
 
+Images come from one of three renderers, chosen when the simulator worker starts: NVIDIA's RTX renderer (OVRTX, without Isaac Sim), Newton's Warp rasterizer, or, where neither runs, a schematic drawn with MuJoCo, in which the parts are plain boxes and cylinders sized from Factory's models and the hand is a box with two fingers, all posed as in Isaac Lab every frame. The physics and the success check are Isaac Lab's either way. `robo info` names this episode's renderer (`renderer`) and physics engine (`physics`).
+
 ## How to control the robot
 
 You are the robot's policy. You act only through the `robo` command in your shell; you cannot read or change the simulator, the scoring, or other files to succeed. The episode server checks Factory's own success condition on the final simulated state.
@@ -67,7 +69,7 @@ You are the robot's policy. You act only through the `robo` command in your shel
 ```
 robo info                                   # action space, skills, cameras, step budget
 robo observe                                # fingertip pose, held part pose, fixed part estimate and dimensions
-robo observe --image [--camera C]           # also saves an RTX image (cameras: scene, close, side) and prints its path
+robo observe --image [--camera C]           # also saves an image (cameras: scene, close, side) and prints its path
 robo act DX DY DZ RX RY RZ [--repeat N]     # one 1/15 s control step of Factory's task-space impedance controller
 robo skill hold [N]                         # zero command for N steps (default 15)
 robo done "short summary"                   # end the episode and ask for scoring

@@ -1,8 +1,8 @@
 """The embodiment spec (spec_version 1): what a robot senses, how it is commanded, and what skills it has.
 
-A copy of BenchFlow's `benchflow.embodied.spec` (branch `robouse`, commit 0a848984), so the spec is available without
-BenchFlow installed. Keep the two in sync; tests/test_embodiment_spec.py checks them against each other when BenchFlow
-is importable.
+A copy of BenchFlow's `benchflow.embodied.spec` (BenchFlow commit 0a848984, not in a release yet), so the spec is
+available without BenchFlow installed. Keep the two in sync; tests/test_embodiment_spec.py checks them against each
+other when BenchFlow is importable.
 """
 
 from __future__ import annotations

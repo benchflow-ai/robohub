@@ -46,6 +46,10 @@ def operator(a: argparse.Namespace) -> int:
         p = safety.OPERATOR_DIR / "pending.json"
         print(p.read_text() if p.exists() else "no pending operator request")
         print("e-stop:", safety.estop_engaged() or "clear")
+        notices = safety.OPERATOR_DIR / "notices.jsonl"
+        for line in notices.read_text().splitlines()[-5:] if notices.exists() else []:
+            n = json.loads(line)
+            print(f"notice {n.get('at', '')}: {n.get('text', '')}")
     elif a.action == "answer":
         print(op.answer(a.value, a.note))
     else:

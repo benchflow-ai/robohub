@@ -28,10 +28,11 @@ KEYS = (
     "split",
     "seed",
     "mode",
-    "job",
+    "run",
     "regime",
     "released",
 )
+HIDDEN_KEYS = ("job",)  # what `run` (the run folder's name) was called before 0.3.1: still accepted, not listed
 
 
 def load_trials(jobs: list[Path], excluded: list[str] | None = None) -> list[dict]:
@@ -82,7 +83,8 @@ def load_trials(jobs: list[Path], excluded: list[str] | None = None) -> list[dic
                     "split": c.get("split") or "default",
                     "seed": c.get("seed"),
                     "mode": ep.get("embodiment_mode") or r.get("embodiment_mode") or "sim",
-                    "job": job.name,
+                    "run": job.name,
+                    "job": job.name,  # the same, for `--by job` (HIDDEN_KEYS)
                     "regime": jmeta.get("regime"),
                     "released": md.get("released", True),
                 }
@@ -228,7 +230,7 @@ def main(
 ) -> int:
     paths = [Path(j) for j in jobs]
     by = [k for spec in (by or ["harness,model"]) for k in spec.split(",") if k]
-    bad = [k for k in by if k not in KEYS]
+    bad = [k for k in by if k not in KEYS + HIDDEN_KEYS]
     if bad:
         raise SystemExit(f"unknown group key(s) {bad}; choose from {KEYS}")
     rep = build(paths, by)

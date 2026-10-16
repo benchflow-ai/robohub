@@ -8,12 +8,13 @@ it on the rig machine (`pip install -e "lerobot[metal]"` from the makermods fork
 "lerobot[feetech]"` for SO-101).
 
 Status: the Metal factory mirrors the configuration used by inspect-robots-metal on the 2026-09-05 bench sessions; the
-SO-101 factory mirrors ~/benchflow/robot/so101_sort_control.py. Neither live path has run through Robo Use yet (the
+SO-101 factory mirrors the bench control script of the SO-101 sort sessions (not published). Neither live path has run through Robo Use yet (the
 hardware was not connected while this was built); both are covered by the mock.
 """
 
 from __future__ import annotations
 
+import time
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any
@@ -103,6 +104,8 @@ class LeRobotArmDriver(ArmDriver):
         self.cameras = list(cams.keys() if isinstance(cams, dict) else cams)
         self.description = f"LeRobot {prof.display}" + (" (hardware-in-the-loop mock)" if mock else "")
         self._n = 0
+        self._rx: dict[str, float] | None = None  # Damiao bus: when each motor last answered (time.monotonic())
+        self._cached_unstamped = False
 
     def connect(self) -> None:
         robot = self._factory(self.cfg, self.profile)
@@ -111,15 +114,41 @@ class LeRobotArmDriver(ArmDriver):
         # calibrate=False: LeRobot's default would start an interactive, arm-moving calibration mid-episode
         robot.connect(calibrate=False)
         self.robot = robot
+        self._stamp_replies()
         if not self.mock:
             self._cams = open_cameras(self.cam_specs, *self.cfg.get("camera_size", (640, 480)))
         # hold on enable: command the measured pose at once so motors with zero gains until their first frame hold
         self.send(self.read().q)
 
+    def _stamp_replies(self) -> None:
+        """The Damiao bus (Metal) serves a per-motor cache: a motor that stops answering keeps its last values ("Packet
+        drop ... Using last known state"), so a dead CAN link reads like an arm holding still. Wrap its reply decoder to
+        record when each motor last answered; read() stamps the oldest of those times."""
+        bus = getattr(self.robot, "bus", None)
+        states = getattr(bus, "_last_known_states", None)
+        if bus is None or not isinstance(states, dict):
+            return  # no cache: reads are synchronous
+        decode = getattr(bus, "_process_response", None)
+        if not callable(decode) or not all(n in states for n in self.profile.joints):
+            self._cached_unstamped = True  # a cache this driver cannot stamp: freshness unknown
+            return
+        now = time.monotonic()
+        rx = {str(m): now for m in states}  # connect has just read every motor
+
+        def stamped(motor, msg):
+            before = states.get(motor)
+            decode(motor, msg)
+            if states.get(motor) is not before:  # decoded and cached: the motor answered
+                rx[str(motor)] = time.monotonic()
+
+        bus._process_response = stamped
+        self._rx = rx
+
     def _raw(self) -> dict:
         return self.robot.get_observation()
 
     def read(self) -> Reading:
+        t_read = time.monotonic()
         raw = self._raw()
         try:
             q = np.asarray([float(raw[f"{n}.pos"]) for n in self.profile.joints], dtype=float)
@@ -135,7 +164,13 @@ class LeRobotArmDriver(ArmDriver):
                 fr = self._cams[name].frame()
                 if fr is not None:
                     images[name] = fr
-        return Reading(q=q, extra=self._telemetry(raw), images=images)
+        # a cached bus: the oldest motor reply; a synchronous read (Feetech) raises on failure, so it is fresh
+        stamp: float | None = t_read
+        if self._rx is not None:
+            stamp = min(self._rx[n] for n in self.profile.joints)
+        elif self._cached_unstamped:
+            stamp = None
+        return Reading(q=q, extra=self._telemetry(raw), images=images, stamp=stamp)
 
     def _telemetry(self, raw: dict) -> dict:
         out: dict = {}

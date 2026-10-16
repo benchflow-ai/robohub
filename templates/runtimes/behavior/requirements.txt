@@ -4,3 +4,5 @@ imageio==2.37.4
 imageio-ffmpeg==0.6.0
 pillow==12.3.0
 pyyaml==6.0.3
+# robouse serve checks for MuJoCo before any episode server starts, also for these remote-worker backends (robouse <= 0.4.0)
+mujoco==3.3.0

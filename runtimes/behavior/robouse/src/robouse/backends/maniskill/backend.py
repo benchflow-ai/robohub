@@ -86,7 +86,7 @@ class ManiSkillBackend(Backend):
             env["VK_ICD_FILENAMES"] = str(icd)  # SAPIEN renders through MoltenVK on macOS
         env.setdefault("MVK_CONFIG_LOG_LEVEL", "0")
         self.worker = StdioWorker(
-            "maniskill", config.sim_python("maniskill", "maniskill"), WORKER, setup="docs/suites/maniskill.md", env=env
+            "maniskill", config.sim_python("maniskill", "maniskill"), WORKER, setup=config.SUITES_DOCS, env=env
         )
         self._state = None
         self._success = False

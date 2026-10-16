@@ -31,14 +31,14 @@ DESCRIPTION = "Robo Use: run robot tasks with an agent harness as the policy. ht
 
 def _analysis(sub: argparse._SubParsersAction) -> None:
     rp = sub.add_parser(
-        "report", help="metrics with 95%% confidence intervals over job folders, grouped by trial attributes"
+        "report", help="metrics with 95%% confidence intervals over run folders, grouped by trial attributes"
     )
-    rp.add_argument("jobs", nargs="+", help="job folders (run-many --out)")
+    rp.add_argument("runs", nargs="+", help="run folders (run-many --out)")
     rp.add_argument(
         "--by",
         action="append",
         help="group keys, comma-separated (repeatable): harness, model, suite, "
-        "category, difficulty, task, split, seed, mode, job, regime, released (default harness,model)",
+        "category, difficulty, task, split, seed, mode, run, regime, released (default harness,model)",
     )
     rp.add_argument(
         "--metrics", action="append", help="metrics to show, comma-separated (default: the nine robot metrics and cost)"
@@ -47,15 +47,16 @@ def _analysis(sub: argparse._SubParsersAction) -> None:
     rp.add_argument("--cost-quality", help="write cost-versus-success points (JSON) for groups with a known cost")
     rp.add_argument("--svg", help="write a cost-versus-success scatter (SVG)")
     rp.set_defaults(
-        func=lambda a: _call("..analysis.report", "main", a.jobs, a.by, a.metrics, a.json, a.cost_quality, a.svg)
+        func=lambda a: _call("..analysis.report", "main", a.runs, a.by, a.metrics, a.json, a.cost_quality, a.svg)
     )
 
     gr = sub.add_parser("grade")  # listed once it has run on this release (it needs a vision-language model API)
-    gr.add_argument("trials", nargs="+", help="trial folders or job folders")
+    gr.add_argument("trials", nargs="+", help="trial folders or run folders")
     gr.add_argument(
         "--model",
-        default="moonshotai/Kimi-K3",
-        help="vision-language model, OpenAI-compatible (default: Kimi K3 on Baseten)",
+        required=True,
+        help="vision-language model at ROBOUSE_GRADER_URL (an OpenAI-compatible endpoint; key in "
+        "ROBOUSE_GRADER_API_KEY); it must read images",
     )
     gr.add_argument("--rubric", help="extra rubric text appended to the task's success rule")
     gr.set_defaults(func=lambda a: _call("..analysis.grader", "main", a.trials, a.model, a.rubric))
@@ -115,7 +116,13 @@ def parser() -> argparse.ArgumentParser:
     )
     f.add_argument("--dest", help="target folder (default: <cache>/menagerie, or $ROBOUSE_MENAGERIE_ASSETS)")
     f.add_argument("--robot", action="append", help="only this Menagerie robot folder (repeatable), e.g. unitree_go2")
-    f.add_argument("--all", action="store_true", help="every robot the bundled suites use (about 2 GB)")
+    from ..assets import about_mb, download_bytes
+
+    f.add_argument(
+        "--all",
+        action="store_true",
+        help=f"every robot the bundled suites use ({about_mb(download_bytes(everything=True))})",
+    )
     f.set_defaults(func=_fetch_assets)
     _analysis(sub)
     real.register(sub)
@@ -123,11 +130,16 @@ def parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    from ..tasks import TaskFormatError
+
     try:
         return _main(argv)
     except KeyboardInterrupt:
         print("\nrobouse: interrupted", file=sys.stderr)
         return 130
+    except TaskFormatError as e:  # e.g. a folder in the older task.toml + instruction.md layout
+        print(f"robouse: {e}", file=sys.stderr)
+        return 2
 
 
 def _main(argv: list[str] | None = None) -> int:
