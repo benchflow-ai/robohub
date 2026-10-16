@@ -27,7 +27,7 @@ def main():
     ck = checks()
     tasks = [yaml.safe_load(p.read_text()) for p in sorted((ROOT / "src").glob("*/task.yaml"))]
     lines = ["# Tasks", "",
-             f"{len(tasks)} tasks, each built in two variants (with-skill, no-skill). Checks: every variant's reference solution passes, its no-op fails and both trivial edits fail (`tools/check.py`, records in `checks/`).", ""]
+             f"{len(tasks)} tasks, each built in two variants (with-skill, no-skill). Checks: every variant's reference solution passes, its valid alternatives pass, and its no-op and every trivial edit fail (`tools/check.py`, records in `checks/`).", ""]
     for key, src in sources.items():
         mine = [t for t in tasks if t["source"] == key]
         if not mine:

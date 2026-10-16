@@ -14,13 +14,14 @@ RUN cd /workspace/lerobot && pip install --no-cache-dir --no-deps --no-build-iso
 COPY setup/ /opt/skills-study/setup/
 COPY variant.sh integrity.py /opt/skills-study/
 # Starting state, then the variant step (no-skill deletes the guide files; with-skill changes nothing), then the
-# integrity manifest of the protected upstream files (root-only, read by the verifier) and a fresh one-commit git repository.
+# integrity manifest of the protected upstream files and a fresh one-commit git repository, whose commit id is kept for the verifier (both root-only).
 RUN cd /workspace/lerobot && sh /opt/skills-study/setup/apply.sh && rm -rf /opt/skills-study/setup \
  && sh /opt/skills-study/variant.sh \
  && python3 /opt/skills-study/integrity.py write src/lerobot/configs src/lerobot/datasets src/lerobot/processor/pipeline.py src/lerobot/utils/import_utils.py > /opt/skills-study/protected.sha256 \
  && chmod -R go-rwx /opt/skills-study \
  && git init -q && git add -A \
  && git -c user.name=workspace -c user.email=workspace@localhost commit -qm "Workspace" \
+ && git rev-parse HEAD > /opt/skills-study/base_commit \
  && mkdir -p /logs/verifier /logs/agent /logs/artifacts
 ENV PYTHONUNBUFFERED=1
 WORKDIR /workspace/lerobot

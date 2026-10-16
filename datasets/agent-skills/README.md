@@ -18,12 +18,12 @@ The verifier also fails a trial that edits protected upstream files (an integrit
 ## Layout
 
 - `sources.yaml`: upstream repository, pinned commit, licence, guide files and protected paths per source.
-- `src/<id>/`: the task source (prompt, starting state, reference solution, hidden tests, two trivial edits that must fail); `src/_shared/`: a starting project and test helpers shared by several tasks.
+- `src/<id>/`: the task source (prompt, starting state, reference solution, hidden tests, trivial edits that must fail, and for some tasks valid alternative solutions that must pass); `src/_shared/`: a starting project and test helpers shared by several tasks.
 - `env/<source>/requirements.txt`: the pinned Python environment of each source.
 - `tasks/`: the built bench tasks (`python3 tools/build.py` regenerates them from `src/`; do not edit them by hand).
-- `tools/check.py`: the checks (reference passes, no-op fails, trivial edits fail, both variants); `checks/*.jsonl` and [`CHECKS.md`](CHECKS.md): their results.
+- `tools/check.py`: the checks (reference and valid alternatives pass, no-op and trivial edits fail, both variants); `checks/*.jsonl` and [`CHECKS.md`](CHECKS.md): their results.
 - `study/`: the four job files (agent x variant) and `run_study.sh`; `tools/summarize.py`: the analysis.
 
 ## Adding a task
 
-Write `src/<id>/` (see `tools/build.py` for the format), run `python3 tools/build.py <id>`, then run `tools/check.py` in a sandbox built like the task image and commit the task with its check record. A task is ready when its reference solution passes in both variants and the no-op and both trivial edits fail in both.
+Write `src/<id>/` (see `tools/build.py` for the format), run `python3 tools/build.py <id>`, then run `tools/check.py` in a sandbox built like the task image and commit the task with its check record. A task is ready when its reference solution and valid alternatives pass in both variants and the no-op and every trivial edit fail in both.
