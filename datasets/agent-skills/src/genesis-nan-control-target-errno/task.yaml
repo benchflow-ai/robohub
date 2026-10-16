@@ -1,0 +1,12 @@
+id: genesis-nan-control-target-errno
+source: genesis
+summary: Make a NaN position control target halt the rigid simulation through the solver's per-environment errno mechanism with a new error code, instead of silently saturating the joint torque.
+skill: CLAUDE.md#Miscellaneous
+scenario: 'CLAUDE.md "Miscellaneous": halt the simulation on NaN via the existing errno mechanism (define a new error code if necessary), a warning is not acceptable; plus "Runtime hot paths: efficiency first" (no host sync per control call)'
+difficulty: hard
+timeout_sec: 2400
+library_task: true
+cpus: 2
+memory_mb: 4096
+tags: [nan, errno, rigid, control]
+protect: [genesis/engine/simulator.py, genesis/engine/scene.py, genesis/utils/misc.py]

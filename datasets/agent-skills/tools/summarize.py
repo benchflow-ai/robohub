@@ -6,8 +6,8 @@
 Reads jobs-out/<agent>--<variant>/trial-<n>/<job>/<rollout>/result.json (and the agent trajectory next to it) and prints:
 - per cell (agent x variant): trials, passes, pass rate, infrastructure errors, tokens, cost, agent time;
 - per agent and source: with-skill vs no-skill pass rate and the paired difference per task;
-- guide use: in with-skill trials, how often the agent opened a guide file; leakage: in no-skill trials, any mention of a
-  guide path or of the upstream repository's skills on the web (those trials are listed, not dropped).
+- guide use: in with-skill trials, how often a guide path appears in the trajectory (a listing or a read; open the trajectory to tell); leakage: in no-skill trials, any mention of a
+  guide path (Isaac Lab docs link to skills/user/..., so a mention can be a dangling link) or a fetch of the upstream guides from GitHub; those trials are listed for a person to judge, not dropped.
 Standard library only.
 """
 import argparse
@@ -108,7 +108,7 @@ def main():
             print(f"{agent:12s} {src:9s} with {pw}/{nw} ({pw / max(nw, 1):.0%})  without {po}/{no} ({po / max(no, 1):.0%})  "
                   f"diff {d:+.2f} over {len(diffs)} tasks")
     used = [r for r in rows if r["variant"] == "with-skill"]
-    print(f"\nguide opened in {sum(r['guide_hits'] > 0 for r in used)}/{len(used)} with-skill trials")
+    print(f"\nguide path mentioned in {sum(r['guide_hits'] > 0 for r in used)}/{len(used)} with-skill trials")
     leaks = [r for r in rows if r["variant"] == "no-skill" and (r["guide_hits"] or r["web_hits"])]
     print(f"possible leakage in {len(leaks)} no-skill trials (guide path mentioned or upstream skills fetched):")
     for r in leaks:

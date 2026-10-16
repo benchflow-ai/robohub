@@ -1,0 +1,10 @@
+id: genesis-drone-propellers-spin
+source: genesis
+summary: Make gs.morphs.Drone validate propellers_spin (values +1/-1, one per propeller link) and accept numpy arrays, typed with the genesis.typing aliases.
+skill: CLAUDE.md#API Design
+scenario: 'CLAUDE.md "API Design" (option fields for index/array inputs use the genesis.typing aliases because Options is strict Pydantic) and "Miscellaneous" (an exception is raised on what a user can hand in): a Drone morph field that rejects numpy arrays and silently accepts invalid spins'
+difficulty: easy
+timeout_sec: 1200
+library_task: true
+tags: [options, pydantic, validation, drone]
+protect: [genesis/engine]
