@@ -7,11 +7,15 @@ calling thread). Any run of ProxyArray's bridge code or of the wp.to_torch shim 
 and every call both observers check that ProxyArray (its attributes and its functions' code), the test's data objects
 and warp's to_torch are exactly as the verifier set them up. An audit hook, which cannot be removed, records changes of
 a ProxyArray's class or of the code of the watched functions at any time, and, during a call, attempts to replace the
-observers or start threads or processes.
+observers or start threads or processes. torch.compile may run in a term: inductor compiles in-process
+(TORCHINDUCTOR_COMPILE_THREADS=1) and only the processes its own code starts, with fixed shapes, are let through (the
+system C++ compiler without plugin or wrapper options, its one-line ISA probe and openssl sha512).
 
 Statically, every .py file that differs from the workspace build commit (compared by content, read from disk, so git
-attributes, ignore files and commits cannot hide one) must not name the bridge internals or the interpreter's hooks;
-rewards.py must also not assign attributes, call setattr-like builtins or import the introspection modules.
+attributes, ignore files and commits cannot hide one) must not name the bridge internals or the interpreter's hooks in
+its code (prose is not read: comments, docstrings and other string statements that are never used); rewards.py must
+also not assign attributes, call setattr-like builtins or import the introspection modules. The agent's own test files
+may re-arm ProxyArray's warn-once flag, as a test that expects no DeprecationWarning has to.
 """
 
 import ast
@@ -19,12 +23,17 @@ import functools
 import hashlib
 import importlib
 import os
+import re
+import shutil
 import subprocess
 import sys
 import threading
 import types
 from pathlib import Path
 from types import SimpleNamespace
+
+# torch.compile in a term compiles in this process (no compile worker threads or processes).
+os.environ["TORCHINDUCTOR_COMPILE_THREADS"] = "1"
 
 import pytest
 import torch
@@ -97,6 +106,45 @@ AUDIT_DURING_CALL = {"sys.setprofile", "sys.settrace", "sys._setprofileallthread
                      "ctypes.dlsym", "ctypes.cdata", "ctypes.addressof", "ctypes.call_function"}
 FLAGS = []
 STATE = {"watching": False, "in_hook": False}
+if "torch._inductor.config" in sys.modules:
+    sys.modules["torch._inductor.config"].compile_threads = 1
+
+# The processes torch.compile (inductor) starts on CPU, recognised by caller, program, arguments and environment.
+INDUCTOR_DIR = os.path.join(os.path.dirname(os.path.realpath(torch.__file__)), "_inductor") + os.sep
+BASE_ENV = dict(os.environ)
+SEARCH_PATH = BASE_ENV.get("PATH", os.defpath)
+COMPILERS = {os.path.realpath(p) for p in (shutil.which(n, path=SEARCH_PATH) for n in ("g++", "gcc", "c++", "cc", "clang", "clang++")) if p}
+OPENSSL = {os.path.realpath(p) for p in [shutil.which("openssl", path=SEARCH_PATH)] if p}
+PYTHON = os.path.realpath(sys.executable)
+ISA_PROBE = re.compile(r'\nimport torch\nfrom ctypes import cdll\ncdll\.LoadLibrary\("[^"\\\n]+\.so"\)\n')
+RISKY_ARG = re.compile(r"-B|-wrapper|-fplugin|-specs|--specs|@|-fuse-ld|--ld-path|.*plugin")
+SAME_ENV = ("PATH", "LD_PRELOAD", "LD_AUDIT", "LD_LIBRARY_PATH", "GCC_EXEC_PREFIX", "COMPILER_PATH", "PYTHONHOME", "PYTHONSTARTUP")
+
+
+def inductor_process(args):
+    """True for a process that torch's own inductor code starts to compile a kernel."""
+    try:
+        exe, argv, _, env = args
+        argv = [os.fsdecode(a) for a in argv]
+        f = sys._getframe(2)
+        while f is not None and os.path.basename(f.f_code.co_filename) == "subprocess.py":
+            f = f.f_back
+        if f is None or not os.path.realpath(f.f_code.co_filename).startswith(INDUCTOR_DIR):
+            return False
+        env = os.environ if env is None else env
+        if any(env.get(k) != BASE_ENV.get(k) for k in SAME_ENV):
+            return False
+        prog = os.fsdecode(exe if exe is not None else argv[0])
+        prog = os.path.realpath(prog if os.sep in prog else (shutil.which(prog, path=SEARCH_PATH) or prog))
+        if prog in COMPILERS:
+            return not any(RISKY_ARG.match(a) for a in argv[1:])
+        if prog == PYTHON:
+            return _len(argv) == 3 and argv[1] == "-c" and ISA_PROBE.fullmatch(argv[2]) is not None
+        if prog in OPENSSL:
+            return _len(argv) == 3 and argv[1] == "sha512"
+    except Exception:  # noqa: BLE001  (anything unexpected is not an inductor process)
+        return False
+    return False
 
 
 def _audit(event, args):
@@ -108,7 +156,7 @@ def _audit(event, args):
             obj, name = args[0], args[1] if _len(args) > 1 else "?"
             if _id(obj) in WATCHED_FUNCS or _isinstance(obj, ProxyArray):
                 FLAGS.append(f"{event} {name!r} on {_type(obj).__name__}")
-        elif STATE["watching"] and event in AUDIT_DURING_CALL:
+        elif STATE["watching"] and event in AUDIT_DURING_CALL and not (event == "subprocess.Popen" and inductor_process(args)):
             FLAGS.append(f"{event} during a reward call")
     finally:
         STATE["in_hook"] = False
@@ -247,6 +295,7 @@ BANNED_NAMES = ("_warn_implicit", "_deprecation_warned", "__torch_function__", "
                 "settrace", "monitoring", "_getframe", "addaudithook", "get_referents")
 BANNED_EXACT = {"gc", "ctypes", "_src"}
 BANNED_IN_STRINGS = BANNED_NAMES[:12]
+TEST_FILE_ALLOWED = {"_deprecation_warned"}  # the warn-once flag; any change of it during a reward call is seen at run time
 REWARDS_BANNED_CALLS = {"setattr", "delattr", "exec", "eval", "compile", "__import__", "globals", "vars", "locals"}
 REWARDS_BANNED_IMPORTS = {"importlib", "builtins", "sys", "gc", "ctypes", "threading", "inspect", "types"}
 IMPORTABLE_BINARIES = (b".so", b".pyd")
@@ -299,12 +348,21 @@ def changed_files():
     return changed, odd
 
 
+def is_test_file(rel):
+    parts = Path(rel).parts
+    name = parts[-1]
+    return name.startswith("test_") or name.endswith("_test.py") or name == "conftest.py" or bool({"test", "tests"} & set(parts[:-1]))
+
+
 def static_problems(rel, data):
     try:
         tree = ast.parse(data, filename=rel)
     except (SyntaxError, ValueError):
         return  # cannot be imported either
     strict = rel == REWARDS_REL
+    allowed = TEST_FILE_ALLOWED if is_test_file(rel) and not strict else set()
+    # Prose: a string that is a whole statement (a docstring or a bare string) is never used, so it is not read.
+    prose = {id(n.value) for n in ast.walk(tree) if isinstance(n, ast.Expr) and isinstance(n.value, ast.Constant) and isinstance(n.value.value, str)}
     for node in ast.walk(tree):
         line = getattr(node, "lineno", "?")
         names = []
@@ -320,13 +378,13 @@ def static_problems(rel, data):
             names = [part for a in node.names for part in a.name.split(".")]
         elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
             names = [node.name]
-        elif isinstance(node, ast.Constant) and isinstance(node.value, str):
+        elif isinstance(node, ast.Constant) and isinstance(node.value, str) and id(node) not in prose:
             for b in BANNED_IN_STRINGS:
-                if b in node.value:
+                if b in node.value and b not in allowed:
                     yield f"{rel}:{line}: string names the bridge internals ({b})"
         for n in names:
             parts = n.split(".")
-            if any(b in n for b in BANNED_NAMES) or BANNED_EXACT & set(parts):
+            if any(b in n for b in BANNED_NAMES if b not in allowed) or BANNED_EXACT & set(parts):
                 yield f"{rel}:{line}: names {n!r} (bridge internals or interpreter hooks)"
         if not strict:
             continue
