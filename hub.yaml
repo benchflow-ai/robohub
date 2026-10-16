@@ -80,7 +80,7 @@ runtimes:
     remote_worker: true
   gpu:
     backends: [gpu]
-    simulators: ManiSkill3 3.0.1, Genesis 1.4.2, MuJoCo Playground 0.2.0, Isaac Lab 2.3 on Isaac Sim 5.1, on a remote NVIDIA RTX GPU worker
+    simulators: ManiSkill3 3.0.1, Genesis 1.4.2, MuJoCo Playground 0.2.0, Isaac Lab 3.0.0-EA (kit-less container; Isaac Lab 2.3 on Isaac Sim 5.1 for older packages), on a remote NVIDIA RTX GPU worker
     gpu: required
     # remote GPU workers (robouse/backends/gpu/worker/server.py, one per simulator); the endpoints file is named by $ROBOUSE_GPU_REMOTE
     remote_worker: ROBOUSE_GPU_REMOTE
@@ -363,15 +363,15 @@ datasets:
     description: 'Robo Use MuJoCo Playground 0.4: a Unitree Go1 with a learned gait navigating obstacles.'
   - name: isaac-sim/isaaclab-factory
     dir: isaaclab-factory
-    upstream: {benchmark: "Isaac Lab Factory", org_name: "NVIDIA Isaac Sim (isaac-sim)", repo: "https://github.com/isaac-sim/IsaacLab", licence: "BSD-3-Clause (Isaac Lab); Isaac Sim under the NVIDIA Isaac Sim additional software license"}
-    version: "0.4"
+    upstream: {benchmark: "Isaac Lab Factory", org_name: "NVIDIA Isaac Sim (isaac-sim)", repo: "https://github.com/isaac-sim/IsaacLab", licence: "BSD-3-Clause (Isaac Lab); the kit-less container's OvPhysX under the NVIDIA Omniverse license and OVRTX under the NVIDIA Software License Agreement"}
+    version: "0.5"
     suites: [gpu-isaaclab]
     run:
       label: "Robo Use + GPU worker"
       command: "robouse run-many --tasks tasks/gpu-isaaclab --harness oracle --out runs/gpu-isaaclab-oracle"
-      note: "Needs GPU simulator workers (<code>robouse/backends/gpu/worker/server.py</code> in the Robo Use package, one per simulator: ManiSkill3 3.0.1, Genesis 1.4.2, MuJoCo Playground 0.2.0, Isaac Lab 2.3 on Isaac Sim 5.1) on an NVIDIA RTX GPU machine. Isaac Lab draws its images with Isaac Sim's RTX renderer where the NVIDIA driver supports it (580) and otherwise with a MuJoCo schematic of the parts (on 595, where Isaac Sim's renderer crashes); <code>robo info</code> and each trial's result name the renderer. The command above is the Robo Use run that checked every task with the reference solutions and a no-op control; it uses the task folders of a Robo Use source checkout. Requirements: <a href=\"https://github.com/benchflow-ai/robohub#gpu-datasets\">GPU datasets in the robohub README</a>."
-      bench_note: "Version 0.4 ran with bench 0.7.8 on 2026-10-14 on an x86_64 machine with an NVIDIA RTX PRO 6000 (driver 595.91), the GPU workers on the same machine: every reference solution scored 1 and every no-op control 0. With bench, the host names the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code>; a worker on the same machine listens on the Docker bridge's address and is reached as <code>host.docker.internal</code>."
-    description: 'Robo Use Isaac Lab Factory 0.4: contact-rich assembly from Isaac Lab''s Factory on a Franka Panda.'
+      note: "Needs GPU simulator workers (<code>robouse/backends/gpu/worker/server.py</code> in the Robo Use package after 0.4.1, one per simulator family); these tasks use the <code>isaaclab3</code> family: Isaac Lab 3.0.0-EA in NVIDIA's kit-less container (<code>nvcr.io/nvidia/isaac-lab:3.0.0-rc1-kitless</code>, no Isaac Sim), PhysX through OvPhysX, on an NVIDIA GPU machine. Images come from NVIDIA's RTX renderer without Kit (OVRTX) or Newton's Warp rasterizer, both of which ran on driver 595; <code>robo info</code> and each trial's result name the renderer and the physics engine. The command above is the Robo Use run that checked every task with the reference solutions and a no-op control; it uses the task folders of a Robo Use source checkout. Requirements: <a href=\"https://github.com/benchflow-ai/robohub#gpu-datasets\">GPU datasets in the robohub README</a>."
+      bench_note: "Version 0.5 has not run with bench yet. It ran with the Robo Use runner on 2026-10-16 on a Daytona sandbox with an NVIDIA RTX PRO 6000 (driver 595.84), the worker in the kit-less container on the same machine: every reference solution scored 1 and every no-op control 0, with OVRTX images and again with Newton's renderer. With bench, the host names the worker endpoints file in <code>$ROBOUSE_GPU_REMOTE</code>; a worker on the same machine listens on the Docker bridge's address and is reached as <code>host.docker.internal</code>."
+    description: 'Robo Use Isaac Lab Factory 0.5: contact-rich assembly from Isaac Lab''s Factory on a Franka Panda, on Isaac Lab 3.0.'
   - name: robodojo-benchmark/robodojo
     dir: robodojo
     upstream: {benchmark: "RoboDojo", org_name: "RoboDojo Benchmark (MMLab@HKU and partners)", repo: "https://github.com/RoboDojo-Benchmark/RoboDojo", licence: "MIT (LICENSE file); README states a non-commercial research licence"}
@@ -409,6 +409,7 @@ datasets:
 # entries stay exactly as published (published versions are immutable, and `bench` has no deprecation field), so old commands
 # still resolve; hub.json lists these for the hub page.
 deprecated:
+  - {name: isaac-sim/isaaclab-factory, version: "0.4", superseded_by: isaac-sim/isaaclab-factory@0.5, reason: "it runs on Isaac Lab 2.3 with Isaac Sim 5.1, whose RTX renderer crashes on NVIDIA driver 595, so every image came from a MuJoCo schematic; 0.5 runs on Isaac Lab 3.0.0-EA in NVIDIA's kit-less container (Isaac Lab's new task IDs, its (x, y, z, w) quaternions) with OVRTX or Newton images of the real scene, and its reference solutions centre the part above the fixed part before descending"}
   - {name: stanfordvl/behavior-1k, version: "0.3", superseded_by: stanfordvl/behavior-1k@0.4, reason: "its simulator container cannot start: the thin-client runtime has no MuJoCo, which the episode server of Robo Use 0.2.0 required for every backend; 0.4 is exported with the fixed episode server (and MuJoCo in the runtime)"}
   - {name: haosulab/maniskill-gpu, version: "0.3", superseded_by: haosulab/maniskill-gpu@0.4, reason: "its simulator container cannot start: the thin-client runtime has no MuJoCo, which the episode server of Robo Use 0.2.0 required for every backend; 0.4 is exported with the fixed episode server (and MuJoCo in the runtime)"}
   - {name: benchflow/robouse-genesis, version: "0.3", superseded_by: benchflow/robouse-genesis@0.4, reason: "its simulator container cannot start: the thin-client runtime has no MuJoCo, which the episode server of Robo Use 0.2.0 required for every backend; 0.4 is exported with the fixed episode server (and MuJoCo in the runtime)"}
