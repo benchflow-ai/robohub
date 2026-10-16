@@ -1,0 +1,8 @@
+id: lerobot-cpu-user-remote-train
+source: lerobot
+summary: Write a training launch script for a user whose laptop has no GPU, sending the lerobot-train run to a Hugging Face Jobs GPU with a time cap, detached, and pushing the model.
+skill: AGENT_GUIDE.md#6.2 (CPU only) with 4.9 (--job.target)
+scenario: 'AGENT_GUIDE.md 6.2 "CPU only: don''t train here" and 4.9 "No local GPU? Add --job.target=<flavor> (e.g. a10g-small) to run on Hugging Face Jobs" for a CPU-only laptop user who wants ACT trained on a Hub dataset'
+difficulty: easy
+timeout_sec: 1200
+tags: [training-config, act, hf-jobs, decision-rules]

@@ -1,0 +1,10 @@
+id: lerobot-laptop-first-train-script
+source: lerobot
+summary: Write a first-run lerobot-train launch script for a first-time user on an 8 GB laptop GPU, choosing the policy and an epoch-based run length for a small local dataset.
+skill: AGENT_GUIDE.md#6.2 (with 5.6, 7.1, 7.2 and 4.9)
+scenario: 'AGENT_GUIDE.md 6.2 "Decision rules" (< 8 GB VRAM -> act) and 5.6 (first time, laptop -> ACT), 7.1 "start at 5 epochs" and 7.2 steps <-> epochs, with the 4.9 lerobot-train command shape, for a first-time SO-101 user with an RTX 4060 laptop GPU'
+difficulty: easy
+timeout_sec: 1200
+tags: [training-config, act, decision-rules]
+shared:
+  - {from: _shared/lerobot/skills_setup, to: .skills_setup}

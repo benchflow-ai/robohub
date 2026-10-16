@@ -27,14 +27,16 @@ def sh(cmd, cwd, env=None, timeout=900):
 
 
 def reset(w):
-    st = sh("git status --porcelain", w).stdout
-    if st.strip():
+    st = sh("git status --porcelain", w)
+    if st.returncode:
+        raise SystemExit(f"git status failed in {w} (add it to safe.directory?): {st.stderr[:300]}")
+    if st.stdout.strip():
         r = sh("git stash push -u -q && git stash drop -q", w)
         if r.returncode:
             raise SystemExit(f"reset failed: {r.stderr}")
-    left = sh("git status --porcelain", w).stdout
-    if left.strip():
-        raise SystemExit(f"reset left changes: {left[:500]}")
+    left = sh("git status --porcelain", w)
+    if left.returncode or left.stdout.strip():
+        raise SystemExit(f"reset left changes: {left.stdout[:500]} {left.stderr[:300]}")
 
 
 def run_check(task_dir, src_dir, w, mode):

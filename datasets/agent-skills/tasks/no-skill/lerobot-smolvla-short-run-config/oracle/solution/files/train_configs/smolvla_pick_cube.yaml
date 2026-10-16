@@ -1,0 +1,19 @@
+# SmolVLA on the local SO-101 pick-cube recordings: 6 epochs at batch size 8.
+# total_frames = 1447, steps_per_epoch = ceil(1447 / 8) = 181, steps = 6 * 181 = 1086.
+dataset:
+  repo_id: mira/so101_pick_cube
+  root: recordings/so101_pick_cube
+policy:
+  type: smolvla
+  push_to_hub: false
+  # Train the vision encoder: train_expert_only=true would freeze the whole VLM, vision included.
+  freeze_vision_encoder: false
+  train_expert_only: false
+  # The policy preset builds the scheduler from these fields; size them to the run.
+  scheduler_warmup_steps: 54
+  scheduler_decay_steps: 1086
+batch_size: 8
+steps: 1086
+save_freq: 362
+output_dir: outputs/train/smolvla_pick_cube
+job_name: smolvla_pick_cube
