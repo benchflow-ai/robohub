@@ -6750,86 +6750,86 @@
       {
         "name": "koch-cube-in-cup",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "git_commit_id": "01bc0c956e083b9ff5b0fd3a41506699db396e36",
         "path": "datasets/robouse-so101/koch-cube-in-cup",
-        "digest": "sha256:f0cfbc2a66a92e5e10047e992c2aecd9994514e94e1ec835e298330772f6368c"
+        "digest": "sha256:6e7f4107a341604556772f32b9e5fce04b6ac507425a1f8404e82fe279ca7552"
       },
       {
         "name": "koch-stack-two-cubes",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "git_commit_id": "01bc0c956e083b9ff5b0fd3a41506699db396e36",
         "path": "datasets/robouse-so101/koch-stack-two-cubes",
-        "digest": "sha256:7d31c62b92f57d5f01e5f33c6eae3ef4f87e1b6ef8a09716f0e8ae6d550d086c"
+        "digest": "sha256:30fa18ad38141cd6bbd3a816a73f1de42f0f5a2b6a53fd0a3c7a0eee1946a628"
       },
       {
         "name": "so101-bimanual-lift-box",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "git_commit_id": "01bc0c956e083b9ff5b0fd3a41506699db396e36",
         "path": "datasets/robouse-so101/so101-bimanual-lift-box",
-        "digest": "sha256:40366a8e9958ad95b50bc93964c33171f05a005195c869a4da9396045ca407cc"
+        "digest": "sha256:9f0cec49bac0d135424a9b289cb81f809f14b95e951248fbed32cc7b11c1e805"
       },
       {
         "name": "so101-bimanual-ruler-handover",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "git_commit_id": "01bc0c956e083b9ff5b0fd3a41506699db396e36",
         "path": "datasets/robouse-so101/so101-bimanual-ruler-handover",
-        "digest": "sha256:13280a26714f0bf2785cce27f828b4bbe9749c7f39d7d8f2b7093a8c9f6c3628"
+        "digest": "sha256:52bbd347685ada51cfde6e8ad176b8548266c8656591ffdd9564859a863abf4f"
       },
       {
         "name": "so101-block-lift",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "git_commit_id": "01bc0c956e083b9ff5b0fd3a41506699db396e36",
         "path": "datasets/robouse-so101/so101-block-lift",
-        "digest": "sha256:e56141f81ba8eeefecc16da0278f17a7aa787dbc110238eb1bd8cdf485f3f85c"
+        "digest": "sha256:1a530b238a74886b235ecf12be8d315d96e20052fb7a7907c2128f931dccc882"
       },
       {
         "name": "so101-cube-in-cup",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "git_commit_id": "01bc0c956e083b9ff5b0fd3a41506699db396e36",
         "path": "datasets/robouse-so101/so101-cube-in-cup",
-        "digest": "sha256:1531dfc61d165c664c4a12a004299effd2c9d3e422c851006b4910b0c6b989ff"
+        "digest": "sha256:7434e011e3e7ca1094f181fc392c7e2232ffe6a7104e22aebf85909bd361dd0e"
       },
       {
         "name": "so101-open-drawer",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "git_commit_id": "01bc0c956e083b9ff5b0fd3a41506699db396e36",
         "path": "datasets/robouse-so101/so101-open-drawer",
-        "digest": "sha256:6dcac3b878a4be9301e7f33781606eaf33f1ac6ab545cff202ebb61b13dee0cc"
+        "digest": "sha256:e71a01cd792dac6396cbe0e41b0d16428f799ff52a12e226fcf5405f03237eb6"
       },
       {
         "name": "so101-press-buttons-in-order",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "git_commit_id": "01bc0c956e083b9ff5b0fd3a41506699db396e36",
         "path": "datasets/robouse-so101/so101-press-buttons-in-order",
-        "digest": "sha256:7e2e769c0fbeabf13c409a5a280b091e69c8a9263455b782257eb2bec77f292b"
+        "digest": "sha256:5c887e7e0fa61d8d34c3dd70fe6998f1106e505b32577c96e2a7e5129ae4e0bf"
       },
       {
         "name": "so101-push-puck-to-zone",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "git_commit_id": "01bc0c956e083b9ff5b0fd3a41506699db396e36",
         "path": "datasets/robouse-so101/so101-push-puck-to-zone",
-        "digest": "sha256:9da4ccff79ef0cb0c2506eaee34082de8e1c049e3b7fba120885121b456d1c3f"
+        "digest": "sha256:5f0761a2c85821699077ae15410ebd93d203f83947e05ddfeb5d8ad638cdafb2"
       },
       {
         "name": "so101-reach",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "git_commit_id": "01bc0c956e083b9ff5b0fd3a41506699db396e36",
         "path": "datasets/robouse-so101/so101-reach",
-        "digest": "sha256:8bde40d217c0255f53a4bc94daac9f408c5f314a72ba18e4cfea177182c2fcd6"
+        "digest": "sha256:4e4129c74b9473ff5303233a5a753701c9c846bdf8ce4f03e0cccb5157e6ed6f"
       },
       {
         "name": "so101-sort-by-color",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "git_commit_id": "01bc0c956e083b9ff5b0fd3a41506699db396e36",
         "path": "datasets/robouse-so101/so101-sort-by-color",
-        "digest": "sha256:80ea5bd3744b59d628a3479a0da029a82758f82889aff004deefdd2ae7392b0f"
+        "digest": "sha256:cdb3583eee3a0a67df907cfb23441f13f53cc09a5d9b77ad9af38ce7013a3cc9"
       },
       {
         "name": "so101-stack-two-cubes",
         "git_url": "https://github.com/benchflow-ai/robohub.git",
-        "git_commit_id": "6b67b511bb4223ec504d103e5bdf05306a60806e",
+        "git_commit_id": "01bc0c956e083b9ff5b0fd3a41506699db396e36",
         "path": "datasets/robouse-so101/so101-stack-two-cubes",
-        "digest": "sha256:5f67598e1b6e06117be7ddd9f71d64acdec8daeea586ab16a9058f30722ace06"
+        "digest": "sha256:13c48702c4b77d85c384720c2ca4171a7bcb55796e61807726768c0b7cdfbb60"
       }
     ]
   },
