@@ -1,0 +1,11 @@
+id: isaaclab-presets-newton
+source: isaaclab
+summary: Make a PhysX-only manager-based locomotion task selectable between PhysX and Newton MuJoCo-Warp with physics presets.
+skill: skills/user/use-presets (with select-backends)
+scenario: 'use-presets evaluations.md Scenario 2 "Add PhysX And Newton Variants" and select-backends Scenario 2 "Add Presets": a PhysicsCfg(PresetCfg) with default, physx and newton_mjwarp variants, solver values kept inside the variants'
+difficulty: medium
+timeout_sec: 1800
+tags: [presets, newton, physx]
+shared:
+  - {from: _shared/isaaclab/trail_walker, to: source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker}
+protect: [source/isaaclab_assets/isaaclab_assets]
