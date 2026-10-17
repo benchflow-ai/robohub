@@ -21,7 +21,9 @@ from __future__ import annotations
 import json
 import logging
 import os
+import signal
 import socket
+import threading
 import time
 from collections.abc import Callable, Generator
 from pathlib import Path
@@ -106,6 +108,14 @@ class Episode:
         self.probe = PhysicsProbe(self.backend, spec)
         self._trace = open(self.run_dir / "trace.jsonl", "w")  # noqa: SIM115 - open for the whole episode
         self._obs_count = 0
+        # a backend that can draw its images in more than one way says which (GPU track: Isaac Lab's RTX renderer or a
+        # schematic): `robo info`, the trace's first line and result.json record it
+        self.renderer = rh() if (rh := _hook(self.backend, "renderer")) else None
+        if self.renderer:
+            start = {"op": "start", "runner": True}
+            resp = {"ok": True, "result": {"backend": self.backend.name, "seed": self.seed, "renderer": self.renderer}}
+            self._trace.write(json.dumps({"t": 0.0, "steps": 0, "req": start, "resp": resp}) + "\n")
+            self._trace.flush()
         self._record_frame(force=True)
 
     def _save_workspace_images(self) -> None:
@@ -257,6 +267,13 @@ class Episode:
         if halted and not self.finished:
             self.finish("safety_stop", clip(halted, 500), settle=False)
 
+    def idle(self) -> None:
+        """Between requests, and while the episode lingers after its end: a real robot's checks (the backend's
+        `idle_check`); a stop they latch before the end ends the episode."""
+        if check := _hook(self.backend, "idle_check"):
+            check()
+            self._check_halt()
+
     def info(self) -> dict:
         s = self.backend.action_spec
         extra = _hook(self.backend, "info_extra")
@@ -269,6 +286,7 @@ class Episode:
             "steps_used": self.steps,
             "max_steps": self.max_steps,
             "observation_mode": self.obs_mode,
+            **({"renderer": self.renderer} if self.renderer else {}),
             **({"max_repeat": self.max_repeat} if "max_repeat" in self.spec else {}),
             **(extra() if extra else {}),
             **(
@@ -322,12 +340,22 @@ class Episode:
         if not all(np.isfinite(x) for x in action):
             return {"ok": False, "error": "action values must be finite numbers (no nan or inf)"}
         n = 0
+        stop = None
         for _ in range(max(1, min(self.max_repeat, repeat))):
             if not self._budget_left():
                 break
             self._env_step(action)
             n += 1
-        return {"ok": True, "result": {"executed_steps": n, "state": self._state(), "steps_used": self.steps}}
+            if stop := self._motion_stop():
+                break
+        res = {"executed_steps": n, "state": self._state(), "steps_used": self.steps}
+        return {"ok": True, "result": {**res, **(stop or {})}}
+
+    def _motion_stop(self) -> dict | None:
+        """Real robots: what the safety layer did to the last step's motion (a contact), which ends the request's motion
+        and is reported in its result. Simulators have no such hook."""
+        pop = _hook(self.backend, "pop_motion_event")
+        return pop() if pop else None
 
     def move_to(self, pos: Any, grip: Any, max_steps: int, tol: float) -> dict:
         if not self.skills_enabled or "move_to" not in self.backend.skills():
@@ -427,6 +455,10 @@ class Episode:
                 break
             self._env_step(action)
             n += 1
+            if stop := self._motion_stop():
+                gen.close()
+                out = {"stopped": "by the safety layer", **stop}
+                break
         return {
             "ok": True,
             "result": {
@@ -464,13 +496,22 @@ class Episode:
         if getattr(self.backend, "halted", None):
             settle = False
         hold = self._hold()
+        # real robots: from here a contact is a safety stop, and each settle step holds what the safety layer holds now
+        # (after a contact, the hold), never the command from before it
+        live_hold = _hook(self.backend, "begin_settle") if settle else None
+        if live_hold:
+            live_hold()
         for _ in range(SETTLE_STEPS if settle else 0):  # settle; success must still hold afterwards
             try:
-                self.backend.step(hold)
+                self.backend.step(self._hold() if live_hold else hold)
             except Exception:  # noqa: BLE001 - a backend that cannot step further is judged on its current state
                 break
             self._record_frame(force=True)
+        if (halted := getattr(self.backend, "halted", None)) and outcome != "safety_stop":
+            outcome, text = "safety_stop", clip(str(halted), 500)  # a real robot stopped, e.g. during the settle steps
         success, judge_error = self._verdict(outcome, text)
+        if (halted := getattr(self.backend, "halted", None)) and outcome != "safety_stop":
+            outcome, text, success = "safety_stop", clip(str(halted), 500), False  # latched during the verdict, say
         self.finished, self.outcome, self.agent_text = True, outcome, text
         b = self.backend
         summary = _hook(b, "session_summary")
@@ -487,6 +528,7 @@ class Episode:
             "agent_text": text,
             "wall_time_s": round(time.time() - self.t0, 2),
             "embodiment_mode": self.mode,
+            **({"renderer": r} if (r := self._renderer_now()) else {}),
             **({"safety_events": list(events)} if (events := getattr(b, "events", None)) else {}),
             **({"session": summary()} if summary else {}),
             **({"judge_error": judge_error} if judge_error else {}),
@@ -502,6 +544,16 @@ class Episode:
         (self.run_dir / "result.json").write_text(json.dumps(self.result, indent=2))
         self.video.close(keep=keep_video)
         return {"outcome": outcome, "episode": "finished"}
+
+    def _renderer_now(self) -> dict | None:
+        """The backend's renderer record at the end (which renderers drew frames), or the one from the start."""
+        if not self.renderer or (rh := _hook(self.backend, "renderer")) is None:
+            return self.renderer
+        try:
+            return rh() or self.renderer
+        except Exception as e:  # noqa: BLE001 - never costs the verdict
+            log.warning("renderer of %s: %s: %s", self.backend.name, type(e).__name__, e)
+            return self.renderer
 
     def _add_metrics(self) -> None:
         b = self.backend
@@ -523,6 +575,13 @@ class Episode:
             self.finish("agent_exited", "")
         self._trace.close()
         self.backend.close()
+        # real robots: close() decides how the arm is left (parked, or holding); the result records it, and a stop after
+        # a normal end (a park that was stopped, an arm that could not be parked) holds a run-many batch (real/batch.py)
+        if self.result and (summary := _hook(self.backend, "session_summary")):
+            self.result["session"] = summary()
+            if self._result_key:
+                self.result["signature"] = sign_result(self.result, self._result_key)
+            (self.run_dir / "result.json").write_text(json.dumps(self.result, indent=2))
 
 
 def _finite(x: Any) -> bool:
@@ -550,6 +609,9 @@ def serve(
     """Run one episode on a Unix socket until it finishes (plus `linger_s`) or the runner sends `shutdown`. `secrets`:
     the reference solution's token and the key that signs result.json."""
     ep = Episode(spec, run_dir, workspace, secrets=secrets)
+    if ep.mode != "sim" and threading.current_thread() is threading.main_thread():
+        # a real robot: a terminate request ends the episode like Ctrl-C, so close() holds the arm on the way out
+        signal.signal(signal.SIGTERM, _interrupt)
     if os.path.exists(sock_path):
         os.unlink(sock_path)
     srv = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
@@ -562,6 +624,7 @@ def serve(
     stop_after: float | None = None
     try:
         while True:
+            ep.idle()  # real robots: the arm is watched while the agent thinks (at most once a second)
             if time.time() > deadline and not ep.finished:
                 ep.finish("wall_time_exhausted", "")
             if ep.finished and stop_after is None:
@@ -583,9 +646,17 @@ def serve(
                 except Exception as e:  # noqa: BLE001 - a malformed request gets an error reply
                     resp = {"ok": False, "error": clip(f"bad request: {e}", 300)}
                 send_reply(conn, resp)  # a client that went away does not end the episode
+    except KeyboardInterrupt:
+        if on_interrupt := _hook(ep.backend, "on_interrupt"):  # real robots: close() records why it ran
+            on_interrupt()
+        raise
     finally:
         ep.close()
         srv.close()
         if os.path.exists(sock_path):
             os.unlink(sock_path)
     return ep.result
+
+
+def _interrupt(signum: int, frame: Any) -> None:
+    raise KeyboardInterrupt

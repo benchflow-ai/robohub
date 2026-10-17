@@ -1,0 +1,346 @@
+{
+  "repository": "https://github.com/google-deepmind/mujoco_menagerie",
+  "commit": "8161bba264d7fa7c99ca301e91e7fb44737676ad",
+  "license": "Apache-2.0",
+  "note": "MuJoCo Menagerie robots of the so101 suite: every file of each folder, LICENSE included. Not stored in git; `robouse fetch-assets --robot robotstudio_so101 --robot low_cost_robot_arm` downloads them into ~/.cache/robouse/menagerie, and the hub's so101 runtime fetches them at image build, each SHA-256 checked.",
+  "robots": {
+    "robotstudio_so101": {
+      "robot": "The Robot Studio SO-101",
+      "suite": "so101",
+      "license": "Apache-2.0",
+      "license_file": "robotstudio_so101/LICENSE"
+    },
+    "low_cost_robot_arm": {
+      "robot": "Koch v1.1 low-cost robot arm",
+      "suite": "so101",
+      "license": "Apache-2.0",
+      "license_file": "low_cost_robot_arm/LICENSE"
+    }
+  },
+  "files": [
+    {
+      "path": "robotstudio_so101/CHANGELOG.md",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/CHANGELOG.md",
+      "bytes": 143,
+      "sha256": "d9ba6fe2c0d9cd4b536600d354111fd7a3d60c6f0a7bf46eb70f2106af14ec81"
+    },
+    {
+      "path": "robotstudio_so101/LICENSE",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "robotstudio_so101/README.md",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/README.md",
+      "bytes": 1142,
+      "sha256": "e2344e7c14290bed85c7907247aecb8bf6cb4392e3de0d7c45680efe9bb9b5a9"
+    },
+    {
+      "path": "robotstudio_so101/assets/base_motor_holder_so101_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/base_motor_holder_so101_v1.stl",
+      "bytes": 1877084,
+      "sha256": "8cd2f241037ea377af1191fffe0dd9d9006beea6dcc48543660ed41647072424"
+    },
+    {
+      "path": "robotstudio_so101/assets/base_so101_v2.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/base_so101_v2.stl",
+      "bytes": 471584,
+      "sha256": "bb12b7026575e1f70ccc7240051f9d943553bf34e5128537de6cd86fae33924d"
+    },
+    {
+      "path": "robotstudio_so101/assets/motor_holder_so101_base_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/motor_holder_so101_base_v1.stl",
+      "bytes": 1129384,
+      "sha256": "31242ae6fb59d8b15c66617b88ad8e9bded62d57c35d11c0c43a70d2f4caa95b"
+    },
+    {
+      "path": "robotstudio_so101/assets/motor_holder_so101_wrist_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/motor_holder_so101_wrist_v1.stl",
+      "bytes": 1052184,
+      "sha256": "887f92e6013cb64ea3a1ab8675e92da1e0beacfd5e001f972523540545e08011"
+    },
+    {
+      "path": "robotstudio_so101/assets/moving_jaw_so101_gripper_part0_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/moving_jaw_so101_gripper_part0_v1.stl",
+      "bytes": 50684,
+      "sha256": "3a92e115d1934d4c45cff808c4eff2ea10361a137a7f89940033a1f8a821b88c"
+    },
+    {
+      "path": "robotstudio_so101/assets/moving_jaw_so101_gripper_part1_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/moving_jaw_so101_gripper_part1_v1.stl",
+      "bytes": 342684,
+      "sha256": "d10f6c671d26f62988ec95efee9370a0657b5833b3c5f8aad59fd69a87ef2aee"
+    },
+    {
+      "path": "robotstudio_so101/assets/moving_jaw_so101_gripper_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/moving_jaw_so101_gripper_v1.stl",
+      "bytes": 690384,
+      "sha256": "e8a5dc040b98e27453a5b74f9087d1dbca14589cf9a17c4de7868d5ab98413cd"
+    },
+    {
+      "path": "robotstudio_so101/assets/moving_jaw_so101_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/moving_jaw_so101_v1.stl",
+      "bytes": 1413584,
+      "sha256": "785a9dded2f474bc1d869e0d3dae398a3dcd9c0c345640040472210d2861fa9d"
+    },
+    {
+      "path": "robotstudio_so101/assets/rotation_pitch_so101_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/rotation_pitch_so101_v1.stl",
+      "bytes": 883684,
+      "sha256": "9be900cc2a2bf718102841ef82ef8d2873842427648092c8ed2ca1e2ef4ffa34"
+    },
+    {
+      "path": "robotstudio_so101/assets/sts3215_03a_no_horn_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/sts3215_03a_no_horn_v1.stl",
+      "bytes": 865884,
+      "sha256": "75ef3781b752e4065891aea855e34dc161a38a549549cd0970cedd07eae6f887"
+    },
+    {
+      "path": "robotstudio_so101/assets/sts3215_03a_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/sts3215_03a_v1.stl",
+      "bytes": 954084,
+      "sha256": "a37c871fb502483ab96c256baf457d36f2e97afc9205313d9c5ab275ef941cd0"
+    },
+    {
+      "path": "robotstudio_so101/assets/under_arm_so101_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/under_arm_so101_v1.stl",
+      "bytes": 1975884,
+      "sha256": "d01d1f2de365651dcad9d6669e94ff87ff7652b5bb2d10752a66a456a86dbc71"
+    },
+    {
+      "path": "robotstudio_so101/assets/upper_arm_so101_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/upper_arm_so101_v1.stl",
+      "bytes": 1303484,
+      "sha256": "475056e03a17e71919b82fd88ab9a0b898ab50164f2a7943652a6b2941bb2d4f"
+    },
+    {
+      "path": "robotstudio_so101/assets/waveshare_mounting_plate_so101_v2.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/waveshare_mounting_plate_so101_v2.stl",
+      "bytes": 62784,
+      "sha256": "e197e24005a07d01bbc06a8c42311664eaeda415bf859f68fa247884d0f1a6e9"
+    },
+    {
+      "path": "robotstudio_so101/assets/wrist_roll_follower_so101_camera_mount.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/wrist_roll_follower_so101_camera_mount.stl",
+      "bytes": 122884,
+      "sha256": "58c457b33a26d9c9bb337aa351173e7123f84719a93f486541adef6eba57ae21"
+    },
+    {
+      "path": "robotstudio_so101/assets/wrist_roll_follower_so101_gripper_part0_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/wrist_roll_follower_so101_gripper_part0_v1.stl",
+      "bytes": 73784,
+      "sha256": "370eb470a6ab48b08febcaeb5274d2bcc91246692532ce12c795fb82977def72"
+    },
+    {
+      "path": "robotstudio_so101/assets/wrist_roll_follower_so101_gripper_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/wrist_roll_follower_so101_gripper_v1.stl",
+      "bytes": 741684,
+      "sha256": "65f32debcf265420c0160afe004f8befc5df4b3e578fd59ebaa62eade0371224"
+    },
+    {
+      "path": "robotstudio_so101/assets/wrist_roll_follower_so101_v1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/wrist_roll_follower_so101_v1.stl",
+      "bytes": 1439884,
+      "sha256": "4b17b410a12d64ec39554abc3e8054d8a97384b2dc4a8d95a5ecb2a93670f5f4"
+    },
+    {
+      "path": "robotstudio_so101/assets/wrist_roll_pitch_so101_v2.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/assets/wrist_roll_pitch_so101_v2.stl",
+      "bytes": 2699784,
+      "sha256": "6c7ec5525b4d8b9e397a30ab4bb0037156a5d5f38a4adf2c7d943d6c56eda5ae"
+    },
+    {
+      "path": "robotstudio_so101/scene.xml",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/scene.xml",
+      "bytes": 825,
+      "sha256": "d3037f0fd36b61a9b6805b2c79831e7a392276d0f490145d01f718542eee9150"
+    },
+    {
+      "path": "robotstudio_so101/scene_box.xml",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/scene_box.xml",
+      "bytes": 1469,
+      "sha256": "14c3826f23889587e63b88ef9a0e7d72318ffe13078fad8287c56dbdb9ba9ad8"
+    },
+    {
+      "path": "robotstudio_so101/so101.png",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/so101.png",
+      "bytes": 1010575,
+      "sha256": "fca552381f318dab5b1f9a69007e79d905d91c9d1bebbfdf267b78d924a9c46d"
+    },
+    {
+      "path": "robotstudio_so101/so101.xml",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/robotstudio_so101/so101.xml",
+      "bytes": 16670,
+      "sha256": "5ad49f2b45c083baac9ffe5d4d3213a5da7eac8039095bb2df177a697aae8308"
+    },
+    {
+      "path": "low_cost_robot_arm/CHANGELOG.md",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/CHANGELOG.md",
+      "bytes": 151,
+      "sha256": "5da1384a829dd237327c0ca1316428610fa0012d7d1a4df8445f1614b1e8c4a9"
+    },
+    {
+      "path": "low_cost_robot_arm/LICENSE",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "low_cost_robot_arm/README.md",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/README.md",
+      "bytes": 1688,
+      "sha256": "088f63c3c17dec2d74ea75b8254e3cbc50fe951fb3c742bd9627011b4891a6ba"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/base_link.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/base_link.stl",
+      "bytes": 41884,
+      "sha256": "318319a694d56d5e1689165e0be0fe8cdc3a8e6f0e24f49debbe4d3acbf3b9b1"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/base_link_collision.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/base_link_collision.stl",
+      "bytes": 115184,
+      "sha256": "6a2fb1636701a5aedf596ae136c16fab95a32bbed032209a4fc1e2374eb57032"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/base_link_motor.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/base_link_motor.stl",
+      "bytes": 513684,
+      "sha256": "f390555ae4aa13b6689c841b02de45b3ba65cb0c07b1434231c586e8facd55cc"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/elbow_to_wrist.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/elbow_to_wrist.stl",
+      "bytes": 55384,
+      "sha256": "556baf0946adc733fe3d9e34426d15d7113fbe68d179a29740c890e9dc797eff"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/elbow_to_wrist_collision.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/elbow_to_wrist_collision.stl",
+      "bytes": 300884,
+      "sha256": "2393f808423e77fa57ae9fc5c033e6ff88d26eeecff9246c1a9f4a53fbba1613"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/elbow_to_wrist_extension.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/elbow_to_wrist_extension.stl",
+      "bytes": 55684,
+      "sha256": "f0a7a6df9c9615e3851f45473e529cb0bd211a43c2b7d810f06a0a51a25272c4"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/elbow_to_wrist_extension_collision.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/elbow_to_wrist_extension_collision.stl",
+      "bytes": 143284,
+      "sha256": "f427561ef715d4f7191d15b9c353070938839da2f36acf0a809286453ae98a50"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/elbow_to_wrist_extension_motor.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/elbow_to_wrist_extension_motor.stl",
+      "bytes": 703784,
+      "sha256": "d1095089609f2751bfc9f9b2c05dc79df5f18fc0fcb1e7ec531f8544c1c12e1e"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/elbow_to_wrist_motor.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/elbow_to_wrist_motor.stl",
+      "bytes": 517084,
+      "sha256": "90ffe8a2c0f6829d755cfd1cfab533de60d51c02dc4ae6cd150883b35313a8d6"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/gripper_moving_finger.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/gripper_moving_finger.stl",
+      "bytes": 44284,
+      "sha256": "7c8fe847a51a4d21cf3686402d74dc3207a56040bba935171d58721882b500d1"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/gripper_moving_finger_collision_1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/gripper_moving_finger_collision_1.stl",
+      "bytes": 24084,
+      "sha256": "baf3abe91e1ff5438ed01f5758d91a2c2c4f4d3c6207d09355e327f1df7584db"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/gripper_moving_finger_collision_2.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/gripper_moving_finger_collision_2.stl",
+      "bytes": 19384,
+      "sha256": "d4cc7e11a433464bbc106be3c6cef85d3207fb42530e47730270d35d6d19c2f5"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/gripper_static_finger.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/gripper_static_finger.stl",
+      "bytes": 72984,
+      "sha256": "e0dd1cd95f81daa6e390e00cefb67d862794496c7b91f19ad190f88cad6728df"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/gripper_static_finger_collision_1.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/gripper_static_finger_collision_1.stl",
+      "bytes": 1016784,
+      "sha256": "fc588e42b8b527078f0cb20e11b3223a9f801ad67c1f4d017c1a5571d7182c53"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/gripper_static_finger_collision_2.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/gripper_static_finger_collision_2.stl",
+      "bytes": 85184,
+      "sha256": "85ce6c1255bf4d0015ad7be17513b78355a5000b94e305abfed66d5fbfcd67a5"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/gripper_static_finger_motor.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/gripper_static_finger_motor.stl",
+      "bytes": 709484,
+      "sha256": "77397afcc8265c702744daeb9614b3140f717bf6efef29102beb1e7799e86732"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/shoulder_rotation.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/shoulder_rotation.stl",
+      "bytes": 41684,
+      "sha256": "ec57e078e4ce10e458d536029dbdac04178e19fe1d8fd9d5ad6a6b2532ed15d2"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/shoulder_rotation_collision.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/shoulder_rotation_collision.stl",
+      "bytes": 444484,
+      "sha256": "9e8d446babdd1f9cf4300e56287d2f6933464b353dce216e6c6a7f80282afb9a"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/shoulder_rotation_motor.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/shoulder_rotation_motor.stl",
+      "bytes": 688334,
+      "sha256": "01c550ce4c8885e1d220bd3b1c5047ce2bd733bd9dce3e44f6d66a18b9ca92f2"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/shoulder_to_elbow.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/shoulder_to_elbow.stl",
+      "bytes": 69184,
+      "sha256": "3c0fbd8fe25b8f6aa04eab34c069cb782ca44bce8d339654ebe3e69cd18f50d3"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/shoulder_to_elbow_collision.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/shoulder_to_elbow_collision.stl",
+      "bytes": 159584,
+      "sha256": "3f233a1ce5611437975527ece8d8bf11f07ae90a8c398ff8efe78f9cd5b2961d"
+    },
+    {
+      "path": "low_cost_robot_arm/assets/shoulder_to_elbow_motor.stl",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/assets/shoulder_to_elbow_motor.stl",
+      "bytes": 702984,
+      "sha256": "a19788b5f401782a1bf9ffe88e771593009f5e8191aff6ef17f184ee0122453a"
+    },
+    {
+      "path": "low_cost_robot_arm/low_cost_robot_arm.png",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/low_cost_robot_arm.png",
+      "bytes": 723189,
+      "sha256": "b03d3d23894f8a635ce69648caa29993ba5a120244a5a5f0b90ad31786020c09"
+    },
+    {
+      "path": "low_cost_robot_arm/low_cost_robot_arm.xml",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/low_cost_robot_arm.xml",
+      "bytes": 8151,
+      "sha256": "30a8641f3187e3633b0251d71d1589913a5a3bd8464ae29d21ef0398b8cf3649"
+    },
+    {
+      "path": "low_cost_robot_arm/scene.xml",
+      "url": "https://raw.githubusercontent.com/google-deepmind/mujoco_menagerie/8161bba264d7fa7c99ca301e91e7fb44737676ad/low_cost_robot_arm/scene.xml",
+      "bytes": 867,
+      "sha256": "dbf6b9901364e99d4c5b0a71c1ab029355787a3dbc01a9e0f4c2b2a7022c67b9"
+    }
+  ]
+}

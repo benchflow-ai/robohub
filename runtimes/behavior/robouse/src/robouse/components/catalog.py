@@ -271,4 +271,10 @@ SUITES = {
                  capabilities=["pick-and-place"]),
     "stationerybench": dict(embodiments=["real-arm"], scene="upstream-scenes", scenario="tabletop", track="arm",
                             capabilities=["pick-and-place", "long-horizon"]),
+    "rle-bench": dict(embodiments=["franka-panda-upstream"], scene="upstream-scenes", scenario="tabletop", track="arm",
+                      capabilities=["spatial-reasoning", "partial-observability", "perception", "long-horizon"]),
+    "capx": dict(embodiments=["franka-panda-upstream"], scene="upstream-scenes", scenario="tabletop", track="arm",
+                 capabilities=["pick-and-place", "contact-rich", "bimanual-coordination"]),
+    "capx-libero": dict(embodiments=["franka-panda-upstream"], scene="upstream-scenes", scenario="household-kitchen",
+                        track="arm", capabilities=["pick-and-place"]),
 }

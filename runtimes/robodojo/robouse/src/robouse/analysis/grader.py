@@ -8,7 +8,9 @@ Used two ways:
 - `real.verdict: vlm` on a real-robot task: the episode server asks the model at the end of the episode, from the
   final camera frames (for rigs without an operator; the operator verdict stays the default).
 
-Any OpenAI-compatible chat endpoint with image input works; the default is Kimi K3 on Baseten (BASETEN_API_KEY).
+Any OpenAI-compatible chat endpoint whose model reads images works. There is no default: name the model (`--model`, or
+`real.vlm_model`), the endpoint (ROBOUSE_GRADER_URL, a base URL such as https://host/v1) and its key
+(ROBOUSE_GRADER_API_KEY, sent as a bearer token). No other variable and no key file is read.
 """
 
 from __future__ import annotations
@@ -16,8 +18,8 @@ from __future__ import annotations
 import base64
 import io
 import json
-import os
 import re
+import sys
 import time
 import urllib.request
 from pathlib import Path
@@ -26,8 +28,7 @@ import numpy as np
 
 from .. import config
 
-DEFAULT_MODEL = "moonshotai/Kimi-K3"
-DEFAULT_URL = "https://inference.baseten.co/v1"
+SETTINGS = ("ROBOUSE_GRADER_URL", "ROBOUSE_GRADER_API_KEY")
 
 PROMPT = """You are grading one episode of a robot task from camera frames taken during the episode (in time order; the last frame is the final state).
 
@@ -50,18 +51,22 @@ def _png_b64(img: np.ndarray, max_side: int = 512) -> str:
     return base64.b64encode(b.getvalue()).decode()
 
 
-def _key() -> str:
-    from .. import _maintainer
+def endpoint() -> tuple[str, str]:
+    """(chat-completions URL, key) from ROBOUSE_GRADER_URL and ROBOUSE_GRADER_API_KEY. RuntimeError naming what is
+    missing: there is no default endpoint, and no key file is read."""
+    url, key = (config.env(v) for v in SETTINGS)
+    if need := [v for v in SETTINGS if not config.env(v)]:
+        raise RuntimeError(
+            f"the VLM grader needs {' and '.join(need)}: an OpenAI-compatible endpoint whose model reads images, and "
+            "its key (there is no default endpoint)"
+        )
+    return url.rstrip("/") + "/chat/completions", key
 
-    k = config.env("ROBOUSE_GRADER_API_KEY") or os.environ.get("BASETEN_API_KEY") or _maintainer.baseten_key()
-    if not k:
-        raise RuntimeError("no grader key: set BASETEN_API_KEY (or ROBOUSE_GRADER_API_KEY with ROBOUSE_GRADER_URL)")
-    return k
 
-
-def vlm_verdict(
-    frames: list[np.ndarray], task: str, rubric: list[str] | None = None, model: str = DEFAULT_MODEL
-) -> dict:
+def vlm_verdict(frames: list[np.ndarray], task: str, rubric: list[str] | None = None, model: str = "") -> dict:
+    if not model:
+        raise ValueError("the VLM grader needs a model: one that reads images, at ROBOUSE_GRADER_URL")
+    url, key = endpoint()
     rub = (
         ("Rubric (report the highest stage reached):\n" + "\n".join(f"{i}: {d}" for i, d in enumerate(rubric)) + "\n\n")
         if rubric
@@ -72,14 +77,13 @@ def vlm_verdict(
         {"type": "image_url", "image_url": {"url": "data:image/png;base64," + _png_b64(f)}} for f in frames
     ]
     body = {"model": model, "max_tokens": 8000, "messages": [{"role": "user", "content": content}]}
-    url = config.env("ROBOUSE_GRADER_URL", DEFAULT_URL).rstrip("/") + "/chat/completions"
     last = None
     for attempt in range(3):
         try:
             req = urllib.request.Request(
                 url,
                 data=json.dumps(body).encode(),
-                headers={"Content-Type": "application/json", "Authorization": f"Api-Key {_key()}"},
+                headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"},
             )
             with urllib.request.urlopen(req, timeout=300) as r:
                 resp = json.loads(r.read())
@@ -144,7 +148,7 @@ def _task_text(trial: Path) -> tuple[str, list[str] | None]:
     return (m.group(1).strip() if m else body[:1500]), (t.spec.get("real") or {}).get("rubric")
 
 
-def grade_trial(trial: Path, model: str = DEFAULT_MODEL, rubric_file: str | None = None) -> dict:
+def grade_trial(trial: Path, model: str, rubric_file: str | None = None) -> dict:
     task, rubric = _task_text(trial)
     if rubric_file:
         task += "\n\n" + Path(rubric_file).read_text()
@@ -159,6 +163,11 @@ def grade_trial(trial: Path, model: str = DEFAULT_MODEL, rubric_file: str | None
 
 
 def main(trials: list[str], model: str, rubric: str | None) -> int:
+    try:
+        endpoint()
+    except RuntimeError as e:
+        print(f"robouse: {e}", file=sys.stderr)
+        return 2
     paths = []
     for t in trials:
         p = Path(t)

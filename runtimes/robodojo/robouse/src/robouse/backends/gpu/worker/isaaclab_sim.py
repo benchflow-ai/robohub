@@ -1,8 +1,18 @@
 """Isaac Lab Factory tasks for the GPU track (runs on the GPU worker; see server.py).
 
 NVIDIA Isaac Lab 2.3 on Isaac Sim 5.1: the Factory contact-rich assembly environments (Narang et al., "Factory: Fast
-Contact for Robotic Assembly", RSS 2022; Isaac Lab port `isaaclab_tasks.direct.factory`) with PhysX GPU dynamics and
-RTX rendering. One episode = one process = one Isaac Sim app with one environment (num_envs=1).
+Contact for Robotic Assembly", RSS 2022; Isaac Lab port `isaaclab_tasks.direct.factory`) with PhysX GPU dynamics.
+One episode = one process = one Isaac Sim app with one environment (num_envs=1).
+
+Images come from one of two renderers, chosen by ROBOUSE_IL_RTX when the worker starts and reported in `info()` and
+`renderer()` (so in `robo info`, the trace and every episode's result.json):
+  isaac-sim-rtx      Isaac Sim's RTX renderer (ROBOUSE_IL_RTX=1). It needs a driver it supports: it ran on 580 and
+                     crashed at start-up on 595.
+  mujoco-schematic   a MuJoCo (OpenGL) scene of boxes and cylinders sized from Factory's asset configs, with the poses
+                     copied from Isaac Lab every frame (ROBOUSE_IL_RTX=0). The physics and the success check are Isaac
+                     Lab's either way.
+ROBOUSE_IL_RTX=auto (the default) starts one RTX probe (a separate process that opens a Factory environment with
+cameras and renders a frame) when the worker starts, and uses RTX if it gave an image, else the schematic.
 
 The robot (Franka Panda) starts holding the part (peg, gear or nut) a few centimetres from the fixed part, as in
 Factory. Actions are Factory's own: a 6-D end-effector command relative to the current fingertip pose, smoothed by an
@@ -26,8 +36,71 @@ IMG_W, IMG_H = 640, 480
 FRAME_EVERY = 2
 # Isaac Sim 5.1's RTX renderer crashes at start-up on NVIDIA driver 595 (it runs on 580). Without RTX the physics
 # still runs on the GPU, and images come from a MuJoCo (OpenGL, EGL) scene of the Factory parts' shapes whose poses
-# are copied from Isaac Lab every frame. ROBOUSE_IL_RTX=1 uses Isaac Sim's own RTX viewport instead.
-RTX = os.environ.get("ROBOUSE_IL_RTX", "0") == "1"
+# are copied from Isaac Lab every frame. ROBOUSE_IL_RTX=1 uses Isaac Sim's own RTX viewport instead; auto (the
+# default) probes RTX once in prepare(), which sets ROBOUSE_IL_RTX to 1 or 0 for the episode processes.
+RTX_MODES = ("auto", "1", "0")
+RTX = os.environ.get("ROBOUSE_IL_RTX", "auto") == "1"
+RENDERERS = {
+    "isaac-sim-rtx": "Isaac Sim's RTX renderer",
+    "mujoco-schematic": "a MuJoCo schematic of the Factory parts (boxes and cylinders sized from Factory's asset "
+    "configs, poses copied from Isaac Lab every frame); not Isaac Sim's renderer",
+}
+PROBE_TIMEOUT_S = float(os.environ.get("ROBOUSE_IL_RTX_PROBE_TIMEOUT_S", "900"))
+
+
+def prepare() -> None:
+    """Worker start-up (server.py): resolve ROBOUSE_IL_RTX=auto to 1 or 0 with one RTX probe in a child process (a
+    renderer that crashes takes only the probe down). The episode processes inherit the result."""
+    mode = os.environ.get("ROBOUSE_IL_RTX", "auto").strip().lower() or "auto"
+    if mode not in RTX_MODES:
+        raise SystemExit(f"ROBOUSE_IL_RTX must be one of {', '.join(RTX_MODES)}, not {mode!r}")
+    note = {"1": "ROBOUSE_IL_RTX=1", "0": "ROBOUSE_IL_RTX=0"}.get(mode, "")
+    if mode == "auto":
+        import subprocess
+        import sys
+
+        print("isaaclab: probing Isaac Sim's RTX renderer (ROBOUSE_IL_RTX=auto)", flush=True)
+        try:
+            r = subprocess.run(
+                [sys.executable, os.path.abspath(__file__), "--probe-rtx"],
+                capture_output=True,
+                text=True,
+                timeout=PROBE_TIMEOUT_S,
+                env={**os.environ, "ROBOUSE_IL_RTX": "1"},
+            )
+            said = [ln for ln in r.stdout.splitlines() if ln.startswith(("RTX OK", "RTX FAILED"))]
+            ok = bool(said) and said[-1].startswith("RTX OK")
+            tail = (said or r.stderr.strip().splitlines() or r.stdout.strip().splitlines() or [""])[-1]
+            if ok or said:
+                why = tail
+            elif r.returncode < 0:
+                why = f"the probe crashed with signal {-r.returncode} before rendering a frame"
+            else:
+                why = f"exit code {r.returncode}: {tail[:300]}"
+        except subprocess.TimeoutExpired:
+            ok, why = False, f"no image within {PROBE_TIMEOUT_S:.0f} s"
+        mode = "1" if ok else "0"
+        note = f"ROBOUSE_IL_RTX=auto: RTX probe {'passed' if ok else 'failed'} ({why})"
+        print(f"isaaclab: {note}; images from {'isaac-sim-rtx' if ok else 'mujoco-schematic'}", flush=True)
+    os.environ["ROBOUSE_IL_RTX"] = mode
+    os.environ["ROBOUSE_IL_RTX_NOTE"] = note
+    global RTX
+    RTX = mode == "1"
+
+
+def _probe_rtx() -> int:
+    """`python isaaclab_sim.py --probe-rtx`: open the peg-insertion environment with cameras, render one frame and say
+    whether it is an image (not empty, not a single colour)."""
+    t = ILTask("factory-peg-insert", 0, {})
+    for _ in range(4):  # the first RTX frames can be blank while the renderer warms up
+        t._env_step(np.zeros(6))
+    img = t._render("scene")
+    if img is None or img.ndim != 3 or float(np.asarray(img, dtype=float).std()) < 1.0:
+        print("RTX FAILED: the renderer returned an empty or single-colour image", flush=True)
+        return 1
+    print(f"RTX OK: {img.shape[1]}x{img.shape[0]} frame", flush=True)
+    return 0
+
 
 TASKS: dict[str, dict] = {}
 
@@ -79,6 +152,7 @@ class ILTask:
         self.name = self.u.cfg_task.name
         self.frames: list[str] = []
         self._recording = False
+        self.used: set[str] = set()
         self.reset(seed)
 
     # ---- helpers -----------------------------------------------------------------------------------------------------
@@ -109,11 +183,13 @@ class ILTask:
 
     def _render(self, cam: str = "scene") -> np.ndarray:
         if not RTX:
+            self.used.add("mujoco-schematic")
             return self._mj_render(cam)
         self._set_cam(cam)
         img = self.env.render()
         if img is None:
-            img = np.zeros((IMG_H, IMG_W, 3), np.uint8)
+            raise RuntimeError("Isaac Sim's RTX renderer returned no image")
+        self.used.add("isaac-sim-rtx")
         return np.asarray(img)[..., :3]
 
     def _env_step(self, a) -> None:
@@ -196,6 +272,14 @@ class ILTask:
         return self.mjr.render()
 
     # ---- server methods ----------------------------------------------------------------------------------------------
+    def renderer(self) -> dict:
+        """The renderer that draws this episode's images, and those that drew any so far (`used`)."""
+        name = "isaac-sim-rtx" if RTX else "mujoco-schematic"
+        out = {"name": name, "about": RENDERERS[name], "used": sorted(self.used)}
+        if note := os.environ.get("ROBOUSE_IL_RTX_NOTE"):
+            out["why"] = note
+        return out
+
     def info(self) -> dict:
         rz = (
             "RZ in [-1, 1] maps to 0 ... -0.097 rad (clockwise only)" if self.name == "nut_thread" else "RZ x 0.097 rad"
@@ -213,6 +297,7 @@ class ILTask:
             "hold_last": 0.0,
             "max_steps": self.cfg["max_steps"],
             "embodiment": self.embodiment(),
+            "renderer": self.renderer(),
         }
 
     def embodiment(self) -> dict:
@@ -372,3 +457,19 @@ class ILTask:
                 yield ["act", [round(float(x), 4) for x in a]]
         for _ in range(3):
             yield ["skill", "hold", [10]]
+
+
+if __name__ == "__main__":
+    import sys
+
+    if sys.argv[1:] != ["--probe-rtx"]:
+        raise SystemExit("usage: python isaaclab_sim.py --probe-rtx")
+    os.environ["ROBOUSE_IL_RTX"] = "1"
+    RTX = True
+    try:
+        rc = _probe_rtx()
+    except Exception as e:  # reported to prepare() on stdout
+        print(f"RTX FAILED: {type(e).__name__}: {e}"[:400], flush=True)
+        rc = 1
+    sys.stdout.flush()
+    os._exit(rc)  # skip Isaac Sim's slow shutdown: the answer is already printed

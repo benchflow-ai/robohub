@@ -1,0 +1,15 @@
+id: so101-arm
+type: embodiment
+version: 0.1.0
+title: SO-101 follower arm (simulated)
+summary: The Robot Studio's 5-joint SO-101 (MuJoCo Menagerie), alone or as a two-arm rig, with the real so101 profile's skills and units (so101 suite).
+track: arm
+kind: arm
+capabilities:
+- reach
+- grasp
+- top-grasp
+- bimanual
+composable: false
+suites:
+- so101

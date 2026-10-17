@@ -1,0 +1,10 @@
+{
+  "_doc": "USD per 1M tokens, used for cost per run when the harness does not report a cost itself (Claude Code reports total_cost_usd; mini-swe-agent reports instance_cost). Source: baseten.co/pricing (Model APIs), read 2026-09-29. Cached input tokens are billed as input unless cached_input is given. Override with ROBOUSE_PRICING=<file>.",
+  "moonshotai/Kimi-K3": {"input": 3.00, "output": 15.00, "source": "baseten.co/pricing 2026-09-29"},
+  "zai-org/GLM-5.3": {"input": 1.40, "output": 4.40, "source": "baseten.co/pricing 2026-09-29"},
+  "zai-org/GLM-5.3-Fast": {"input": 2.10, "output": 6.60, "source": "baseten.co/pricing 2026-09-29"},
+  "zai-org/GLM-5.3-Flash": {"input": 0.15, "output": 0.50, "source": "baseten.co/pricing 2026-09-29"},
+  "zai-org/GLM-5.2": {"input": 1.40, "output": 4.40, "source": "baseten.co/pricing 2026-09-29"},
+  "deepseek-ai/DeepSeek-V4.1-Flash": {"input": 0.30, "output": 1.20, "source": "baseten.co/pricing 2026-09-29"},
+  "openai/gpt-oss-120b": {"input": 0.10, "output": 0.50, "source": "baseten.co/pricing 2026-09-29"}
+}

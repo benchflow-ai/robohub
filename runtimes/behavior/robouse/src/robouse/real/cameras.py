@@ -1,5 +1,5 @@
-"""Camera sources for real rigs: an OpenCV device index or path, or an MJPEG HTTP stream (e.g. ~/benchflow/robot's
-cam_server.py on another machine). Each camera runs in its own thread and keeps only the newest frame, so a slow camera
+"""Camera sources for real rigs: an OpenCV device index or path, or an MJPEG HTTP stream (e.g. a
+camera server on another machine). Each camera runs in its own thread and keeps only the newest frame, so a slow camera
 never stalls the control loop; `frame()` returns that frame (RGB, resized to the configured size).
 
 Spec strings (task `real.cameras`: {name: spec}): "0" / "1" (OpenCV index), "/dev/video2", "http://host:8000/cam/0.mjpg".

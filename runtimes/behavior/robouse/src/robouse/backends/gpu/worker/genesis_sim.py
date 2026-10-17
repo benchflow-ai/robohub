@@ -190,6 +190,10 @@ class GSTask:
         return np.asarray(rgb)
 
     # ---- server methods --------------------------------------------------------------------------------------------
+    def renderer(self) -> dict:
+        """The renderer that draws this episode's images."""
+        return {"name": "genesis-rasterizer", "about": "Genesis's rasterizer (OpenGL)", "used": ["genesis-rasterizer"]}
+
     def info(self) -> dict:
         return {
             "action": {
@@ -213,6 +217,7 @@ class GSTask:
             "hold_last": 1.0,
             "max_steps": self.cfg["max_steps"],
             "embodiment": self.embodiment(),
+            "renderer": self.renderer(),
         }
 
     def embodiment(self) -> dict:

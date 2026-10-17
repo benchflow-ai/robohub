@@ -27,6 +27,7 @@ import re
 
 import numpy as np
 
+from ... import config
 from ...core.protocol import agent_refused
 from ..embodied import Budget, Embodiment, EmbodiedBackend, Oracle, Sensor, _capped, r3
 from .sim import world as W
@@ -70,7 +71,7 @@ def read_block(spec: dict) -> dict:
         return {"embodiment": rm["embodiment"], "scene": rm["scene"], "task": rm["task"],
                 "versions": {k: str(comps.get(k, "@")).split("@")[-1] for k in ("embodiment", "scene", "task")},
                 "modifiers": dict(rm.get("modifiers") or {}), "seed": int(rm.get("seed", 0)), "instance": rm["instance"]}
-    raise KeyError("a composed task needs an `instance:` block (see docs/task-format.md)")
+    raise KeyError(f"a composed task needs an `instance:` block (see {config.DOCS_URL}task-format/)")
 
 
 class ComposedBackend(EmbodiedBackend):

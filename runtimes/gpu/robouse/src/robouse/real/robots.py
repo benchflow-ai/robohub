@@ -41,7 +41,38 @@ class EnvelopeDefaults:
     windup_gripper: float = 8.0
     temp_warn_c: float = 55.0
     temp_stop_c: float = 65.0
-    watchdog_s: float = 0.5  # a control step slower than this is logged as a loop stall
+    watchdog_s: float = 0.5  # a control step slower than this is a loop stall (logged) ...
+    watchdog_hard_s: float = 2.0  # one control step slower than this stops the episode ...
+    # ... or, on a slow rig, this many control periods when that is longer (10-20 Hz rigs keep 0.5 s and 2 s)
+    watchdog_periods: float = 3.0
+    watchdog_hard_periods: float = 10.0
+    watchdog_max_stalls: int = 3  # this many loop stalls in a row stop the episode
+    telemetry_timeout_s: float = 1.0  # no fresh joint reading for this long stops the episode (dead link, stale cache)
+
+
+@dataclass
+class ContactSettings:
+    """Contact watch (real/contact.py), ported from the 2026-09-05 Metal harness: joint torque against a fresh baseline.
+    Torque in the telemetry's units (N m on the Metal's Damiao motors). No thresholds: no torque watch (the stall check
+    still runs on robots with a kinematic chain)."""
+
+    dtorque: dict[str, float] = field(default_factory=dict)  # per joint: a torque change that counts as contact
+    jump: float = 0.35  # part of the threshold that must appear within one control step (moving, holding)
+    transient_steps: int = 2  # steps skipped after a move starts (the controller's torque jumps with the first step)
+    settle_joints: int = 2  # after a watched descent: a shift on this many joints at once is a contact ...
+    strong: float = 2.5  # ... or on one joint above this many times its threshold (Sep 5: 2.0, see contact.py)
+    watch_height: float = 0.03  # a move is watched where it puts the tool point this close to the table (m)
+    unwatched_factor: float = 5.0  # elsewhere (higher, rising, holding still) thresholds are this many times larger
+    stall_mm: float = 4.0  # watched descent: the tool point this far above where the commanded descent puts it
+    max_contacts: int = 2  # contacts in watched moves before the episode stops (a contact elsewhere stops it at once)
+    torque_key: str = "joint_torque_nm"  # telemetry field with one torque per joint
+    # parks (contact.ParkWatch): an arm joint lagging its command by more than park_lag_deg stops the park (0: not
+    # calibrated: the robot does not park on its own, and a park the operator approves stops at a lag of 0.9 of the
+    # wind-up limit); parks move at most park_speed_deg_s (0: the slow joint speed), the speed the lag was calibrated
+    # at; the torque rules run at park_torque_factor times the thresholds
+    park_lag_deg: float = 0.0
+    park_speed_deg_s: float = 0.0
+    park_torque_factor: float = 4.0
 
 
 @dataclass
@@ -64,6 +95,7 @@ class Profile:
     points: dict[str, tuple[str, list[float]]] = field(default_factory=dict)
     ik_seeds: list[list[float]] = field(default_factory=list)
     envelope: EnvelopeDefaults = field(default_factory=EnvelopeDefaults)
+    contact: ContactSettings = field(default_factory=ContactSettings)
     notes: str = ""
     tested_on_hardware: bool = False
 
@@ -91,22 +123,25 @@ class Profile:
         return Chain(load_chain_file(self.chain_file), self.joint_map, self.tool, self.points)
 
 
-# MakerMods Metal: vendor soft limits (LeRobot MetalFollowerConfigBase.joint_limits) shaved by 1 deg; gripper capped at
-# 115 deg (widest documented jaw opening), 0 = closed. Tool point: 0.122 m along Link6's x axis (fingertip measured on
-# the bench on 2026-09-05; table at z = -0.0088 m in the base frame from the stall touchdown calibration).
+# MakerMods Metal: vendor soft limits (LeRobot MetalFollowerConfigBase.joint_limits) shaved by 1 deg, and kept at least
+# 2.2 deg inside the mechanical stops measured on the bench on 2026-09-05 (recorded sessions): elbow_flex
+# 174 (the forearm stopped at 176.37 against its stop while commanded to 180, 13:16 session), shoulder_lift -2.5 (with
+# torque off the parked arm reads up to +0.09) and gripper 2 (the closed jaws read -0.25). Gripper capped at 115 deg
+# (the vendor stroke table's widest jaw opening), 0 = closed. Tool point: 0.122 m along Link6's x axis (fingertip
+# measured on the bench; table at z = -0.0088 m in the base frame from the stall touchdown calibration).
 METAL = Profile(
     name="metal",
     display="MakerMods Metal arm",
     joints=["shoulder_pan", "shoulder_lift", "elbow_flex", "wrist_flex", "wrist_yaw", "wrist_roll", "gripper"],
-    low=[-159.0, -179.0, 1.0, -122.0, -84.0, -144.0, 0.0],
-    high=[159.0, -1.0, 179.0, 80.0, 84.0, 144.0, 115.0],
+    low=[-159.0, -179.0, 1.0, -122.0, -84.0, -144.0, 2.0],
+    high=[159.0, -2.5, 174.0, 80.0, 84.0, 144.0, 115.0],
     units=["deg"] * 7,
     gripper=6,
     gripper_open=60.0,
     gripper_closed=4.0,
     control_hz=10.0,
     home=[0.0, -110.0, 84.0, -60.0, 0.0, 0.0, 4.0],
-    park=[0.0, -1.0, 1.0, 0.0, 0.0, 0.0, 4.0],
+    park=[0.0, -2.5, 1.0, 0.0, 0.0, 0.0, 4.0],
     chain_file="metal_chain.json",
     joint_map={i: (f"joint{i + 1}", D2R, 0.0) for i in range(6)},
     tool=("link6", [0.122, 0.0, 0.0]),
@@ -124,6 +159,24 @@ METAL = Profile(
         [-40.0, -133.0, 89.0, -48.0, 0.0, 0.0],
     ],
     envelope=EnvelopeDefaults(table_z=-0.0088),
+    # the 2026-09-05 harness's contact thresholds (robot/safety.py: contact_dtorque, contact_jump 0.35). Parks: on the
+    # 2026-09-05 recordings, no arm joint lagged its command by more than 2.55 deg at 6 deg/s or slower, or holding
+    # (wrist_yaw in 12:22:04; shoulder_lift 1.97, elbow_flex 1.36), so 3.3, halfway to the 4 deg wind-up limit a blocked
+    # joint's lag climbs to (on the mock, a joint held back stops the park by lag). Replayed as parks with the recorded
+    # joints and torques, the park watch stops none of 56 park-length stretches of normal motion (the recorded targets
+    # as commands) and, with the commands robouse sends, catches both verified contacts: the 12:17 table touchdown by
+    # the stall check, the 13:16 elbow stop only by torque at 4x (+3.53 N m against 3.2). Lag does not catch 13:16: its
+    # 3.63 deg lag was against the 180 deg the harness sent that day; robouse caps the elbow at 174, so the lag peaks at
+    # 2.36, and an arm following the capped command would not reach the 176.37 stop at all. The 4x was picked on the
+    # same 56 stretches it is scored on: 3x stops 2 of them (the elbow's torque building up as a slow move starts), the
+    # first stop comes just under 3.925x, so 4x is 1.9% above it, and picked with the session under test left out, 1 of
+    # the 56 stops (a lift in 12:22:04, at the 3.75x picked without that session). A false stop only holds the arm: it
+    # costs availability, not safety.
+    contact=ContactSettings(
+        dtorque={"shoulder_lift": 1.5, "elbow_flex": 0.8, "wrist_flex": 0.5},
+        park_lag_deg=3.3,
+        park_speed_deg_s=6.0,
+    ),
     notes=(
         "Joint zero is the vendor's parked pose: upper arm horizontal pointing backward, forearm folded over it. "
         "shoulder_lift 0 = horizontal backward, -90 = vertical, -180 = horizontal forward; elbow_flex 0 = folded, "
@@ -133,20 +186,26 @@ METAL = Profile(
 )
 
 # SO-101 follower. LeRobot DEGREES mode puts 0 at the middle of each calibrated range; the so101_new_calib URDF uses
-# the same zero. Gripper in LeRobot's RANGE_0_100 (0 = closed). Limits: URDF limits shaved by 2 deg.
+# the same zero. Gripper in LeRobot's RANGE_0_100 (0 = closed). Limits: URDF limits shaved by 2 deg; checked against the
+# ranges of motion recorded by calibrating this bench's two followers on 2026-09-05 (lerobot calibration files
+# so_follower/benchmark_left|right: the stops sit at +-121 pan, +-106 shoulder_lift, +-97.3 elbow_flex, +-104
+# wrist_flex, +-169 wrist_roll), so every arm joint stays at least 2.5 deg inside them. The gripper's 0 and 100 are the
+# calibrated stops themselves: 2 and 98 keep it about 2.7 deg inside.
 SO101 = Profile(
     name="so101",
     display="SO-101 follower arm",
     joints=["shoulder_pan", "shoulder_lift", "elbow_flex", "wrist_flex", "wrist_roll", "gripper"],
-    low=[-108.0, -98.0, -94.8, -93.0, -155.2, 0.0],
-    high=[108.0, 98.0, 94.8, 93.0, 160.8, 100.0],
+    low=[-108.0, -98.0, -94.8, -93.0, -155.2, 2.0],
+    high=[108.0, 98.0, 94.8, 93.0, 160.8, 98.0],
     units=["deg"] * 5 + ["0-100"],
     gripper=5,
     gripper_open=60.0,
     gripper_closed=2.0,
     control_hz=10.0,
     home=[0.0, -60.0, 60.0, 60.0, 0.0, 2.0],
-    park=[0.0, -98.0, 94.0, 70.0, 0.0, 2.0],
+    # folded, the fingertips 23 mm above the table by the URDF's kinematics (elbow_flex 94 put them 5 mm below it,
+    # outside the workspace, so every park there was refused)
+    park=[0.0, -98.0, 86.0, 70.0, 0.0, 2.0],
     chain_file="so101_chain.json",
     joint_map={
         0: ("shoulder_pan", D2R, 0.0),
@@ -200,7 +259,11 @@ PIPER = Profile(
     envelope=EnvelopeDefaults(
         joint_speed_deg_s=20.0, slow_joint_speed_deg_s=8.0, windup_deg=6.0, windup_gripper=10.0, gripper_speed=40.0
     ),
-    notes="Piper joint limits from the user manual. No kinematic chain yet: only joint limits and speed limits are enforced.",
+    notes=(
+        "Piper joint limits from the user manual. No kinematic chain yet: only joint limits and speed limits are "
+        "enforced. No contact watch: the Piper driver reads no joint torque, and without a kinematic chain there is no "
+        "stall check, so nothing detects the arm pushing against an object."
+    ),
     tested_on_hardware=False,
 )
 
@@ -223,9 +286,22 @@ def _bimanual(p: Profile, name: str, display: str) -> Profile:
         home=p.home * 2,
         park=p.park * 2,
         envelope=p.envelope,
+        contact=ContactSettings(
+            **{
+                **p.contact.__dict__,
+                "dtorque": {f"{side}_{j}": v for side in ("left", "right") for j, v in p.contact.dtorque.items()},
+            }
+        ),
         notes=(
             f"Two {p.display}s facing the bench from its far edge, left and right as the operator sees them. "
-            "Each arm: " + p.notes
+            "Each arm: "
+            + p.notes
+            + (
+                ""
+                if p.contact.dtorque
+                else " No contact watch on this rig: there is no kinematic chain across both arms for the stall check, "
+                "and the driver reads no joint torque, so nothing detects an arm pushing against an object."
+            )
         ),
         tested_on_hardware=False,
     )

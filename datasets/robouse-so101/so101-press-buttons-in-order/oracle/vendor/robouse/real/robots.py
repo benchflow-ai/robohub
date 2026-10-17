@@ -1,0 +1,404 @@
+"""Real-arm profiles: joints, limits, kinematics, default safety envelope and poses, one per supported robot.
+
+metal   MakerMods Metal (6 Damiao joints + gripper, CAN, LeRobot `metal_follower` from makermods-robotics/lerobot branch
+        arm/makermods-metal). Degrees, absolute. Kinematics: vendor canonical URDF (makermods-robotics/metal-python-ros
+        @ ef4181f), identity joint mapping, checked against 842 recorded hardware poses (Link6 within 0.12 mm).
+so101   SO-101 follower (6 Feetech STS3215, LeRobot `so_follower`; SO-100 uses the same profile with its own
+        calibration). Degrees (LeRobot DEGREES mode); gripper 0-100 (LeRobot RANGE_0_100). Kinematics:
+        TheRobotStudio/SO-ARM100 so101_new_calib.urdf (Apache-2.0), which matches LeRobot's calibration convention.
+piper   AgileX Piper (6 joints + parallel gripper, CAN, `piper_sdk`). Degrees; gripper opening in mm (0-70).
+        Joint limits from the Piper user manual; no kinematic chain shipped yet, so the workspace check uses joint
+        limits only. UNTESTED on hardware.
+"""
+
+from __future__ import annotations
+
+import math
+from dataclasses import dataclass, field
+
+from .kinematics import Chain, load_chain_file
+
+D2R = math.pi / 180
+
+
+@dataclass
+class EnvelopeDefaults:
+    """Workspace envelope in the robot base frame (metres): table floor, box, keep-out behind the base, slow zone."""
+
+    table_z: float = 0.0  # table surface height in the base frame
+    tool_clearance: float = 0.004  # the tool point may come this close to the table
+    body_min_z: float = 0.05  # other monitored points stay this far above the table
+    x_min: float = 0.05
+    x_max: float = 0.62
+    y_abs_max: float = 0.35
+    z_max: float = 0.55
+    behind_min_z: float = 0.09  # any monitored point with x < x_min must stay at least this high
+    slow_zone: float = 0.076  # within this height above the table, speeds drop to the slow values
+    joint_speed_deg_s: float = 15.0
+    slow_joint_speed_deg_s: float = 6.0
+    gripper_speed: float = 90.0  # gripper units per second
+    windup_deg: float = 4.0  # a joint command may lead the measured position by at most this (bounds torque)
+    windup_gripper: float = 8.0
+    temp_warn_c: float = 55.0
+    temp_stop_c: float = 65.0
+    watchdog_s: float = 0.5  # a control step slower than this is a loop stall (logged) ...
+    watchdog_hard_s: float = 2.0  # one control step slower than this stops the episode ...
+    # ... or, on a slow rig, this many control periods when that is longer (10-20 Hz rigs keep 0.5 s and 2 s)
+    watchdog_periods: float = 3.0
+    watchdog_hard_periods: float = 10.0
+    watchdog_max_stalls: int = 3  # this many loop stalls in a row stop the episode
+    telemetry_timeout_s: float = 1.0  # no fresh joint reading for this long stops the episode (dead link, stale cache)
+
+
+@dataclass
+class ContactSettings:
+    """Contact watch (real/contact.py), ported from the 2026-09-05 Metal harness: joint torque against a fresh baseline.
+    Torque in the telemetry's units (N m on the Metal's Damiao motors). No thresholds: no torque watch (the stall check
+    still runs on robots with a kinematic chain)."""
+
+    dtorque: dict[str, float] = field(default_factory=dict)  # per joint: a torque change that counts as contact
+    jump: float = 0.35  # part of the threshold that must appear within one control step (moving, holding)
+    transient_steps: int = 2  # steps skipped after a move starts (the controller's torque jumps with the first step)
+    settle_joints: int = 2  # after a watched descent: a shift on this many joints at once is a contact ...
+    strong: float = 2.5  # ... or on one joint above this many times its threshold (Sep 5: 2.0, see contact.py)
+    watch_height: float = 0.03  # a move is watched where it puts the tool point this close to the table (m)
+    unwatched_factor: float = 5.0  # elsewhere (higher, rising, holding still) thresholds are this many times larger
+    stall_mm: float = 4.0  # watched descent: the tool point this far above where the commanded descent puts it
+    max_contacts: int = 2  # contacts in watched moves before the episode stops (a contact elsewhere stops it at once)
+    torque_key: str = "joint_torque_nm"  # telemetry field with one torque per joint
+    # parks (contact.ParkWatch): an arm joint lagging its command by more than park_lag_deg stops the park (0: not
+    # calibrated: the robot does not park on its own, and a park the operator approves stops at a lag of 0.9 of the
+    # wind-up limit); parks move at most park_speed_deg_s (0: the slow joint speed), the speed the lag was calibrated
+    # at; the torque rules run at park_torque_factor times the thresholds
+    park_lag_deg: float = 0.0
+    park_speed_deg_s: float = 0.0
+    park_torque_factor: float = 4.0
+
+
+@dataclass
+class Profile:
+    name: str
+    display: str
+    joints: list[str]
+    low: list[float]
+    high: list[float]
+    units: list[str]
+    gripper: int | list[int] | None  # index of the gripper in the joint vector (a list for bimanual rigs)
+    gripper_open: float = 0.0  # value that opens the gripper fully
+    gripper_closed: float = 0.0
+    control_hz: float = 10.0
+    home: list[float] = field(default_factory=list)  # a safe pose above the table (reach-ready)
+    park: list[float] = field(default_factory=list)  # rest pose
+    chain_file: str | None = None
+    joint_map: dict[int, tuple[str, float, float]] = field(default_factory=dict)
+    tool: tuple[str, list[float]] = ("", [0.0, 0.0, 0.0])
+    points: dict[str, tuple[str, list[float]]] = field(default_factory=dict)
+    ik_seeds: list[list[float]] = field(default_factory=list)
+    envelope: EnvelopeDefaults = field(default_factory=EnvelopeDefaults)
+    contact: ContactSettings = field(default_factory=ContactSettings)
+    notes: str = ""
+    tested_on_hardware: bool = False
+    chain_data: dict | None = None  # a chain parsed from a rig's URDF (profile_from_config), instead of chain_file
+
+    @property
+    def gidx(self) -> list[int]:
+        """Indices of every gripper joint."""
+        if self.gripper is None:
+            return []
+        return list(self.gripper) if isinstance(self.gripper, (list, tuple)) else [int(self.gripper)]
+
+    @property
+    def arm_idx(self) -> list[int]:
+        """Indices of the non-gripper joints."""
+        return [i for i in range(len(self.joints)) if i not in self.gidx]
+
+    @property
+    def arms(self) -> list[str]:
+        """Arm prefixes for bimanual rigs ("left_", "right_"), or [""] for one arm."""
+        pre = sorted({n.split("_", 1)[0] + "_" for n in self.joints if n.startswith(("left_", "right_"))})
+        return pre or [""]
+
+    def chain(self) -> Chain | None:
+        if self.chain_data is not None:
+            return Chain(self.chain_data, self.joint_map, self.tool, self.points)
+        if not self.chain_file:
+            return None
+        return Chain(load_chain_file(self.chain_file), self.joint_map, self.tool, self.points)
+
+
+# MakerMods Metal: vendor soft limits (LeRobot MetalFollowerConfigBase.joint_limits) shaved by 1 deg, and kept at least
+# 2.2 deg inside the mechanical stops measured on the bench on 2026-09-05 (recorded sessions): elbow_flex
+# 174 (the forearm stopped at 176.37 against its stop while commanded to 180, 13:16 session), shoulder_lift -2.5 (with
+# torque off the parked arm reads up to +0.09) and gripper 2 (the closed jaws read -0.25). Gripper capped at 115 deg
+# (the vendor stroke table's widest jaw opening), 0 = closed. Tool point: 0.122 m along Link6's x axis (fingertip
+# measured on the bench; table at z = -0.0088 m in the base frame from the stall touchdown calibration).
+METAL = Profile(
+    name="metal",
+    display="MakerMods Metal arm",
+    joints=["shoulder_pan", "shoulder_lift", "elbow_flex", "wrist_flex", "wrist_yaw", "wrist_roll", "gripper"],
+    low=[-159.0, -179.0, 1.0, -122.0, -84.0, -144.0, 2.0],
+    high=[159.0, -2.5, 174.0, 80.0, 84.0, 144.0, 115.0],
+    units=["deg"] * 7,
+    gripper=6,
+    gripper_open=60.0,
+    gripper_closed=4.0,
+    control_hz=10.0,
+    home=[0.0, -110.0, 84.0, -60.0, 0.0, 0.0, 4.0],
+    park=[0.0, -2.5, 1.0, 0.0, 0.0, 0.0, 4.0],
+    chain_file="metal_chain.json",
+    joint_map={i: (f"joint{i + 1}", D2R, 0.0) for i in range(6)},
+    tool=("link6", [0.122, 0.0, 0.0]),
+    points={
+        "elbow": ("link3", [0.0, 0.0, 0.0]),
+        "wrist": ("link4", [0.0, 0.0, 0.0]),
+        "link6": ("link6", [0.0, 0.0, 0.0]),
+        "grip_mid": ("link6", [0.06, 0.0, 0.0]),
+    },
+    ik_seeds=[
+        [0.0, -120.0, 40.0, 70.0, 0.0, 0.0],
+        [0.0, -130.0, 60.0, 50.0, 0.0, 0.0],
+        [0.0, -100.0, 90.0, 20.0, 0.0, 0.0],
+        [0.0, -150.0, 90.0, 60.0, 0.0, 0.0],
+        [-40.0, -133.0, 89.0, -48.0, 0.0, 0.0],
+    ],
+    envelope=EnvelopeDefaults(table_z=-0.0088),
+    # the 2026-09-05 harness's contact thresholds (robot/safety.py: contact_dtorque, contact_jump 0.35). Parks: on the
+    # 2026-09-05 recordings, no arm joint lagged its command by more than 2.55 deg at 6 deg/s or slower, or holding
+    # (wrist_yaw in 12:22:04; shoulder_lift 1.97, elbow_flex 1.36), so 3.3, halfway to the 4 deg wind-up limit a blocked
+    # joint's lag climbs to (on the mock, a joint held back stops the park by lag). Replayed as parks with the recorded
+    # joints and torques, the park watch stops none of 56 park-length stretches of normal motion (the recorded targets
+    # as commands) and, with the commands robouse sends, catches both verified contacts: the 12:17 table touchdown by
+    # the stall check, the 13:16 elbow stop only by torque at 4x (+3.53 N m against 3.2). Lag does not catch 13:16: its
+    # 3.63 deg lag was against the 180 deg the harness sent that day; robouse caps the elbow at 174, so the lag peaks at
+    # 2.36, and an arm following the capped command would not reach the 176.37 stop at all. The 4x was picked on the
+    # same 56 stretches it is scored on: 3x stops 2 of them (the elbow's torque building up as a slow move starts), the
+    # first stop comes just under 3.925x, so 4x is 1.9% above it, and picked with the session under test left out, 1 of
+    # the 56 stops (a lift in 12:22:04, at the 3.75x picked without that session). A false stop only holds the arm: it
+    # costs availability, not safety.
+    contact=ContactSettings(
+        dtorque={"shoulder_lift": 1.5, "elbow_flex": 0.8, "wrist_flex": 0.5},
+        park_lag_deg=3.3,
+        park_speed_deg_s=6.0,
+    ),
+    notes=(
+        "Joint zero is the vendor's parked pose: upper arm horizontal pointing backward, forearm folded over it. "
+        "shoulder_lift 0 = horizontal backward, -90 = vertical, -180 = horizontal forward; elbow_flex 0 = folded, "
+        "180 = straight. Gripper 0 = closed. Base frame: +x forward, +y left, +z up, metres."
+    ),
+    tested_on_hardware=True,
+)
+
+# SO-101 follower. LeRobot DEGREES mode puts 0 at the middle of each calibrated range; the so101_new_calib URDF uses
+# the same zero. Gripper in LeRobot's RANGE_0_100 (0 = closed). Limits: URDF limits shaved by 2 deg; checked against the
+# ranges of motion recorded by calibrating this bench's two followers on 2026-09-05 (lerobot calibration files
+# so_follower/benchmark_left|right: the stops sit at +-121 pan, +-106 shoulder_lift, +-97.3 elbow_flex, +-104
+# wrist_flex, +-169 wrist_roll), so every arm joint stays at least 2.5 deg inside them. The gripper's 0 and 100 are the
+# calibrated stops themselves: 2 and 98 keep it about 2.7 deg inside.
+SO101 = Profile(
+    name="so101",
+    display="SO-101 follower arm",
+    joints=["shoulder_pan", "shoulder_lift", "elbow_flex", "wrist_flex", "wrist_roll", "gripper"],
+    low=[-108.0, -98.0, -94.8, -93.0, -155.2, 2.0],
+    high=[108.0, 98.0, 94.8, 93.0, 160.8, 98.0],
+    units=["deg"] * 5 + ["0-100"],
+    gripper=5,
+    gripper_open=60.0,
+    gripper_closed=2.0,
+    control_hz=10.0,
+    home=[0.0, -60.0, 60.0, 60.0, 0.0, 2.0],
+    # folded, the fingertips 23 mm above the table by the URDF's kinematics (elbow_flex 94 put them 5 mm below it,
+    # outside the workspace, so every park there was refused)
+    park=[0.0, -98.0, 86.0, 70.0, 0.0, 2.0],
+    chain_file="so101_chain.json",
+    joint_map={
+        0: ("shoulder_pan", D2R, 0.0),
+        1: ("shoulder_lift", D2R, 0.0),
+        2: ("elbow_flex", D2R, 0.0),
+        3: ("wrist_flex", D2R, 0.0),
+        4: ("wrist_roll", D2R, 0.0),
+    },
+    tool=("gripper_frame_link", [0.0, 0.0, 0.0]),
+    points={"elbow": ("lower_arm_link", [0.0, 0.0, 0.0]), "wrist": ("wrist_link", [0.0, 0.0, 0.0])},
+    ik_seeds=[[0.0, -30.0, 30.0, 70.0, 0.0], [0.0, 0.0, 40.0, 50.0, 0.0], [0.0, 20.0, 0.0, 70.0, 0.0]],
+    envelope=EnvelopeDefaults(
+        table_z=0.0,
+        x_min=0.08,
+        x_max=0.40,
+        y_abs_max=0.30,
+        z_max=0.40,
+        body_min_z=0.03,
+        behind_min_z=0.08,
+        slow_zone=0.04,
+        joint_speed_deg_s=30.0,
+        slow_joint_speed_deg_s=10.0,
+        gripper_speed=60.0,
+        windup_deg=10.0,
+        windup_gripper=15.0,
+        temp_warn_c=50.0,
+        temp_stop_c=60.0,
+    ),
+    notes=(
+        "LeRobot calibration: 0 deg at the middle of each joint's calibrated range. Base frame (URDF base_link): "
+        "+z up, metres. Gripper 0 = closed, 100 = fully open. Forward kinematics come from the vendor URDF and have "
+        "not been re-measured on this bench."
+    ),
+    tested_on_hardware=False,
+)
+
+# AgileX Piper: joint limits from the Piper user manual (deg); gripper opening 0-70 mm.
+PIPER = Profile(
+    name="piper",
+    display="AgileX Piper arm",
+    joints=["joint1", "joint2", "joint3", "joint4", "joint5", "joint6", "gripper"],
+    low=[-150.0, 0.0, -170.0, -100.0, -70.0, -120.0, 0.0],
+    high=[150.0, 180.0, 0.0, 100.0, 70.0, 120.0, 70.0],
+    units=["deg"] * 6 + ["mm"],
+    gripper=6,
+    gripper_open=60.0,
+    gripper_closed=0.0,
+    control_hz=20.0,
+    home=[0.0, 30.0, -60.0, 0.0, 30.0, 0.0, 0.0],
+    park=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+    envelope=EnvelopeDefaults(
+        joint_speed_deg_s=20.0, slow_joint_speed_deg_s=8.0, windup_deg=6.0, windup_gripper=10.0, gripper_speed=40.0
+    ),
+    notes=(
+        "Piper joint limits from the user manual. No kinematic chain yet: only joint limits and speed limits are "
+        "enforced. No contact watch: the Piper driver reads no joint torque, and without a kinematic chain there is no "
+        "stall check, so nothing detects the arm pushing against an object."
+    ),
+    tested_on_hardware=False,
+)
+
+
+def _bimanual(p: Profile, name: str, display: str) -> Profile:
+    """Two copies of a single-arm profile as one rig (LeRobot's bi_* followers): left_* then right_* joints. No
+    kinematic chain across both arms yet, so the workspace check is joint limits + speed only."""
+    n = len(p.joints)
+    return Profile(
+        name=name,
+        display=display,
+        joints=[f"left_{j}" for j in p.joints] + [f"right_{j}" for j in p.joints],
+        low=p.low * 2,
+        high=p.high * 2,
+        units=p.units * 2,
+        gripper=[p.gripper, p.gripper + n],
+        gripper_open=p.gripper_open,
+        gripper_closed=p.gripper_closed,
+        control_hz=p.control_hz,
+        home=p.home * 2,
+        park=p.park * 2,
+        envelope=p.envelope,
+        contact=ContactSettings(
+            **{
+                **p.contact.__dict__,
+                "dtorque": {f"{side}_{j}": v for side in ("left", "right") for j, v in p.contact.dtorque.items()},
+            }
+        ),
+        notes=(
+            f"Two {p.display}s facing the bench from its far edge, left and right as the operator sees them. "
+            "Each arm: "
+            + p.notes
+            + (
+                ""
+                if p.contact.dtorque
+                else " No contact watch on this rig: there is no kinematic chain across both arms for the stall check, "
+                "and the driver reads no joint torque, so nothing detects an arm pushing against an object."
+            )
+        ),
+        tested_on_hardware=False,
+    )
+
+
+SO101_BI = _bimanual(SO101, "so101-bimanual", "bimanual SO-101 follower arms")
+
+PROFILES = {p.name: p for p in (METAL, SO101, PIPER, SO101_BI)}
+PROFILES["so100"] = SO101
+
+
+def profile(name: str) -> Profile:
+    try:
+        return PROFILES[name]
+    except KeyError:
+        raise KeyError(f"unknown robot {name!r}; known: {sorted(PROFILES)}") from None
+
+
+def profile_from_config(cfg: dict) -> Profile:
+    """The safety profile for a task's `real:` block merged with the rig entry: `profile:` names a built-in profile
+    (default: `robot`), or is a full profile for an arm Robo Use has none for (any LeRobot robot through the
+    lerobot-robot driver):
+
+        profile:
+          base: so101              # optional: start from a built-in profile and override fields
+          name: myarm
+          joints: [j1, j2, j3, j4, j5, gripper]
+          low: [...]               # joint limits in the robot's units (inside its stops)
+          high: [...]
+          units: [deg, deg, deg, deg, deg, 0-100]
+          gripper: 5               # index of the gripper (null: none)
+          gripper_open: 60
+          gripper_closed: 2
+          home: [...]              # a safe pose above the table; park: the rest pose
+          park: [...]
+          control_hz: 10
+          urdf: ~/arms/myarm.urdf  # kinematic chain for the workspace veto (joints of the same names, degrees)
+          tool: [tool_link, [0, 0, 0]]
+          points: {elbow: [forearm_link, [0, 0, 0]], wrist: [wrist_link, [0, 0, 0]]}
+          envelope: {x_max: 0.4, joint_speed_deg_s: 20, ...}
+          contact: {stall_mm: 4}
+
+    Every profile is a copy: a rig's values never change the built-in profiles."""
+    import copy
+    from pathlib import Path
+
+    spec = cfg.get("profile")
+    if spec is None or isinstance(spec, str):
+        return copy.deepcopy(profile(spec or cfg.get("robot", "metal")))
+    d = dict(spec)
+    base = copy.deepcopy(profile(d.pop("base"))) if d.get("base") else None
+    urdf = d.pop("urdf", None)
+    env = d.pop("envelope", None) or {}
+    contact = d.pop("contact", None) or {}
+    for k in ("tool",):
+        if k in d:
+            d[k] = (str(d[k][0]), [float(v) for v in d[k][1]])
+    if "points" in d:
+        d["points"] = {n: (str(v[0]), [float(x) for x in v[1]]) for n, v in d["points"].items()}
+    if base is not None:
+        prof = base
+        for k, v in d.items():
+            if not hasattr(prof, k):
+                raise KeyError(f"profile has no field {k!r}")
+            setattr(prof, k, v)
+    else:
+        missing = [k for k in ("name", "joints", "low", "high", "units", "gripper") if k not in d]
+        if missing:
+            raise KeyError(f"a profile without base needs {missing}")
+        d.setdefault("display", d["name"])
+        prof = Profile(**d)
+    if not (len(prof.joints) == len(prof.low) == len(prof.high) == len(prof.units)):
+        raise ValueError("profile joints, low, high and units must have the same length")
+    if any(lo >= hi for lo, hi in zip(prof.low, prof.high, strict=True)):
+        raise ValueError("every profile joint needs low < high")
+    if urdf:
+        from .kinematics import urdf_to_chain
+
+        path = Path(str(urdf)).expanduser()
+        prof.chain_data = urdf_to_chain(path, prof.name, source=str(path))
+        prof.chain_file = str(path)
+        names = {j["name"] for j in prof.chain_data["joints"]}
+        if not prof.joint_map:
+            prof.joint_map = {
+                i: (n, D2R if prof.units[i] == "deg" else 1.0, 0.0)
+                for i, n in enumerate(prof.joints)
+                if i not in prof.gidx and n in names
+            }
+        if len(prof.joint_map) != len(prof.arm_idx):
+            raise ValueError(
+                f"the URDF {path.name} lacks joints {[prof.joints[i] for i in prof.arm_idx if i not in prof.joint_map]}"
+            )
+        if not prof.tool[0]:
+            raise ValueError("a profile with a urdf needs tool: [link, [x, y, z]] (the tool point the envelope checks)")
+    prof.envelope = EnvelopeDefaults(**{**prof.envelope.__dict__, **env})
+    prof.contact = ContactSettings(**{**prof.contact.__dict__, **contact})
+    return prof

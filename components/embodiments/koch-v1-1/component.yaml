@@ -1,0 +1,14 @@
+id: koch-v1-1
+type: embodiment
+version: 0.1.0
+title: Koch v1.1 low-cost arm (simulated)
+summary: The 5-joint Koch v1.1 (MuJoCo Menagerie `low_cost_robot_arm`) on the so101 suite's desk.
+track: arm
+kind: arm
+capabilities:
+- reach
+- grasp
+- top-grasp
+composable: false
+suites:
+- so101

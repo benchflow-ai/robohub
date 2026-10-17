@@ -1,7 +1,7 @@
 """Hard tier of tabletop tasks (suite "hard"): scenarios and reference solutions.
 
-The scenes run on the ordinary tabletop backend (backend = "tabletop" in task.toml); this module only holds the
-scenario definitions (HARD_SCENARIOS, written into each task.toml by adapters/hard/generate.py) and the reference
+The scenes run on the ordinary tabletop backend (backend: tabletop in task.md); this module only holds the
+scenario definitions (HARD_SCENARIOS, written into each task.md by adapters/hard/generate.py) and the reference
 solutions (`oracle_main`, called as `python -m robouse.oracle --backend tabletop_hard --env <id>`).
 
 Every reference solution drives the robot only through the robo socket. On `skills = false` tasks it uses only

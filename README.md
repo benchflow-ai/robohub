@@ -45,13 +45,14 @@ A dataset is named `<org>/<name>`. A dataset adapted from another benchmark sits
 | `robocasa/robocasa@0.3` | 24 | robocasa | RoboCasa |
 | `benchflow/robouse-nav@0.3` | 40 | light | |
 | `robocurve/cubepick-reach@0.3` | 5 | light | inspect-robots cubepick-reach |
+| `benchflow/so101@0.1` | 12 | so101 | the SO-101 (one arm or two) and the Koch v1.1 on a small desk; simulated twins of Robo Use's real SO-101 tasks |
 | `benchflow/robouse-noop-control@0.4` | 100 | as robouse-core | robouse-core's tasks with reference solutions that do nothing; each must score 0 |
-| `stanfordvl/behavior-1k@0.3` | 43 | behavior (GPU) | BEHAVIOR-1K |
-| `haosulab/maniskill-gpu@0.3` | 12 | gpu (GPU) | ManiSkill3 |
-| `benchflow/robouse-genesis@0.3` | 3 | gpu (GPU) | |
-| `benchflow/robouse-playground@0.3` | 5 | gpu (GPU) | |
-| `isaac-sim/isaaclab-factory@0.3` | 5 | gpu (GPU) | Isaac Lab Factory |
-| `robodojo-benchmark/robodojo@0.3` | 9 | robodojo (GPU) | RoboDojo |
+| `stanfordvl/behavior-1k@0.4` | 43 | behavior (GPU) | BEHAVIOR-1K |
+| `haosulab/maniskill-gpu@0.4` | 12 | gpu (GPU) | ManiSkill3 |
+| `benchflow/robouse-genesis@0.4` | 3 | gpu (GPU) | |
+| `benchflow/robouse-playground@0.4` | 5 | gpu (GPU) | |
+| `isaac-sim/isaaclab-factory@0.5` | 5 | gpu (GPU) | Isaac Lab Factory |
+| `robodojo-benchmark/robodojo@0.4` | 9 | robodojo (GPU) | RoboDojo |
 | `rle-bench/rle-bench@0.1` | 6 | rlebench | RLE-Bench, family 03 (tabletop reasoning); tower, cantilever and balance pass at RLE-Bench quality 0.5 or more, which is Robo Use's rule (RLE-Bench has no pass mark and reports the quality as the score) |
 | `capgym/cap-x@0.1` | 43 | capx, capx-libero | CaP-X: RoboSuite and LIBERO-PRO tasks as code as policy with CaP-X's privileged API (object poses from the simulator, inverse kinematics; no perception models), over many turns (not one of CaP-Bench's tiers) |
 
@@ -98,10 +99,10 @@ Six datasets run their simulators on NVIDIA GPUs: `stanfordvl/behavior-1k`, `hao
 | Datasets | Simulator workers and hardware | Endpoints file |
 |---|---|---|
 | `stanfordvl/behavior-1k` | BEHAVIOR-1K (OmniGibson 3.9.3 on NVIDIA Isaac Sim 5.1) with the BEHAVIOR Data Bundle, one worker per activity; an NVIDIA RTX GPU with RT cores and a driver from the 580 branch (Isaac Sim 5.1 crashed at start-up on 595) | `ROBOUSE_BEHAVIOR_REMOTE` |
-| `haosulab/maniskill-gpu`, `benchflow/robouse-genesis`, `benchflow/robouse-playground`, `isaac-sim/isaaclab-factory` | one worker per simulator: ManiSkill3 3.0.1 (SAPIEN, ray-traced cameras), Genesis 1.4.2, MuJoCo Playground 0.2.0 (MuJoCo Warp), Isaac Lab 2.3 on Isaac Sim 5.1; an NVIDIA RTX GPU (Isaac Lab ran without its RTX renderer on driver 595) | `ROBOUSE_GPU_REMOTE` |
+| `haosulab/maniskill-gpu`, `benchflow/robouse-genesis`, `benchflow/robouse-playground`, `isaac-sim/isaaclab-factory` | one worker per simulator: ManiSkill3 3.0.1 (SAPIEN, ray-traced cameras), Genesis 1.4.2, MuJoCo Playground 0.2.0 (MuJoCo Warp), and for `isaac-sim/isaaclab-factory@0.5` Isaac Lab 3.0.0-EA in NVIDIA's kit-less container (`nvcr.io/nvidia/isaac-lab:3.0.0-rc1-kitless`, worker family `isaaclab3`, PhysX through OvPhysX); an NVIDIA GPU. Isaac Lab's images come from NVIDIA's RTX renderer without Kit (OVRTX) or Newton's Warp rasterizer, both of which ran on driver 595; `robo info` and each trial's `result.json` name the renderer | `ROBOUSE_GPU_REMOTE` |
 | `robodojo-benchmark/robodojo` | RoboDojo (NVIDIA Isaac Sim 5.1, Isaac Lab 2.3) with its Hugging Face assets, one worker per task; an NVIDIA RTX GPU with RT cores and a driver from the 580 branch | `ROBOUSE_ROBODOJO_REMOTE` |
 
-The worker programs are in the Robo Use package (`pip install robouse==0.2.0`), and each file's docstring says how to start it: `robouse/backends/behavior/worker.py` (in the BEHAVIOR-1K conda environment), `robouse/backends/gpu/worker/server.py` (one process per simulator family) and `robouse/backends/robodojo/worker.py` (from a RoboDojo checkout at commit `726e9aa`, in RoboDojo's environment). The simulators they drive are installed separately, under their own terms (see [Third-party simulators and assets](#third-party-simulators-and-assets)); no prebuilt worker image is published. The Robo Use maintainers checked every task of these datasets with the reference solutions and a no-op control through the Robo Use runner from a source checkout; they were not run in the hub's checks, where their packages passed `bench tasks check` only.
+The worker programs are in the Robo Use package (the 0.4 versions need the release after Robo Use 0.4.1), and each file's docstring says how to start it: `robouse/backends/behavior/worker.py` (in the BEHAVIOR-1K conda environment), `robouse/backends/gpu/worker/server.py` (one process per simulator family) and `robouse/backends/robodojo/worker.py` (from a RoboDojo checkout at commit `726e9aa`, in RoboDojo's environment). The simulators they drive are installed separately, under their own terms (see [Third-party simulators and assets](#third-party-simulators-and-assets)); no prebuilt worker image is published. Versions 0.4 of `haosulab/maniskill-gpu`, `benchflow/robouse-genesis`, `benchflow/robouse-playground` and `isaac-sim/isaaclab-factory` ran with `bench` and with the Robo Use runner (see [Checks](#checks)); `isaac-sim/isaaclab-factory@0.5` (Isaac Lab 3.0) ran with `bench` from the exported packages and with the Robo Use runner; `stanfordvl/behavior-1k` and `robodojo-benchmark/robodojo` were checked by the Robo Use maintainers through the Robo Use runner from a source checkout, and have not run with `bench`. A worker can run on the machine that runs `bench`: start it on the Docker bridge's address (`server.py ... --host 172.17.0.1` on Docker Engine's default bridge) and give it as `http://host.docker.internal:<port>` in the endpoints file; the 0.4 packages map `host.docker.internal` to the host. The pinned package lists of the GPU workers' virtualenvs are in the Robo Use package under `robouse/backends/gpu/worker/locks/`.
 
 ## Simulator images
 
@@ -126,11 +127,12 @@ The simulator images are built from this repository, not pulled from a registry.
 | `rlebench` | robosuite at `5ce6643` and RoboCasa at `b4684e6` (RLE-Bench's pins), pinned pip packages |
 | `capx` | CaP-X's robosuite fork at `9729273`, PyRoKi at `95afccc`, jaxls at `6fe7cf9`, pinned pip packages (a complete lock), the `panda_description` robot model |
 | `capx-libero` | LIBERO-PRO with its assets at `5368540`, CaP-X's robosuite 1.4 fork at `a498b08`, PyRoKi at `95afccc`, CPU PyTorch 2.8.0, pinned pip packages (a complete lock), the `panda_description` robot model |
+| `so101` | pinned pip packages; 54 MuJoCo Menagerie files (SO-101, Koch v1.1) from commit `8161bba`, each checked against its SHA-256 |
 | `behavior`, `gpu`, `robodojo` | a thin client; the simulators run on remote GPU workers |
 
 ## Third-party simulators and assets
 
-The simulators, robot models, scenes and datasets the images download, or that run on remote GPU workers, are not in this repository. When you build or run them you accept each upstream's terms. Some are restrictive: ManiSkill3's assets are CC BY-NC 4.0; the BEHAVIOR-1K Data Bundle allows non-commercial academic research only and may not be redistributed; Isaac Sim and NVIDIA's Factory assets are under NVIDIA's licences; RoboCasa's assets are CC BY 4.0. RoboDojo's own terms apply to its assets, which its workers fetch at build time. Do not publish built images of the `maniskill`, `behavior`, `gpu` or `robodojo` runtimes.
+The simulators, robot models, scenes and datasets the images download, or that run on remote GPU workers, are not in this repository. When you build or run them you accept each upstream's terms. Some are restrictive: ManiSkill3's assets are CC BY-NC 4.0; the BEHAVIOR-1K Data Bundle allows non-commercial academic research only and may not be redistributed; Isaac Sim, the Isaac Lab container's OvPhysX and OVRTX, and NVIDIA's Factory assets are under NVIDIA's licences (OVRTX's licence does not allow publishing benchmark or performance data about it without NVIDIA's permission); RoboCasa's assets are CC BY 4.0. RoboDojo's own terms apply to its assets, which its workers fetch at build time. Do not publish built images of the `maniskill`, `behavior`, `gpu` or `robodojo` runtimes.
 
 ## Licence
 
@@ -151,6 +153,7 @@ templates/                  the templates scripts/export.py writes packages and 
 scripts/export.py           Robo Use checkout -> runtimes/ and datasets/
 scripts/build_registry.py   datasets at a commit -> registry.json and hub.json
 scripts/summarize_jobs.py   bench job folders -> dogfood.json
+scripts/mujoco_regress.py   a MuJoCo release -> reference and no-op verdicts of every MuJoCo-based task, diffed against the pins
 ```
 
 ## Regenerating
@@ -165,6 +168,23 @@ python scripts/build_registry.py --tag
 
 To change a dataset, bump its version in `hub.yaml`, export, commit and pin; `build_registry.py` keeps every entry already in `registry.json` and pins only versions that are new.
 
+## MuJoCo regression check
+
+`scripts/mujoco_regress.py` re-runs every MuJoCo-based task's reference solution and no-op on a new MuJoCo release, with only MuJoCo changed, and compares the verdicts with the pinned runtime's. The MuJoCo-based runtimes pin seven versions: 3.1.6 (`humanoidbench`), 3.3.0 (`base` and most others), 3.3.1 (`robocasa`, `rlebench`), 3.4.0 (`dexjoco`), 3.5.0 (`capx`, `capx-libero`), 3.6.0 (`myosuite`) and 3.14.0 (`dmcontrol`). `light`, `driving` and `maniskill` pin MuJoCo but their physics is not MuJoCo; the GPU runtimes have no MuJoCo pin.
+
+Each job runs on a throwaway Linux machine as root (the tool replays the runtime's Dockerfile onto it). It runs every task of its share on the pinned runtime, then switches MuJoCo in every interpreter of the runtime (`uv pip install mujoco==VERSION`, which adds only what the new MuJoCo needs and records the change) and runs them again. For the tasks whose verdict changed, it runs the pinned version once more (repeatability), seeds 1 and 2 on both versions for up to eight of them, and a bisection over the MuJoCo releases in between (four tasks in full, up to twelve more on both sides of each boundary found). Trials run as many at a time as the machine's memory holds simulators of the runtime (`hub.yaml` `sim_memory`), and a trial killed for memory is run again alone. A trial reproduces the task's BenchFlow topology without Docker: the simulator service's command and environment from `environment/docker-compose.yaml`, then `oracle/solve.sh` or the no-op (`robo info; robo observe`, then exit without `robo done`, as in `benchflow/robouse-noop-control`), then `verifier/test.sh`.
+
+```sh
+python3 scripts/mujoco_regress.py plan --mujoco 3.16.0 --out plan.json --shards base=3,menagerie=2,libero=3
+python3 scripts/mujoco_regress_daytona.py --plan plan.json --results results --parallel 10 \
+    --label KEY=VALUE --ledger sandboxes.jsonl            # Daytona CPU sandboxes, DAYTONA_API_KEY set
+python3 scripts/mujoco_regress.py diff --plan plan.json --results results/* --out diff.json
+python3 scripts/mujoco_regress.py report --diff diff.json --notes notes.json --out REPORT.md
+python3 -m unittest scripts/test_mujoco_regress.py      # the tool's own tests
+```
+
+`diff.json` has, per task, both verdicts, outcomes and steps, the error and the file it was raised in, the first diverging step (from the episode's physics samples, else its robo trace), the repeat and seed checks, the bisection, and a first classification: our pin, simulator change or task fragility. `--notes` replaces that classification with reviewed attributions. `variant RUNTIME --mujoco VERSION --out DIR` writes the same switch as a copy of a runtime folder whose Dockerfile ends with it, for a Docker build. Slow suites can run the new version first and the pinned one only where the verdict moved (`job --pinned-only-changed`; the rest keep the published check as their baseline).
+
 ## Checks
 
 Run on 2026-10-01 with the released `bench` 0.7.4 on a 16-core linux/arm64 cloud VM (Docker 29.1), through `bench eval run -d NAME@VERSION` against this repository's `registry.json`, so every run first verified all task digests at the pinned commit.
@@ -175,7 +195,11 @@ Run on 2026-10-01 with the released `bench` 0.7.4 on a 16-core linux/arm64 cloud
 | Reference solutions, every task of the 27 CPU datasets | every task scored 1 |
 | No-op reference solutions (`scripts/export.py --noop-out`), every task of every CPU dataset, and `benchflow/robouse-noop-control@0.4` | every task scored 0 |
 | `rle-bench/rle-bench@0.1` and `capgym/cap-x@0.1`, exported from Robo Use 0.3.0 (run 2026-10-01, same VM and `bench`): `bench tasks check`, reference solutions, no-op reference solutions | 49/49 valid; every task scored 1 (6/6, 43/43); every task scored 0 (0/6, 0/43) |
+| `benchflow/so101@0.1`, exported from an unreleased Robo Use build, 0.4.1 plus the so101 backend, with `robo act` taking absolute joint targets through the real so101 profile's guard (commit `2820052` of branch `w2-1015/lerobot-so101`; run 2026-10-16 on the arm64 VM): `bench tasks check` (bench 0.7.4); reference solutions and no-op reference solutions twice each through `robouse run-many` on the exported packages, outside the runtime image, scored by the episode server's verdict (the exported verifier writes to the container's `/logs/verifier`); the reference solution and the no-op on 10 perturbed layouts per task; trivial policies (holding still, random targets, random skills, constant targets) on the backend. The `bench` runs in the runtime image were not repeated for this export | 12/12 valid; every task scored 1 in every run (24/24) with identical traces, and 0 with the no-op (0/24); 118/120 and 0/120 on the perturbed layouts; no trivial policy solved any task (0 of 614 runs) |
 | A scripted agent looking for the oracle token in a vision task and a composed task, with a token set on the host (0.2 packages; the token handling has not changed since) | no token in its environment, files or processes; none of about 5,400 candidate strings, including the token an earlier version committed, unlocked privileged state; a control with the reference solution's token did |
+| `haosulab/maniskill-gpu@0.4`, `benchflow/robouse-genesis@0.4`, `benchflow/robouse-playground@0.4` and `isaac-sim/isaaclab-factory@0.4` (not published; 0.5 replaces it), exported from Robo Use code after 0.4.1 (run 2026-10-14 with `bench` 0.7.8 on x86_64 Daytona sandboxes with an NVIDIA RTX PRO 6000 and driver 595.91, the GPU workers on the same machine, through registry entries pinned to the export commit): reference solutions, and no-op reference solutions (`scripts/export.py --noop-out`) | every task scored 1 (12/12, 3/3, 5/5, 5/5); every task scored 0 (0/12, 0/3, 0/5, 0/5). Isaac Lab drew its images with the MuJoCo schematic (Isaac Sim's RTX renderer crashes on driver 595), as each trial's `result.json` records |
+| `isaac-sim/isaaclab-factory@0.5`, the same tasks on Isaac Lab 3.0.0-EA in NVIDIA's kit-less container (Robo Use runner from the Robo Use commit it was exported from, 2026-10-16, a Daytona sandbox with an NVIDIA RTX PRO 6000 and driver 595.84, the worker in the container on the same machine): reference solutions and the no-op control, once with OVRTX images and once with Newton's renderer | every task scored 1 (5/5, twice); every task scored 0 (0/5, twice); each trial's `result.json` names the renderer. Newton physics was not run: Isaac Lab 3.0.0-EA has no Newton configuration for Factory |
+| `isaac-sim/isaaclab-factory@0.5` with `bench` 0.7.8 (2026-10-16, the same sandbox, the exported packages through `--tasks-dir` before registry entries existed, the worker on the Docker bridge's address): reference solutions, and no-op reference solutions (`scripts/export.py --noop-out`) | every task scored 1 (5/5); every task scored 0 (0/5); OVRTX images |
 | The composed inspect-tag judge, with the robot driven to the tag and an answer that lists every three-digit number | 1 on `benchflow/robouse-composed@0.2`, 0 on 0.3 |
 
-Every dataset comes from a Robo Use release as published on PyPI, and every file the runtimes copy is identical to that release's wheel: `rle-bench/rle-bench@0.1` and `capgym/cap-x@0.1` come from 0.3.0, every other dataset from 0.2.0. `brave-eai/dexjoco@0.3` and `carlosferrazza/humanoid-bench@0.3` were run in full when they were published; the 0.2.0 export left their packages unchanged. The GPU datasets were not run in the hub's checks; their packages passed `bench tasks check` only.
+Every dataset comes from a Robo Use release as published on PyPI, and every file the runtimes copy is identical to that release's wheel: `rle-bench/rle-bench@0.1` and `capgym/cap-x@0.1` come from 0.3.0, every other dataset from 0.2.0, with two exceptions. The six GPU datasets' 0.4 versions (0.5 for `isaac-sim/isaaclab-factory`) come from Robo Use code after 0.4.1 (branches int-1014/gpu and w2-1015/isaac3) and are to be exported again from the next release before they are pinned in `registry.json`. `benchflow/so101@0.1` comes from an unreleased Robo Use build, 0.4.1 plus the so101 backend and suite (branch `w2-1015/lerobot-so101` of `github.com/benchflow-ai/robouse`, commit `2820052`, which builds on `hub-1014/so101-desk`; recorded in `export.json` and `runtimes/so101/SOURCE.json`); the 0.4.1 wheel on PyPI does not contain the so101 backend. `brave-eai/dexjoco@0.3` and `carlosferrazza/humanoid-bench@0.3` were run in full when they were published; the 0.2.0 export left their packages unchanged. The GPU datasets' versions before 0.4 were not run in the hub's checks; their packages passed `bench tasks check` only, and they cannot start under bench (their thin-client runtime has no MuJoCo, which the episode server of Robo Use 0.2.0 required).
