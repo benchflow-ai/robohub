@@ -1,0 +1,7 @@
+Before policy actions go to my robot I want them clamped to safe per-joint limits, as a step of the policy postprocessor pipeline that is saved with the checkpoint. Please add it to LeRobot:
+
+- Class `ActionClampProcessorStep` in `src/lerobot/processor/action_clamp_processor.py`, importable as `from lerobot.processor import ActionClampProcessorStep`, and registered in LeRobot's processor step registry under the name `action_clamp_processor`.
+- Constructor: `ActionClampProcessorStep(min_action=None, max_action=None, margin=0.0)`. `min_action`/`max_action` are 1-D tensors (one value per action dimension); `margin` is a float that widens the limits on both sides.
+- It processes policy actions (tensors of shape `(D,)` or `(B, D)`): every element is clamped to `[min_action - margin, max_action + margin]` for its dimension. The output keeps the input's shape, dtype and device. It does not change the pipeline's feature descriptions.
+- `min_action`/`max_action` are state: they must be saved in the pipeline's safetensors state file, not in the JSON config. `margin` is plain config.
+- A `PolicyProcessorPipeline` containing the step, saved with `save_pretrained`, must load back with `PolicyProcessorPipeline.from_pretrained` in a fresh Python process that only imports `lerobot.processor`, and behave the same. Overriding the margin at load time with `overrides={"action_clamp_processor": {"margin": ...}}` must work.

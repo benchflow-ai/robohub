@@ -1,0 +1,9 @@
+id: lerobot-optional-scipy-smoothing
+source: lerobot
+summary: Add a Savitzky-Golay action-smoothing utility to LeRobot that depends on the optional scipy package, guarded the way LeRobot guards optional dependencies.
+skill: AGENTS.md#Notes (Optional dependencies)
+scenario: 'AGENTS.md "Optional dependencies": guard the optional import with TYPE_CHECKING or the _scipy_available flag from utils/import_utils.py at module top, call require_package(...) at use time, and do not call is_package_available in the new module'
+difficulty: medium
+timeout_sec: 1500
+library_task: true
+tags: [optional-dependencies, library]

@@ -1,0 +1,10 @@
+id: genesis-box-size-validation
+source: genesis
+summary: Make gs.morphs.Box reject non-positive sizes and degenerate lower/upper corners at construction, keeping array-like inputs working.
+skill: CLAUDE.md#API Design
+scenario: 'CLAUDE.md "API Design" (option fields use the genesis.typing array-like aliases of a strict Pydantic Options) and "Miscellaneous" (an exception is raised on what a user can hand in): a Box morph option that silently accepts a negative or zero size'
+difficulty: easy
+timeout_sec: 1200
+library_task: true
+tags: [options, pydantic, validation]
+protect: [genesis/engine]

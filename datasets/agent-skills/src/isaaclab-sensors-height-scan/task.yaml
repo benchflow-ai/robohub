@@ -1,0 +1,11 @@
+id: isaaclab-sensors-height-scan
+source: isaaclab
+summary: Move a flat-ground locomotion task to generated rough terrain and add a ray-cast height scanner to the policy observations.
+skill: skills/user/use-sensors-actuators
+scenario: 'use-sensors-actuators evaluations.md Scenario 2 "Ray-Cast Terrain Perception": a RayCasterCfg mounted on the base, mesh_prim_paths pointing at the terrain mesh, a height-scan observation'
+difficulty: medium
+timeout_sec: 1800
+tags: [sensors, ray-caster, terrain]
+shared:
+  - {from: _shared/isaaclab/trail_walker, to: source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker}
+protect: [source/isaaclab_assets/isaaclab_assets]

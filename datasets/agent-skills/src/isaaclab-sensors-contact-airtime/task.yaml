@@ -1,0 +1,11 @@
+id: isaaclab-sensors-contact-airtime
+source: isaaclab
+summary: Add a contact sensor to a quadruped task and wire foot air-time rewards, thigh-contact penalties and a base-contact termination to it.
+skill: skills/user/use-sensors-actuators (with create-environments)
+scenario: 'use-sensors-actuators evaluations.md Scenario 1 "Contact Sensor" and create-environments Scenario 4: a common ContactSensorCfg with track_air_time and history, the maintained mdp.feet_air_time term bound to the foot bodies'
+difficulty: medium
+timeout_sec: 1800
+tags: [sensors, contact, rewards]
+shared:
+  - {from: _shared/isaaclab/trail_walker, to: source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker}
+protect: [source/isaaclab_assets/isaaclab_assets]

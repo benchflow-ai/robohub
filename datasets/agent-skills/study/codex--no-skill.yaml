@@ -1,0 +1,13 @@
+# Agent-skills study, cell: codex (gpt-6-astra), variant no-skill. One run of this file is one trial of every task;
+# study/run_study.sh runs it 5 times (trial-1 to trial-5) into separate job folders.
+# Needs OPENAI_API_KEY in the environment and DAYTONA_API_KEY for the sandboxes. Paths are relative to datasets/agent-skills/.
+tasks_dir: tasks/no-skill
+jobs_dir: jobs-out/codex--no-skill
+agent: codex-acp
+model: gpt-6-astra
+environment: daytona
+concurrency: 8
+# retry an errored trial once, with bench's default retry categories: sandbox and verifier infrastructure errors,
+# agent install, pipe and ACP errors, agent idle timeouts and transient provider API errors; a scored trial is never retried
+max_retries: 1
+agent_idle_timeout_sec: 900

@@ -1,0 +1,9 @@
+id: lerobot-reach-env-config
+source: lerobot
+summary: Register a small local gymnasium env as a LeRobot env type (EnvConfig subclass with gym_kwargs and create_envs) so lerobot-eval can build it and score success.
+skill: AGENTS.md#Architecture (envs/)
+scenario: 'AGENTS.md Architecture: "envs/ - EnvConfig base in configs.py, factory in factory.py. Each env subclass defines gym_kwargs and create_envs()" and "Polymorphism via draccus.ChoiceRegistry with @register_subclass", plus the benchmark contract that lerobot-eval scores info["is_success"]'
+difficulty: medium
+timeout_sec: 1800
+library_task: true
+tags: [envs, draccus, registry, library]

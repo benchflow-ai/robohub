@@ -1,0 +1,10 @@
+id: isaaclab-register-task
+source: isaaclab
+summary: Register a new manager-based task with Gym and add an RSL-RL PPO config so the isaaclab train CLI can run it.
+skill: skills/user/create-environments (with train-rl-agents)
+scenario: 'create-environments evaluations.md Scenario 3 "Register And Train" and Scenario 6 "Add An Internal Task": Gym registration with env and agent entry points, a suffixless task ID, a small training smoke test'
+difficulty: easy
+timeout_sec: 1200
+tags: [registration, rsl-rl]
+shared:
+  - {from: _shared/isaaclab/trail_walker, to: source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker}

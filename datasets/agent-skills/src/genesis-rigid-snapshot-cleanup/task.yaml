@@ -1,0 +1,10 @@
+id: genesis-rigid-snapshot-cleanup
+source: genesis
+summary: Fix and clean up a contributor's genesis/utils/rigid_snapshot.py (wrong array layout, ignored envs_idx, live views) so it follows the Genesis data-access, typing and style conventions.
+skill: CLAUDE.md#Data Access
+scenario: 'CLAUDE.md "Miscellaneous" and "Data Access": getters / qd_to_numpy with transpose=True instead of .to_numpy(), tensor_to_array instead of .detach().cpu().numpy(), no getattr/hasattr, no local imports, no plain dicts for public returns, ASCII only; plus the zero-copy aliasing hazard of CPU views'
+difficulty: medium
+timeout_sec: 1800
+library_task: true
+tags: [refactor, data-access, conventions, seeded]
+protect: [genesis/engine, genesis/utils/misc.py]

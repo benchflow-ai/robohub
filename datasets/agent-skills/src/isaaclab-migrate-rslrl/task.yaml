@@ -1,0 +1,10 @@
+id: isaaclab-migrate-rslrl
+source: isaaclab
+summary: Migrate a 2.x RSL-RL runner config (RslRlPpoActorCriticCfg, init_noise_std, empirical_normalization) to Isaac Lab 3.0's actor and critic model configs.
+skill: skills/user/migrate-2x-to-3x (with train-rl-agents)
+scenario: 'migrate-2x-to-3x evaluations.md Scenario 3 "RSL-RL Migration": check the maintained RSL-RL model and runner configurations, align the downstream config, run a small config or training smoke test'
+difficulty: medium
+timeout_sec: 1800
+tags: [migration, rsl-rl]
+shared:
+  - {from: _shared/isaaclab/trail_walker, to: source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker}

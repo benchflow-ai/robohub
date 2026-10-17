@@ -1,0 +1,13 @@
+# Agent-skills study, cell: claude-code (claude-opus-5-5), variant with-skill. One run of this file is one trial of every task;
+# study/run_study.sh runs it 5 times (trial-1 to trial-5) into separate job folders.
+# Needs ANTHROPIC_API_KEY in the environment and DAYTONA_API_KEY for the sandboxes. Paths are relative to datasets/agent-skills/.
+tasks_dir: tasks/with-skill
+jobs_dir: jobs-out/claude-code--with-skill
+agent: claude-agent-acp
+model: claude-opus-5-5
+environment: daytona
+concurrency: 8
+# retry an errored trial once, with bench's default retry categories: sandbox and verifier infrastructure errors,
+# agent install, pipe and ACP errors, agent idle timeouts and transient provider API errors; a scored trial is never retried
+max_retries: 1
+agent_idle_timeout_sec: 900

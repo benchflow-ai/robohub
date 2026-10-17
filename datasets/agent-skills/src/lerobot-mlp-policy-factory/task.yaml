@@ -1,0 +1,11 @@
+id: lerobot-mlp-policy-factory
+source: lerobot
+summary: Add a small MLP behaviour-cloning policy to LeRobot in its own policies/ subpackage so that --policy.type=mlp_bc works through the config registry, the policy and processor factories and save/load.
+skill: AGENTS.md#Architecture (configs/, policies/)
+scenario: 'AGENTS.md Architecture: "policies/ - Each policy in its own subdir. All inherit PreTrainedPolicy ... Factory with lazy imports in factory.py" and "configs/ - Polymorphism via draccus.ChoiceRegistry with @register_subclass", for a new state-only MLP policy that must be selectable with --policy.type'
+difficulty: hard
+timeout_sec: 2400
+library_task: true
+tags: [policies, registry, factory, library]
+shared:
+  - {from: _shared/lerobot/skills_setup, to: .skills_setup}

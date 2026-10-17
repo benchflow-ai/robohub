@@ -1,0 +1,11 @@
+id: isaaclab-migrate-quaternions
+source: isaaclab
+summary: Migrate a 2.x task's hard-coded and runtime quaternions from WXYZ to Isaac Lab 3.0's XYZW order without touching other four-element values.
+skill: skills/user/migrate-2x-to-3x
+scenario: 'migrate-2x-to-3x evaluations.md Scenario 1 "Quaternion Migration": use the migration guide and the quaternion finder, distinguish quaternions from colors, handle runtime quaternion index assignments'
+difficulty: medium
+timeout_sec: 1800
+tags: [migration, quaternions]
+shared:
+  - {from: _shared/isaaclab/trail_walker, to: source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker}
+protect: [source/isaaclab_assets/isaaclab_assets, scripts/tools]

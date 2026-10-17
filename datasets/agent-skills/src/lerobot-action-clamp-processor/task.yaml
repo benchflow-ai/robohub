@@ -1,0 +1,9 @@
+id: lerobot-action-clamp-processor
+source: lerobot
+summary: Add a registered ProcessorStep that clamps policy actions to per-dimension bounds, with the bounds stored as pipeline state, so it round-trips through DataProcessorPipeline save_pretrained/from_pretrained.
+skill: AGENTS.md#Architecture (processor/)
+scenario: 'AGENTS.md Architecture: "processor/ - ProcessorStep base with registry. DataProcessorPipeline / PolicyProcessorPipeline chain steps": a new step registered in ProcessorStepRegistry, exported from lerobot.processor, with tensor state saved to safetensors and config to JSON'
+difficulty: medium
+timeout_sec: 1800
+library_task: true
+tags: [processor, registry, serialization, library]

@@ -1,0 +1,9 @@
+id: isaaclab-presets-camera
+source: isaaclab
+summary: Expose RGB and depth variants of a camera task through domain presets, with the observation shape following the data type.
+skill: skills/user/use-presets
+scenario: 'use-presets evaluations.md Scenario 3 "Camera Data-Type Presets": a domain preset selected by presets=rgb or presets=depth that also updates the observation shape (known failures: using physics= for it, leaving the shape unchanged)'
+difficulty: medium
+timeout_sec: 1800
+tags: [presets, camera]
+protect: [source/isaaclab_assets/isaaclab_assets]

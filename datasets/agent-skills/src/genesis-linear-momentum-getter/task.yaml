@@ -1,0 +1,10 @@
+id: genesis-linear-momentum-getter
+source: genesis
+summary: Add a vectorized RigidSolver.get_linear_momentum getter and a RigidEntity.get_linear_momentum wrapper, following the solver data-access conventions.
+skill: CLAUDE.md#Data Access
+scenario: 'CLAUDE.md "Miscellaneous" (a quantity derived from several raw solver fields belongs in a single vectorized solver getter) and "Data Access" (qd_to_torch / qd_to_numpy with transpose=True, never .to_numpy() / .to_torch())'
+difficulty: medium
+timeout_sec: 1800
+library_task: true
+tags: [getter, rigid, data-access]
+protect: [genesis/utils, genesis/engine/solvers/kinematic_solver.py]

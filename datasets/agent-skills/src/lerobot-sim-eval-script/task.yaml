@@ -1,0 +1,8 @@
+id: lerobot-sim-eval-script
+source: lerobot
+summary: Write a lerobot-eval script for a local ACT checkpoint that evaluates it in the simulated task it was trained for, with enough episodes for a stable success rate.
+skill: AGENT_GUIDE.md#8.2
+scenario: 'AGENT_GUIDE.md 8.2 "Sim-benchmark eval": lerobot-eval against the matching env.type, --policy.path to a local checkpoints/<step>/pretrained_model, and --eval.n_episodes >= 50 for a stable success-rate estimate, for an ACT checkpoint trained on the ALOHA transfer-cube sim data'
+difficulty: easy
+timeout_sec: 1200
+tags: [evaluation, aloha, act]

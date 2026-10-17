@@ -1,0 +1,10 @@
+id: lerobot-smolvla-short-run-config
+source: lerobot
+summary: Write a lerobot-train YAML config that trains SmolVLA for a fixed number of epochs on a small local dataset, with the LR schedule, checkpoints and vision-encoder freezing set for that run.
+skill: AGENT_GUIDE.md#7.2 (with 7.5 and 7.6)
+scenario: 'AGENT_GUIDE.md 7.2 "Steps <-> epochs conversion", 7.5 "Scale LR schedule & checkpoints with --steps" (policy.scheduler_decay_steps, save_freq) and 7.6 "SmolVLA: unfreeze the vision encoder" (freeze_vision_encoder=false and train_expert_only=false) turned into a config for a short run on a 1,447-frame dataset'
+difficulty: medium
+timeout_sec: 1800
+tags: [training-config, smolvla, draccus]
+shared:
+  - {from: _shared/lerobot/skills_setup, to: .skills_setup}

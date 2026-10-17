@@ -1,0 +1,11 @@
+id: isaaclab-actuator-model
+source: isaaclab
+summary: Replace ideal PD position control on a quadruped's legs with Isaac Lab's learned ANYdrive actuator network.
+skill: skills/user/use-sensors-actuators
+scenario: 'use-sensors-actuators evaluations.md Scenario 3 "Actuator Model": replace ideal position control with a learned actuator model, joint_names_expr matching the intended joints'
+difficulty: easy
+timeout_sec: 1200
+tags: [actuators]
+shared:
+  - {from: _shared/isaaclab/trail_walker, to: source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker}
+protect: [source/isaaclab_assets/isaaclab_assets]

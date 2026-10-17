@@ -1,0 +1,10 @@
+id: genesis-weld-overflow-error
+source: genesis
+summary: Fix add_weld_constraint crashing with AttributeError when the dynamic weld capacity is exhausted by raising a clear GenesisException, and replace the direct quadrants .to_numpy() calls of the constraint solver with the project helpers.
+skill: CLAUDE.md#Miscellaneous
+scenario: 'CLAUDE.md "Miscellaneous" (an exception is raised on what a user can hand in, critical errors are never downgraded to warnings; to_numpy() on quadrants data is forbidden, use qd_to_numpy / qd_to_torch) on a real crash of the dynamic weld overflow path'
+difficulty: medium
+timeout_sec: 1800
+library_task: true
+tags: [rigid, constraints, data-access, bug]
+protect: [genesis/engine/solvers/rigid/rigid_solver.py, genesis/utils/misc.py]

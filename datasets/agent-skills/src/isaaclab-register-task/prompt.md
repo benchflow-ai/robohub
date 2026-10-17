@@ -1,0 +1,3 @@
+I wrote a new manager-based task config, `TrailWalkerFlatEnvCfg` in `source/isaaclab_tasks/isaaclab_tasks/contrib/trail_walker/trail_walker_env_cfg.py`, inside this Isaac Lab checkout. I want to train it with RSL-RL through the standard CLI, `isaaclab train --rl_library rsl_rl --task IsaacContrib-TrailWalker-Flat`.
+
+Register it under the Gym ID `IsaacContrib-TrailWalker-Flat` and add an RSL-RL PPO runner config for it: experiment name `trail_walker_flat`, 24 steps per environment, 300 iterations, a checkpoint every 50 iterations, actor and critic MLPs of 128-128-128 with ELU, initial action noise 1.0, and the usual PPO settings of the maintained locomotion tasks.

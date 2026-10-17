@@ -1,0 +1,10 @@
+id: genesis-rolling-friction-auto-torsional
+source: genesis
+summary: Resolve RigidOptions.enable_torsional_friction automatically (None by default) so enabling rolling friction no longer requires setting it by hand, raising only on an explicit conflicting value.
+skill: CLAUDE.md#API Design
+scenario: 'CLAUDE.md "API Design": do not force users to set an option with a single correct value; default it to None, resolve it at init time, raise on a conflicting explicit value, and document the resolution'
+difficulty: medium
+timeout_sec: 1800
+library_task: true
+tags: [options, friction, rigid]
+protect: [genesis/engine]

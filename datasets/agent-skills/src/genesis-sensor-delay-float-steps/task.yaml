@@ -1,0 +1,10 @@
+id: genesis-sensor-delay-float-steps
+source: genesis
+summary: Fix sensor read delays being truncated to one step too few (and wrongly warned about) when delay / dt is not exactly an integer in floating point.
+skill: CLAUDE.md#Style
+scenario: 'CLAUDE.md "Style": compare floats with a tolerance, == and != on floating-point values (host-side included) are prohibited; a seeded sensor-delay conversion that truncates delay / dt and compares delay_ts * dt == delay exactly'
+difficulty: medium
+timeout_sec: 1800
+library_task: true
+tags: [sensors, floating-point, seeded]
+protect: [genesis/engine/solvers, genesis/engine/sensors/imu.py, genesis/engine/simulator.py]

@@ -1,0 +1,37 @@
+# Upstream repositories the agent-skills tasks run in, each at a pinned commit.
+# guide_files: the agent-facing files that the no-skill variant deletes before the workspace is committed
+# (the with-skill variant keeps the repository exactly as shipped). Paths are relative to the repository root;
+# `**/NAME` deletes every file of that name. Human documentation (docs/, CONTRIBUTING, CODING_GUIDELINES.md) stays in both.
+# protect: upstream files the agent must leave unchanged; the verifier fails a trial that edits them
+# (a task can add its own entries with `protect:` in task.yaml, or exempt paths with `allow:`). A path written +PATH is
+# add-only (upstream tests): new files and new lines are allowed there, but every original line must stay, in order.
+isaaclab:
+  name: Isaac Lab
+  repo: https://github.com/isaac-sim/IsaacLab
+  commit: f87ae20f93cd68ce1c477b73b8b09bac7df01ff9
+  commit_date: '2026-10-15'
+  licence: BSD-3-Clause
+  licence_file: LICENSE
+  workdir: /workspace/IsaacLab
+  guide_files: [skills, .agents, .claude, '**/AGENTS.md', '**/CLAUDE.md']
+  protect: [source/isaaclab/isaaclab, source/isaaclab_physx/isaaclab_physx, source/isaaclab_newton/isaaclab_newton, source/isaaclab_rl/isaaclab_rl, source/isaaclab_tasks/isaaclab_tasks/utils, source/isaaclab_tasks/isaaclab_tasks/core]
+lerobot:
+  name: LeRobot
+  repo: https://github.com/huggingface/lerobot
+  commit: 297774fca4e3ad0aa34e7425fbf937111637e77b
+  commit_date: '2026-10-15'
+  licence: Apache-2.0
+  licence_file: LICENSE
+  workdir: /workspace/lerobot
+  guide_files: [AGENT_GUIDE.md, '**/AGENTS.md', '**/CLAUDE.md']
+  protect: [src/lerobot/configs, src/lerobot/datasets, src/lerobot/processor/pipeline.py, src/lerobot/utils/import_utils.py]
+genesis:
+  name: Genesis
+  repo: https://github.com/Genesis-Embodied-AI/genesis-world
+  commit: 1a6d3c40b566038f846d75335ca4c07e74b88fc0
+  commit_date: '2026-10-15'
+  licence: Apache-2.0
+  licence_file: LICENSE
+  workdir: /workspace/genesis-world
+  guide_files: ['**/CLAUDE.md', '**/AGENTS.md']
+  protect: [+tests]
