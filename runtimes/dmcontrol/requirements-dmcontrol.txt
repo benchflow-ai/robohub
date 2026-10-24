@@ -2,7 +2,7 @@
 # dm_control 1.0.47 pins its own MuJoCo (3.14.0); its models and meshes (Control Suite, Jaco arm and hand, Duplo bricks) ship in the wheel.
 absl-py==2.5.0
 attrs==26.1.0
-certifi==2026.7.22
+certifi==2026.10.19
 charset-normalizer==3.5.1
 dm-control==1.0.47
 dm-env==1.6
@@ -20,7 +20,7 @@ pyopengl==3.1.10
 pyparsing==3.3.3
 requests==2.34.2
 scipy==1.18.1
-setuptools==84.0.0
+setuptools==84.1.0
 tqdm==4.70.1
 typing-extensions==4.16.0
 urllib3==2.8.0
