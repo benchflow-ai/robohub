@@ -23,7 +23,7 @@ numcodecs==0.15.1
 numpy==1.26.4
 opencv-python==4.11.0.86
 opt-einsum==3.4.0
-pillow==12.3.0
+pillow==13.0.0
 psutil==7.2.2
 pyopengl==3.1.10
 pyyaml==6.0.3

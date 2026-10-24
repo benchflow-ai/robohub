@@ -4,7 +4,7 @@
 absl-py==2.5.0
 anyio==4.15.1
 attrs==26.1.0
-certifi==2026.7.22
+certifi==2026.10.19
 charset-normalizer==3.5.2
 cloudpickle==3.1.2
 colorlog==6.12.0
@@ -16,7 +16,7 @@ Farama-Notifications==0.0.6
 fonttools==4.66.1
 fsspec==2026.9.0
 gitdb==4.0.12
-GitPython==3.2.0
+GitPython==3.2.1
 glfw==2.10.2
 greenlet==3.1.1
 gymnasium==1.2.3
@@ -53,7 +53,7 @@ numpy==1.26.4
 opencv-python-headless==4.11.0.86
 opt_einsum==3.4.0
 packaging==26.3
-pillow==12.1.1
+pillow==13.0.0
 pycollada==0.9.3
 Pygments==2.21.0
 pyliblzfse==0.4.1

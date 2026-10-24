@@ -6,7 +6,7 @@ absl-py==2.5.0
 anyio==4.15.1
 attrs==26.1.0
 bddl==1.0.1
-certifi==2026.7.22
+certifi==2026.10.19
 charset-normalizer==3.5.2
 cloudpickle==3.1.2
 colorlog==6.12.0
@@ -17,12 +17,12 @@ easydict==1.9
 etils==1.14.0
 Farama-Notifications==0.0.6
 fastjsonschema==2.22.2
-filelock==3.32.3
+filelock==4.2.1
 fonttools==4.66.1
 fsspec==2026.9.0
 future==1.0.0
 gitdb==4.0.12
-GitPython==3.2.0
+GitPython==3.2.1
 glfw==2.10.2
 greenlet==3.1.1
 gym==0.25.2
@@ -69,7 +69,7 @@ numpy==1.26.4
 opencv-python-headless==4.11.0.86
 opt_einsum==3.4.0
 packaging==26.3
-pillow==12.1.1
+pillow==13.0.0
 platformdirs==4.12.2
 pluggy==1.6.0
 pycollada==0.9.3
@@ -87,7 +87,7 @@ robot_descriptions==1.22.0
 rpds-py==2026.6.3
 rtree==1.4.1
 scipy==1.15.3
-setuptools==78.1.0
+setuptools==84.1.0
 shapely==2.1.2
 six==1.17.0
 smmap==5.0.3
